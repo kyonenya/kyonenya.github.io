@@ -220,7 +220,7 @@ header .container {
 	margin-right: 2em;
 }
 .logo {
-	margin-left: 0.5em;
+	margin-left: 0.3em;
 }
 .contents {
 	padding-top: 6em; /* 初期表示でヘッダーに本文がめり込まないように。スクロール後は知らん */
