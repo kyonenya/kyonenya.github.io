@@ -15,7 +15,7 @@ body {
 	font-family: "Helvetica Neue", Verdana, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "游ゴシック Medium", "Yu Gothic Medium", "メイリオ", Meiryo, sans-serif; 
 	/* font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "游ゴシック Medium", "Yu Gothic Medium", "メイリオ", Meiryo, sans-serif;  */
 	width: 100vw;
-	word-break: break-all;
+	word-break: break-word; /* 文頭句読点を避ける */
 	color: #333; /* 黒の文字色 */
 	line-height: 1.7;
 	background: hsl(40, 38%, 97%); /* 再生紙くらいの白色、andante (40,38%,97%) より */
@@ -112,6 +112,8 @@ nav li + li { /* 2番目以降のメニューリストアイテムに区切り�
 
 /*	タグ（なるべく使わない）
 ---------------------------------*/
+
+
 /* ＠リンク */
 a { /* いったん全部リセット */
 	text-decoration: none;
@@ -150,6 +152,9 @@ blockquote {
 }
 blockquote p {
 	text-indent: 0; /*引用ブロック中は字下げなし*/
+}
+li {
+	list-style: none;
 }
 
 /* 説明リストを簡易的な表にする https://techacademy.jp/magazine/19405 */

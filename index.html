@@ -13,6 +13,7 @@
 	<link href="common/reset.css" media="all" rel="stylesheet" type="text/css" />
 	<link href="./style.css" media="all" rel="stylesheet" type="text/css" />
 	<link rel="shortcut icon" href="img/favicon.ico"/>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script><!-- jQueryインポート -->
 </head>
 
 <body>
@@ -32,6 +33,36 @@
 </header>
 
 <div class="contents"><!--コンテンツ領域格納　-->
+
+<div class="inner">
+
+<div id="wrap">
+	<script type="text/javascript">
+	$(function(){
+	
+	$.getJSON("manuscript.json", function(sample_list){
+		for(var i in sample_list){
+			var h = '<li class="postlist">'
+				+'<div class="post-info upper">'
+				+ sample_list[i].date
+				+ '</div>'
+				+ '<div class="text">'
+				+ sample_list[i].text
+				+ '</div>'
+				+ '<div class="post-info lower">'
+				+ sample_list[i].tags
+				+ '</div>'
+				+ '</li>'
+		$("#wrap").append(h);
+		}
+	});
+		
+	});
+	</script>
+</div>
+
+</div>
+
 
 <section>
 <div class="inner">
