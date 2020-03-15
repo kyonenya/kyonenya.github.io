@@ -8,13 +8,12 @@
 	--width-large: 900px;
 }
 
-/*	セクション
+/* 全体的に
 ---------------------------------*/
 	/*--1番目の外包装--*/
 body {
 	font-family: "Helvetica Neue", Verdana, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "游ゴシック Medium", "Yu Gothic Medium", "メイリオ", Meiryo, sans-serif; 
-	/* font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "游ゴシック Medium", "Yu Gothic Medium", "メイリオ", Meiryo, sans-serif;  */
-	width: 100vw;
+	/* width: 100vw; */
 	word-break: break-word; /* 文頭句読点を避ける */
 	color: #333; /* 黒の文字色 */
 	line-height: 1.7;
@@ -32,6 +31,10 @@ body {
 	/* セクション間の上下余白 */
 section {
 	padding: 0 0 2em; 
+}
+
+.text {
+	margin-left: 0.5em;
 }
 
 /*	草稿
@@ -134,24 +137,22 @@ a { /* いったん全部リセット */
 	border-bottom: 1px solid hsl(271, 35%, 65%); 
 }
 
-/*段落：二段落目以降*/
+/* 段落：二段落目以降　*/
 p + p {
 	text-indent: 1em;
 	margin-top: 0.5em; /*段落間だけを空ける*/
 }
-.text {
-	margin-left: 0.5em;
-}
 
-/*ブロック引用*/
+/* ブロック引用　*/
 blockquote {
-	margin: 1em 0 1em 1em; /*本文と上下1行空け、2(1+x+y)文字インデント*/
+	/* 本文と上下1行空け、2文字（1+x+y）インデント */
+	margin: 1em 0 1em 1em; 
 	color: var(--monochrome-dark);
 	border-left: 0.2em solid var(--monochrome-light);
 	padding-left: 0.8em;
 }
 blockquote p {
-	text-indent: 0; /*引用ブロック中は字下げなし*/
+	text-indent: 0; /* 引用ブロック中は字下げなし */
 }
 ul li {
 	list-style: none;
