@@ -13,7 +13,9 @@
 	<link href="common/reset.css" media="all" rel="stylesheet" type="text/css" />
 	<link href="./style.css" media="all" rel="stylesheet" type="text/css" />
 	<link rel="shortcut icon" href="img/favicon.ico"/>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script><!-- jQueryインポート -->
+	<!-- CDNからJavaScriptライブラリをインポート -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script><!-- jQuery -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js" type="text/javascript"></script><!-- moment.js -->
 </head>
 
 <body>
@@ -59,7 +61,11 @@
 		}
 		console.log(manuscripts[1].text);
 		manuscripts[2].tags === undefined ? console.log('タグなし') : console.log('タグあり');
-	});
+	// moment.js
+	console.log(moment().format("YYYY-MM-DD HH:mm:SS"));
+	console.log(moment(manuscripts[0].date).format("YYYY-MM-DD HH:mm:SS"));	
+	console.log(`${moment().diff(manuscripts[0].date, 'days')}日前`);
+	}); // 日前 
 		
 	});
 	</script>
