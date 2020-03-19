@@ -64,10 +64,13 @@ section {
 .upper {
 	padding-bottom: 0.25em;
 }
-.tags:before {
+/* .tags:before {
 	content: '#'
 }
-
+ */
+ #wrap {
+ 	padding: 0;
+ }
 /*	ヘッダー
 ---------------------------------*/
 	/*--サイトタイトルロゴ--*/
