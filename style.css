@@ -8,9 +8,8 @@
 	--width-large: 900px;
 }
 
-/* 全体的に
+/* ベースグループ
 ---------------------------------*/
-	/*--1番目の外包装--*/
 body {
 	font-family: "Helvetica Neue", Verdana, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "游ゴシック Medium", "Yu Gothic Medium", "メイリオ", Meiryo, sans-serif; 
 	/* width: 100vw; */
@@ -24,6 +23,9 @@ body {
 		border-left: 1px dotted var(--monochrome-light);
 		border-right: 1px dotted var(--monochrome-light);
 }
+
+
+
 	/* 2番目の個包装 */
 .inner {
 	margin: 0 0.5em; /* 限界余白 */
@@ -54,9 +56,7 @@ section {
 
 .post-info {
 	display: inline-block;
-	color: var(--monochrome-dark);
 	margin-left: 0.5em;
-	font-size: 95%;
 }
 .lower {
 	padding-top: 0.75em;
@@ -68,12 +68,12 @@ section {
 	content: '#'
 }
  */
- #wrap {
+#wrap {
  	padding: 0;
  }
 /*	ヘッダー
 ---------------------------------*/
-	/*--サイトタイトルロゴ--*/
+/*-- サイトタイトルロゴ-- */
 header {
 	font-family: "Avenir Next", Verdana, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "游ゴシック Medium", "Yu Gothic Medium", "メイリオ", Meiryo, sans-serif; 
 }
@@ -82,11 +82,11 @@ header {
 	font-weight: normal;
 	vertical-align: center;	
 }
-	/* 小コンテナ：メニューリスト */
+/* 小コンテナ：メニューリスト */
 nav .container {
 	display: flex;
 }
-	/* ナビメニュー */
+/* ナビメニュー */
 nav a { /* リンクブロック[1] */
 	display: block; 
 	line-height: 1.2em; /* 実質的には区切り線の高さ */
@@ -128,7 +128,6 @@ a { /* いったん全部リセット */
 	text-decoration: none;
 	color: inherit;
 }
-
 .text a { /* 本文中のリンクは装飾する */ 
 	/* 下線と文字とを空けるため、擬似的な下線を作る */
 	display: inline-block; 
@@ -203,6 +202,12 @@ dd{
 	color: var(--monochrome-medium);
 	font-size: 80%;
 }
+
+.hp_textWeak {
+	color: var(--monochrome-dark);
+	font-size: 95%;
+}
+
 
 /* タブレット以上
 ----------------------------------------------------*/

@@ -54,16 +54,16 @@ $.getJSON("manuscript.json", function(manuscripts){
 	
 		var h = '<li class="postlist">'
 			+ `<a href="index.html?p=${i}" class="blocklink">`
-			+'<div class="post-info upper">'
+			+'<div class="post-info hp_textWeak upper">'
 			+ moment(manuscripts[i].date).format("YYYY-MM-DD")
 			+ '</div>'
 			+ '<div class="text">'
 			+ manuscripts[i].text
 			+ '</div>'
-			+ '<div class="post-info lower">'
+			+ '<div class="post-info hp_textWeak lower">'
 			+ `${moment().diff(manuscripts[i].date, 'days')}日前`
 			+ '</div>'
-			+ '<div class="post-info lower tags">'
+			+ '<div class="post-info hp_textWeak lower tags">'
 			+ hashtags
 			+ '</div>'
 			+ '</a>'
@@ -102,17 +102,17 @@ $.getJSON("manuscript.json", function(manuscripts){
 	}
 
 	var h = '<article class="postpage">'
-		+'<div class="post-info upper">'
+		+'<div class="post-info hp_textWeak upper">'
 		+ moment(manuscripts[i].date).format("YYYY-MM-DD HH:mm")
 		+ '</div>'
 		+ '<div class="subtitle">' + manuscripts[i].title + '</div>'
 		+ '<div class="text">'
 		+ manuscripts[i].text
 		+ '</div>'
-		+ '<div class="post-info lower">'
+		+ '<div class="post-info hp_textWeak lower">'
 		+ `${moment().diff(manuscripts[i].date, 'days')}日前`
 		+ '</div>'
-		+ '<div class="post-info lower tags">'
+		+ '<div class="post-info hp_textWeak lower tags">'
 		+ hashtags
 		+ '</div>'
 		+ '</article>'
@@ -127,13 +127,12 @@ $.getJSON("manuscript.json", function(manuscripts){
 <section>
 <div class="inner">
 	<article class="postpage">
-		<div class="post-info">2020-03-09</div>
-		<div class="subtitle">0309</div>
+		<div class="subtitle hp_textWeak"">2020-03-09</div>
 		<div class="text">
 		<p>自分の心を観察するときは、推測を挟んではいけない。少なくとも共通言語の論理で推測してはいけない。それは自分固有の狂気を殺すことに繋がる。まず心が混沌を語るのを聞き、そこにある論理を引き出していかねばならない。</p>
 		<p>自分の不義理が巡り巡って自分を刺しに（もちろんこれは比喩だ）来るのではないかとふと不安になることがある。そうなったら仕方ないかなと諦める気持ちもある。僕は安定的な人間関係を築くということがからきしできない人間だ。理由はいくつかあるが、最も大きいのは、自分が何にもまして独り考えることを優先してしまうことだろうと思う。我が偉大な思考の前にはすべては無価値だとか、そういう大袈裟なことを思っているわけではない。ただいくら些細でくだらない考えであっても、それを一人弄んでいる心地よい時間を放棄することは、僕にとって難しいことなのだ。大学時代（この傾向が最も強かったのはそのころだ）僕は、考えていることを中断したくないばかりに講義やサークル活動をサボるということがしばしばあった。そうした傾向が自分の社会生活を困難にするだろうことは理解していたが、それでもまあいいやと思っていた気がする。意識の上では、なぜ自分はいつもこうなのかと嘆いていたはずだが、結局そうした生き方を続けていたということは、この優先順位付けは不動のものだったということだろう。あの頃からすれば大幅にマイルドになったが、傾向は今でも変わっていない。よく知らない人間と長時間過ごすくらいなら、いくら面白げなイベントだろうと独りでぼーっと考える時間を選ぶ。こんな自分と変わらず交友を続けてくれている人々には大変感謝している。</p></div>
-		<div class="post-info lower">2年前</div>
-		<span class="tags post-info">#日記</span>
+		<div class="post-info hp_textWeak lower">2年前</div>
+		<span class="tags post-info hp_textWeak">#日記</span>
 	</div>
 	</article>
 	
@@ -163,13 +162,13 @@ $.getJSON("manuscript.json", function(manuscripts){
 	<article class="postlist">
 	<a href="index.html?p=1" class="blocklink">
 		<h3 class="post-title"></h3>
-		<div class="post-info upper">2020-03-09</div>
+		<div class="post-info hp_textWeak upper">2020-03-09</div>
 		<div class="text">
 		<p>自分の心を観察するときは、推測を挟んではいけない。少なくとも共通言語の論理で推測してはいけない。それは自分固有の狂気を殺すことに繋がる。まず心が混沌を語るのを聞き、そこにある論理を引き出していかねばならない。</p>
 		<p>自分の不義理が巡り巡って自分を刺しに（もちろんこれは比喩だ）来るのではないかとふと不安になることがある。そうなったら仕方ないかなと諦める気持ちもある。僕は安定的な人間関係を築くということがからきしできない人間だ。理由はいくつかあるが、最も大きいのは、自分が何にもまして独り考えることを優先してしまうことだろうと思う。我が偉大な思考の前にはすべては無価値だとか、そういう大袈裟なことを思っているわけではない。ただいくら些細でくだらない考えであっても、それを一人弄んでいる心地よい時間を放棄することは、僕にとって難しいことなのだ。大学時代（この傾向が最も強かったのはそのころだ）僕は、考えていることを中断したくないばかりに講義やサークル活動をサボるということがしばしばあった。そうした傾向が自分の社会生活を困難にするだろうことは理解していたが、それでもまあいいやと思っていた気がする。意識の上では、なぜ自分はいつもこうなのかと嘆いていたはずだが、結局そうした生き方を続けていたということは、この優先順位付けは不動のものだったということだろう。あの頃からすれば大幅にマイルドになったが、傾向は今でも変わっていない。よく知らない人間と長時間過ごすくらいなら、いくら面白げなイベントだろうと独りでぼーっと考える時間を選ぶ。こんな自分と変わらず交友を続けてくれている人々には大変感謝している。</p>
 		</div>
-		<div class="post-info lower">2年前</div>
-		<div class="post-info">日記</div>
+		<div class="post-info hp_textWeak lower">2年前</div>
+		<div class="post-info hp_textWeak">日記</div>
 	</a>
 	</article>
 
