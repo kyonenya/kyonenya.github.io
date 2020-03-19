@@ -65,7 +65,11 @@
 	console.log(moment().format("YYYY-MM-DD HH:mm:SS"));
 	console.log(moment(manuscripts[0].date).format("YYYY-MM-DD HH:mm:SS"));	
 	console.log(`${moment().diff(manuscripts[0].date, 'days')}日前`);
-	}); // 日前 
+
+	console.log(manuscripts[2].text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'')); //tagremove
+
+	console.log(manuscripts[2].text.slice(0, 140)); //先頭N文字だけ
+	}); 
 		
 	});
 	</script>
