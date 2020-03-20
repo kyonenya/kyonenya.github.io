@@ -41,17 +41,7 @@
 <div class="inner">
 <div id="wrap_postpage">
 <script type="text/javascript">
-$(function(){
-//i = 1;
-// URL が「http://www.example.com?lib=jquery&ver=3」の場合
-console.log(getParam('id')); //「jquery」を出力
-// alert(getParam('ver')); // 「3」を出力
-/**
- * Get the URL parameter value
- *
- * @param  name {string} パラメータのキー文字列
- * @return  url {url} 対象のURL文字列（任意）
- */
+// URLからクエリ文字列を取得する関数
 function getParam(name, url) {
     if (!url) url = window.location.href;
     name = name.replace(/[\[\]]/g, "\\$&");
@@ -61,19 +51,21 @@ function getParam(name, url) {
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
-i = getParam('id');
+	// ページidを取得、nullまたは0以上の整数
+	i = getParam('id');
+
+// jQuery処理開始
+$(function(){
 
 $.getJSON("manuscript.json", function(manuscripts){
 
+// タグたちに#をつける
 	let hashtags = "";
 	for (let index = 0; index < manuscripts[i].tags.length; index++) { // 要素数を.lengthで
 		hashtags += `#${manuscripts[i].tags[index]} `;
 	}
-
 	var h = '<article class="postpage">'
-		+'<div class="post-info hp_textWeak upper">'
-		+ moment(manuscripts[i].date).format("YYYY-MM-DD HH:mm")
-		+ '</div>'
+		+'<div class="post-info hp_textWeak upper">' + moment(manuscripts[i].date).format("YYYY-MM-DD HH:mm") + '</div>'
 		// + '<div class="subtitle">' + manuscripts[i].title + '</div>'
 		+ '<div class="text">'
 		+ manuscripts[i].text
@@ -83,11 +75,15 @@ $.getJSON("manuscript.json", function(manuscripts){
 		+ '</div>'
 		+ '<div class="post-info hp_textWeak lower tags">'
 		+ hashtags
-		+ '</div>'
-		+ '</article>'
+		+ '</div>' + '</article>'
+		
+	// HTMLを生成
 	$("#wrap_postpage").append(h);
 	});
-});
+
+
+/* jQuery処理終了 */ }); 
+
 </script>
 </div>
 </section>
@@ -98,42 +94,30 @@ $.getJSON("manuscript.json", function(manuscripts){
 <ul id="wrap">
 <script type="text/javascript">
 $(function(){
-
 $.getJSON("manuscript.json", function(manuscripts){
-	for(var i in manuscripts){
-	
+
+for(var i in manuscripts){
+	// タグに#をつける
 	let hashtags = "";
-	for (let index = 0; index < manuscripts[i].tags.length; index++) { // 要素数を.lengthで
-		hashtags += `#${manuscripts[i].tags[index]} `;
+	for (let j = 0; j < manuscripts[i].tags.length; j++) { 
+		hashtags += `#${manuscripts[i].tags[j]} `;
 	}
+	// 長文の表示文字数を制限する
 	let text = "";
 	if (manuscripts[i].text.length > 140) {
-		text = manuscripts[i].text.substr(0, 140) + '…' + '<br>' + '<div class="hp_textWeak">続きを読む</div>'; // 先頭からn文字
+		text = manuscripts[i].text.substr(0, 140) + '…' + '<p><div class="hp_textWeak">続きを読む</div></p>'; // 先頭からn文字
 	} else {
-		text = manuscripts[i].text;
+		text = manuscripts[i].text; // 短文はそのまま表示
 	};
-	
-	console.log(hashtags);
-	
-		var h = '<li class="postlist">'
-			+ `<a href="?id=${i}">`
-			+'<div class="post-info hp_textWeak upper">'
-			+ moment(manuscripts[i].date).format("YYYY-MM-DD")
-			+ '</div>'
-			+ '<div class="text">'
-			+ text
-			+ '</div>'
-			+ '<div class="post-info hp_textWeak lower">'
-			+ `${moment().diff(manuscripts[i].date, 'days')}日前`
-			+ '</div>'
-			+ '<div class="post-info hp_textWeak lower tags">'
-			+ hashtags
-			+ '</div>'
-			+ '</a>'
-			+ '</li>'
+	// 記事一覧ページのHTML要素を作成
+	var h = '<li class="postlist">' + `<a href="?id=${i}">`
+		+'<div class="post-info hp_textWeak upper">' + moment(manuscripts[i].date).format("YYYY-MM-DD") + '</div>'
+		+ '<div class="text">' + text + '</div>'
+		+ '<div class="post-info hp_textWeak lower">' + `${moment().diff(manuscripts[i].date, 'days')}日前` + '</div>'
+		+ '<div class="post-info hp_textWeak lower tags">' + hashtags + '</div>'
+		+ '</a>' + '</li>'
 		$("#wrap").append(h);
 	}
-	console.log(manuscripts[1].text);
 	manuscripts[2].tags === undefined ? console.log('タグなし') : console.log('タグあり');
 // moment.js
 // console.log(moment().format("YYYY-MM-DD HH:mm:SS"));
