@@ -50,6 +50,13 @@ $.getJSON("manuscript.json", function(manuscripts){
 	for (let index = 0; index < manuscripts[i].tags.length; index++) { // 要素数を.lengthで
 		hashtags += `#${manuscripts[i].tags[index]} `;
 	}
+	let text = "";
+	if (manuscripts[i].text.length > 140) {
+		text = manuscripts[i].text.substr(0, 140) + '…' + '<br>' + '<div class="hp_textWeak">続きを読む</div>'; // 先頭からn文字
+	} else {
+		text = manuscripts[i].text;
+	};
+	
 	console.log(hashtags);
 	
 		var h = '<li class="postlist">'
@@ -58,7 +65,7 @@ $.getJSON("manuscript.json", function(manuscripts){
 			+ moment(manuscripts[i].date).format("YYYY-MM-DD")
 			+ '</div>'
 			+ '<div class="text">'
-			+ manuscripts[i].text
+			+ text
 			+ '</div>'
 			+ '<div class="post-info hp_textWeak lower">'
 			+ `${moment().diff(manuscripts[i].date, 'days')}日前`
