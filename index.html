@@ -37,6 +37,62 @@
 
 <div class="contents"><!--コンテンツ領域格納　-->
 
+<section>
+<div class="inner">
+<div id="wrap_postpage">
+<script type="text/javascript">
+$(function(){
+//i = 1;
+// URL が「http://www.example.com?lib=jquery&ver=3」の場合
+console.log(getParam('id')); //「jquery」を出力
+// alert(getParam('ver')); // 「3」を出力
+/**
+ * Get the URL parameter value
+ *
+ * @param  name {string} パラメータのキー文字列
+ * @return  url {url} 対象のURL文字列（任意）
+ */
+function getParam(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+i = getParam('id');
+
+$.getJSON("manuscript.json", function(manuscripts){
+
+	let hashtags = "";
+	for (let index = 0; index < manuscripts[i].tags.length; index++) { // 要素数を.lengthで
+		hashtags += `#${manuscripts[i].tags[index]} `;
+	}
+
+	var h = '<article class="postpage">'
+		+'<div class="post-info hp_textWeak upper">'
+		+ moment(manuscripts[i].date).format("YYYY-MM-DD HH:mm")
+		+ '</div>'
+		// + '<div class="subtitle">' + manuscripts[i].title + '</div>'
+		+ '<div class="text">'
+		+ manuscripts[i].text
+		+ '</div>'
+		+ '<div class="post-info hp_textWeak lower">'
+		+ `${moment().diff(manuscripts[i].date, 'days')}日前`
+		+ '</div>'
+		+ '<div class="post-info hp_textWeak lower tags">'
+		+ hashtags
+		+ '</div>'
+		+ '</article>'
+	$("#wrap_postpage").append(h);
+	});
+});
+</script>
+</div>
+</section>
+
+
 <section class="">
 <div class="inner">
 <ul id="wrap">
@@ -60,7 +116,7 @@ $.getJSON("manuscript.json", function(manuscripts){
 	console.log(hashtags);
 	
 		var h = '<li class="postlist">'
-			+ `<a href="index.html?p=${i}" class="blocklink">`
+			+ `<a href="?id=${i}">`
 			+'<div class="post-info hp_textWeak upper">'
 			+ moment(manuscripts[i].date).format("YYYY-MM-DD")
 			+ '</div>'
@@ -80,13 +136,18 @@ $.getJSON("manuscript.json", function(manuscripts){
 	console.log(manuscripts[1].text);
 	manuscripts[2].tags === undefined ? console.log('タグなし') : console.log('タグあり');
 // moment.js
-console.log(moment().format("YYYY-MM-DD HH:mm:SS"));
-console.log(moment(manuscripts[0].date).format("YYYY-MM-DD HH:mm:SS"));	
-console.log(`${moment().diff(manuscripts[0].date, 'days')}日前`);
+// console.log(moment().format("YYYY-MM-DD HH:mm:SS"));
+//console.log(moment(manuscripts[0].date).format("YYYY-MM-DD HH:mm:SS"));	
+//console.log(`${moment().diff(manuscripts[0].date, 'days')}日前`);
 
 console.log(manuscripts[2].text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'')); //tagremove
 
 console.log(manuscripts[2].text.slice(0, 140)); //先頭N文字だけ
+
+
+
+
+
 }); 
 	
 });
@@ -96,40 +157,7 @@ console.log(manuscripts[2].text.slice(0, 140)); //先頭N文字だけ
 </section>
 
 
-<section>
-<div class="inner">
-<div id="wrap_postpage">
-<script type="text/javascript">
-$(function(){
-i = 2
-$.getJSON("manuscript.json", function(manuscripts){
-	let hashtags = "";
-	for (let index = 0; index < manuscripts[i].tags.length; index++) { // 要素数を.lengthで
-		hashtags += `#${manuscripts[i].tags[index]} `;
-	}
 
-	var h = '<article class="postpage">'
-		+'<div class="post-info hp_textWeak upper">'
-		+ moment(manuscripts[i].date).format("YYYY-MM-DD HH:mm")
-		+ '</div>'
-		+ '<div class="subtitle">' + manuscripts[i].title + '</div>'
-		+ '<div class="text">'
-		+ manuscripts[i].text
-		+ '</div>'
-		+ '<div class="post-info hp_textWeak lower">'
-		+ `${moment().diff(manuscripts[i].date, 'days')}日前`
-		+ '</div>'
-		+ '<div class="post-info hp_textWeak lower tags">'
-		+ hashtags
-		+ '</div>'
-		+ '</article>'
-	$("#wrap_postpage").append(h);
-	});
-});
-</script>
-	
-</div>
-</section>
 
 <section>
 <div class="inner">
