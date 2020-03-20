@@ -40,6 +40,7 @@
 <section>
 <div class="inner">
 <div id="wrap_postpage">
+<!--
 <script type="text/javascript">
 // URLからクエリ文字列を取得する関数
 function getParam(name, url) {
@@ -59,11 +60,6 @@ $(function(){
 
 $.getJSON("manuscript.json", function(manuscripts){
 
-// タグたちに#をつける
-	let hashtags = "";
-	for (let index = 0; index < manuscripts[i].tags.length; index++) { // 要素数を.lengthで
-		hashtags += `#${manuscripts[i].tags[index]} `;
-	}
 	var h = '<article class="postpage">'
 		+'<div class="post-info hp_textWeak upper">' + moment(manuscripts[i].date).format("YYYY-MM-DD HH:mm") + '</div>'
 		// + '<div class="subtitle">' + manuscripts[i].title + '</div>'
@@ -87,50 +83,64 @@ $.getJSON("manuscript.json", function(manuscripts){
 </script>
 </div>
 </section>
-
+-->
 
 <section class="">
 <div class="inner">
 <ul id="wrap">
 <script type="text/javascript">
-$(function(){
+	// URLからクエリ文字列を取得する関数
+function getParam(name, url) {
+	if (!url) url = window.location.href;
+	name = name.replace(/[\[\]]/g, "\\$&");
+	var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"), results = regex.exec(url);
+	if (!results) return null;
+	if (!results[2]) return '';
+	return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+// ページidを取得、0以上の整数またはnull
+i = getParam('id');
+
+$(function(){ // jQuery処理開始
+// JSONデータ取得
 $.getJSON("manuscript.json", function(manuscripts){
 
+let h = "";	
+
 for(var i in manuscripts){
-	// タグに#をつける
+	// 各タグに#をつける（この際どうでもいいか）
 	let hashtags = "";
 	for (let j = 0; j < manuscripts[i].tags.length; j++) { 
 		hashtags += `#${manuscripts[i].tags[j]} `;
 	}
-	// 長文の表示文字数を制限する
+	// 各長文の表示文字数を制限する
 	let text = "";
 	if (manuscripts[i].text.length > 140) {
-		text = manuscripts[i].text.substr(0, 140) + '…' + '<p><div class="hp_textWeak">続きを読む</div></p>'; // 先頭からn文字
+		text = manuscripts[i].text.substr(0, 140) + '…' + '<p><div class="hp_textWeak">続きを読む</div></p>'; 
 	} else {
-		text = manuscripts[i].text; // 短文はそのまま表示
+		text = manuscripts[i].text;
 	};
-	// 記事一覧ページのHTML要素を作成
-	var h = '<li class="postlist">' + `<a href="?id=${i}">`
+	// 記事一覧ページのHTMLタグを積算
+	h += '<li class="postlist">' + `<a href="?id=${i}">`
 		+'<div class="post-info hp_textWeak upper">' + moment(manuscripts[i].date).format("YYYY-MM-DD") + '</div>'
 		+ '<div class="text">' + text + '</div>'
 		+ '<div class="post-info hp_textWeak lower">' + `${moment().diff(manuscripts[i].date, 'days')}日前` + '</div>'
 		+ '<div class="post-info hp_textWeak lower tags">' + hashtags + '</div>'
 		+ '</a>' + '</li>'
-		$("#wrap").append(h);
 	}
-	manuscripts[2].tags === undefined ? console.log('タグなし') : console.log('タグあり');
-// moment.js
-// console.log(moment().format("YYYY-MM-DD HH:mm:SS"));
-//console.log(moment(manuscripts[0].date).format("YYYY-MM-DD HH:mm:SS"));	
-//console.log(`${moment().diff(manuscripts[0].date, 'days')}日前`);
+	$("#wrap").append(h);	
+/*	if () {
+			
+	} else {
+		$("#wrap").append(h);
+	};
+*/
+function sum(a, b, c) {
+	return a + b + c; 
+	//これでログ表示ではなく値が返ってきて、他の計算にも使えるようになる。returnで関数はストップ、それ以降の処理は実行されない。
+}
 
-console.log(manuscripts[2].text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'')); //tagremove
-
-console.log(manuscripts[2].text.slice(0, 140)); //先頭N文字だけ
-
-
-
-
+// console.log(manuscripts[2].text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'')); //tagremove
 
 }); 
 	
