@@ -16,7 +16,8 @@
 	<link rel="shortcut icon" href="img/favicon.ico"/>
 	<!-- JavaScriptライブラリをCDNからインポート -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script><!-- jQuery -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js" type="text/javascript"></script><!-- Moment.js -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script><!-- Moment.js -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/ja.js"></script><!-- Moment.js 日本語ロケール -->
 </head>
 
 <body>
@@ -86,10 +87,10 @@ $.getJSON("manuscript.json", function(manuscripts){
 <section class="">
 <div class="inner">
 <ul id="wrap">
-<ul id="wrap_postpage">
+<div id="wrap_postpage">
 <script type="text/javascript">
 	// 変数宣言
-	let h = "";	
+	let h = "";
 	// URLからクエリ文字列を取得する関数
 	function getParam(name, url) {
 		if (!url) url = window.location.href;
@@ -110,12 +111,30 @@ $.getJSON("manuscript.json", function(manuscripts){
 	function htmlComb(id) {
 		return '<li class="postlist">' + `<a href="?id=${id}">`
 		+'<div class="post-info hp_textWeak upper">' + moment(manuscripts[id].date).format("YYYY-MM-DD") + '</div>'
-		+ '<div class="text">' + manuscripts[id].text + '</div>'
-		+ '<div class="post-info hp_textWeak lower">' + `${moment().diff(manuscripts[id].date, 'days')}日前` + '</div>'
+		+ '<div class="text">' + manuscripts[id].text 
+		+ '</div>'
+		+ '<div class="post-info hp_textWeak lower">' 
+		+ moment(manuscripts[id].date).fromNow() 
+		+ '</div>'
 		+ '<div class="post-info hp_textWeak lower tags">' + manuscripts[id].tags + '</div>'
 		+ '</a>' + '</li>'
 	}
 	// console.log(htmlComb(2));
+
+	function htmlComb_page(id) {
+		return '<article class="postpage">'
+		+'<div class="post-info hp_textWeak upper">' + moment(manuscripts[id].date).format("YYYY-MM-DD HH:mm") + '</div>'
+		// + '<div class="subtitle">' + manuscripts[i].title + '</div>'
+		+ '<div class="text">'
+		+ manuscripts[id].text
+		+ '</div>'
+		+ '<div class="post-info hp_textWeak lower">'
+		+ moment(manuscripts[id].date).fromNow()
+		+ '</div>'
+		+ '<div class="post-info hp_textWeak lower tags">'
+		+ manuscripts[id].tags
+		+ '</div>' + '</article>'	
+	}
 
 	for(var i in manuscripts){
 		// hashtags, 各タグに#をつける（この際どうでもいいか）
@@ -137,7 +156,7 @@ $.getJSON("manuscript.json", function(manuscripts){
 	if (id == null) {
 		$("#wrap").append(h);
 	} else {
-		$("#wrap_postpage").append(htmlComb(id));
+		$("#wrap_postpage").append(htmlComb_page(id));
 	};
 
 // console.log(manuscripts[2].text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'')); //tagremove
@@ -169,7 +188,7 @@ $.getJSON("manuscript.json", function(manuscripts){
 <div class="inner">
 	<h2 class="title">このサイトについて</h2>
 	<div class="text">
-	<p>京念屋隆史のサイトです。哲学を研究しています。</p>
+<!--	<p>京念屋隆史のサイトです。哲学を研究しています。</p> -->
 	</div>
 	<h3 class="subtitle">サイトマップ</h3>
 	<div class="text">
@@ -273,38 +292,35 @@ $.getJSON("manuscript.json", function(manuscripts){
 	<div class="title-side">last update: 2020/03/12</div>
 	<h2 class="title">プロフィール</h2>
 	<h3 class="subtitle">京念屋 隆史（きょうねんや たかし）</h3>
-<div class="text">
-<dl>
-  <dt>所属：</dt>
-  <dd>法政大学大学院人文科学研究科 博士課程</dd>
-  <dt>学位：</dt>
-  <dd>修士（哲学／慶應義塾大学）</dd>
-  <dt>連絡先：</dt>
-  <dd>kyonenya.takashi@gmail.com</dd>
-<dl>
-</div>
-
-<table>
-	<tbody>
-		<tr>
-			<td>所属</td><!--tableDatacell, 一行づつ左から右へ-->
-			<td>法政大学大学院人文科学研究科 博士課程</td>
-		</tr>
-		<tr><!--tableRow, 行-->
-			<td>学位：</td><!--tableDatacell-->
-			<td>修士（哲学／慶應義塾大学）</td>
-		</tr>
-		<tr><!--tableRow, 行-->
-			<td>連絡先：</td><!--tableDatacell-->
-			<td>kyonenya.takashi@gmail.com</td>
-		</tr>
-	</tbody>
-</table>
+	<div class="bl_horizTable">
+		<table>
+			<tbody>
+				<tr>
+					<th>名前</th>
+					<td>京念屋 隆史</td>
+				</tr>
+				<tr>
+					<th>所属</th>
+					<td>法政大学人文科学研究科 博士課程</td>
+				</tr>
+				<tr>
+					<th>学位</th>
+					<td>哲学（修士／慶應義塾大学）</td>
+				</tr>
+				<tr>
+					<th>メール</th>
+					<td>kyonenya.takashi@gmail.com</td>
+				</tr>				
+			</tbody>
+		</table>
+	</div>
+	<!-- /bl.horizTable -->	
 
 </div>
 </section>
 
-</div><!--コンテンツ領域格納終わり-->
+</div>
+<!--コンテンツ領域格納終わり-->
 
 <!--footer-->
 <footer class="footer">
