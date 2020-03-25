@@ -6,6 +6,7 @@
 	--first-color: hsl(202, 35%, 50%); /* 6ステップ (202, 35%, 53%) より*/
 	--first-color-light: hsl(202, 35%, 70%); 
 	--width-large: 900px;
+	--margin-text: 0.5em; /* 余白限界を起点とした、その内側の要素の余白 */
 }
 
 /* ベースグループ
@@ -17,6 +18,7 @@ body {
 	line-height: 1.7;
 	background: hsl(40, 38%, 97%); /* 再生紙色、andante (40, 38%, 97%) より */
 }
+
 .ly_centerWrapper {
 	/* 大画面では両端に余白を設け、中央揃えをする */
 	max-width: var(--width-large);
@@ -27,15 +29,18 @@ body {
 }
 
 .ly_cont {
+/* コンテンツ領域 */
 	/* 限界余白 */
 	margin: 0 0.5em;
+	/* 分析用 */
+	border-left: 1px dashed var(--monochrome-light);
+	border-right: 1px dashed var(--monochrome-light);
 }
 
-/* セクション間の上下余白 */
-
-.text {
-/* margin-left: 0.5em;
- */
+a {
+	/* リンク装飾をリセット */
+	text-decoration: none;
+	color: inherit;
 }
 
 /*	草稿
@@ -63,18 +68,14 @@ body {
 .upper {
 	padding-bottom: 0.25em;
 }
-/* .tags:before {
-	content: '#'
-}
- */
+
 #wrap {
  	padding: 0;
  }
 /*	ヘッダー
 ---------------------------------*/
-/*-- サイトタイトルロゴ-- */
 .ly_header {
-	font-family: "Avenir Next", Verdana, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "游ゴシック Medium", "Yu Gothic Medium", "メイリオ", Meiryo, sans-serif; 
+	font-family: "Avenir Next", Verdana, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "游ゴシック Medium", "Yu Gothic Medium", "メイリオ", Meiryo, sans-serif;
 }
 .el_headerLogo { 
 	font-size: 175%;
@@ -86,7 +87,7 @@ nav .container {
 	display: flex;
 }
 /* ナビメニュー */
-nav a { /* リンクブロック[1] */
+nav a {
 	display: block; 
 	line-height: 1.2em; /* 実質的には区切り線の高さ */
 	text-align: center;
@@ -115,15 +116,9 @@ nav li + li { /* 2番目以降のメニューリストアイテムに区切り�
   color: #333;
 }
 
-/*	タグ（なるべく使わない）
+/* テキストのマークアップ
 ---------------------------------*/
-
-/* リンク */
-a { /* いったん全部リセット */
-	text-decoration: none;
-	color: inherit;
-}
-.text a { /* 本文中のリンクは装飾する */ 
+.text a { 
 	/* 下線と文字とを空けるため、擬似的な下線を作る */
 	display: inline-block; 
 	line-height: 1em; /* 下余白リセット */
@@ -132,46 +127,50 @@ a { /* いったん全部リセット */
 	border-bottom: 1px solid hsl(219, 62%, 70%); /* 細く見せる */
 	padding-bottom: 1px; /* 擬似的な下線 */
 }
-.text a:visited { /* 訪問済みリンク */
+.text a:visited { 
+	/* 訪問済みリンク */
 	color: hsl(271, 35%, 45%); /* 紫、Wikipediaより */
 	border-bottom: 1px solid hsl(271, 35%, 65%); 
 }
 
-/* 段落：二段落目以降　*/
-p + p {
-	text-indent: 1em;
-	margin-top: 0.5em; /*段落間だけを空ける*/
+.text p {
+	/* プレーンテキスト */
+	margin: 0 0.5em /* 限界余白 */
+}
+.text p + p {
+	text-indent: 1em; /* 二段落目以降を字下げ */
+	margin-top: 0.5em; /* 段落間に余白 */
 }
 
-/* ブロック引用　*/
-blockquote {
-	/* 本文と上下1行空け、2文字（1+x+y）インデント */
+.text blockquote {
+	/* ブロック引用　*/
+	/* 上下に1行の余白、左から1文字分インデント */
 	margin: 1em 0 1em 1em; 
 	color: var(--monochrome-dark);
 	border-left: 0.2em solid var(--monochrome-light);
 	padding-left: 0.8em;
 }
-blockquote p {
+.text blockquote p {
 	text-indent: 0; /* 引用ブロック中は字下げなし */
 }
 ul li {
 	list-style: none;
 }
-
 /* 説明リストを簡易的な表にする https://techacademy.jp/magazine/19405 */
 dt{
   float: left; /* 改行を解除し、一列に横並びにする */
 }
-
 dd{
   margin-left: 80px;
 }
 
 
-/*	部品
+/*	エレメント
 ---------------------------------*/
 /*h2相当、大見出し*/
 .title { 
+	/* 標準余白 */
+	margin: 3em 0 1em; /* セクション間余白、左右からの余白、後続要素との余白 */
 	/* 横棒 */
 	border-left: 4px solid var(--monochrome-medium);
 	padding-left: 0.45em; /* 横棒と文字の間隔 */
@@ -181,15 +180,14 @@ dd{
 	padding-right: 0.75em;
 	font-weight: normal;
 	font-size: 110%;
-	margin: 0 0 1em; /* 左端から0.5文字 */
 }
 /*h3相当、平行線つき小見出し*/
 .subtitle {
+	/* 標準余白 */
+	margin: 1em 0.5em 0.75em; /* セクション間余白、左右からの余白、後続要素との余白 */
 	font-weight: normal;
 	border-bottom: 1px solid hsl(0, 0%, 87%);;
 	font-size: 105%;
-	margin: 0.5em 0.5em 0.75em; /* これで左端から1文字分、上は大見出し・小見出しと連続するときは余白相殺される 
-*/
 }
 .title-side {
 	text-align: right;
