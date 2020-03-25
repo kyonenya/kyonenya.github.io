@@ -12,7 +12,6 @@
 ---------------------------------*/
 body {
 	font-family: "Helvetica Neue", Verdana, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "游ゴシック Medium", "Yu Gothic Medium", "メイリオ", Meiryo, sans-serif; 
-	/* width: 100vw; */
 	word-break: break-word; /* 行頭に、。が来るのを避ける */
 	color: #333; /* 黒の文字色 */
 	line-height: 1.7;
@@ -25,8 +24,8 @@ body {
 }
 
 /* 2番目の個包装 */
-.inner {
-	/*margin: 0 0.5em;*/ /* 限界余白 ※良くない、いずれ直す。 */
+.ly_cont {
+	margin: 0 0.5em; /* 限界余白 ※良くない、いずれ直す。 */
 }
 /* セクション間の上下余白 */
 section {
@@ -34,7 +33,8 @@ section {
 }
 
 .text {
-	margin-left: 0.5em;
+/* margin-left: 0.5em;
+ */
 }
 
 /*	草稿
@@ -72,10 +72,10 @@ section {
 /*	ヘッダー
 ---------------------------------*/
 /*-- サイトタイトルロゴ-- */
-header {
+.ly_header {
 	font-family: "Avenir Next", Verdana, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "游ゴシック Medium", "Yu Gothic Medium", "メイリオ", Meiryo, sans-serif; 
 }
-.logo { 
+.el_headerLogo { 
 	font-size: 175%;
 	font-weight: normal;
 	vertical-align: center;	
@@ -237,12 +237,12 @@ dd{
 /* タブレット以上
 ----------------------------------------------------*/
 @media (min-width: 560px) {
-.inner {
-	margin: 0 1em; /* 限界余白を広くする（上書き） */
-}
+/* . ly_cont {
+	margin: 0 1em; 
+} */
 /*-- ヘッダー：固定帯に --*/
-	/* 大箱　*/
-header {
+/* 大箱　*/
+.ly_header {
 	position: fixed; 
 	background: inherit; /* 塗りつぶし */
 	width: 100%;
@@ -250,7 +250,7 @@ header {
 	max-width: var(--width-large);
 }
 	/* 中コンテナ：ロゴ＋メニュー　*/
-header .inner {
+.ly_header_inner {
 	width: 100%;
 	display: flex;	
 	justify-content: space-between; /* 二つを両端に分ける */
@@ -258,10 +258,10 @@ header .inner {
 	padding-top: 0.75em; /* これにて手動で縦方向センタリング */
 }
 	/* 小コンテナ：メニューリスト、右端から離す */
-header .container {
+.ly_header .container {
 	margin-right: 2em;
 }
-.logo {
+.el_headerLogo {
 	margin-left: 0.3em;
 }
 .contents {
@@ -271,7 +271,7 @@ header .container {
 
 @media (max-width: 559px) {
 /* -- ヘッダー：中央揃えの隊列にする -- */
-header .inner {
+.ly_header_inner {
 	text-align: center;
 	margin-top: 1em;
 }
