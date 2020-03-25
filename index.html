@@ -21,7 +21,9 @@
 </head>
 
 <body>
-<header class="ly_header" >
+<div class="ly_centerWrapper"><!-- 大画面時の余白設定用 -->
+
+<header class="ly_header">
 	<div class="ly_header_inner">
 		<h1 class="el_headerLogo"><a href="#">kyonen-ya</a></h1>
 		<nav>
@@ -36,12 +38,11 @@
 	<!-- /.ly_header_inner -->
 </header>
 
-<div class="contents"><!--コンテンツ領域格納　-->
+<main>
 
-<section class="">
-<div class="inner">
-<ul id="wrap">
-<div id="wrap_postpage">
+<section class="ly_cont">
+<ul id="wrap"></ul>
+<div id="wrap_postpage"></div>
 <script type="text/javascript">
 	// 変数宣言
 	let h = "";
@@ -112,49 +113,38 @@ $.getJSON("manuscript.json", function(manuscripts){
 	} else {
 		$("#wrap_postpage").append(htmlComb_page(id));
 	};
-
 // console.log(manuscripts[2].text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'')); //tagremove
 }); 
 	
 });
 </script>
-</ul>
-</div>
 </section>
 
-
-<!--ここから-->
-<section class="">
-<div class="ly_cont">
+<!-- ここから手動 -->
+<section class="ly_cont">
 <div class="text">
 	<h2 class="title">このサイトについて</h2>
-	<p>xxxのサイトです。xxをxxしています。</p> -->
-	</div>
+	<p>xxxのサイトです。xxをxxしています。</p>
 	<h3 class="subtitle">サイトマップ</h3>
-	<div class="text">
 	<ul>
 		<li>Works：あいうえおかきくけこ</li>
 		<li>Profile：たちつてとさしすせそ</li>
 		<li>Blog：なにぬねのはひふへほ</li>
 	</ul>
 </div>
-</div>
 </section>
 
-<section class="">
-<div class="ly_cont">
+<section class="ly_cont">
 <h2 class="title">著作解題</h2>
-	<h3 class="subtitle">セロ弾きのゴーシュ（19xx）</h3>
 	<div class="text">
+	<h3 class="subtitle">セロ弾きのゴーシュ（19xx）</h3>
 	<p>ゴーシュは町の活動写真館でセロを弾く係りでした。けれどもあんまり上手でないという評判でした。上手でないどころではなく実は仲間の楽手のなかではいちばん下手でしたから、いつでも楽長にいじめられるのでした。</p>
 	<p>ひるすぎみんなは楽屋に円くならんで今度の町の音楽会へ出す第六交響曲の練習をしていました。</p>
 	</div>
-</div>
 </section>
 
 <!--1-->
-<section class="">
-<div class="ly_cont">
+<section class="ly_cont">
 	<h2 class="title">お知らせ</h2>
 	<h3 class="subtitle">2010年1月6日(水)</h3>
 	<div class="text">
@@ -171,12 +161,10 @@ $.getJSON("manuscript.json", function(manuscripts){
 	<div class="text">
 		<p>にわかにぱたっと楽長が両手を鳴らしました。みんなぴたりと曲をやめてしんとしました。楽長がどなりました。</p>
 		<p>「セロがおくれた。トォテテ　テテテイ、ここからやり直し。はいっ。」</p>
-	</div>
 </section>
 
-<!--2-->
-<section class="">
-<div class="ly_cont">
+
+<section class="ly_cont">
 <div class="text">
 	<h2 class="title">業績一覧</h2>
 	<h3 class="subtitle">論文</h3>
@@ -188,13 +176,10 @@ $.getJSON("manuscript.json", function(manuscripts){
 	<ol>
 		<li>山田太郎,「発表タイトル」, 〇〇セミナー, 〇〇大学, 2010. 3. 19. </li>
 	</ol>
-</div>	
 </div>
 </section>
 
-<!--3-->
-<section class="">
-<div class="ly_cont">
+<section class="ly_cont">
 	<div class="title-side">last update: 2020/03/12</div>
 	<h2 class="title">プロフィール</h2>
 	<h3 class="subtitle">京念屋 隆史（きょうねんや たかし）</h3>
@@ -220,20 +205,17 @@ $.getJSON("manuscript.json", function(manuscripts){
 			</tbody>
 		</table>
 	</div>
-	<!-- /bl.horizTable -->	
-</div>
+	<!-- /bl_horizTable -->	
 </section>
 
-</div>
-<!--コンテンツ領域格納終わり-->
+</div><!-- /ly_centerWrapper -->
+</main>
 
-<!--footer-->
-<footer class="footer">
-<div class="inner">
-	<p class="copyright">&copy; 2020-<a href="#"> kyonen-ya</a> 〇〇</p>
-</div>
+<footer class="ly_footer">
+	<div class="ly_footer_inner">
+		<p class="el_footerCopyright">&copy; 2020-<a href="#"> kyonen-ya</a> xxx</p>
+	</div>
 </footer>
 
-</div>
 </body>
 </html>

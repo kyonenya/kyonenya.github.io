@@ -15,22 +15,23 @@ body {
 	word-break: break-word; /* 行頭に、。が来るのを避ける */
 	color: #333; /* 黒の文字色 */
 	line-height: 1.7;
-	background: hsl(40, 38%, 97%); /* 再生紙くらいの白色、andante (40, 38%, 97%) より */
-	max-width: var(--width-large); 
+	background: hsl(40, 38%, 97%); /* 再生紙色、andante (40, 38%, 97%) より */
+}
+.ly_centerWrapper {
+	/* 大画面では両端に余白を設け、中央揃えをする */
+	max-width: var(--width-large);
 	margin: 0 auto; /* 中央揃え */	
-		/* 分析用 */
-		border-left: 1px dotted var(--monochrome-light);
-		border-right: 1px dotted var(--monochrome-light);
+	/* 分析用 */
+	border-left: 1px dotted var(--monochrome-light);
+	border-right: 1px dotted var(--monochrome-light);
 }
 
-/* 2番目の個包装 */
 .ly_cont {
-	margin: 0 0.5em; /* 限界余白 ※良くない、いずれ直す。 */
+	/* 限界余白 */
+	margin: 0 0.5em;
 }
+
 /* セクション間の上下余白 */
-section {
-	padding: 0 0 2em; 
-}
 
 .text {
 /* margin-left: 0.5em;
@@ -101,19 +102,16 @@ nav li + li { /* 2番目以降のメニューリストアイテムに区切り�
 }
 
 /*--フッター--*/
-.footer {
+.ly_footer {
 	background-color: var(--monochrome-light);
 }
-.footer .inner {
-	padding: 20px 10px;
+.ly_footer_inner {
+	padding: 20px 1em;
 }
-.footer .footer-link a {
-  color: #fff;
+.el_footerCopyright {
+	font-size: 80%;
 }
-.footer .copyright {
-  font-size: 12px;
-}
-.footer .copyright a {
+.el_footerCopyright a {
   color: #333;
 }
 
@@ -185,7 +183,7 @@ dd{
 	font-size: 110%;
 	margin: 0 0 1em; /* 左端から0.5文字 */
 }
-	/*h3相当、平行線つき小見出し*/
+/*h3相当、平行線つき小見出し*/
 .subtitle {
 	font-weight: normal;
 	border-bottom: 1px solid hsl(0, 0%, 87%);;
@@ -234,42 +232,51 @@ dd{
 }
 
 
-/* タブレット以上
-----------------------------------------------------*/
+/* ----------------------------------------------------
+タブレット以上 */
 @media (min-width: 560px) {
-/* . ly_cont {
-	margin: 0 1em; 
-} */
-/*-- ヘッダー：固定帯に --*/
+/* ベースグループ */
+	:root {
+		font-size: 18px;
+	}
+	/* ヘッダーに本文がめり込まないように。 */
+	main {
+		padding-top: 6em; 
+	}
+	
+/* -- ヘッダー：固定帯に -- */
 /* 大箱　*/
 .ly_header {
 	position: fixed; 
-	background: inherit; /* 塗りつぶし */
+	background: inherit; /* 白く塗りつぶし */
 	width: 100%;
 	height: 4.5em;
-	max-width: var(--width-large);
 }
-	/* 中コンテナ：ロゴ＋メニュー　*/
+/* 中コンテナ：ロゴ＋メニュー　*/
 .ly_header_inner {
-	width: 100%;
 	display: flex;	
 	justify-content: space-between; /* 二つを両端に分ける */
 	align-items: center;	/* 二つの高さ位置を揃える */
 	padding-top: 0.75em; /* これにて手動で縦方向センタリング */
+	max-width: var(--width-large);
 }
-	/* 小コンテナ：メニューリスト、右端から離す */
+/* 小コンテナ：メニューリスト、右端から離す */
 .ly_header .container {
-	margin-right: 2em;
+	margin-right: 1em;
 }
 .el_headerLogo {
-	margin-left: 0.3em;
+	margin-left: 0.5em;
 }
-.contents {
-	padding-top: 6em; /* 初期表示でヘッダーに本文がめり込まないように。スクロール後は知らん */
-}
-}	/* 大画面設定ここまで */
 
+}
+
+/* ----------------------------------------------------
+タブレット以下 */
 @media (max-width: 559px) {
+	:root {
+		font-size: 16px;
+	}
+
 /* -- ヘッダー：中央揃えの隊列にする -- */
 .ly_header_inner {
 	text-align: center;
@@ -286,20 +293,4 @@ nav a {
 .contents {
 	padding-top: 1em; 
 }
-} /* レスポンシブここまで */
-
-/* フォントサイズ */
-@media (max-width: 559px) {
-	:root {
-		font-size: 16px;
-	}
 }
-@media (min-width: 560px) {
-	:root {
-		font-size: 18px;
-	}
-}
-
-/* 註
-[1] liではなくaに指定することでブロック全体をクリックできる。一行下で、a要素はふつうインライン要素でサイズ指定無効なので、ブロック要素に変換。二行下で、heightではなくline-heightだと上下均等に余白が作られ、縦中央揃えになってくれる。
-*/
