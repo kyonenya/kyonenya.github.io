@@ -36,8 +36,9 @@ body {
 	border-right: 1px dashed var(--monochrome-light);
 }
 
+/* リセット */
 a {
-	/* リンク装飾をいったんリセット */
+	/* リンク装飾をリセット */
 	text-decoration: none;
 	color: inherit;
 }
@@ -148,16 +149,43 @@ nav li + li { /* 2番目以降のメニューリストアイテムに区切り�
 .bl_text blockquote p {
 	text-indent: 0; /* 引用ブロック中は字下げなし */
 }
+
+/* 順序なしリスト */
+.bl_text ul {
+	margin-left: 0;
+	padding-left: 0.5em;
+}
 .bl_text ul li {
-	list-style: none;
+	list-style: square inside;
 }
-/* 説明リストを簡易的な表にする https://techacademy.jp/magazine/19405 */
-.bl_text dt{
-  float: left; /* 改行を解除し、一列に横並びにする */
+
+/* 順序つきリスト */
+.bl_text ol {
+	margin-left: 0;
+	padding-left: 0.5em;
 }
-.bl_text dd{
-  margin-left: 80px;
+.bl_text ol li {
+	list-style: decimal inside;
+	padding-left: 1em;
 }
+
+/* 説明リスト */
+.bl_text dt {
+	float: left;
+	text-align: right;
+	margin-left: -0.5em; /* 4文字目は画面ギリギリに入れる */
+	width: 4em; /* 最大文字数 */
+}
+.bl_text dd {
+	margin-left: 3.5em; /* dtの左余白＋最大文字数 */
+	/* "： "にぶら下げ、狭い画面で改行されたとき */
+	padding-left: 1.25em;
+	text-indent: -1.25em;
+}
+.bl_text dd:before {
+	content: "： ";
+}
+
 
 .el_heading2 { 
 /* セクションごとの見出し */
@@ -215,10 +243,9 @@ nav li + li { /* 2番目以降のメニューリストアイテムに区切り�
 	font-size: 95%;
 }
 
-
 /* --フッター-- */
 .ly_footer {
-	background-color: var(--monochrome-light);
+	background-color: hsl(0, 0%, 94%);
 	margin-top: 3em;
 }
 .ly_footer_inner {
@@ -227,9 +254,10 @@ nav li + li { /* 2番目以降のメニューリストアイテムに区切り�
 .el_footerCopyright {
 	font-size: 80%;
 	text-align: center;
+	color: var(--monochrome-dark)
 }
 .el_footerCopyright a {
-  color: #333;
+	color: inherit;
 }
 
 /* -----------------------------------------
