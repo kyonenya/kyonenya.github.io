@@ -40,9 +40,11 @@
 
 <main>
 
-<section class="ly_cont">
-<ul id="wrap"></ul>
-<div id="wrap_postpage"></div>
+<section class="">
+	<ul class="bl_posts" id="wrap"></ul>
+	<article class="ly_cont">
+		<div id="wrap_postpage"></div>
+	</article>
 <script type="text/javascript">
 	// 変数宣言
 	let h = "";
@@ -61,34 +63,54 @@
 /* --JSONデータ取得開始-- */
 $(function(){ 
 $.getJSON("manuscript.json", function(manuscripts){
-
-	// HTMLタグ生成関数
+	// 記事リスト（HTMLタグ生成関数）
 	function htmlComb(id) {
-		return '<li class="postlist">' + `<a href="?id=${id}">`
-		+'<div class="post-info hp_textWeak upper">' + moment(manuscripts[id].date).format("YYYY-MM-DD") + '</div>'
-		+ '<div class="text">' + manuscripts[id].text 
-		+ '</div>'
-		+ '<div class="post-info hp_textWeak lower">' 
-		+ moment(manuscripts[id].date).fromNow() 
-		+ '</div>'
-		+ '<div class="post-info hp_textWeak lower tags">' + manuscripts[id].tags + '</div>'
-		+ '</a>' + '</li>'
+		return `
+	<li class="bl_posts_item">
+	<a href="?id=${id}">
+		<header class="bl_posts_header">
+			<time class="bl_posts_date" datetime="${moment(manuscripts[id].date).format("YYYY-MM-DD HH:mm")}">
+				${moment(manuscripts[id].date).format("YYYY-MM-DD")}
+			</time>
+		</header>
+		<div class="bl_text">
+			${manuscripts[id].text}
+		</div>
+		<footer class="bl_posts_footer">
+			<span class="bl_posts_dateago">
+				${moment(manuscripts[id].date).fromNow()}
+			</span>
+			<ul class="bl_posts_tags">
+				<li><span>${manuscripts[id].tags}</span></li>
+			<ul>
+		</footer>
+	</a>
+	</li>
+	`
 	}
 	// console.log(htmlComb(2));
 
+	// 個別記事ページ（HTMLタグ生成関数）
 	function htmlComb_page(id) {
-		return '<article class="postpage">'
-		+'<div class="post-info hp_textWeak upper">' + moment(manuscripts[id].date).format("YYYY-MM-DD HH:mm") + '</div>'
-		// + '<div class="subtitle">' + manuscripts[i].title + '</div>'
-		+ '<div class="text">'
-		+ manuscripts[id].text
+		return '<article class="">'
+		+ '<header>'
+			+'<div class="post-info hp_textWeak upper">' 
+			+ moment(manuscripts[id].date).format("YYYY-MM-DD HH:mm")
+			+ '</div>'
+			// + '<div class="el_heading3">' + manuscripts[i].title + '</div>'
+		+ '</header>'
+		+ '<div class="bl_text">'
+			+ manuscripts[id].text
 		+ '</div>'
-		+ '<div class="post-info hp_textWeak lower">'
-		+ moment(manuscripts[id].date).fromNow()
-		+ '</div>'
-		+ '<div class="post-info hp_textWeak lower tags">'
-		+ manuscripts[id].tags
-		+ '</div>' + '</article>'	
+		+ '<footer>'
+			+ '<div class="post-info hp_textWeak lower">'
+				+ moment(manuscripts[id].date).fromNow()
+			+ '</div>'
+			+ '<div class="post-info hp_textWeak lower tags">'
+				+ manuscripts[id].tags
+			+ '</div>' 
+		+ '</footer>'
+		+ '</article>'	
 	}
 
 	for(var i in manuscripts){
@@ -122,57 +144,59 @@ $.getJSON("manuscript.json", function(manuscripts){
 
 <!-- ここから手動 -->
 <section class="ly_cont">
-<div class="text">
-	<h2 class="title">このサイトについて</h2>
-	<p>xxxのサイトです。xxをxxしています。</p>
-	<h3 class="subtitle">サイトマップ</h3>
-	<ul>
-		<li>Works：あいうえおかきくけこ</li>
-		<li>Profile：たちつてとさしすせそ</li>
-		<li>Blog：なにぬねのはひふへほ</li>
-	</ul>
-</div>
+	<div class="bl_text">
+		<h2 class="el_heading2">このサイトについて</h2>
+		<p>xxxのサイトです。xxをxxしています。</p>
+		<h3 class="el_heading3">サイトマップ</h3>
+		<ul>
+			<li>Works：あいうえおかきくけこ</li>
+			<li>Profile：たちつてとさしすせそ</li>
+			<li>Blog：なにぬねのはひふへほ</li>
+		</ul>
+	</div>
+	<!-- /bl_text -->
 </section>
 
 <section class="ly_cont">
-<h2 class="title">著作解題</h2>
-	<div class="text">
-	<h3 class="subtitle">セロ弾きのゴーシュ（19xx）</h3>
-	<p>ゴーシュは町の活動写真館でセロを弾く係りでした。けれどもあんまり上手でないという評判でした。上手でないどころではなく実は仲間の楽手のなかではいちばん下手でしたから、いつでも楽長にいじめられるのでした。</p>
-	<p>ひるすぎみんなは楽屋に円くならんで今度の町の音楽会へ出す第六交響曲の練習をしていました。</p>
+	<div class="bl_text">
+		<h2 class="el_heading2">著作解題</h2>
+		<h3 class="el_heading3">セロ弾きのゴーシュ（19xx）</h3>
+		<p>ゴーシュは町の活動写真館でセロを弾く係りでした。けれどもあんまり上手でないという評判でした。上手でないどころではなく実は仲間の楽手のなかではいちばん下手でしたから、いつでも楽長にいじめられるのでした。</p>
+		<p>ひるすぎみんなは楽屋に円くならんで今度の町の音楽会へ出す第六交響曲の練習をしていました。</p>
 	</div>
 </section>
 
-<!--1-->
 <section class="ly_cont">
-	<h2 class="title">お知らせ</h2>
-	<h3 class="subtitle">2010年1月6日(水)</h3>
-	<div class="text">
-		<p>ひるすぎみんなは楽屋に円くならんで今度の町の音楽会へ出す第六交響曲こうきょうきょくの練習をしていました。</p>
-		<blockquote>
-			<p>トランペットは一生けん命歌っています。</p>
-			<p>ヴァイオリンも二いろ風のように鳴っています。</p>
-			<p>クラリネットもボーボーとそれに手伝っています。</p>
-		</blockquote>
-		<p>ゴーシュも口をりんと結んで眼めを皿さらのようにして楽譜がくふを見つめながらもう一心に弾いています。</p>
-	</div>
+	<article class="bl_text">
+		<h2 class="el_heading2">お知らせ</h2>
+		<h3 class="el_heading3">2010年1月6日(水)</h3>
+			<p>ひるすぎみんなは楽屋に円くならんで今度の町の音楽会へ出す第六交響曲の練習をしていました。</p>
+			<blockquote>
+				<p>トランペットは一生けん命歌っています。</p>
+				<p>ヴァイオリンも二いろ風のように鳴っています。</p>
+				<p>クラリネットもボーボーとそれに手伝っています。</p>
+			</blockquote>
+			<p>ゴーシュも口をりんと結んで眼めを皿さらのようにして楽譜を見つめながらもう一心に弾いています。</p>
+	</article>
+	<!-- /bl_text -->
 
-	<h3 class="subtitle">2010年1月6日(金)</h3>
-	<div class="text">
-		<p>にわかにぱたっと楽長が両手を鳴らしました。みんなぴたりと曲をやめてしんとしました。楽長がどなりました。</p>
-		<p>「セロがおくれた。トォテテ　テテテイ、ここからやり直し。はいっ。」</p>
+	<article class="bl_text">
+		<h3 class="el_heading3">2010年1月6日(金)</h3>
+			<p>にわかにぱたっと楽長が両手を鳴らしました。みんなぴたりと曲をやめてしんとしました。楽長がどなりました。</p>
+			<p>「セロがおくれた。トォテテ　テテテイ、ここからやり直し。はいっ。」</p>
+	</article>
+	<!-- /bl_text -->
 </section>
 
-
 <section class="ly_cont">
-<div class="text">
-	<h2 class="title">業績一覧</h2>
-	<h3 class="subtitle">論文</h3>
+<div class="bl_text">
+	<h2 class="el_heading2">業績一覧</h2>
+	<h3 class="el_heading3">論文</h3>
 	<ol>
 		<li>山田太郎, 「論文タイトル」, 『雑誌名』, 4巻, pp. 49-56, 〇〇学会, 2011. 3.<a class="btn" href="">［機関リポジトリ］</a></li>
 		<li>山田太郎, 「論文タイトル：サブタイトル」, 『雑誌名』, 43-2号, pp. 81-94, 〇〇学会, 2010. 12.<a href="https://">［PDFリンク］</a></li>
 	</ol>
-	<h3 class="subtitle">発表</h3>
+	<h3 class="el_heading3">発表</h3>
 	<ol>
 		<li>山田太郎,「発表タイトル」, 〇〇セミナー, 〇〇大学, 2010. 3. 19. </li>
 	</ol>
@@ -180,9 +204,8 @@ $.getJSON("manuscript.json", function(manuscripts){
 </section>
 
 <section class="ly_cont">
-	<div class="title-side">last update: 2020/03/12</div>
-	<h2 class="title">プロフィール</h2>
-	<h3 class="subtitle">京念屋 隆史（きょうねんや たかし）</h3>
+	<h2 class="el_heading2">プロフィール</h2>
+	<h3 class="el_heading3">京念屋 隆史（きょうねんや たかし）</h3>
 	<div class="bl_horizTable">
 		<table>
 			<tbody>

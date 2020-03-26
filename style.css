@@ -6,7 +6,6 @@
 	--first-color: hsl(202, 35%, 50%); /* 6ステップ (202, 35%, 53%) より*/
 	--first-color-light: hsl(202, 35%, 70%); 
 	--width-large: 900px;
-	--margin-text: 0.5em; /* 余白限界を起点とした、その内側の要素の余白 */
 }
 
 /* ベースグループ
@@ -30,7 +29,7 @@ body {
 
 .ly_cont {
 /* コンテンツ領域 */
-	/* 限界余白 */
+	/* 余白限界 */
 	margin: 0 0.5em;
 	/* 分析用 */
 	border-left: 1px dashed var(--monochrome-light);
@@ -38,40 +37,53 @@ body {
 }
 
 a {
-	/* リンク装飾をリセット */
+	/* リンク装飾をいったんリセット */
 	text-decoration: none;
 	color: inherit;
 }
+ul li {
+	/* 順序なしリストのスタイルをリセット */
+	list-style: none;
+}
+li:last-child {
+	/* リストの後続要素との余白をリセット */
+	margin-bottom: 0;
+}
 
-/*	草稿
+/*	ポストリスト
 ---------------------------------*/
-.postlist {
+.bl_posts_item {
 	display: block;
+	padding: 1em 1.5em;
+	border-top: 1px solid var(--monochrome-light);
+	/* 小ブロックにして中央揃え */
 	max-width: 560px;
 	margin: 0em auto;
-	padding: 1em;
-	border: 1px solid var(--monochrome-light);
+}
+.bl_posts_tags {
+	display: inline-flex;
+	flex-wrap: wrap;	
+}
+.bl_posts_tags li {
+	margin: 0 0.5em;
 }
 .postlist .post-title {
 	font-size: 105%;
 	font-weight: bold;
 	margin: 0 0 0.25em 0em;
 }
-
-.post-info {
-	display: inline-block;
-	margin-left: 0.5em;
-}
-.lower {
-	padding-top: 0.75em;
-}
-.upper {
+.bl_posts_header {
 	padding-bottom: 0.25em;
+	color: var(--monochrome-dark)
 }
-
+.bl_posts_footer {
+	padding-top: 0.5em;
+	color: var(--monochrome-dark)
+}
 #wrap {
  	padding: 0;
- }
+}
+
 /*	ヘッダー
 ---------------------------------*/
 .ly_header {
@@ -102,23 +114,10 @@ nav li + li { /* 2番目以降のメニューリストアイテムに区切り�
 	border-left: 1px solid var(--first-color-light);
 }
 
-/*--フッター--*/
-.ly_footer {
-	background-color: var(--monochrome-light);
-}
-.ly_footer_inner {
-	padding: 20px 1em;
-}
-.el_footerCopyright {
-	font-size: 80%;
-}
-.el_footerCopyright a {
-  color: #333;
-}
+/* ---------------------------------
+テキストブロック（配下の要素をじかにマークアップ）*/
 
-/* テキストのマークアップ
----------------------------------*/
-.text a { 
+.bl_text a { 
 	/* 下線と文字とを空けるため、擬似的な下線を作る */
 	display: inline-block; 
 	line-height: 1em; /* 下余白リセット */
@@ -127,22 +126,18 @@ nav li + li { /* 2番目以降のメニューリストアイテムに区切り�
 	border-bottom: 1px solid hsl(219, 62%, 70%); /* 細く見せる */
 	padding-bottom: 1px; /* 擬似的な下線 */
 }
-.text a:visited { 
+.bl_text a:visited { 
 	/* 訪問済みリンク */
 	color: hsl(271, 35%, 45%); /* 紫、Wikipediaより */
 	border-bottom: 1px solid hsl(271, 35%, 65%); 
 }
 
-.text p {
-	/* プレーンテキスト */
-	margin: 0 0.5em /* 限界余白 */
-}
-.text p + p {
+.bl_text p + p {
 	text-indent: 1em; /* 二段落目以降を字下げ */
 	margin-top: 0.5em; /* 段落間に余白 */
 }
 
-.text blockquote {
+.bl_text blockquote {
 	/* ブロック引用　*/
 	/* 上下に1行の余白、左から1文字分インデント */
 	margin: 1em 0 1em 1em; 
@@ -150,50 +145,41 @@ nav li + li { /* 2番目以降のメニューリストアイテムに区切り�
 	border-left: 0.2em solid var(--monochrome-light);
 	padding-left: 0.8em;
 }
-.text blockquote p {
+.bl_text blockquote p {
 	text-indent: 0; /* 引用ブロック中は字下げなし */
 }
-ul li {
+.bl_text ul li {
 	list-style: none;
 }
 /* 説明リストを簡易的な表にする https://techacademy.jp/magazine/19405 */
-dt{
+.bl_text dt{
   float: left; /* 改行を解除し、一列に横並びにする */
 }
-dd{
+.bl_text dd{
   margin-left: 80px;
 }
 
-
-/*	エレメント
----------------------------------*/
-/*h2相当、大見出し*/
-.title { 
+.el_heading2 { 
+/* セクションごとの見出し */
 	/* 標準余白 */
-	margin: 3em 0 1em; /* セクション間余白、左右からの余白、後続要素との余白 */
+	margin: 3em -0.5em 1em; /* セクション間余白、左右の余白限界からの余白、後続要素との余白 */
 	/* 横棒 */
 	border-left: 4px solid var(--monochrome-medium);
 	padding-left: 0.45em; /* 横棒と文字の間隔 */
 	/* 下線 */
-	/* display:inline-block; */
 	border-bottom: 1px solid hsl(0, 0%, 75%);
 	padding-right: 0.75em;
 	font-weight: normal;
 	font-size: 110%;
 }
-/*h3相当、平行線つき小見出し*/
-.subtitle {
+
+.el_heading3 {
+/* 節ごとの小見出し */
 	/* 標準余白 */
-	margin: 1em 0.5em 0.75em; /* セクション間余白、左右からの余白、後続要素との余白 */
+	margin: 1.5em 0 0.75em; /* セクション間余白、左右の余白限界からの余白、後続要素との余白 */
 	font-weight: normal;
 	border-bottom: 1px solid hsl(0, 0%, 87%);;
 	font-size: 105%;
-}
-.title-side {
-	text-align: right;
-	margin: 0.7em 1em -2.7em 0; /* ネガティブマージンで擬似的に下に移動、抉れた分を上に補給 */
-	color: var(--monochrome-medium);
-	font-size: 80%;
 }
 
 /* テーブル（水平）*/
@@ -230,7 +216,51 @@ dd{
 }
 
 
-/* ----------------------------------------------------
+/* --フッター-- */
+.ly_footer {
+	background-color: var(--monochrome-light);
+	margin-top: 3em;
+}
+.ly_footer_inner {
+	padding: 1em 0;
+}
+.el_footerCopyright {
+	font-size: 80%;
+	text-align: center;
+}
+.el_footerCopyright a {
+  color: #333;
+}
+
+/* -----------------------------------------
+タブレット以下 */
+@media (max-width: 559px) {
+	:root {
+		font-size: 16px;
+	}
+	
+/* -- ヘッダー：中央揃えの隊列にする -- */
+	.ly_header_inner {
+		text-align: center;
+		margin-top: 1em;
+	}
+	nav {
+		display: inline-block;
+		text-align: center;
+		padding-top: 0.5em;
+	}
+	nav a {
+		font-size: 100%;
+	}
+	.contents {
+		padding-top: 1em; 
+	}
+	.ly_header {
+		margin-bottom: 2em;
+	}	
+}
+
+/* -----------------------------------------
 タブレット以上 */
 @media (min-width: 560px) {
 /* ベースグループ */
@@ -242,53 +272,34 @@ dd{
 		padding-top: 6em; 
 	}
 	
-/* -- ヘッダー：固定帯に -- */
-/* 大箱　*/
-.ly_header {
-	position: fixed; 
-	background: inherit; /* 白く塗りつぶし */
-	width: 100%;
-	height: 4.5em;
-}
-/* 中コンテナ：ロゴ＋メニュー　*/
-.ly_header_inner {
-	display: flex;	
-	justify-content: space-between; /* 二つを両端に分ける */
-	align-items: center;	/* 二つの高さ位置を揃える */
-	padding-top: 0.75em; /* これにて手動で縦方向センタリング */
-	max-width: var(--width-large);
-}
-/* 小コンテナ：メニューリスト、右端から離す */
-.ly_header .container {
-	margin-right: 1em;
-}
-.el_headerLogo {
-	margin-left: 0.5em;
-}
-
-}
-
-/* ----------------------------------------------------
-タブレット以下 */
-@media (max-width: 559px) {
-	:root {
-		font-size: 16px;
+	/* -- ヘッダー：固定帯に -- */
+	/* 大箱　*/
+	.ly_header {
+		position: fixed; 
+		background: hsl(40, 38%, 97%); /* 白く塗りつぶし */
+		width: 100%;
+		height: 4.5em;
 	}
+	/* 中コンテナ：ロゴ＋メニュー　*/
+	.ly_header_inner {
+		display: flex;	
+		justify-content: space-between; /* 二つを両端に分ける */
+		align-items: center;	/* 二つの高さ位置を揃える */
+		padding-top: 0.75em; /* これにて手動で縦方向センタリング */
+		max-width: var(--width-large);
+	}
+	/* 小コンテナ：メニューリスト、右端から離す */
+	.ly_header .container {
+		margin-right: 1em;
+	}
+	.el_headerLogo {
+		margin-left: 0.5em;
+	}
+}
 
-/* -- ヘッダー：中央揃えの隊列にする -- */
-.ly_header_inner {
-	text-align: center;
-	margin-top: 1em;
-}
-nav {
-	display: inline-block;
-	text-align: center;
-	padding-top: 0.5em;
-}
-nav a {
-	font-size: 100%;
-}
-.contents {
-	padding-top: 1em; 
-}
+@media (min-width: 900px) {
+	.ly_cont {
+		width: 800px;
+		margin: 0 auto;
+	}		
 }
