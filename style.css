@@ -33,7 +33,7 @@ body {
 	margin: 0 0.5em;
 	/* 分析用 */
 	border-left: 1px dashed var(--monochrome-light);
-	border-right: 1px dashed var(--monochrome-light);
+	border-right: 1px dashed var(--monochrome-light); 
 }
 
 /* リセット */
@@ -61,18 +61,6 @@ li:last-child {
 	max-width: 560px;
 	margin: 0em auto;
 }
-.bl_posts_tags {
-	display: inline-flex;
-	flex-wrap: wrap;	
-}
-.bl_posts_tags li {
-	margin: 0 0.5em;
-}
-.postlist .post-title {
-	font-size: 105%;
-	font-weight: bold;
-	margin: 0 0 0.25em 0em;
-}
 .bl_posts_header {
 	padding-bottom: 0.25em;
 	color: var(--monochrome-dark)
@@ -81,6 +69,27 @@ li:last-child {
 	padding-top: 0.5em;
 	color: var(--monochrome-dark)
 }
+.bl_text_footer {
+	padding-bottom: 0em;
+	color: var(--monochrome-dark)
+}
+
+/* タグリスト */
+.bl_posts_tags {
+	display: inline-flex;
+	flex-wrap: wrap;
+}
+.bl_posts_tags li {
+	margin: 0 0.5em;
+}
+
+/* 標準マークアップの上書き、ポストリストにおいてのみ局所的に */
+.bl_posts_item .bl_text h2 {
+	font-weight: bold;
+	margin: 0 0 0.25em 0; /* 一括指定で余白を上書きリセット */
+	border: none;
+}
+
 #wrap {
  	padding: 0;
 }
@@ -116,7 +125,7 @@ nav li + li { /* 2番目以降のメニューリストアイテムに区切り�
 }
 
 /* ---------------------------------
-テキストブロック（配下の要素をじかにマークアップ）*/
+テキストブロック（配下の要素をじかにマークアップ、余白設定はしない）*/
 
 .bl_text a { 
 	/* 下線と文字とを空けるため、擬似的な下線を作る */
@@ -148,6 +157,15 @@ nav li + li { /* 2番目以降のメニューリストアイテムに区切り�
 }
 .bl_text blockquote p {
 	text-indent: 0; /* 引用ブロック中は字下げなし */
+}
+
+.bl_text h2 {
+/* 節ごとの小見出し */
+	/* 標準余白 */
+	margin: 0.5em 0 0.75em; /* セクション間余白、左右の余白限界からの余白、後続要素との余白 */
+	font-weight: normal;
+	border-bottom: 1px solid hsl(0, 0%, 87%);;
+	font-size: 105%;
 }
 
 /* 順序なしリスト */
@@ -204,7 +222,7 @@ nav li + li { /* 2番目以降のメニューリストアイテムに区切り�
 .el_heading3 {
 /* 節ごとの小見出し */
 	/* 標準余白 */
-	margin: 1.5em 0 0.75em; /* セクション間余白、左右の余白限界からの余白、後続要素との余白 */
+	margin: 1em 0 0.75em; /* セクション間余白、左右の余白限界からの余白、後続要素との余白 */
 	font-weight: normal;
 	border-bottom: 1px solid hsl(0, 0%, 87%);;
 	font-size: 105%;
@@ -249,7 +267,7 @@ nav li + li { /* 2番目以降のメニューリストアイテムに区切り�
 	margin-top: 3em;
 }
 .ly_footer_inner {
-	padding: 1em 0;
+	padding: 1.5em 0;
 }
 .el_footerCopyright {
 	font-size: 80%;
@@ -325,9 +343,10 @@ nav li + li { /* 2番目以降のメニューリストアイテムに区切り�
 	}
 }
 
-@media (min-width: 900px) {
+@media (min-width: 750px) {
 	.ly_cont {
-		width: 800px;
+	/* 大画面ではテキストを画面いっぱいに表示せず、中央に寄せる */
+		width: 750px;
 		margin: 0 auto;
-	}		
+	}
 }
