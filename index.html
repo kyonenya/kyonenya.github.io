@@ -25,7 +25,7 @@
 
 <header class="ly_header">
 	<div class="ly_header_inner">
-		<h1 class=><a href="#" class="el_logo">kyonen-ya</a><span class="el_logo_suffix"> :: 024</span></h1>
+		<h1 class=><a href="#" class="el_logo">kyonen-ya</a><span class="el_logo_suffix"></span></h1>
 		<nav>
 			<ul class="container">
 				<li><a href="index.html">Home</a></li>
@@ -148,6 +148,8 @@ $.getJSON("manuscript.json", function(manuscripts){
 		$("#wrap").append(h);
 	} else {
 		$("#wrap_postpage").append(htmlComb_page(id));
+		$('.el_logo_suffix').text(` :: ${id}`)
+		$('title').html(`kyonen-ya :: ${id}`);
 	};
 }); 
 	
