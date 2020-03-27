@@ -111,11 +111,18 @@ li:last-child {
 .ly_header {
 	font-family: "Avenir Next", Verdana, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "游ゴシック Medium", "Yu Gothic Medium", "メイリオ", Meiryo, sans-serif;
 }
-.el_headerLogo { 
-	font-size: 175%;
+.el_logo { 
+	font-size: 32px;
 	font-weight: normal;
 	vertical-align: center;	
 }
+.el_logo_suffix{
+	font-size: 16px;
+	font-weight: normal;
+	color: var(--monochrome-dark);
+	vertical-align: baseline;
+}
+
 /* 小コンテナ：メニューリスト */
 nav .container {
 	display: flex;
@@ -349,7 +356,7 @@ nav li + li { /* 2番目以降のメニューリストアイテムに区切り�
 	.ly_header .container {
 		margin-right: 1em;
 	}
-	.el_headerLogo {
+	.el_logo {
 		margin-left: 0.5em;
 	}
 }
