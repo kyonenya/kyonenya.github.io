@@ -204,7 +204,6 @@ nav li + li { /* 2番目以降のメニューリストアイテムに区切り�
 	content: "： ";
 }
 
-
 .el_heading2 { 
 /* セクションごとの見出し */
 	/* 標準余白 */
@@ -315,13 +314,13 @@ nav li + li { /* 2番目以降のメニューリストアイテムに区切り�
 	}
 	/* ヘッダーに本文がめり込まないように。 */
 	main {
-		padding-top: 6em; 
+		padding-top: 6em;
 	}
-	
+
 	/* -- ヘッダー：固定帯に -- */
 	/* 大箱　*/
 	.ly_header {
-		position: fixed; 
+		position: fixed;
 		background: hsl(40, 38%, 97%); /* 白く塗りつぶし */
 		width: 100%;
 		height: 4.5em;
