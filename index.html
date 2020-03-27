@@ -63,6 +63,12 @@
 /* --JSONデータ取得開始-- */
 $(function(){ 
 $.getJSON("manuscript.json", function(manuscripts){
+	console.log(manuscripts[2].tags.length);
+	console.log(manuscripts[2].tags[1]);
+
+	const hashtags = [];
+	const shortTexts = [];
+
 	// 記事リスト（HTMLタグ生成関数）
 	function htmlComb(id) {
 		return `
@@ -74,53 +80,66 @@ $.getJSON("manuscript.json", function(manuscripts){
 				</time>
 			</header>
 			<div class="bl_text">
-				${manuscripts[id].text}
+				${shortTexts[id]}
 			</div>
 			<footer class="bl_posts_footer">
 				<span class="bl_posts_dateago">
 					${moment(manuscripts[id].date).fromNow()}
 				</span>
-				<ul class="bl_posts_tags">
-					<li><span>${manuscripts[id].tags}</span></li>
+				<ul class="bl_tags">
+					${hashtags[id]}
 				<ul>
 			</footer>
 		</a>
 		</li>
 		`
 	}
-
+	
 	// 個別記事ページ（HTMLタグ生成関数）
 	function htmlComb_page(id) {
 		return `
 		<article class="">
+		<header class="bl_text_header">
+			<time class="bl_text_date" datetime="${moment(manuscripts[id].date).format("YYYY-MM-DD HH:mm")}">
+				${moment(manuscripts[id].date).format("YYYY-MM-DD HH:mm")}
+			</time>
+		</header>
 		<div class="bl_text">
 			${manuscripts[id].text}
 		</div>
 		<footer class="bl_text_footer">
-			<time class="bl_text_date" datetime="${moment(manuscripts[id].date).format("YYYY-MM-DD HH:mm")}">
-				${moment(manuscripts[id].date).format("YYYY-MM-DD HH:mm")}
-			</time>
-			<span class="bl_posts_tags">
-				${manuscripts[id].tags}
+			<span class="bl_posts_dateago">
+				${moment(manuscripts[id].date).fromNow()}
 			</span>
+			<ul class="bl_tags">
+				${hashtags[id]}
+			</ul>
 		</footer>
-		</article>	
-		`
+		</article>`
 	}
 
 	for(var i in manuscripts){
-		// hashtags, 各タグに#をつける（この際どうでもいいか）
-		/* let hashtags = "";
-		for (let j = 0; j < manuscripts[i].tags.length; j++) { 
-			hashtags += `#${manuscripts[i].tags[j]} `;
-		} */	
-		// text, 各長文の表示文字数を制限する
-		/*let text = "";
-		if (manuscripts[i].text.length > 140) {
-			text = manuscripts[i].text.substr(0, 140) + '…' + '<p><div class="hp_textWeak">続きを読む</div></p>'; 
+
+		// ハッシュタグをli要素として生成
+		hashtags[i] = "" // 初期化
+		for (var j in manuscripts[i].tags) {
+			hashtags[i] += `
+			<li>
+				<span>
+					#${manuscripts[i].tags[j]}
+				</span>
+			</li>`;
+		};
+
+		// 長文の表示文字数を制限し、「続きを読む」を表示
+		if (manuscripts[i].text.length > 300) {
+			shortTexts[i] = `${manuscripts[i].text.substr(0, 300)}…
+			<div class="bl_posts_readmore">続きを読む</div>`;
 		} else {
-			text = manuscripts[i].text;
-		};*/
+			shortTexts[i] = manuscripts[i].text;
+		};
+		console.log(shortTexts[i]);
+		
 		// 記事一覧ページのHTMLタグを積算
 		h += htmlComb(i);
 	}
