@@ -8,8 +8,8 @@
 	--width-large: 900px;
 }
 
-/* ベースグループ
----------------------------------*/
+/* ---------------------------------
+	ベースグループ */
 body {
 	font-family: "Helvetica Neue", Verdana, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "游ゴシック Medium", "Yu Gothic Medium", "メイリオ", Meiryo, sans-serif; 
 	word-break: break-word; /* 行頭に、。が来るのを避ける */
@@ -21,10 +21,10 @@ body {
 .ly_cont {
 /* コンテンツ領域 */
 	/* 余白限界 */
-	margin: 0 0.5em;
+	margin: 0 0.5em 0 0.6em; /* 左余白を多めに、右端が日本語だと少し余るので */
 	/* 分析用 */
-	border-left: 1px dashed var(--monochrome-light);
-	border-right: 1px dashed var(--monochrome-light); 
+/*	border-left: 1px dashed var(--monochrome-light);
+	border-right: 1px dashed var(--monochrome-light); */
 }
 
 /* リセット */
@@ -42,8 +42,12 @@ li:last-child {
 	margin-bottom: 0;
 }
 
-/*	ポストリスト
----------------------------------*/
+/*	---------------------------------
+	記事一覧リスト */
+.bl_posts {
+ 	padding: 0;
+}
+
 .bl_posts_item {
 	display: block;
 	padding: 1em 1.5em;
@@ -66,16 +70,7 @@ li:last-child {
 	color: var(--monochrome-dark);
 }
 
-.bl_text_header {
-	padding-bottom: 0em;
-	color: var(--monochrome-dark)
-}
-.bl_text_footer {
-	padding-bottom: 0em;
-	color: var(--monochrome-dark)
-}
-
-/* 局所的に、標準マークアップを縮小して上書き */
+/* 標準マークアップを上書き */
 .bl_posts_item .bl_text h1 {
 	font-weight: bold;
 	margin: 0 0 0.25em 0; /* 一括指定で余白を上書きリセット */
@@ -90,9 +85,9 @@ li:last-child {
 	font-size: 100%;
 }
 
-/* タグリストブロック（小さい） */
+/* タグリスト */
 .bl_tags {
-	display: inline-flex; /* 横並び、かつ日付に回り込める */
+	display: inline-flex; /* 横並び、かつ先立つ要素（日付）に回り込める */
 	flex-wrap: wrap;
 	list-style: none;
 }
@@ -100,49 +95,22 @@ li:last-child {
 	margin-left: 0.5em;
 }
 
-#wrap {
- 	padding: 0;
-}
-
-/*	ヘッダー
----------------------------------*/
-.ly_header {
-	font-family: "Avenir Next", Verdana, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "游ゴシック Medium", "Yu Gothic Medium", "メイリオ", Meiryo, sans-serif;
-}
-.el_logo { 
-	font-size: 32px;
-	font-weight: normal;
-	vertical-align: center;	
-}
-.el_logo_suffix{
-	font-size: 16px;
-	font-weight: normal;
-	color: var(--monochrome-dark);
-	vertical-align: baseline;
-}
-
-/* 小コンテナ：メニューリスト */
-nav .container {
-	display: flex;
-}
-/* ナビメニュー */
-nav a {
-	display: block; 
-	line-height: 1.2em; /* 実質的には区切り線の高さ */
-	text-align: center;
-	font-size: 110%;
-	color: var(--first-color);
-}
-nav li {
-	list-style: none;	
-	padding: 0 0.7em; /* メニュー同士の間隔 */
-}
-nav li + li { /* 2番目以降のメニューリストアイテムに区切り線 */
-	border-left: 1px solid var(--first-color-light);
-}
-
 /* ---------------------------------
-テキストブロック（配下の要素をじかにマークアップ、余白設定はしない）*/
+	テキストブロック */
+.bl_text + .bl_text {
+	/* セクション間余白 */
+	margin-top: 1.5em;
+}	
+.bl_text_header {
+	padding-bottom: 0em;
+	color: var(--monochrome-dark)
+}
+.bl_text_footer {
+	padding-bottom: 0em;
+	color: var(--monochrome-dark)
+}
+
+/* マークアップ */	
 .bl_text a { 
 	/* 下線と文字とを空けるため、擬似的な下線を作る */
 	display: inline-block; 
@@ -201,6 +169,13 @@ nav li + li { /* 2番目以降のメニューリストアイテムに区切り�
 	font-size: 105%;
 }
 
+.bl_text hr {
+/* 水平線 */
+	border: none; /* デフォルトスタイルをリセット */
+	border-top: 1px solid hsl(0, 0%, 90%);
+	width: 50%;
+	margin: 1.5em auto;
+}
 
 /* 順序なしリスト */
 .bl_text ul {
@@ -237,6 +212,8 @@ nav li + li { /* 2番目以降のメニューリストアイテムに区切り�
 	content: "： ";
 }
 
+/* ---------------------------------
+	部品 */
 .el_heading1 { 
 	/* .bl_text h1を複製し、ブロックの外でも使えるようにする。ただし標準余白は常につける */
 	margin: 3em 0em 1em; 
@@ -281,7 +258,43 @@ nav li + li { /* 2番目以降のメニューリストアイテムに区切り�
 	font-size: 95%;
 }
 
-/* --フッター-- */
+/*---------------------------------
+	ヘッダー */
+.ly_header {
+	font-family: "Avenir Next", Verdana, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "游ゴシック Medium", "Yu Gothic Medium", "メイリオ", Meiryo, sans-serif;
+}
+.el_logo { 
+	font-size: 32px;
+	font-weight: normal;
+	vertical-align: center;	
+}
+.el_logo_suffix{
+	font-size: 16px;
+	font-weight: normal;
+	color: var(--monochrome-dark);
+	vertical-align: baseline; /* 英単語帳：baseline */
+}
+/* 小コンテナ：メニューリスト */
+nav .container {
+	display: flex;
+}
+/* ナビメニュー */
+nav a {
+	display: block; 
+	line-height: 1.2em; /* 実質的には区切り線の高さ */
+	text-align: center;
+	font-size: 110%;
+	color: var(--first-color);
+}
+nav li {
+	list-style: none;	
+	padding: 0 0.7em; /* メニュー同士の間隔 */
+}
+nav li + li { /* 2番目以降のメニューリストアイテムに区切り線 */
+	border-left: 1px solid var(--first-color-light);
+}
+
+/* フッター */
 .ly_footer {
 	background-color: hsl(0, 0%, 94%);
 	margin-top: 3em;
@@ -299,13 +312,12 @@ nav li + li { /* 2番目以降のメニューリストアイテムに区切り�
 }
 
 /* -----------------------------------------
-タブレット以下 */
+	タブレット以下 */
 @media (max-width: 559px) {
 	:root {
 		font-size: 16px;
 	}
-	
-/* -- ヘッダー：中央揃えの隊列にする -- */
+/* ヘッダー：中央揃えの隊列にする */
 	.ly_header_inner {
 		text-align: center;
 		margin-top: 1em;
@@ -327,7 +339,7 @@ nav li + li { /* 2番目以降のメニューリストアイテムに区切り�
 }
 
 /* -----------------------------------------
-タブレット以上 */
+	タブレット以上 */
 @media (min-width: 560px) {
 /* ベースグループ */
 	:root {
@@ -338,36 +350,33 @@ nav li + li { /* 2番目以降のメニューリストアイテムに区切り�
 		padding-top: 3em;
 	}
 
-	/* -- ヘッダー：固定帯に -- */
-	/* 大箱　*/
+/* ヘッダー */
 	.ly_header {
-/*		position: fixed; */
+	/* 大箱　*/
 		background: hsl(40, 38%, 97%); /* 白く塗りつぶし */
-		width: 100%;
 		height: 4.5em;
-/*		border: 1px dashed #bbb; */
+		margin: 0 auto;
 	}
-	/* 中コンテナ：ロゴ＋メニュー　*/
 	.ly_header_inner {
+	/* 中コンテナ：ロゴ＋メニュー　*/
 		display: flex;	
 		justify-content: space-between; /* 二つを両端に分ける */
 		align-items: center;	/* 二つの高さ位置を揃える */
 		padding-top: 0.75em; /* これにて手動で縦方向センタリング */
-		max-width: var(--width-large);
 	}
-	/* 小コンテナ：メニューリスト、右端から離す */
 	.ly_header .container {
-/*		margin-right: 20px;*/
+	/* 小コンテナ：メニューリスト */
+		margin-right: 0px;
 	}
 	.el_logo {
 		margin-left: 8px;
 	}
 }
 
-@media (min-width: 750px) {
+@media (min-width: 960px) {
 	.ly_cont, .ly_header {
 	/* 大画面ではテキストを画面いっぱいに表示せず、中央に寄せる */
-		width: 750px;
+		width: 960px;
 		margin: 0 auto;
 	}
 }

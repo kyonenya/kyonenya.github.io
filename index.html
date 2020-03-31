@@ -1,19 +1,24 @@
 <!DOCTYPE html>
-<html>
-<head>
+<html lang="ja">
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
 	<meta charset="UTF-8">
+	<title>placet experiri</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-	<meta property='og:type' content='website'>
-	<meta property='og:title' content='サイトタイトル'>
-	<meta property='og:url' content='URL入れる'>
-	<meta property='og:description' content='サイト説明'>
-	<meta property="og:image" content="ogイメージのパス入れる">
-	<meta name="description" content="サイト説明" />
-	<title>kyonen-ya</title>
 	<!-- CSSインポート -->
 	<link href="common/reset.css" media="all" rel="stylesheet" type="text/css">
 	<link href="./style.css" media="all" rel="stylesheet" type="text/css">
 	<link rel="shortcut icon" href="img/favicon.ico"/>
+	<!-- SNS用のメタデータ -->
+	<meta property="og:site_name" content="placet experiri">
+	<meta property="og:locale" content="ja_JP">
+	<meta property='og:type' content='article'>
+	<meta property='og:title' content='placet experiri'>	
+	<meta property='og:url' content="">
+	<meta property='og:description' content="京念屋隆史のサイトです。哲学を研究しています。">
+	<meta property="og:image" content="ogイメージのパス入れる">
+	<!-- 従来型のメタデータ -->
+	<meta name="description" content="京念屋隆史のサイトです。哲学を研究しています。">
+	<meta name="keywords" content="哲学,京念屋隆史,京念屋">
 	<!-- JavaScriptライブラリをCDNからインポート -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script><!-- jQuery -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script><!-- Moment.js -->
@@ -24,13 +29,12 @@
 
 <header class="ly_header">
 	<div class="ly_header_inner">
-		<h1 class=><a href="#" class="el_logo">kyonen-ya</a><span class="el_logo_suffix"></span></h1>
+		<h1 class=><a href="index.html" class="el_logo">placet experiri</a><span class="el_logo_suffix"></span></h1>
 		<nav>
 			<ul class="container">
 				<li><a href="index.html">Home</a></li>
 				<li><a href="works.html">Works</a></li>
-				<li><a href="log.html">Blog</a></li>
-				<li><a href="profile.html">Profile</a></li>
+				<li><a href="about.html">About</a></li>
 			</ul>
 		</nav>
 	</div>
@@ -38,7 +42,6 @@
 </header>
 
 <main>
-
 <section class="">
 	<ul class="bl_posts" id="wrap"></ul>
 	<article class="ly_cont">
@@ -128,7 +131,7 @@ $.getJSON("manuscript.json", function(manuscripts){
 				</span>
 			</li>`;
 		};
-
+	
 		// 長文の表示文字数を制限し、「続きを読む」を表示
 		if (manuscripts[i].text.length > 300) {
 			shortTexts[i] = `${manuscripts[i].text.substr(0, 300)}…
@@ -146,7 +149,7 @@ $.getJSON("manuscript.json", function(manuscripts){
 	} else {
 		$("#wrap_postpage").append(htmlComb_page(manuscripts.length - id));
 		$('.el_logo_suffix').text(` :: ${id}`)
-		$('title').html(`kyonen-ya :: ${id}`);
+		$('title').html(`placet experiri :: ${id}`);
 	};
 }); 
 	
@@ -202,7 +205,7 @@ $.getJSON("manuscript.json", function(manuscripts){
 	<!-- /bl_text -->
 
 	<article class="bl_text">
-		<h2 class="el_heading3">2010年1月6日(金)</h2>
+		<h2>2010年1月6日(金)</h2>
 			<p>にわかにぱたっと楽長が両手を鳴らしました。みんなぴたりと曲をやめてしんとしました。楽長がどなりました。</p>
 			<p>「セロがおくれた。トォテテ　テテテイ、ここからやり直し。はいっ。」</p>
 	</article>
