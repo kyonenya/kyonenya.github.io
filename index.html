@@ -46,82 +46,81 @@
 		<div id="wrap_postpage"></div>
 	</article>
 <script type="text/javascript">
-	// 変数宣言
-	let h = "";
-	// URLからクエリ文字列を取得する関数
-	function getParam(name, url) {
-		if (!url) url = window.location.href;
-		name = name.replace(/[\[\]]/g, "\\$&");
-		var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"), results = regex.exec(url);
-		if (!results) return null;
-		if (!results[2]) return '';
-		return decodeURIComponent(results[2].replace(/\+/g, " "));
-	}
-	// ページidを取得、0以上の整数またはnull
-	id = getParam('id');
+// 変数宣言
+let h = "";
+
+// URLからクエリ文字列を取得する関数
+function getParam(name, url) {
+	if (!url) url = window.location.href;
+	name = name.replace(/[\[\]]/g, "\\$&");
+	var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"), results = regex.exec(url);
+	if (!results) return null;
+	if (!results[2]) return '';
+	return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+// ページidを取得、0以上の整数またはnull
+id = getParam('id');
 
 /* --JSONデータ取得開始-- */
 $(function(){ 
 $.getJSON("manuscript.json", function(manuscripts){
-	console.log(manuscripts[2].tags.length);
-	console.log(manuscripts[2].tags[1]);
 
 	const hashtags = [];
 	const shortTexts = [];
 
 	// 記事リスト（HTMLタグ生成関数）
-	function htmlComb(id) {
+	function htmlComb(i) {
 		return `
 		<li class="bl_posts_item">
-		<a href="?id=${id}">
+		<a href="?id=${manuscripts.length - i}">
 			<header class="bl_posts_header">
-				<time class="bl_posts_date" datetime="${moment(manuscripts[id].date).format("YYYY-MM-DD HH:mm")}">
-					${moment(manuscripts[id].date).format("YYYY-MM-DD")}
+				<time class="bl_posts_date" datetime="${moment(manuscripts[i].date).format("YYYY-MM-DD HH:mm")}">
+					${moment(manuscripts[i].date).format("YYYY-MM-DD")}
 				</time>
 			</header>
 			<div class="bl_text">
-				${shortTexts[id]}
+				${shortTexts[i]}
 			</div>
 			<footer class="bl_posts_footer">
 				<span class="bl_posts_dateago">
-					${moment(manuscripts[id].date).fromNow()}
+					${moment(manuscripts[i].date).fromNow()}
 				</span>
 				<ul class="bl_tags">
-					${hashtags[id]}
+					${hashtags[i]}
 				<ul>
 			</footer>
 		</a>
 		</li>
 		`
 	}
-	
+
 	// 個別記事ページ（HTMLタグ生成関数）
-	function htmlComb_page(id) {
+	function htmlComb_page(i) {
 		return `
 		<article class="">
 		<header class="bl_text_header">
-			<time class="bl_text_date" datetime="${moment(manuscripts[id].date).format("YYYY-MM-DD HH:mm")}">
-				${moment(manuscripts[id].date).format("YYYY-MM-DD HH:mm")}
+			<time class="bl_text_date" datetime="${moment(manuscripts[i].date).format("YYYY-MM-DD HH:mm")}">
+				${moment(manuscripts[i].date).format("YYYY-MM-DD HH:mm")}
 			</time>
 		</header>
 		<div class="bl_text">
-			${manuscripts[id].text}
+			${manuscripts[i].text}
 		</div>
 		<footer class="bl_text_footer">
 			<span class="bl_posts_dateago">
-				${moment(manuscripts[id].date).fromNow()}
+				${moment(manuscripts[i].date).fromNow()}
 			</span>
 			<ul class="bl_tags">
-				${hashtags[id]}
+				${hashtags[i]}
 			</ul>
 		</footer>
 		</article>`
 	}
 
 	for(var i in manuscripts){
-
+		
 		// ハッシュタグをli要素として生成
-		hashtags[i] = "" // 初期化
+		hashtags[i] = ""	// 初期化
 		for (var j in manuscripts[i].tags) {
 			hashtags[i] += `
 			<li>
@@ -138,16 +137,15 @@ $.getJSON("manuscript.json", function(manuscripts){
 		} else {
 			shortTexts[i] = manuscripts[i].text;
 		};
-		console.log(shortTexts[i]);
 		
 		// 記事一覧ページのHTMLタグを積算
 		h += htmlComb(i);
 	}
-	
+
 	if (id == null) {
 		$("#wrap").append(h);
 	} else {
-		$("#wrap_postpage").append(htmlComb_page(id));
+		$("#wrap_postpage").append(htmlComb_page(manuscripts.length - id));
 		$('.el_logo_suffix').text(` :: ${id}`)
 		$('title').html(`kyonen-ya :: ${id}`);
 	};
@@ -159,10 +157,10 @@ $.getJSON("manuscript.json", function(manuscripts){
 
 <!-- ここから手動 -->
 <section class="ly_cont">
+	<h1 class="el_heading1">このサイトについて</h1>
 	<div class="bl_text">
-		<h1 class="el_heading2">このサイトについて</h2>
 		<p>xxxのサイトです。xxをxxしています。</p>
-		<h2 class="el_heading3">サイトマップ</h3>
+		<h2>サイトマップ</h2>
 		<ul>
 			<li>Works：あいうえおかきくけこ</li>
 			<li>Profile：たちつてとさしすせそ</li>
@@ -181,17 +179,18 @@ $.getJSON("manuscript.json", function(manuscripts){
 </section>
 
 <section class="ly_cont">
+	<h1 class="el_heading1">著作解題</h1>
 	<div class="bl_text">
-	<h1 class="el_heading2">著作解題</h1>
 		<h2 class="el_heading3">セロ弾きのゴーシュ（19xx）</h2>
 		<p>ゴーシュは町の活動写真館でセロを弾く係りでした。けれどもあんまり上手でないという評判でした。上手でないどころではなく実は仲間の楽手のなかではいちばん下手でしたから、いつでも楽長にいじめられるのでした。</p>
 		<p>ひるすぎみんなは楽屋に円くならんで今度の町の音楽会へ出す第六交響曲の練習をしていました。</p>
 	</div>
+	<!-- /bl_text -->
 </section>
 
 <section class="ly_cont">
-	<h1 class="el_heading2">お知らせ</h1>
-	<article class="bl_text">
+	<h1 class="el_heading1">お知らせ</h1>
+	<article class="bl_text"><!-- 記事全体をリンクブロックにする可能性があるので、bl_textは個別につけて構わない -->
 		<h2 class="el_heading3">2010年1月6日(水)</h2>
 			<p>ひるすぎみんなは楽屋に円くならんで今度の町の音楽会へ出す第六交響曲の練習をしていました。</p>
 			<blockquote>
@@ -212,7 +211,7 @@ $.getJSON("manuscript.json", function(manuscripts){
 </section>
 
 <section class="ly_cont">
-	<h1 class="el_heading2">業績一覧</h1>
+	<h1 class="el_heading1">業績一覧</h1>
 	<div class="bl_text">
 		<h2 class="el_heading3">論文</h2>
 		<ol>
@@ -227,7 +226,7 @@ $.getJSON("manuscript.json", function(manuscripts){
 </section>
 
 <section class="ly_cont">
-	<h1 class="el_heading2">プロフィール</h1>
+	<h1 class="el_heading1">プロフィール</h1>
 	<div class="bl_text">
 		<h2 class="el_heading3">京念屋 隆史（きょうねんや たかし）</h2>
 		<dl>

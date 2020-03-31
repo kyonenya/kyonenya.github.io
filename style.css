@@ -65,16 +65,16 @@ li:last-child {
 	padding-bottom: 0.25em;
 	color: var(--monochrome-dark);
 }
-.bl_posts_footer {
-	padding-top: 0.5em;
-	color: var(--monochrome-dark);
-}
 .bl_posts_readmore {
 	color: var(--monochrome-dark);
-	padding: 0.25em 0 0;
-	border-bottom: 1px solid var(--monochrome-light);
-	display: inline-block;
+	margin: 0.4em 0 -0.15em;
+	font-size: 95%;
 }
+.bl_posts_footer {
+	padding-top: 0.4em;
+	color: var(--monochrome-dark);
+}
+
 
 .bl_text_header {
 	padding-bottom: 0em;
@@ -85,11 +85,19 @@ li:last-child {
 	color: var(--monochrome-dark)
 }
 
-/* 標準マークアップの上書き、ポストリストにおいてのみ局所的に */
-.bl_posts_item .bl_text h2 {
+/* 局所的に、標準マークアップを縮小して上書き */
+.bl_posts_item .bl_text h1 {
 	font-weight: bold;
 	margin: 0 0 0.25em 0; /* 一括指定で余白を上書きリセット */
+	padding: 0;
 	border: none;
+}
+
+.bl_posts_item .bl_text h2 {
+	font-weight: bold;
+	margin: 0 0 0.25em 0;
+	border: none;
+	font-size: 100%;
 }
 
 /* タグリストブロック（小さい） */
@@ -145,7 +153,6 @@ nav li + li { /* 2番目以降のメニューリストアイテムに区切り�
 
 /* ---------------------------------
 テキストブロック（配下の要素をじかにマークアップ、余白設定はしない）*/
-
 .bl_text a { 
 	/* 下線と文字とを空けるため、擬似的な下線を作る */
 	display: inline-block; 
@@ -167,7 +174,6 @@ nav li + li { /* 2番目以降のメニューリストアイテムに区切り�
 }
 
 .bl_text blockquote {
-	/* ブロック引用　*/
 	/* 上下に1行の余白、左から1文字分インデント */
 	margin: 1em 0 1em 1em; 
 	color: var(--monochrome-dark);
@@ -178,6 +184,24 @@ nav li + li { /* 2番目以降のメニューリストアイテムに区切り�
 	text-indent: 0; /* 引用ブロック中は字下げなし */
 }
 
+.bl_text h1 { 
+/* 章・セクション見出し */
+	/* 標準余白 */
+	margin: 1em 0em 1em; /* セクション間・左右から・後続要素との余白 */
+	/* 横棒 */
+	border-left: 4px solid var(--monochrome-medium);
+	padding-left: 0.45em; /* 横棒と文字の間隔 */
+	/* 下線 */
+	border-bottom: 1px solid hsl(0, 0%, 75%);
+	padding-right: 0.75em;
+	font-weight: normal;
+	font-size: 110%;
+}
+.bl_text h1:not(:first-child) {
+	/* 2番目以降のみ余白を広げる */
+	margin: 3em 0em 1em; 
+}
+
 .bl_text h2 {
 /* 節ごとの小見出し */
 	/* 標準余白 */
@@ -186,6 +210,7 @@ nav li + li { /* 2番目以降のメニューリストアイテムに区切り�
 	border-bottom: 1px solid hsl(0, 0%, 87%);;
 	font-size: 105%;
 }
+
 
 /* 順序なしリスト */
 .bl_text ul {
@@ -203,7 +228,6 @@ nav li + li { /* 2番目以降のメニューリストアイテムに区切り�
 }
 .bl_text ol li {
 	list-style: decimal inside;
-	padding-left: 1em;
 }
 
 /* 説明リスト */
@@ -223,27 +247,15 @@ nav li + li { /* 2番目以降のメニューリストアイテムに区切り�
 	content: "： ";
 }
 
-.el_heading2 { 
-/* セクションごとの見出し */
-	/* 標準余白 */
-	margin: 3em -0.5em 1em; /* セクション間余白、左右の余白限界からの余白、後続要素との余白 */
-	/* 横棒 */
+.el_heading1 { 
+	/* .bl_text h1を複製し、ブロックの外でも使えるようにする。ただし標準余白は常につける */
+	margin: 3em 0em 1em; 
 	border-left: 4px solid var(--monochrome-medium);
-	padding-left: 0.45em; /* 横棒と文字の間隔 */
-	/* 下線 */
+	padding-left: 0.45em;
 	border-bottom: 1px solid hsl(0, 0%, 75%);
 	padding-right: 0.75em;
 	font-weight: normal;
 	font-size: 110%;
-}
-
-.el_heading3 {
-/* 節ごとの小見出し */
-	/* 標準余白 */
-	margin: 1em 0 0.75em; /* セクション間余白、左右の余白限界からの余白、後続要素との余白 */
-	font-weight: normal;
-	border-bottom: 1px solid hsl(0, 0%, 87%);;
-	font-size: 105%;
 }
 
 /* テーブル（水平）*/
