@@ -41,17 +41,15 @@ li:last-child {
 /*	---------------------------------
 	記事一覧リスト */
 .bl_posts {
-	font-size: 14px;
 }
 
 .bl_posts_item {
 	display: block;
-	padding: 1em 0.7em 1em 1em; /* 右端余白を手動調整 */
+	padding: 1em; 
 	border-top: 1px solid var(--monochrome-light);
 	/* 小ブロックにして中央揃え */
 	max-width: 560px;
 	margin: 0 auto;
-		border: 1px solid #999;
 }
 
 .bl_posts_header {
@@ -68,7 +66,7 @@ li:last-child {
 	color: var(--monochrome-dark);
 }
 
-/* 標準マークアップを上書き */
+/* 標準マークアップを局所的に上書き */
 .bl_posts_item .bl_text h1 {
 	font-weight: bold;
 	margin: 0 0 0.25em 0; /* 一括指定で余白を上書きリセット */
@@ -101,7 +99,7 @@ li:last-child {
 /* ---------------------------------
 	テキストブロック */
 .bl_text {
-	border: 1px solid #999;
+
 }
 
 .bl_text + .bl_text {
@@ -134,7 +132,7 @@ li:last-child {
 }
 
 .bl_text p {
-	margin-left: 0.15em;*/ /* 右端の折り返し余白と釣り合わせるため、手動で微調整 
+	text-align: justify; /* 均等割付で右端もぴったり揃う */
 }
 
 .bl_text p + p {
