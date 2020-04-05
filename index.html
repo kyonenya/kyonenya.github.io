@@ -3,19 +3,18 @@
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
 	<meta charset="UTF-8">
 	<title>placet experiri</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- CSSインポート -->
 	<link href="common/reset.css" media="all" rel="stylesheet" type="text/css">
 	<link href="./style.css" media="all" rel="stylesheet" type="text/css">
 	<!-- アイコン画像 -->
-	<link rel="shortcut icon" href="img/favicon.ico">
-<!--	<link rel="apple-touch-icon" type="image/png" href="img/apple-touch-icon-152x152.png">	-->
+	<link rel="shortcut icon" href="favicon.ico">
 	<link rel="apple-touch-icon" type="image/png" href="img/apple-touch-icon-180x180.png">
 	<link rel="icon" type="image/png" href="img/icon-192x192.png">
-	<meta property="og:image" content="ogイメージのパス入れる">
 	<!-- 通常のメタデータ -->
 	<meta name="description" content="ベータ版">
-	<meta name="keywords" content="哲学, 京念屋隆史, 京念屋">
+	<meta name="author" content="京念屋隆史">
+	<link rel="canonical" href="https://kyonenya.github.io">	
 	<!-- SNS用のメタデータ -->
 	<meta property="og:site_name" content="placet experiri">
 	<meta property="og:locale" content="ja_JP">
@@ -23,6 +22,7 @@
 	<meta property='og:title' content='placet experiri'>	
 	<meta property='og:url' content="">
 	<meta property='og:description' content="言ってみただけ。">	
+	<meta property="og:image" content="ogイメージのパス入れる">
 	<!-- JavaScriptライブラリをCDNからインポート -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script><!-- jQuery -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script><!-- Moment.js -->
@@ -67,8 +67,8 @@ function getParam(name, url) {
 // ページidを取得、0以上の整数またはnull
 id = getParam('id');
 
-/* --JSONデータ取得開始-- */
-$(function(){ 
+/* -- JSONデータ取得開始 -- */
+$(function(){
 $.getJSON("manuscript.json", function(manuscripts){
 
 	const hashtags = [];
@@ -123,8 +123,7 @@ $.getJSON("manuscript.json", function(manuscripts){
 		</article>`
 	}
 
-	for(var i in manuscripts){
-		
+	for(var i in manuscripts){	
 		// ハッシュタグをli要素として生成
 		hashtags[i] = ""	// 初期化
 		for (var j in manuscripts[i].tags) {
