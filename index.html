@@ -34,8 +34,8 @@
 <header class="ly_header">
 	<div class="ly_header_inner">
 		<h1 class=><a href="index.html" class="el_logo">placet experiri</a><span class="el_logo_suffix"></span></h1>
-		<nav>
-			<ul class="container">
+		<nav class="bl_nav">
+			<ul class="bl_nav_inner">
 				<li><a href="index.html">Home</a></li>
 				<li><a href="works.html">Works</a></li>
 				<li><a href="about.html">About</a></li>
@@ -46,11 +46,13 @@
 </header>
 
 <main>
-<section class="">
-	<ul class="bl_posts" id="wrap"></ul>
-	<article class="ly_cont">
-		<div id="wrap_postpage"></div>
-	</article>
+<section class="ly_cont">
+	<ul class="bl_posts" id="postlistWrapper"></ul>
+</section>
+
+<article class="ly_cont">
+	<div id="postWrapper"></div>
+</article>
 <script type="text/javascript">
 // 変数宣言
 let h = "";
@@ -148,9 +150,9 @@ $.getJSON("manuscript.json", function(manuscripts){
 	}
 
 	if (id == null) {
-		$("#wrap").append(h);
+		$("#postlistWrapper").append(h);
 	} else {
-		$("#wrap_postpage").append(htmlComb_page(manuscripts.length - id));
+		$("#postWrapper").append(htmlComb_page(manuscripts.length - id));
 		$('.el_logo_suffix').text(` :: ${id}`)
 		$('title').html(`placet experiri :: ${id}`);
 	};
@@ -245,11 +247,36 @@ $.getJSON("manuscript.json", function(manuscripts){
 	</div>
 </section>
 
+<section class="ly_cont">
+	<h1 class="el_heading1">お知らせ</h1>
+	<div class="bl_text">
+		<ul class="bl_posts">
+			<li class="bl_posts_item">
+				<header class="bl_posts_header">
+					<time class="bl_posts_date" datetime="2020-04-05">2020-04-05</time>
+				</header>
+				<div class="bl_text">
+					<p>ウェブサイトを公開しました。作成の経緯や技術的なことについては<a href="#">ここ</a>に覚書を残しておきます。</p>
+				</div>
+			</li>
+			<li class="bl_posts_item">
+				<header class="bl_posts_header">
+					<time class="bl_posts_date" datetime="2020-04-05">2020-04-04</time>
+				</header>
+				<div class="bl_text">
+					<p>ベータ版運用開始。</p>
+				</div>
+			</li>			
+		</ul>
+	</div>
+	<!-- /bl_text -->
+</section>
+
 </main>
 
 <footer class="ly_footer">
 	<div class="ly_footer_inner">
-		<p class="el_footerCopyright">&copy; 2020-<a href="#"> kyonen-ya</a> xxx</p>
+		<p class="el_footerCopyright">&copy; 2020- <a href="#">placet experiri</a></p>
 	</div>
 </footer>
 

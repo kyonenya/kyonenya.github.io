@@ -38,66 +38,9 @@ li:last-child {
 	margin-bottom: 0;
 }
 
-/*	---------------------------------
-	記事一覧リスト */
-.bl_posts {
-}
-
-.bl_posts_item {
-	display: block;
-	padding: 1em; 
-	border-top: 1px solid var(--monochrome-light);
-	/* 小ブロックにして中央揃え */
-	max-width: 560px;
-	margin: 0 auto;
-}
-
-.bl_posts_header {
-	padding-bottom: 0.25em;
-	color: var(--monochrome-dark);
-}
-.bl_posts_readmore {
-	color: var(--monochrome-dark);
-	margin: 0.4em 0 -0.15em;
-	font-size: 98%;
-}
-.bl_posts_footer {
-	padding-top: 0.4em;
-	color: var(--monochrome-dark);
-}
-
-/* 標準マークアップを局所的に上書き */
-.bl_posts_item .bl_text h1 {
-	font-weight: bold;
-	margin: 0 0 0.25em 0; /* 一括指定で余白を上書きリセット */
-	padding: 0;
-	border: none;
-}
-
-.bl_posts_item .bl_text h2 {
-	font-weight: bold;
-	margin: 0 0 0.25em 0;
-	border: none;
-	font-size: 100%;
-}
-
-.bl_posts_item .bl_text hr {
-	border: none;
-	margin: 0;	
-}
-
-/* タグリスト */
-.bl_tags {
-	display: inline-flex; /* 横並び、かつ先立つ要素（日付）に回り込める */
-	flex-wrap: wrap;
-	list-style: none;
-}
-.bl_tags li {
-	margin-left: 0.5em;
-}
 
 /* ---------------------------------
-	テキストブロック */
+	テキスト領域 */
 .bl_text {
 
 }
@@ -183,7 +126,7 @@ li:last-child {
 	/* 標準余白 */
 	margin: 0.5em 0 0.75em; /* セクション間余白、左右の余白限界からの余白、後続要素との余白 */
 	font-weight: normal;
-	border-bottom: 1px solid hsl(0, 0%, 87%);;
+	border-bottom: 1px solid hsl(0, 0%, 75%);
 	font-size: 105%;
 }
 
@@ -230,17 +173,86 @@ li:last-child {
 	content: "： ";
 }
 
+/*	---------------------------------
+	記事一覧リスト */
+.bl_posts {
+}
+
+.bl_posts_item {
+	display: block;
+	padding: 1em;
+	border-bottom: 1px solid var(--monochrome-light);
+	/* 小ブロックにして中央揃え */
+	margin: 0 auto;
+}
+
+.bl_posts_item:first-child {
+	/*border-top: 1px solid var(--monochrome-light);*/
+	padding-top: 0;
+}
+
+.bl_posts_header {
+}
+.bl_posts_date {
+	display: inline-flex;
+	padding-bottom: 0.25em;
+	color: var(--monochrome-dark);
+}
+.bl_posts_readmore {
+	color: var(--monochrome-dark);
+	margin: 0.4em 0 -0.15em;
+	font-size: 98%;
+}
+.bl_posts_footer {
+	padding-top: 0.4em;
+	color: var(--monochrome-dark);
+}
+
+/* 標準マークアップを局所的に上書き */
+.bl_posts_item .bl_text h1 {
+	font-weight: bold;
+	margin: 0 0 0.25em 0; /* 一括指定で余白を上書きリセット */
+	padding: 0;
+	border: none;
+}
+
+.bl_posts_item .bl_text h2 {
+	font-weight: bold;
+	margin: 0 0 0.25em 0;
+	border: none;
+	font-size: 100%;
+}
+
+.bl_posts_item .bl_text hr {
+	border: none;
+	margin: 0.75em auto;
+}
+
+/* タグリスト */
+.bl_tags {
+	display: inline-flex; /* 横並び、かつ先立つ要素（日付）に回り込める */
+	flex-wrap: wrap;
+	list-style: none;
+}
+.bl_tags li {
+	margin-left: 0.5em;
+}
+
 /* ---------------------------------
 	部品 */
 .el_heading1 { 
 	/* .bl_text h1を複製し、ブロックの外でも使えるようにする。ただし標準余白は常につける */
-	margin: 3em 0em 1em; 
+	margin: 3em 0em 1em;
 	border-left: 4px solid var(--monochrome-medium);
 	padding-left: 0.45em;
 	border-bottom: 1px solid hsl(0, 0%, 75%);
 	padding-right: 0.75em;
 	font-weight: normal;
 	font-size: 110%;
+}
+.ly_cont:first-child > .el_heading1 {
+	/* 先頭の見出しだけ小さめの後続余白 */
+	margin: 1em 0em 1em; 
 }
 
 /* テーブル（水平）*/
@@ -271,20 +283,15 @@ li:last-child {
 	border-bottom-width: 0px; /* 最終行の下線を消す */
 }
 
-.hp_textWeak {
-	color: var(--monochrome-dark);
-	font-size: 95%;
-}
-
 /*---------------------------------
-	ヘッダー */
+	ヘッダー・フッター */
 .ly_header_inner {
 	font-family: "Avenir Next", "Segoe UI", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "游ゴシック Medium", "Yu Gothic Medium", "メイリオ", Meiryo, sans-serif;
 }
 .el_logo { 
 	font-size: 32px;
 	font-weight: normal;
-	vertical-align: center;	
+	vertical-align: center;
 }
 .el_logo_suffix{
 	font-size: 16px;
@@ -293,35 +300,35 @@ li:last-child {
 	vertical-align: baseline; /* 英単語帳：baseline */
 }
 /* 小コンテナ：メニューリスト */
-nav .container {
+.bl_nav_inner {
 	display: flex;
 }
 /* ナビメニュー */
-nav a {
+.bl_nav a {
 	display: block; 
 	line-height: 1.2em; /* 実質的には区切り線の高さ */
 	text-align: center;
 	font-size: 110%;
 	color: var(--first-color);
 }
-nav li {
+.bl_nav li {
 	list-style: none;	
 	padding: 0 0.7em; /* メニュー同士の間隔 */
 }
-nav li + li { /* 2番目以降のメニューリストアイテムに区切り線 */
+.bl_nav li + li { /* 2番目以降のメニューリストアイテムに区切り線 */
 	border-left: 1px solid var(--first-color-light);
 }
 
 /* フッター */
 .ly_footer {
-	background-color: hsl(0, 0%, 94%);
+	background-color: hsl(0, 0%, 90%);
 	margin-top: 3em;
 }
 .ly_footer_inner {
 	padding: 1.25em 0; /* フッターの高さ */
 }
 .el_footerCopyright {
-	font-size: 80%;
+	font-size: 85%;
 	text-align: center;
 	color: var(--monochrome-dark)
 }
@@ -336,24 +343,22 @@ nav li + li { /* 2番目以降のメニューリストアイテムに区切り�
 	:root {
 		font-size: 16px;
 	}
-/* ヘッダー：中央揃え */
+/* -- ヘッダー -- */
 	.ly_header {
 		margin-bottom: 2em;
 	}
 	.ly_header_inner {
+		/* スマホでは中央揃えに */
 		text-align: center;
 		margin-top: 1em;
 	}
-	nav {
+	.bl_nav {
 		display: inline-block;
 		text-align: center;
 		padding-top: 0.5em;
 	}
-	nav a {
+	.bl_nav a {
 		font-size: 100%;
-	}
-	.contents {
-		padding-top: 1em; 
 	}
 	
 }
@@ -361,19 +366,21 @@ nav li + li { /* 2番目以降のメニューリストアイテムに区切り�
 /* -----------------------------------------
 	タブレット以上 */
 @media (min-width: 560px) {
-/* ベースグループ */
+
+/* -- ベースグループ -- */
 	:root {
 		font-size: 18px;
 	}
 	/* ヘッダーに本文がめり込まないように。 */
 	main {
-		padding-top: 3em;
+		padding-top: 2em;
+	/*border: 1px solid #999;*/
 	}
 
-/* ヘッダー */
+/* -- ヘッダー -- */
 	.ly_header {
 	/* 大箱　*/
-		background: hsl(40, 38%, 97%); /* 白く塗りつぶし */
+		background: hsl(40, 38%, 97%); /* 背景色で塗りつぶし */
 		height: 4.5em;
 		margin: 0 auto;
 	}
@@ -381,10 +388,10 @@ nav li + li { /* 2番目以降のメニューリストアイテムに区切り�
 	/* 中コンテナ：ロゴ＋メニュー　*/
 		display: flex;	
 		justify-content: space-between; /* 二つを両端に分ける */
-		align-items: center;	/* 二つの高さ位置を揃える */
+		align-items: center; /* 二つの高さ位置を揃える */
 		padding-top: 0.75em; /* これにて手動で縦方向センタリング */
 	}
-	.ly_header .container {
+	.bl_nav_inner {
 	/* 小コンテナ：メニューリスト */
 		margin-right: 0px;
 	}
@@ -393,10 +400,14 @@ nav li + li { /* 2番目以降のメニューリストアイテムに区切り�
 	}
 }
 
+/* -----------------------------------------
+	PC画面以上 */
 @media (min-width: 960px) {
+
 	.ly_cont, .ly_header {
 	/* 大画面ではテキストを画面いっぱいに表示せず、中央に寄せる */
 		width: 80vw;
 		margin: 0 auto;
 	}
+
 }
