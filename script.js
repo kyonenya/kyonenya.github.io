@@ -1,6 +1,9 @@
 'use strict'
+{
 // 変数宣言
-let h = "";
+	let h = "";
+	const hashtags = [];
+	const postTexts = [];
 
 // URLからクエリ文字列を取得する関数
 function getParam(name, url) {
@@ -14,13 +17,10 @@ function getParam(name, url) {
 // ページidを取得、0以上の整数またはnull
 let id = getParam('id');
 
+
 /* -- JSONデータ取得開始 -- */
 $(function(){
-
 $.getJSON("manuscript.json", function(manuscripts){
-
-	const hashtags = [];
-	const shortTexts = [];
 
 	// 記事リスト（HTMLタグ生成関数）
 	function htmlComb(i) {
@@ -33,7 +33,7 @@ $.getJSON("manuscript.json", function(manuscripts){
 				</time>
 			</header>
 			<div class="bl_text">
-				${shortTexts[i]}
+				${postTexts[i]}
 			</div>
 			<footer class="bl_posts_footer">
 				<span class="bl_posts_dateago">
@@ -85,10 +85,10 @@ $.getJSON("manuscript.json", function(manuscripts){
 	
 		// 長文の表示文字数を制限し、「続きを読む」を表示
 		if (manuscripts[i].text.length > 300) {
-			shortTexts[i] = `${manuscripts[i].text.substr(0, 300)}…
+			postTexts[i] = `${manuscripts[i].text.substr(0, 300)}…
 			<div class="bl_posts_readmore">続きを読む</div>`;
 		} else {
-			shortTexts[i] = manuscripts[i].text;
+			postTexts[i] = manuscripts[i].text;
 		};
 		
 		// 記事一覧ページのHTMLタグを積算
@@ -101,8 +101,12 @@ $.getJSON("manuscript.json", function(manuscripts){
 		$("#postWrapper").append(htmlComb_page(manuscripts.length - id));
 		$('.el_logo_suffix').text(` :: ${id}`)
 		$('title').html(`placet experiri :: ${id}`);
+		document.getElementById('description').content = manuscripts[manuscripts.length - id].text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').substr(0, 300); // HTMLタグを削除して先頭300文字をとる
+		console.log(document.getElementById('description').content);
 	};
-
+	
 }); // $.getJSON(){...
-
 }); // $(function(){...
+
+
+}

@@ -15,6 +15,13 @@ body {
 	color: #333; /* 黒の文字色 */
 	line-height: 1.7;
 	background: hsl(40, 38%, 97%); /* 再生紙色、andante (40, 38%, 97%) より */
+	/* フッターを下部固定 */
+	display: flex;
+	flex-flow: column; /* 縦隊列 */
+	min-height: 100vh; /* コンテンツが少なくても */
+}
+main {
+	flex: 1; /* メイン領域をめいっぱい広げておいて */
 }
 
 .ly_header, .ly_cont {
