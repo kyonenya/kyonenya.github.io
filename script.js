@@ -102,7 +102,7 @@ $.getJSON("manuscript.json", function(manuscripts){
 		$('.el_logo_suffix').text(` :: ${id}`)
 		$('title').html(`placet experiri :: ${id}`);
 		document.getElementById('description').content = manuscripts[manuscripts.length - id].text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').substr(0, 300); // HTMLタグを削除して先頭300文字をとる
-		console.log(document.getElementById('description').content);
+	document.getElementById('ogDescription').content = manuscripts[manuscripts.length - id].text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').substr(0, 300); // 同上
 	};
 	
 }); // $.getJSON(){...
