@@ -23,10 +23,6 @@
 	<meta property='og:url' content="">
 	<meta property='og:description' content="言ってみただけ。">	
 	<meta property="og:image" content="ogイメージのパス入れる">
-	<!-- JavaScriptライブラリをCDNからインポート -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script><!-- jQuery -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script><!-- Moment.js -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/ja.js"></script><!-- Moment.js 日本語ロケール -->
 </head>
 
 <body>
@@ -38,7 +34,7 @@
 			<ul class="bl_nav_inner">
 				<li><a href="index.html">Home</a></li>
 				<li><a href="works.html">Works</a></li>
-				<li><a href="about.html">About</a></li>
+				<li><a href="index.html">Info</a></li>
 			</ul>
 		</nav>
 	</div>
@@ -46,239 +42,29 @@
 </header>
 
 <main>
-<section class="ly_cont">
-	<ul class="bl_posts" id="postlistWrapper"></ul>
-</section>
-
-<article class="ly_cont">
-	<div id="postWrapper"></div>
-</article>
-<script type="text/javascript">
-// 変数宣言
-let h = "";
-
-// URLからクエリ文字列を取得する関数
-function getParam(name, url) {
-	if (!url) url = window.location.href;
-	name = name.replace(/[\[\]]/g, "\\$&");
-	var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"), results = regex.exec(url);
-	if (!results) return null;
-	if (!results[2]) return '';
-	return decodeURIComponent(results[2].replace(/\+/g, " "));
-}
-// ページidを取得、0以上の整数またはnull
-id = getParam('id');
-
-/* -- JSONデータ取得開始 -- */
-$(function(){
-$.getJSON("manuscript.json", function(manuscripts){
-
-	const hashtags = [];
-	const shortTexts = [];
-
-	// 記事リスト（HTMLタグ生成関数）
-	function htmlComb(i) {
-		return `
-		<li class="bl_posts_item">
-		<a href="?id=${manuscripts.length - i}">
-			<header class="bl_posts_header">
-				<time class="bl_posts_date" datetime="${moment(manuscripts[i].date).format("YYYY-MM-DD HH:mm")}">
-					${moment(manuscripts[i].date).format("YYYY-MM-DD")}
-				</time>
-			</header>
-			<div class="bl_text">
-				${shortTexts[i]}
-			</div>
-			<footer class="bl_posts_footer">
-				<span class="bl_posts_dateago">
-					${moment(manuscripts[i].date).fromNow()}
-				</span>
-				<ul class="bl_tags">
-					${hashtags[i]}
-				<ul>
-			</footer>
-		</a>
-		</li>
-		`
-	}
-
-	// 個別記事ページ（HTMLタグ生成関数）
-	function htmlComb_page(i) {
-		return `
-		<article class="">
-		<header class="bl_text_header">
-			<time class="bl_text_date" datetime="${moment(manuscripts[i].date).format("YYYY-MM-DD HH:mm")}">
-				${moment(manuscripts[i].date).format("YYYY-MM-DD HH:mm")}
-			</time>
-		</header>
-		<div class="bl_text">
-			${manuscripts[i].text}
-		</div>
-		<footer class="bl_text_footer">
-			<span class="bl_posts_dateago">
-				${moment(manuscripts[i].date).fromNow()}
-			</span>
-			<ul class="bl_tags">
-				${hashtags[i]}
-			</ul>
-		</footer>
-		</article>`
-	}
-
-	for(var i in manuscripts){	
-		// ハッシュタグをli要素として生成
-		hashtags[i] = ""	// 初期化
-		for (var j in manuscripts[i].tags) {
-			hashtags[i] += `
-			<li>
-				<span>
-					#${manuscripts[i].tags[j]}
-				</span>
-			</li>`;
-		};
+	<!-- JavaScriptにより自動生成 -->
+	<section class="ly_cont">
+		<ul class="bl_posts" id="postlistWrapper"></ul>
+	</section>
 	
-		// 長文の表示文字数を制限し、「続きを読む」を表示
-		if (manuscripts[i].text.length > 300) {
-			shortTexts[i] = `${manuscripts[i].text.substr(0, 300)}…
-			<div class="bl_posts_readmore">続きを読む</div>`;
-		} else {
-			shortTexts[i] = manuscripts[i].text;
-		};
-		
-		// 記事一覧ページのHTMLタグを積算
-		h += htmlComb(i);
-	}
-
-	if (id == null) {
-		$("#postlistWrapper").append(h);
-	} else {
-		$("#postWrapper").append(htmlComb_page(manuscripts.length - id));
-		$('.el_logo_suffix').text(` :: ${id}`)
-		$('title').html(`placet experiri :: ${id}`);
-	};
-}); 
-	
-});
-</script>
-</section>
-
-<!-- ここから手動 -->
-<section class="ly_cont">
-	<h1 class="el_heading1">このサイトについて</h1>
-	<div class="bl_text">
-		<p>xxxのサイトです。xxをxxしています。</p>
-		<h2>サイトマップ</h2>
-		<ul>
-			<li>Works：あいうえおかきくけこ</li>
-			<li>Profile：たちつてとさしすせそ</li>
-			<li>Blog：なにぬねのはひふへほ</li>
-		</ul>
-		<dl>
-			<dt>Works</dt>
-			<dd>書いたものの解説を載せます。</dd>
-			<dt>Profile</dt>
-			<dd>履歴書と業績一覧です。</dd>
-			<dt>log</dt>
-			<dd>私信です。</dd>
-		</dl>	
-	</div>
-	<!-- /bl_text -->
-</section>
-
-<section class="ly_cont">
-	<h1 class="el_heading1">著作解題</h1>
-	<div class="bl_text">
-		<h2 class="el_heading3">セロ弾きのゴーシュ（19xx）</h2>
-		<p>ゴーシュは町の活動写真館でセロを弾く係りでした。けれどもあんまり上手でないという評判でした。上手でないどころではなく実は仲間の楽手のなかではいちばん下手でしたから、いつでも楽長にいじめられるのでした。</p>
-		<p>ひるすぎみんなは楽屋に円くならんで今度の町の音楽会へ出す第六交響曲の練習をしていました。</p>
-	</div>
-	<!-- /bl_text -->
-</section>
-
-<section class="ly_cont">
-	<h1 class="el_heading1">お知らせ</h1>
-	<article class="bl_text"><!-- 記事全体をリンクブロックにする可能性があるので、bl_textは個別につけて構わない -->
-		<h2 class="el_heading3">2010年1月6日(水)</h2>
-			<p>ひるすぎみんなは楽屋に円くならんで今度の町の音楽会へ出す第六交響曲の練習をしていました。</p>
-			<blockquote>
-				<p>トランペットは一生けん命歌っています。</p>
-				<p>ヴァイオリンも二いろ風のように鳴っています。</p>
-				<p>クラリネットもボーボーとそれに手伝っています。</p>
-			</blockquote>
-			<p>ゴーシュも口をりんと結んで眼めを皿さらのようにして楽譜を見つめながらもう一心に弾いています。</p>
+	<article class="ly_cont">
+		<div id="postWrapper"></div>
 	</article>
-	<!-- /bl_text -->
-
-	<article class="bl_text">
-		<h2>2010年1月6日(金)</h2>
-			<p>にわかにぱたっと楽長が両手を鳴らしました。みんなぴたりと曲をやめてしんとしました。楽長がどなりました。</p>
-			<p>「セロがおくれた。トォテテ　テテテイ、ここからやり直し。はいっ。」</p>
-	</article>
-	<!-- /bl_text -->
-</section>
-
-<section class="ly_cont">
-	<h1 class="el_heading1">業績一覧</h1>
-	<div class="bl_text">
-		<h2 class="el_heading3">論文</h2>
-		<ol>
-			<li>山田太郎, 「論文タイトル」, 『雑誌名』, 4巻, pp. 49-56, 〇〇学会, 2011. 3.<a class="btn" href="">［機関リポジトリ］</a></li>
-			<li>山田太郎, 「論文タイトル：サブタイトル」, 『雑誌名』, 43-2号, pp. 81-94, 〇〇学会, 2010. 12.<a href="https://">［PDFリンク］</a></li>
-		</ol>
-		<h2 class="el_heading3">発表</h2>
-		<ol>
-			<li>山田太郎,「発表タイトル」, 〇〇セミナー, 〇〇大学, 2010. 3. 19. </li>
-		</ol>
-	</div>
-</section>
-
-<section class="ly_cont">
-	<h1 class="el_heading1">プロフィール</h1>
-	<div class="bl_text">
-		<h2 class="el_heading3">山田 太郎（やまだ たろう）</h2>
-		<dl>
-			<dt>所属</dt>
-			<dd>〇〇大学〇〇研究科〇〇課程ああああああああ</dd>
-			<dt>学位</dt>
-			<dd>〇〇（修士／〇〇大学）</dd>
-			<dt>あ連絡先</dt>
-			<dd>〇〇〇@gmail.com</dd>
-		</dl>
-	</div>
-</section>
-
-<section class="ly_cont">
-	<h1 class="el_heading1">お知らせ</h1>
-	<div class="bl_text">
-		<ul class="bl_posts">
-			<li class="bl_posts_item">
-				<header class="bl_posts_header">
-					<time class="bl_posts_date" datetime="2020-04-05">2020-04-05</time>
-				</header>
-				<div class="bl_text">
-					<p>ウェブサイトを公開しました。作成の経緯や技術的なことについては<a href="#">ここ</a>に覚書を残しておきます。</p>
-				</div>
-			</li>
-			<li class="bl_posts_item">
-				<header class="bl_posts_header">
-					<time class="bl_posts_date" datetime="2020-04-05">2020-04-04</time>
-				</header>
-				<div class="bl_text">
-					<p>ベータ版運用開始。</p>
-				</div>
-			</li>			
-		</ul>
-	</div>
-	<!-- /bl_text -->
-</section>
-
+	<!-- ここまで自動生成 -->
 </main>
-
+	
 <footer class="ly_footer">
 	<div class="ly_footer_inner">
 		<p class="el_footerCopyright">&copy; 2020- <a href="#">placet experiri</a></p>
 	</div>
 </footer>
+	
+<!-- JavaScriptライブラリをCDNからインポート -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script><!-- jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script><!-- Moment.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/ja.js"></script><!-- Moment.js 日本語ロケール -->
+<!-- 記事リスト生成スクリプト -->
+<script src="script.js"></script>
 
 </body>
 </html>
