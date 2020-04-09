@@ -5,18 +5,18 @@
 	const hashtags = [];
 	const postTexts = [];
 
-// URLからクエリ文字列を取得する関数
-function getParam(name, url) {
-	if (!url) url = window.location.href;
-	name = name.replace(/[\[\]]/g, "\\$&");
-	var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"), results = regex.exec(url);
-	if (!results) return null;
-	if (!results[2]) return '';
-	return decodeURIComponent(results[2].replace(/\+/g, " "));
-}
-// ページidを取得、0以上の整数またはnull
-let id = getParam('id');
 
+// URLからクエリ文字列を取得
+	function getId() {
+		const queryStr = window.location.search.slice(1); // "id=3&p=2"
+		if (!queryStr) { // 非存在判定
+			return '0';
+		}
+		// matchで'id=123'を抽出、replaceで'id='を消して'123'を返す
+		return queryStr.match(/id=\d+/)[0].replace(/id=/, '')
+	}
+	// 取得（即時関数にするか）
+	let id = getId();
 
 /* -- JSONデータ取得開始 -- */
 $(function(){
@@ -95,14 +95,14 @@ $.getJSON("manuscript.json", function(manuscripts){
 		h += htmlComb(i);
 	}
 
-	if (id == null) {
+	if (id == 0) {
 		$("#postlistWrapper").append(h);
 	} else {
 		$("#postWrapper").append(htmlComb_page(manuscripts.length - id));
 		$('.el_logo_suffix').text(` :: ${id}`)
 		$('title').html(`placet experiri :: ${id}`);
-		document.getElementById('description').content = manuscripts[manuscripts.length - id].text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').substr(0, 300); // HTMLタグを削除して先頭300文字をとる
-		document.getElementById('ogDescription').content = manuscripts[manuscripts.length - id].text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').substr(0, 300); // 同上
+		document.getElementById('description').content = manuscripts[manuscripts.length - id].text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').substr(0, 200); // HTMLタグを削除して先頭200文字をとる
+		document.getElementById('ogDescription').content = manuscripts[manuscripts.length - id].text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').substr(0, 200); // 同上
 		console.log(document.getElementById('ogDescription').content);
 	};
 	
