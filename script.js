@@ -5,7 +5,7 @@
 	const hashtags = [];
 	const postTexts = [];
 
-// URLからクエリ文字列を取得
+	// URLからクエリ文字列を取得
 	function getId() {
 		const queryStr = window.location.search.slice(1); // "id=3&p=2"
 		if (!queryStr) { // 非存在判定
