@@ -7,4 +7,4 @@ RewriteEngine On
 # http://example.com/detail.php?id=1 を
 # http://example.com/1.html に見せかける
 # RewriteRule ^(.*).html$ detail.php?id=$1 [L]
-RewriteRule ^(.*)$ ?id=$1 [L]
+# RewriteRule ^(.*)$ ?id=$1 [L]
