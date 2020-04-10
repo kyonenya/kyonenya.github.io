@@ -1,6 +1,6 @@
 'use strict'
 {
-// 変数宣言
+	// 変数宣言
 	let h = "";
 	const hashtags = [];
 	const postTexts = [];
@@ -83,8 +83,8 @@ $.getJSON("manuscript.json", function(manuscripts){
 		};
 	
 		// 長文の表示文字数を制限し、「続きを読む」を表示
-		if (manuscripts[i].text.length > 300) {
-			postTexts[i] = `${manuscripts[i].text.substr(0, 300)}…
+		if (manuscripts[i].text.length > 200) {
+			postTexts[i] = `${manuscripts[i].text.substr(0, 200)}…
 			<div class="bl_posts_readmore">続きを読む</div>`;
 		} else {
 			postTexts[i] = manuscripts[i].text;
@@ -100,13 +100,12 @@ $.getJSON("manuscript.json", function(manuscripts){
 		$("#postWrapper").append(htmlComb_page(manuscripts.length - id));
 		$('.el_logo_suffix').text(` :: ${id}`)
 		$('title').html(`placet experiri :: ${id}`);
-		document.getElementById('description').content = manuscripts[manuscripts.length - id].text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').substr(0, 140); // HTMLタグを削除して先頭200文字をとる
-		document.getElementById('ogDescription').content = manuscripts[manuscripts.length - id].text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').substr(0, 140); // 同上
+		document.getElementById('description').content = manuscripts[manuscripts.length - id].text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').substr(0, 200); // HTMLタグを削除して先頭200文字をとる
+		document.getElementById('ogDescription').content = manuscripts[manuscripts.length - id].text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').substr(0, 200); // 同上
 		console.log(document.getElementById('ogDescription').content);
 	};
 	
 }); // $.getJSON(){...
 }); // $(function(){...
-
 
 }
