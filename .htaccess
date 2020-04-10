@@ -8,8 +8,9 @@ RewriteEngine On
 # http://example.com/1.html に見せかける
 # 静的URLへのアクセスを動的なほうに転送する？
 # RewriteRule ^(.*).html$ detail.php?id=$1 [L]
+RewriteRule ^(.*)$ ?id=$1
 
-RewriteRule ^(.*)$ ?id=$1 [L]
+RewriteRule ^url-test.html$ /?id=1
 
 # RewriteRule ^img/(.+) new-img/$1 [R=301,L]
 # 「img」ディレクトリ内へのアクセスで、画像ファイルのみを新しい「new-img」ディレクトリに転送します。
