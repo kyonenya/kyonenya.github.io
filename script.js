@@ -5,7 +5,6 @@
 	const hashtags = [];
 	const postTexts = [];
 
-
 // URLからクエリ文字列を取得
 	function getId() {
 		const queryStr = window.location.search.slice(1); // "id=3&p=2"
@@ -101,8 +100,8 @@ $.getJSON("manuscript.json", function(manuscripts){
 		$("#postWrapper").append(htmlComb_page(manuscripts.length - id));
 		$('.el_logo_suffix').text(` :: ${id}`)
 		$('title').html(`placet experiri :: ${id}`);
-		document.getElementById('description').content = manuscripts[manuscripts.length - id].text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').substr(0, 200); // HTMLタグを削除して先頭200文字をとる
-		document.getElementById('ogDescription').content = manuscripts[manuscripts.length - id].text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').substr(0, 200); // 同上
+		document.getElementById('description').content = manuscripts[manuscripts.length - id].text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').substr(0, 140); // HTMLタグを削除して先頭200文字をとる
+		document.getElementById('ogDescription').content = manuscripts[manuscripts.length - id].text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').substr(0, 140); // 同上
 		console.log(document.getElementById('ogDescription').content);
 	};
 	
