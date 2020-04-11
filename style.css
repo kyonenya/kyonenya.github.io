@@ -187,7 +187,7 @@ li:last-child {
 .bl_posts_item {
 	display: block;
 	padding: 0.75em 0;
-	border-top: 1px solid var(--monochrome-light);
+	border-bottom: 1px solid var(--monochrome-light);
 	/* 小ブロックにして中央揃え */
 	margin: 0 auto;
 }

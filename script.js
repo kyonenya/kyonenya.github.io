@@ -19,16 +19,16 @@
 
 /* -- JSONデータ取得開始 -- */
 $(function(){
-$.getJSON("manuscript.json", function(manuscripts){
+$.getJSON("data.json", function(data) {
 
 	// 記事リスト（HTMLタグ生成関数）
 	function htmlComb(i) {
 		return `
 		<li class="bl_posts_item">
-		<a href="?id=${manuscripts.length - i}">
+		<a href="?id=${data.length - i}">
 			<header class="bl_posts_header">
-				<time class="bl_posts_date" datetime="${moment(manuscripts[i].date).format("YYYY-MM-DD HH:mm")}">
-					${moment(manuscripts[i].date).format("YYYY-MM-DD")}
+				<time class="bl_posts_date" datetime="${moment(data[i].date).format("YYYY-MM-DD HH:mm")}">
+					${moment(data[i].date).format("YYYY-MM-DD")}
 				</time>
 			</header>
 			<div class="bl_text">
@@ -36,7 +36,7 @@ $.getJSON("manuscript.json", function(manuscripts){
 			</div>
 			<footer class="bl_posts_footer">
 				<span class="bl_posts_dateago">
-					${moment(manuscripts[i].date).fromNow()}
+					${moment(data[i].date).fromNow()}
 				</span>
 				<ul class="bl_tags">
 					${hashtags[i]}
@@ -52,57 +52,60 @@ $.getJSON("manuscript.json", function(manuscripts){
 		return `
 		<article class="">
 		<header class="bl_text_header">
-			<time class="bl_text_date" datetime="${moment(manuscripts[i].date).format("YYYY-MM-DD HH:mm")}">
-				${moment(manuscripts[i].date).format("YYYY-MM-DD HH:mm")}
+			<time class="bl_text_date" datetime="${moment(data[i].date).format("YYYY-MM-DD HH:mm")}">
+				${moment(data[i].date).format("YYYY-MM-DD HH:mm")}
 			</time>
 		</header>
 		<div class="bl_text">
-			${manuscripts[i].text}
+			${data[i].text}
 		</div>
 		<footer class="bl_text_footer">
 			<span class="bl_posts_dateago">
-				${moment(manuscripts[i].date).fromNow()}
+				${moment(data[i].date).fromNow()}
 			</span>
 			<ul class="bl_tags">
 				${hashtags[i]}
 			</ul>
 		</footer>
 		</article>`
-	}
+	} // function htmlComb_page(i) {...
 
-	for(var i in manuscripts){	
+	for(var i in data){	
 		// ハッシュタグをli要素として生成
 		hashtags[i] = ""	// 初期化
-		for (var j in manuscripts[i].tags) {
+		for (var j in data[i].tags) {
 			hashtags[i] += `
 			<li>
 				<span>
-					#${manuscripts[i].tags[j]}
+					#${data[i].tags[j]}
 				</span>
 			</li>`;
 		};
 	
 		// 長文の表示文字数を制限し、「続きを読む」を表示
-		if (manuscripts[i].text.length > 200) {
-			postTexts[i] = `${manuscripts[i].text.substr(0, 200)}…
+		if (data[i].text.length > 200) {
+			postTexts[i] = `${data[i].text.substr(0, 200).replace(/<a.*?>(.*?)<\/a>/, '$1')}…
 			<div class="bl_posts_readmore">続きを読む</div>`;
 		} else {
-			postTexts[i] = manuscripts[i].text;
+			postTexts[i] = data[i].text.replace(/<a.*?>(.*?)<\/a>/, '$1');
 		};
-		
+		// 一覧表示ではリンクを削除
+		// 配列を編集しても反映されないやつ。なので↑にメソッドチェーンで書いた
+
 		// 記事一覧ページのHTMLタグを積算
 		h += htmlComb(i);
+
 	}
 
 	if (id == 0) {
 		$("#postlistWrapper").append(h);
 	} else {
-		$("#postWrapper").append(htmlComb_page(manuscripts.length - id));
 		$('.el_logo_suffix').text(` :: ${id}`)
 		$('title').html(`placet experiri :: ${id}`);
-		document.getElementById('description').content = manuscripts[manuscripts.length - id].text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').substr(0, 200); // HTMLタグを削除して先頭200文字をとる
-		document.getElementById('ogDescription').content = manuscripts[manuscripts.length - id].text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').substr(0, 200); // 同上
-		console.log(document.getElementById('ogDescription').content);
+		document.getElementById('description').content = data[data.length - id].text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').substr(0, 140); // HTMLタグを削除して先頭140文字をとる
+		document.getElementById('ogDescription').content = data[data.length - id].text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').substr(0, 140); // 同上、OGPはJS未対応なので無駄だけど
+	// console.log(document.getElementById('ogDescription').content);
+		$("#postWrapper").append(htmlComb_page(data.length - id));
 	};
 	
 }); // $.getJSON(){...
