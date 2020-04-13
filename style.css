@@ -27,7 +27,7 @@ main {
 .ly_header, .ly_cont {
 	/* 余白限界 */
 	width: 92.5vw;
-7	margin: 0 auto;
+	margin: 0 auto;
 }
 
 /* リセット */
@@ -233,6 +233,12 @@ li:last-child {
 	border: none;
 	margin: 0.75em auto;
 }
+/* 
+.bl_posts_item .bl_text p + p {
+	display: inline-block; 
+	margin-top: 0em; 
+}
+*/
 
 /* タグリスト */
 .bl_tags {
