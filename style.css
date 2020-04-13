@@ -21,13 +21,13 @@ body {
 	min-height: 100vh; /* コンテンツが少なくても */
 }
 main {
-	flex: 1; /* メイン領域をめいっぱい広げておいて */
+	flex: 1; /* メイン領域を（上下に）めいっぱい広げておいて */
 }
 
 .ly_header, .ly_cont {
 	/* 余白限界 */
 	width: 92.5vw;
-	margin: 0 auto;
+7	margin: 0 auto;
 }
 
 /* リセット */
@@ -193,6 +193,7 @@ li:last-child {
 }
 
 .bl_posts_item:first-child {
+	padding-top: 0;
 /*	border-top: 1px solid var(--monochrome-light); */
 }
 
@@ -411,7 +412,7 @@ li:last-child {
 
 	.ly_cont, .ly_header {
 	/* 大画面ではテキストを画面いっぱいに表示せず、中央に寄せる */
-		width: 80vw;
+		width: 75vw;
 		margin: 0 auto;
 	}
 
