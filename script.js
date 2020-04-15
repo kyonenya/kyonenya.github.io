@@ -83,6 +83,10 @@ $.getJSON("data.json", function(data) {
 		};
 
 		// 記事一覧リストでは表示長文の表示文字数を制限する
+		// 記事一覧の要約テキスト用に、jsonに新しいプロパティを追加
+		data[i].shortText = data[i].text.replace(/<\/?a.*?>|<hr\/?>/, '').replace(/<\/p><p>/g, ''); // aタグとpタグ改行を削除
+		console.log(data[i].shortText);
+		
 		if (data[i].text.length > 200) {
 			postTexts[i] = `${data[i].text.substr(0, 200).replace(/<a.*?>(.*?)<\/a>/, '$1')}…`;
 		} else {
