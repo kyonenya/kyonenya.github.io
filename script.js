@@ -91,7 +91,7 @@ $.getJSON("data.json", function(data) {
 
 		// 長文なら省略表示をして「…」を追加
 		if (data[i].text.length > shortTextLength) {
-			postTexts[i] = `${data[i].shortText.substr(0, shortTextLength)}…`;
+			postTexts[i] = `${data[i].shortText.substr(0, shortTextLength)}...`;
 		} else {
 			postTexts[i] = data[i].shortText;
 		};
