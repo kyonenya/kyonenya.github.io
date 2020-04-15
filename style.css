@@ -2,9 +2,9 @@
 :root { 
 	--monochrome-light: hsl(0, 0%, 85%); /* andante (0,0%,87%) より */
 	--monochrome-medium: hsl(0, 0%, 68%); 
-	--monochrome-dark: hsl(0, 0%, 45%);
-	--first-color: hsl(202, 35%, 50%); /* 6ステップ (202, 35%, 53%) より*/
-	--first-color-light: hsl(202, 35%, 70%); 
+	--monochrome-dark: hsl(0, 0%, 50%);
+	--main-color: hsl(202, 35%, 50%); /* 6ステップ (202, 35%, 53%) より*/
+	--main-color-light: hsl(202, 35%, 70%); 
 }
 
 /* ---------------------------------
@@ -21,7 +21,7 @@ body {
 	min-height: 100vh; /* コンテンツが少なくても */
 }
 main {
-	flex: 1; /* メイン領域を（上下に）めいっぱい広げておいて */
+	flex: 1; /* メイン領域を上下にめいっぱい広げておいて */
 }
 
 .ly_header, .ly_cont {
@@ -182,6 +182,7 @@ li:last-child {
 /*	---------------------------------
 	記事一覧リスト */
 .bl_posts {
+/*	font-size: 90%; */
 }
 
 .bl_posts_item {
@@ -217,16 +218,19 @@ li:last-child {
 /* 標準マークアップを局所的に上書き */
 .bl_posts_item .bl_text h1 {
 	font-weight: bold;
-	margin: 0 0 0.25em 0; /* 一括指定で余白を上書きリセット */
+	margin: -0.25em 0 0.25em 0; /* 一括指定で余白を上書きリセット */
 	padding: 0;
 	border: none;
+	font-size: 105%;
 }
 
 .bl_posts_item .bl_text h2 {
-	font-weight: bold;
-	margin: 0 0 0.25em 0;
+	font-weight: normal;
+/*	color: hsl(202, 35%, 50%); */
+	margin: -0.25em 0 0.25em 0;
 	border: none;
 	font-size: 100%;
+	text-decoration: underline;
 }
 
 .bl_posts_item .bl_text hr {
@@ -321,14 +325,14 @@ li:last-child {
 	line-height: 1.2em; /* 実質的には区切り線の高さ */
 	text-align: center;
 	font-size: 110%;
-	color: var(--first-color);
+	color: var(--main-color);
 }
 .bl_nav li {
 	list-style: none;	
 	padding: 0 0.7em; /* メニュー同士の間隔 */
 }
 .bl_nav li + li { /* 2番目以降のメニューリストアイテムに区切り線 */
-	border-left: 1px solid var(--first-color-light);
+	border-left: 1px solid var(--main-color-light);
 }
 
 /* フッター */

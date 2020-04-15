@@ -81,11 +81,10 @@ $.getJSON("data.json", function(data) {
 				</span>
 			</li>`;
 		};
-	
-		// 長文の表示文字数を制限し、「続きを読む」を表示
+
+		// 記事一覧リストでは表示長文の表示文字数を制限する
 		if (data[i].text.length > 200) {
-			postTexts[i] = `${data[i].text.substr(0, 200).replace(/<a.*?>(.*?)<\/a>/, '$1')}…
-			<div class="bl_posts_readmore">続きを読む</div>`;
+			postTexts[i] = `${data[i].text.substr(0, 200).replace(/<a.*?>(.*?)<\/a>/, '$1')}…`;
 		} else {
 			postTexts[i] = data[i].text.replace(/<a.*?>(.*?)<\/a>/, '$1');
 		};
