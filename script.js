@@ -1,8 +1,9 @@
 'use strict'
 {
-	// 変数宣言
+	// 定数宣言
 	let h = "";
 	const hashtags = [];
+	const shortTextLength = 140;
 	const postTexts = [];
 
 	// URLからクエリ文字列を取得
@@ -82,18 +83,18 @@ $.getJSON("data.json", function(data) {
 			</li>`;
 		};
 
-		// 記事一覧リストでは表示長文の表示文字数を制限する
-		// 記事一覧の要約テキスト用に、jsonに新しいプロパティを追加
-		data[i].shortText = data[i].text.replace(/<\/?a.*?>|<hr\/?>/, '').replace(/<\/p><p>/g, ''); // aタグとpタグ改行を削除
-		console.log(data[i].shortText);
-		
-		if (data[i].text.length > 200) {
-			postTexts[i] = `${data[i].text.substr(0, 200).replace(/<a.*?>(.*?)<\/a>/, '$1')}…`;
+	// 記事一覧リストでは表示長文の表示文字数を制限する
+		// 記事一覧の要約テキスト用に、dataオブジェクトに新しいプロパティ'shortText'を追加
+		// まずa, hr, blockquoteタグを削除、それから複数段落を一つの段落へと統合
+		data[i].shortText = data[i].text.replace(/<\/?a.*?>|<hr>|<\/?blockquote>/g, '').replace(/<\/p><p>/g, ''); 
+		// console.log(data[i].shortText);
+
+		// 長文なら省略表示をして「…」を追加
+		if (data[i].text.length > shortTextLength) {
+			postTexts[i] = `${data[i].shortText.substr(0, shortTextLength)}…`;
 		} else {
-			postTexts[i] = data[i].text.replace(/<a.*?>(.*?)<\/a>/, '$1');
+			postTexts[i] = data[i].shortText;
 		};
-		// 一覧表示ではリンクを削除
-		// 配列を編集しても反映されないやつ。なので↑にメソッドチェーンで書いた
 
 		// 記事一覧ページのHTMLタグを積算
 		h += htmlComb(i);
