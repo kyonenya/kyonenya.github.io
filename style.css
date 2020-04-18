@@ -10,7 +10,8 @@
 /* ---------------------------------
 	ベースグループ */
 body {
-	font-family: "Helvetica Neue", Verdana, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "游ゴシック Medium", "Yu Gothic Medium", "メイリオ", Meiryo, sans-serif; 
+	font-family: "Helvetica Neue", Verdana, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, sans-serif;
+	/* font-family: "Helvetica Neue", Verdana, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "游ゴシック Medium", "Yu Gothic Medium", "メイリオ", Meiryo, sans-serif; */ 
 	word-break: break-word; /* 行頭に、。が来るのを避ける */
 	color: #333; /* 黒の文字色 */
 	line-height: 1.6;
@@ -115,7 +116,7 @@ li:last-child {
 	margin: 1em 0em 1em; /* セクション間・左右から・後続要素との余白 */
 	/* 横棒 */
 	border-left: 4px solid var(--monochrome-medium);
-	padding-left: 0.45em; /* 横棒と文字の間隔 */
+	padding-left: 0.35em; /* 横棒と文字の間隔 */
 	/* 下線 */
 	border-bottom: 1px solid hsl(0, 0%, 75%);
 	padding-right: 0.75em;
@@ -139,9 +140,9 @@ li:last-child {
 .bl_text hr {
 /* 水平線 */
 	border: none; /* デフォルトスタイルをリセット */
-	border-top: 1px solid hsl(0, 0%, 90%);
+	border-top: 1px solid var(--monochrome-light);
 	width: 50%;
-	margin: 1em auto;
+	margin: 1.25em auto;
 }
 
 /* 順序なしリスト */
@@ -385,7 +386,9 @@ li:last-child {
 /* -- ベースグループ -- */
 	:root {
 		font-size: 18px;
+		line-height: 1.7;
 	}
+	
 	/* ヘッダーに本文がめり込まないように。 */
 	main {
 		padding-top: 2em;
@@ -411,9 +414,13 @@ li:last-child {
 		margin-right: 0px;
 	}
 	.el_logo {
-		margin-left: 8px;
+		margin-left: 4px;
 	}
 }
+
+	.bl_text p + p {
+		margin-top: 1em; /* 段落間余白を増量 */
+	}
 
 /* -----------------------------------------
 	PC画面以上 */
@@ -421,7 +428,7 @@ li:last-child {
 
 	.ly_cont, .ly_header {
 	/* 大画面ではテキストを画面いっぱいに表示せず、中央に寄せる */
-		width: 75vw;
+		max-width: 800px;
 		margin: 0 auto;
 	}
 

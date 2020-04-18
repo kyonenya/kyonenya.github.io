@@ -104,12 +104,12 @@ $.getJSON("data.json", function(data) {
 	if (id == 0) {
 		$("#postlistWrapper").append(h);
 	} else {
+		$("#postWrapper").append(htmlComb_page(data.length - id));	
 		$('.el_logo_suffix').text(` :: ${id}`)
 		$('title').html(`placet experiri :: ${id}`);
 		document.getElementById('description').content = data[data.length - id].text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').substr(0, 140); // HTMLタグを削除して先頭140文字をとる
 		document.getElementById('ogDescription').content = data[data.length - id].text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').substr(0, 140); // 同上、OGPはJS未対応なので無駄だけど
 	// console.log(document.getElementById('ogDescription').content);
-		$("#postWrapper").append(htmlComb_page(data.length - id));
 	};
 	
 }); // $.getJSON(){...
