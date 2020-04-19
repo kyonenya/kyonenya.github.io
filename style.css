@@ -1,6 +1,6 @@
 @charset "UTF-8";
 :root { 
-	--monochrome-light: hsl(0, 0%, 85%); /* andante (0,0%,87%) より */
+	--monochrome-light: hsl(0, 0%, 85%);
 	--monochrome-medium: hsl(0, 0%, 68%); 
 	--monochrome-dark: hsl(0, 0%, 50%);
 	--main-color: hsl(202, 35%, 50%); /* 6ステップ (202, 35%, 53%) より*/
@@ -73,7 +73,7 @@ li:last-child {
 	text-decoration: none;
 	color: hsl(219, 62%, 50%); /* 薄青、Wikipediaより */
 	border-bottom: 1px solid hsl(219, 62%, 70%); /* 細く見せる */
-	padding-bottom: 1px; /* 擬似的な下線 */
+	padding-bottom: 1px; /* 下線との距離 */
 }
 .bl_text a:visited { 
 	/* 訪問済みリンク */
@@ -219,10 +219,10 @@ li:last-child {
 /* 標準マークアップを局所的に上書き */
 .bl_posts_item .bl_text h1 {
 	font-weight: normal;
-	margin: 0 0 0.25em 0; /* 一括指定で余白を上書きリセット */
+	margin: -0.3em 0 0.2em 0; /* 余白を一括指定で上書きリセット */
 	padding: 0;
-	border: none;
-	font-size: 100%;
+	border: none; /* 装飾リセット */
+	font-size: 100%; /* サイズリセット */
 }
 
 .bl_posts_item .bl_text h2 {
@@ -383,7 +383,6 @@ li:last-child {
 	タブレット以上 */
 @media (min-width: 560px) {
 
-/* -- ベースグループ -- */
 	:root {
 		font-size: 18px;
 		line-height: 1.7;
@@ -392,10 +391,13 @@ li:last-child {
 	/* ヘッダーに本文がめり込まないように。 */
 	main {
 		padding-top: 2em;
-	/*border: 1px solid #999;*/
+	}
+	
+	.bl_text p + p {
+		margin-top: 1em; /* 段落間の余白を増量 */
 	}
 
-/* -- ヘッダー -- */
+	/* -- ヘッダー -- */
 	.ly_header {
 	/* 大箱　*/
 		background: hsl(40, 38%, 97%); /* 背景色で塗りつぶし */
@@ -416,11 +418,8 @@ li:last-child {
 	.el_logo {
 		margin-left: 4px;
 	}
-}
 
-	.bl_text p + p {
-		margin-top: 1em; /* 段落間余白を増量 */
-	}
+} /* @media (min-width: 560px) {... */
 
 /* -----------------------------------------
 	PC画面以上 */
