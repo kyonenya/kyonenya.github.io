@@ -22,6 +22,17 @@
 $(function(){
 $.getJSON("data.json", function(data) {
 
+	// 古い順にソート
+/*	data.sort(function(a, b) {
+		if (a.date > b.date) {
+			return 1;
+		} else {
+			return -1;
+		}
+	})
+	console.log(data);
+*/
+
 	// 記事リスト（HTMLタグ生成関数）
 	function htmlComb(i) {
 		return `
@@ -96,6 +107,20 @@ $.getJSON("data.json", function(data) {
 			postTexts[i] = data[i].shortText;
 		};
 
+
+		// 【検索機能試作】
+/*
+			let searchWordIndex = data[i].text.indexOf('意味');
+			console.log(searchWordIndex);
+			if (searchWordIndex === -1) {
+				continue; 
+			}
+			if (searchWordIndex <= 16) {
+				searchWordIndex = 16; 
+			}
+			postTexts[i] = `…${data[i].text.substr(searchWordIndex - 16, 42)}…`;
+*/
+			
 		// 記事一覧ページのHTMLタグを積算
 		h += htmlComb(i);
 
