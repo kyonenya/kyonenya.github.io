@@ -34,7 +34,7 @@ $.getJSON("data.json", function(data) {
 */
 
 	// 記事リスト（HTMLタグ生成関数）
-	function htmlComb(i) {
+	const htmlComb = (i) => {
 		return `
 		<li class="bl_posts_item">
 		<a href="?id=${data.length - i}">
@@ -60,7 +60,7 @@ $.getJSON("data.json", function(data) {
 	}
 
 	// 個別記事ページ（HTMLタグ生成関数）
-	function htmlComb_page(i) {
+	const htmlComb_page = (i) => {
 		return `
 		<article class="">
 		<header class="bl_text_header">
@@ -82,7 +82,7 @@ $.getJSON("data.json", function(data) {
 		</article>`
 	} // function htmlComb_page(i) {...
 
-	for(var i in data){	
+	for (var i = 0; i < data.length; i=i+1) {
 		// ハッシュタグをli要素として生成
 		hashtags[i] = ""	// 初期化
 		for (var j in data[i].tags) {
@@ -107,7 +107,6 @@ $.getJSON("data.json", function(data) {
 			postTexts[i] = data[i].shortText;
 		};
 
-
 		// 【検索機能試作】
 /*
 			let searchWordIndex = data[i].text.indexOf('意味');
@@ -120,6 +119,11 @@ $.getJSON("data.json", function(data) {
 			}
 			postTexts[i] = `…${data[i].text.substr(searchWordIndex - 16, 42)}…`;
 */
+		// 記事一覧ページのHTMLタグを積算
+		h += htmlComb(i);
+
+	} // for (1 < i < data.length) {...
+
 
 //--リアルタイム検索
 	const textArea = document.getElementById('search-text');
@@ -128,18 +132,20 @@ $.getJSON("data.json", function(data) {
 	const searchWord = () => {
 		const searchText = textArea.value; // 検索ボックスに入力された値
 		let targetText;
+		let ul_posts = document.querySelectorAll('.bl_posts_item');
+		console.log(ul_posts[1].tagName);
 
-		document.querySelectorAll('.bl_posts_item .bl_text').forEach((postText, index) => {
-		targetText = postText.textContent;
-		
-		// 検索対象となるリストに入力された文字列が存在するかどうかを判断
-		if (targetText.indexOf(searchText) != -1) {
-			postText.parentNode.classList.remove('hidden');
-		} else {
-			postText.parentNode.classList.add('hidden');
-		}
-		
-		});
+		for (var i = 0; i < data.length; i=i+1) {
+			targetText = data[i].text;
+			
+			// 検索対象となるリストに入力された文字列が存在するかどうかを判断
+			if (targetText.indexOf(searchText) != -1) {
+				ul_posts[i].classList.remove('hp_hidden');
+			} else {
+				ul_posts[i].classList.add('hp_hidden');
+			}
+			
+		}; // for...
 	}; // searchWord = function(){...
 
 	// 文字入力されるたびに検索実行
@@ -147,13 +153,7 @@ $.getJSON("data.json", function(data) {
 		searchWord();
 	});
 
-
 //--
-			
-		// 記事一覧ページのHTMLタグを積算
-		h += htmlComb(i);
-
-	}
 
 	if (id == 0) {
 		$("#postlistWrapper").append(h);
@@ -163,7 +163,6 @@ $.getJSON("data.json", function(data) {
 		$('title').html(`placet experiri :: ${id}`);
 		document.getElementById('description').content = data[data.length - id].text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').substr(0, 140); // HTMLタグを削除して先頭140文字をとる
 		document.getElementById('ogDescription').content = data[data.length - id].text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').substr(0, 140); // 同上、OGPはJS未対応なので無駄だけど
-	// console.log(document.getElementById('ogDescription').content);
 	};
 	
 }); // $.getJSON(){...
