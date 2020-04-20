@@ -120,6 +120,35 @@ $.getJSON("data.json", function(data) {
 			}
 			postTexts[i] = `…${data[i].text.substr(searchWordIndex - 16, 42)}…`;
 */
+
+//--リアルタイム検索
+	const textArea = document.getElementById('search-text');
+
+	// 検索関数
+	const searchWord = () => {
+		const searchText = textArea.value; // 検索ボックスに入力された値
+		let targetText;
+
+		document.querySelectorAll('.bl_posts_item .bl_text').forEach((postText, index) => {
+		targetText = postText.textContent;
+		
+		// 検索対象となるリストに入力された文字列が存在するかどうかを判断
+		if (targetText.indexOf(searchText) != -1) {
+			postText.parentNode.classList.remove('hidden');
+		} else {
+			postText.parentNode.classList.add('hidden');
+		}
+		
+		});
+	}; // searchWord = function(){...
+
+	// 文字入力されるたびに検索実行
+	textArea.addEventListener('input', () => {
+		searchWord();
+	});
+
+
+//--
 			
 		// 記事一覧ページのHTMLタグを積算
 		h += htmlComb(i);

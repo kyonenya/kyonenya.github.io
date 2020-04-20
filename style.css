@@ -31,6 +31,10 @@ main {
 	margin: 0 auto;
 }
 
+.hidden {
+	display: none
+}
+
 /* リセット */
 a {
 	/* リンク装飾をリセット */
