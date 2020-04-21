@@ -1,7 +1,7 @@
 'use strict'
 {
 	// 定数宣言
-	let h = "";
+	let html = ""; // htmlタグ
 	const hashtags = [];
 	const shortTextLength = 140;
 	const postTexts = [];
@@ -33,7 +33,99 @@ $.getJSON("data.json", function(data) {
 	console.log(data);
 */
 
-	// 記事リスト（HTMLタグ生成関数）
+	for (var i = 0; i < data.length; i=i+1) {
+		// プレーンテキスト
+
+		// ハッシュタグをli要素として生成
+		hashtags[i] = ""	// 初期化
+		for (var j in data[i].tags) {
+			hashtags[i] += `
+			<li>
+				<span>
+					#${data[i].tags[j]}
+				</span>
+			</li>`;
+		};
+
+	// 記事一覧リストでは表示長文の表示文字数を制限する
+		// 記事一覧の要約テキスト用に、dataオブジェクトに新しいプロパティ'shortText'を追加
+		// まずa, hr, blockquoteタグを削除、それから複数段落を一つの段落へと統合
+		data[i].shortText = data[i].text.replace(/<\/?a.*?>|<hr>|<\/?blockquote>/g, '').replace(/<\/p><p>/g, ''); 
+		// console.log(data[i].shortText);
+
+		// 長文なら省略表示をして「…」を追加
+		if (data[i].text.length > shortTextLength) {
+			postTexts[i] = `${data[i].shortText.substr(0, shortTextLength)}...`;
+		} else {
+			postTexts[i] = data[i].shortText;
+		};
+
+		// 【検索機能試作】
+/*
+			let searchWordIndex = data[i].text.indexOf('意味');
+			console.log(searchWordIndex);
+			if (searchWordIndex === -1) {
+				continue; 
+			}
+			if (searchWordIndex <= 16) {
+				searchWordIndex = 16; 
+			}
+			postTexts[i] = `…${data[i].text.substr(searchWordIndex - 16, 42)}…`;
+*/
+		// 記事一覧ページのHTMLタグを積算
+		html += htmlComb(i);
+
+	} // for (1 < i < data.length) {...
+
+
+// --リアルタイム検索
+	const textArea = document.getElementById('search-text');
+
+	// 検索関数
+	const searchWord = () => {
+		const searchText = textArea.value; // 検索ボックスに入力された値
+		let targetText;
+		let ul_posts = document.querySelectorAll('.bl_posts_item');
+	
+		for (var i = 0; i < data.length; i=i+1) {
+			let searchWordIndex = data[i].text.indexOf(searchText);
+
+			// 検索
+			if (searchWordIndex != -1) {
+			// マッチしたら表示
+				ul_posts[i].classList.remove('hp_hidden');
+				// 検索語句の周辺の文字列を引っ張ってきて表示
+				if (searchWordIndex <= 16) {
+					searchWordIndex = 16; // 検索語句が先頭すぎたら先頭から表示
+				}
+				document.querySelectorAll('.bl_posts_item .bl_text')[i].textContent = `…${data[i].text.substr(searchWordIndex - 16, 42)}…`;
+
+			} else {
+			// マッチしなければ非表示に
+				ul_posts[i].classList.add('hp_hidden');
+			}
+		}; // for...
+		
+	}; // searchWord()...
+
+	// 文字入力されるたびに検索実行
+	textArea.addEventListener('input', () => {
+		searchWord();
+	});
+
+//--
+
+	if (id == 0) {
+		$("#postlistWrapper").append(html);
+	} else {
+		$("#postWrapper").append(htmlComb_page(data.length - id));
+		$('.el_logo_suffix').text(` :: ${id}`)
+		$('title').html(`placet experiri :: ${id}`);
+		document.getElementById('description').content = data[data.length - id].text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').substr(0, 140); // HTMLタグを削除して先頭140文字をとる
+		document.getElementById('ogDescription').content = data[data.length - id].text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').substr(0, 140); // 同上、OGPはJS未対応なので無駄だけど
+	};
+
+	// 記事リスト（HTMLタグ生成関数）邪魔なので末尾に。関数の巻き上げ。
 	function htmlComb(i) {
 		return `
 		<li class="bl_posts_item">
@@ -80,96 +172,6 @@ $.getJSON("data.json", function(data) {
 		</footer>`
 	} // function htmlComb_page(i) {...
 
-	for (var i = 0; i < data.length; i=i+1) {
-		// ハッシュタグをli要素として生成
-		hashtags[i] = ""	// 初期化
-		for (var j in data[i].tags) {
-			hashtags[i] += `
-			<li>
-				<span>
-					#${data[i].tags[j]}
-				</span>
-			</li>`;
-		};
-
-	// 記事一覧リストでは表示長文の表示文字数を制限する
-		// 記事一覧の要約テキスト用に、dataオブジェクトに新しいプロパティ'shortText'を追加
-		// まずa, hr, blockquoteタグを削除、それから複数段落を一つの段落へと統合
-		data[i].shortText = data[i].text.replace(/<\/?a.*?>|<hr>|<\/?blockquote>/g, '').replace(/<\/p><p>/g, ''); 
-		// console.log(data[i].shortText);
-
-		// 長文なら省略表示をして「…」を追加
-		if (data[i].text.length > shortTextLength) {
-			postTexts[i] = `${data[i].shortText.substr(0, shortTextLength)}...`;
-		} else {
-			postTexts[i] = data[i].shortText;
-		};
-
-		// 【検索機能試作】
-/*
-			let searchWordIndex = data[i].text.indexOf('意味');
-			console.log(searchWordIndex);
-			if (searchWordIndex === -1) {
-				continue; 
-			}
-			if (searchWordIndex <= 16) {
-				searchWordIndex = 16; 
-			}
-			postTexts[i] = `…${data[i].text.substr(searchWordIndex - 16, 42)}…`;
-*/
-		// 記事一覧ページのHTMLタグを積算
-		h += htmlComb(i);
-
-	} // for (1 < i < data.length) {...
-
-
-// --リアルタイム検索
-	const textArea = document.getElementById('search-text');
-
-	// 検索関数
-	const searchWord = () => {
-		const searchText = textArea.value; // 検索ボックスに入力された値
-		let targetText;
-		let ul_posts = document.querySelectorAll('.bl_posts_item');
-	
-		for (var i = 0; i < data.length; i=i+1) {
-			let searchWordIndex = data[i].text.indexOf(searchText);
-
-			// 検索
-			if (searchWordIndex != -1) {
-			// マッチしたら表示
-				ul_posts[i].classList.remove('hp_hidden');
-				// 検索語句の周辺の文字列を引っ張ってきて表示
-				if (searchWordIndex <= 16) {
-					searchWordIndex = 16; // 検索語句が先頭すぎたら先頭から表示
-				}
-				document.querySelectorAll('.bl_posts_item .bl_text')[i].textContent = `…${data[i].text.substr(searchWordIndex - 16, 42)}…`;
-
-			} else {
-			// マッチしなければ非表示に
-				ul_posts[i].classList.add('hp_hidden');
-			}
-		}; // for...
-		
-	}; // searchWord()...
-
-	// 文字入力されるたびに検索実行
-	textArea.addEventListener('input', () => {
-		searchWord();
-	});
-
-//--
-
-	if (id == 0) {
-		$("#postlistWrapper").append(h);
-	} else {
-		$("#postWrapper").append(htmlComb_page(data.length - id));	
-		$('.el_logo_suffix').text(` :: ${id}`)
-		$('title').html(`placet experiri :: ${id}`);
-		document.getElementById('description').content = data[data.length - id].text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').substr(0, 140); // HTMLタグを削除して先頭140文字をとる
-		document.getElementById('ogDescription').content = data[data.length - id].text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').substr(0, 140); // 同上、OGPはJS未対応なので無駄だけど
-	};
-	
 }); // $.getJSON(){...
 }); // $(function(){...
 
