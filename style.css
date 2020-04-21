@@ -248,6 +248,19 @@ li:last-child {
 }
 */
 
+input[type="text"] {
+	background: hsl(40, 38%, 99%);
+  padding: 5px 5px 3px;
+  font-size: 16px;
+  border: 1px solid var(--monochrome-light);
+ 	margin-left: auto;
+ 	display: block;
+}
+
+input[type="text"]:focus {
+
+}
+
 /* タグリスト */
 .bl_tags {
 	display: inline-flex; /* 横並び、かつ先立つ要素（日付）に回り込める */

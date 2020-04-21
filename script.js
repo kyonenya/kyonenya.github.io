@@ -15,7 +15,7 @@
 		// matchで'id=123'を抽出、replaceで'id='を消して'123'を返す
 		return queryStr.match(/id=\d+/)[0].replace(/id=/, '')
 	}
-	// 取得（即時関数にするか）
+	// 取得
 	let id = getId();
 
 /* -- JSONデータ取得開始 -- */
@@ -34,7 +34,7 @@ $.getJSON("data.json", function(data) {
 */
 
 	// 記事リスト（HTMLタグ生成関数）
-	const htmlComb = (i) => {
+	function htmlComb(i) {
 		return `
 		<li class="bl_posts_item">
 		<a href="?id=${data.length - i}">
@@ -60,9 +60,8 @@ $.getJSON("data.json", function(data) {
 	}
 
 	// 個別記事ページ（HTMLタグ生成関数）
-	const htmlComb_page = (i) => {
+	function htmlComb_page(i) {
 		return `
-		<article class="">
 		<header class="bl_text_header">
 			<time class="bl_text_date" datetime="${moment(data[i].date).format("YYYY-MM-DD HH:mm")}">
 				${moment(data[i].date).format("YYYY-MM-DD HH:mm")}
@@ -78,8 +77,7 @@ $.getJSON("data.json", function(data) {
 			<ul class="bl_tags">
 				${hashtags[i]}
 			</ul>
-		</footer>
-		</article>`
+		</footer>`
 	} // function htmlComb_page(i) {...
 
 	for (var i = 0; i < data.length; i=i+1) {
@@ -125,7 +123,7 @@ $.getJSON("data.json", function(data) {
 	} // for (1 < i < data.length) {...
 
 
-//--リアルタイム検索
+// --リアルタイム検索
 	const textArea = document.getElementById('search-text');
 
 	// 検索関数
@@ -133,20 +131,27 @@ $.getJSON("data.json", function(data) {
 		const searchText = textArea.value; // 検索ボックスに入力された値
 		let targetText;
 		let ul_posts = document.querySelectorAll('.bl_posts_item');
-		console.log(ul_posts[1].tagName);
-
+	
 		for (var i = 0; i < data.length; i=i+1) {
-			targetText = data[i].text;
-			
-			// 検索対象となるリストに入力された文字列が存在するかどうかを判断
-			if (targetText.indexOf(searchText) != -1) {
+			let searchWordIndex = data[i].text.indexOf(searchText);
+
+			// 検索
+			if (searchWordIndex != -1) {
+			// マッチしたら表示
 				ul_posts[i].classList.remove('hp_hidden');
+				// 検索語句の周辺の文字列を引っ張ってきて表示
+				if (searchWordIndex <= 16) {
+					searchWordIndex = 16; // 検索語句が先頭すぎたら先頭から表示
+				}
+				document.querySelectorAll('.bl_posts_item .bl_text')[i].textContent = `…${data[i].text.substr(searchWordIndex - 16, 42)}…`;
+
 			} else {
+			// マッチしなければ非表示に
 				ul_posts[i].classList.add('hp_hidden');
 			}
-			
 		}; // for...
-	}; // searchWord = function(){...
+		
+	}; // searchWord()...
 
 	// 文字入力されるたびに検索実行
 	textArea.addEventListener('input', () => {
