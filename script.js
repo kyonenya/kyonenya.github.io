@@ -2,9 +2,10 @@
 {
 	// 定数宣言
 	let html = ""; // htmlタグ
-	const hashtags = [];
+	const hashtag = [];
 	const shortTextLength = 140;
 	const postTexts = [];
+	const plainTexts = [];
 
 	// URLからクエリ文字列を取得
 	function getId() {
@@ -34,18 +35,20 @@ $.getJSON("data.json", function(data) {
 */
 
 	for (var i = 0; i < data.length; i=i+1) {
-		// プレーンテキスト
+		// プレーンテキスト生成
+		plainTexts[i] = data[i].text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'');
 
-		// ハッシュタグをli要素として生成
-		hashtags[i] = ""	// 初期化
+		// ハッシュタグをli要素として生成して結合
+		hashtag[i] = ""	// 初期化
 		for (var j in data[i].tags) {
-			hashtags[i] += `
+			hashtag[i] += `
 			<li>
 				<span>
 					#${data[i].tags[j]}
 				</span>
 			</li>`;
 		};
+
 
 	// 記事一覧リストでは表示長文の表示文字数を制限する
 		// 記事一覧の要約テキスト用に、dataオブジェクトに新しいプロパティ'shortText'を追加
@@ -79,37 +82,53 @@ $.getJSON("data.json", function(data) {
 
 
 // --リアルタイム検索
-	const textArea = document.getElementById('search-text');
-
+	const form = document.getElementById('form_searchWord');
+	
 	// 検索関数
 	const searchWord = () => {
-		const searchText = textArea.value; // 検索ボックスに入力された値
-		let targetText;
-		let ul_posts = document.querySelectorAll('.bl_posts_item');
-	
-		for (var i = 0; i < data.length; i=i+1) {
-			let searchWordIndex = data[i].text.indexOf(searchText);
+		const searchWord = form.value; // 検索ボックスに入力された値
+		const resultLength = 42; // 検索結果の全文字数
+		const beforeLength = 16; // マッチした検索語句の何文字前から先読みするか
 
-			// 検索
+		for (var i = 0; i < data.length; i = i + 1) {
+			const li = document.querySelectorAll('.bl_posts_item');
+			const li_text = document.querySelectorAll('.bl_posts_item .bl_text');
+			let searchWordIndex = plainTexts[i].indexOf(searchWord);
+			let resultText = '…';
+
+			// マッチしたら
 			if (searchWordIndex != -1) {
-			// マッチしたら表示
-				ul_posts[i].classList.remove('hp_hidden');
-				// 検索語句の周辺の文字列を引っ張ってきて表示
-				if (searchWordIndex <= 16) {
-					searchWordIndex = 16; // 検索語句が先頭すぎたら先頭から表示
+				li[i].classList.remove('hp_hidden'); // 表示
+				
+				// 検索語句が先頭に近すぎたら
+				if (searchWordIndex <= beforeLength) {
+					searchWordIndex = beforeLength; // 冒頭から表示する
+					resultText = '';
 				}
-				document.querySelectorAll('.bl_posts_item .bl_text')[i].textContent = `…${data[i].text.substr(searchWordIndex - 16, 42)}…`;
-
+				
+				// 結果表示用の文字列（先読み文字列［ハイライト語句］後続文字列）
+				resultText += plainTexts[i]
+					.substr(searchWordIndex - beforeLength, searchWord.length + resultLength)
+					.replace(new RegExp(searchWord, "g"), `<span class="hp_highlight">${searchWord}<\/span>`); // 変数を使って複数置換させる
+				
+				// 検索語句の周辺の文字列を表示。
+				li_text[i].innerHTML = `${resultText}…`;
 			} else {
 			// マッチしなければ非表示に
-				ul_posts[i].classList.add('hp_hidden');
+				li[i].classList.add('hp_hidden');
 			}
+			
+			// 検索フォームが空になったら
+			if (searchWord === '') {
+				li_text[i].innerHTML = postTexts[i] // 元のテキストに戻す
+			};
+
 		}; // for...
-		
+
 	}; // searchWord()...
 
 	// 文字入力されるたびに検索実行
-	textArea.addEventListener('input', () => {
+	form.addEventListener('input', () => {
 		searchWord();
 	});
 
@@ -127,8 +146,7 @@ $.getJSON("data.json", function(data) {
 
 	// 記事リスト（HTMLタグ生成関数）邪魔なので末尾に。関数の巻き上げ。
 	function htmlComb(i) {
-		return `
-		<li class="bl_posts_item">
+		return `<li class="bl_posts_item">
 		<a href="?id=${data.length - i}">
 			<header class="bl_posts_header">
 				<time class="bl_posts_date" datetime="${moment(data[i].date).format("YYYY-MM-DD HH:mm")}">
@@ -143,18 +161,16 @@ $.getJSON("data.json", function(data) {
 					${moment(data[i].date).fromNow()}
 				</span>
 				<ul class="bl_tags">
-					${hashtags[i]}
+					${hashtag[i]}
 				<ul>
 			</footer>
 		</a>
-		</li>
-		`
+		</li>`
 	}
 
 	// 個別記事ページ（HTMLタグ生成関数）
 	function htmlComb_page(i) {
-		return `
-		<header class="bl_text_header">
+		return `<header class="bl_text_header">
 			<time class="bl_text_date" datetime="${moment(data[i].date).format("YYYY-MM-DD HH:mm")}">
 				${moment(data[i].date).format("YYYY-MM-DD HH:mm")}
 			</time>
@@ -167,7 +183,7 @@ $.getJSON("data.json", function(data) {
 				${moment(data[i].date).fromNow()}
 			</span>
 			<ul class="bl_tags">
-				${hashtags[i]}
+				${hashtag[i]}
 			</ul>
 		</footer>`
 	} // function htmlComb_page(i) {...
