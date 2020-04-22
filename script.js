@@ -106,16 +106,24 @@ $.getJSON("data.json", function(data) {
 					resultText = '';
 				}
 				
-				// 結果表示用の文字列（先読み文字列［ハイライト語句］後続文字列）
-				resultText += plainTexts[i]
-					.substr(searchWordIndex - beforeLength, searchWord.length + resultLength)
-					.replace(new RegExp(searchWord, "g"), `<span class="hp_highlight">${searchWord}<\/span>`); // 変数を使って複数置換させる
+				// 結果表示用の文字列
+				resultText += plainTexts[i].substr(searchWordIndex - beforeLength, searchWord.length + resultLength) // 先読み文字列［マッチした語句］後続文字列
+
+				// 検索語句が末尾に近かったら
+/*				console.log(resultText.length < resultLength);
+
+				if (resultText.length > resultLength) {
+					resultText += '…';
+				}
+*/				
+				resultText = resultText.replace(new RegExp(searchWord, "g"), `<span class="hp_highlight">${searchWord}<\/span>`); // 変数を使って複数置換させる
 				
-				// 検索語句の周辺の文字列を表示。
-				li_text[i].innerHTML = `${resultText}…`;
+				// 検索語句の周辺の文字列を表示
+				li_text[i].innerHTML = `<p>${resultText}</p>`;
+
 			} else {
-			// マッチしなければ非表示に
-				li[i].classList.add('hp_hidden');
+			// マッチしなかったときは
+				li[i].classList.add('hp_hidden'); // 非表示に
 			}
 			
 			// 検索フォームが空になったら
