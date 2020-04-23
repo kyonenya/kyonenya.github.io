@@ -1,7 +1,7 @@
 'use strict'
 {	
 	// 定数宣言
-	let html = "";
+	let html = [];
 	const hashtag = [];
 	const shortTextLength = 140;
 	const postTexts = [];
@@ -58,7 +58,7 @@ $.getJSON("data.json", function(data) {
 		};
 
 		// 記事一覧ページのHTMLタグを積算
-		html += htmlComb(i);
+		html.push(htmlComb(i));
 
 	} // for() {...
 
@@ -124,7 +124,7 @@ $.getJSON("data.json", function(data) {
 	if (id == 0) {
 		// $("#postlistWrapper").append(html);
 		// const htmlElement = document.createElement(li);
-		ul.innerHTML = html;
+		ul.innerHTML = html.join(''); // タグを直接書き換え、結合
 	
 	} else {
 		$("#postWrapper").append(htmlComb_page(data.length - id));
@@ -146,8 +146,7 @@ $.getJSON("data.json", function(data) {
 					<time class="bl_posts_date" datetime="${moment(data[i].date).format("YYYY-MM-DD HH:mm")}">${moment(data[i].date).format("YYYY-MM-DD")}</time>
 				</header>
 				<div class="bl_text">
-					${postTexts[i]}
-				</div>
+					${postTexts[i]}</div>
 				<footer class="bl_posts_footer">
 					<span class="bl_posts_dateago">${moment(data[i].date).fromNow()}</span>
 					<ul class="bl_tags">
