@@ -24,7 +24,7 @@ $(function(){
 $.getJSON("data.json", function(data) {
 	// セレクター
 	const input = document.getElementById('input_searchWord');
-
+	const ul_postlist = document.getElementById('postlistWrapper');
 	// 古い順に逆順ソート
 /*	data.sort(function(a, b) {
 		if (a.date > b.date) {
@@ -124,8 +124,12 @@ $.getJSON("data.json", function(data) {
 
 /* ---------------------------------
 	HTML生成 */
+	
 	if (id == 0) {
 		$("#postlistWrapper").append(html);
+/*		const htmlElement = document.createElement(li);
+		ul_postlist.appendChild(htmlElement);		
+*/
 	} else {
 		$("#postWrapper").append(htmlComb_page(data.length - id));
 		$('.el_logo_suffix').text(` :: ${id}`)
