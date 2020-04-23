@@ -1,7 +1,7 @@
 'use strict'
 {	
 	// 定数宣言
-	let html = ""; // htmlタグ
+	let html = "";
 	const hashtag = [];
 	const shortTextLength = 140;
 	const postTexts = [];
@@ -24,7 +24,8 @@ $(function(){
 $.getJSON("data.json", function(data) {
 	// セレクター
 	const input = document.getElementById('input_searchWord');
-	const ul_postlist = document.getElementById('postlistWrapper');
+	const ul = document.getElementById('postlistWrapper');
+
 	// 古い順に逆順ソート
 /*	data.sort(function(a, b) {
 		if (a.date > b.date) {
@@ -42,12 +43,7 @@ $.getJSON("data.json", function(data) {
 		// ハッシュタグをli要素として生成して結合
 		hashtag[i] = ""	// 初期化
 		for (var j in data[i].tags) {
-			hashtag[i] += `
-			<li>
-				<span>
-					#${data[i].tags[j]}
-				</span>
-			</li>`;
+			hashtag[i] += `<li><span>#${data[i].tags[j]}</span></li>`;
 		};
 
 	// 記事一覧リストでは表示長文の表示文字数を制限する
@@ -126,10 +122,10 @@ $.getJSON("data.json", function(data) {
 	HTML生成 */
 	
 	if (id == 0) {
-		$("#postlistWrapper").append(html);
-/*		const htmlElement = document.createElement(li);
-		ul_postlist.appendChild(htmlElement);		
-*/
+		// $("#postlistWrapper").append(html);
+		// const htmlElement = document.createElement(li);
+		ul.innerHTML = html;
+	
 	} else {
 		$("#postWrapper").append(htmlComb_page(data.length - id));
 		$('.el_logo_suffix').text(` :: ${id}`)
@@ -143,46 +139,40 @@ $.getJSON("data.json", function(data) {
 	HTMLテンプレート */
 	// 記事リスト（HTMLタグ生成関数）邪魔なので末尾に。関数の巻き上げ。
 	function htmlComb(i) {
-		return `<li class="bl_posts_item">
-		<a href="?id=${data.length - i}">
-			<header class="bl_posts_header">
-				<time class="bl_posts_date" datetime="${moment(data[i].date).format("YYYY-MM-DD HH:mm")}">
-					${moment(data[i].date).format("YYYY-MM-DD")}
-				</time>
-			</header>
-			<div class="bl_text">
-				${postTexts[i]}
-			</div>
-			<footer class="bl_posts_footer">
-				<span class="bl_posts_dateago">
-					${moment(data[i].date).fromNow()}
-				</span>
-				<ul class="bl_tags">
-					${hashtag[i]}
-				<ul>
-			</footer>
-		</a>
+		return `
+		<li class="bl_posts_item">
+			<a href="?id=${data.length - i}">
+				<header class="bl_posts_header">
+					<time class="bl_posts_date" datetime="${moment(data[i].date).format("YYYY-MM-DD HH:mm")}">${moment(data[i].date).format("YYYY-MM-DD")}</time>
+				</header>
+				<div class="bl_text">
+					${postTexts[i]}
+				</div>
+				<footer class="bl_posts_footer">
+					<span class="bl_posts_dateago">${moment(data[i].date).fromNow()}</span>
+					<ul class="bl_tags">
+						${hashtag[i]}
+					</ul>
+				</footer>
+			</a>
 		</li>`
 	}
 
 	// 個別記事ページ（HTMLタグ生成関数）
 	function htmlComb_page(i) {
-		return `<header class="bl_text_header">
-			<time class="bl_text_date" datetime="${moment(data[i].date).format("YYYY-MM-DD HH:mm")}">
-				${moment(data[i].date).format("YYYY-MM-DD HH:mm")}
-			</time>
-		</header>
-		<div class="bl_text">
-			${data[i].text}
-		</div>
-		<footer class="bl_text_footer">
-			<span class="bl_posts_dateago">
-				${moment(data[i].date).fromNow()}
-			</span>
-			<ul class="bl_tags">
-				${hashtag[i]}
-			</ul>
-		</footer>`
+		return `
+			<header class="bl_text_header">
+				<time class="bl_text_date" datetime="${moment(data[i].date).format("YYYY-MM-DD HH:mm")}">${moment(data[i].date).format("YYYY-MM-DD HH:mm")}</time>
+			</header>
+			<div class="bl_text">
+				${data[i].text}
+			</div>
+			<footer class="bl_text_footer">
+				<span class="bl_posts_dateago">${moment(data[i].date).fromNow()}</span>
+				<ul class="bl_tags">
+					${hashtag[i]}
+				</ul>
+			</footer>`
 	} // function htmlComb_page(i) {...
 
 }); // $.getJSON(){...
