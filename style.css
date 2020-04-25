@@ -80,7 +80,7 @@ li:last-child {
 	line-height: 1em; /* 下余白リセット */
 	text-decoration: none;
 	color: hsl(219, 62%, 50%); /* 薄青、Wikipediaより */
-	border-bottom: 1px solid hsl(219, 62%, 70%); /* 細く見せる */
+	border-bottom: 1px solid hsl(219, 62%, 70%); /* 細く見せるため薄色に */
 	padding-bottom: 1px; /* 下線との距離 */
 }
 .bl_text a:visited { 
