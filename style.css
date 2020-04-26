@@ -82,6 +82,7 @@ li:last-child {
 	color: hsl(219, 62%, 50%); /* 薄青、Wikipediaより */
 	border-bottom: 1px solid hsl(219, 62%, 70%); /* 細く見せるため薄色に */
 	padding-bottom: 1px; /* 下線との距離 */
+	text-indent: 0; /* 時々生じる謎のインデントを削除 */
 }
 .bl_text a:visited { 
 	/* 訪問済みリンク */
@@ -95,7 +96,7 @@ li:last-child {
 
 .bl_text p + p {
 	text-indent: 1em; /* 二段落目以降を字下げ */
-	margin-top: 0.5em; /* 段落間に余白 */
+	margin-top: 1em; /* 段落間に余白 */
 }
 
 .bl_text blockquote {
@@ -405,10 +406,6 @@ input[type="text"]:focus {
 	/* ヘッダーに本文がめり込まないように。 */
 	main {
 		padding-top: 2em;
-	}
-	
-	.bl_text p + p {
-		margin-top: 1em; /* 段落間の余白を増量 */
 	}
 
 	/* -- ヘッダー -- */
