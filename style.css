@@ -435,7 +435,11 @@ input[type="text"]:focus {
 /* -----------------------------------------
 	PC画面以上 */
 @media (min-width: 960px) {
-
+	
+	body {
+		line-height: 1.7;
+	}
+	
 	.ly_cont, .ly_header {
 	/* 大画面ではテキストを画面いっぱいに表示せず、中央に寄せる */
 		max-width: 800px;
