@@ -31,6 +31,55 @@ main {
 	margin: 0 auto;
 }
 
+/* ------ */
+
+.el_search {	
+/* ナビ部分にfloat: left;を指定して、検索フォーム部分はposition: relative;をあてて基準のポジションにしておきます */
+	position: relative; 
+}
+
+.el_search p, .el_search_inner {
+/* 検索フォームとアイコンを重ねあわせている…… */
+	position: absolute; 
+/* アイコン部分とテキスト入力エリアをposition: absolute;、top: 0;、right: 0;で右に寄せています */
+	top: 0;
+	right: 0; 
+}
+
+.el_search p { 
+/* position: absolute;を使って検索フォームとアイコンを重ねあわせているので、このとき検索フォームが上になるように、z-indexを使っています */
+	z-index: 100; 
+}
+
+.el_search_inner {
+ -webkit-appearance: none; 
+/* スマホのスタイルをリセット：iPhoneでみると入力フォーム部分が角丸になっています。表示が綺麗じゃないので、それをリセットする。 */
+	border-radius: 0; 
+/* アイコンの上に検索フォームが重なった状態で、opacity: 0;にし、透明にします。これで検索フォームは透明なのでアイコンが表示される状態になります。 */
+	opacity: 0; 
+	z-index: 200;
+/* 検索フォームが透明になっているだけなので、アイコンにホバーするとカーソルの表示がcursor: text;になります。これは不自然なので、デフォルトではカーソルをcursor: pointer;にします。 */
+	cursor: pointer; 
+	-webkit-transition: all 0.1s ease-in;
+	-moz-transition: all 0.1s ease-in;
+	-o-transition: all 0.1s ease-in;
+	transition: all 0.1s ease-in;
+}
+
+.el_search_inner:focus {
+/* あとはクリックしてフォーカスしたときに表示すればスイッチ式の検索フォームが実現できます。フォーカスされたらopacity: 1;にしましょう。これで検索フォームが表示されアイコンが隠れます。 */
+	opacity: 1; 
+/* 今回はwidth: 100%;にしてナビ部分全体が検索フォームになるようにしました。 */
+	width: 100%; 
+/* あとはカーソルの表示をcursor: text;に戻してあげれば自然です。 */
+	cursor: text; 
+}
+.el_search:focus {
+	width: 100%; 
+}
+
+/* ---- */
+
 .hp_hidden {
 	display: none !important;
 }
