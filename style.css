@@ -33,20 +33,20 @@ main {
 
 /* ------ */
 
-.bl_nav { /*重複してるのであとで統合*/	
+.el_search { /*重複してるのであとで統合*/	
 /* ナビ部分にfloat: left;を指定して、検索フォーム部分はposition: relative;をあてて基準のポジションにしておきます */
 	position: relative; 
 }
 
-.el_search_icon span, .el_search_form {
+.el_search_icon, .el_search_form {
 /* 検索フォームとアイコンを重ねあわせている…… */
 	position: absolute; 
 /* アイコン部分とテキスト入力エリアをposition: absolute;、top: 0;、right: 0;で右に寄せています */
 	top: 0;
-	right: 0; 
+	right: 0;
 }
 
-.el_search_icon span { 
+.el_search_icon { 
 /* position: absolute;を使って検索フォームとアイコンを重ねあわせているので、このとき検索フォームが上になるように、z-indexを使っています */
 	z-index: 100; 
 }
@@ -66,7 +66,7 @@ main {
 /* あとはクリックしてフォーカスしたときに表示すればスイッチ式の検索フォームが実現できます。フォーカスされたらopacity: 1;にしましょう。これで検索フォームが表示されアイコンが隠れます。 */
 	opacity: 1; 
 /* 今回はwidth: 100%;にしてナビ部分全体が検索フォームになるようにしました。 */
-	width: 300px;
+	width: 200px;
 /* あとはカーソルの表示をcursor: text;に戻してあげれば自然です。 */
 	cursor: text; 
 }
@@ -373,13 +373,11 @@ input[type="text"]:focus {
 	color: var(--monochrome-dark);
 	vertical-align: baseline; /* 英単語帳：baseline */
 }
-.bl_nav {
-	display: flex;
-}
+
 /* 小コンテナ：メニューリスト */
 .bl_nav_inner {
 	display: flex;
-	width: 300px;
+	width: 250px; /* ナビメニューの大きさを手動で指定、ゆえに変わりうる */
 }
 /* ナビメニュー */
 .bl_nav a {
