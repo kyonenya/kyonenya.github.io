@@ -11,18 +11,17 @@
 	ベースグループ */
 body {
 	font-family: "Helvetica Neue", Verdana, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, sans-serif;
-	/* font-family: "Helvetica Neue", Verdana, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "游ゴシック Medium", "Yu Gothic Medium", "メイリオ", Meiryo, sans-serif; */ 
-	word-break: break-word; /* 行頭に、。が来るのを避ける */
-	color: #333; /* 黒の文字色 */
+	word-break: break-word;	/* 行頭に、。が来るのを避ける */
+	color: #333;	/* 黒の文字色 */
 	line-height: 1.6;
-	background: hsl(40, 38%, 97%); /* 再生紙色 */
+	background: hsl(40, 38%, 97%);	/* 再生紙色 */
 	/* フッターを下部固定 */
 	display: flex;
-	flex-flow: column; /* 縦の隊列 */
-	min-height: 100vh; /* コンテンツが少なくても */
+	flex-flow: column;	/* 縦の隊列 */
+	min-height: 100vh;	/* コンテンツが少なくても */
 }
 main {
-	flex: 1; /* メイン領域を上下にめいっぱい広げておいて */
+	flex: 1;	/* メイン領域を上下にめいっぱい広げておいて */
 }
 
 .ly_header, .ly_cont {
@@ -31,49 +30,7 @@ main {
 	margin: 0 auto;
 }
 
-/* ------ */
-
-.el_search { /*重複してるのであとで統合*/	
-/* ナビ部分にfloat: left;を指定して、検索フォーム部分はposition: relative;をあてて基準のポジションにしておきます */
-	position: relative; 
-}
-
-.el_search_icon, .el_search_form {
-/* 検索フォームとアイコンを重ねあわせている…… */
-	position: absolute; 
-/* アイコン部分とテキスト入力エリアをposition: absolute;、top: 0;、right: 0;で右に寄せています */
-	top: 0;
-	right: 0;
-}
-
-.el_search_icon { 
-/* position: absolute;を使って検索フォームとアイコンを重ねあわせているので、このとき検索フォームが上になるように、z-indexを使っています */
-	z-index: 100; 
-}
-
-.el_search_form {
- -webkit-appearance: none; 
-/* スマホのスタイルをリセット：iPhoneでみると入力フォーム部分が角丸になっています。表示が綺麗じゃないので、それをリセットする。 */
-	border-radius: 0; 
-/* アイコンの上に検索フォームが重なった状態で、opacity: 0;にし、透明にします。これで検索フォームは透明なのでアイコンが表示される状態になります。 */
-	opacity: 0; 
-	z-index: 200;
-/* 検索フォームが透明になっているだけなので、アイコンにホバーするとカーソルの表示がcursor: text;になります。これは不自然なので、デフォルトではカーソルをcursor: pointer;にします。 */
-	cursor: pointer; 
-}
-
-.el_search_form:focus {
-/* あとはクリックしてフォーカスしたときに表示すればスイッチ式の検索フォームが実現できます。フォーカスされたらopacity: 1;にしましょう。これで検索フォームが表示されアイコンが隠れます。 */
-	opacity: 1; 
-/* 今回はwidth: 100%;にしてナビ部分全体が検索フォームになるようにしました。 */
-	width: 200px;
-/* あとはカーソルの表示をcursor: text;に戻してあげれば自然です。 */
-	cursor: text; 
-}
-
-
-/* ---- */
-
+/* ヘルパークラス ----- */
 .hp_hidden {
 	display: none !important;
 }
@@ -82,16 +39,18 @@ main {
 	background-color: #fffd77 !important;
 }
 
-/* リセット */
+/* リセット ----- */
+
 a {
 	/* リンク装飾をリセット */
 	text-decoration: none;
 	color: inherit;
 }
+
 ul li {
-	/* 順序なしリストのスタイルをリセット */
 	list-style: none;
 }
+
 li:last-child {
 	/* リストの後続要素との余白をリセット */
 	margin-bottom: 0;
@@ -99,9 +58,6 @@ li:last-child {
 
 /* ---------------------------------
 	テキスト領域 */
-.bl_text {
-
-}
 
 .bl_text + .bl_text {
 	/* セクション間余白 */
@@ -116,7 +72,7 @@ li:last-child {
 	color: var(--monochrome-dark)
 }
 
-/* マークアップ */	
+/* マークアップ ----- */	
 .bl_text a { 
 	/* 下線と文字とを空けるため、擬似的な下線を作る */
 	display: inline-block; 
@@ -189,8 +145,8 @@ li:last-child {
 	font-size: 105%;
 }
 
-.bl_text hr {
 /* 水平線 */
+.bl_text hr {
 	border: none; /* デフォルトスタイルをリセット */
 	border-top: 1px solid var(--monochrome-light);
 	width: 50%;
@@ -234,9 +190,6 @@ li:last-child {
 
 /*	---------------------------------
 	記事一覧リスト */
-.bl_posts {
-/*	font-size: 90%; */
-}
 
 .bl_posts_item {
 	display: block;
@@ -265,18 +218,17 @@ li:last-child {
 	color: var(--monochrome-dark);
 }
 
-/* 標準マークアップを局所的に上書き */
+/* 標準マークアップを局所的に上書き ----- */
 .bl_posts_item .bl_text h1 {
 	font-weight: normal;
-	margin: -0.3em 0 0.2em 0; /* 余白を一括指定で上書きリセット */
+	margin: -0.3em 0 0.2em 0;	/* 余白を一括指定で上書きリセット */
 	padding: 0;
-	border: none; /* 装飾リセット */
-	font-size: 100%; /* サイズリセット */
+	border: none;	/* 装飾リセット */
+	font-size: 100%;	/* サイズリセット */
 }
 
 .bl_posts_item .bl_text h2 {
 	font-weight: normal;
-/*	color: hsl(202, 35%, 50%); */
 	margin: 0 0 0.25em 0;
 	border: none;
 	font-size: 100%;
@@ -285,21 +237,6 @@ li:last-child {
 .bl_posts_item .bl_text hr {
 	border: none;
 	margin: 0.75em auto;
-}
-
-input[type="text"] {
-	display: block;
-	width: 50vw;
-	max-width: 300px;
-	background: hsl(40, 38%, 99%);
-	padding: 5px 5px 3px;
-	font-size: 16px;
-	border: 1px solid var(--monochrome-light);
-	margin: 0 auto;
-}
-
-input[type="text"]:focus {
-
 }
 
 /* タグリスト */
@@ -314,6 +251,7 @@ input[type="text"]:focus {
 
 /* ---------------------------------
 	部品 */
+
 .el_heading1 { 
 	/* .bl_text h1を複製し、ブロックの外でも使えるようにする。ただし標準余白は常につける */
 	margin: 3em 0em 1em;
@@ -329,7 +267,7 @@ input[type="text"]:focus {
 	margin: 1em 0em 1em; 
 }
 
-/* テーブル（水平）*/
+/* 表 ----- */
 .bl_horizTable {
 	border: 1px solid var(--monochrome-light); /* 表全体を囲む */
 	max-width: 560px;
@@ -358,10 +296,12 @@ input[type="text"]:focus {
 }
 
 /*---------------------------------
-	ヘッダー・フッター */
-.ly_header_inner {
+	ヘッダー */
+.ly_header {
 	font-family: "Avenir Next", "Segoe UI", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "游ゴシック Medium", "Yu Gothic Medium", "メイリオ", Meiryo, sans-serif;
 }
+
+/* ロゴ ----- */
 .el_logo { 
 	font-size: 32px;
 	font-weight: normal;
@@ -371,54 +311,102 @@ input[type="text"]:focus {
 	font-size: 16px;
 	font-weight: normal;
 	color: var(--monochrome-dark);
-	vertical-align: baseline; /* 英単語帳：baseline */
+	vertical-align: baseline; /* 英単語帳の位置：baseline */
 }
 
-/* 小コンテナ：メニューリスト */
+/* メニューリスト */
 .bl_nav_inner {
 	display: flex;
-	width: 250px; /* ナビメニューの大きさを手動で指定、ゆえに変わりうる */
 }
-/* ナビメニュー */
+
+/* ナビメニュー ------ */
 .bl_nav a {
 	display: block; 
-	line-height: 1.2em; /* 実質的には区切り線の高さ */
+	line-height: 1.25em;	/* 実質的には区切り線の高さ */
 	text-align: center;
 	font-size: 110%;
 	color: var(--main-color);
 }
 .bl_nav li {
-	list-style: none;	
-	padding: 0 0.7em; /* メニュー同士の間隔 */
+	list-style: none;
+	padding: 0 0.7em;	/* メニュー同士の間隔 */
 }
-/* 2番目以降のメニューリストアイテムに区切り線 */
-/*.bl_nav li + li { 
+.bl_nav li + li { 
 	border-left: 1px solid var(--main-color-light);
+}
+
+/* 検索フォーム ----- */
+.el_search {
+	position: relative;	/* 基準 */
+	width: 1em;
+}
+
+.el_search_icon, .el_search_form {
+	position: absolute;	/* フォームにアイコンを重ねる */
+	top: 0;
+	right: 0;
+	width: 2em;	/* メニュー間隔を手動で調整、右からの幅が広いほど間隔が狭まる */
+}
+
+.el_search_icon {
+	z-index: 10;	/* フォームの下に重ねる */
+	/* .bl_nav aと同様 */
+	line-height: 1.2em;
+	text-align: center;
+	font-size: 110%;
+	color: var(--main-color);
+}
+
+.el_search_form {
+	z-index: 100;	/* アイコンの上に重ねて、しかし透明に */
+	opacity: 0; 
+	cursor: pointer; 
+	border: 1px solid var(--monochrome-light);
+	/* iOSのフォームスタイルを初期化してから角丸をリセット */
+	-webkit-appearance: none;
+	border-radius: 4px; 
+}
+
+.el_search_form:focus {
+	opacity: 1; /* フォーカスされたら可視化 */
+	cursor: text;
+}
+/*
+input[type="text"] {
+	display: block;
+	width: 50vw;
+	max-width: 300px;
+	background: hsl(40, 38%, 99%);
+	padding: 5px 5px 3px;
+	font-size: 16px;
+	border: 1px solid var(--monochrome-light);
+	margin: 0 auto;
 }*/
 
-.bl_nav li  { 
-	border-right: 1px solid var(--main-color-light);
-}
 
-/* フッター */
+/*---------------------------------
+	フッター */
 .ly_footer {
 	background-color: hsl(0, 0%, 90%);
 	margin-top: 3em;
 }
+
 .ly_footer_inner {
-	padding: 1.25em 0; /* フッターの高さ */
+	padding: 1.25em 0;	/* フッターの高さ */
 }
+
 .el_footerCopyright {
 	font-size: 85%;
 	text-align: center;
 	color: var(--monochrome-dark)
 }
+
 .el_footerCopyright a {
 	color: inherit;
 }
 
 /* -----------------------------------------
-	タブレット以下 */
+	スマホ */
 @media (max-width: 559px) {
 
 	:root {
@@ -442,10 +430,15 @@ input[type="text"]:focus {
 		font-size: 100%;
 	}
 	
-}
+	.el_search_form:focus {
+	width: 245px; /* 手動で決めてる */
+	}
+	
+} /* @media (max-width: 559px) {... */
+
 
 /* -----------------------------------------
-	タブレット以上 */
+	タブレット・ＰＣ */
 @media (min-width: 560px) {
 
 	:root {
@@ -453,12 +446,12 @@ input[type="text"]:focus {
 		line-height: 1.7;
 	}
 	
-	/* ヘッダーに本文がめり込まないように。 */
 	main {
+		/* ヘッダーに本文がめり込まないように */
 		padding-top: 2em;
 	}
 
-	/* -- ヘッダー -- */
+	/* ヘッダー ----- */
 	.ly_header {
 	/* 大箱　*/
 		background: hsl(40, 38%, 97%); /* 背景色で塗りつぶし */
@@ -468,22 +461,30 @@ input[type="text"]:focus {
 	.ly_header_inner {
 	/* 中コンテナ：ロゴ＋メニュー　*/
 		display: flex;	
-		justify-content: space-between; /* 二つを両端に分ける */
-		align-items: center; /* 二つの高さ位置を揃える */
-		padding-top: 0.75em; /* これにて手動で縦方向センタリング */
+		justify-content: space-between;	/* 二つを両端に分ける */
+		align-items: center;	/* 二つの高さ位置を揃える */
+		padding-top: 0.75em;	/* これにて手動で縦方向センタリング */
 	}
 	.bl_nav_inner {
 	/* 小コンテナ：メニューリスト */
 		margin-right: 0px;
 	}
+
+	/* ロゴ */
 	.el_logo {
 		margin-left: 4px;
 	}
 
+	/* 検索フォーム */
+	.el_search_form:focus {
+	width: 300px; /* これも手動で決めてる */
+	}
+
 } /* @media (min-width: 560px) {... */
 
+
 /* -----------------------------------------
-	PC画面以上 */
+	ＰＣのみ */
 @media (min-width: 960px) {
 	
 	.ly_cont, .ly_header {
@@ -493,4 +494,4 @@ input[type="text"]:focus {
 		line-height: 1.7;
 	}
 
-}
+} /* @media (min-width: 960px) {... */
