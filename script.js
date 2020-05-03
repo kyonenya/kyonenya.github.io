@@ -39,6 +39,9 @@ $.getJSON("data.json", function(data) {
 	for (var i = 0; i < data.length; i=i+1) {
 		// プレーンテキストを生成して配列に格納
 		plainTexts[i] = data[i].text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'');
+		
+		// ダブルダッシュ——が途切れてしまうので罫線に変更
+		data[i].text = data[i].text.replace(/——/g, '──');
 
 		// ハッシュタグをli要素として生成して結合
 		hashtag[i] = ""	// 初期化
@@ -48,15 +51,18 @@ $.getJSON("data.json", function(data) {
 
 	// 記事一覧リストの表示文字数を制限する
 		// まずa, hr, blockquoteタグを削除、それから複数段落を一つの段落へと統合
-		data[i].shortText = data[i].text.replace(/<\/?a.*?>|<hr>|<\/?blockquote>/g, '').replace(/<\/p><p>/g, ''); 
+		const eachShortText 
+				= data[i].text
+					.replace(/<\/?a.*?>|<hr>|<\/?blockquote>/g, '')
+					.replace(/<\/p><p>/g, '');
 
 		// 長文なら省略表示をして「…」を追加
 		if (data[i].text.length > shortTextLength) {
-			postTexts[i] = `${data[i].shortText.substr(0, shortTextLength)}…`;
+			postTexts[i] = `${eachShortText.substr(0, shortTextLength)}…`;
 		} else {
-			postTexts[i] = data[i].shortText;
+			postTexts[i] = data[i].eachShortText;
 		};
-
+		
 		// 記事一覧ページのHTMLタグを積算
 		html.push(htmlComb(i));
 

@@ -121,16 +121,11 @@ li:last-child {
 
 /* 章・セクション見出し */
 .bl_text h1 { 
-	/* 標準余白 */
-	margin: 1em 0em 1em;	/* セクション間・左右から・後続要素との余白 */
-	/* 横棒 */
-	border-left: 4px solid var(--monochrome-medium);
-	padding-left: 0.35em;	/* 横棒と文字の間隔 */
-	/* 下線 */
-	border-bottom: 1px solid hsl(0, 0%, 75%);
-	padding-right: 0.75em;
-	font-weight: normal;
-	font-size: 110%;
+	margin: -0.8em 0em 0.4em;	/* セクション間・左右から・後続要素との余白 */
+	font-weight: bold;
+	font-size: 105%;
+/*	letter-spacing: 0.05em;	*/
+	letter-spacing: 1px;	
 }
 .bl_text h1:not(:first-child) {
 	/* 2番目以降のみ余白を広げる */
