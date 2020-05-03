@@ -5,9 +5,8 @@
 	<title>placet experiri</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- CSSインポート -->
-	<link href="common/reset.css" media="all" rel="stylesheet" type="text/css">
+	<link href="assets/reset.css" media="all" rel="stylesheet" type="text/css">
 	<link href="./style.css" media="all" rel="stylesheet" type="text/css">
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 	<!-- アイコン画像 -->
 	<link rel="icon" href="favicon.ico">
 	<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="icon/apple-touch-icon-180x180.png">
@@ -38,7 +37,13 @@
 				<li><a href="works.html">Works</a></li>
 				<li><a href="about.html">About</a></li>
 				<li class="el_search">
-					<div class="el_search_icon">◉</div>
+					<!--<div class="el_search_icon">◉</div>-->
+					<svg class="el_search_icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+						<!--<rect x="0" y="0" width="16" height="16" fill="none" stroke="olive" stroke-width="1"/>-->
+						<g style='display:inline' transform='translate(-345.0004,79.003359)'>
+				    	<path d='m 351.48974,-78.0062 c 3.02885,0 5.53125,2.47458 5.53125,5.5 0,1.14986 -0.38921,2.20784 -1,3.09375 l 3.6875,3.6875 a 1.0054782,1.0054782 0 1 1 -1.40625,1.4375 l -3.6875,-3.6875 c -0.88729,0.61091 -1.973,0.96875 -3.125,0.96875 -3.02886,0 -5.5,-2.47459 -5.5,-5.5 0,-3.02542 2.47114,-5.5 5.5,-5.5 z m 0,2 c -1.94736,0 -3.5,1.55485 -3.5,3.5 0,1.94514 1.55264,3.5 3.5,3.5 1.94735,0 3.5,-1.55486 3.5,-3.5 0,-1.94515 -1.55265,-3.5 -3.5,-3.5 z' style='display:inline;'/>
+					  </g>
+				</svg>
 					<form>
 						<input type="search" id="input_searchWord" placeholder="検索ワードを入力" value="" class="el_search_form">
 					</form>	
@@ -50,11 +55,6 @@
 </header>
 
 <main>
-	<section class="ly_cont">
-		<!--<form>
-			<input type="text" id="input_searchWord" placeholder="検索ワードを入力">
-		</form>-->
-	</section>
 
 	<!-- JavaScriptによる自動生成 -->
 	<section class="ly_cont">
@@ -65,7 +65,7 @@
 	</article>
 	<!-- ここまで自動生成 -->
 </main>
-	
+
 <footer class="ly_footer">
 	<div class="ly_footer_inner">
 		<p class="el_footerCopyright">&copy; 2020- <a href="#">placet experiri</a></p>

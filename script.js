@@ -4,8 +4,8 @@
 	let html = [];
 	const hashtag = [];
 	const shortTextLength = 140;
-	const postTexts = [];
-	const plainTexts = [];
+	const postTexts = [];	// 記事リスト表示用
+	const plainTexts = [];	// 全文検索用
 
 	// URLからクエリ文字列を取得
 	function getId() {
@@ -46,7 +46,7 @@ $.getJSON("data.json", function(data) {
 			hashtag[i] += `<li><span>#${data[i].tags[j]}</span></li>`;
 		};
 
-	// 記事一覧リストでは表示長文の表示文字数を制限する
+	// 記事一覧リストの表示文字数を制限する
 		// まずa, hr, blockquoteタグを削除、それから複数段落を一つの段落へと統合
 		data[i].shortText = data[i].text.replace(/<\/?a.*?>|<hr>|<\/?blockquote>/g, '').replace(/<\/p><p>/g, ''); 
 

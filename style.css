@@ -3,7 +3,7 @@
 	--monochrome-light: hsl(0, 0%, 85%);
 	--monochrome-medium: hsl(0, 0%, 68%); 
 	--monochrome-dark: hsl(0, 0%, 50%);
-	--main-color: hsl(202, 35%, 50%); /* 6ステップ (202, 35%, 53%) より*/
+	--main-color: hsl(202, 35%, 50%);
 	--main-color-light: hsl(202, 35%, 70%); 
 }
 
@@ -14,6 +14,7 @@ body {
 	word-break: break-word;	/* 行頭に、。が来るのを避ける */
 	color: #333;	/* 黒の文字色 */
 	line-height: 1.6;
+	font-size: 16px;
 	background: hsl(40, 38%, 97%);	/* 再生紙色 */
 	/* フッターを下部固定 */
 	display: flex;
@@ -76,26 +77,26 @@ li:last-child {
 .bl_text a { 
 	/* 下線と文字とを空けるため、擬似的な下線を作る */
 	display: inline-block; 
-	line-height: 1em; /* 下余白リセット */
+	line-height: 1em;	/* 下余白リセット */
 	text-decoration: none;
-	color: hsl(219, 62%, 50%); /* 薄青、Wikipediaより */
-	border-bottom: 1px solid hsl(219, 62%, 70%); /* 細く見せるため薄色に */
-	padding-bottom: 1px; /* 下線との距離 */
-	text-indent: 0; /* 時々生じる謎のインデントを削除 */
+	color: hsl(219, 62%, 50%);	/* 薄青、Wikipediaより */
+	border-bottom: 1px solid hsl(219, 62%, 70%);	/* 細く見せるため薄色に */
+	padding-bottom: 1px;	/* 下線との距離 */
+	text-indent: 0;	/* 時々生じる謎のインデントを削除 */
 }
 .bl_text a:visited { 
 	/* 訪問済みリンク */
-	color: hsl(271, 35%, 45%); /* 紫、Wikipediaより */
+	color: hsl(271, 35%, 45%);	/* 紫、Wikipediaより */
 	border-bottom: 1px solid hsl(271, 35%, 65%); 
 }
 
 .bl_text p {
-	text-align: justify; /* 均等割付で右端もぴったり揃う */
+	text-align: justify;	/* 均等割付で右端もぴったり揃う */
 }
 
 .bl_text p + p {
-	text-indent: 1em; /* 二段落目以降を字下げ */
-	margin-top: 1em; /* 段落間に余白 */
+	text-indent: 1em;	/* 二段落目以降を字下げ */
+	margin-top: 1em;	/* 段落間に余白 */
 }
 
 .bl_text blockquote {
@@ -106,7 +107,7 @@ li:last-child {
 	padding-left: 0.8em;
 }
 .bl_text blockquote p {
-	text-indent: 0; /* 引用ブロック中は字下げなし */
+	text-indent: 0;	/* 引用ブロック中は字下げなし */
 }
 
 .bl_text em {
@@ -118,13 +119,13 @@ li:last-child {
 	font-weight: bold;
 }
 
-.bl_text h1 { 
 /* 章・セクション見出し */
+.bl_text h1 { 
 	/* 標準余白 */
-	margin: 1em 0em 1em; /* セクション間・左右から・後続要素との余白 */
+	margin: 1em 0em 1em;	/* セクション間・左右から・後続要素との余白 */
 	/* 横棒 */
 	border-left: 4px solid var(--monochrome-medium);
-	padding-left: 0.35em; /* 横棒と文字の間隔 */
+	padding-left: 0.35em;	/* 横棒と文字の間隔 */
 	/* 下線 */
 	border-bottom: 1px solid hsl(0, 0%, 75%);
 	padding-right: 0.75em;
@@ -139,7 +140,7 @@ li:last-child {
 .bl_text h2 {
 /* 節ごとの小見出し */
 	/* 標準余白 */
-	margin: 0.5em 0 0.75em; /* セクション間余白、左右の余白限界からの余白、後続要素との余白 */
+	margin: 0.5em 0 0.75em;	/* セクション間余白、左右の余白限界からの余白、後続要素との余白 */
 	font-weight: normal;
 	border-bottom: 1px solid hsl(0, 0%, 75%);
 	font-size: 105%;
@@ -147,7 +148,7 @@ li:last-child {
 
 /* 水平線 */
 .bl_text hr {
-	border: none; /* デフォルトスタイルをリセット */
+	border: none;	/* デフォルトスタイルをリセット */
 	border-top: 1px solid var(--monochrome-light);
 	width: 50%;
 	margin: 1.25em auto;
@@ -221,7 +222,7 @@ li:last-child {
 /* 標準マークアップを局所的に上書き ----- */
 .bl_posts_item .bl_text h1 {
 	font-weight: normal;
-	margin: -0.3em 0 0.2em 0;	/* 余白を一括指定で上書きリセット */
+	margin: -0.2em 0 0.2em 0;	/* 余白を一括指定で上書きリセット */
 	padding: 0;
 	border: none;	/* 装飾リセット */
 	font-size: 100%;	/* サイズリセット */
@@ -324,7 +325,7 @@ li:last-child {
 	display: block; 
 	line-height: 1.25em;	/* 実質的には区切り線の高さ */
 	text-align: center;
-	font-size: 110%;
+	font-size: 100%;
 	color: var(--main-color);
 }
 .bl_nav li {
@@ -343,26 +344,27 @@ li:last-child {
 
 .el_search_icon, .el_search_form {
 	position: absolute;	/* フォームにアイコンを重ねる */
-	top: 0;
 	right: 0;
-	width: 2em;	/* メニュー間隔を手動で調整、右からの幅が広いほど間隔が狭まる */
+	width: 1.9em;	/* メニュー間隔を手動で調整、右からの幅が広いほど間隔が狭まる */
 }
 
 .el_search_icon {
+	top: 0;
 	z-index: 10;	/* フォームの下に重ねる */
-	/* .bl_nav aと同様 */
-	line-height: 1.2em;
-	text-align: center;
-	font-size: 110%;
 	color: var(--main-color);
+	padding-top: 2px;	/* 横一列になるよう手動調整 */
+	font-size: 100%;
+	fill: hsl(202, 35%, 60%);
 }
 
 .el_search_form {
-	z-index: 100;	/* アイコンの上に重ねて、しかし透明に */
-	opacity: 0; 
+	top: -4px;	/* フォームがメニューを覆い隠すよう少し上に */
 	cursor: pointer; 
 	border: 1px solid var(--monochrome-light);
-	/* iOSのフォームスタイルを初期化してから角丸をリセット */
+	/* アイコンの上に重ねて、しかし透明に */
+	z-index: 100;
+	opacity: 0; 
+	/* iOSのフォームスタイルを初期化してから装飾 */
 	-webkit-appearance: none;
 	border-radius: 4px; 
 }
@@ -370,19 +372,8 @@ li:last-child {
 .el_search_form:focus {
 	opacity: 1; /* フォーカスされたら可視化 */
 	cursor: text;
+	width: 245px; /* 手動で調整してる */
 }
-/*
-input[type="text"] {
-	display: block;
-	width: 50vw;
-	max-width: 300px;
-	background: hsl(40, 38%, 99%);
-	padding: 5px 5px 3px;
-	font-size: 16px;
-	border: 1px solid var(--monochrome-light);
-	margin: 0 auto;
-}*/
-
 
 /*---------------------------------
 	フッター */
@@ -409,9 +400,6 @@ input[type="text"] {
 	スマホ */
 @media (max-width: 559px) {
 
-	:root {
-		font-size: 16px;
-	}
 /* -- ヘッダー -- */
 	.ly_header {
 		margin-bottom: 1em;
@@ -426,14 +414,7 @@ input[type="text"] {
 		text-align: center;
 		padding-top: 0.5em;
 	}
-	.bl_nav a {
-		font-size: 100%;
-	}
-	
-	.el_search_form:focus {
-	width: 245px; /* 手動で決めてる */
-	}
-	
+
 } /* @media (max-width: 559px) {... */
 
 
@@ -441,7 +422,7 @@ input[type="text"] {
 	タブレット・ＰＣ */
 @media (min-width: 560px) {
 
-	:root {
+	body {
 		font-size: 18px;
 		line-height: 1.7;
 	}
@@ -451,31 +432,38 @@ input[type="text"] {
 		padding-top: 2em;
 	}
 
-	/* ヘッダー ----- */
-	.ly_header {
+	/* ヘッダー --------------- */
 	/* 大箱　*/
+	.ly_header {
 		background: hsl(40, 38%, 97%); /* 背景色で塗りつぶし */
 		height: 4.5em;
 		margin: 0 auto;
 	}
-	.ly_header_inner {
 	/* 中コンテナ：ロゴ＋メニュー　*/
+	.ly_header_inner {
 		display: flex;	
 		justify-content: space-between;	/* 二つを両端に分ける */
 		align-items: center;	/* 二つの高さ位置を揃える */
 		padding-top: 0.75em;	/* これにて手動で縦方向センタリング */
 	}
-	.bl_nav_inner {
 	/* 小コンテナ：メニューリスト */
+	.bl_nav_inner {
 		margin-right: 0px;
 	}
-
+	.bl_nav a {
+	font-size: 110%;
+}
 	/* ロゴ */
 	.el_logo {
 		margin-left: 4px;
 	}
-
 	/* 検索フォーム */
+	.el_search_icon, .el_search_form {
+		width: 1.7em;	/* メニュー間隔、上書き */
+	}
+	.el_search_icon {
+	top: 2px;
+	}
 	.el_search_form:focus {
 	width: 300px; /* これも手動で決めてる */
 	}
