@@ -121,7 +121,7 @@ li:last-child {
 
 /* 章・セクション見出し */
 .bl_text h1 { 
-	margin: -0.8em 0em 0.4em;	/* セクション間・左右から・後続要素との余白 */
+	margin: -1em 0em 0.4em;	/* セクション間・左右から・後続要素との余白 */
 	font-weight: bold;
 	font-size: 105%;
 /*	letter-spacing: 0.05em;	*/
