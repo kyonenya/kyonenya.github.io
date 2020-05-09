@@ -9,8 +9,8 @@
 
 	// URLからクエリ文字列を取得
 	function getId() {
-		const queryStr = window.location.search.slice(1); // "id=3&p=2"
-		if (!queryStr) { // 非存在判定
+		const queryStr = window.location.search.slice(1);	// "id=3&p=2"
+		if (!queryStr) {	// 非存在判定
 			return '0';
 		}
 		// matchで'id=123'を抽出、replaceで'id='を消して'123'を返す
@@ -64,14 +64,14 @@ $.getJSON("data.json", function(data) {
 		// 記事一覧ページのHTMLタグを積算
 		html.push(htmlComb(i));
 
-	} // for() {...
+	}	// for() {...
 
 /* ---------------------------------
 	リアルタイム検索 */
 	
 	// 検索関数
 	const searchWord = () => {
-		const searchWord = input.value; // 検索ボックスに入力された値
+		const searchWord = input.value;	// 検索ボックスに入力された値
 		// 全件ループ開始
 		for (var i = 0; i < data.length; i=i+1) {
 			const li = document.querySelectorAll('.bl_posts_item');
@@ -80,42 +80,42 @@ $.getJSON("data.json", function(data) {
 			let resultText = '…';
 
 			// 表示調整用
-			const beforeLength = 16; // 先読み、マッチした検索語句の何文字前から？
-			const afterLength = 26; // 後読み
-			const resultLength = beforeLength + searchWord.length + afterLength; // 先読み＋検索語句＋後読み＝結果文字列
+			const beforeLength = 16;	// 先読み、マッチした検索語句の何文字前から？
+			const afterLength = 26;	// 後読み
+			const resultLength = beforeLength + searchWord.length + afterLength;	// 結果文字数＝先読み＋検索語句＋後読み
 		
 			// マッチしたときは、
 			if (searchWordIndex != -1) {
-				li[i].classList.remove('hp_hidden'); // 表示。				
+				li[i].classList.remove('hp_hidden');	// 表示。
 				// 検索語句が先頭に近すぎたら、
 				if (searchWordIndex <= beforeLength) {
-					searchWordIndex = beforeLength; // 冒頭から表示して、
-					resultText = ''; // 冒頭の'…'を削除。
+					searchWordIndex = beforeLength;	// 冒頭から表示して、
+					resultText = '';	// 冒頭の'…'を削除。
 				}				
 				// 結果表示用の文字列
 				resultText += plainTexts[i].substr(searchWordIndex - beforeLength, resultLength)
 				// 検索語句が末尾より十分遠ければ、
-				const lastIndex = searchWordIndex + searchWord.length + afterLength;
-				if (lastIndex < plainTexts[i].length) {
-					resultText += '…'; // 末尾に'…'を追加。
-				}
+				const searchWordIndex_last = searchWordIndex + searchWord.length + afterLength;
+				if (searchWordIndex_last < plainTexts[i].length) {
+					resultText += '…';	// 末尾に'…'を追加。
+				} 
 				// 検索語句をハイライト表示する
-				resultText = resultText.replace(new RegExp(searchWord, "g"), `<span class="hp_highlight">${searchWord}<\/span>`); // 変数を使って複数置換させる
+				resultText = resultText.replace(new RegExp(searchWord, "g"), `<span class="hp_highlight">${searchWord}<\/span>`);	// 変数を使って複数置換させる
 				// DOM要素として追加
 				li_text[i].innerHTML = `<p>${resultText}</p>`;
 			
 			} else {
 			// マッチしなかったときは、
-				li[i].classList.add('hp_hidden'); // 非表示に。
+				li[i].classList.add('hp_hidden');	// 非表示に。
 			}
 			
 			// 検索フォームが空になったら、
 			if (searchWord === '') {
-				li_text[i].innerHTML = postTexts[i] // 元のテキストに戻す。
+				li_text[i].innerHTML = postTexts[i]	// 元のテキストに戻す。
 			};
 
-		}; // for(){...
-	}; // searchWord()...
+		};	// for(){...
+	};	// searchWord()...
 
 	// 文字入力されるたびに検索実行
 	input.addEventListener('input', () => {
@@ -128,15 +128,15 @@ $.getJSON("data.json", function(data) {
 	if (id == 0) {
 		// $("#postlistWrapper").append(html);
 		// const htmlElement = document.createElement(li);
-		ul.innerHTML = html.join(''); // タグを直接書き換え、結合
+		ul.innerHTML = html.join('');	// タグを直接書き換え、結合
 	
 	} else {
 		$("#postWrapper").append(htmlComb_page(data.length - id));
 		$('.el_logo_suffix').text(` :: ${id}`)
 		$('title').html(`placet experiri :: ${id}`);
-		document.getElementById('description').content = data[data.length - id].text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').substr(0, 140); // HTMLタグを削除して先頭140文字をとる
-		document.getElementById('ogDescription').content = data[data.length - id].text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').substr(0, 140); // 同上、OGPはJS未対応なので無駄だけど
-		input.classList.add('hp_hidden'); // 検索フォームを非表示に
+		document.getElementById('description').content = data[data.length - id].text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').substr(0, 140);	// HTMLタグを削除して先頭140文字をとる
+		document.getElementById('ogDescription').content = data[data.length - id].text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').substr(0, 140);	// 同上、OGPはJS未対応なので無駄だけど
+		input.classList.add('hp_hidden');	// 検索フォームを非表示に
 	};
 
 /* ---------------------------------
@@ -176,8 +176,8 @@ $.getJSON("data.json", function(data) {
 					${hashtag[i]}
 				</ul>
 			</footer>`
-	} // function htmlComb_page(i) {...
+	}	// function htmlComb_page(i) {...
 
-}); // $.getJSON(){...
-}); // $(function(){...
-} // {...
+});	// $.getJSON(){...
+});	// $(function(){...
+}	// {...
