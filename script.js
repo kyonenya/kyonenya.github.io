@@ -51,16 +51,14 @@ $.getJSON("data.json", function(data) {
 
 	// 記事一覧リストの表示文字数を制限する
 		// まずa, hr, blockquoteタグを削除、それから複数段落を一つの段落へと統合
-		const eachShortText 
+		postTexts[i]
 				= data[i].text
 					.replace(/<\/?a.*?>|<hr>|<\/?blockquote>/g, '')
 					.replace(/<\/p><p>/g, '');
 
 		// 長文なら省略表示をして「…」を追加
-		if (data[i].text.length > shortTextLength) {
-			postTexts[i] = `${eachShortText.substr(0, shortTextLength)}…`;
-		} else {
-			postTexts[i] = data[i].eachShortText;
+		if (postTexts[i].length > shortTextLength) {
+			postTexts[i] = `${postTexts[i].substr(0, shortTextLength)}…`;
 		};
 		
 		// 記事一覧ページのHTMLタグを積算
