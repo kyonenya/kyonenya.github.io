@@ -427,6 +427,12 @@ li:last-child {
 		padding-top: 2em;
 	}
 
+	.ly_cont, .ly_header {
+		width: 85%;
+		margin: 0 auto;
+		line-height: 1.7;
+	}
+
 	/* ヘッダー --------------- */
 	/* 大箱　*/
 	.ly_header {
@@ -473,7 +479,6 @@ li:last-child {
 	.ly_cont, .ly_header {
 	/* 大画面ではテキストを画面いっぱいに表示せず、中央に寄せる */
 		max-width: 800px;
-		margin: 0 auto;
 		line-height: 1.7;
 	}
 
