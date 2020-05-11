@@ -19,11 +19,11 @@
 	// 取得
 	let postId = getId();
 
-/* -- JSONデータ取得開始 -- */
-$(function(){
-$.getJSON("data.json", function(data) {
-
-
+/* JSONデータ取得開始 ---------- */
+fetch('data.json')
+ .then((response) => response.json())
+ .then((data) => {
+	
 	// 古い順に逆順ソート
 /*	data.sort(function(a, b) {
 		if (a.date > b.date) {
@@ -33,7 +33,6 @@ $.getJSON("data.json", function(data) {
 		}
 	})
 */
-
 	for (var i = 0; i < data.length; i=i+1) {
 		// プレーンテキストを生成して配列に格納
 		plainTexts[i] = data[i].text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'');
@@ -70,8 +69,8 @@ $.getJSON("data.json", function(data) {
 	/* 検索関数 ---------- */
 	const realTimeSearch = () => {
 
-	// 定数宣言
-	const searchWord = document.querySelector('.el_search_form').value;	// 検索ボックスに入力された値	
+		// 検索ボックスに入力された値
+		const searchWord = document.querySelector('.el_search_form').value;
 		
 		// 全件ループ開始
 		for (var i = 0; i < data.length; i=i+1) {
@@ -133,7 +132,7 @@ $.getJSON("data.json", function(data) {
 		const postCount = data.length - postId;	
 		// 記事内容の生成
 		document.getElementById('postWrapper').innerHTML
-				= htmlComb_page(postCount);
+				= htmlComb_article(postCount);
 		// placet experiri :: 7 を、
 		// ロゴに追加。
 		document.querySelector('.el_logo_suffix').innerText 
@@ -178,7 +177,7 @@ $.getJSON("data.json", function(data) {
 	}
 
 	// 個別記事ページ（HTMLタグ生成関数）
-	function htmlComb_page(i) {
+	function htmlComb_article(i) {
 		return `
 			<header class="bl_text_header">
 				<time class="bl_text_date" datetime="${moment(data[i].date).format("YYYY-MM-DD HH:mm")}">${moment(data[i].date).format("YYYY-MM-DD HH:mm")}</time>
@@ -194,6 +193,9 @@ $.getJSON("data.json", function(data) {
 			</footer>`
 	}	// function htmlComb_page(i) {...
 
-});	// $.getJSON(){...
-});	// $(function(){...
-}	// {...
+})	// fetch.then((data) => {...
+.catch((err) => {
+	alert('インターネットの接続を確認して、ページを再読み込みしてください。');
+});	// .catch
+
+}
