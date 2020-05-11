@@ -3,9 +3,9 @@
 	// 定数宣言
 	let html = [];
 	const hashtag = [];
-	const shortTextLength = 140;
-	const postTexts = [];	// 記事リスト表示用
-	const plainTexts = [];	// 全文検索用
+	const shortTextLength = 140;	// 記事一覧に何文字表示するか
+	const postTexts = [];	// 記事一覧への表示用テキスト
+	const plainTexts = [];	// 全文検索などに使う
 
 	// URLからクエリ文字列を取得
 	function getId() {
@@ -17,14 +17,12 @@
 		return queryStr.match(/id=\d+/)[0].replace(/id=/, '')
 	}
 	// 取得
-	let id = getId();
+	let postId = getId();
 
 /* -- JSONデータ取得開始 -- */
 $(function(){
 $.getJSON("data.json", function(data) {
-	// セレクター
-	const input = document.getElementById('input_searchWord');
-	const ul = document.getElementById('postlistWrapper');
+
 
 	// 古い順に逆順ソート
 /*	data.sort(function(a, b) {
@@ -69,9 +67,12 @@ $.getJSON("data.json", function(data) {
 /* ---------------------------------
 	リアルタイム検索 */
 	
-	// 検索関数
-	const searchWord = () => {
-		const searchWord = input.value;	// 検索ボックスに入力された値
+	/* 検索関数 ---------- */
+	const realTimeSearch = () => {
+
+	// 定数宣言
+	const searchWord = document.querySelector('.el_search_form').value;	// 検索ボックスに入力された値	
+		
 		// 全件ループ開始
 		for (var i = 0; i < data.length; i=i+1) {
 			const li = document.querySelectorAll('.bl_posts_item');
@@ -115,28 +116,43 @@ $.getJSON("data.json", function(data) {
 			};
 
 		};	// for(){...
-	};	// searchWord()...
+	};	// realTimeSearch() => {...
 
 	// 文字入力されるたびに検索実行
-	input.addEventListener('input', () => {
-		searchWord();
+	document.querySelector('.el_search_form').addEventListener('input', () => {
+		realTimeSearch();
 	});
 
 /* ---------------------------------
-	HTML生成 */
-	
-	if (id == 0) {
-		// $("#postlistWrapper").append(html);
-		// const htmlElement = document.createElement(li);
-		ul.innerHTML = html.join('');	// タグを直接書き換え、結合
-	
+	HTML生成 */	
+	if (postId == 0) {
+		document.querySelector('.bl_posts').innerHTML
+				= html.join('');	// タグを直接書き換え、配列を結合
 	} else {
-		$("#postWrapper").append(htmlComb_page(data.length - id));
-		$('.el_logo_suffix').text(` :: ${id}`)
-		$('title').html(`placet experiri :: ${id}`);
-		document.getElementById('description').content = data[data.length - id].text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').substr(0, 140);	// HTMLタグを削除して先頭140文字をとる
-		document.getElementById('ogDescription').content = data[data.length - id].text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'').substr(0, 140);	// 同上、OGPはJS未対応なので無駄だけど
-		input.classList.add('hp_hidden');	// 検索フォームを非表示に
+		// 記事idをループで言うと何番目かに変換
+		const postCount = data.length - postId;	
+		// 記事内容の生成
+		document.getElementById('postWrapper').innerHTML
+				= htmlComb_page(postCount);
+		// placet experiri :: 7 を、
+		// ロゴに追加。
+		document.querySelector('.el_logo_suffix').innerText 
+				= ` :: ${postId}`;
+		// ブラウザのタイトルを書き換え。
+		document.title = `placet experiri :: ${postId}`;
+		
+		// meta descriptionを書き換え
+		document.querySelector("meta[name=description]").content
+				= plainTexts[postCount].substr(0, 140);	// プレーンテキストの先頭140文字
+		// meta og:descriptionを書き換え
+		document.querySelector("meta[property='og:description']").content 
+				= plainTexts[postCount].substr(0, 140);	// OGPはJS未対応なのでたぶん無駄
+		// meta og:titleを書き換え
+		document.querySelector("meta[property='og:title']").content 
+				= '仮タイトル'
+//				= data[postCount].title;
+		// 検索フォームを非表示に
+		document.querySelector('.el_search_form').classList.add('hp_hidden');
 	};
 
 /* ---------------------------------
