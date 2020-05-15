@@ -320,7 +320,7 @@ li:last-child {
 	display: block; 
 	line-height: 1.25em;	/* 実質的には区切り線の高さ */
 	text-align: center;
-	font-size: 100%;
+	font-size: 105%;
 	color: var(--main-color);
 }
 .bl_nav li {

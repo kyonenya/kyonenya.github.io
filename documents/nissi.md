@@ -1,14 +1,14 @@
 ## 2020/05/11
 
+jsonにtitle追加、わりと大規模な改修になる
+
 クエリ文字列の取得を書き換え
 
 タグ検索の実装
 
 - jQuery書き換え、append部のみ
 
-jsonにtitle追加、わりと大規模な改修になる
-
-getjsonをfetchに
+- getjsonをfetchに
 
 
 ## 検索フォーム関連 2020/04/21

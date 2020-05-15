@@ -1,6 +1,6 @@
 'use strict'
 {	
-	// 定数宣言
+	// 変数宣言
 	let html = [];
 	const hashtag = [];
 	const shortTextLength = 140;	// 記事一覧に何文字表示するか
@@ -18,6 +18,7 @@
 	}
 	// 取得
 	let postId = getId();
+
 
 /* JSONデータ取得開始 ---------- */
 fetch('data.json')
@@ -63,8 +64,9 @@ fetch('data.json')
 
 	}	// for() {...
 
-/* ---------------------------------
-	リアルタイム検索 */
+
+	/* ---------------------------------
+		リアルタイム検索 */
 	
 	/* 検索関数 ---------- */
 	const realTimeSearch = () => {
@@ -122,13 +124,14 @@ fetch('data.json')
 		realTimeSearch();
 	});
 
-/* ---------------------------------
-	HTML生成 */	
+	
+	/* ---------------------------------
+		HTML生成 */	
 	if (postId == 0) {
 		document.querySelector('.bl_posts').innerHTML
 				= html.join('');	// タグを直接書き換え、配列を結合
 	} else {
-		// 記事idをループで言うと何番目かに変換
+		// 記事idはループカウントで言うと何番目か
 		const postCount = data.length - postId;	
 		// 記事内容の生成
 		document.getElementById('postWrapper').innerHTML
@@ -154,9 +157,10 @@ fetch('data.json')
 		document.querySelector('.el_search_form').classList.add('hp_hidden');
 	};
 
-/* ---------------------------------
-	HTMLテンプレート */
-	// 記事リスト（HTMLタグ生成関数）邪魔なので末尾に。関数の巻き上げ。
+
+	/* ---------------------------------
+		テンプレート */
+	// 記事リスト
 	function htmlComb(i) {
 		return `
 		<li class="bl_posts_item">
@@ -176,7 +180,7 @@ fetch('data.json')
 		</li>`
 	}
 
-	// 個別記事ページ（HTMLタグ生成関数）
+	// 個別記事ページ
 	function htmlComb_article(i) {
 		return `
 			<header class="bl_text_header">
@@ -193,9 +197,11 @@ fetch('data.json')
 			</footer>`
 	}	// function htmlComb_page(i) {...
 
+
 })	// fetch.then((data) => {...
+
 .catch((err) => {
 	alert('インターネットの接続を確認して、ページを再読み込みしてください。');
-});	// .catch
+});
 
 }
