@@ -332,13 +332,10 @@ li:last-child {
 
 /* 見出し */
 .bl_text h3 {
-/* 小見出し */
-/*
-	margin: 0.5em 0 0.75em;	
+	margin: 1.5em 0 0.75em;
 	font-weight: normal;
+	font-size: 100%;
 	border-bottom: 1px solid hsl(0, 0%, 75%);
-	font-size: 105%;
-*/
 }
 
 /* 水平線 */
@@ -352,10 +349,10 @@ li:last-child {
 /* 順序なしリスト */
 .bl_text ul {
 	margin-left: 0;
-	padding-left: 0.5em;
+	padding-left: 2em;
 }
 .bl_text ul li {
-	list-style: square inside;
+	list-style: square;
 }
 
 /* 順序つきリスト */
