@@ -320,7 +320,7 @@ li:last-child {
 	display: block; 
 	line-height: 1.25em;	/* 実質的には区切り線の高さ */
 	text-align: center;
-	font-size: 105%;
+	font-size: 100%;
 	color: var(--main-color);
 }
 .bl_nav li {
@@ -356,6 +356,7 @@ li:last-child {
 	top: -4px;	/* フォームがメニューを覆い隠すよう少し上に */
 	cursor: pointer; 
 	border: 1px solid var(--monochrome-light);
+	outline: none;
 	/* アイコンの上に重ねて、しかし透明に */
 	z-index: 100;
 	opacity: 0; 
