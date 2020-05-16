@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-<url>
-	<loc>https://kyonenya.github.io/</loc>
-	<priority>1.0</priority>
-	<lastmod>2020-05-16T09:42:26+09:00</lastmod>
-</url>
-<url>
-	<loc>https://www.sample/A.html?id=1</loc>
-	<priority>1.0</priority>
-</url>
-<url>
-	<loc>https://www.sample/A.html?id=2</loc>
-	<priority>0.8</priority>
-</url>
-<url>
-	<loc>https://www.sample/A.html?id=3</loc>
-	<priority>0.5</priority>
-</url>
+	<url>
+		<loc>https://kyonenya.github.io</loc>
+		<priority>1.0</priority>
+		<changefreq>weekly</changefreq>
+		<lastmod>2020-05-16</lastmod>
+	</url>
+	<url><loc>https://kyonenya.github.io?id=1</loc></url>
+	<url><loc>https://kyonenya.github.io?id=2</loc></url>
+	<url><loc>https://kyonenya.github.io?id=3</loc></url>
+	<url><loc>https://kyonenya.github.io?id=4</loc></url>
+	<url><loc>https://kyonenya.github.io?id=5</loc></url>
+	<url><loc>https://kyonenya.github.io?id=6</loc></url>
+	<url><loc>https://kyonenya.github.io?id=7</loc></url>
+	<url><loc>https://kyonenya.github.io?id=8</loc></url>
+	<url><loc>https://kyonenya.github.io?id=9</loc></url>
+	<url><loc>https://kyonenya.github.io?id=10</loc></url>	
 </urlset>
 </xml>
