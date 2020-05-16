@@ -64,124 +64,22 @@ li:last-child {
 	/* セクション間余白 */
 	margin-top: 1.5em;
 }	
+
 .bl_text_header {
 	padding-bottom: 0.5em;
 	color: var(--monochrome-dark)
 }
+
+.bl_text_title {
+	margin: -0.6em 0em 0.4em;
+	font-weight: bold;
+	font-size: 105%;
+	letter-spacing: 1px;
+}
+
 .bl_text_footer {
 	padding-top: 0.5em;
 	color: var(--monochrome-dark)
-}
-
-/* マークアップ ----- */	
-.bl_text a { 
-	/* 下線と文字とを空けるため、擬似的な下線を作る */
-	display: inline-block; 
-	line-height: 1em;	/* 下余白リセット */
-	text-decoration: none;
-	color: hsl(219, 62%, 50%);	/* 薄青、Wikipediaより */
-	border-bottom: 1px solid hsl(219, 62%, 70%);	/* 細く見せるため薄色に */
-	padding-bottom: 1px;	/* 下線との距離 */
-	text-indent: 0;	/* 時々生じる謎のインデントを削除 */
-}
-.bl_text a:visited { 
-	/* 訪問済みリンク */
-	color: hsl(271, 35%, 45%);	/* 紫、Wikipediaより */
-	border-bottom: 1px solid hsl(271, 35%, 65%); 
-}
-
-.bl_text p {
-	text-align: justify;	/* 均等割付で右端もぴったり揃う */
-}
-
-.bl_text p + p {
-	text-indent: 1em;	/* 二段落目以降を字下げ */
-	margin-top: 1em;	/* 段落間に余白 */
-}
-
-.bl_text blockquote {
-	/* 上下に1行の余白、左から1文字分インデント */
-	margin: 1em 0 1em 1em;
-	color: var(--monochrome-dark);
-	border-left: 0.2em solid var(--monochrome-light);
-	padding-left: 0.8em;
-}
-.bl_text blockquote p {
-	text-indent: 0;	/* 引用ブロック中は字下げなし */
-}
-
-.bl_text em {
-	text-emphasis: dot;
-	font-style: normal;
-}
-
-.bl_text strong {
-	font-weight: bold;
-}
-
-/* 章・セクション見出し */
-.bl_text h1 { 
-	margin: -0.6em 0em 0.4em;	/* セクション間・左右から・後続要素との余白 */
-	font-weight: bold;
-	font-size: 105%;
-/*	letter-spacing: 0.05em;	*/
-	letter-spacing: 1px;	
-}
-.bl_text h1:not(:first-child) {
-	/* 2番目以降のみ余白を広げる */
-	margin: 3em 0em 1em; 
-}
-
-.bl_text h2 {
-/* 節ごとの小見出し */
-	/* 標準余白 */
-	margin: 0.5em 0 0.75em;	/* セクション間余白、左右の余白限界からの余白、後続要素との余白 */
-	font-weight: normal;
-	border-bottom: 1px solid hsl(0, 0%, 75%);
-	font-size: 105%;
-}
-
-/* 水平線 */
-.bl_text hr {
-	border: none;	/* デフォルトスタイルをリセット */
-	border-top: 1px solid var(--monochrome-light);
-	width: 50%;
-	margin: 1.25em auto;
-}
-
-/* 順序なしリスト */
-.bl_text ul {
-	margin-left: 0;
-	padding-left: 0.5em;
-}
-.bl_text ul li {
-	list-style: square inside;
-}
-
-/* 順序つきリスト */
-.bl_text ol {
-	margin-left: 0;
-	padding-left: 0.5em;
-}
-.bl_text ol li {
-	list-style: decimal inside;
-}
-
-/* 説明リスト */
-.bl_text dt {
-	float: left;
-	text-align: right;
-	margin-left: -0.5em; /* 4文字目は画面ギリギリに入れる */
-	width: 4em; /* 最大文字数 */
-}
-.bl_text dd {
-	margin-left: 3.5em; /* dtの左余白＋最大文字数 */
-	/* "： "にぶら下げ、狭い画面で改行されたとき */
-	padding-left: 1.25em;
-	text-indent: -1.25em;
-}
-.bl_text dd:before {
-	content: "： ";
 }
 
 /*	---------------------------------
@@ -197,7 +95,6 @@ li:last-child {
 
 .bl_posts_item:first-child {
 	padding-top: 0;
-/*	border-top: 1px solid var(--monochrome-light); */
 }
 
 .bl_posts_header {
@@ -209,30 +106,14 @@ li:last-child {
 	color: var(--monochrome-dark);
 }
 
+.bl_posts_title {
+	margin: -0.3em 0 0.1em 0;
+	padding: 0;
+}
+
 .bl_posts_footer {
 	padding-top: 0.4em;
 	color: var(--monochrome-dark);
-}
-
-/* 標準マークアップを局所的に上書き ----- */
-.bl_posts_item .bl_text h1 {
-	font-weight: normal;
-	margin: -0.2em 0 0.2em 0;	/* 余白を一括指定で上書きリセット */
-	padding: 0;
-	border: none;	/* 装飾リセット */
-	font-size: 100%;	/* サイズリセット */
-}
-
-.bl_posts_item .bl_text h2 {
-	font-weight: normal;
-	margin: 0 0 0.25em 0;
-	border: none;
-	font-size: 100%;
-}
-
-.bl_posts_item .bl_text hr {
-	border: none;
-	margin: 0.75em auto;
 }
 
 /* タグリスト */
@@ -248,8 +129,8 @@ li:last-child {
 /* ---------------------------------
 	部品 */
 
-.el_heading1 { 
-	/* .bl_text h1を複製し、ブロックの外でも使えるようにする。ただし標準余白は常につける */
+/* 大見出し |_____ */
+.el_heading1 {
 	margin: 3em 0em 1em;
 	border-left: 4px solid var(--monochrome-medium);
 	padding-left: 0.45em;
@@ -259,11 +140,20 @@ li:last-child {
 	font-size: 110%;
 }
 .ly_cont:first-child > .el_heading1 {
-	/* 先頭の見出しだけ小さめの後続余白 */
-	margin: 1em 0em 1em; 
+	/* 先頭の見出しだけ小さめの先頭余白 */
+	margin-top: 1em; 
 }
 
-/* 表 ----- */
+/* 小見出し _____ */
+.el_heading2 {
+	/* 標準余白 */
+	margin: 0.5em 0 0.75em;	/* セクション間余白、左右の余白限界からの余白、後続要素との余白 */
+	font-weight: normal;
+	border-bottom: 1px solid hsl(0, 0%, 75%);
+	font-size: 105%;
+}
+
+/* 表 ---------- */
 .bl_horizTable {
 	border: 1px solid var(--monochrome-light); /* 表全体を囲む */
 	max-width: 560px;
@@ -390,6 +280,108 @@ li:last-child {
 
 .el_footerCopyright a {
 	color: inherit;
+}
+
+/*	---------------------------------
+	マークアップ */
+
+.bl_text a { 
+	/* 下線と文字とを空けるため、擬似的な下線を作る */
+	display: inline-block; 
+	line-height: 1em;	/* 下余白リセット */
+	text-decoration: none;
+	color: hsl(219, 62%, 50%);	/* 薄青、Wikipediaより */
+	border-bottom: 1px solid hsl(219, 62%, 70%);	/* 細く見せるため薄色に */
+	padding-bottom: 1px;	/* 下線との距離 */
+	text-indent: 0;	/* 時々生じる謎のインデントを削除 */
+}
+.bl_text a:visited { 
+	/* 訪問済みリンク */
+	color: hsl(271, 35%, 45%);	/* 紫、Wikipediaより */
+	border-bottom: 1px solid hsl(271, 35%, 65%); 
+}
+
+.bl_text p {
+	text-align: justify;	/* 均等割付で右端もぴったり揃う */
+}
+
+.bl_text p + p {
+	text-indent: 1em;	/* 二段落目以降を字下げ */
+	margin-top: 1em;	/* 段落間に余白 */
+}
+
+.bl_text blockquote {
+	/* 上下に1行の余白、左から1文字分インデント */
+	margin: 1em 0 1em 1em;
+	color: var(--monochrome-dark);
+	border-left: 0.2em solid var(--monochrome-light);
+	padding-left: 0.8em;
+}
+.bl_text blockquote p {
+	text-indent: 0;	/* 引用ブロック中は字下げなし */
+}
+
+.bl_text em {
+	text-emphasis: dot;
+	font-style: normal;
+}
+
+.bl_text strong {
+	font-weight: bold;
+}
+
+/* 見出し */
+.bl_text h3 {
+/* 小見出し */
+/*
+	margin: 0.5em 0 0.75em;	
+	font-weight: normal;
+	border-bottom: 1px solid hsl(0, 0%, 75%);
+	font-size: 105%;
+*/
+}
+
+/* 水平線 */
+.bl_text hr {
+	border: none;	/* デフォルトスタイルをリセット */
+	border-top: 1px solid var(--monochrome-light);
+	width: 50%;
+	margin: 1.25em auto;
+}
+
+/* 順序なしリスト */
+.bl_text ul {
+	margin-left: 0;
+	padding-left: 0.5em;
+}
+.bl_text ul li {
+	list-style: square inside;
+}
+
+/* 順序つきリスト */
+.bl_text ol {
+	margin-left: 0;
+	padding-left: 0.5em;
+}
+.bl_text ol li {
+	list-style: decimal inside;
+}
+
+/* 説明リスト */
+.bl_text dt {
+	float: left;
+	text-align: right;
+	margin-left: -0.5em; /* 4文字目は画面ギリギリに入れる */
+	width: 4em; /* 最大文字数 */
+}
+.bl_text dd {
+	margin-left: 3.5em; /* dtの左余白＋最大文字数 */
+	/* "： "にぶら下げ、狭い画面で改行されたとき */
+	padding-left: 1.25em;
+	text-indent: -1.25em;
+}
+.bl_text dd:before {
+	content: "： ";
 }
 
 /* -----------------------------------------

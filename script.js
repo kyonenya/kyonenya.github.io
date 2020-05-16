@@ -2,7 +2,7 @@
 {	
 	// 変数宣言
 	let html = [];
-	const hashtag = [];
+	const hashtags = [];
 	const shortTextLength = 140;	// 記事一覧に何文字表示するか
 	const postTexts = [];	// 記事一覧への表示用テキスト
 	const plainTexts = [];	// 全文検索などに使う
@@ -35,32 +35,28 @@ fetch('data.json')
 	})
 */
 	for (var i = 0; i < data.length; i=i+1) {
-		// プレーンテキストを生成して配列に格納
-		plainTexts[i] = data[i].text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'');
-		
+
 		// ダブルダッシュ——が途切れてしまうので罫線に変更
 		data[i].text = data[i].text.replace(/——/g, '──');
 
+		// プレーンテキストを生成して配列に格納
+		plainTexts[i] = data[i].text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'');
+
 		// ハッシュタグをli要素として生成して結合
-		hashtag[i] = ""	// 初期化
+		hashtags[i] = ""	// 初期化
 		for (var j in data[i].tags) {
-			hashtag[i] += `<li><span>#${data[i].tags[j]}</span></li>`;
+			hashtags[i] += `<li><span>#${data[i].tags[j]}</span></li>`;
 		};
 
-	// 記事一覧リストの表示文字数を制限する
-		// まずa, hr, blockquoteタグを削除、それから複数段落を一つの段落へと統合
-		postTexts[i]
-				= data[i].text
-					.replace(/<\/?a.*?>|<hr>|<\/?blockquote>/g, '')
-					.replace(/<\/p><p>/g, '');
-
-		// 長文なら省略表示をして「…」を追加
+		// 記事一覧リストでの表示用文字列を作る
+		postTexts[i] = plainTexts[i];
+		// 長文なら省略して「…」を追加
 		if (postTexts[i].length > shortTextLength) {
 			postTexts[i] = `${postTexts[i].substr(0, shortTextLength)}…`;
 		};
 		
 		// 記事一覧ページのHTMLタグを積算
-		html.push(htmlComb(i));
+		html.push(htmlComb_postlist(i));
 
 	}	// for() {...
 
@@ -160,48 +156,57 @@ fetch('data.json')
 
 	/* ---------------------------------
 		テンプレート */
-	// 記事リスト
-	function htmlComb(i) {
+	// 記事一覧リスト
+	function htmlComb_postlist(i) {
 		return `
 		<li class="bl_posts_item">
 			<a href="?id=${data.length - i}">
 				<header class="bl_posts_header">
-					<time class="bl_posts_date" datetime="${moment(data[i].date).format("YYYY-MM-DD HH:mm")}">${moment(data[i].date).format("YYYY-MM-DD")}</time>
+					<time class="bl_posts_date" datetime="${moment(data[i].date).format("YYYY-MM-DD HH:mm")}">${moment(data[i].date).format("YYYY-MM-DD")}
+					</time>
 				</header>
+				<div class="bl_posts_title">
+					${data[i].title}
+				</div>
 				<div class="bl_text">
-					${postTexts[i]}</div>
+					<p>${postTexts[i]}</p>
+				</div>
 				<footer class="bl_posts_footer">
 					<span class="bl_posts_dateago">${moment(data[i].date).fromNow()}</span>
 					<ul class="bl_tags">
-						${hashtag[i]}
+						${hashtags[i]}
 					</ul>
 				</footer>
 			</a>
 		</li>`
-	}
+	} // function htmlComb_postlist(i) {...
 
 	// 個別記事ページ
 	function htmlComb_article(i) {
 		return `
 			<header class="bl_text_header">
-				<time class="bl_text_date" datetime="${moment(data[i].date).format("YYYY-MM-DD HH:mm")}">${moment(data[i].date).format("YYYY-MM-DD HH:mm")}</time>
+				<time class="bl_text_date" datetime="${moment(data[i].date).format("YYYY-MM-DD HH:mm")}">${moment(data[i].date).format("YYYY-MM-DD HH:mm")}
+				</time>
 			</header>
+			<div class="bl_text_title">
+				${data[i].title}
+			</div>
 			<div class="bl_text">
 				${data[i].text}
 			</div>
 			<footer class="bl_text_footer">
 				<span class="bl_posts_dateago">${moment(data[i].date).fromNow()}</span>
 				<ul class="bl_tags">
-					${hashtag[i]}
+					${hashtags[i]}
 				</ul>
 			</footer>`
-	}	// function htmlComb_page(i) {...
+	}	// function htmlComb_article(i) {...
 
 
 })	// fetch.then((data) => {...
 
 .catch((err) => {
-	alert('インターネットの接続を確認して、ページを再読み込みしてください。');
+	console.log('インターネットの接続を確認して、ページを再読み込みしてください。');
 });
 
 }
