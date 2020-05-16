@@ -65,11 +65,11 @@ li:last-child {
 	margin-top: 1.5em;
 }	
 .bl_text_header {
-	padding-bottom: 0em;
+	padding-bottom: 0.5em;
 	color: var(--monochrome-dark)
 }
 .bl_text_footer {
-	padding-bottom: 0em;
+	padding-top: 0.5em;
 	color: var(--monochrome-dark)
 }
 
@@ -121,7 +121,7 @@ li:last-child {
 
 /* 章・セクション見出し */
 .bl_text h1 { 
-	margin: -1em 0em 0.4em;	/* セクション間・左右から・後続要素との余白 */
+	margin: -0.6em 0em 0.4em;	/* セクション間・左右から・後続要素との余白 */
 	font-weight: bold;
 	font-size: 105%;
 /*	letter-spacing: 0.05em;	*/
@@ -425,7 +425,7 @@ li:last-child {
 	
 	main {
 		/* ヘッダーに本文がめり込まないように */
-		padding-top: 2em;
+		padding-top: 1em;
 	}
 
 	.ly_cont, .ly_header {
