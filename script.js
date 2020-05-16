@@ -7,18 +7,34 @@
 	const postTexts = [];	// 記事一覧への表示用テキスト
 	const plainTexts = [];	// 全文検索などに使う
 
-	// URLからクエリ文字列を取得
-	function getId() {
-		const queryStr = window.location.search.slice(1);	// "id=3&p=2"
-		if (!queryStr) {	// 非存在判定
-			return '0';
+	/* ---------------------------------
+		URLからクエリ文字列を取得 */
+	const getUrlQueries = () => {
+		const queries = {};
+		const queryStr = window.location.search.slice(1);	// 文頭の'?'を除外
+		//	const queryStr = 'foo=1&bar=2';
+	
+	  // クエリがない場合は、
+		if (!queryStr) {
+			return queries;	// 空のオブジェクトを返す。
 		}
-		// matchで'id=123'を抽出、replaceで'id='を消して'123'を返す
-		return queryStr.match(/id=\d+/)[0].replace(/id=/, '')
+	
+	  // 複数のクエリを'&'で切って配列へと分解
+		const queryArr = queryStr.split('&')	// ['foo=1', 'bar=2']
+	
+		queryArr.forEach((eachQueryStr) => {
+			// '='でさらに分割してそれぞれkey,valueへと格納
+			const keyAndValue = eachQueryStr.split('=');	// ['foo', '1']
+			queries[keyAndValue[0]] = keyAndValue[1];	// {foo: 1}
+		});
+		
+		return queries;
 	}
-	// 取得
-	let postId = getId();
-
+	
+	// 実行
+	const queries = getUrlQueries();
+	const postId = queries.id;
+	
 
 /* JSONデータ取得開始 ---------- */
 fetch('data.json')
@@ -123,7 +139,7 @@ fetch('data.json')
 	
 	/* ---------------------------------
 		HTML生成 */	
-	if (postId == 0) {
+	if (postId == null) {
 		document.querySelector('.bl_posts').innerHTML
 				= html.join('');	// タグを直接書き換え、配列を結合
 	} else {
