@@ -71,10 +71,10 @@ li:last-child {
 }
 
 .bl_text_title {
-	margin: -0.6em 0em 0.4em;
+	margin: -0.3em 0em 0.5em;
 	font-weight: bold;
-	font-size: 105%;
-	letter-spacing: 1px;
+	font-size: 115%;
+	text-align: center;
 }
 
 .bl_text_footer {
@@ -106,9 +106,12 @@ li:last-child {
 }
 
 .bl_posts_title {
-	margin: -0.3em 0 0.1em 0;
+	margin: -0.4em 0 0em 0;
 	padding: 0;
 	letter-spacing: 1px;
+	/* h2をリセット */
+	font-weight: normal;
+	font-size: 100%;
 }
 
 .bl_posts_footer {
@@ -332,7 +335,7 @@ li:last-child {
 
 /* 見出し */
 .bl_text h3 {
-	margin: 1.5em 0 0.75em;
+	margin: 1.5em 0 0.5em;
 	font-weight: normal;
 	font-size: 100%;
 	border-bottom: 1px solid hsl(0, 0%, 75%);
@@ -349,10 +352,10 @@ li:last-child {
 /* 順序なしリスト */
 .bl_text ul {
 	margin-left: 0;
-	padding-left: 2em;
+	padding-left: 1.5em;
 }
 .bl_text ul li {
-	list-style: square;
+	list-style: disc;
 }
 
 /* 順序つきリスト */

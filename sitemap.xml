@@ -3,16 +3,17 @@
 	<url>
 		<loc>https://kyonenya.github.io/</loc>
 		<priority>1.0</priority>
-		<changefreq>weekly</changefreq>
-		<lastmod>2020-05-16</lastmod>
+		<changefreq>daily</changefreq>
+		<lastmod>2020-05-18</lastmod>
 	</url>
-	<url><loc>https://kyonenya.github.io/?id=1</loc></url>
-	<url><loc>https://kyonenya.github.io/?id=2</loc></url>
-	<url><loc>https://kyonenya.github.io/?id=3</loc></url>
-	<url><loc>https://kyonenya.github.io/?id=4</loc></url>
-	<url><loc>https://kyonenya.github.io/?id=5</loc></url>
-	<url><loc>https://kyonenya.github.io/?id=6</loc></url>
-	<url><loc>https://kyonenya.github.io/?id=7</loc></url>
-	<url><loc>https://kyonenya.github.io/?id=8</loc></url>
+	<url><loc>https://kyonenya.github.io/?id=test</loc></url>
 	<url><loc>https://kyonenya.github.io/?id=9</loc></url>
+	<url><loc>https://kyonenya.github.io/?id=8</loc></url>
+	<url><loc>https://kyonenya.github.io/?id=7</loc></url>
+	<url><loc>https://kyonenya.github.io/?id=6</loc></url>
+	<url><loc>https://kyonenya.github.io/?id=5</loc></url>
+	<url><loc>https://kyonenya.github.io/?id=4</loc></url>
+	<url><loc>https://kyonenya.github.io/?id=3</loc></url>
+	<url><loc>https://kyonenya.github.io/?id=2</loc></url>
+	<url><loc>https://kyonenya.github.io/?id=1</loc></url>
 </urlset>

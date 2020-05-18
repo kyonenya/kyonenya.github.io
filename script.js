@@ -148,23 +148,22 @@ fetch('data.json')
 		// 記事内容の生成
 		document.getElementById('postWrapper').innerHTML
 				= htmlComb_article(postCount);
-		// placet experiri :: 7 を、
-		// ロゴに追加。
+		// ロゴに::7を追加。
 		document.querySelector('.el_logo_suffix').innerText 
 				= ` :: ${postId}`;
-		// ブラウザのタイトルを書き換え。
-		document.title = `placet experiri :: ${postId}`;
-		
+		// ブラウザのタイトルを書き換え
+		if (!data.title) {
+			// 記事タイトルが存在するならそれを先頭に
+			document.title = `${data[postCount].title}｜placet experiri :: ${postId}`;	
+		} else {
+			document.title = `placet experiri :: ${postId}`;	
+		}
+		// link rel="canonical"を書き換え
+		document.querySelector("link[rel=canonical]").href
+				= `https://kyonenya.github.io/?id=${postId}`
 		// meta descriptionを書き換え
 		document.querySelector("meta[name=description]").content
 				= plainTexts[postCount].substr(0, 140);	// プレーンテキストの先頭140文字
-		// meta og:descriptionを書き換え
-		document.querySelector("meta[property='og:description']").content 
-				= plainTexts[postCount].substr(0, 140);	// OGPはJS未対応なのでたぶん無駄
-		// meta og:titleを書き換え
-		document.querySelector("meta[property='og:title']").content 
-				= '仮タイトル'
-//				= data[postCount].title;
 		// 検索フォームを非表示に
 		document.querySelector('.el_search_form').classList.add('hp_hidden');
 	};
@@ -181,9 +180,9 @@ fetch('data.json')
 					<time class="bl_posts_date" datetime="${moment(data[i].date).format("YYYY-MM-DD HH:mm")}">${moment(data[i].date).format("YYYY-MM-DD")}
 					</time>
 				</header>
-				<div class="bl_posts_title">
+				<h2 class="bl_posts_title">
 					${data[i].title}
-				</div>
+				</h2>
 				<div class="bl_text">
 					<p>${postTexts[i]}</p>
 				</div>
@@ -204,9 +203,9 @@ fetch('data.json')
 				<time class="bl_text_date" datetime="${moment(data[i].date).format("YYYY-MM-DD HH:mm")}">${moment(data[i].date).format("YYYY-MM-DD HH:mm")}
 				</time>
 			</header>
-			<div class="bl_text_title">
+			<h2 class="bl_text_title">
 				${data[i].title}
-			</div>
+			</h2>
 			<div class="bl_text">
 				${data[i].text}
 			</div>
@@ -220,9 +219,9 @@ fetch('data.json')
 
 
 })	// fetch.then((data) => {...
-
+/*
 .catch((err) => {
 	console.log('インターネットの接続を確認して、ページを再読み込みしてください。');
 });
-
+*/
 }
