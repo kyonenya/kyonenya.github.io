@@ -10,7 +10,7 @@
 /* ---------------------------------
 	ベースグループ */
 body {
-	font-family: "Helvetica Neue", Verdana, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, sans-serif;
+	font-family: "Helvetica Neue", Verdana, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif;
 	word-break: break-word;	/* 行頭に、。が来るのを避ける */
 	color: #333;	/* 黒の文字色 */
 	line-height: 1.6;
@@ -71,9 +71,9 @@ li:last-child {
 }
 
 .bl_text_title {
-	margin: -0.3em 0em 0.5em;
+	margin: -0.5em 0em 0.3em;
 	font-weight: bold;
-	font-size: 115%;
+	font-size: 105%;
 	text-align: center;
 }
 
@@ -121,7 +121,7 @@ li:last-child {
 
 /* タグリスト */
 .bl_tags {
-	display: inline-flex; /* 横並び、かつ先立つ要素（日付）に回り込める */
+	display: inline-flex;	/* 横並び、かつ先立つ要素（日付）に回り込める */
 	flex-wrap: wrap;
 	list-style: none;
 }
@@ -158,7 +158,7 @@ li:last-child {
 
 /* 表 ---------- */
 .bl_horizTable {
-	border: 1px solid var(--monochrome-light); /* 表全体を囲む */
+	border: 1px solid var(--monochrome-light);	/* 表全体を囲む */
 	max-width: 560px;
 }
 .bl_horizTable table {
@@ -167,21 +167,21 @@ li:last-child {
 	border-collapse: collapse;
 	border-spacing: 0; 
 }
-.bl_horizTable th { /* ■□ */
-	width: 20%; /* テーブル頭の幅 */
-	padding: .3em 0; /* 上下幅 */
+.bl_horizTable th {	/* ■□ */
+	width: 20%;	/* テーブル頭の幅 */
+	padding: .3em 0;	/* 上下幅 */
 	background: hsl(0, 0%, 94%);
 	border-bottom: 1px solid var(--monochrome-light);
 	font-weight: normal;
 }
-.bl_horizTable td { /* □■ */
-	word-break: keep-all; /* いつもより早めに改行 */
+.bl_horizTable td {	/* □■ */
+	word-break: keep-all;	/* いつもより早めに改行 */
 	padding: .3em 0 .3em .75em; 
 	border-bottom: 1px solid var(--monochrome-light);
 }
 .bl_horizTable tr:last-child th, 
 .bl_horizTable tr:last-child td {
-	border-bottom-width: 0px; /* 最終行の下線を消す */
+	border-bottom-width: 0px;	/* 最終行の下線を消す */
 }
 
 /*---------------------------------
@@ -200,7 +200,7 @@ li:last-child {
 	font-size: 16px;
 	font-weight: normal;
 	color: var(--monochrome-dark);
-	vertical-align: baseline; /* 英単語帳の位置：baseline */
+	vertical-align: baseline;	/* 英単語帳の位置：baseline */
 }
 
 /* メニューリスト */
@@ -259,9 +259,9 @@ li:last-child {
 }
 
 .el_search_form:focus {
-	opacity: 1; /* フォーカスされたら可視化 */
+	opacity: 1;	/* フォーカスされたら可視化 */
 	cursor: text;
-	width: 245px; /* 手動で調整してる */
+	width: 245px;	/* 手動で調整してる */
 }
 
 /*---------------------------------
@@ -310,7 +310,7 @@ li:last-child {
 
 .bl_text p + p {
 	text-indent: 1em;	/* 二段落目以降を字下げ */
-	margin-top: 1em;	/* 段落間に余白 */
+	margin-top: 0.5em;	/* 段落間に余白 */
 }
 
 .bl_text blockquote {
@@ -346,7 +346,7 @@ li:last-child {
 	border: none;	/* デフォルトスタイルをリセット */
 	border-top: 1px solid var(--monochrome-light);
 	width: 50%;
-	margin: 1.25em auto;
+	margin: 1em auto;
 }
 
 /* 順序なしリスト */
@@ -371,11 +371,11 @@ li:last-child {
 .bl_text dt {
 	float: left;
 	text-align: right;
-	margin-left: -0.5em; /* 4文字目は画面ギリギリに入れる */
-	width: 4em; /* 最大文字数 */
+	margin-left: -0.5em;	/* 4文字目は画面ギリギリに入れる */
+	width: 4em;	/* 最大文字数 */
 }
 .bl_text dd {
-	margin-left: 3.5em; /* dtの左余白＋最大文字数 */
+	margin-left: 3.5em;	/* dtの左余白＋最大文字数 */
 	/* "： "にぶら下げ、狭い画面で改行されたとき */
 	padding-left: 1.25em;
 	text-indent: -1.25em;
@@ -426,10 +426,19 @@ li:last-child {
 		line-height: 1.7;
 	}
 
+	.bl_text_title {
+	/*	margin: -0.5em 0em 0.3em;	*/
+		font-size: 110%;
+	}
+
+	.bl_text p + p {
+		margin-top: 1em;	/* 段落間余白を増量 */
+	}
+
 	/* ヘッダー --------------- */
 	/* 大箱　*/
 	.ly_header {
-		background: hsl(40, 38%, 97%); /* 背景色で塗りつぶし */
+		background: hsl(40, 38%, 97%);	/* 背景色で塗りつぶし */
 		height: 4.5em;
 		margin: 0 auto;
 	}
@@ -459,7 +468,7 @@ li:last-child {
 	top: 2px;
 	}
 	.el_search_form:focus {
-	width: 300px; /* これも手動で決めてる */
+	width: 300px;	/* これも手動で決めてる */
 	}
 
 } /* @media (min-width: 560px) {... */
