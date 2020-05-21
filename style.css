@@ -268,7 +268,7 @@ li:last-child {
 	フッター */
 .ly_footer {
 	background-color: hsl(0, 0%, 90%);
-	margin-top: 3em;
+	margin-top: 2em;
 }
 
 .ly_footer_inner {
@@ -417,9 +417,10 @@ li:last-child {
 	
 	main {
 		/* ヘッダーに本文がめり込まないように */
-		padding-top: 1em;
+		padding-top: 1.5em;
 	}
 
+	/* 大画面ではテキストを画面いっぱいに表示せず、中央に寄せる */
 	.ly_cont, .ly_header {
 		width: 85%;
 		margin: 0 auto;
@@ -479,8 +480,8 @@ li:last-child {
 @media (min-width: 960px) {
 	
 	.ly_cont, .ly_header {
-	/* 大画面ではテキストを画面いっぱいに表示せず、中央に寄せる */
-		max-width: 800px;
+		width: 78%;
+		max-width: 1000px;
 		line-height: 1.7;
 	}
 
