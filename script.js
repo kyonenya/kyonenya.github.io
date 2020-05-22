@@ -3,7 +3,7 @@
 	// 変数宣言
 	let html = [];
 	const hashtags = [];
-	const shortTextLength = 130;	// 記事一覧に何文字表示するか
+	const shortTextLength = 125;	// 記事一覧に何文字表示するか
 	const postTexts = [];	// 記事一覧への表示用テキスト
 	const plainTexts = [];	// 全文検索などに使う
 
