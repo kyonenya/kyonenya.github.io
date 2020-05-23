@@ -40,6 +40,10 @@ main {
 	background-color: #fffd77 !important;
 }
 
+.hp_underline {
+	text-decoration: underline;
+}
+
 /* リセット ----- */
 
 a {
@@ -194,6 +198,7 @@ li:last-child {
 	font-weight: normal;
 	vertical-align: center;
 }
+
 .el_logo_suffix{
 	font-size: 16px;
 	font-weight: normal;
@@ -214,6 +219,7 @@ li:last-child {
 	font-size: 100%;
 	color: var(--main-color);
 }
+
 .bl_nav li {
 	list-style: none;
 	padding: 0 0.7em;	/* メニュー同士の間隔 */
