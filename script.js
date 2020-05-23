@@ -203,10 +203,8 @@ fetch('data.json')
 				<time class="bl_text_date" datetime="${moment(data[i].date).format("YYYY-MM-DD HH:mm")}">${moment(data[i].date).format("YYYY-MM-DD HH:mm")}
 				</time>
 			</header>
-			<h2 class="bl_text_title">
-				${data[i].title}
-			</h2>
 			<div class="bl_text">
+				<h2 class="bl_text_title">${data[i].title}</h2>
 				${data[i].text}
 			</div>
 			<footer class="bl_text_footer">

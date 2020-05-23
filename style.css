@@ -109,7 +109,6 @@ li:last-child {
 	margin: -0.4em 0 0em 0;
 	padding: 0;
 	letter-spacing: 1px;
-	/* h2をリセット */
 	font-weight: normal;
 	font-size: 100%;
 }
@@ -142,15 +141,14 @@ li:last-child {
 	font-weight: normal;
 	font-size: 110%;
 }
-.ly_cont:first-child > .el_heading1 {
-	/* 先頭の見出しだけ小さめの先頭余白 */
-	margin-top: 1em; 
+/* 先頭の見出しだけ上余白なし */
+.ly_cont:first-child .el_heading1 {
+	margin-top: 0em; 
 }
 
 /* 小見出し _____ */
 .el_heading2 {
-	/* 標準余白 */
-	margin: 0.5em 0 0.75em;	/* セクション間余白、左右の余白限界からの余白、後続要素との余白 */
+	margin: 1em 0 0.75em;	/* セクション間余白、左右の余白限界からの余白、後続要素との余白 */
 	font-weight: normal;
 	border-bottom: 1px solid hsl(0, 0%, 75%);
 	font-size: 105%;
@@ -361,10 +359,10 @@ li:last-child {
 /* 順序つきリスト */
 .bl_text ol {
 	margin-left: 0;
-	padding-left: 0.5em;
+	padding-left: 1.5em;
 }
 .bl_text ol li {
-	list-style: decimal inside;
+	list-style: decimal;
 }
 
 /* 説明リスト */
