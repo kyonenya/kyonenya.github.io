@@ -2,8 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<url>
 		<loc>https://kyonenya.github.io/</loc>
-		<priority>1.0</priority>
 		<changefreq>daily</changefreq>
+		<lastmod>2020-05-23</lastmod>
+	</url>
+	<url>
+		<loc>https://kyonenya.github.io/works</loc>
 		<lastmod>2020-05-23</lastmod>
 	</url>
 	<url><loc>https://kyonenya.github.io/?id=9</loc></url>
