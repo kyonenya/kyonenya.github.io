@@ -159,8 +159,8 @@ fetch('data.json')
 			document.title = `placet experiri :: ${postId}`;	
 		}
 		// link rel="canonical"を書き換え
-		document.querySelector("link[rel=canonical]").href
-				= `https://kyonenya.github.io/?id=${postId}`
+		/* document.querySelector("link[rel=canonical]").href
+				 = `https://kyonenya.github.io/?id=${postId}`	*/
 		// meta descriptionを書き換え
 		document.querySelector("meta[name=description]").content
 				= plainTexts[postCount].substr(0, 140);	// プレーンテキストの先頭140文字
