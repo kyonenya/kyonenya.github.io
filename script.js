@@ -148,22 +148,20 @@ fetch('data.json')
 		// 記事内容の生成
 		document.getElementById('postWrapper').innerHTML
 				= htmlComb_article(postCount);
-		// ロゴに::7を追加。
+		// ロゴに' :: 1'を追加。
 		document.querySelector('.el_logo_suffix').innerText 
 				= ` :: ${postId}`;
 		// ブラウザのタイトルを書き換え
-		if (!data.title) {
+		if (data[postCount].title) {	// 存在判定
 			// 記事タイトルが存在するならそれを先頭に
-			document.title = `${data[postCount].title}｜placet experiri :: ${postId}`;	
+			document.title = `${data[postCount].title}｜placet experiri :: ${postId}`;
 		} else {
-			document.title = `placet experiri :: ${postId}`;	
+			// 記事タイトルが存在しなければデフォルトのidタイトル
+			document.title = `placet experiri :: ${postId}`;
 		}
-		// link rel="canonical"を書き換え
-		/* document.querySelector("link[rel=canonical]").href
-				 = `https://kyonenya.github.io/?id=${postId}`	*/
 		// meta descriptionを書き換え
 		document.querySelector("meta[name=description]").content
-				= plainTexts[postCount].substr(0, 140);	// プレーンテキストの先頭140文字
+				= plainTexts[postCount].substr(0, 110);	// プレーンテキストの先頭110文字
 		// 検索フォームを非表示に
 		document.querySelector('.el_search_form').classList.add('hp_hidden');
 	};
