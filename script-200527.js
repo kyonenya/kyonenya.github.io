@@ -57,6 +57,7 @@ fetch(jsonPath)
 
 		// ダブルダッシュ——が途切れてしまうので罫線に変更
 		data[i].text = data[i].text.replace(/——/g, '──');
+		data[i].title = data[i].title.replace(/——/g, '──');
 
 		// プレーンテキストを生成して配列に格納
 		plainTexts[i] = data[i].text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'');
