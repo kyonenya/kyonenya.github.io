@@ -41,7 +41,7 @@ main {
 }
 
 .hp_underline {
-	text-decoration: underline;
+	/*text-decoration: underline;*/
 }
 
 /* リセット ----- */
@@ -90,18 +90,18 @@ li:last-child {
 	記事一覧リスト */
 
 .bl_posts_item {
-	display: block;
 	padding: 0.75em 0;
 	border-bottom: 1px solid var(--monochrome-light);
 	/* 小ブロックにして中央揃え */
+	display: block;
 	margin: 0 auto;
 }
 .bl_posts_item:first-child {
+	/* 先頭の余白リセット */
 	padding-top: 0;
 }
 
 .bl_posts_header {
-	padding-bottom: 0.3em;
 	color: var(--monochrome-dark);
 }
 
@@ -110,15 +110,23 @@ li:last-child {
 }
 
 .bl_posts_title {
-	margin: -0.4em 0 0em 0;
-	padding: 0;
+	/* 装飾 */
 	letter-spacing: 1px;
+	/* 下線 */
+	display: inline-block;
+	line-height: 1em;
+	border-bottom: 1px solid hsl(0, 0%, 30%);
+	padding-bottom: 1px;
+	/* リセット */
 	font-weight: normal;
 	font-size: 100%;
 }
 
+.bl_posts_summary {
+	margin: 1px 0;
+}
+
 .bl_posts_footer {
-	padding-top: 0.2em;
 	color: var(--monochrome-dark);
 }
 
@@ -412,7 +420,7 @@ li:last-child {
 
 /* -----------------------------------------
 	タブレット・ＰＣ */
-@media (min-width: 560px) {
+@media (min-width: 570px) {
 
 	body {
 		font-size: 18px;

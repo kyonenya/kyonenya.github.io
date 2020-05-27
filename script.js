@@ -1,9 +1,12 @@
 'use strict'
 {	
-	// 変数宣言
+	// メンテナンス用
+	const shortTextLength = 125;	// 記事一覧に何文字表示するか
+	const jsonPath = 'data-200527.json';
+
+	// その他変数宣言
 	let html = [];
 	const hashtags = [];
-	const shortTextLength = 125;	// 記事一覧に何文字表示するか
 	const postTexts = [];	// 記事一覧への表示用テキスト
 	const plainTexts = [];	// 全文検索などに使う
 
@@ -37,7 +40,7 @@
 	
 
 /* JSONデータ取得開始 ---------- */
-fetch('data.json')
+fetch(jsonPath)
  .then((response) => response.json())
  .then((data) => {
 	
@@ -70,10 +73,14 @@ fetch('data.json')
 		if (postTexts[i].length > shortTextLength) {
 			postTexts[i] = `${postTexts[i].substr(0, shortTextLength)}…`;
 		};
-		
+	
 		// 記事一覧ページのHTMLタグを積算
-		html.push(htmlComb_postlist(i));
-
+		if (data[i].title) {	// 存在判定
+			html.push(htmlComb_postlist(i));
+		} else {
+			html.push(htmlComb_postlist(i).replace(/<h2.*h2>/m, ''));
+		}
+	
 	}	// for() {...
 
 
@@ -89,7 +96,7 @@ fetch('data.json')
 		// 全件ループ開始
 		for (var i = 0; i < data.length; i=i+1) {
 			const li = document.querySelectorAll('.bl_posts_item');
-			const li_text = document.querySelectorAll('.bl_posts_item .bl_text');
+			const li_text = document.querySelectorAll('.bl_posts_summary');
 			let searchWordIndex = plainTexts[i].indexOf(searchWord);
 			let resultText = '…';
 
@@ -142,7 +149,8 @@ fetch('data.json')
 	if (postId == null) {
 		document.querySelector('.bl_posts').innerHTML
 				= html.join('');	// タグを直接書き換え、配列を結合
-	} else {
+	} 
+	else {
 		// 記事idはループカウントで言うと何番目か
 		const postCount = data.length - postId;	
 		// 記事内容の生成
@@ -178,10 +186,8 @@ fetch('data.json')
 					<time class="bl_posts_date" datetime="${moment(data[i].date).format("YYYY-MM-DD HH:mm")}">${moment(data[i].date).format("YYYY-MM-DD")}
 					</time>
 				</header>
-				<h2 class="bl_posts_title">
-					${data[i].title}
-				</h2>
-				<div class="bl_text">
+				<h2 class="bl_posts_title hp_underline">${data[i].title}</h2>
+				<div class="bl_posts_summary">
 					<p>${postTexts[i]}</p>
 				</div>
 				<footer class="bl_posts_footer">
@@ -220,4 +226,4 @@ fetch('data.json')
 	console.log('インターネットの接続を確認して、ページを再読み込みしてください。');
 });
 */
-}
+} // {...

@@ -1,3 +1,9 @@
+
+## デザイン・CSSについて
+CSSの命名規則は [PRECSS](http://precss.io/ja/) に則ります。  
+参考書籍：[CSS設計完全ガイド](https://www.amazon.co.jp/dp/429711173X)
+
+
 ## 参考文献
 https://designsupply-web.com/knowledgeside/4649/
 https://the-zombis.sakura.ne.jp/wp/blog/2019/08/24/post-3964/
