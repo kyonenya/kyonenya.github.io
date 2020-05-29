@@ -75,10 +75,11 @@ li:last-child {
 }
 
 .bl_text_title {
-	margin: -0.5em 0em 0.3em;
+	margin: -0.5em 0em 0.2em;
 	font-weight: bold;
-	font-size: 105%;
+	font-size: 107.5%;
 	text-align: center;
+	letter-spacing: 1px
 }
 
 .bl_text_footer {
@@ -119,11 +120,13 @@ li:last-child {
 	padding-bottom: 1px;
 	/* リセット */
 	font-weight: normal;
-	font-size: 100%;
+	font-size: 107.5%;
+	margin: 0 0 0.3em 0;
 }
 
 .bl_posts_summary {
 	margin: 1px 0;
+	text-align: justify;
 }
 
 .bl_posts_footer {
@@ -327,7 +330,7 @@ li:last-child {
 
 .bl_text blockquote {
 	/* 上下に1行の余白、左から1文字分インデント */
-	margin: 1em 0 1em 1em;
+	margin: 1em 0.5em 1em 1em;
 	color: var(--monochrome-dark);
 	border-left: 0.2em solid var(--monochrome-light);
 	padding-left: 0.8em;
