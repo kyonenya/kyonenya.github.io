@@ -331,7 +331,7 @@ li:last-child {
 .bl_text blockquote {
 	/* 上下に1行の余白、左から1文字分インデント */
 	margin: 1em 0.5em 1em 1em;
-	color: var(--monochrome-dark);
+	color: hsl(0, 0%, 40%);
 	border-left: 0.2em solid var(--monochrome-light);
 	padding-left: 0.8em;
 }
