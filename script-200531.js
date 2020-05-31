@@ -182,7 +182,7 @@ fetch(jsonPath)
 	function htmlComb_postlist(i) {
 		return `
 		<li class="bl_posts_item">
-			<a href="?id=${data.length - i}">
+			<a href="${window.location.href}?id=${data.length - i}">
 				<header class="bl_posts_header">
 					<time class="bl_posts_date" datetime="${moment(data[i].date).format("YYYY-MM-DD HH:mm")}">${moment(data[i].date).format("YYYY-MM-DD")}
 					</time>
