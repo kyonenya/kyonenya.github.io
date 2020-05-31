@@ -12,7 +12,7 @@
 - 結論——静的なホスティングサイトで、かつ動的なページ生成を可能にするためには、相手方のPCやスマホを使役してページ生成をやらせればよい。本来サーバーサイドでやるべき仕事を相手にやらせる横着な方法。
 
 
-## 簡易CMS機能（JavaScript）
+## 簡易CMS機能
 - 記事データベース：jsonファイルで代用。非同期通信（ajax）でjsonをGETして、オブジェクトに格納する。以前はjQueryの$getJSONでやっていたが、現在はJavaScriptネイティブのfetchで行なっている。参考：[JSONファイルからHTML生成（jQuery）](https://teratail.com/questions/93120)
 
 - 記事一覧ページ：テンプレートに記事データを埋め込んで、ループで一括HTML生成。参考：[JavaScriptのDOM要素一括生成は.innerHTMLが速い](http://bicycle.life.coocan.jp/takamints/index.php/techtips/whichFastAppendChild)
@@ -28,12 +28,12 @@
 - これに限らず、脱jQueryの潮流に従って、jQueryをJavaScriptに置き換えた。参考：[jQuery→JavaScript書き換え一覧](https://qiita.com/okame_qiita/items/d8d85906b88e33ba0eff)
 
 
-## SEO面について
+## JavaScript SEO
 - 現在ではGoogleクローラーがJavaScriptをレンダリングできるというのは常識だが、厄介ごとも多い。
 
 - 原則的には、サイトマップをxmlで作ってサーチコンソールから送信すれば登録してくれる。参考：[拝啓 Google様、JavaScriptとJSONで動的に変化するページをインデックスしてください](https://qiita.com/S_Kosaka/items/ab6465141061e08bce64)
 
-- 例えば、検索結果への反映やサーチコンソールからの削除申請に対する反応は現在でもゆっくりめ。参考：[HTMLのクロールとJavaScriptの実行は別プロセス](https://www.suzukikenichi.com/blog/executing-javascript-needs-another-cycle-and-takes-longer-time/)
+<!-- - 例えば、検索結果への反映やサーチコンソールからの削除申請に対する反応は現在でもゆっくりめ。参考：[HTMLのクロールとJavaScriptの実行は別プロセス](https://www.suzukikenichi.com/blog/executing-javascript-needs-another-cycle-and-takes-longer-time/) -->
 
 - Googlebotが持ってるJavaScriptのキャッシュが悪さをする。次のような症状がこのサイトでも出た。例：[ライブテストとクロール済みのページで得られるHTMLが異なっている](https://developers.google.com/search/docs/guides/fix-search-javascript?hl=ja)
 
