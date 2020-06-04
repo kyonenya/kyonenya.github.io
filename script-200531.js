@@ -76,9 +76,10 @@ fetch(jsonPath)
 		};
 	
 		// 記事一覧ページのHTMLタグを積算
-		if (data[i].title) {	// 存在判定
+		if (data[i].title) {	// タイトルの存在判定
 			html.push(htmlComb_postlist(i));
 		} else {
+			// タイトルがなければ当該タグを削除
 			html.push(htmlComb_postlist(i).replace(/<h2.*h2>/m, ''));
 		}
 	
@@ -187,7 +188,7 @@ fetch(jsonPath)
 					<time class="bl_posts_date" datetime="${moment(data[i].date).format("YYYY-MM-DD HH:mm")}">${moment(data[i].date).format("YYYY-MM-DD")}
 					</time>
 				</header>
-				<h2 class="bl_posts_title hp_underline">${data[i].title}</h2>
+				<h2 class="bl_posts_title">${data[i].title}</h2>
 				<div class="bl_posts_summary">
 					<p>${postTexts[i]}</p>
 				</div>

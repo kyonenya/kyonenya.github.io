@@ -41,7 +41,7 @@ main {
 }
 
 .hp_underline {
-	/*text-decoration: underline;*/
+	text-decoration: underline;
 }
 
 /* リセット ----- */
@@ -61,32 +61,6 @@ li:last-child {
 	margin-bottom: 0;
 }
 
-/* ---------------------------------
-	テキスト領域 */
-
-.bl_text + .bl_text {
-	/* セクション間余白 */
-	margin-top: 1.5em;
-}	
-
-.bl_text_header {
-	padding-bottom: 0.5em;
-	color: var(--monochrome-dark)
-}
-
-.bl_text_title {
-	margin: -0.5em 0em 0.2em;
-	font-weight: normal;
-	font-size: 115%;
-	text-align: center;
-	letter-spacing: 1px;
-	text-decoration: underline;
-}
-
-.bl_text_footer {
-	padding-top: 0.5em;
-	color: var(--monochrome-dark)
-}
 
 /*	---------------------------------
 	記事一覧リスト */
@@ -114,19 +88,14 @@ li:last-child {
 .bl_posts_title {
 	/* 装飾 */
 	letter-spacing: 1px;
-	/* 下線 */
-	/*display: inline-block;
-	line-height: 1em;
-	border-bottom: 1px solid hsl(0, 0%, 30%);
-	padding-bottom: 1px;*/
 	/* リセット */
 	font-weight: normal;
-	font-size: 115%;
+	font-size: 120%;
 	margin-top: -0.1em;
 }
 
 .bl_posts_summary {
-	margin-top: 0.2em;
+	margin-top: 0.1em;
 	text-align: justify;
 	line-height: 1.5;
 }
@@ -144,6 +113,33 @@ li:last-child {
 }
 .bl_tags li {
 	margin-left: 0.5em;
+}
+
+/* ---------------------------------
+	テキスト領域 */
+
+.bl_text + .bl_text {
+	/* セクション間余白 */
+	margin-top: 1.5em;
+}	
+
+.bl_text_header {
+	padding-bottom: 0.5em;
+	color: var(--monochrome-dark)
+}
+
+.bl_text_title {
+	margin: -0.4em auto 0.25em;
+	font-weight: normal;
+	font-size: 120%;
+	text-align: center;
+	letter-spacing: 1px;
+	/*text-decoration: underline;*/
+}
+
+.bl_text_footer {
+	padding-top: 0.5em;
+	color: var(--monochrome-dark)
 }
 
 /* ---------------------------------
@@ -444,11 +440,6 @@ li:last-child {
 		width: 85%;
 		margin: 0 auto;
 		line-height: 1.7;
-	}
-
-	.bl_text_title {
-		font-size: 110%;
-		margin-bottom: 0.3em;
 	}
 
 	.bl_text p + p {
