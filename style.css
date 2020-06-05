@@ -91,11 +91,11 @@ li:last-child {
 	/* リセット */
 	font-weight: normal;
 	font-size: 120%;
-	margin-top: -0.1em;
+	margin-top: 0em;
 }
 
 .bl_posts_summary {
-	margin-top: 0.1em;
+	margin-top: 0.2em;
 	text-align: justify;
 	line-height: 1.5;
 }
@@ -129,9 +129,9 @@ li:last-child {
 }
 
 .bl_text_title {
-	margin: -0.4em auto 0.25em;
-	font-weight: normal;
-	font-size: 120%;
+	margin: -0.3em auto 0.3em;
+	font-weight: bold;
+	font-size: 117%;
 	text-align: center;
 	letter-spacing: 1px;
 	/*text-decoration: underline;*/
