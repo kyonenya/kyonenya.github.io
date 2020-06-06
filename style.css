@@ -16,6 +16,7 @@ body {
 	line-height: 1.6;
 	font-size: 16px;
 	background: hsl(40, 38%, 97%);	/* 再生紙色 */
+	-webkit-text-size-adjust: 100%; /* iPhone横画面の表示崩れを防ぐ */
 	/* フッターを下部固定 */
 	display: flex;
 	flex-flow: column;	/* 縦の隊列 */
@@ -182,7 +183,7 @@ li:last-child {
 .bl_horizTable th {	/* ■□ */
 	width: 20%;	/* テーブル頭の幅 */
 	padding: .3em 0;	/* 上下幅 */
-	background: hsl(0, 0%, 94%);
+	background: hsl(0, 0%, 95%);
 	border-bottom: 1px solid var(--monochrome-light);
 	font-weight: normal;
 }
@@ -328,15 +329,22 @@ li:last-child {
 }
 
 .bl_text blockquote {
-	/* 上下に1行の余白、左から1文字分インデント */
-	margin: 1em 0.5em 1em 1em;
-	color: hsl(0, 0%, 40%);
-	border-left: 0.2em solid var(--monochrome-light);
-	padding-left: 0.8em;
+	/* 上下 1em = 0.5em + 0.5em */
+	margin: 0.5em 0em 0.5em 0.5em;
+	padding: 0.5em 0em 0.5em 0.75em;
+	/* 左 1em = 0.75em + 0.25em */
+	border-left: 0.25em solid var(--monochrome-light);
+	background: hsl(0, 0%, 96%);
+	/* color: hsl(0, 0%, 30%); */
+	font-family: "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "游明朝", YuMincho, "Times New Roman", serif;
+}
+.bl_text blockquote p {
+	/* 上下左余白1em = 0.5em + 0.5em */
+	margin: 0em 0.5em 0em 0.5em
 }
 .bl_text blockquote p + p {
 	text-indent: 0;	/* 引用ブロック中は字下げなし */
-	margin-top: 0em;	/* 段落間に余白 */
+	margin-top: 0em;	/* 段落間余白もなし */
 }
 
 .bl_text em {
@@ -352,7 +360,8 @@ li:last-child {
 .bl_text h3 {
 	margin: 1.5em 0 0.5em;
 	font-weight: normal;
-	font-size: 100%;
+	font-size: 112%;
+	letter-spacing: 1px;
 	border-bottom: 1px solid hsl(0, 0%, 75%);
 }
 
@@ -361,7 +370,7 @@ li:last-child {
 	border: none;	/* デフォルトスタイルをリセット */
 	border-top: 1px solid var(--monochrome-light);
 	width: 50%;
-	margin: 1em auto;
+	margin: 1.5em auto;
 }
 
 /* 順序なしリスト */
@@ -441,6 +450,10 @@ li:last-child {
 		margin: 0 auto;
 		line-height: 1.7;
 	}
+	
+	.bl_text_title {
+		font-size: 120%;
+	}
 
 	.bl_text p + p {
 		margin-top: 1em;	/* 段落間余白を増量 */
@@ -466,7 +479,8 @@ li:last-child {
 	}
 	.bl_nav a {
 	font-size: 110%;
-}
+	}
+
 	/* ロゴ */
 	.el_logo {
 		margin-left: 4px;
