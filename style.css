@@ -489,7 +489,7 @@ li:last-child {
 		width: 1.7em;	/* メニュー間隔、上書き */
 	}
 	.el_search_icon {
-	top: 2px;
+	top: 0px;	/* 下にずり落ちるので上に押し上げて上書き */
 	}
 	.el_search_form:focus {
 	width: 300px;	/* これも手動で決めてる */
