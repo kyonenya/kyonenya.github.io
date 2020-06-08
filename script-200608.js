@@ -2,7 +2,7 @@
 {	
 	// メンテナンス用
 	const shortTextLength = 125;	// 記事一覧に何文字表示するか
-	const jsonPath = 'data-200531.json';
+	const jsonPath = 'data-200608.json';
 
 	// その他変数宣言
 	let html = [];
