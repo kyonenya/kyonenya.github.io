@@ -305,12 +305,12 @@ li:last-child {
 
 .bl_text a { 
 	/* 下線と文字とを空けるため、擬似的な下線を作る */
-	display: inline-block; 
+	display: inline; 
 	line-height: 1em;	/* 下余白リセット */
 	text-decoration: none;
 	color: hsl(219, 62%, 50%);	/* 薄青、Wikipediaより */
-	border-bottom: 1px solid hsl(219, 62%, 70%);	/* 細く見せるため薄色に */
-	padding-bottom: 1px;	/* 下線との距離 */
+	border-bottom: 1px solid hsl(219, 62%, 65%);	/* 細く見せるため薄色に */
+	padding-bottom: 0px;	/* 下線との距離 */
 	text-indent: 0;	/* 時々生じる謎のインデントを削除 */
 }
 .bl_text a:visited { 
@@ -330,13 +330,12 @@ li:last-child {
 
 .bl_text blockquote {
 	/* 上下 1em = 0.5em + 0.5em */
-	margin: 0.5em 0em 0.5em 0.5em;
+	margin: 1em 0em 1em 0.5em;
 	padding: 0.5em 0em 0.5em 0.75em;
 	/* 左 1em = 0.75em + 0.25em */
 	border-left: 0.25em solid var(--monochrome-light);
-	background: hsl(0, 0%, 96%);
-	/* color: hsl(0, 0%, 30%); */
-	font-family: "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "游明朝", YuMincho, "Times New Roman", serif;
+	background: hsl(0, 0%, 94%);
+	font-family: Georgia, "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "游明朝", YuMincho, serif;
 }
 .bl_text blockquote p {
 	/* 上下左余白1em = 0.5em + 0.5em */
