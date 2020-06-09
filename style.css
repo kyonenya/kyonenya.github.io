@@ -205,7 +205,7 @@ li:last-child {
 
 /* ロゴ ----- */
 .el_logo { 
-	font-size: 28px;
+	font-size: 30px;
 	font-weight: normal;
 	vertical-align: center;
 }
@@ -483,8 +483,7 @@ li:last-child {
 	/* ロゴ */
 	.el_logo {
 		margin-left: 3px;
-		letter-spacing: 1px;
-		font-size: 32px;
+		font-size: 34px;
 	}
 	/* 検索フォーム */
 	.el_search_icon, .el_search_form {
