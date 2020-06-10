@@ -1,15 +1,17 @@
 ## これはどんなサイトですか
-静的なHTMLサイトでも動作するように、JavaScriptのみで構築したブログサイト。記事データをJSONファイルで保持し、そこから個別記事ページを動的に生成する。リアルタイムで全文検索をできる機能もある。SEO面、検索エンジン（Google）への反映についても検証済。
+静的なHTMLサイトでも動作するように、JavaScriptのみで構築したブログサイト。記事データをJSONファイルで保持し、そこから個別記事ページを動的に生成する。
 
 
-## なぜそんな設計で作る必要があるのですか
+## なぜそんな設計で作るのですか
 - なぜ静的ホスティングサイトなのですか——有料サーバーと契約すると、自分が死んだりクレカが止まったりしただけでサイトが消滅するから。無料サーバーも3ヶ月ごとなどの更新ボタンを押し忘れると消える。
 
 - なぜGitHub Pagesなのですか——今後数十年は潰れそうにない会社だから。あと無料ドメイン名（github.io）が一番かっこいいから。
 
 - なぜHTMLサイトにはしないのですか——記事を100個作ったらディレクトリにHTMLファイルが100個できるのが嫌だから。ヘッダーとフッターのデザインを変えるとき100個のHTMLファイル全てを更新するのは不合理だから。
 
-- 結論——静的なホスティングサイトで、かつ動的なページ生成を可能にするためには、相手方のPCやスマホを使役してページ生成をやらせればよい（本来サーバーサイドでやるべき仕事を相手にやらせる横着な方法）。
+- なぜ静的サイトジェネレーター（Jekyllなど）を使わないのですか——スマホやタブレットから記事を追加したりコードを書いたりできないため。たかがブログを書くのにパソコンを開いていちいちビルドするのはスマートでない。
+
+- 結論——静的なホスティングサイトで、かつ動的なページ生成を可能にするためには、相手方のPCやスマホを使役してページ生成をやらせるのがよい（本来サーバーサイドでやるべき仕事を相手にやらせる横着な方法）。
 
 
 ## 簡易CMS機能
@@ -29,18 +31,18 @@
 
 
 ## JavaScript SEO
-- 現在ではGoogleクローラーがJavaScriptをレンダリングできるというのは常識だが、厄介ごとも多い。
+- 現在ではGoogleクローラーもJavaScriptをレンダリングできるが、厄介ごともある。
 
 - 原則的には、サイトマップをxmlで作ってサーチコンソールから送信すれば登録してくれる。参考：[拝啓 Google様、JavaScriptとJSONで動的に変化するページをインデックスしてください](https://qiita.com/S_Kosaka/items/ab6465141061e08bce64)
 
 <!-- - 例えば、検索結果への反映やサーチコンソールからの削除申請に対する反応は現在でもゆっくりめ。参考：[HTMLのクロールとJavaScriptの実行は別プロセス](https://www.suzukikenichi.com/blog/executing-javascript-needs-another-cycle-and-takes-longer-time/) -->
 
-- Googlebotが持ってるJavaScriptのキャッシュが悪さをする。次のような症状がこのサイトでも出た。例：[ライブテストとクロール済みのページで得られるHTMLが異なっている](https://developers.google.com/search/docs/guides/fix-search-javascript?hl=ja)
+- 具体的には、Googlebotが持ってるJavaScriptのキャッシュが悪さをする。次のような症状がこのサイトでも出た。例：[ライブテストとクロール済みのページで得られるHTMLが異なっている](https://developers.google.com/search/docs/guides/fix-search-javascript?hl=ja)
 
 - この場合、ファイル名にフィンガープリントを設定することで解決する（[Google公式マニュアル](https://developers.google.com/search/docs/guides/fix-search-javascript?hl=ja)）。記事のjsonを更新したら（jsonファイルではなく）jsファイルに"script-20200530"のようなユニークな名前をつける。原始的なやり方だが、更新を確実に反映させたいときの応急処置として。参考：[キャッシュのせいだから再読込して」と毎回言わなくて済むように](https://www.nishishi.com/blog/2013/04/avoid_cache_que.html)
 
 
 ## サイトデザインについて
-- CSSの命名規則は [PRECSS](http://precss.io/ja/) に則る。参考書籍：『CSS設計完全ガイド』（[Amazon](https://www.amazon.co.jp/dp/429711173X)）
+- CSSの命名規則は[PRECSS](http://precss.io/ja/) に則る。参考書籍：『CSS設計完全ガイド』（[Amazon](https://www.amazon.co.jp/dp/429711173X)）
 
 - [andante](http://ofni.necocen.info)という日記サイトのデザインを勝手に大いに参考にさせてもらった。
