@@ -155,7 +155,7 @@ li:last-child {
 	border-bottom: 1px solid hsl(0, 0%, 75%);
 	padding-right: 0.75em;
 	font-weight: normal;
-	font-size: 110%;
+	font-size: 115%;
 }
 /* 先頭の見出しだけ上余白なし */
 .ly_cont .el_heading1:first-child {
@@ -167,7 +167,7 @@ li:last-child {
 	margin: 1em 0 0.75em;	/* セクション間余白、左右の余白限界からの余白、後続要素との余白 */
 	font-weight: normal;
 	border-bottom: 1px solid hsl(0, 0%, 75%);
-	font-size: 105%;
+	font-size: 110%;
 }
 
 /* 表 ---------- */
@@ -380,6 +380,7 @@ li:last-child {
 }
 .bl_text ul li {
 	list-style: circle;
+	margin-bottom: 0.25em;
 }
 
 /* 順序つきリスト */
@@ -389,6 +390,7 @@ li:last-child {
 }
 .bl_text ol li {
 	list-style: decimal;
+	margin-bottom: 0.25em;
 }
 
 /* 説明リスト */
