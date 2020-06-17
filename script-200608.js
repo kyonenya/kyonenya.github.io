@@ -82,8 +82,9 @@ fetch(jsonPath)
 			postTexts[i] = `${postTexts[i].substr(0, shortTextLength)}…`;
 		};
 	
-	// 記事一覧ページのHTMLタグを積算 ----------
+		// 記事一覧ページのHTMLタグを積算 ----------
 		const tagFilterIndex = data[i].tags.indexOf(queries.tag)
+
 		// タグ検索がONで、かつ検索にマッチしないならば、
 		if (queries.tag != null & tagFilterIndex == -1) {
 			// 当該記事はフィルターされる。
@@ -184,7 +185,7 @@ fetch(jsonPath)
 			suffix: ` :: ${queries.id}`
 		}
 		
-		// ページ生成
+		// ページ生成（この一連の処理を関数化する）
 		document.getElementById('articleWrapper').innerHTML = html_article(postCount);	// 記事内容
 		document.title = article.pageTitle(postCount)	// ブラウザのタイトル
 		document.querySelector('.el_logo_suffix').innerText = article.suffix;	// ロゴのidカウンター
@@ -217,12 +218,12 @@ fetch(jsonPath)
 					<p>${postTexts[i]}</p>
 				</div>
 			</a>
-				<footer class="bl_posts_footer">
-					<span class="bl_posts_dateago">${moment(data[i].date).fromNow()}</span>
-					<ul class="bl_tags">
-						${hashtags[i]}
-					</ul>
-				</footer>
+			<footer class="bl_posts_footer">
+				<span class="bl_posts_dateago">${moment(data[i].date).fromNow()}</span>
+				<ul class="bl_tags">
+					${hashtags[i]}
+				</ul>
+			</footer>
 		</li>`
 	} // function html_postlist(i) {...
 
