@@ -8,7 +8,7 @@
 	let html = [];
 	const hashtags = [];
 	const postTexts = [];	// 記事一覧への表示用テキスト
-	const plainTexts = [];	// 全文検索などに使う
+	const plainTexts = [];
 
 	/* ---------------------------------
 		URLからクエリ文字列を取得 */
@@ -76,11 +76,11 @@ fetch(jsonPath)
 		};
 	
 		// 記事一覧ページのHTMLタグを積算
-		if (data[i].title) {	// タイトルの存在判定
-			html.push(htmlComb_postlist(i));	// 積算
+		if (data[i].title) {	// もしタイトルが存在すれば、
+			html.push(html_postlist(i));	// そのまま積算。
 		} else {
-			// タイトルがなければ当該タグを削除
-			html.push(htmlComb_postlist(i).replace(/<h2.*h2>/m, ''));
+			// タイトルが存在しなければ、タイトルタグ（h2）を削除してから積算。
+			html.push(html_postlist(i).replace(/<h2[\s\S]*?h2>/gm, ''));	// [改行文字or非改行文字]の最短の(?)繰り返し(*)
 		}
 	
 	}	// for() {...
@@ -127,7 +127,7 @@ fetch(jsonPath)
 					resultText += '…';	// 末尾に'…'を追加。
 				} 
 				// 検索語句をハイライト表示する
-				resultText = resultText.replace(new RegExp(searchWord, "g"), `<span class="hp_highlight">${searchWord}<\/span>`);	// 変数を使って複数置換させる
+				resultText = resultText.replace(new RegExp(searchWord, "g"), `<span class="hp_highlight">${searchWord}<\/span>`);	// （変数を使って複数置換させる方法）
 				// DOM要素として追加
 				li_text[i].innerHTML = `<p>${resultText}</p>`;
 			
@@ -161,16 +161,24 @@ fetch(jsonPath)
 	// 個別記事ページ生成 ----------
 		// 記事idはループカウントで言うと何番目か
 		const postCount = data.length - postId;	
+		// 表示調整用。
+		const articlePage = {
+			title: function (postCount) {
+				return `${data[postCount].title}｜placet experiri :: ${postId}`;
+			}
+		}
+		
 		// 記事内容の生成
 		document.getElementById('postWrapper').innerHTML
-				= htmlComb_article(postCount);
+				= html_article(postCount);
 		// ロゴに' :: 123'を追加。
 		document.querySelector('.el_logo_suffix').innerText 
 				= ` :: ${postId}`;
 		// ブラウザのタイトルを書き換え
 		if (data[postCount].title) {	// 存在判定
 			// 記事タイトルが存在するならそれを先頭に
-			document.title = `${data[postCount].title}｜placet experiri :: ${postId}`;
+			// document.title = `${data[postCount].title}｜placet experiri :: ${postId}`;
+			document.title = articlePage.title(postCount)
 		} else {
 			// 記事タイトルが存在しなければデフォルトのidタイトルに
 			document.title = `placet experiri :: ${postId}`;
@@ -186,15 +194,17 @@ fetch(jsonPath)
 	/* ---------------------------------
 		テンプレート */
 	// 記事一覧リスト
-	function htmlComb_postlist(i) {
+	function html_postlist(i) {
 		return `
 		<li class="bl_posts_item">
-			<a href="${window.location.href}?id=${data.length - i}">
+			<a href="?id=${data.length - i}">
 				<header class="bl_posts_header">
 					<time class="bl_posts_date" datetime="${moment(data[i].date).format("YYYY-MM-DD HH:mm")}">${moment(data[i].date).format("YYYY-MM-DD")}
 					</time>
 				</header>
-				<h2 class="bl_posts_title">${data[i].title}</h2>
+				<h2 class="bl_posts_title">
+					${data[i].title}
+				</h2>
 				<div class="bl_posts_summary">
 					<p>${postTexts[i]}</p>
 				</div>
@@ -206,10 +216,10 @@ fetch(jsonPath)
 				</footer>
 			</a>
 		</li>`
-	} // function htmlComb_postlist(i) {...
+	} // function html_postlist(i) {...
 
 	// 個別記事ページ
-	function htmlComb_article(i) {
+	function html_article(i) {
 		return `
 			<header class="bl_text_header">
 				<time class="bl_text_date" datetime="${moment(data[i].date).format("YYYY-MM-DD HH:mm")}">${moment(data[i].date).format("YYYY-MM-DD HH:mm")}
@@ -225,7 +235,7 @@ fetch(jsonPath)
 					${hashtags[i]}
 				</ul>
 			</footer>`
-	}	// function htmlComb_article(i) {...
+	}	// function html_article(i) {...
 
 
 })	// fetch.then((data) => {...
