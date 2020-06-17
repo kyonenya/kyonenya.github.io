@@ -1,8 +1,8 @@
 'use strict'
 {	
-	// メンテナンス用
+	// 表示調整・メンテナンス用
 	const shortTextLength = 125;	// 記事一覧に何文字表示するか
-	const jsonPath = 'data-200531.json';
+	const jsonPath = 'data-200608.json';
 
 	// その他変数宣言
 	let html = [];
@@ -76,9 +76,10 @@ fetch(jsonPath)
 		};
 	
 		// 記事一覧ページのHTMLタグを積算
-		if (data[i].title) {	// 存在判定
-			html.push(htmlComb_postlist(i));
+		if (data[i].title) {	// タイトルの存在判定
+			html.push(htmlComb_postlist(i));	// 積算
 		} else {
+			// タイトルがなければ当該タグを削除
 			html.push(htmlComb_postlist(i).replace(/<h2.*h2>/m, ''));
 		}
 	
@@ -98,16 +99,20 @@ fetch(jsonPath)
 		for (var i = 0; i < data.length; i=i+1) {
 			const li = document.querySelectorAll('.bl_posts_item');
 			const li_text = document.querySelectorAll('.bl_posts_summary');
+
+			// 変数
 			let searchWordIndex = plainTexts[i].indexOf(searchWord);
+			let searchWordIndex_title = data[i].title.indexOf(searchWord);	// タイトル簡易検索
+			let searchWordIndex_hashtags = hashtags[i].indexOf(searchWord);	// ハッシュタグ簡易検索
 			let resultText = '…';
 
 			// 表示調整用
-			const beforeLength = 16;	// 先読み、マッチした検索語句の何文字前から？
-			const afterLength = 26;	// 後読み
-			const resultLength = beforeLength + searchWord.length + afterLength;	// 結果文字数＝先読み＋検索語句＋後読み
-		
-			// マッチしたときは、
-			if (searchWordIndex != -1) {
+			const resultLength = 42;	// 結果文字数＝先読み＋検索語句＋後読み
+			const beforeLength = 15;	// 先読み、マッチした検索語句の何文字前から？
+			const afterLength = resultLength - beforeLength - searchWord.length;	// 後読み
+			
+			// マッチしたときは（本文・タイトル・タグのいずれかに）
+			if (searchWordIndex != -1 || searchWordIndex_title != -1 || searchWordIndex_hashtags != -1) {
 				li[i].classList.remove('hp_hidden');	// 表示。
 				// 検索語句が先頭に近すぎたら、
 				if (searchWordIndex <= beforeLength) {
@@ -148,16 +153,18 @@ fetch(jsonPath)
 	/* ---------------------------------
 		HTML生成 */	
 	if (postId == null) {
+	// 記事一覧ページ生成 
 		document.querySelector('.bl_posts').innerHTML
 				= html.join('');	// タグを直接書き換え、配列を結合
 	} 
 	else {
+	// 個別記事ページ生成 ----------
 		// 記事idはループカウントで言うと何番目か
 		const postCount = data.length - postId;	
 		// 記事内容の生成
 		document.getElementById('postWrapper').innerHTML
 				= htmlComb_article(postCount);
-		// ロゴに' :: 1'を追加。
+		// ロゴに' :: 123'を追加。
 		document.querySelector('.el_logo_suffix').innerText 
 				= ` :: ${postId}`;
 		// ブラウザのタイトルを書き換え
@@ -165,7 +172,7 @@ fetch(jsonPath)
 			// 記事タイトルが存在するならそれを先頭に
 			document.title = `${data[postCount].title}｜placet experiri :: ${postId}`;
 		} else {
-			// 記事タイトルが存在しなければデフォルトのidタイトル
+			// 記事タイトルが存在しなければデフォルトのidタイトルに
 			document.title = `placet experiri :: ${postId}`;
 		}
 		// meta descriptionを書き換え
@@ -187,7 +194,7 @@ fetch(jsonPath)
 					<time class="bl_posts_date" datetime="${moment(data[i].date).format("YYYY-MM-DD HH:mm")}">${moment(data[i].date).format("YYYY-MM-DD")}
 					</time>
 				</header>
-				<h2 class="bl_posts_title hp_underline">${data[i].title}</h2>
+				<h2 class="bl_posts_title">${data[i].title}</h2>
 				<div class="bl_posts_summary">
 					<p>${postTexts[i]}</p>
 				</div>
