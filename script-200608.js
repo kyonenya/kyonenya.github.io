@@ -35,9 +35,7 @@
 	}
 	
 	// 実行
-	const queries = getUrlQueries();
-	const postId = queries.id;
-	
+	const queries = getUrlQueries();	// 記事idは'queries.id'に格納される
 
 /* JSONデータ取得開始 ---------- */
 fetch(jsonPath)
@@ -151,45 +149,37 @@ fetch(jsonPath)
 
 	
 	/* ---------------------------------
-		HTML生成 */	
-	if (postId == null) {
-	// 記事一覧ページ生成 
-		document.querySelector('.bl_posts').innerHTML
-				= html.join('');	// タグを直接書き換え、配列を結合
-	} 
-	else {
+		HTML生成 */	 
+
 	// 個別記事ページ生成 ----------
-		// 記事idはループカウントで言うと何番目か
-		const postCount = data.length - postId;	
-		// 表示調整用。
-		const articlePage = {
-			title: function (postCount) {
-				return `${data[postCount].title}｜placet experiri :: ${postId}`;
-			}
+	if (isFinite(queries.id)) {	// 数値（有限の数値）判定
+		// 変数
+		const postCount = data.length - queries.id;	// 記事idはループカウントで言うと何番目か
+		// 表示調整用
+		const article = {
+			pageTitle: function (postCount) {
+				if (data[postCount].title) {	// 記事タイトルが存在するなら、
+					return `${data[postCount].title}｜placet experiri :: ${queries.id}`	// それをページタイトルの先頭に。
+				} else {	// 記事タイトルが存在しないなら、
+					return `placet experiri :: ${queries.id}`;	// デフォルトのidタイトルに。
+				}
+			},
+			suffix: ` :: ${queries.id}`
 		}
 		
-		// 記事内容の生成
-		document.getElementById('postWrapper').innerHTML
-				= html_article(postCount);
-		// ロゴに' :: 123'を追加。
-		document.querySelector('.el_logo_suffix').innerText 
-				= ` :: ${postId}`;
-		// ブラウザのタイトルを書き換え
-		if (data[postCount].title) {	// 存在判定
-			// 記事タイトルが存在するならそれを先頭に
-			// document.title = `${data[postCount].title}｜placet experiri :: ${postId}`;
-			document.title = articlePage.title(postCount)
-		} else {
-			// 記事タイトルが存在しなければデフォルトのidタイトルに
-			document.title = `placet experiri :: ${postId}`;
-		}
-		// meta descriptionを書き換え
+		// ページ生成
+		document.getElementById('articleWrapper').innerHTML = html_article(postCount);	// 記事内容
+		document.title = article.pageTitle(postCount)	// ブラウザのタイトル
+		document.querySelector('.el_logo_suffix').innerText = article.suffix;	// ロゴのidカウンター
 		document.querySelector("meta[name=description]").content
-				= plainTexts[postCount].substr(0, 110);	// プレーンテキストの先頭110文字
-		// 検索フォームを非表示に
-		document.querySelector('.el_search_form').classList.add('hp_hidden');
-	};
-
+				= plainTexts[postCount].substr(0, 110);	// 検索結果の説明文
+		document.querySelector('.el_search_form').classList.add('hp_hidden');	// 検索フォームを非表示に
+	}
+	// 記事一覧ページ生成 ----------
+	else if (queries.id == null) {	
+		document.getElementById('postListWrapper').innerHTML
+				= html.join('');	// 配列を結合し、タグを書き換え
+	}
 
 	/* ---------------------------------
 		テンプレート */
