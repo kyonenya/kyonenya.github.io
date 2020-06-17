@@ -1,7 +1,6 @@
 'use strict'
 {	
-	// 表示調整・メンテナンス用
-	const shortTextLength = 125;	// 記事一覧に何文字表示するか
+	// 表示調整用
 	const jsonPath = 'data-200608.json';
 
 	// その他変数宣言
@@ -9,6 +8,7 @@
 	const hashtags = [];
 	const postTexts = [];	// 記事一覧への表示用テキスト
 	const plainTexts = [];
+
 
 	/* ---------------------------------
 		URLからクエリ文字列を取得 */
@@ -21,27 +21,29 @@
 		if (!queryStr) {
 			return queries;	// 空のオブジェクトを返す。
 		}
-	
+		
 	  // 複数のクエリを'&'で切って配列へと分解
 		const queryArr = queryStr.split('&')	// ['foo=1', 'bar=2']
 	
 		queryArr.forEach((eachQueryStr) => {
-			// '='でさらに分割してそれぞれkey,valueへと格納
+			// '='でさらに分割してそれぞれ配列（key,value）へと格納
 			const keyAndValue = eachQueryStr.split('=');	// ['foo', '1']
-			queries[keyAndValue[0]] = keyAndValue[1];	// {foo: 1}
+			// 配列からオブジェクトを生成、このとき値を日本語にデコードしておく
+			queries[keyAndValue[0]] = decodeURIComponent(keyAndValue[1]);	// {foo: 1}
 		});
 		
 		return queries;
 	}
 	
 	// 実行
-	const queries = getUrlQueries();	// 記事idは'queries.id'に格納される
+	const queries = getUrlQueries();
 
-/* JSONデータ取得開始 ---------- */
+
+/* JSONデータ取得開始 --------------------  */
 fetch(jsonPath)
  .then((response) => response.json())
  .then((data) => {
-	
+
 	// 古い順に逆順ソート
 /*	data.sort(function(a, b) {
 		if (a.date > b.date) {
@@ -49,8 +51,11 @@ fetch(jsonPath)
 		} else {
 			return -1;
 		}
-	})
-*/
+	}) */
+
+
+	/* ---------------------------------
+		下準備・テンプレートの加工 */
 	for (var i = 0; i < data.length; i=i+1) {
 
 		// ダブルダッシュ——が途切れてしまうので罫線に変更
@@ -63,21 +68,33 @@ fetch(jsonPath)
 		// ハッシュタグをli要素として生成して結合
 		hashtags[i] = ""	// 初期化
 		for (var j in data[i].tags) {
-			hashtags[i] += `<li><span>#${data[i].tags[j]}</span></li>`;
+			// リンクにタグフィルター用のクエリ文字列を仕込む
+			hashtags[i] += `<li><a href="?tag=${data[i].tags[j]}">#${data[i].tags[j]}</a></li>`;
 		};
 
 		// 記事一覧リストでの表示用文字列を作る
+		// 表示調整用
+		const shortTextLength = 125;	// 記事一覧に何文字表示するか
+
 		postTexts[i] = plainTexts[i];
 		// 長文なら省略して「…」を追加
 		if (postTexts[i].length > shortTextLength) {
 			postTexts[i] = `${postTexts[i].substr(0, shortTextLength)}…`;
 		};
 	
-		// 記事一覧ページのHTMLタグを積算
-		if (data[i].title) {	// もしタイトルが存在すれば、
+	// 記事一覧ページのHTMLタグを積算 ----------
+		const tagFilterIndex = data[i].tags.indexOf(queries.tag)
+		// タグ検索がONで、かつ検索にマッチしないならば、
+		if (queries.tag != null & tagFilterIndex == -1) {
+			// 当該記事はフィルターされる。
+		}
+		// もしタイトルが存在すれば、
+		else if (data[i].title) {	
 			html.push(html_postlist(i));	// そのまま積算。
-		} else {
-			// タイトルが存在しなければ、タイトルタグ（h2）を削除してから積算。
+		} 
+		// タイトルが存在しなければ、
+		else {
+			// タイトルタグ（h2）を削除してから積算。
 			html.push(html_postlist(i).replace(/<h2[\s\S]*?h2>/gm, ''));	// [改行文字or非改行文字]の最短の(?)繰り返し(*)
 		}
 	
@@ -140,13 +157,13 @@ fetch(jsonPath)
 			};
 
 		};	// for(){...
-	};	// realTimeSearch() => {...
+	};	// ---------- realTimeSearch() => {...
 
 	// 文字入力されるたびに検索実行
 	document.querySelector('.el_search_form').addEventListener('input', () => {
 		realTimeSearch();
 	});
-
+	
 	
 	/* ---------------------------------
 		HTML生成 */	 
@@ -180,7 +197,8 @@ fetch(jsonPath)
 		document.getElementById('postListWrapper').innerHTML
 				= html.join('');	// 配列を結合し、タグを書き換え
 	}
-
+	
+	
 	/* ---------------------------------
 		テンプレート */
 	// 記事一覧リスト
@@ -198,13 +216,13 @@ fetch(jsonPath)
 				<div class="bl_posts_summary">
 					<p>${postTexts[i]}</p>
 				</div>
+			</a>
 				<footer class="bl_posts_footer">
 					<span class="bl_posts_dateago">${moment(data[i].date).fromNow()}</span>
 					<ul class="bl_tags">
 						${hashtags[i]}
 					</ul>
 				</footer>
-			</a>
 		</li>`
 	} // function html_postlist(i) {...
 
