@@ -262,7 +262,7 @@ li:last-child {
 }
 
 .el_search_form {
-	top: -4px;	/* フォームがメニューを覆い隠すよう少し上に */
+	top: -10px;	/* フォームがメニューを覆い隠すよう少し上に */
 	cursor: pointer; 
 	border: 1px solid var(--monochrome-light);
 	outline: none;
