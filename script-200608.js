@@ -185,7 +185,7 @@ fetch(jsonPath)
 			suffix: ` :: ${queries.id}`
 		}
 		
-		// ページ生成（この一連の処理を関数化する）
+		// ページ生成
 		document.getElementById('articleWrapper').innerHTML = html_article(postCount);	// 記事内容
 		document.title = article.pageTitle(postCount)	// ブラウザのタイトル
 		document.querySelector('.el_logo_suffix').innerText = article.suffix;	// ロゴのidカウンター
