@@ -5,17 +5,14 @@
 
 	// その他変数宣言
 	let html = [];
-	const hashtags = [];
 	const postTexts = [];	// 記事一覧への表示用テキスト
-	const plainTexts = [];
 
 
 	/* ---------------------------------
 		URLからクエリ文字列を取得 */
 	const getUrlQueries = () => {
 		const queries = {};
-		const queryStr = window.location.search.slice(1);	// 文頭の'?'を除外
-		//	const queryStr = 'foo=1&bar=2';
+		const queryStr = window.location.search.slice(1);	// 'foo=1&bar=2'、文頭の'?'を除外
 	
 	  // クエリがない場合は、
 		if (!queryStr) {
@@ -31,9 +28,9 @@
 			// 配列からオブジェクトを生成、このとき値を日本語にデコードしておく
 			queries[keyAndValue[0]] = decodeURIComponent(keyAndValue[1]);	// {foo: 1}
 		});
-		
+	
 		return queries;
-	}
+	};
 	
 	// 実行
 	const queries = getUrlQueries();
@@ -58,25 +55,24 @@ fetch(jsonPath)
 		下準備・テンプレートの加工 */
 	for (var i = 0; i < data.length; i=i+1) {
 
+	// dataオブジェクト配列にプロパティを追加
 		// ダブルダッシュ——が途切れてしまうので罫線に変更
 		data[i].text = data[i].text.replace(/——/g, '──');
 		data[i].title = data[i].title.replace(/——/g, '──');
 
-		// プレーンテキストを生成して配列に格納
-		plainTexts[i] = data[i].text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'');
+		// プレーンテキストを生成して格納
+		data[i].plainTexts = data[i].text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'');
 
-		// ハッシュタグをli要素として生成して結合
-		hashtags[i] = ""	// 初期化
-		for (var j in data[i].tags) {
-			// リンクにタグフィルター用のクエリ文字列を仕込む
-			hashtags[i] += `<li><a href="?tag=${data[i].tags[j]}">#${data[i].tags[j]}</a></li>`;
-		};
+		// （dataオブジェクト配列に新しいプロパティを追加）
+		data[i].hashtags = data[i].tags
+				.map((eachTag) => template_hashtags(eachTag))
+				.join('');
 
-		// 記事一覧リストでの表示用文字列を作る
+	// 記事一覧リストでの表示用文字列を作る
 		// 表示調整用
 		const shortTextLength = 125;	// 記事一覧に何文字表示するか
 
-		postTexts[i] = plainTexts[i];
+		postTexts[i] = data[i].plainTexts;
 		// 長文なら省略して「…」を追加
 		if (postTexts[i].length > shortTextLength) {
 			postTexts[i] = `${postTexts[i].substr(0, shortTextLength)}…`;
@@ -117,9 +113,9 @@ fetch(jsonPath)
 			const li_text = document.querySelectorAll('.bl_posts_summary');
 
 			// 変数
-			let searchWordIndex = plainTexts[i].indexOf(searchWord);
+			let searchWordIndex = data[i].plainTexts.indexOf(searchWord);
 			let searchWordIndex_title = data[i].title.indexOf(searchWord);	// タイトル簡易検索
-			let searchWordIndex_hashtags = hashtags[i].indexOf(searchWord);	// ハッシュタグ簡易検索
+			let searchWordIndex_hashtags = data[i].hashtags.indexOf(searchWord);	// ハッシュタグ簡易検索
 			let resultText = '…';
 
 			// 表示調整用
@@ -136,10 +132,10 @@ fetch(jsonPath)
 					resultText = '';	// 冒頭の'…'を削除。
 				}				
 				// 結果表示用の文字列
-				resultText += plainTexts[i].substr(searchWordIndex - beforeLength, resultLength)
+				resultText += data[i].plainTexts.substr(searchWordIndex - beforeLength, resultLength)
 				// 検索語句が末尾より十分遠ければ、
 				const searchWordIndex_last = searchWordIndex + searchWord.length + afterLength;
-				if (searchWordIndex_last < plainTexts[i].length) {
+				if (searchWordIndex_last < data[i].plainTexts.length) {
 					resultText += '…';	// 末尾に'…'を追加。
 				} 
 				// 検索語句をハイライト表示する
@@ -221,7 +217,7 @@ fetch(jsonPath)
 			<footer class="bl_posts_footer">
 				<span class="bl_posts_dateago">${moment(data[i].date).fromNow()}</span>
 				<ul class="bl_tags">
-					${hashtags[i]}
+					${data[i].hashtags}
 				</ul>
 			</footer>
 		</li>`
@@ -241,11 +237,17 @@ fetch(jsonPath)
 			<footer class="bl_text_footer">
 				<span class="bl_posts_dateago">${moment(data[i].date).fromNow()}</span>
 				<ul class="bl_tags">
-					${hashtags[i]}
+					${data[i].hashtags}
 				</ul>
 			</footer>`
 	}	// function html_article(i) {...
 
+	function template_hashtags(eachTag) {
+		return `<li><a href="?tag=${eachTag}">#${eachTag}</a></li>`
+	}
+		// リンクにタグフィルター用のクエリ文字列を仕込む
+
+//
 
 })	// fetch.then((data) => {...
 /*
