@@ -5,8 +5,6 @@
 
 	// その他変数宣言
 	let html = [];
-	const postTexts = [];	// 記事一覧への表示用テキスト
-
 
 	/* ---------------------------------
 		URLからクエリ文字列を取得 */
@@ -56,29 +54,29 @@ fetch(jsonPath)
 	for (var i = 0; i < data.length; i=i+1) {
 
 	// dataオブジェクト配列にプロパティを追加
-		// ダブルダッシュ——が途切れてしまうので罫線に変更
+		// 1. ダブルダッシュ——が途切れてしまうので罫線に変更
 		data[i].text = data[i].text.replace(/——/g, '──');
 		data[i].title = data[i].title.replace(/——/g, '──');
 
-		// プレーンテキストを生成して格納
-		data[i].plainTexts = data[i].text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'');
+		// 2. プレーンテキストを生成して格納
+		data[i].plainText = data[i].text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'');
 
-		// （dataオブジェクト配列に新しいプロパティを追加）
+		// 3. 記事一覧リストでの表示用文字列を作る
+		const postTextLength = 125;	// 記事一覧に何文字表示するか
+		
+		// 長文なら、
+		if (data[i].plainText.length > postTextLength) {
+			data[i].postText = `${data[i].plainText.substr(0, postTextLength)}…`;	// 冒頭n文字分だけを省略表示。
+		} else {	// 短文なら、
+			data[i].postText = data[i].plainText;	// プレーンテキストそのまま
+		};
+
+		// dataオブジェクト配列に新しいプロパティを追加）
 		data[i].hashtags = data[i].tags
 				.map((eachTag) => template_hashtags(eachTag))
 				.join('');
-
-	// 記事一覧リストでの表示用文字列を作る
-		// 表示調整用
-		const shortTextLength = 125;	// 記事一覧に何文字表示するか
-
-		postTexts[i] = data[i].plainTexts;
-		// 長文なら省略して「…」を追加
-		if (postTexts[i].length > shortTextLength) {
-			postTexts[i] = `${postTexts[i].substr(0, shortTextLength)}…`;
-		};
 	
-		// 記事一覧ページのHTMLタグを積算 ----------
+	// 記事一覧ページのHTMLタグを積算 ----------
 		const tagFilterIndex = data[i].tags.indexOf(queries.tag)
 
 		// タグ検索がONで、かつ検索にマッチしないならば、
@@ -113,7 +111,7 @@ fetch(jsonPath)
 			const li_text = document.querySelectorAll('.bl_posts_summary');
 
 			// 変数
-			let searchWordIndex = data[i].plainTexts.indexOf(searchWord);
+			let searchWordIndex = data[i].plainText.indexOf(searchWord);
 			let searchWordIndex_title = data[i].title.indexOf(searchWord);	// タイトル簡易検索
 			let searchWordIndex_hashtags = data[i].hashtags.indexOf(searchWord);	// ハッシュタグ簡易検索
 			let resultText = '…';
@@ -132,10 +130,10 @@ fetch(jsonPath)
 					resultText = '';	// 冒頭の'…'を削除。
 				}				
 				// 結果表示用の文字列
-				resultText += data[i].plainTexts.substr(searchWordIndex - beforeLength, resultLength)
+				resultText += data[i].plainText.substr(searchWordIndex - beforeLength, resultLength)
 				// 検索語句が末尾より十分遠ければ、
 				const searchWordIndex_last = searchWordIndex + searchWord.length + afterLength;
-				if (searchWordIndex_last < data[i].plainTexts.length) {
+				if (searchWordIndex_last < data[i].plainText.length) {
 					resultText += '…';	// 末尾に'…'を追加。
 				} 
 				// 検索語句をハイライト表示する
@@ -150,7 +148,7 @@ fetch(jsonPath)
 			
 			// 検索フォームが空になったら、
 			if (searchWord === '') {
-				li_text[i].innerHTML = postTexts[i]	// 元のテキストに戻す。
+				li_text[i].innerHTML = data[i].postText	// 元のテキストに戻す。
 			};
 
 		};	// for(){...
@@ -211,7 +209,7 @@ fetch(jsonPath)
 					${data[i].title}
 				</h2>
 				<div class="bl_posts_summary">
-					<p>${postTexts[i]}</p>
+					<p>${data[i].postText}</p>
 				</div>
 			</a>
 			<footer class="bl_posts_footer">
