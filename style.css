@@ -28,7 +28,7 @@ main {
 
 .ly_header, .ly_cont {
 	/* 余白限界 */
-	width: 92.5vw;
+	width: 90vw;
 	margin: 0 auto;
 }
 
@@ -38,12 +38,15 @@ main {
 }
 
 .hp_highlight {
-	background-color: #fffd77 !important;
+	background: hsl(60, 100%, 77%);	/* #ffff8c */
+	border: 1px solid hsla(0, 0%, 0%, 0.15);	/* 	透明化した黒線を被せる */
+	border-radius: 3px;
+	padding: 0.1em;
 }
 
 .hp_underline {
-	border-bottom: 1px solid !important;
-	padding-bottom: 0px !important;
+	border-bottom: 1px solid /* !important */;
+	padding-bottom: 0px /* !important */;
 }
 
 /* リセット ----- */
@@ -117,6 +120,16 @@ li:last-child {
 	margin-left: 0.5em;
 }
 
+.el_archive_header {
+	color: hsl(0, 0%, 45%);
+	text-align: center;
+	font-weight: bold;
+	font-size: 1.2em;
+	margin: -0.5em 0 0em;
+
+}
+
+
 /* ---------------------------------
 	テキスト領域 */
 
@@ -127,7 +140,7 @@ li:last-child {
 
 .bl_text_header {
 	padding-bottom: 0.5em;
-	color: var(--monochrome-dark)
+	color: var(--monochrome-dark);
 }
 
 .bl_text_title {
@@ -333,9 +346,9 @@ li:last-child {
 .bl_text blockquote {
 	/* 上下 1em = 0.5em + 0.5em */
 	margin: 1em 0em 1em 0.5em;
-	padding: 0.5em 0em 0.5em 0.75em;
-	/* 左 1em = 0.75em + 0.25em */
-	border-left: 0.25em solid var(--monochrome-light);
+	padding: 0.5em 0em 0.5em 0.8em;
+	/* 左 1em = 0.8em + 0.em */
+	border-left: 0.2em solid var(--monochrome-light);
 	background: hsl(0, 0%, 95%);
 	font-family: Georgia, "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "游明朝", YuMincho, serif;
 }
@@ -467,7 +480,7 @@ li:last-child {
 	.ly_header {
 		background: hsl(40, 38%, 97%);	/* 背景色で塗りつぶし */
 		height: 4.5em;
-		margin: 0 auto;
+		margin: 0.5em auto 0;
 	}
 	/* 中コンテナ：ロゴ＋メニュー　*/
 	.ly_header_inner {
@@ -481,13 +494,13 @@ li:last-child {
 		margin-right: 0px;
 	}
 	.bl_nav a {
-	font-size: 110%;
+	font-size: 112%;
 	}
 
 	/* ロゴ */
 	.el_logo {
 		margin-left: 3px;
-		font-size: 32px;
+		font-size: 34px;
 	}
 	/* 検索フォーム */
 	.el_search_icon, .el_search_form {
