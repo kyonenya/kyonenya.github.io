@@ -81,7 +81,7 @@ fetch(jsonPath)
 
 		// タグ検索がONで、かつ検索にマッチしないならば、
 		if (queries.tag != null & tagFilterIndex == -1) {
-			// 当該記事はフィルターされる。
+			// 当該記事はフィルターされ、生成されない。
 		}
 		// もしタイトルが存在すれば、
 		else if (data[i].title) {	
@@ -159,6 +159,7 @@ fetch(jsonPath)
 		realTimeSearch();
 	});
 	
+
 // レンダリング 	---------------------------
 
 	const renderHTML = (currentPage) => {
@@ -190,40 +191,17 @@ fetch(jsonPath)
 	}
 
 	// 個別記事ページ生成 ----------
-	if (isFinite(queries.id)) {	// 数値（有限の数値）判定
+	if (isFinite(queries.id)) {	// 数値判定
 		const postCount = data.length - queries.id;	// 記事idはループカウントで言うと何番目か
 		const article = new Article(postCount);
-		// console.log(article.suffix);
-		// 表示調整用
-		/*
-		const article = {
-			pageTitle(postCount) {
-				if (data[postCount].title) {	// 記事タイトルが存在するなら、
-					return `${data[postCount].title}｜placet experiri :: ${queries.id}`	// それをページタイトルの先頭に。
-				} else {	// 記事タイトルが存在しないなら、
-					return `placet experiri :: ${queries.id}`;	// デフォルトのidタイトルに。
-				}
-			},
-			suffix: ` :: ${queries.id}`,
-			description: `${data[postCount].plainText.substr(0, 110)}…`
-		}
-		*/	
 		// ページ生成
 		renderHTML(article);
-		/*
-		document.getElementById('articleWrapper').innerHTML = html_article(postCount);	// 記事内容
-		document.title = article.pageTitle(postCount)	// ブラウザのタイトル
-		document.querySelector('.el_logo_suffix').innerText = article.suffix;	// ロゴのidカウンター
-		document.querySelector("meta[name=description]").content
-				= article.description;	// 検索結果の説明文
-		document.querySelector('.el_search_form').classList.add('hp_hidden');	// 検索フォームを非表示に
-		*/
-	}
+	};
 	// 記事一覧ページ生成 ----------
-	else if (queries.id == null) {	
+	if (queries.id == null) {	
 		document.getElementById('postListWrapper').innerHTML
 				= html.join('');	// 配列を結合し、タグを書き換え
-	} 
+	};
 	
 	
 	/* ---------------------------------
