@@ -20,15 +20,15 @@ body {
 	/* フッターを下部固定 */
 	display: flex;
 	flex-flow: column;	/* 縦の隊列 */
-	min-height: 100vh;	/* コンテンツが少なくても */
+	min-height: 100vh;	/* コンテンツが少なくても、 */
 }
 main {
-	flex: 1;	/* メイン領域を上下にめいっぱい広げておいて */
+	flex: 1;	/* メイン領域を上下にめいっぱい広げておいて。 */
 }
 
 .ly_header, .ly_cont {
 	/* 余白限界 */
-	width: 90vw;
+	width: 92.5vw;
 	margin: 0 auto;
 }
 
