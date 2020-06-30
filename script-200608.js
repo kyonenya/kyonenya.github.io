@@ -51,31 +51,33 @@ fetch(jsonPath)
 
 	/* ---------------------------------
 		下準備・テンプレートの加工 */
-	for (var i = 0; i < data.length; i=i+1) {
 
+	for (const eachData of data) {	
 	// dataオブジェクト配列にプロパティを追加
+
 		// 1. ダブルダッシュ——が途切れてしまうので罫線に変更
-		data[i].text = data[i].text.replace(/——/g, '──');
-		data[i].title = data[i].title.replace(/——/g, '──');
+		eachData.text = eachData.text.replace(/——/g, '──');
+		eachData.title = eachData.title.replace(/——/g, '──');
 
 		// 2. プレーンテキストを生成して格納
-		data[i].plainText = data[i].text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'');
+		eachData.plainText = eachData.text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'');
 
 		// 3. 記事一覧リストでの表示用文字列を作る
-		const postTextLength = 125;	// 記事一覧に何文字表示するか
-		
+		const postTextLength = 125;	// 記事一覧に何文字表示するか	
 		// 長文なら、
-		if (data[i].plainText.length > postTextLength) {
-			data[i].postText = `${data[i].plainText.substr(0, postTextLength)}…`;	// 冒頭n文字分だけを省略表示。
+		if (eachData.plainText.length > postTextLength) {
+			eachData.postText = `${eachData.plainText.substr(0, postTextLength)}…`;	// 冒頭n文字分だけを省略表示。
 		} else {	// 短文なら、
-			data[i].postText = data[i].plainText;	// プレーンテキストそのまま
+			eachData.postText = eachData.plainText;	// プレーンテキストそのまま
 		};
 
-		// dataオブジェクト配列に新しいプロパティを追加）
-		data[i].hashtags = data[i].tags
+		// 4.  ハッシュタグを生成しておく
+		eachData.hashtags = eachData.tags
 				.map((eachTag) => template_hashtags(eachTag))
 				.join('');
-	
+		}
+
+	for (var i = 0; i < data.length; i=i+1) {	
 	// 記事一覧ページのHTMLタグを積算 ----------
 		const tagFilterIndex = data[i].tags.indexOf(queries.tag)
 
