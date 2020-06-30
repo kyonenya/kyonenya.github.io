@@ -4,7 +4,7 @@
 	const jsonPath = 'data-200608.json';
 
 	// その他変数宣言
-	let html = [];
+	// let html = [];
 
 	/* ---------------------------------
 		URLからクエリ文字列を取得 */
@@ -51,15 +51,15 @@ fetch(jsonPath)
 
 	/* ---------------------------------
 		下準備・テンプレートの加工 */
-
+		
+	// data[]オブジェクト配列にプロパティを追加
 	for (const eachData of data) {	
-	// dataオブジェクト配列にプロパティを追加
 
-		// 1. ダブルダッシュ——が途切れてしまうので罫線に変更
+		// 1. ダブルダッシュ——が途切れてしまうので罫線二つに置換
 		eachData.text = eachData.text.replace(/——/g, '──');
 		eachData.title = eachData.title.replace(/——/g, '──');
 
-		// 2. プレーンテキストを生成して格納
+		// 2. マークアップを削除してプレーンテキストを生成
 		eachData.plainText = eachData.text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'');
 
 		// 3. 記事一覧リストでの表示用文字列を作る
@@ -73,31 +73,88 @@ fetch(jsonPath)
 
 		// 4.  ハッシュタグを生成しておく
 		eachData.hashtags = eachData.tags
-				.map((eachTag) => template_hashtags(eachTag))
+				.map((eachTag) => {return template_hashtags(eachTag)})
 				.join('');
-		}
+				
+		// 5. 
+		eachData.postHtml = html_postlist(data.length - eachData.id);
+	}
 
-	for (var i = 0; i < data.length; i=i+1) {	
-	// 記事一覧ページのHTMLタグを積算 ----------
-		const tagFilterIndex = data[i].tags.indexOf(queries.tag)
+	const postlist = {
+		onView: [],
+		html: '',
+	};
+	
+	postlist.onView = data.map((eachData) => {
+		const tagExists = eachData.tags.includes(queries.tag);	// タグ検索結果
+		// タグ検索がOFFか、または検索にヒットしているならば、
+		if (queries.tag == null || tagExists) {
+			return eachData.id;	// 表示
+		}
+	});
+	/*
+	for (const eachData of data) {
+		const tagFilterIndex = eachData.tags.indexOf(queries.tag)
 
 		// タグ検索がONで、かつ検索にマッチしないならば、
+		// タグ検索がOFFか、または検索にヒットしているならば
 		if (queries.tag != null & tagFilterIndex == -1) {
 			// 当該記事はフィルターされ、生成されない。
-		}
-		// もしタイトルが存在すれば、
-		else if (data[i].title) {	
-			html.push(html_postlist(i));	// そのまま積算。
 		} 
-		// タイトルが存在しなければ、
-		else {
-			// タイトルタグ（h2）を削除してから積算。
-			html.push(html_postlist(i).replace(/<h2[\s\S]*?h2>/gm, ''));	// [改行文字or非改行文字]の最短の(?)繰り返し(*)
-		}
+		else {	
+			postlist.onView.push(eachData.id);
+		} 
 	
 	}	// for() {...
+	*/
+
+	// 記事一覧ページ生成 ----------
+	postlist.html = data.reduce((accumulator, eachData) => {
+		if (postlist.onView.includes(eachData.id)) {	// 含まれているか
+			return accumulator + eachData.postHtml;
+		} else {
+			return accumulator;
+		};
+	}, '');	// 初期値には空文字
+	
+	if (queries.id == null) {	
+		document.getElementById('postListWrapper').innerHTML
+				= postlist.html
+				// eachHtml.join('');	// 配列を結合し、タグを書き換え
+	};
 
 
+// 個別記事ページ ---------------------------
+	const renderHTML = (currentPage) => {
+		document.getElementById('articleWrapper').innerHTML 
+				= currentPage.html;	// 記事内容
+		document.title = currentPage.pageTitle	// ブラウザのタイトル
+		document.querySelector('.el_logo_suffix').innerText 
+				= currentPage.suffix;	// ロゴのidカウンター
+		document.querySelector("meta[name=description]").content
+				= currentPage.description;	// 検索結果の説明文
+	};
+
+	class Article {
+		constructor(i) {
+			this.html = html_article(i);
+			this.suffix = ` :: ${queries.id}`;
+			// this.suffix = ` # 演劇`; 
+			this.description = `${data[i].plainText.substr(0, 110)}…`;
+			this.pageTitle = data[i].title	// 記事タイトルの存在判定
+				? `${data[i].title}｜placet experiri :: ${queries.id}`	// タイトルあり
+				: `placet experiri :: ${queries.id}`;	// タイトルなし
+		}
+	}
+
+	// 個別記事ページ生成 ----------
+	if (isFinite(queries.id)) {	// 数値判定
+		const postCount = data.length - queries.id;	// 記事idはループカウントで言うと何番目か
+		const article = new Article(postCount);
+		// ページ生成
+		renderHTML(article);
+	};
+	
 	/* ---------------------------------
 		リアルタイム検索 */
 	
@@ -160,51 +217,7 @@ fetch(jsonPath)
 	document.querySelector('.el_search_form').addEventListener('input', () => {
 		realTimeSearch();
 	});
-	
 
-// レンダリング 	---------------------------
-
-	const renderHTML = (currentPage) => {
-		document.getElementById('articleWrapper').innerHTML 
-				= currentPage.html;	// 記事内容
-		document.title = currentPage.pageTitle	// ブラウザのタイトル
-		document.querySelector('.el_logo_suffix').innerText 
-				= currentPage.suffix;	// ロゴのidカウンター
-		document.querySelector("meta[name=description]").content
-				= currentPage.description;	// 検索結果の説明文
-	};
-
-	class Article {
-		constructor(i) {
-			this.html = html_article(i);
-			this.suffix = ` :: ${queries.id}`;
-			// this.suffix = ` # 演劇`;
-			this.description = `${data[i].plainText.substr(0, 110)}…`;
-			this.pageTitle = this.makePageTitle(i);
-		}
-		
-		makePageTitle(i) {
-			if (data[i].title) {	// 記事タイトルが存在するなら、
-				return `${data[i].title}｜placet experiri :: ${queries.id}`	// それをページタイトルの先頭に。
-			} else {	// 記事タイトルが存在しないなら、
-				return `placet experiri :: ${queries.id}`;	// デフォルトのidタイトルに。
-			}
-		}
-	}
-
-	// 個別記事ページ生成 ----------
-	if (isFinite(queries.id)) {	// 数値判定
-		const postCount = data.length - queries.id;	// 記事idはループカウントで言うと何番目か
-		const article = new Article(postCount);
-		// ページ生成
-		renderHTML(article);
-	};
-	// 記事一覧ページ生成 ----------
-	if (queries.id == null) {	
-		document.getElementById('postListWrapper').innerHTML
-				= html.join('');	// 配列を結合し、タグを書き換え
-	};
-	
 	
 	/* ---------------------------------
 		テンプレート */
