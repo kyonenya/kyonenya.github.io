@@ -93,15 +93,21 @@ fetch(jsonPath)
 	});
 
 	const postlist = {
-		html: `<ul class="bl_posts">${data.map((eachData) => {
-				if (status.onView.includes(eachData.id)) {
-					return eachData.postHtml;
-				};
-			}).join('')}</ul>`,
+		html: `<ul class="bl_posts">${
+			data.map((eachData) => {
+					if (status.onView.includes(eachData.id)) {
+						return eachData.postHtml;
+					};
+				}).join('')
+			}</ul>`,
 		suffix: '',
 		description: '',
-		pageTitle: `#演技｜placet experiri`,
-		archiveHeader: ``,
+		pageTitle: status.tag	// exists?
+				? `#${status.tag}｜placet experiri`	// タグ検索時
+				: '',	// デフォルト
+		archiveHeader: status.tag	// exists?
+				? `#${status.tag}`	// タグ検索時
+				: '',	// デフォルト
 	}
 /*
 	postlist.html = `
@@ -114,8 +120,6 @@ fetch(jsonPath)
 		</ul>`
 */
 	if (status.id == null) {	
-		// document.getElementById('postListWrapper').innerHTML
-				// = postlist.html;
 		renderHTML(postlist);
 	};
 
@@ -125,11 +129,10 @@ fetch(jsonPath)
 		constructor(i) {
 			this.html = html_article(i);
 			this.suffix = ` :: ${status.id}`;
-			// this.suffix = ` # 演劇`; 
 			this.description = `${data[i].plainText.substr(0, 110)}…`;
-			this.pageTitle = data[i].title	// 記事タイトルの存在判定
-				? `${data[i].title}｜placet experiri :: ${status.id}`	// タイトルあり
-				: `placet experiri :: ${status.id}`;	// タイトルなし
+			this.pageTitle = data[i].title	// exists?
+				? `${data[i].title}｜placet experiri :: ${status.id}`	// 記事タイトルあり
+				: `placet experiri :: ${status.id}`;	// 記事タイトルなし
 			this.archiveHeader = '';
 		}
 	}
@@ -138,8 +141,7 @@ fetch(jsonPath)
 	if (isFinite(status.id)) {	// 数値判定
 		const postCount = data.length - queries.id;	// 記事idはループカウントで言うと何番目か
 		const article = new Article(postCount);
-		// ページ生成
-		renderHTML(article);
+		renderHTML(article);	// ページ生成
 	};
 	
 	/* ---------------------------------
@@ -163,7 +165,7 @@ fetch(jsonPath)
 			let resultText = '…';
 
 			// 表示調整用
-			const resultLength = 42;	// 結果文字数＝先読み＋検索語句＋後読み
+			const resultLength = 41;	// 結果文字数＝先読み＋検索語句＋後読み
 			const beforeLength = 15;	// 先読み、マッチした検索語句の何文字前から？
 			const afterLength = resultLength - beforeLength - searchWord.length;	// 後読み
 			
