@@ -29,8 +29,9 @@
 	};
 	
 	// 実行
-	const queries = getUrlQueries();
-
+	const status = getUrlQueries();
+	status.onView = [];
+	
 
 /* JSONデータ取得開始 --------------------  */
 fetch(jsonPath)
@@ -82,46 +83,27 @@ fetch(jsonPath)
 
 	/* ---------------------------------
 		記事一覧ページ生成 */
-	const renderHTML = (currentPage) => {
-		document.getElementById('root').innerHTML
-				= currentPage.html;	// 記事内容
-		if (currentPage.pageTitle) {
-			document.title = currentPage.pageTitle;	// ブラウザのタイトル
+	// この配列に登録されたidだけが記事リストに表示される
+	status.onView = data.map((eachData) => {	
+		const tagExists = eachData.tags.includes(status.tag);	// タグ検索にヒットしたか？
+		// タグ検索がOFFか、またはタグ検索にヒットしているならば、
+		if (status.tag == null || tagExists) {
+			return eachData.id;	// 表示リストにidを登録。
 		}
-		if (currentPage.suffix) {
-			document.querySelector('.el_logo_suffix').innerText 
-					= currentPage.suffix;	// ロゴのidカウンター
-		}
-		if (currentPage.description) {
-			document.querySelector('meta[name=description]').content
-					= currentPage.description;	// メタタグの説明文			
-		}
-		if (currentPage.archiveHeader) {
-			document.querySelector('.el_archive_header').innerText
-					= currentPage.archiveHeader;	// 記事検索時に現れる、ページ上部のナビゲーションバー
-		}
-	};
+	});
 
 	const postlist = {
-		// この配列に登録されたidだけが記事リストに表示される
-		onView: data.map((eachData) => {	
-			const tagExists = eachData.tags.includes(queries.tag);	// タグ検索結果
-			// タグ検索がOFFか、またはタグ検索にヒットしているならば、
-			if (queries.tag == null || tagExists) {
-				return eachData.id;	// 表示リストにidを登録。
-			}
-		}),
-		html: '',/*data.map((eachData) => {
-			if (this.onView.includes(eachData.id)) {
-				return eachData.postHtml;
-			};
-		}).join('')*/	// 同じオブジェクト内のonViewを参照するのは無理。
+		html: `<ul class="bl_posts">${data.map((eachData) => {
+				if (status.onView.includes(eachData.id)) {
+					return eachData.postHtml;
+				};
+			}).join('')}</ul>`,
 		suffix: '',
 		description: '',
 		pageTitle: `#演技｜placet experiri`,
 		archiveHeader: ``,
 	}
-
+/*
 	postlist.html = `
 		<ul class="bl_posts">
 			${data.map((eachData) => {
@@ -130,8 +112,8 @@ fetch(jsonPath)
 				};
 			}).join('')}
 		</ul>`
-
-	if (queries.id == null) {	
+*/
+	if (status.id == null) {	
 		// document.getElementById('postListWrapper').innerHTML
 				// = postlist.html;
 		renderHTML(postlist);
@@ -139,22 +121,21 @@ fetch(jsonPath)
 
 
 // 個別記事ページ ---------------------------
-
 	class Article {
 		constructor(i) {
 			this.html = html_article(i);
-			this.suffix = ` :: ${queries.id}`;
+			this.suffix = ` :: ${status.id}`;
 			// this.suffix = ` # 演劇`; 
 			this.description = `${data[i].plainText.substr(0, 110)}…`;
 			this.pageTitle = data[i].title	// 記事タイトルの存在判定
-				? `${data[i].title}｜placet experiri :: ${queries.id}`	// タイトルあり
-				: `placet experiri :: ${queries.id}`;	// タイトルなし
+				? `${data[i].title}｜placet experiri :: ${status.id}`	// タイトルあり
+				: `placet experiri :: ${status.id}`;	// タイトルなし
 			this.archiveHeader = '';
 		}
 	}
 
 	// 個別記事ページ生成 ----------
-	if (isFinite(queries.id)) {	// 数値判定
+	if (isFinite(status.id)) {	// 数値判定
 		const postCount = data.length - queries.id;	// 記事idはループカウントで言うと何番目か
 		const article = new Article(postCount);
 		// ページ生成
@@ -226,7 +207,8 @@ fetch(jsonPath)
 
 	
 	/* ---------------------------------
-		テンプレート */
+		テンプレート */		// 関数の巻き上げを使って上から参照する
+
 	// 記事一覧リスト
 	function html_postlist(i) {
 		return `
@@ -250,7 +232,7 @@ fetch(jsonPath)
 				</ul>
 			</footer>
 		</li>`
-	} // function html_postlist(i) {...
+	}
 
 	// 個別記事ページ
 	function html_article(i) {
@@ -271,14 +253,33 @@ fetch(jsonPath)
 				</ul>
 			</footer>
 		</article>`
-	}	// function html_article(i) {...
-
-	function template_hashtags(eachTag) {
-		return `<li><a href="?tag=${eachTag}">#${eachTag}</a></li>`
 	}
-		// リンクにタグフィルター用のクエリ文字列を仕込む
 
-//
+	//  ハッシュタグ（共通部品）
+	function template_hashtags(eachTag) {
+		return `<li><a href="?tag=${eachTag}">#${eachTag}</a></li>`	// リンクにタグフィルター用のクエリ文字列を仕込む
+	}
+
+	// レンダラー（汎用）
+	function renderHTML(currentPage) {
+		document.getElementById('root').innerHTML
+				= currentPage.html;	// 記事内容
+		if (currentPage.pageTitle) {
+			document.title = currentPage.pageTitle;	// ブラウザのタイトル
+		}
+		if (currentPage.suffix) {
+			document.querySelector('.el_logo_suffix').innerText 
+					= currentPage.suffix;	// ロゴのidカウンター
+		}
+		if (currentPage.description) {
+			document.querySelector('meta[name=description]').content
+					= currentPage.description;	// メタタグの説明文			
+		}
+		if (currentPage.archiveHeader) {
+			document.querySelector('.el_archive_header').innerText
+					= currentPage.archiveHeader;	// 記事検索時に現れる、ページ上部のナビゲーションバー
+		}
+	}
 
 })	// fetch.then((data) => {...
 /*
