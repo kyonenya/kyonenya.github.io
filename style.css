@@ -41,7 +41,8 @@ main {
 	background: hsl(60, 100%, 77%);	/* #ffff8c */
 	border: 1px solid hsla(0, 0%, 0%, 0.15);	/* 	透明化した黒線を被せる */
 	border-radius: 3px;
-	padding: 0.1em;
+	padding: 2px;
+	margin: 1px;
 }
 
 .hp_underline {
