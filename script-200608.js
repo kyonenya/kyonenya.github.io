@@ -38,21 +38,9 @@ fetch(jsonPath)
  .then((response) => response.json())
  .then((data) => {
 
-	// 古い順に逆順ソート
-/*	data.sort(function(a, b) {
-		if (a.date > b.date) {
-			return 1;
-		} else {
-			return -1;
-		}
-	}) */
-
-
-	/* ---------------------------------
-		下準備・データの加工 */
-		
-	// data[]オブジェクト配列にプロパティを追加
-	for (const eachData of data) {	
+/* ---------------------------------
+	下準備・データの加工 */
+	for (const eachData of data) {	// data[]オブジェクト配列にプロパティを追加
 
 		// 1. ダブルダッシュ——が途切れてしまうので罫線二つに置換しておく
 		eachData.text = eachData.text.replace(/——/g, '──');
@@ -62,7 +50,7 @@ fetch(jsonPath)
 		eachData.plainText = eachData.text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'');
 
 		// 3. 記事一覧リストでの表示用文字列を作っておく
-		const postTextLength = 125;	// 記事一覧に何文字表示するか	
+		const postTextLength = 125;	// 記事一覧に何文字表示するか？
 		// 長文なら、
 		if (eachData.plainText.length > postTextLength) {
 			eachData.postText = `${eachData.plainText.substr(0, postTextLength)}…`;	// 冒頭n文字分だけを省略表示。
@@ -81,11 +69,11 @@ fetch(jsonPath)
 	}
 
 
-	/* ---------------------------------
-		記事一覧ページ生成 */
+/* ---------------------------------
+	記事一覧ページ生成 */
 	// この配列に登録されたidだけが記事リストに表示される
 	status.onView = data.map((eachData) => {	
-		const tagExists = eachData.tags.includes(status.tag);	// タグ検索にヒットしたか？
+		const tagExists = eachData.tags.includes(status.tag);	// タグ検索にヒットしたか
 		// タグ検索がOFFか、またはタグ検索にヒットしているならば、
 		if (status.tag == null || tagExists) {
 			return eachData.id;	// 表示リストにidを登録。
@@ -109,22 +97,15 @@ fetch(jsonPath)
 				? `#${status.tag}`	// タグ検索時
 				: '',	// デフォルト
 	}
-/*
-	postlist.html = `
-		<ul class="bl_posts">
-			${data.map((eachData) => {
-				if (postlist.onView.includes(eachData.id)) {
-					return eachData.postHtml;
-				};
-			}).join('')}
-		</ul>`
-*/
+
+	// レンダリング
 	if (status.id == null) {	
 		renderHTML(postlist);
 	};
 
 
-// 個別記事ページ ---------------------------
+/* ---------------------------------
+	個別記事ページ生成 */
 	class Article {
 		constructor(i) {
 			this.html = html_article(i);
@@ -137,10 +118,10 @@ fetch(jsonPath)
 		}
 	}
 
-	// 個別記事ページ生成 ----------
+	// レンダリング
 	if (isFinite(status.id)) {	// 数値判定
-		const postCount = data.length - queries.id;	// 記事idはループカウントで言うと何番目か
-		const article = new Article(postCount);
+		const i = data.length - status.id;	// 記事idはループカウントで言うと何番目か
+		const article = new Article(i);
 		renderHTML(article);	// ページ生成
 	};
 	
@@ -165,8 +146,8 @@ fetch(jsonPath)
 			let resultText = '…';
 
 			// 表示調整用
-			const resultLength = 41;	// 結果文字数＝先読み＋検索語句＋後読み
-			const beforeLength = 15;	// 先読み、マッチした検索語句の何文字前から？
+			const resultLength = 41;	// 検索結果に表示したい文字数は？
+			const beforeLength = 15;	// 先読み、マッチした検索語句の何文字前から表示したい？
 			const afterLength = resultLength - beforeLength - searchWord.length;	// 後読み
 			
 			// マッチしたときは（本文・タイトル・タグのいずれかに）
