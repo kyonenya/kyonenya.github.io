@@ -112,6 +112,7 @@ fetch(jsonPath)
 	if (status.id == null) {	
 		renderHTML(postlist);
 	};
+	
 
 /* ---------------------------------
 	個別記事ページ生成 */
@@ -152,7 +153,7 @@ fetch(jsonPath)
 			
 			//const li = document.querySelectorAll('.bl_posts_item');
 			//const li_text = document.querySelectorAll('.bl_posts_summary');
-			const i = data.length - eachData.id
+			const i = data.length - eachData.id;
 			const li = document.querySelector(`.bl_posts_item[data-id="${eachData.id}"]`);
 			const li_text = document.querySelector(`.bl_posts_summary[data-id="${eachData.id}"]`);
 			
