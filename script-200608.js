@@ -66,22 +66,18 @@ fetch(jsonPath)
 		// 5. 記事リストのHTMLを生成しておく
 		const i = data.length - eachData.id;
 		eachData.postHtml = html_postlist(i);
+		
+		// 6. 表示・非表示フラグを、タグフィルターに応じてセットしておく
+		const tagExists = eachData.tags.includes(status.tag);	// タグ検索にヒットしたか
+		// タグ検索がOFFか、またはタグ検索にヒットしているならば、
+		eachData.isVisible = status.tag == null || tagExists
+				? true	// 表示。
+				: false;
 	}
-
 
 /* ---------------------------------
 	記事一覧ページ生成 */
 	// この配列に登録されたidだけが記事リストに表示される
-	/*
-	status.onView = data.map((eachData) => {	
-		const tagExists = eachData.tags.includes(status.tag);	// タグ検索にヒットしたか
-		// タグ検索がOFFか、またはタグ検索にヒットしているならば、
-		if (status.tag == null || tagExists) {
-			return eachData.id;	// 表示リストにidを登録。
-		}
-	});
-	*/
-
 	status.onView = data.reduce((accumulator, eachData) => {
 		const tagExists = eachData.tags.includes(status.tag);	// タグ検索にヒットしたか
 		// タグ検索がOFFか、またはタグ検索にヒットしているならば、
@@ -97,7 +93,7 @@ fetch(jsonPath)
 	const postlist = {
 		html: `<ul class="bl_posts">${
 			data.map((eachData) => {
-					if (status.onView.includes(eachData.id)) {
+					if (eachData.isVisible === true) {
 						return eachData.postHtml;
 					};
 				}).join('')
