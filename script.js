@@ -1,7 +1,7 @@
 'use strict'
 {	
 	// 表示調整用
-	const jsonPath = 'data-200608.json';
+	const jsonPath = 'data.json';
 
 
 	/* ---------------------------------
