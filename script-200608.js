@@ -30,8 +30,7 @@
 	
 	// 実行
 	const status = getUrlQueries();
-	status.onView = [];
-	
+	//status.onView = [];
 
 /* JSONデータ取得開始 --------------------  */
 fetch(jsonPath)
@@ -77,6 +76,7 @@ fetch(jsonPath)
 
 /* ---------------------------------
 	記事一覧ページ生成 */
+	/*
 	// この配列に登録されたidだけが記事リストに表示される
 	status.onView = data.reduce((accumulator, eachData) => {
 		const tagExists = eachData.tags.includes(status.tag);	// タグ検索にヒットしたか
@@ -89,7 +89,7 @@ fetch(jsonPath)
 		// mapは入力と同数の配列を出力してしまうため、ループをスキップできず、nullで埋められてしまう。
 		// filterは入力した配列、つまりdata配列が丸ごと出力されてしまうので却下。
 	// console.log(status.onView);
-
+*/
 	const postlist = {
 		html: `<ul class="bl_posts">${
 			data.map((eachData) => {
@@ -112,8 +112,6 @@ fetch(jsonPath)
 	if (status.id == null) {	
 		renderHTML(postlist);
 	};
-
-	//console.log(document.querySelector('.bl_posts_summary[data-id="10"]').innerText);
 
 /* ---------------------------------
 	個別記事ページ生成 */
@@ -146,13 +144,17 @@ fetch(jsonPath)
 		const searchWord = document.querySelector('.el_search_form').value;
 		
 		// 全件ループ開始
-//		for (var i = 0; i < data.length; i=i+1) {
-		for (const eachId of status.onView) {
+		for (const eachData of data) {
+		
+			if (eachData.isVisible === false) {	// 記事一覧に表示されてなければ、
+				continue;	// スキップして次の記事へ。
+			};
+			
 			//const li = document.querySelectorAll('.bl_posts_item');
 			//const li_text = document.querySelectorAll('.bl_posts_summary');
-			const i = data.length - eachId
-			const li = document.querySelector(`.bl_posts_item[data-id="${eachId}"]`);
-			const li_text = document.querySelector(`.bl_posts_summary[data-id="${eachId}"]`);
+			const i = data.length - eachData.id
+			const li = document.querySelector(`.bl_posts_item[data-id="${eachData.id}"]`);
+			const li_text = document.querySelector(`.bl_posts_summary[data-id="${eachData.id}"]`);
 			
 			let searchWordIndex = data[i].plainText.indexOf(searchWord);
 			let searchWordIndex_title = data[i].title.indexOf(searchWord);	// タイトル簡易検索
