@@ -28,7 +28,7 @@ main {
 
 .ly_header, .ly_cont {
 	/* 余白限界 */
-	width: 92.5vw;
+	width: 91vw;
 	margin: 0 auto;
 }
 
@@ -263,20 +263,20 @@ li:last-child {
 .el_search_icon, .el_search_form {
 	position: absolute;	/* フォームにアイコンを重ねる */
 	right: 0;
-	width: 1.9em;	/* メニュー間隔を手動で調整、右からの幅が広いほど間隔が狭まる */
 }
 
 .el_search_icon {
 	top: 0;
 	z-index: 10;	/* フォームの下に重ねる */
-	color: var(--main-color);
 	padding-top: 2px;	/* 横一列になるよう手動調整 */
-	font-size: 100%;
-	fill: hsl(202, 35%, 60%);
+	width: 1.9em;
+	height: 1.9em;
+/*	fill: hsl(202, 35%, 60%);	*/
 }
 
 .el_search_form {
 	top: -10px;	/* フォームがメニューを覆い隠すよう少し上に */
+	width: 1.9em;	/* メニュー間隔を手動で調整、右からの幅が広いほど間隔が狭まる */
 	cursor: pointer; 
 	border: 1px solid var(--monochrome-light);
 	outline: none;
@@ -431,7 +431,7 @@ li:last-child {
 
 /* -- ヘッダー -- */
 	.ly_header {
-		margin-bottom: 1em;
+		margin-bottom: 1.5em;
 	}
 	.ly_header_inner {
 		/* スマホでは中央揃えに */
@@ -510,7 +510,11 @@ li:last-child {
 		width: 1.7em;	/* メニュー間隔、上書き */
 	}
 	.el_search_icon {
+	/* 大きく */
+	width: 2em;
+	height: 2em;
 	top: 0px;	/* 下にずり落ちるので上に押し上げて上書き */
+	left: 10px;
 	}
 	.el_search_form:focus {
 	width: 300px;	/* これも手動で決めてる */

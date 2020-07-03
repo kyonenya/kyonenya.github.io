@@ -3,9 +3,8 @@
 	// 表示調整用
 	const jsonPath = 'data.json';
 
-
-	/* ---------------------------------
-		URLからクエリ文字列を取得 */
+/* ---------------------------------
+	URLからクエリ文字列を取得 */
 	const getUrlQueries = () => {
 		const queries = {};
 		const queryStr = window.location.search.slice(1);	// 'foo=1&bar=2'、文頭の'?'を除外
@@ -59,7 +58,13 @@ fetch(jsonPath)
 
 		// 4.  ハッシュタグを生成しておく
 		eachData.hashtags = eachData.tags
-				.map((eachTag) => {return template_hashtags(eachTag)})
+				.map((eachTag) => {
+					if (eachTag === status.tag) {	// タグフィルターにマッチしているなら、
+						return html_hashtags_highlighted(eachTag);	// 当該タグをハイライト。
+					} else {
+						return html_hashtags(eachTag);
+					}
+				})
 				.join('');
 				
 		// 5. 記事リストのHTMLを生成しておく
@@ -74,22 +79,9 @@ fetch(jsonPath)
 				: false;
 	}
 
+
 /* ---------------------------------
 	記事一覧ページ生成 */
-	/*
-	// この配列に登録されたidだけが記事リストに表示される
-	status.onView = data.reduce((accumulator, eachData) => {
-		const tagExists = eachData.tags.includes(status.tag);	// タグ検索にヒットしたか
-		// タグ検索がOFFか、またはタグ検索にヒットしているならば、
-		if (status.tag == null || tagExists) {
-			accumulator.push(eachData.id);	// 表示リストにidを登録。
-		}
-		return accumulator;
-	}, []);	// 初期値は空の配列
-		// mapは入力と同数の配列を出力してしまうため、ループをスキップできず、nullで埋められてしまう。
-		// filterは入力した配列、つまりdata配列が丸ごと出力されてしまうので却下。
-	// console.log(status.onView);
-*/
 	const postlist = {
 		html: `<ul class="bl_posts">${
 			data.map((eachData) => {
@@ -133,6 +125,8 @@ fetch(jsonPath)
 		const i = data.length - status.id;	// 記事idはループカウントで言うと何番目か
 		const article = new Article(i);
 		renderHTML(article);	// ページ生成
+		document.querySelector('.el_search_form')
+				.classList.add('hp_hidden');	// 検索フォームを非表示
 	};
 	
 	
@@ -150,16 +144,14 @@ fetch(jsonPath)
 			if (eachData.isVisible === false) {	// 記事一覧に表示されてなければ、
 				continue;	// スキップして次の記事へ。
 			};
-			
-			//const li = document.querySelectorAll('.bl_posts_item');
-			//const li_text = document.querySelectorAll('.bl_posts_summary');
-			const i = data.length - eachData.id;
+		
+			// const i = data.length - eachData.id;
 			const li = document.querySelector(`.bl_posts_item[data-id="${eachData.id}"]`);
 			const li_text = document.querySelector(`.bl_posts_summary[data-id="${eachData.id}"]`);
 			
-			let searchWordIndex = data[i].plainText.indexOf(searchWord);
-			let searchWordIndex_title = data[i].title.indexOf(searchWord);	// タイトル簡易検索
-			let searchWordIndex_hashtags = data[i].hashtags.indexOf(searchWord);	// ハッシュタグ簡易検索
+			let searchWordIndex = eachData.plainText.indexOf(searchWord);
+			let searchWordIndex_title = eachData.title.indexOf(searchWord);	// タイトル簡易検索
+			let searchWordIndex_hashtags = eachData.hashtags.indexOf(searchWord);	// ハッシュタグ簡易検索
 			let resultText = '…';
 			
 			// 表示調整用
@@ -177,10 +169,10 @@ fetch(jsonPath)
 					resultText = '';	// 冒頭の'…'を削除。
 				}				
 				// 結果表示用の文字列
-				resultText += data[i].plainText.substr(searchWordIndex - beforeLength, resultLength)
+				resultText += eachData.plainText.substr(searchWordIndex - beforeLength, resultLength)
 				// 検索語句が末尾より十分遠ければ、
 				const searchWordIndex_last = searchWordIndex + searchWord.length + afterLength;
-				if (searchWordIndex_last < data[i].plainText.length) {
+				if (searchWordIndex_last < eachData.plainText.length) {
 					resultText += '…';	// 末尾に'…'を追加。
 				} 
 				// 検索語句をハイライト表示する
@@ -195,7 +187,7 @@ fetch(jsonPath)
 			
 			// 検索フォームが空になったら、
 			if (searchWord === '') {
-				li_text.innerHTML = data[i].postText	// 元のテキストに戻す。
+				li_text.innerHTML = eachData.postText	// 元のテキストに戻す。
 			};
 
 		};	// for(){...
@@ -257,8 +249,12 @@ fetch(jsonPath)
 	}
 
 	//  ハッシュタグ（共通部品）
-	function template_hashtags(eachTag) {
+	function html_hashtags(eachTag) {
 		return `<li><a href="?tag=${eachTag}">#${eachTag}</a></li>`	// リンクにタグフィルター用のクエリ文字列を仕込む
+	}
+	// ハッシュタグ、ハイライトされたとき
+	function html_hashtags_highlighted(eachTag) {
+		return `<li><a href="?tag=${eachTag}" class="hp_highlight">#${eachTag}</a></li>`	// リンクにタグフィルター用のクエリ文字列を仕込む
 	}
 
 	// レンダラー（汎用）
@@ -283,9 +279,5 @@ fetch(jsonPath)
 	}
 
 })	// fetch.then((data) => {...
-/*
-.catch((err) => {
-	console.log('インターネットの接続を確認して、ページを再読み込みしてください。');
-});
-*/
+
 } // {...
