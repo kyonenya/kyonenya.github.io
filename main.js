@@ -16,9 +16,8 @@
 		
 	  // 複数のクエリを'&'で切って配列へと分解
 		const queryArr = queryStr.split('&')	// ['foo=1', 'bar=2']
-	
 		queryArr.forEach((eachQueryStr) => {
-			// '='でさらに分割してそれぞれ配列（key,value）へと格納
+			const keyAndValue = eachQueryStr.split('=');	// ['foo', '1']// '='でさらに分割してそれぞれ配列（key,value）へと格納
 			// 配列からオブジェクトを生成、このとき値を日本語にデコードしておく
 			queries[keyAndValue[0]] = decodeURIComponent(keyAndValue[1]);	// {foo: 1}
 		});
