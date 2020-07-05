@@ -19,7 +19,6 @@
 	
 		queryArr.forEach((eachQueryStr) => {
 			// '='でさらに分割してそれぞれ配列（key,value）へと格納
-			const keyAndValue = eachQueryStr.split('=');	// ['foo', '1']
 			// 配列からオブジェクトを生成、このとき値を日本語にデコードしておく
 			queries[keyAndValue[0]] = decodeURIComponent(keyAndValue[1]);	// {foo: 1}
 		});
@@ -29,6 +28,7 @@
 	
 	// 実行
 	const status = getUrlQueries();
+
 
 /* JSONデータ取得開始 --------------------  */
 fetch(jsonPath)

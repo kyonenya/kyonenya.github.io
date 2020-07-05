@@ -201,7 +201,7 @@ li:last-child {
 }
 .bl_horizTable th {	/* ■□ */
 	width: 20%;	/* テーブル頭の幅 */
-	padding: .3em 0;	/* 上下幅 */
+	padding: 0.3em 0;	/* 上下幅 */
 	background: hsl(0, 0%, 95%);
 	border-bottom: 1px solid var(--monochrome-light);
 	font-weight: normal;
@@ -219,7 +219,7 @@ li:last-child {
 /*---------------------------------
 	ヘッダー */
 .ly_header {
-	font-family: "Avenir Next", "Segoe UI", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "游ゴシック Medium", "Yu Gothic Medium", "メイリオ", Meiryo, sans-serif;
+	font-family: "Avenir Next", Verdana, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "游ゴシック Medium", "Yu Gothic Medium", "メイリオ", Meiryo, sans-serif;
 }
 
 /* ロゴ ----- */
