@@ -37,12 +37,12 @@ article>*+* {
 input,button,textarea,select {
 	font:inherit
 }
-
+/*
 img:not([alt]) {
 	filter:blur(10px)
 }
 
 @media(prefers-reduced-motion:reduce){*{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important}}
-
+*/
 /* 配布元：https://github.com/hankchizljaw/modern-css-reset/blob/master/dist/reset.min.css */
 /* 紹介：https://coliss.com/articles/build-websites/operation/css/css-reset-for-modern-browser.html */

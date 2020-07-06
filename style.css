@@ -92,7 +92,7 @@ li:last-child {
 }
 
 .bl_posts_date {
-	display: inline-flex;
+	/* display: inline-flex; */
 }
 
 .bl_posts_title {
@@ -429,6 +429,59 @@ li:last-child {
 .bl_text dd:before {
 	content: "： ";
 }
+
+	/* ブログカード ---------- */
+	.bl_blogcard {
+		font-size: 80%;
+		border: 1px solid hsl(0, 0%, 82%);;
+		border-radius: 4px;
+		padding: 0.6em 1em 0.75em;
+		margin: 1em auto;
+		width: 90%;
+	}
+	.bl_blogcard_header {
+		display: inline-flex;
+		color: var(--monochrome-dark);
+	}
+	.bl_blogcard_icon {
+		vertical-align: bottom;
+		margin-top: 4px;
+	}
+	.bl_blogcard_logo {
+		margin-left: 0.2em;
+		font-size: 130%;
+		color: #333;
+		font-family: "Avenir Next";
+	}
+	.bl_blogcard_suffix {
+		color: var(--monochrome-dark);
+		font-size: 70%;
+	}
+	.bl_blogcard_title {
+		font-weight: bold;
+		font-size: 115%;
+	}
+	.bl_blogcard_text {
+		margin: 0.2em 0;
+	}
+	.bl_blogcard_footer {
+		color: var(--monochrome-dark);
+		display: inline-flex;
+		flex-wrap: wrap;
+	}
+	.bl_blogcard_time {
+		margin-right: 0.5em;
+	}
+	.bl_blogcard_tags {
+		display: inline-flex;	/* 横並び、かつ先立つ要素（日付）に回り込める */
+		flex-wrap: wrap;
+		list-style: none;
+	}
+	.bl_blogcard_tags li {
+		margin-left: 0.3em;
+	}
+	/* ブログカード ---------- */
+
 
 /* -----------------------------------------
 	スマホ */
