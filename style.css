@@ -149,7 +149,7 @@ li:last-child {
 }
 
 .bl_text_title {
-	margin: -0.3em auto 0.3em;
+	margin: -0.2em auto 0.4em;
 	font-weight: bold;
 	font-size: 117%;
 	text-align: center;
@@ -435,8 +435,8 @@ li:last-child {
 		font-size: 80%;
 		border: 1px solid hsl(0, 0%, 80%);
 		border-radius: 4px;
-		padding: 0.6em 1em 0.75em;
-		margin: 1em auto;
+		padding: 0.6em 1em 0.7em;
+		margin: 1.25em auto 1em;
 		width: 90%;
 	}
 	.bl_blogcard a {	/* offset */
@@ -458,7 +458,7 @@ li:last-child {
 	}
 	.bl_text .bl_blogcard_logo {
 		margin-left: 0.2em;
-		font-size: 130%;
+		font-size: 128%;
 		color: #333;
 		font-family: "Avenir Next";
 	}
@@ -468,7 +468,7 @@ li:last-child {
 	}
 	.bl_text .bl_blogcard_title {
 		font-weight: bold;
-		font-size: 115%;
+		font-size: 120%;
 	}
 	.bl_text .bl_blogcard_text {
 		margin: 0.2em 0;
