@@ -8,11 +8,7 @@
 	<!-- CSSインポート -->
 	<link href="../assets/reset.css" media="all" rel="stylesheet" type="text/css">
 	<link href="../style.css" media="all" rel="stylesheet" type="text/css">
-	<!-- JavaScriptライブラリをCDNからインポート -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script><!-- Moment.js -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/ja.js"></script><!-- Moment.js 日本語ロケール -->
-	<!-- JavaScript、ページ生成スクリプト -->
-	<script src="main.js"></script>
+
 	<!-- アイコン画像 -->
 	<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="icon/apple-touch-icon-180x180.png">
 	<link rel="icon" type="image/png" sizes="192x192" href="icon/icon-192x192.png">
@@ -65,6 +61,7 @@
 			</header>
 				<h2 class="bl_text_title">言葉の出口、場所のイメージ</h2>
 				<p>（<a href="?id=1">id: 1</a>への追記）</p>
+
 			<user-card id="3"></user-card>
 
 			<!--  -->
@@ -104,35 +101,13 @@
 		<p class="el_footerCopyright">© 2020- <a href="https://kyonenya.github.io/about">placet experiri</a></p>
 	</div>
 </footer>
+	<!-- JavaScriptライブラリをCDNからインポート -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script><!-- Moment.js -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/ja.js"></script><!-- Moment.js 日本語ロケール -->
+	<!-- JavaScript、ページ生成スクリプト -->
+	<script src="../main.js"></script>
 <script>
-	class UserCard extends HTMLElement {
-		constructor() {
-			super();
-			// getAttribute()でカスタムデータ属性みたいに取得できる
-			this.innerHTML = `
-			<div class="bl_blogcard">
-				<header class="bl_blogcard_header">
-					<img src="../favicon.ico" class="bl_blogcard_icon" width="20" height="20">
-					<div class="bl_blogcard_logo">placet experiri</span>
-					<span class="bl_blogcard_suffix"> :: ${this.getAttribute('id')}</span>
-				</header>
-				<div class="bl_blogcard_title">言葉の出口、場所のイメージ</div>
-				<p class="bl_blogcard_text">ここを作ってからさっそく思索に変化が現れている。歩きながら、読書や料理をしながら、ここに書くことをぼんやり考えてい<!--る時間が増えた。そうやって考えるとき、この場所-->…</p>
-				<footer class="bl_blogcard_footer">
-					<div class="bl_blogcard_time">2020-04-10</div>
-					<ul class="bl_blogcard_tags">
-						<li><a href="?tag=思考">#思考</a></li>
-						<li><a href="?tag=想像">#想像</a></li>
-					</ul>
-				</footer>
-			</div>
-			`;
-		}
-	}
 
-	// レンダリングと結びつける
-	// 第一引数にHTML上のカスタムエレメント、第二引数にJS上のクラス名
-	window.customElements.define('user-card', UserCard);
 </script>
 
 </body>
