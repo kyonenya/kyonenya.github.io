@@ -210,12 +210,12 @@ fetch(jsonPath)
 			<div class="bl_blogcard">
 				<a href="?id=${this.id}">
 					<header class="bl_blogcard_header">
-						<img src="assets/quotation-alpha.png" class="bl_blogcard_icon" width="20" height="20">
+						<img src="assets/quotation-alpha.png" class="bl_blogcard_icon" width="20" height="20" alt="アイコン">
 						<div class="bl_blogcard_logo">placet experiri</span>
 						<span class="bl_blogcard_suffix"> :: ${this.id}</span>
 					</header>
 					<div class="bl_blogcard_title">${data[this.i].title}</div>
-					<p class="bl_blogcard_text">${data[this.i].plainText.substr(0, 59)}…</p>
+					<p class="bl_blogcard_text">${data[this.i].plainText.substr(0, 56)}…</p>
 					<footer class="bl_blogcard_footer">
 						<span class="bl_blogcard_time">${moment(data[this.i].date).format("YYYY-MM-DD")}</span>
 						<ul class="bl_blogcard_tags">
