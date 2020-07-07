@@ -349,17 +349,17 @@ li:last-child {
 }
 
 .bl_text blockquote {
-	/* 上下 1em = 0.5em + 0.5em */
-	margin: 1em 0em 1em 0.5em;
-	padding: 0.5em 0em 0.5em 0.8em;
-	/* 左 1em = 0.8em + 0.em */
-	border-left: 0.2em solid var(--monochrome-light);
-	background: hsl(0, 0%, 95%);
+	padding: 0em 0em 0em 0.75em;
+	/* 左：padding＋border-left＝1emになるように */
+	border-left: 0.25em solid var(--monochrome-light);
+/*	background: hsl(0, 0%, 95%);	*/
 	font-family: Georgia, "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "游明朝", YuMincho, serif;
+	box-sizing: border-box;
+	margin: 1em 0em 1em 0.7em;
 }
 .bl_text blockquote p {
-	/* 上下左余白1em = 0.5em + 0.5em */
-	margin: 0em 0.5em 0em 0.5em
+	/* 左：p:margin＋blockquote:margin＝1emになるように */
+	margin: 0em 0.5em 0em 0.3em
 }
 .bl_text blockquote p + p {
 	text-indent: 0;	/* 引用ブロック中は字下げなし */
@@ -456,7 +456,7 @@ li:last-child {
 	margin-top: 3px;
 }
 .bl_text .bl_blogcard_logo {
-	font-size: 128%;
+	font-size: 130%;
 	color: #333;
 	font-family: "Avenir Next", "Segoe UI", sans-serif;
 	margin-left: 0.2em;
@@ -530,7 +530,7 @@ li:last-child {
 	
 	.bl_text_title {
 		font-size: 120%;
-		margin: 0em auto 0.5em;	/* margin: -0.3em auto 0.3em; */
+		margin: 0em auto 0.5em;	/* <- margin: -0.3em auto 0.3em; */
 	}
 	.bl_text p + p {
 		/* margin-top: 0.75em; */	/* 段落間余白を増量 */
@@ -579,6 +579,10 @@ li:last-child {
 	/* ブログカード */
 	.bl_text .bl_blogcard {
 		margin: 1.5em 2em 1.25em;
+	}
+	.bl_text .bl_blogcard_icon {
+		width: 24px;
+		height: 24px;
 	}
 
 } /* @media (min-width: 560px) {... */
