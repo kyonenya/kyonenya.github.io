@@ -463,7 +463,7 @@ li:last-child {
 }
 .bl_text .bl_blogcard_suffix {
 	color: var(--monochrome-dark);
-	font-size: 70%;
+	font-size: 75%;
 }
 .bl_text .bl_blogcard_title {
 	font-weight: bold;
