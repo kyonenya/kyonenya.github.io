@@ -435,7 +435,7 @@ li:last-child {
 	border: 1px solid hsl(0, 0%, 80%);
 	border-radius: 4px;
 	padding: 0.6em 1em 0.7em;
-	margin: 1.25em 1em 1em;
+	margin: 1.25em 0.5em 1em;
 	box-sizing: border-box;
 }
 .bl_text .bl_blogcard a {	/* offset */
