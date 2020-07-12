@@ -569,7 +569,7 @@ li:last-child {
 	.el_search_icon {
 	width: 1.95em;
 	height: 1.95em;	/* 大きく */
-	top: 0px;	/* 下にずり落ちるので上に押し上げて上書き */
+	top: 2px;	/* 下にずり落ちるので上に押し上げて上書き */
 	left: 10px;
 	}
 	.el_search_form:focus {
@@ -592,9 +592,9 @@ li:last-child {
 	ＰＣのみ */
 @media (min-width: 960px) {
 	body {
-		font-size: 19px;
+		font-size: 20px;
 	}
 	.ly_cont, .ly_header {
-		max-width: 760px;	/* 1行40文字になるように、font-size × 40 */
+		max-width: 900px;	/* 1行40文字になるように、font-size × 40 */
 	}
 } /* @media (min-width: 960px) {... */
