@@ -595,6 +595,7 @@ li:last-child {
 		font-size: 20px;
 	}
 	.ly_cont, .ly_header {
+		width: 77%;
 		max-width: 900px;	/* 1行40文字になるように、font-size × 40 */
 	}
 } /* @media (min-width: 960px) {... */
