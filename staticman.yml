@@ -7,6 +7,8 @@ comments:
   #
   # Names of the fields the form is allowed to submit. If a field that is
   # not here is part of the request, an error will be thrown.
+  # フォームがサブミットを許可しているフィールドの名前。
+  # ここにないフィールドがリクエストの一部である場合、エラーが投げられます。
   allowedFields: ["name", "email", "url", "message", "replying_to_uid"]
 
   # (*) REQUIRED
@@ -69,6 +71,8 @@ comments:
 
   # Names of required fields. If any of these isn't in the request or is empty,
   # an error will be thrown.
+  # 必須フィールドの名前です。これらがリクエストに含まれていない場合や空の場合は、
+  # エラーが投げられます。
   requiredFields: ["name", "message"] # 差し当たりメールアドレスは要求しないことにする
 
   # List of transformations to apply to any of the fields supplied. Keys are
@@ -76,7 +80,13 @@ comments:
   transforms:
     email: md5
 
+  # note that reCaptcha is nested under comments
   reCaptcha:
     enabled: false
-  #  siteKey: 6LcWstQUAAAAALoGBcmKsgCFbMQqkiGiEt361nK1
-  #  secret: eteZTgxDkxg3sbrLwAPwiaAcdUh/zFRQQzjlmxdurvWvGqaFLOOBwFWUsA6NcMyoeAB1z0kl93Pdno4v0RelTKFXiwrcLAdQaOpR1Ckz7mim/9p8/Jvu7I00d0/OO3ZUPpDw5NGP6f7SKafKCT53dAzWyiWvpt7JfbnUMUubfA0rUTMGCToBIya/IrMVOPkjc1N25k0fz3uigElI6n1R2MwVOxmrpWyl99r8fpx8evKL7R4ycUkaL+CyUL4fCrfaAvOfyGnNG5eJQhv188OXpRuaxut2sXs273WH5BaDoU0vEGSMo9RrQwYl3oNTgb9aFTOhd5Npz+EpZuul+jwuCnZwDXQ2uc7i8+hDacSJy43IrTxrWkxANik3BvUIZHCKbrpKFUxQfjYCX8J6pjIt5uSpqxRfYDQwo8mKAHX9Fhg/r5a+e2NPG5HWZy6LEkAS4ny3l5lKGmM3EuJWzSOpYTpCXAbVTKfkjvd0gACJnbBhNR21xKfHfWhmH9bJE8/QqKrajqO3Myg+JHhMwRp/r7tNkuGWUhN3UBvYZRSpiSi53/fQvrYDhOQSPKSoMlbKO0AilrQj7mUxwBrpYAm0GP/5ptUIMDbUedXIDWEPyxLYSnNXrTJ/A71w8u1Fw3mURquylVUUP4si172SBOMZl/0auV6geG5UqXqvPxRxgFQ=
+    # the siteKey is used as-is (no encryption)
+    siteKey: 6Ldpy7AZAAAAALuLbjS1YfNRMLp6eB6RgEdseCW4
+    # the secret is the encrypted blob you got back from the encrypt call    
+    secret: iDg2qVWDyHOQIIlYSQGoFg8a+Chl1IO050uB/Ogq1JT9bpcammwIJku0dlH480TW7NrAhuDV/8tp1IHd0BocjEdmdIjn2+LT3DGEiyxxb7QukGt6yrD4uzhNe3alK9UcsFiNjUU3UgZtmjiEMYfWAZOi4DY6zqH9wd5DW6pQCkKE98dEIAdgSDpf+AONe68rWuoHJeyfY/0UVX0/45NgGcVdtM0jIZ77QMnY6yVFHJR/Dthi7g4AwJ3wHdcQ2/k3qcc/bnL8rB6q9sp7IrbWj1Z1ehoXobva9jNwVMu0skQRhj685MK4ip+T8mjmcSiZ7yniXbnzovm1b/yx9xLf05k/nWzWOyDBixEsPY3wTtt85/8Vy1Bs+mPVB+n2GA95c5UZT4kygJeT7Q/1dJnReYDOtfFV4lCdRFfq7rk+6otOkDyOvxC28zoBRcDVs2a5xXE003hgdIjeIikNWKoAB4GIb1kF0SUmUOnZbOS22CJuk/ZM881bSbXApQiP16Sh9sop2kJM6oD+SAooY4MMKAcqUZAZ9p8WrJXUkxogosXbbhg6S+Lzrgjmpnor2oOPBB5g/DQC6GRQO8nEu8eLzXPzeuRWvSXs7k5lW0URtBEiSD8ZWFoEcOqnflbRyI6vmZr0bJAYx7d2F0JJjIHlPDyb5IXyM21fIZwcf3FSGVg=
+
+  # 参考：https://travisdowns.github.io/blog/2020/02/05/now-with-comments.html
+  # 実例：https://github.com/travisdowns/travisdowns.github.io
