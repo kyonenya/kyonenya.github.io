@@ -1,49 +1,36 @@
-# Name of the property. You can have multiple properties with completely
-# different config blocks for different sections of your site.
-# For example, you can have one property to handle comment submission and
-# another one to handle posts.
 # プロパティの名前です。複数のプロパティを持つことができ、サイト内の様々なセクションで全く異なる設定ブロックを持つことができます。
 # 例えば、コメント投稿用のプロパティと投稿用のプロパティを持つことができます。
 comments:
-  # (*) REQUIRED
   # ＊必須
-  # Names of the fields the form is allowed to submit. If a field that is not here is part of the request, an error will be thrown.
   # フォームがサブミットを許可しているフィールドの名前。ここにないフィールドがリクエストの一部である場合、エラーが投げられます。
   allowedFields: ["name", "email", "url", "message", "replying_to_uid"]
 
-  # (*) REQUIRED
   # ＊必須
-  # Name of the branch being used. Must match the one sent in the URL of the request.
   # 使用するブランチの名前です。リクエストURLで送られたものと一致しなければなりません。
-  branch: master
+  branch: develop
 
   # Text to use as the commit message or pull request title. Accepts placeholders.
   commitMessage: "Comment from {fields.name} on {options.slug}"
 
-  # (*) REQUIRED
-  #
-  # Destination path (filename) for the data files. Accepts placeholders.
+  # ＊必須
   # データファイルの保存先パス（ファイル名）。プレースホルダーを受け付けます。
   filename: "entry{@timestamp}"
 
-  # The format of the generated data files. Accepted values are "json", "yaml"
-  # or "frontmatter"
-  format: "yaml"
+  # 生成されるデータファイルのフォーマット。受け入れられる値は、"json"、"yaml"、または "fronttmatter "です。
+  format: "json"
 
   # List of fields to be populated automatically by Staticman and included in
   # the data file. Keys are the name of the field. The value can be an object
   # with a `type` property, which configures the generated field, or any value
   # to be used directly (e.g. a string, number or array)
+  # Staticmanが自動的に入力し、データファイルに含めるフィールドのリストです。キーはフィールドの名前です. 値には、生成されるフィールドを設定する "type"プロパティを持つオブジェクトか、直接使用する任意の値 (文字列、数値、配列など) を指定することができます。
   generatedFields:
     date:
       type: date
       options:
         format: "timestamp-seconds"
 
-  # Whether entries need to be appproved before they are published to the main
-  # branch. If set to `true`, a pull request will be created for your approval.
-  # Otherwise, entries will be published to the main branch automatically.
-  # メインブランチに公開する前に承認が必要かどうかを指定します。true に設定されている場合、承認のためのプルリクエストが作成されます。
+  # メインブランチに公開する前に承認が必要かどうかを指定します。trueに設定されている場合、承認のためのプルリクエストが作成されます。
   # そうでない場合、エントリは自動的にメインブランチに公開されます。
   moderation: false # 差し当たりコメント承認はオフにしておく。
 
@@ -71,7 +58,7 @@ comments:
   # ＊必須
   # Destination path (directory) for the data files. Accepts placeholders.
   # データファイルの保存先パス（ディレクトリ）。プレースホルダーを受け入れます。
-  path: "_data/comments/{options.slug}"
+  path: "_comments/{options.slug}"
 
   # Names of required fields. If any of these isn't in the request or is empty,
   # an error will be thrown.
