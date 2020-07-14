@@ -14,16 +14,12 @@ comments:
 
   # ＊必須
   # データファイルの保存先パス（ファイル名）。プレースホルダーを受け付けます。
-  filename: "entry{@timestamp}"
+  filename: "entry"  # "entry{@timestamp}"から変更
 
   # 生成されるデータファイルのフォーマット。受け入れられる値は、"json"、"yaml"、または "fronttmatter "です。
   format: "json"
 
-  # List of fields to be populated automatically by Staticman and included in
-  # the data file. Keys are the name of the field. The value can be an object
-  # with a `type` property, which configures the generated field, or any value
-  # to be used directly (e.g. a string, number or array)
-  # Staticmanが自動的に入力し、データファイルに含めるフィールドのリストです。キーはフィールドの名前です. 値には、生成されるフィールドを設定する "type"プロパティを持つオブジェクトか、直接使用する任意の値 (文字列、数値、配列など) を指定することができます。
+  # Staticmanが自動的に入力し、データファイルに含めるフィールドのリストです。キーはフィールドの名前です。値には、生成されるフィールドを設定する "type"プロパティを持つオブジェクトか、直接使用する任意の値（文字列、数値、配列など）を指定することができます。
   generatedFields:
     date:
       type: date
