@@ -14,7 +14,7 @@ comments:
 
   # ＊必須
   # データファイルの保存先パス（ファイル名）。プレースホルダーを受け付けます。
-  filename: "entry"  # "entry{@timestamp}"から変更
+  filename: "entry{@timestamp}"
 
   # 生成されるデータファイルのフォーマット。受け入れられる値は、"json"、"yaml"、または "fronttmatter "です。
   format: "json"
@@ -24,7 +24,7 @@ comments:
     date:
       type: date
       options:
-        format: "timestamp-seconds"
+        format: "{@date:YYYY-MM-DD HH:mm}" # 例："2020-06-09 10:58"（Moment.js）
 
   # メインブランチに公開する前に承認が必要かどうかを指定します。trueに設定されている場合、承認のためのプルリクエストが作成されます。
   # そうでない場合、エントリは自動的にメインブランチに公開されます。
@@ -50,19 +50,14 @@ comments:
     # Mailgun domain (encrypted)
     #domain: "4r3e2w1q"
 
-  # (*) REQUIRED
   # ＊必須
-  # Destination path (directory) for the data files. Accepts placeholders.
   # データファイルの保存先パス（ディレクトリ）。プレースホルダーを受け入れます。
   path: "_comments/{options.slug}"
 
-  # Names of required fields. If any of these isn't in the request or is empty,
-  # an error will be thrown.
   # 必須フィールドの名前です。これらがリクエストに含まれていない場合や空の場合は、エラーが投げられます。
   requiredFields: ["name", "message"] # 差し当たりメールアドレスは必須にしないことにする。
 
-  # List of transformations to apply to any of the fields supplied. Keys are
-  # the name of the field and values are possible transformation types.
+  # List of transformations to apply to any of the fields supplied. Keys are the name of the field and values are possible transformation types.
   transforms:
     email: md5
 
