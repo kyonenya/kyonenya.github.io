@@ -1,8 +1,0 @@
-# staticman (comments) configuration
-# example: 
-# staticman_url: https://staticman-travisdownsio.herokuapp.com/v2/entry/travisdowns/travisdowns.github.io/master/comments
-staticman_url: https://staticman-kyonenya.herokuapp.com/v2/entry/kyonenya/kyonenya.github.io/master/comments
-
-reCaptcha:
-  siteKey: 6Ldpy7AZAAAAALuLbjS1YfNRMLp6eB6RgEdseCW4   
-  secret: iDg2qVWDyHOQIIlYSQGoFg8a+Chl1IO050uB/Ogq1JT9bpcammwIJku0dlH480TW7NrAhuDV/8tp1IHd0BocjEdmdIjn2+LT3DGEiyxxb7QukGt6yrD4uzhNe3alK9UcsFiNjUU3UgZtmjiEMYfWAZOi4DY6zqH9wd5DW6pQCkKE98dEIAdgSDpf+AONe68rWuoHJeyfY/0UVX0/45NgGcVdtM0jIZ77QMnY6yVFHJR/Dthi7g4AwJ3wHdcQ2/k3qcc/bnL8rB6q9sp7IrbWj1Z1ehoXobva9jNwVMu0skQRhj685MK4ip+T8mjmcSiZ7yniXbnzovm1b/yx9xLf05k/nWzWOyDBixEsPY3wTtt85/8Vy1Bs+mPVB+n2GA95c5UZT4kygJeT7Q/1dJnReYDOtfFV4lCdRFfq7rk+6otOkDyOvxC28zoBRcDVs2a5xXE003hgdIjeIikNWKoAB4GIb1kF0SUmUOnZbOS22CJuk/ZM881bSbXApQiP16Sh9sop2kJM6oD+SAooY4MMKAcqUZAZ9p8WrJXUkxogosXbbhg6S+Lzrgjmpnor2oOPBB5g/DQC6GRQO8nEu8eLzXPzeuRWvSXs7k5lW0URtBEiSD8ZWFoEcOqnflbRyI6vmZr0bJAYx7d2F0JJjIHlPDyb5IXyM21fIZwcf3FSGVg=
