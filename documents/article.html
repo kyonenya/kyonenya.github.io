@@ -24,6 +24,59 @@
 	<meta property='og:description' content="言ってみただけ。哲学と哲学以外のこと">
 	<meta property="og:image" content="https://kyonenya.github.io/icon/ogp-image.png"
 	<meta name="twitter:card" content="summary">
+	<style>
+/* https://saruwakakun.com/html-css/reference/hidden-show */
+		/*全体*/
+/*ボタン装飾*/
+.hidden_box label {
+    padding: 15px;
+    cursor :pointer;
+}
+
+/*ボタンホバー時*/
+.hidden_box label:hover {
+    background: #efefef;
+}
+
+/*チェックは見えなくする*/
+.hidden_box input {
+    /* display: none; */
+}
+
+/*中身を非表示にしておく*/
+.hidden_box .hidden_show {
+	display:none
+}
+/*クリックで中身表示*/
+.hidden_box input:checked ~ .hidden_show {
+	display: block;
+}
+		/* エディター */
+.bl_editor {
+  font-size: 90%;
+	margin: 0 auto;
+}
+.bl_editor_title {
+  width: 80%;
+  /* border: none; */
+  background: hsl(40, 38%, 97%);
+  margin: 0 auto 0.25em;
+}
+.bl_editor_title:focus {
+  outline: none;
+}
+.bl_editor_body {
+  width: 80%;
+  height: 20vh;
+  /* border: none; */
+  background: hsl(40, 38%, 97%);
+	resize: vertical;
+  margin: 0 auto;
+}
+.bl_editor_body:focus {
+  outline: none;
+}
+	</style>
 
 </head>
 <body>
@@ -60,29 +113,6 @@
 				</time>
 			</header>
 				<h2 class="bl_text_title">言葉の出口、場所のイメージ</h2>
-				<p>（<a href="?id=1">id: 1</a>への追記）</p>
-
-			<user-card id="3"></user-card>
-
-			<!--  -->
-			<!-- <a href=""> -->
-			<div class="bl_blogcard">
-				<header class="bl_blogcard_header">
-					<img src="../favicon.ico" class="bl_blogcard_icon" width="20" height="20">
-					<div class="bl_blogcard_logo">placet experiri</span>
-					<span class="bl_blogcard_suffix"> :: 3</span>
-				</header>
-				<div class="bl_blogcard_title">言葉の出口、場所のイメージ</div>
-				<p class="bl_blogcard_text">ここを作ってからさっそく思索に変化が現れている。歩きながら、読書や料理をしながら、ここに書くことをぼんやり考えてい<!--る時間が増えた。そうやって考えるとき、この場所-->…</p>
-				<footer class="bl_blogcard_footer">
-					<div class="bl_blogcard_time">2020-04-10</div>
-					<ul class="bl_blogcard_tags">
-						<li><a href="?tag=思考">#思考</a></li>
-						<li><a href="?tag=想像">#想像</a></li>
-					</ul>
-				</footer>
-			</div>
-			<!-- </a> -->
 			<div class="bl_text">
 				<p>ここを作ってからさっそく思索に変化が現れている。歩きながら、読書や料理をしながら、ここに書くことをぼんやり考えている時間が増えた。そうやって考えるとき、この場所のことを思い浮かべていることに気づいた。ローカルで下書きしているときにも心はここにあり、ほのかにインターネットに接続されている。</p><p>場所のイメージとは、他人だったり社交の場だったり、日記や草稿だったりする、言葉の出口のイメージだ。それぞれの場所には特有の、思考の気分のようなものがある。賑やかすぎると話せない事柄があるが、独りで静かすぎると思考は推進力を失う。ここはインターネット上であるにもかかわらず、ふだんの考えるときの静かで透明な空気に近く、しかしちょっとだけ熱がある。</p><p>おそらく考えるときには、言葉の出口になる場所をあらかじめ先取りして思考するのだろう。だからいびつな出口に忖度するようにして思考もあらかじめ歪むし、出口を塞がれた思想は初めから生まれない。そういう不幸な境遇にある考え事を、どんな人でも持っている気がする。だが、思考の出口は実在する出口である必要はないのだ。みんな勝手に相手を作ってお喋りすればいいのに。</p><hr><p>そんなわけで、この場所を思い浮かべながらたくさんの考え事をしている。実際に書くことなしに、書くことを思い浮かべた時点で、やりたいことは既に終わっている。書き留めることにあまり固執しないように。</p><p>そうやって想念をぐるぐる回していると、その中から顔見知りの想念が出てくる。そうなったら、それ以上同じことを考えずに済むように、ここに書いてお別れをする。とはいえ想念を書き留める役割をするのは二、三言目くらいまでで、そこから先は言葉が言葉を呼んで自走していく。手癖に落ち着くこともあれば、偶然の組み合わせで新たな展開を見せることもある。とにかく時期が肝心だ。熱が冷めきってしまわないうちに生け捕りにしないといけない。</p>
 			</div>
@@ -92,7 +122,38 @@
 					<li><a href="?tag=思考">#思考</a></li>
 				</ul>
 			</footer>
-		</article></div>
+		</article>
+		<section>
+			<ul>
+				<li>
+					<header>
+						<span>kyonenya</span>
+					</header>
+					<div>
+						<p>こんにちは。面白い記事ですね。</p>
+					</div>
+					<footer>
+						<span>1日前</span>
+					</footer>
+				</li>
+			</ul>
+
+
+			<div class="hidden_box">
+				<label for="label1">コメントする</label>
+				<input type="checkbox" id="label1"/>
+				<div class="hidden_show">
+					<!--非表示ここから-->     
+					<div class="bl_editor">
+						<input type="text" class="bl_editor_title" placeholder="名前" />
+						<textarea name="" class="bl_editor_body" placeholder="コメント"></textarea>
+						<button type="submit">コメント</button>
+					</div>
+					<!--ここまで-->
+				</div>
+			</div>
+		</section>
+	</div>
 		<!-- 自動生成ここまで -->
 	</section>
 </main>
