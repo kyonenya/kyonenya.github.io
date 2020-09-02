@@ -28,52 +28,53 @@
 /* https://saruwakakun.com/html-css/reference/hidden-show */
 		/*全体*/
 /*ボタン装飾*/
-.hidden_box label {
+
+.bl_commentForm label {
     padding: 15px;
     cursor :pointer;
 }
-
-/*ボタンホバー時*/
-.hidden_box label:hover {
+.bl_commentForm label:hover {
     background: #efefef;
 }
-
-/*チェックは見えなくする*/
-.hidden_box input {
-    /* display: none; */
+.bl_commentForm_switch {
+  /* チェックは見えなくする */
+  display: none;
 }
-
-/*中身を非表示にしておく*/
-.hidden_box .hidden_show {
-	display:none
+.bl_commentForm {
+  display: none;
 }
-/*クリックで中身表示*/
-.hidden_box input:checked ~ .hidden_show {
-	display: block;
+.bl_commentForm_switch:checked ~ .bl_commentForm {
+  /*クリックで中身表示*/
+  display: block;
 }
-		/* エディター */
-.bl_editor {
+/* エディター */
+.bl_commentForm_inner {
   font-size: 90%;
-	margin: 0 auto;
+  /* 中身を非表示にしておく */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.bl_editor_title {
+.bl_commentForm_name {
   width: 80%;
-  /* border: none; */
+  border: 1px solid darkgray;
+  -webkit-appearance: none;
   background: hsl(40, 38%, 97%);
-  margin: 0 auto 0.25em;
 }
-.bl_editor_title:focus {
+.bl_commentForm_name:focus {
   outline: none;
 }
-.bl_editor_body {
+.bl_commentForm_body {
   width: 80%;
   height: 20vh;
+  border: 1px solid darkgray;
+  -webkit-appearance: none;  
   /* border: none; */
   background: hsl(40, 38%, 97%);
 	resize: vertical;
-  margin: 0 auto;
+ /* margin: 0 auto;*/
 }
-.bl_editor_body:focus {
+.bl_commentForm_body:focus {
   outline: none;
 }
 	</style>
@@ -139,20 +140,24 @@
 			</ul>
 
 
-			<div class="hidden_box">
-				<label for="label1">コメントする</label>
-				<input type="checkbox" id="label1"/>
-				<div class="hidden_show">
-					<!--非表示ここから-->     
-					<div class="bl_editor">
-						<input type="text" class="bl_editor_title" placeholder="名前" />
-						<textarea name="" class="bl_editor_body" placeholder="コメント"></textarea>
-						<button type="submit">コメント</button>
-					</div>
-					<!--ここまで-->
-				</div>
-			</div>
-		</section>
+<section>
+  <label for="label1">コメントする</label>
+  <input type="checkbox" id="label1" class="bl_commentForm_switch" />
+  <!-- 非表示ここから -->
+  <div class="bl_commentForm">
+    <div class="bl_commentForm_inner">
+      <input type="text" class="bl_commentForm_name" placeholder="名前" />
+      <textarea name="" class="bl_commentForm_body" placeholder="コメント"></textarea>
+      <button type="submit" class="bl_commentForm_submit">コメント</button>
+    </div>
+    <!-- ./bl_commentForm_inner -->
+  </div>
+  <!-- ./bl_commentForm -->
+  <!-- ここまで -->
+</section>
+
+
+</section>
 	</div>
 		<!-- 自動生成ここまで -->
 	</section>
