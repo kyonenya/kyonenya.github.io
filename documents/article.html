@@ -1,40 +1,39 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
-	<meta charset="UTF-8">
-	<meta name="robot" content="noindex">
-	<title>placet experiri</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<!-- CSSインポート -->
-	<link href="../assets/reset.css" media="all" rel="stylesheet" type="text/css">
-	<link href="../style.css" media="all" rel="stylesheet" type="text/css">
+  <meta charset="UTF-8">
+  <meta name="robot" content="noindex">
+  <title>placet experiri</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- CSSインポート -->
+  <link href="../assets/reset.css" media="all" rel="stylesheet" type="text/css">
+  <link href="../style.css" media="all" rel="stylesheet" type="text/css">
 
-	<!-- アイコン画像 -->
-	<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="icon/apple-touch-icon-180x180.png">
-	<link rel="icon" type="image/png" sizes="192x192" href="icon/icon-192x192.png">
-	<link rel="icon" href="favicon.ico">
-	<!-- 通常のメタデータ -->
-	<meta name="description" content="言ってみただけ。哲学と哲学以外のことを書くテキストサイト">
-	<!-- SNS用のメタデータ -->
-	<meta property="og:site_name" content="placet experiri">
-	<meta property="og:locale" content="ja_JP">
-	<meta property='og:type' content='article'>
-	<meta property='og:title' content='placet experiri'>
-	<meta property='og:url' content='https://kyonenya.github.io/'>
-	<meta property='og:description' content="言ってみただけ。哲学と哲学以外のこと">
-	<meta property="og:image" content="https://kyonenya.github.io/icon/ogp-image.png"
-	<meta name="twitter:card" content="summary">
-	<style>
+  <!-- アイコン画像 -->
+  <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="icon/apple-touch-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="icon/icon-192x192.png">
+  <link rel="icon" href="favicon.ico">
+  <!-- 通常のメタデータ -->
+  <meta name="description" content="言ってみただけ。哲学と哲学以外のことを書くテキストサイト">
+  <!-- SNS用のメタデータ -->
+  <meta property="og:site_name" content="placet experiri">
+  <meta property="og:locale" content="ja_JP">
+  <meta property='og:type' content='article'>
+  <meta property='og:title' content='placet experiri'>
+  <meta property='og:url' content='https://kyonenya.github.io/'>
+  <meta property='og:description' content="言ってみただけ。哲学と哲学以外のこと">
+  <meta property="og:image" content="https://kyonenya.github.io/icon/ogp-image.png"
+  <meta name="twitter:card" content="summary">
+  <style>
 /* https://saruwakakun.com/html-css/reference/hidden-show */
-		/*全体*/
+    /*全体*/
 /*ボタン装飾*/
-
-.bl_commentForm label {
-    padding: 15px;
-    cursor :pointer;
+.bl_commentForm_show {
+  padding: 15px;
+  cursor :pointer;
 }
-.bl_commentForm label:hover {
-    background: #efefef;
+.bl_commentForm_show:hover {
+  background: #efefef;
 }
 .bl_commentForm_switch {
   /* チェックは見えなくする */
@@ -71,84 +70,104 @@
   -webkit-appearance: none;  
   /* border: none; */
   background: hsl(40, 38%, 97%);
-	resize: vertical;
+  resize: vertical;
  /* margin: 0 auto;*/
 }
 .bl_commentForm_body:focus {
   outline: none;
 }
-	</style>
+.bl_commentForm_submit {
+  appearance: none;
+  border: 0;
+  border-radius: 5px;
+  background: hsl(202, 35%, 60%);
+  color: #fff;
+  padding: 8px 16px;
+  font-size: 16px;
+  font-family: inherit;
+  cursor: pointer;
+}
+.bl_commentForm_submit:hover {
+  background: hsl(202, 35%, 45%);
+}
+ 
+.bl_commentForm_submit:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px #cbd6ee;
+}
+
+  </style>
 
 </head>
 <body>
 <header class="ly_header">
-	<div class="ly_header_inner">
-		<h1 class=""><a href="https://kyonenya.github.io/" class="el_logo">placet experiri</a><span class="el_logo_suffix"> :: 3</span></h1>
-		<nav class="bl_nav">
-			<ul class="bl_nav_inner">
-				<li><a href="https://kyonenya.github.io/">Home</a></li>
-				<li><a href="https://kyonenya.github.io/works">Works</a></li>
-				<li><a href="https://kyonenya.github.io/about">About</a></li>
-				<li class="el_search">
-					<img src="../assets/search.svg" class="el_search_icon" alt="検索アイコン">
-					<form>
-						<input type="search" placeholder="検索ワードを入力" value="" class="el_search_form hp_hidden">
-					</form>
-				</li>
-			</ul>
-		</nav>
-	</div>
-	<!-- /.ly_header_inner -->
+  <div class="ly_header_inner">
+    <h1 class=""><a href="https://kyonenya.github.io/" class="el_logo">placet experiri</a><span class="el_logo_suffix"> :: 3</span></h1>
+    <nav class="bl_nav">
+      <ul class="bl_nav_inner">
+        <li><a href="https://kyonenya.github.io/">Home</a></li>
+        <li><a href="https://kyonenya.github.io/works">Works</a></li>
+        <li><a href="https://kyonenya.github.io/about">About</a></li>
+        <li class="el_search">
+          <img src="../assets/search.svg" class="el_search_icon" alt="検索アイコン">
+          <form>
+            <input type="search" placeholder="検索ワードを入力" value="" class="el_search_form hp_hidden">
+          </form>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <!-- /.ly_header_inner -->
 </header>
 <main>
-	<section class="ly_cont">
-		<div class="el_archive">
-			<h1 class="el_archive_header"></h1>
-			<!-- <label><input type="checkbox">古い順</label> -->
-		</div>
-		<!-- JavaScriptによる自動生成 -->
-		<div id="root">
-		<article>
-			<header class="bl_text_header">
-				<time class="bl_text_date" datetime="2020-04-10 13:31">2020-04-10 13:31
-				</time>
-			</header>
-				<h2 class="bl_text_title">言葉の出口、場所のイメージ</h2>
-			<div class="bl_text">
-				<p>ここを作ってからさっそく思索に変化が現れている。歩きながら、読書や料理をしながら、ここに書くことをぼんやり考えている時間が増えた。そうやって考えるとき、この場所のことを思い浮かべていることに気づいた。ローカルで下書きしているときにも心はここにあり、ほのかにインターネットに接続されている。</p><p>場所のイメージとは、他人だったり社交の場だったり、日記や草稿だったりする、言葉の出口のイメージだ。それぞれの場所には特有の、思考の気分のようなものがある。賑やかすぎると話せない事柄があるが、独りで静かすぎると思考は推進力を失う。ここはインターネット上であるにもかかわらず、ふだんの考えるときの静かで透明な空気に近く、しかしちょっとだけ熱がある。</p><p>おそらく考えるときには、言葉の出口になる場所をあらかじめ先取りして思考するのだろう。だからいびつな出口に忖度するようにして思考もあらかじめ歪むし、出口を塞がれた思想は初めから生まれない。そういう不幸な境遇にある考え事を、どんな人でも持っている気がする。だが、思考の出口は実在する出口である必要はないのだ。みんな勝手に相手を作ってお喋りすればいいのに。</p><hr><p>そんなわけで、この場所を思い浮かべながらたくさんの考え事をしている。実際に書くことなしに、書くことを思い浮かべた時点で、やりたいことは既に終わっている。書き留めることにあまり固執しないように。</p><p>そうやって想念をぐるぐる回していると、その中から顔見知りの想念が出てくる。そうなったら、それ以上同じことを考えずに済むように、ここに書いてお別れをする。とはいえ想念を書き留める役割をするのは二、三言目くらいまでで、そこから先は言葉が言葉を呼んで自走していく。手癖に落ち着くこともあれば、偶然の組み合わせで新たな展開を見せることもある。とにかく時期が肝心だ。熱が冷めきってしまわないうちに生け捕りにしないといけない。</p>
-			</div>
-			<footer class="bl_text_footer">
-				<span class="bl_posts_dateago">3ヶ月前</span>
-				<ul class="bl_tags">
-					<li><a href="?tag=思考">#思考</a></li>
-				</ul>
-			</footer>
-		</article>
-		<section>
-			<ul>
-				<li>
-					<header>
-						<span>kyonenya</span>
-					</header>
-					<div>
-						<p>こんにちは。面白い記事ですね。</p>
-					</div>
-					<footer>
-						<span>1日前</span>
-					</footer>
-				</li>
-			</ul>
+  <section class="ly_cont">
+    <div class="el_archive">
+      <h1 class="el_archive_header"></h1>
+      <!-- <label><input type="checkbox">古い順</label> -->
+    </div>
+    <!-- JavaScriptによる自動生成 -->
+    <div id="root">
+    <article>
+      <header class="bl_text_header">
+        <time class="bl_text_date" datetime="2020-04-10 13:31">2020-04-10 13:31
+        </time>
+      </header>
+        <h2 class="bl_text_title">言葉の出口、場所のイメージ</h2>
+      <div class="bl_text">
+        <p>ここを作ってからさっそく思索に変化が現れている。歩きながら、読書や料理をしながら、ここに書くことをぼんやり考えている時間が増えた。そうやって考えるとき、この場所のことを思い浮かべていることに気づいた。ローカルで下書きしているときにも心はここにあり、ほのかにインターネットに接続されている。</p>
+      </div>
+      <footer class="bl_text_footer">
+        <span class="bl_posts_dateago">3ヶ月前</span>
+        <ul class="bl_tags">
+          <li><a href="?tag=思考">#思考</a></li>
+        </ul>
+      </footer>
+    </article>
+    <section>
+      <ul>
+        <li>
+          <header>
+            <span>kyonenya</span>
+          </header>
+          <div>
+            <p>こんにちは。おはようございます。こんばんわ。</p>
+          </div>
+          <footer>
+            <span>1日前</span>
+          </footer>
+        </li>
+      </ul>
 
 
 <section>
-  <label for="label1">コメントする</label>
-  <input type="checkbox" id="label1" class="bl_commentForm_switch" />
+  <label for="switch" class="bl_commentForm_show">>コメントする</label>
+  <input type="checkbox" id="switch" class="bl_commentForm_switch" />
   <!-- 非表示ここから -->
   <div class="bl_commentForm">
     <div class="bl_commentForm_inner">
       <input type="text" class="bl_commentForm_name" placeholder="名前" />
       <textarea name="" class="bl_commentForm_body" placeholder="コメント"></textarea>
-      <button type="submit" class="bl_commentForm_submit">コメント</button>
+      <button type="submit" class="bl_commentForm_submit">送信</button>
     </div>
     <!-- ./bl_commentForm_inner -->
   </div>
@@ -158,20 +177,20 @@
 
 
 </section>
-	</div>
-		<!-- 自動生成ここまで -->
-	</section>
+  </div>
+    <!-- 自動生成ここまで -->
+  </section>
 </main>
 <footer class="ly_footer">
-	<div class="ly_footer_inner">
-		<p class="el_footerCopyright">© 2020- <a href="https://kyonenya.github.io/about">placet experiri</a></p>
-	</div>
+  <div class="ly_footer_inner">
+    <p class="el_footerCopyright">© 2020- <a href="https://kyonenya.github.io/about">placet experiri</a></p>
+  </div>
 </footer>
-	<!-- JavaScriptライブラリをCDNからインポート -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script><!-- Moment.js -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/ja.js"></script><!-- Moment.js 日本語ロケール -->
-	<!-- JavaScript、ページ生成スクリプト -->
-	<script src="../main.js"></script>
+  <!-- JavaScriptライブラリをCDNからインポート -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script><!-- Moment.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/ja.js"></script><!-- Moment.js 日本語ロケール -->
+  <!-- JavaScript、ページ生成スクリプト -->
+  <script src="../main.js"></script>
 <script>
 
 </script>
