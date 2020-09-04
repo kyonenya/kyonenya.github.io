@@ -15,35 +15,42 @@
   <style>
 /* https://saruwakakun.com/html-css/reference/hidden-show */
     /*全体*/
+.bl_commentForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 /*ボタン装飾*/
 .bl_commentForm_show {
-  padding: 15px;
+  padding: 10px;
+  width: 100%;
   cursor :pointer;
+  border-top: 1px solid darkgray;
+  text-align: center;
 }
-.bl_commentForm_show:hover {
-  background: #efefef;
+.bl_commentForm_show_text {
+  color: gray;
+  font-family: Georgia, serif;
 }
 .bl_commentForm_switch {
   /* チェックは見えなくする */
   display: none;
 }
-.bl_commentForm {
-  display: none;
-}
-.bl_commentForm_switch:checked ~ .bl_commentForm {
-  /*クリックで中身表示*/
-  display: block;
-}
-/* エディター */
+/* 非表示 */
 .bl_commentForm_inner {
   font-size: 90%;
+  width: 100%;
   /* 中身を非表示にしておく */
+  display: none;
+}
+.bl_commentForm_switch:checked ~ .bl_commentForm_inner {
+  /*クリックで中身表示*/
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 .bl_commentForm_name {
-  width: 80%;
+  width: 100%;
   border: 1px solid darkgray;
   -webkit-appearance: none;
   background: hsl(40, 38%, 97%);
@@ -52,7 +59,7 @@
   outline: none;
 }
 .bl_commentForm_body {
-  width: 80%;
+  width: 100%;
   height: 20vh;
   border: 1px solid darkgray;
   -webkit-appearance: none;  
@@ -132,37 +139,45 @@
       </footer>
     </article>
     <section>
-      <ul>
-        <li>
-          <header>
-            <span>kyonenya</span>
-          </header>
-          <div>
-            <p>こんにちは。おはようございます。こんばんわ。</p>
-          </div>
-          <footer>
-            <span>1日前</span>
-          </footer>
-        </li>
-      </ul>
+
+<ul class="bl_comments">
+  <li class="bl_comments_item">
+    <header class="bl_comments_header">
+      <span class="bl_comments_name">kyonenya</span>
+    </header>
+    <div class="bl_comments_body">
+      <p>こんにちは。おはようございます。こんばんわ。</p>
+    </div>
+    <footer class="bl_comments_footer">
+      <span class="bl_comments_dateago" datetime="2020/09/02 18:45">1日前</span>
+    </footer>
+  </li>
+  <li class="bl_comments_item">
+    <header class="bl_comments_header">
+      <span class="bl_comments_name">takashi</span>
+    </header>
+    <div class="bl_comments_body">
+      <p>こんばんわ。こんにちは。おはようございます。</p>
+    </div>
+    <footer class="bl_comments_footer">
+      <span class="bl_comments_dateago" datetime="2020/09/02 18:45">3時間前</span>
+    </footer>
+  </li>
+</ul>
 
 <!-- 参考：note -->
 <!-- https://note.com/oyako_kitchen/n/n2020d435fcd8 -->
-<section>
-  <label for="switch" class="bl_commentForm_show">>コメントする</label>
+<div class="bl_commentForm">
+  <label for="switch" class="bl_commentForm_show"><span class="bl_commentForm_show_text">Leave a reply: ></span></label>
   <input type="checkbox" id="switch" class="bl_commentForm_switch" />
   <!-- 非表示ここから -->
-  <div class="bl_commentForm">
-    <div class="bl_commentForm_inner">
-      <input type="text" class="bl_commentForm_name" placeholder="名前" />
-      <textarea name="" class="bl_commentForm_body" placeholder="コメント"></textarea>
-      <button type="submit" class="bl_commentForm_submit">送信</button>
-    </div>
-    <!-- ./bl_commentForm_inner -->
-  </div>
-  <!-- ./bl_commentForm -->
+  <div class="bl_commentForm_inner">
+    <textarea name="" class="bl_commentForm_body" placeholder="コメント"></textarea>
+    <input type="text" class="bl_commentForm_name" placeholder="名前" />
+    <button type="submit" class="bl_commentForm_submit">送信</button>
+  </div><!-- /.bl_commentForm_inner -->
   <!-- ここまで -->
-</section>
+</div><!-- /.bl_commentForm -->
 
 </section>
   </div>
