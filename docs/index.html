@@ -16,11 +16,10 @@
   <!-- CSSインポート -->
   <link href="../src/reset.css" media="all" rel="stylesheet" type="text/css" />
   <link href="../src/style.css" media="all" rel="stylesheet" type="text/css" />
-  <!-- JavaScriptライブラリをCDNからインポート -->
+  <!-- JavaScriptインポート -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js" defer></script><!-- Moment.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/ja.js" defer></script><!-- Moment.js 日本語ロケール -->
-  <!-- JavaScript、ページ生成スクリプト -->
-  <script src="../src/main.js" defer></script>
+  <script src="../src/main.js" defer></script><!-- ページ生成スクリプト -->
   <!-- アイコン画像 -->
   <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../assets/icons/apple-touch-icon-180x180.png" />
   <link rel="icon" type="image/png" sizes="192x192" href="../assets/icons/icon-192x192.png" />
@@ -42,7 +41,10 @@
 <body>
   <header class="ly_header">
     <div class="ly_header_inner">
-      <h1><a href="https://kyonenya.github.io/" class="el_logo">placet experiri</a><span class="el_logo_suffix"></span></h1>
+      <h1>
+        <a href="https://kyonenya.github.io/" class="el_logo">placet experiri</a>
+        <span class="el_logo_suffix"></span>
+      </h1>
       <nav class="bl_nav">
         <ul class="bl_nav_inner">
           <li><a href="https://kyonenya.github.io/">Home</a></li>
@@ -51,29 +53,29 @@
           <li class="el_search">
             <img src="../assets/images/search.svg" class="el_search_icon" alt="検索アイコン" />
             <form>
-              <input type="search" placeholder="検索ワードを入力" value="" class="el_search_form">
+              <input type="search" placeholder="検索ワードを入力" value="" class="el_search_form" />
             </form>
           </li>
         </ul>
       </nav>
-    </div>
-    <!-- /.ly_header_inner -->
+    </div><!-- /.ly_header_inner -->
   </header>
   <main>
     <section class="ly_cont">
       <div class="el_archive">
-        <h1 class="el_archive_header"></h1>
-      </div>
-      <!-- JavaScriptによる自動生成 -->
+        <h2 class="el_archive_header"></h2>
+      </div><!-- ./el_archive -->
+      <!-- JavaScriptによる動的生成コンテンツ -->
       <div id="root">
-      </div>
-      <!-- 自動生成ここまで -->
+      </div><!-- ./root -->
     </section>
   </main>
   <footer class="ly_footer">
     <div class="ly_footer_inner">
-      <p class="el_footerCopyright">&copy; 2020- <a href="https://kyonenya.github.io/about">placet experiri</a></p>
-    </div>
+      <p class="el_footerCopyright">
+        &copy; 2020- <a href="https://kyonenya.github.io/about">placet experiri</a>
+      </p>
+    </div><!-- ./ly_footer_inner -->
   </footer>
 </body>
 </html>
