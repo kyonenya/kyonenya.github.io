@@ -223,13 +223,13 @@ li:last-child {
 }
 
 /* ロゴ ----- */
-.el_logo { 
+.el_logo_title { 
   font-size: 30px;
   font-weight: normal;
   vertical-align: center;
 }
 
-.el_logo_suffix{
+.el_logo_suffix {
   font-size: 16px;
   font-weight: normal;
   color: var(--monochrome-dark);
@@ -311,13 +311,13 @@ li:last-child {
   padding: 1.25em 0;  /* フッターの高さ */
 }
 
-.el_footerCopyright {
+.el_footer_copyright {
   font-size: 85%;
   text-align: center;
   color: var(--monochrome-dark)
 }
 
-.el_footerCopyright a {
+.el_footer_copyright a {
   color: inherit;
 }
 
@@ -558,7 +558,7 @@ li:last-child {
   font-size: 112%;
   }
   /* ロゴ */
-  .el_logo {
+  .el_logo_title {
     margin-left: 3px;
     font-size: 34px;
   }
