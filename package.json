@@ -8,6 +8,7 @@
     "postcss": "^8.1.2",
     "postcss-cli": "^8.1.0",
     "postcss-import": "^13.0.0",
-    "stylelint": "^13.7.2"
+    "stylelint": "^13.7.2",
+    "stylelint-config-standard": "^20.0.0"
   }
 }
