@@ -4,7 +4,7 @@ module.exports = {
 //    require('stylelint'),
     require('postcss-import')({
       plugins: [
-        require('stylelint')({}),
+        require('stylelint'),
         // どのcssファイルでのエラーなのかを表示させるプラグイン
         require('postcss-reporter'),
       ]

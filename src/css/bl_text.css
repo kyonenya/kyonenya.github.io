@@ -1,5 +1,4 @@
-/* bl_text テキスト領域 */
-
+/* そのた */ 
 .bl_text + .bl_text {
   /* セクション間余白 */
   margin-top: 1.5em;
@@ -29,10 +28,4 @@
 .bl_text_footer {
   padding-top: 0.5em;
   color: var(--monochrome-dark);
-}
-
-@media screen and (min-width: 570px) {
-  .bl_text p + p {
-    /* margin-top: 0.75em; */  /* 段落間余白を増量 */
-  }
 }

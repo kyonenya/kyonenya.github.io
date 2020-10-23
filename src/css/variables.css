@@ -1,0 +1,18 @@
+:root {
+  --text-color: #333;
+  --background-color: hsl(40, 38%, 97%);
+  --monochrome-light: hsl(0, 0%, 85%);
+  --monochrome-medium: hsl(0, 0%, 68%);
+  --monochrome-dark: hsl(0, 0%, 45%);
+  --main-color: hsl(202, 35%, 50%);
+  --main-color-light: hsl(202, 35%, 65%);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text-color: hsl(40, 38%, 97%);
+    --background-color: #333;
+    --main-color: hsl(349, 39%, 63%);
+    --main-color-light: hsl(349, 39%, 58%);
+  }
+}
