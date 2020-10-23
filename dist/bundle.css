@@ -1,12 +1,35 @@
 @charset "UTF-8";
 
+/**
+ * エントリーポイント
+ */
+
+/**
+ * 変数
+ */
+
 :root {
-  /* --text-color: ; */
+  --text-color: hsl(0, 0%, 20%);  /* #333 */
+  --background-color: hsl(40, 38%, 97%);
   --monochrome-light: hsl(0, 0%, 85%);
+  --monochrome-midlight: hsl(0, 0%, 75%);
   --monochrome-medium: hsl(0, 0%, 68%);
   --monochrome-dark: hsl(0, 0%, 45%);
   --main-color: hsl(202, 35%, 50%);
   --main-color-light: hsl(202, 35%, 65%);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text-color: hsl(40, 38%, 97%);
+    --background-color: hsl(0, 0%, 20%);
+    --monochrome-light: hsl(0, 0%, 27%);
+    --monochrome-midlight: hsl(0, 0%, 33%);
+    --monochrome-medium: hsl(0, 0%, 40%);
+    --monochrome-dark: hsl(0, 0%, 55%);
+    --main-color: hsl(349, 39%, 63%);
+    --main-color-light: hsl(349, 39%, 58%);
+  }
 }
 
 /**
@@ -113,16 +136,17 @@ img:not([alt]) {
   }
 }
 
-/* ---------------------------------
-  ベースグループ */
+/**
+ * ベースグループ
+ */
 
 body {
   font-family: "Helvetica Neue", Verdana, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif;
   word-break: break-word;  /* 行頭に、。が来るのを避ける */
-  color: #333;  /* 黒の文字色 */
+  color: var(--text-color);  /* 黒の文字色 */
   line-height: 1.6;
   font-size: 16px;
-  background: hsl(40, 38%, 97%);  /* 再生紙色 */
+  background: var(--background-color);
   -webkit-text-size-adjust: 100%; /* iPhone横画面の表示崩れを防ぐ */
   /* フッターを下部固定 */
   display: flex;
@@ -223,8 +247,9 @@ li:last-child {
   margin-bottom: 0;
 }
 
-/* ---------------------------------
-  ヘッダー */
+/**
+ * ヘッダー
+ */
 
 .ly_header {
   font-family: "Avenir Next", "Segoe UI", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "游ゴシック Medium", "Yu Gothic Medium", "メイリオ", Meiryo, sans-serif;
@@ -304,6 +329,8 @@ li:last-child {
 }
 
 .el_search_icon {
+  background-image: url(../../assets/images/search.svg);
+  background-size: 100%;
   top: 0;
   left: 0.5em;
   z-index: 10;  /* フォームの下に重ねる */
@@ -311,6 +338,13 @@ li:last-child {
   width: 1.9em;
   height: 1.9em;
   /* fill: hsl(202, 35%, 60%); */
+}
+
+@media (prefers-color-scheme: dark) {
+  .el_search_icon {
+    background-image: url(../../assets/images/search_dark.svg);
+    background-size:100%;
+  }
 }
 
 .el_search_form {
@@ -338,7 +372,7 @@ li:last-child {
   /* ヘッダー --------------- */
   /* 大箱 */
   .ly_header {
-    background: hsl(40, 38%, 97%);  /* 背景色で塗りつぶし */
+    background: var(--background-color);  /* 背景色で塗りつぶし */
     height: 4.5em;
     margin: 0.5em auto 0;
   }
@@ -385,11 +419,12 @@ li:last-child {
   }
 }
 
-/* ---------------------------------
-  フッター */
+/**
+ * フッター
+ */
 
 .ly_footer {
-  background-color: hsl(0, 0%, 90%);
+  background-color: var(--monochrome-light);
   margin-top: 2em;
 }
 
@@ -407,10 +442,43 @@ li:last-child {
   color: inherit;
 }
 
-/* bl_text テキスト領域 */
+/**
+ * テキスト領域
+ */
 
-/*  ---------------------------------
-  マークアップ */
+.bl_text + .bl_text {
+  /* セクション間余白 */
+  margin-top: 1.5em;
+}
+
+.bl_text_header {
+  padding-bottom: 0.5em;
+  color: var(--monochrome-dark);
+}
+
+.bl_text_title {
+  margin: -0.2em auto 0.4em;
+  font-weight: bold;
+  font-size: 117%;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+@media screen and (min-width: 570px) {
+  .bl_text_title {
+    font-size: 120%;
+    margin: 0 auto 0.5em;
+  }
+}
+
+.bl_text_footer {
+  padding-top: 0.5em;
+  color: var(--monochrome-dark);
+}
+
+/**
+ * マークアップ
+ */
 
 .bl_text a {
   /* 下線と文字とを空けるため、擬似的な下線を作る */
@@ -426,7 +494,7 @@ li:last-child {
 .bl_text a:visited {
   /* 訪問済みリンク */
   color: hsl(271, 35%, 45%);  /* 紫、Wikipediaより */
-  border-bottom: 1px solid hsl(271, 35%, 65%);
+  border-bottom: 1px solid hsl(271, 35%, 60%);
 }
 
 .bl_text p {
@@ -530,43 +598,9 @@ li:last-child {
   content: "： ";
 }
 
-/* そのた */
-
-.bl_text + .bl_text {
-  /* セクション間余白 */
-  margin-top: 1.5em;
-}
-
-.bl_text_header {
-  padding-bottom: 0.5em;
-  color: var(--monochrome-dark);
-}
-
-.bl_text_title {
-  margin: -0.2em auto 0.4em;
-  font-weight: bold;
-  font-size: 117%;
-  text-align: center;
-  letter-spacing: 1px;
-  /* text-decoration: underline; */
-}
-
-@media screen and (min-width: 570px) {
-  .bl_text_title {
-    font-size: 120%;
-    margin: 0 auto 0.5em;
-  }
-}
-
-.bl_text_footer {
-  padding-top: 0.5em;
-  color: var(--monochrome-dark);
-}
-
-/* @import url("markup.css"); */
-
-/*  ---------------------------------
-  記事一覧リスト */
+/**
+ * 記事一覧リスト
+ */
 
 .bl_posts_item {
   padding: 0.5em 0;
@@ -629,8 +663,9 @@ li:last-child {
   margin: -0.5em 0 0;
 }
 
-/* ---------------------------------
-  部品 */
+/**
+ * 見出し
+ */
 
 /* 大見出し |_____ */
 
@@ -638,7 +673,7 @@ li:last-child {
   margin: 2em 0 1em;
   border-left: 4px solid var(--monochrome-medium);
   padding-left: 0.45em;
-  border-bottom: 1px solid hsl(0, 0%, 75%);
+  border-bottom: 1px solid var(--monochrome-midlight);
   padding-right: 0.75em;
   font-weight: normal;
   font-size: 115%;
@@ -655,48 +690,17 @@ li:last-child {
 .el_heading2 {
   margin: 1em 0 0.75em;  /* セクション間余白、左右の余白限界からの余白、後続要素との余白 */
   font-weight: normal;
-  border-bottom: 1px solid hsl(0, 0%, 75%);
+  border-bottom: 1px solid var(--monochrome-midlight);
   font-size: 110%;
 }
 
-/* 表 ---------- */
-
-.bl_horizTable {
-  border: 1px solid var(--monochrome-light);  /* 表全体を囲む */
-  max-width: 560px;
-}
-
-.bl_horizTable table {
-  width: 100%;
-  /* セル列同士の謎の余白リセット */
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-
-.bl_horizTable th {  /* ■□ */
-  width: 20%;  /* テーブル頭の幅 */
-  padding: 0.3em 0;  /* 上下幅 */
-  background: hsl(0, 0%, 95%);
-  border-bottom: 1px solid var(--monochrome-light);
-  font-weight: normal;
-}
-
-.bl_horizTable td {  /* □■ */
-  word-break: keep-all;  /* いつもより早めに改行 */
-  padding: 0.3em 0 0.3em 0.75em;
-  border-bottom: 1px solid var(--monochrome-light);
-}
-
-.bl_horizTable tr:last-child th,
-.bl_horizTable tr:last-child td {
-  border-bottom-width: 0;  /* 最終行の下線を消す */
-}
-
-/* ブログカード ---------- */
+/**
+ * ブログカード
+ */
 
 .bl_text .bl_blogcard {
   font-size: 80%;
-  border: 1px solid hsl(0, 0%, 80%);
+  border: 1px solid var(--monochrome-light);
   border-radius: 4px;
   padding: 0.6em 1em 0.7em;
   margin: 1.25em 0.5em 1em;
@@ -704,13 +708,13 @@ li:last-child {
 }
 
 .bl_text .bl_blogcard a {  /* offset */
-  color: #333;
+  color: var(--text-color);
   border: none;
   line-height: 1.5;
 }
 
 .bl_text .bl_blogcard a:visited {  /* offset */
-  color: #333;
+  color: var(--text-color);
   border: none;
 }
 
@@ -720,13 +724,15 @@ li:last-child {
 }
 
 .bl_text .bl_blogcard_icon {
+  background-image: url(../../assets/images/quotation-alpha.png);
+  background-size: 100%;  
   vertical-align: bottom;
   margin-top: 3px;
 }
 
 .bl_text .bl_blogcard_logo {
   font-size: 130%;
-  color: #333;
+  color: var(--text-color);
   font-family: "Avenir Next", "Segoe UI", sans-serif;
   margin-left: 0.2em;
 }

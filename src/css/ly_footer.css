@@ -1,7 +1,7 @@
-/* ---------------------------------
-  フッター */
+/**
+ * フッター
+ */
 .ly_footer {
-/*  background-color: hsl(0, 0%, 90%);*/
   background-color: var(--monochrome-light);
   margin-top: 2em;
 }

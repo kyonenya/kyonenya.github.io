@@ -1,7 +1,10 @@
-/* ブログカード ---------- */
+/**
+ * ブログカード
+ */
+
 .bl_text .bl_blogcard {
   font-size: 80%;
-  border: 1px solid hsl(0, 0%, 80%);
+  border: 1px solid var(--monochrome-light);
   border-radius: 4px;
   padding: 0.6em 1em 0.7em;
   margin: 1.25em 0.5em 1em;
@@ -9,13 +12,13 @@
 }
 
 .bl_text .bl_blogcard a {  /* offset */
-  color: #333;
+  color: var(--text-color);
   border: none;
   line-height: 1.5;
 }
 
 .bl_text .bl_blogcard a:visited {  /* offset */
-  color: #333;
+  color: var(--text-color);
   border: none;
 }
 
@@ -25,13 +28,15 @@
 }
 
 .bl_text .bl_blogcard_icon {
+  background-image: url(../../assets/images/quotation-alpha.png);
+  background-size: 100%;  
   vertical-align: bottom;
   margin-top: 3px;
 }
 
 .bl_text .bl_blogcard_logo {
   font-size: 130%;
-  color: #333;
+  color: var(--text-color);
   font-family: "Avenir Next", "Segoe UI", sans-serif;
   margin-left: 0.2em;
 }

@@ -1,5 +1,7 @@
-/* ---------------------------------
-  ベースグループ */
+/**
+ * ベースグループ
+ */
+
 body {
   font-family: "Helvetica Neue", Verdana, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif;
   word-break: break-word;  /* 行頭に、。が来るのを避ける */

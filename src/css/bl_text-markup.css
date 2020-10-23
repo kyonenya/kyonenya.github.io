@@ -1,4 +1,7 @@
-/* bl_text テキスト領域 */
+/**
+ * マークアップ
+ */
+
 .bl_text a {
   /* 下線と文字とを空けるため、擬似的な下線を作る */
   display: inline;
@@ -13,7 +16,7 @@
 .bl_text a:visited {
   /* 訪問済みリンク */
   color: hsl(271, 35%, 45%);  /* 紫、Wikipediaより */
-  border-bottom: 1px solid hsl(271, 35%, 65%);
+  border-bottom: 1px solid hsl(271, 35%, 60%);
 }
 
 .bl_text p {

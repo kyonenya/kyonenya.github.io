@@ -1,4 +1,7 @@
-/* そのた */ 
+/**
+ * テキスト領域
+ */
+
 .bl_text + .bl_text {
   /* セクション間余白 */
   margin-top: 1.5em;
@@ -15,7 +18,6 @@
   font-size: 117%;
   text-align: center;
   letter-spacing: 1px;
-  /* text-decoration: underline; */
 }
 
 @media screen and (min-width: 570px) {
