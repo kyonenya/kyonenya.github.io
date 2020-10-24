@@ -76,14 +76,14 @@ main {
 
 .hp_highlight {
   background: hsl(60, 100%, 77%);  /* #ffff8c */
-  border: 1px solid hsla(0, 0%, 0%, 0.15);  /*   透明化した黒線を被せる */
+  border: 1px solid hsla(0, 0%, 0%, 0.15);  /* 透明化した黒線を被せる */
   border-radius: 3px;
   padding: 2px;
   margin: 1px;
 }
 
 .hp_underline {
-  border-bottom: 1px solid /* !important */;
+  border-bottom: 1px solid var(--monochrome-dark);
   padding-bottom: 0;
 }
 
@@ -92,7 +92,6 @@ main {
 }
 
 /* リセット ----- */
-
 a {
   /* リンク装飾をリセット */
   text-decoration: none;
