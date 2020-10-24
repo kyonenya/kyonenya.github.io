@@ -5,6 +5,7 @@
 :root {
   --text-color: hsl(0, 0%, 20%);  /* #333 */
   --background-color: hsl(40, 38%, 97%);
+  --monochrome-bright: hsl(0, 0%, 90%);
   --monochrome-light: hsl(0, 0%, 85%);
   --monochrome-midlight: hsl(0, 0%, 75%);
   --monochrome-medium: hsl(0, 0%, 68%);
@@ -17,10 +18,11 @@
   :root {
     --text-color: hsl(40, 38%, 97%);
     --background-color: hsl(0, 0%, 20%);
-    --monochrome-light: hsl(0, 0%, 27%);
-    --monochrome-midlight: hsl(0, 0%, 33%);
-    --monochrome-medium: hsl(0, 0%, 40%);
-    --monochrome-dark: hsl(0, 0%, 55%);
+    --monochrome-bright: hsl(0, 0%, 13%);
+    --monochrome-light: hsl(0, 0%, 33%);
+    --monochrome-midlight: hsl(0, 0%, 45%);
+    --monochrome-medium: hsl(0, 0%, 50%);
+    --monochrome-dark: hsl(0, 0%, 65%);
     --main-color: hsl(349, 39%, 63%);
     --main-color-light: hsl(349, 39%, 58%);
   }

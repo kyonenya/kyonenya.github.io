@@ -1,8 +1,9 @@
 /**
  * フッター
  */
+
 .ly_footer {
-  background-color: var(--monochrome-light);
+  background-color: var(--monochrome-bright);
   margin-top: 2em;
 }
 

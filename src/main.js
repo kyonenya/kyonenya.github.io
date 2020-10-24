@@ -210,7 +210,7 @@ fetch(jsonPath)
       <div class="bl_blogcard">
         <a href="?id=${this.id}">
           <header class="bl_blogcard_header">
-            <img class="bl_blogcard_icon" width="20" height="20" alt="アイコン">
+            <div class="bl_blogcard_icon"></div>
             <div class="bl_blogcard_logo">placet experiri</span>
             <span class="bl_blogcard_suffix"> :: ${this.id}</span>
           </header>

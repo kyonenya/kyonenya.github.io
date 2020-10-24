@@ -11,6 +11,7 @@
 :root {
   --text-color: hsl(0, 0%, 20%);  /* #333 */
   --background-color: hsl(40, 38%, 97%);
+  --monochrome-bright: hsl(0, 0%, 90%);
   --monochrome-light: hsl(0, 0%, 85%);
   --monochrome-midlight: hsl(0, 0%, 75%);
   --monochrome-medium: hsl(0, 0%, 68%);
@@ -23,10 +24,11 @@
   :root {
     --text-color: hsl(40, 38%, 97%);
     --background-color: hsl(0, 0%, 20%);
-    --monochrome-light: hsl(0, 0%, 27%);
-    --monochrome-midlight: hsl(0, 0%, 33%);
-    --monochrome-medium: hsl(0, 0%, 40%);
-    --monochrome-dark: hsl(0, 0%, 55%);
+    --monochrome-bright: hsl(0, 0%, 13%);
+    --monochrome-light: hsl(0, 0%, 33%);
+    --monochrome-midlight: hsl(0, 0%, 45%);
+    --monochrome-medium: hsl(0, 0%, 50%);
+    --monochrome-dark: hsl(0, 0%, 65%);
     --main-color: hsl(349, 39%, 63%);
     --main-color-light: hsl(349, 39%, 58%);
   }
@@ -343,7 +345,7 @@ li:last-child {
 @media (prefers-color-scheme: dark) {
   .el_search_icon {
     background-image: url(../../assets/images/search_dark.svg);
-    background-size:100%;
+    background-size: 100%;
   }
 }
 
@@ -390,7 +392,6 @@ li:last-child {
     margin-right: 0;
   }
 
-
   .bl_nav a {
     font-size: 112%;
   }
@@ -424,7 +425,7 @@ li:last-child {
  */
 
 .ly_footer {
-  background-color: var(--monochrome-light);
+  background-color: var(--monochrome-bright);
   margin-top: 2em;
 }
 
@@ -440,40 +441,6 @@ li:last-child {
 
 .el_footer_copyright a {
   color: inherit;
-}
-
-/**
- * テキスト領域
- */
-
-.bl_text + .bl_text {
-  /* セクション間余白 */
-  margin-top: 1.5em;
-}
-
-.bl_text_header {
-  padding-bottom: 0.5em;
-  color: var(--monochrome-dark);
-}
-
-.bl_text_title {
-  margin: -0.2em auto 0.4em;
-  font-weight: bold;
-  font-size: 117%;
-  text-align: center;
-  letter-spacing: 1px;
-}
-
-@media screen and (min-width: 570px) {
-  .bl_text_title {
-    font-size: 120%;
-    margin: 0 auto 0.5em;
-  }
-}
-
-.bl_text_footer {
-  padding-top: 0.5em;
-  color: var(--monochrome-dark);
 }
 
 /**
@@ -494,7 +461,19 @@ li:last-child {
 .bl_text a:visited {
   /* 訪問済みリンク */
   color: hsl(271, 35%, 45%);  /* 紫、Wikipediaより */
-  border-bottom: 1px solid hsl(271, 35%, 60%);
+  border-bottom: 1px solid hsl(271, 35%, 55%);
+}
+
+@media (prefers-color-scheme: dark) {
+  .bl_text a {
+    color: hsl(219, 62%, 60%);
+    border-bottom: 1px solid hsl(219, 62%, 50%);
+  }
+  
+  .bl_text a:visited {
+    color: hsl(271, 35%, 60%);
+    border-bottom: 1px solid hsl(271, 35%, 45%);
+  }
 }
 
 .bl_text p {
@@ -599,6 +578,40 @@ li:last-child {
 }
 
 /**
+ * テキスト領域 その他
+ */
+
+.bl_text + .bl_text {
+  /* セクション間余白 */
+  margin-top: 1.5em;
+}
+
+.bl_text_header {
+  padding-bottom: 0.5em;
+  color: var(--monochrome-dark);
+}
+
+.bl_text_title {
+  margin: -0.2em auto 0.4em;
+  font-weight: bold;
+  font-size: 117%;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+@media screen and (min-width: 570px) {
+  .bl_text_title {
+    font-size: 120%;
+    margin: 0 auto 0.5em;
+  }
+}
+
+.bl_text_footer {
+  padding-top: 0.5em;
+  color: var(--monochrome-dark);
+}
+
+/**
  * 記事一覧リスト
  */
 
@@ -628,7 +641,7 @@ li:last-child {
   letter-spacing: 1px;
   /* リセット */
   font-weight: normal;
-  font-size: 125%;
+  font-size: 128%;
   margin-top: 0;
 }
 
@@ -724,8 +737,8 @@ li:last-child {
 }
 
 .bl_text .bl_blogcard_icon {
-  background-image: url(../../assets/images/quotation-alpha.png);
-  background-size: 100%;  
+  background-image: url(../../assets/icons/quotation-alpha.png);
+  background-size: 100%;
   vertical-align: bottom;
   margin-top: 3px;
 }

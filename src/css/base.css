@@ -32,6 +32,7 @@ body {
 main {
   flex: 1;  /* メイン領域を上下にめいっぱい広げておいて。 */
 }
+
 @media screen and (min-width: 560px) {
   main {
     padding-top: 1.5em;  /* ヘッダーに本文がめり込まないように */
@@ -106,6 +107,3 @@ li:last-child {
   /* リストの後続要素との余白をリセット */
   margin-bottom: 0;
 }
-
-
-

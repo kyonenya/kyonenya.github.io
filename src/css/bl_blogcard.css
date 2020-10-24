@@ -28,8 +28,8 @@
 }
 
 .bl_text .bl_blogcard_icon {
-  background-image: url(../../assets/images/quotation-alpha.png);
-  background-size: 100%;  
+  background-image: url(../../assets/icons/quotation-alpha.png);
+  background-size: 100%;
   vertical-align: bottom;
   margin-top: 3px;
 }

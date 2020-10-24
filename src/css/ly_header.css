@@ -1,6 +1,7 @@
 /**
  * ヘッダー
  */
+
 .ly_header {
   font-family: "Avenir Next", "Segoe UI", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "游ゴシック Medium", "Yu Gothic Medium", "メイリオ", Meiryo, sans-serif;
 }
@@ -90,7 +91,7 @@
 @media (prefers-color-scheme: dark) {
   .el_search_icon {
     background-image: url(../../assets/images/search_dark.svg);
-    background-size:100%;
+    background-size: 100%;
   }
 }
 
@@ -136,7 +137,6 @@
   .bl_nav_inner {
     margin-right: 0;
   }
-
 
   .bl_nav a {
     font-size: 112%;
