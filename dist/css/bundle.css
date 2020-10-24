@@ -333,6 +333,7 @@ li:last-child {
 .el_search_icon {
   background-image: url(../../assets/images/search.svg);
   background-size: 100%;
+  background-repeat: no-repeat;
   top: 0;
   left: 0.5em;
   z-index: 10;  /* フォームの下に重ねる */
