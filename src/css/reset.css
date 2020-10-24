@@ -1,4 +1,8 @@
-/* A Modern CSS Reset */
+/**
+ * A Modern CSS Reset 
+ * https://github.com/hankchizljaw/modern-css-reset/blob/master/dist/reset.css
+ */
+
 /* Box sizing rules */
 /*
 *,
@@ -12,6 +16,8 @@
 ul[class],
 ol[class] {
   padding: 0;
+  /* Remove list styles on ul, ol elements with a class attribute */
+  list-style: none;
 }
 
 /* Remove default margin */
@@ -40,12 +46,6 @@ body {
   min-height: 100vh;
   text-rendering: optimizeSpeed;
   line-height: 1.5;
-}
-
-/* Remove list styles on ul, ol elements with a class attribute */
-ul[class],
-ol[class] {
-  list-style: none;
 }
 
 /* A elements that don't have a class get default styles */
@@ -90,7 +90,3 @@ img:not([alt]) {
     scroll-behavior: auto !important;
   }
 }
-
-/* Modern Reset CSS
-https://github.com/hankchizljaw/modern-css-reset/blob/master/dist/reset.css
-*/

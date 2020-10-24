@@ -19,7 +19,7 @@
 ## 簡易CMS機能
 - 記事データベース：jsonファイルで代用。非同期通信（ajax）でjsonをGETして、オブジェクトに格納する。以前はjQueryの$getJSONでやっていたが、現在はJavaScriptネイティブのfetchで行なっている。参考：[JSONファイルからHTML生成（jQuery）](https://teratail.com/questions/93120)
 
-- 記事一覧ページ：テンプレートに記事データを埋め込んで、ループで一括HTML生成。参考：[JavaScriptのDOM要素一括生成の速度比較（.innerHTML系が一番速い）](http://bicycle.life.coocan.jp/takamints/index.php/techtips/whichFastAppendChild)
+<!-- 記事一覧ページ：テンプレートに記事データを埋め込んで、ループで一括HTML生成。参考：[JavaScriptのDOM要素一括生成の速度比較（.innerHTML系が一番速い）](http://bicycle.life.coocan.jp/takamints/index.php/techtips/whichFastAppendChild) -->
 
 - 個別記事ページ：パーマリンクをクエリ文字列（?id=123）で割り振り、そのidをもとに個別ページを生成。ページ遷移しているように見える。
 
