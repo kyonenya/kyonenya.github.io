@@ -77,6 +77,7 @@ main {
 .hp_highlight {
   background: hsl(60, 100%, 77%);  /* #ffff8c */
   border: 1px solid hsla(0, 0%, 0%, 0.15);  /* 透明化した黒線を被せる */
+  color: #333;  /* ダークモード下でも黒文字にする */
   border-radius: 3px;
   padding: 2px;
   margin: 1px;

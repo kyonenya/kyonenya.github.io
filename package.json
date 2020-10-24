@@ -2,8 +2,7 @@
   "name": "kyonenya.github.io",
   "version": "1.0.0",
   "scripts": {
-    "postcss watchモード": "postcss src/css/index.css -o dist/css/bundle.css -w",
-    "stylelint": "stylelint \"**/*.css\""
+    "postcss watchモード": "postcss src/css/index.css -o dist/css/bundle.css -w"
   },
   "dependencies": {
     "postcss": "^8.1.2",

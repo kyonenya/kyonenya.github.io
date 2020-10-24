@@ -217,14 +217,15 @@ main {
 
 .hp_highlight {
   background: hsl(60, 100%, 77%);  /* #ffff8c */
-  border: 1px solid hsla(0, 0%, 0%, 0.15);  /*   透明化した黒線を被せる */
+  border: 1px solid hsla(0, 0%, 0%, 0.15);  /* 透明化した黒線を被せる */
+  color: #333;  /* ダークモード下でも黒文字にする */
   border-radius: 3px;
   padding: 2px;
   margin: 1px;
 }
 
 .hp_underline {
-  border-bottom: 1px solid var(--monochrome-dark)/* !important */;
+  border-bottom: 1px solid var(--monochrome-dark);
   padding-bottom: 0;
 }
 
@@ -257,24 +258,9 @@ li:last-child {
   font-family: "Avenir Next", "Segoe UI", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "游ゴシック Medium", "Yu Gothic Medium", "メイリオ", Meiryo, sans-serif;
 }
 
-@media screen and (max-width: 559px) {
-  .ly_header {
-    margin-bottom: 1.5em;
-  }
-}
-
-@media screen and (max-width: 559px) {
-  .ly_header_inner {
-    /* スマホでは中央揃えに */
-    text-align: center;
-    margin-top: 1em;
-  }
-}
-
-/* ロゴ ----- */
+/* ロゴ */
 
 .el_logo_title {
-  font-size: 30px;
   font-weight: normal;
   vertical-align: center;
 }
@@ -286,15 +272,7 @@ li:last-child {
   vertical-align: baseline;  /* 英単語帳の位置：baseline */
 }
 
-/* ナビメニュー ------ */
-
-@media screen and (max-width: 559px) {
-  .bl_nav {
-    display: inline-block;
-    text-align: center;
-    padding-top: 0.5em;
-  }
-}
+/* ナビメニュー */
 
 .bl_nav_inner {
   display: flex;
@@ -304,7 +282,6 @@ li:last-child {
   display: block;
   line-height: 1.25em;  /* 実質的には区切り線の高さ */
   text-align: center;
-  font-size: 105%;
   color: var(--main-color);
 }
 
@@ -317,7 +294,7 @@ li:last-child {
   border-left: 1px solid var(--main-color-light);
 }
 
-/* 検索フォーム ----- */
+/* 検索フォーム */
 
 .el_search {
   position: relative;  /* 基準 */
@@ -334,13 +311,8 @@ li:last-child {
   background-image: url(../../assets/images/search.svg);
   background-size: 100%;
   background-repeat: no-repeat;
-  top: 0;
-  left: 0.5em;
   z-index: 10;  /* フォームの下に重ねる */
-  padding-top: 2px;  /* 横一列になるよう手動調整 */
-  width: 1.9em;
-  height: 1.9em;
-  /* fill: hsl(202, 35%, 60%); */
+  padding-top: 2px;  /* 横一列になるよう手動調整（共通） */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -352,7 +324,6 @@ li:last-child {
 
 .el_search_form {
   top: -10px;  /* フォームがメニューを覆い隠すよう少し上に */
-  width: 1.9em;  /* メニュー間隔を手動で調整、右からの幅が広いほど間隔が狭まる */
   cursor: pointer;
   border: 1px solid var(--monochrome-light);
   outline: none;
@@ -367,12 +338,61 @@ li:last-child {
 .el_search_form:focus {
   /* フォーカスされたら可視化し、左にビョーンと伸びる */
   opacity: 1;
-  width: 245px;  /* サイズはナビメニューの横幅に合わせて手動調整 */
   cursor: text;
 }
 
-@media screen and (min-width: 560px) {  
-  /* ヘッダー --------------- */
+/**
+ * モバイル用（ヘッダー）
+ * ロゴとメニューを中央に縦並びにする
+ */
+
+@media screen and (max-width: 559px) {
+  .ly_header {
+    margin-bottom: 1.5em;
+  }
+
+  .ly_header_inner {
+    /* スマホでは中央揃えに */
+    text-align: center;
+    margin-top: 0.8em;
+  }
+
+  .el_logo_title {
+    font-size: 30px;
+  }
+  
+  .bl_nav {
+    display: inline-block;
+    text-align: center;
+    padding-top: 0.5em;
+  }
+  
+  .bl_nav a {
+    font-size: 105%;
+  }
+  
+  .el_search_icon,
+  .el_search_form {
+    width: 1.9em;  /* メニュー間隔を手動で調整、右からの幅が広いほど間隔が狭まる */
+  }
+  
+  .el_search_icon {
+    height: 1.9em;
+    top: 0;
+    left: 0.5em;
+  }
+  
+  .el_search_form:focus {
+    width: 245px;  /* サイズはナビメニューの横幅に合わせて手動調整 */
+  }
+}
+
+/**
+ * タブレット・PC用（ヘッダー）
+ * ロゴとメニューを横並びにする
+ */
+
+@media screen and (min-width: 560px) {
   /* 大箱 */
   .ly_header {
     background: var(--background-color);  /* 背景色で塗りつぶし */
@@ -382,6 +402,7 @@ li:last-child {
 
   /* 中コンテナ：ロゴ＋メニュー */
   .ly_header_inner {
+    text-align: center;
     display: flex;
     justify-content: space-between;  /* 二つを両端に分ける */
     align-items: center;  /* 二つの高さ位置を揃える */
@@ -390,7 +411,7 @@ li:last-child {
 
   /* 小コンテナ：メニューリスト */
   .bl_nav_inner {
-    margin-right: 0;
+    /* margin-right: 0; */
   }
 
   .bl_nav a {
@@ -406,7 +427,7 @@ li:last-child {
   /* 検索フォーム */
   .el_search_icon,
   .el_search_form {
-    width: 1.7em;  /* メニュー間隔、上書き */
+    width: 1.7em;  /* メニュー間隔を上書き */
   }
   
   .el_search_icon {
