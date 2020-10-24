@@ -1,7 +1,7 @@
 'use strict'
 {  
   // 表示調整用
-  const jsonPath = '../data.json';
+  const jsonPath = './data.json';
 
 /* ---------------------------------
   URLからクエリ文字列を取得 */
