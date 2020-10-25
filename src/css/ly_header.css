@@ -1,5 +1,6 @@
 /**
  * ヘッダー
+ * 共通スタイル、モバイル、タブレット、の順で書く
  */
 
 .ly_header {
@@ -63,7 +64,6 @@
 @media (prefers-color-scheme: dark) {
   .el_search_icon {
     background-image: url(../../assets/images/search_dark.svg);
-    background-size: 100%;
   }
 }
 
@@ -102,6 +102,7 @@
   }
 
   .el_logo_title {
+    margin-left: 3px;
     font-size: 30px;
   }
   
@@ -112,7 +113,7 @@
   }
   
   .bl_nav a {
-    font-size: 105%;
+    font-size: 108%;
   }
   
   .el_search_icon,
@@ -122,7 +123,7 @@
   
   .el_search_icon {
     height: 1.9em;
-    top: 0;
+    top: 1px;
     left: 0.5em;
   }
   

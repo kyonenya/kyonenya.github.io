@@ -28,19 +28,19 @@
 }
 
 .bl_text .bl_blogcard_icon {
-  background-image: url(../../assets/icons/icon-alpha.svg);
+  background-image: url(../../assets/icons/favicon.svg);
   background-size: 100%;
   vertical-align: bottom;
-  margin-top: 3px;
-  width: 20px;
-  height: 20px;
+  margin-top: 0.25em;
+  width: 1.4em;
+  height: 1.4em;
 }
 
 .bl_text .bl_blogcard_logo {
   font-size: 130%;
   color: var(--text-color);
   font-family: "Avenir Next", "Segoe UI", sans-serif;
-  margin-left: 0.2em;
+  margin-left: 0.1em;
 }
 
 .bl_text .bl_blogcard_suffix {
@@ -82,10 +82,5 @@
 @media screen and (min-width: 560px) {
   .bl_text .bl_blogcard {
     margin: 1.5em 2em 1.25em;
-  }
-  
-  .bl_text .bl_blogcard_icon {
-    width: 24px;
-    height: 24px;
   }
 }

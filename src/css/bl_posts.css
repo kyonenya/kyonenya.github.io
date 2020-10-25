@@ -55,7 +55,7 @@
 }
 
 .el_archive_header {
-  color: hsl(0, 0%, 45%);
+  color: var(--monochrome-dark);
   text-align: center;
   font-weight: bold;
   font-size: 1.2em;

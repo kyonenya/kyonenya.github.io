@@ -29,8 +29,8 @@
     --monochrome-midlight: hsl(0, 0%, 45%);
     --monochrome-medium: hsl(0, 0%, 50%);
     --monochrome-dark: hsl(0, 0%, 65%);
-    --main-color: hsl(349, 39%, 63%);
-    --main-color-light: hsl(349, 39%, 58%);
+    --main-color: hsl(202, 35%, 52%);
+    --main-color-light: hsl(202, 35%, 42%);
   }
 }
 
@@ -252,6 +252,7 @@ li:last-child {
 
 /**
  * ヘッダー
+ * 共通スタイル、モバイル、タブレット、の順で書く
  */
 
 .ly_header {
@@ -318,7 +319,6 @@ li:last-child {
 @media (prefers-color-scheme: dark) {
   .el_search_icon {
     background-image: url(../../assets/images/search_dark.svg);
-    background-size: 100%;
   }
 }
 
@@ -358,6 +358,7 @@ li:last-child {
   }
 
   .el_logo_title {
+    margin-left: 3px;
     font-size: 30px;
   }
   
@@ -368,7 +369,7 @@ li:last-child {
   }
   
   .bl_nav a {
-    font-size: 105%;
+    font-size: 108%;
   }
   
   .el_search_icon,
@@ -378,7 +379,7 @@ li:last-child {
   
   .el_search_icon {
     height: 1.9em;
-    top: 0;
+    top: 1px;
     left: 0.5em;
   }
   
@@ -691,7 +692,7 @@ li:last-child {
 }
 
 .el_archive_header {
-  color: hsl(0, 0%, 45%);
+  color: var(--monochrome-dark);
   text-align: center;
   font-weight: bold;
   font-size: 1.2em;
@@ -759,19 +760,19 @@ li:last-child {
 }
 
 .bl_text .bl_blogcard_icon {
-  background-image: url(../../assets/icons/icon-alpha.svg);
+  background-image: url(../../assets/icons/favicon.svg);
   background-size: 100%;
   vertical-align: bottom;
-  margin-top: 3px;
-  width: 20px;
-  height: 20px;
+  margin-top: 0.25em;
+  width: 1.4em;
+  height: 1.4em;
 }
 
 .bl_text .bl_blogcard_logo {
   font-size: 130%;
   color: var(--text-color);
   font-family: "Avenir Next", "Segoe UI", sans-serif;
-  margin-left: 0.2em;
+  margin-left: 0.1em;
 }
 
 .bl_text .bl_blogcard_suffix {
@@ -813,10 +814,5 @@ li:last-child {
 @media screen and (min-width: 560px) {
   .bl_text .bl_blogcard {
     margin: 1.5em 2em 1.25em;
-  }
-  
-  .bl_text .bl_blogcard_icon {
-    width: 24px;
-    height: 24px;
   }
 }
