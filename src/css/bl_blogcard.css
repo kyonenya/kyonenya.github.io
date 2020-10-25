@@ -30,6 +30,7 @@
 .bl_text .bl_blogcard_icon {
   background-image: url(../../assets/icons/favicon.svg);
   background-size: 100%;
+  background-repeat: no-repeat;
   vertical-align: bottom;
   margin-top: 0.25em;
   width: 1.4em;
@@ -40,7 +41,7 @@
   font-size: 130%;
   color: var(--text-color);
   font-family: "Avenir Next", "Segoe UI", sans-serif;
-  margin-left: 0.1em;
+  margin-left: 0.2em;
 }
 
 .bl_text .bl_blogcard_suffix {
