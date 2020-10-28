@@ -2,8 +2,9 @@
   "name": "kyonenya.github.io",
   "version": "1.0.0",
   "scripts": {
-    "TypeScript": "tsc -w",
-    "PostCSS": "postcss src/css/index.css -o dist/css/bundle.css -w"
+    "jest": "jest",
+    "postcss": "postcss src/css/index.css -o dist/css/bundle.css -w",
+    "typeScript": "tsc -w"
   },
   "dependencies": {
     "postcss": "^8.1.2",
@@ -13,5 +14,11 @@
     "stylelint": "^13.7.2",
     "stylelint-config-standard": "^20.0.0",
     "typescript": "^4.0.3"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.15",
+    "jest": "^26.6.1",
+    "jest-cli": "^25.5.4",
+    "ts-jest": "^26.4.3"
   }
 }
