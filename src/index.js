@@ -1,7 +1,7 @@
 'use strict'
 import { getUrlQueries } from './router.js';
 import { processData } from './data.js';
-// import { html_article } from './components/article.js';
+// import { html_article } from './templates/article.js';
 
   // 表示調整用
   const jsonPath = './data.json';
