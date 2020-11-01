@@ -33,7 +33,7 @@ fetch(jsonPath)
         
     // 5. 記事リストのHTMLを生成しておく
     const i = data.length - eachData.id;
-    eachData.postlistHtml = html_postlist(i);
+    eachData.postlistHtml = html_postlist(data[i], eachData.id);
     
     // 6. 表示・非表示フラグを、タグフィルターに応じてセットしておく
     const tagExists = eachData.tags.includes(status.tag);  // タグ検索にヒットしたか
@@ -74,7 +74,7 @@ fetch(jsonPath)
   個別記事ページ生成 */
   class Article {
     constructor(i) {
-      this.html = html_article(i);
+      this.html = html_article(data[i]);
       this.suffix = ` :: ${status.id}`;
       this.description = `${data[i].plainText.substr(0, 110)}…`;
       this.pageTitle = (data[i].title)  // exists?
@@ -204,46 +204,47 @@ fetch(jsonPath)
     テンプレート */    // 関数の巻き上げを使って上から参照する
 
   // 記事一覧リスト
-  function html_postlist(i) {
+  function html_postlist(post, id) {
     return `
-    <li class="bl_posts_item" data-id=${data.length - i}>
-      <a href="?id=${data.length - i}">
+    <li class="bl_posts_item" data-id=${id}>
+      <a href="?id=${id}">
         <header class="bl_posts_header">
-          <time class="bl_posts_date" datetime="${moment(data[i].date).format("YYYY-MM-DD HH:mm")}">${moment(data[i].date).format("YYYY-MM-DD")}
+          <time class="bl_posts_date" datetime="${moment(post.date).format("YYYY-MM-DD HH:mm")}">${moment(post.date).format("YYYY-MM-DD")}
           </time>
         </header>
         <h2 class="bl_posts_title">
-          ${data[i].title}
+          ${post.title}
         </h2>
-        <div class="bl_posts_summary" data-id=${data.length - i}>
-          <p>${data[i].postText}</p>
+        <div class="bl_posts_summary" data-id=${id}>
+          <p>${post.postText}</p>
         </div>
       </a>
       <footer class="bl_posts_footer">
-        <span class="bl_posts_dateago">${moment(data[i].date).fromNow()}</span>
+        <span class="bl_posts_dateago">${moment(post.date).fromNow()}</span>
         <ul class="bl_tags">
-          ${data[i].hashtags}
+          ${post.hashtags}
         </ul>
       </footer>
     </li>`
   }
 
   // 個別記事ページ
-  function html_article(i) {
+  // function html_article(i) {
+  function html_article(post) {
     return `
     <article>
       <header class="bl_text_header">
-        <time class="bl_text_date" datetime="${moment(data[i].date).format("YYYY-MM-DD HH:mm")}">${moment(data[i].date).format("YYYY-MM-DD HH:mm")}
+        <time class="bl_text_date" datetime="${moment(post.date).format("YYYY-MM-DD HH:mm")}">${moment(post.date).format("YYYY-MM-DD HH:mm")}
         </time>
       </header>
       <div class="bl_text">
-        <h2 class="bl_text_title">${data[i].title}</h2>
-        ${data[i].text}
+        <h2 class="bl_text_title">${post.title}</h2>
+        ${post.text}
       </div>
       <footer class="bl_text_footer">
-        <span class="bl_posts_dateago">${moment(data[i].date).fromNow()}</span>
+        <span class="bl_posts_dateago">${moment(post.date).fromNow()}</span>
         <ul class="bl_tags">
-          ${data[i].hashtags}
+          ${post.hashtags}
         </ul>
       </footer>
     </article>`
