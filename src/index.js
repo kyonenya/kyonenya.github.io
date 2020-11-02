@@ -1,7 +1,7 @@
 'use strict'
 import { getUrlQueries } from './router.js';
 import { process } from './data.js';
-import { Article } from './article.js';
+import { createArticle } from './article.js';
 import { renderHTML } from './render.js';
 import { realTimeSearch } from './search.js';
 
@@ -76,7 +76,7 @@ fetch(jsonPath)
   };
   if (isFinite(status.id)) {  // 数値判定
     const i = data.length - status.id;  // 記事idはループカウントで言うと何番目か
-    const article = new Article(data[i]);
+    const article = createArticle(data[i]);
     renderHTML(article);  // ページ生成
     document.querySelector('.el_search_form')
         .classList.add('hp_hidden');  // 検索フォームを非表示
