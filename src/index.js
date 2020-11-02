@@ -2,6 +2,7 @@
 import { getUrlQueries } from './router.js';
 import { process } from './data.js';
 import { html_article } from './template.js';
+import { renderHTML } from './render.js';
 import { realTimeSearch } from './search.js';
 
   // 表示調整用
@@ -82,8 +83,6 @@ fetch(jsonPath)
   
   /* ---------------------------------
     リアルタイム検索 */
-    
-
   // 文字入力されるたびに検索実行
   document.querySelector('.el_search_form').addEventListener('input', () => {
     realTimeSearch(data);
@@ -122,26 +121,5 @@ fetch(jsonPath)
   // レンダリングと結びつける
   // 第一引数にHTML上のカスタムエレメント、第二引数にJS上のクラス名
   window.customElements.define('blog-card', BlogCard);
-  
-  // レンダラー（汎用）
-  function renderHTML(currentPage) {
-    document.getElementById('root').innerHTML
-        = currentPage.html;  // 記事内容
-    if (currentPage.pageTitle) {
-      document.title = currentPage.pageTitle;  // ブラウザのタイトル
-    }
-    if (currentPage.suffix) {
-      document.querySelector('.el_logo_suffix').innerText 
-          = currentPage.suffix;  // ロゴのidカウンター
-    }
-    if (currentPage.description) {
-      document.querySelector('meta[name=description]').content
-          = currentPage.description;  // メタタグの説明文      
-    }
-    if (currentPage.archiveHeader) {
-      document.querySelector('.el_archive_header').innerText
-          = currentPage.archiveHeader;  // 記事検索時に現れる、ページ上部のナビゲーションバー
-    }
-  }
 
 })  // fetch.then((data) => {...
