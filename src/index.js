@@ -33,33 +33,40 @@ fetch(jsonPath)
 
 /* ---------------------------------
   記事一覧ページ生成 */
-  const postlist = {
-    html: `<ul class="bl_posts">${
-      data.map((eachData) => {
-          if (eachData.isVisible === true) {
-            return eachData.postlistHtml;
-          };
-        }).join('')
-      }</ul>`,
-    suffix: '',
-    description: '',
-    pageTitle: '',
-    archiveHeader: '',
+  const createPostlist = (data) => {
+    return {
+      html: `<ul class="bl_posts">${
+        data.map((eachData) => {
+            if (eachData.isVisible === true) {
+              return eachData.postlistHtml;
+            };
+          }).join('')
+        }</ul>`,
+      suffix: '',
+      description: '',
+      pageTitle: '',
+      archiveHeader: '',
+    }
+  }
+    
+  const createTagged = () => {  
+    return {
+      html: `<ul class="bl_posts">${
+        data.map((eachData) => {
+            if (eachData.isVisible === true) {
+              return eachData.postlistHtml;
+            };
+          }).join('')
+        }</ul>`,
+      suffix: '',
+      description: '',
+      pageTitle: `#${status.tag}｜placet experiri`,
+      archiveHeader: `#${status.tag}`,
+    }
   }
   
-  const postlist_tagged = {
-    html: `<ul class="bl_posts">${
-      data.map((eachData) => {
-          if (eachData.isVisible === true) {
-            return eachData.postlistHtml;
-          };
-        }).join('')
-      }</ul>`,
-    suffix: '',
-    description: '',
-    pageTitle: `#${status.tag}｜placet experiri`,
-    archiveHeader: `#${status.tag}`,
-  }
+  const postlist_tagged = createTagged(data);
+  const postlist = createPostlist(data); 
   
   // ルーティング
   if (status.id == null && status.tag) {
