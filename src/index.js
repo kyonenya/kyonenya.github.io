@@ -43,21 +43,30 @@ fetch(jsonPath)
       }</ul>`,
     suffix: '',
     description: '',
-    pageTitle: (status.tag)  // exists?
-        ? `#${status.tag}｜placet experiri`  // タグ検索時
-        : '',  // デフォルト
-    archiveHeader: (status.tag)  // exists?
-        ? `#${status.tag}`  // タグ検索時
-        : '',  // デフォルト
+    pageTitle: '',
+    archiveHeader: '',
   }
   
+  const postlist_tagged = {
+    html: `<ul class="bl_posts">${
+      data.map((eachData) => {
+          if (eachData.isVisible === true) {
+            return eachData.postlistHtml;
+          };
+        }).join('')
+      }</ul>`,
+    suffix: '',
+    description: '',
+    pageTitle: `#${status.tag}｜placet experiri`,
+    archiveHeader: `#${status.tag}`,
+  }
   
-
-  // レンダリング
-  if (status.id == null) {  
+  // ルーティング
+  if (status.id == null && status.tag) {
+    renderHTML(postlist_tagged);
+  } else if (status.id == null) {
     renderHTML(postlist);
   };
-  // レンダリング
   if (isFinite(status.id)) {  // 数値判定
     const i = data.length - status.id;  // 記事idはループカウントで言うと何番目か
     const article = new Article(data[i]);
@@ -65,6 +74,7 @@ fetch(jsonPath)
     document.querySelector('.el_search_form')
         .classList.add('hp_hidden');  // 検索フォームを非表示
   };
+
   
   
   /* ---------------------------------
