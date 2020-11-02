@@ -1,7 +1,7 @@
 'use strict'
 import { getUrlQueries } from './router.js';
 import { process } from './data.js';
-import { html_article } from './template.js';
+import { Article } from './article.js';
 import { renderHTML } from './render.js';
 import { realTimeSearch } from './search.js';
 
@@ -50,31 +50,17 @@ fetch(jsonPath)
         ? `#${status.tag}`  // タグ検索時
         : '',  // デフォルト
   }
+  
+  
 
   // レンダリング
   if (status.id == null) {  
     renderHTML(postlist);
   };
-  
-
-/* ---------------------------------
-  個別記事ページ生成 */
-  class Article {
-    constructor(i) {
-      this.html = html_article(data[i]);
-      this.suffix = ` :: ${status.id}`;
-      this.description = `${data[i].plainText.substr(0, 110)}…`;
-      this.pageTitle = (data[i].title)  // exists?
-        ? `${data[i].title}｜placet experiri :: ${status.id}`  // 記事タイトルあり
-        : `placet experiri :: ${status.id}`;  // 記事タイトルなし
-      this.archiveHeader = '';
-    }
-  }
-
   // レンダリング
   if (isFinite(status.id)) {  // 数値判定
     const i = data.length - status.id;  // 記事idはループカウントで言うと何番目か
-    const article = new Article(i);
+    const article = new Article(data[i]);
     renderHTML(article);  // ページ生成
     document.querySelector('.el_search_form')
         .classList.add('hp_hidden');  // 検索フォームを非表示
