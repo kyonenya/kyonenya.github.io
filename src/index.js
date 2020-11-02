@@ -1,7 +1,7 @@
 'use strict'
 import { getUrlQueries } from './router.js';
-import { processData } from './data.js';
-import { html_postlist, html_article, html_hashtags, html_hashtags_highlighted } from './template.js';
+import { process } from './data.js';
+import { html_article } from './template.js';
 
   // 表示調整用
   const jsonPath = './data.json';
@@ -17,24 +17,9 @@ fetch(jsonPath)
 
 /* ---------------------------------
   下準備・データの加工 */  
-  data = processData(data);
+  data = process(data);
   
-  for (const eachData of data) {
-    // 4.  ハッシュタグを生成しておく
-    eachData.hashtags = eachData.tags
-        .map((eachTag) => {
-          if (eachTag === status.tag) {  // タグフィルターにマッチしているなら、
-            return html_hashtags_highlighted(eachTag);  // 当該タグをハイライト。
-          } else {
-            return html_hashtags(eachTag);
-          }
-        })
-        .join('');
-        
-    // 5. 記事リストのHTMLを生成しておく
-    const i = data.length - eachData.id;
-    eachData.postlistHtml = html_postlist(data[i], eachData.id);
-    
+  for (const eachData of data) {  
     // 6. 表示・非表示フラグを、タグフィルターに応じてセットしておく
     const tagExists = eachData.tags.includes(status.tag);  // タグ検索にヒットしたか
     // タグ検索がOFFか、またはタグ検索にヒットしているならば、
