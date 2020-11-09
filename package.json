@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "jest": "jest",
-    "wb": "webpack",
+    "webpack": "webpack",
     "postcss": "postcss src/css/index.css -o dist/css/bundle.css -w",
     "typeScript": "tsc -w"
   },
