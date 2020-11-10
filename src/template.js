@@ -1,3 +1,6 @@
+dayjs.locale('ja');
+dayjs.extend(dayjs_plugin_relativeTime);
+
 // 記事一覧リスト
 export const html_postlist = (post, id) => {
   return `
@@ -15,7 +18,7 @@ export const html_postlist = (post, id) => {
         </div>
       </a>
       <footer class="bl_posts_footer">
-        <span class="bl_posts_dateago">${moment(post.date).fromNow()}</span>
+        <span class="bl_posts_dateago">${dayjs(post.date).fromNow()}</span>
         <ul class="bl_tags">
           ${post.hashtags}
         </ul>
@@ -35,7 +38,7 @@ export const html_article = (post) => {
         ${post.text}
       </div>
       <footer class="bl_text_footer">
-        <span class="bl_posts_dateago">${moment(post.date).fromNow()}</span>
+        <span class="bl_posts_dateago">${dayjs(post.date).fromNow()}</span>
         <ul class="bl_tags">
           ${post.hashtags}
         </ul>
