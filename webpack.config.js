@@ -7,6 +7,16 @@ module.exports = {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
   },
-  module: { rules: [] },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: [
+          'eslint-loader',
+        ],
+      },
+    ],
+  },
   optimization: {},
 };

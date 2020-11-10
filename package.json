@@ -8,6 +8,8 @@
     "typeScript": "tsc -w"
   },
   "dependencies": {
+    "eslint": "^6.8.0",
+    "eslint-loader": "^2.2.1",
     "postcss": "^8.1.2",
     "postcss-cli": "^8.1.0",
     "postcss-import": "^13.0.0",
