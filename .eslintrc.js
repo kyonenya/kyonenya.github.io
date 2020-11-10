@@ -11,6 +11,9 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: [],
+  globals: {
+    'moment': false,
+  },
   rules: {
     // no-undef: 0,
   },

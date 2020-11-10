@@ -1,4 +1,4 @@
-import { html_postlist, /* html_article */, html_hashtags, html_hashtags_highlighted } from './template.js';
+import { html_postlist, /* html_article ,*/ html_hashtags, html_hashtags_highlighted } from './template.js';
 
 export const process = (data) => {
   for (const eachData of data) {  // data[]オブジェクト配列にプロパティを追加

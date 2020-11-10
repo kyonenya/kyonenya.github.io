@@ -13,7 +13,7 @@ export const realTimeSearch = (data) => {
     // 記事一覧に表示されてなければ、
     if (eachData.isVisible === false) {
       continue;  // スキップして次のループへ。
-    };
+    }
     
     let wordIndex = eachData.plainText.indexOf(word);
     const isMatched_title = eachData.title.includes(word);  // タイトル簡易検索
@@ -44,7 +44,7 @@ export const realTimeSearch = (data) => {
         }
       
       // 検索語句をハイライト表示する
-      resultText = resultText.replace(new RegExp(word, "g"), `<span class="hp_highlight">${word}<\/span>`);  // （変数を使って複数置換させる方法）
+      resultText = resultText.replace(new RegExp(word, "g"), `<span class="hp_highlight">${word}</span>`);  // （変数を使って複数置換させる方法）
       // DOM要素として追加
       li_text.innerHTML = `<p>${resultText}</p>`;
       
@@ -56,7 +56,7 @@ export const realTimeSearch = (data) => {
     // 検索フォームが空になったら、
     if (word === '') {
       li_text.innerHTML = eachData.postText  // 元のテキストに戻す。
-    };
+    }
 
-  };  // for(){...
+  }  // for(){...
   };  // ---------- realTimeSearch() => {...
