@@ -12,7 +12,8 @@ module.exports = {
   },
   plugins: [],
   globals: {
-    'moment': false,
+    'dayjs': false,
+    'dayjs_plugin_relativeTime': false,
   },
   rules: {
     // no-undef: 0,

@@ -109,7 +109,7 @@ fetch(jsonPath)
           <div class="bl_blogcard_title">${data[this.i].title}</div>
           <p class="bl_blogcard_text">${data[this.i].plainText.substr(0, 56)}…</p>
           <footer class="bl_blogcard_footer">
-            <span class="bl_blogcard_time">${moment(data[this.i].date).format("YYYY-MM-DD")}</span>
+            <span class="bl_blogcard_time">${dayjs(data[this.i].date).format("YYYY-MM-DD")}</span>
             <ul class="bl_blogcard_tags">
               ${this.hashtags}
             </ul>
