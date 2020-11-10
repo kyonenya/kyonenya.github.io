@@ -4,7 +4,7 @@ export const html_postlist = (post, id) => {
     <li class="bl_posts_item" data-id=${id}>
       <a href="?id=${id}">
         <header class="bl_posts_header">
-          <time class="bl_posts_date" datetime="${moment(post.date).format("YYYY-MM-DD HH:mm")}">${moment(post.date).format("YYYY-MM-DD")}
+          <time class="bl_posts_date" datetime="${dayjs(post.date).format("YYYY-MM-DD HH:mm")}">${dayjs(post.date).format("YYYY-MM-DD")}
           </time>
         </header>
         <h2 class="bl_posts_title">
@@ -27,7 +27,7 @@ export const html_article = (post) => {
   return `
     <article>
       <header class="bl_text_header">
-        <time class="bl_text_date" datetime="${moment(post.date).format("YYYY-MM-DD HH:mm")}">${moment(post.date).format("YYYY-MM-DD HH:mm")}
+        <time class="bl_text_date" datetime="${dayjs(post.date).format("YYYY-MM-DD HH:mm")}">${dayjs(post.date).format("YYYY-MM-DD HH:mm")}
         </time>
       </header>
       <div class="bl_text">
