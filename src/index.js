@@ -39,7 +39,7 @@ fetch(jsonPath)
         data.map((eachData) => {
             if (eachData.isVisible === true) {
               return eachData.postlistHtml;
-            };
+            }
           }).join('')
         }</ul>`,
       suffix: '',
@@ -55,7 +55,7 @@ fetch(jsonPath)
         data.map((eachData) => {
             if (eachData.isVisible === true) {
               return eachData.postlistHtml;
-            };
+            }
           }).join('')
         }</ul>`,
       suffix: '',
@@ -73,17 +73,15 @@ fetch(jsonPath)
     renderHTML(postlist_tagged);
   } else if (status.id == null) {
     renderHTML(postlist);
-  };
+  }
   if (isFinite(status.id)) {  // 数値判定
     const i = data.length - status.id;  // 記事idはループカウントで言うと何番目か
     const article = createArticle(data[i]);
     renderHTML(article);  // ページ生成
     document.querySelector('.el_search_form')
         .classList.add('hp_hidden');  // 検索フォームを非表示
-  };
+  }
 
-  
-  
   /* ---------------------------------
     リアルタイム検索 */
   // 文字入力されるたびに検索実行
