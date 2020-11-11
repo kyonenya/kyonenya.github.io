@@ -17,9 +17,7 @@ export const createPostlist = (data) => {
     return {
         html: `<ul class="bl_posts">${
             data.map((eachData) => {
-                if (eachData.isVisible === true) {
                 return eachData.postlistHtml;
-                }
             }).join('')
             }</ul>`,
         suffix: '',
@@ -30,6 +28,15 @@ export const createPostlist = (data) => {
 }
         
 export const createTagged = (data, tag) => {  
+    for (const eachData of data) {
+      // 6. 表示・非表示フラグを、タグフィルターに応じてセットしておく
+      const tagExists = eachData.tags.includes(tag);  // タグ検索にヒットしたか
+      // タグ検索がOFFか、またはタグ検索にヒットしているならば、
+      eachData.isVisible = tag == null || tagExists
+        ? true  // 表示。
+        : false;
+    }
+
     return {
         html: `<ul class="bl_posts">${
             data.map((eachData) => {

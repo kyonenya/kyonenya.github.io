@@ -15,15 +15,6 @@ import { realTimeSearch } from './search.js';
   const app = (data) => {
     // 下準備・データの加工 
     data = process(data);
-  
-    for (const eachData of data) {  
-      // 6. 表示・非表示フラグを、タグフィルターに応じてセットしておく
-      const tagExists = eachData.tags.includes(status.tag);  // タグ検索にヒットしたか
-      // タグ検索がOFFか、またはタグ検索にヒットしているならば、
-      eachData.isVisible = status.tag == null || tagExists
-        ? true  // 表示。
-        : false;
-    }
 
     // ルーティング
     if (status.id == null && status.tag) {
