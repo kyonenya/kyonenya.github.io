@@ -6,16 +6,11 @@ import { renderHTML } from './render.js';
 import { realTimeSearch } from './search.js';
 import { registerComponents } from './component.js';
 
-  // 表示調整用
   const jsonPath = './data.json';
 
-  // クエリを取得する
-  const queryStr = window.location.search.slice(1);  // 'foo=1&bar=2'、文頭の'?'を除外
-  const status = getUrlQueries(queryStr);
-
   const app = (data) => {
-    // 下準備・データの加工 
-    data = process(data);
+    // クエリを取得する
+    const status = getUrlQueries(window.location.search.slice(1));
 
     // ルーティング
     if (status.id == null && status.tag) {
@@ -43,8 +38,9 @@ import { registerComponents } from './component.js';
 const index = async () => {
   const response = await fetch(jsonPath);
   const data = await response.json();
-  app(data);
-  registerComponents(data);
+  const posts = process(data);
+  app(posts);
+  registerComponents(posts);
 }
 
 index();
