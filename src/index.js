@@ -1,7 +1,7 @@
 'use strict'
 import { getUrlQueries } from './router.js';
 import { process } from './data.js';
-import { createArticle } from './article.js';
+import { createArticle, createPostlist, createTagged } from './model.js';
 import { renderHTML } from './render.js';
 import { realTimeSearch } from './search.js';
 
@@ -33,41 +33,10 @@ fetch(jsonPath)
 
 /* ---------------------------------
   記事一覧ページ生成 */
-  const createPostlist = (data) => {
-    return {
-      html: `<ul class="bl_posts">${
-        data.map((eachData) => {
-            if (eachData.isVisible === true) {
-              return eachData.postlistHtml;
-            }
-          }).join('')
-        }</ul>`,
-      suffix: '',
-      description: '',
-      pageTitle: '',
-      archiveHeader: '',
-    }
-  }
-    
-  const createTagged = () => {  
-    return {
-      html: `<ul class="bl_posts">${
-        data.map((eachData) => {
-            if (eachData.isVisible === true) {
-              return eachData.postlistHtml;
-            }
-          }).join('')
-        }</ul>`,
-      suffix: '',
-      description: '',
-      pageTitle: `#${status.tag}｜placet experiri`,
-      archiveHeader: `#${status.tag}`,
-    }
-  }
-  
-  const postlist_tagged = createTagged(data);
+
   const postlist = createPostlist(data); 
-  
+  const postlist_tagged = createTagged(data, status.tag);
+
   // ルーティング
   if (status.id == null && status.tag) {
     renderHTML(postlist_tagged);
