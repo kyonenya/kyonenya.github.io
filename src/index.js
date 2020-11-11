@@ -8,7 +8,7 @@ import { realTimeSearch } from './search.js';
   // 表示調整用
   const jsonPath = './data.json';
 
-  // 実行
+  // クエリを取得する
   const queryStr = window.location.search.slice(1);  // 'foo=1&bar=2'、文頭の'?'を除外
   const status = getUrlQueries(queryStr);
   
@@ -17,8 +17,7 @@ fetch(jsonPath)
  .then((response) => response.json())
  .then((data) => {
 
-/* ---------------------------------
-  下準備・データの加工 */  
+  // 下準備・データの加工 
   data = process(data);
   
   for (const eachData of data) {  
@@ -30,17 +29,12 @@ fetch(jsonPath)
         : false;
   }
 
-
-/* ---------------------------------
-  記事一覧ページ生成 */
-
-  const postlist = createPostlist(data); 
-  const postlist_tagged = createTagged(data, status.tag);
-
   // ルーティング
   if (status.id == null && status.tag) {
+    const postlist_tagged = createTagged(data, status.tag);
     renderHTML(postlist_tagged);
   } else if (status.id == null) {
+    const postlist = createPostlist(data); 
     renderHTML(postlist);
   }
   if (isFinite(status.id)) {  // 数値判定
@@ -51,9 +45,7 @@ fetch(jsonPath)
         .classList.add('hp_hidden');  // 検索フォームを非表示
   }
 
-  /* ---------------------------------
-    リアルタイム検索 */
-  // 文字入力されるたびに検索実行
+  // リアルタイム検索
   document.querySelector('.el_search_form').addEventListener('input', () => {
     realTimeSearch(data);
   });
