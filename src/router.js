@@ -1,5 +1,6 @@
 export const getUrlQueries = (queryStr) => {
   const result = {};
+  queryStr = queryStr.slice(1);
   // const queryStr = window.location.search.slice(1);  // 'foo=1&bar=2'、文頭の'?'を除外
 
   // クエリがない場合は、

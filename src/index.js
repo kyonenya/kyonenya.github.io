@@ -6,11 +6,11 @@ import { renderHTML } from './render.js';
 import { realTimeSearch } from './search.js';
 import { registerComponents } from './component.js';
 
-  const jsonPath = './data.json';
+const jsonPath = './data.json';
 
   const app = (data) => {
     // クエリを取得する
-    const status = getUrlQueries(window.location.search.slice(1));
+    const status = getUrlQueries(window.location.search);
 
     // ルーティング
     if (status.id == null && status.tag) {
@@ -24,14 +24,11 @@ import { registerComponents } from './component.js';
         const i = data.length - status.id;  // 記事idはループカウントで言うと何番目か
         const article = createArticle(data[i]);
         renderHTML(article);  // ページ生成
-        document.querySelector('.el_search_form')
-            .classList.add('hp_hidden');  // 検索フォームを非表示
+        document.querySelector('.el_search_form').classList.add('hp_hidden');  // 検索フォームを非表示
     }
 
     // リアルタイム検索
-    document.querySelector('.el_search_form').addEventListener('input', () => {
-        realTimeSearch(data);
-    });
+    document.querySelector('.el_search_form').addEventListener('input', () => realTimeSearch(data));
   }
 
 // JSONデータを取得して実行
