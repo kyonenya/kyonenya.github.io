@@ -81,9 +81,11 @@ import { realTimeSearch } from './search.js';
     window.customElements.define('blog-card', BlogCard);
   }
 
-// JSONデータ取得
-fetch(jsonPath)
-  .then((response) => response.json())
-  .then((data) => {
-    app(data);
-});
+// JSONデータを取得して実行
+const index = async () => {
+  const response = await fetch(jsonPath);
+  const data = await response.json();
+  app(data);
+}
+
+index();
