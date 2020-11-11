@@ -30,7 +30,7 @@ const app = async () => {
   const data = await response.json();
   const posts = process(data);
   route(posts, getUrlQueries(window.location.search));
-  document.querySelector('.el_search_form').addEventListener('input', () => realTimeSearch(data));  // リアルタイム検索
+  document.querySelector('.el_search_form').addEventListener('input', () => realTimeSearch(posts));  // リアルタイム検索
   registerComponents(posts);
 }
 
