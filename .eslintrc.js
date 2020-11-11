@@ -5,8 +5,8 @@ module.exports = {
   },   
   extends: [
     'eslint:recommended',
+    'airbnb-base',
   ],
-  // parser: 'babel-eslint',
   parserOptions: {
     sourceType: 'module',
   },
@@ -17,5 +17,6 @@ module.exports = {
   },
   rules: {
     // no-undef: 0,
+    'import/prefer-default-export': 0,
   },
 };
