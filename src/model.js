@@ -3,10 +3,9 @@ import { template } from './template.js';
 const createHashtags = (tags, filtered = null) => {
   return tags.map((eachTag) => {
     if (eachTag === filtered) { // タグフィルターにマッチしているなら、
-      return template.filteredHashtags(eachTag); // 当該タグをハイライト。
-    } else {
-      return template.hashtags(eachTag);
+      return template.filteredHashtag(eachTag); // 当該タグをハイライト。
     }
+    return template.hashtag(eachTag);
   })
   .join('');
 };

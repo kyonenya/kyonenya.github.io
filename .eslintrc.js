@@ -18,8 +18,7 @@ module.exports = {
   rules: {
     'import/prefer-default-export': 0,
     'import/extensions': 0,
-    'camelcase': 0,
-    'no-restricted-syntax': 0, // for..of
-    'no-else-return': 0,
+//    'camelcase': 0,
+    'no-restricted-syntax': 0, // for...of
   },
 };
