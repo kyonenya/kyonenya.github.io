@@ -1,7 +1,7 @@
 dayjs.locale('ja');
 dayjs.extend(dayjs_plugin_relativeTime);
 
-const postList = (data, id) => `
+const postList = (data, id, filteredTag = null) => `
   <li class="bl_posts_item" data-id=${id}>
     <a href="?id=${id}">
       <header class="bl_posts_header">
@@ -18,7 +18,12 @@ const postList = (data, id) => `
     <footer class="bl_posts_footer">
       <span class="bl_posts_dateago">${dayjs(data.date).fromNow()}</span>
       <ul class="bl_tags">
-        ${data.hashtags}
+        ${data.tags.map(tag => {
+          if (tag === filteredTag) {
+            return filteredHashtag(tag);
+          }
+          return hashtag(tag);
+        }).join('')}
       </ul>
     </footer>
   </li>`;
