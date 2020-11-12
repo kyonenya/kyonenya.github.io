@@ -1,5 +1,5 @@
 // レンダラー（汎用）
-export const renderHTML = (currentPage) => {
+export const render = (currentPage) => {
   document.getElementById('root').innerHTML
       = currentPage.html;  // 記事内容
   if (currentPage.pageTitle) {
