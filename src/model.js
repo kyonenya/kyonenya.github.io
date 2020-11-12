@@ -1,11 +1,11 @@
-import { html_postlist, html_article, html_hashtags, html_hashtags_highlighted } from './template.js';
+import { template } from './template.js';
 
 const createHashtags = (tags, filtered = null) => {
   return tags.map((eachTag) => {
     if (eachTag === filtered) { // タグフィルターにマッチしているなら、
-      return html_hashtags_highlighted(eachTag); // 当該タグをハイライト。
+      return template.filteredHashtags(eachTag); // 当該タグをハイライト。
     } else {
-      return html_hashtags(eachTag);
+      return template.hashtags(eachTag);
     }
   })
   .join('');
@@ -16,7 +16,7 @@ export const createArticle = (data) =>  {
   data.hashtags = createHashtags(data.tags)
   
   return {
-    html: html_article(data),
+    html: template.article(data),
     suffix: ` :: ${data.id}`,
     description: `${data.plainText.substr(0, 110)}…`,
     pageTitle: (data.title)  // exists?
@@ -32,15 +32,15 @@ export const createPostlist = (data) => {
     
     // 5. 記事リストのHTMLを生成しておく
     const i = data.length - eachData.id;
-    eachData.postlistHtml = html_postlist(data[i], eachData.id);
+    eachData.postlistHtml = template.postList(data[i], eachData.id);
   }
   
   return {
     html: `<ul class="bl_posts">${
-        data.map((eachData) => {
-            return eachData.postlistHtml;
-        }).join('')
-        }</ul>`,
+      data.map((eachData) => {
+          return eachData.postlistHtml;
+      }).join('')
+      }</ul>`,
     suffix: '',
     description: '',
     pageTitle: '',
@@ -54,7 +54,7 @@ export const createTagged = (data, tag) => {
     
     // 5. 記事リストのHTMLを生成しておく
     const i = data.length - eachData.id;
-    eachData.postlistHtml = html_postlist(data[i], eachData.id);
+    eachData.postlistHtml = template.postList(data[i], eachData.id);
   }
   
   for (const eachData of data) {

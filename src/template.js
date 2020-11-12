@@ -55,3 +55,10 @@ export const html_hashtags = (eachTag) => {
 export const html_hashtags_highlighted = (eachTag) => {
   return `<li><a href="?tag=${eachTag}" class="hp_bold">#${eachTag}</a></li>`  // リンクにタグフィルター用のクエリ文字列を仕込む
 }
+
+export const template = {
+  postList: html_postlist,
+  article: html_article,
+  hashtags: html_hashtags,
+  filteredHashtags: html_hashtags_highlighted,  
+};
