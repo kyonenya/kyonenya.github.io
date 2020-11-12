@@ -36,7 +36,7 @@ const article = aData => `
       <footer class="bl_text_footer">
         <span class="bl_posts_dateago">${dayjs(aData.date).fromNow()}</span>
         <ul class="bl_tags">
-          ${aData.hashtags}
+          ${aData.tags.map(tag => template.hashtag(tag)).join('')}
         </ul>
       </footer>
     </article>`;

@@ -1,20 +1,16 @@
 import { template } from './template.js';
 
-const createHashtags = (tags, filtered = null) => {
-  return tags.map((eachTag) => {
+const createHashtags = (tags, filtered = null) => tags.map(eachTag => {
     if (eachTag === filtered) { // タグフィルターにマッチしているなら、
       return template.filteredHashtag(eachTag); // 当該タグをハイライト。
     }
     return template.hashtag(eachTag);
   })
   .join('');
-};
 
 /* 個別記事ページ */
-export const createArticle = (data) =>  {
-  data.hashtags = createHashtags(data.tags)
-  
-  return {
+export const createArticle = (data) => (
+  {
     html: template.article(data),
     suffix: ` :: ${data.id}`,
     description: `${data.plainText.substr(0, 110)}…`,
@@ -22,8 +18,7 @@ export const createArticle = (data) =>  {
       ? `${data.title}｜placet experiri :: ${data.id}`  // 記事タイトルあり
       : `placet experiri :: ${data.id}`,  // 記事タイトルなし
     archiveHeader: '',
-  }
-};
+  });
 
 export const createPostlist = (data) => {
   for (const eachData of data) {
