@@ -1,5 +1,3 @@
-import { html_postlist, html_hashtags, html_hashtags_highlighted } from './template.js';
-
 export const process = (data, tag) => {
   for (const eachData of data) { // data[]オブジェクト配列にプロパティを追加
     // 1. ダブルダッシュ——が途切れてしまうので罫線二つに置換しておく

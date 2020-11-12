@@ -1,8 +1,7 @@
 dayjs.locale('ja');
 dayjs.extend(dayjs_plugin_relativeTime);
 
-// 記事一覧リスト
-export const html_postlist = (post, id) => {
+const postList = (post, id) => {
   return `
     <li class="bl_posts_item" data-id=${id}>
       <a href="?id=${id}">
@@ -26,7 +25,7 @@ export const html_postlist = (post, id) => {
     </li>`;
 }
 
-export const html_article = (post) => {
+const article = (post) => {
   return `
     <article>
       <header class="bl_text_header">
@@ -46,19 +45,17 @@ export const html_article = (post) => {
     </article>`;
 }
 
-//  ハッシュタグ（共通部品）
-export const html_hashtags = (eachTag) => {
-  return `<li><a href="?tag=${eachTag}">#${eachTag}</a></li>`  // リンクにタグフィルター用のクエリ文字列を仕込む
-}
+const hashtags = (eachTag) => {
+  return `<li><a href="?tag=${eachTag}">#${eachTag}</a></li>`;
+};
 
-// ハッシュタグ、ハイライトされたとき
-export const html_hashtags_highlighted = (eachTag) => {
-  return `<li><a href="?tag=${eachTag}" class="hp_bold">#${eachTag}</a></li>`  // リンクにタグフィルター用のクエリ文字列を仕込む
-}
+const filteredHashtags = (eachTag) => {
+  return `<li><a href="?tag=${eachTag}" class="hp_bold">#${eachTag}</a></li>`;  // リンクにタグフィルター用のクエリ文字列を仕込む
+};
 
 export const template = {
-  postList: html_postlist,
-  article: html_article,
-  hashtags: html_hashtags,
-  filteredHashtags: html_hashtags_highlighted,  
+  postList: postList,
+  article: article,
+  hashtags: hashtags,
+  filteredHashtags: filteredHashtags,  
 };
