@@ -1,21 +1,21 @@
 import { html_postlist, html_article, html_hashtags, html_hashtags_highlighted } from './template.js';
 
-/* 個別記事ページ */
-export const createArticle = (post) =>  {
-  // 4. ハッシュタグを生成しておく
-  post.hashtags = post.tags
-    .map((eachTag) => {
-      return html_hashtags(eachTag);
-    })
+const createHashtags = (tags) => {
+  return tags.map(eachTag => html_hashtags(eachTag))
     .join('');
+};
+
+/* 個別記事ページ */
+export const createArticle = (data) =>  {
+  data.hashtags = createHashtags(data.tags)
   
   return {
-    html: html_article(post),
-    suffix: ` :: ${post.id}`,
-    description: `${post.plainText.substr(0, 110)}…`,
-    pageTitle: (post.title)  // exists?
-      ? `${post.title}｜placet experiri :: ${post.id}`  // 記事タイトルあり
-      : `placet experiri :: ${post.id}`,  // 記事タイトルなし
+    html: html_article(data),
+    suffix: ` :: ${data.id}`,
+    description: `${data.plainText.substr(0, 110)}…`,
+    pageTitle: (data.title)  // exists?
+      ? `${data.title}｜placet experiri :: ${data.id}`  // 記事タイトルあり
+      : `placet experiri :: ${data.id}`,  // 記事タイトルなし
     archiveHeader: '',
   }
 }
@@ -23,11 +23,8 @@ export const createArticle = (post) =>  {
 export const createPostlist = (data) => {
   for (const eachData of data) {
     // 4. ハッシュタグを生成しておく
-    eachData.hashtags = eachData.tags
-      .map((eachTag) => {
-          return html_hashtags(eachTag);
-      })
-      .join('');
+    eachData.hashtags = createHashtags(eachData.tags);
+    
     // 5. 記事リストのHTMLを生成しておく
     const i = data.length - eachData.id;
     eachData.postlistHtml = html_postlist(data[i], eachData.id);
