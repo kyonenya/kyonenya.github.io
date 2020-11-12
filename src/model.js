@@ -14,17 +14,17 @@ export const createArticle = (post) =>  {
 }
 
 export const createPostlist = (data) => {
-    return {
-        html: `<ul class="bl_posts">${
-            data.map((eachData) => {
-                return eachData.postlistHtml;
-            }).join('')
-            }</ul>`,
-        suffix: '',
-        description: '',
-        pageTitle: '',
-        archiveHeader: '',
-    }
+  return {
+    html: `<ul class="bl_posts">${
+        data.map((eachData) => {
+            return eachData.postlistHtml;
+        }).join('')
+        }</ul>`,
+    suffix: '',
+    description: '',
+    pageTitle: '',
+    archiveHeader: '',
+  }
 }
         
 export const createTagged = (data, tag) => {  
@@ -39,12 +39,12 @@ export const createTagged = (data, tag) => {
 
     return {
         html: `<ul class="bl_posts">${
-            data.map((eachData) => {
-                if (eachData.isVisible === true) {
-                return eachData.postlistHtml;
-                }
-            }).join('')
-            }</ul>`,
+          data.map((eachData) => {
+              if (eachData.isVisible === true) {
+              return eachData.postlistHtml;
+              }
+          }).join('')
+          }</ul>`,
         suffix: '',
         description: '',
         pageTitle: `#${tag}｜placet experiri`,
