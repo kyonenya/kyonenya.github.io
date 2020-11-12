@@ -69,9 +69,9 @@ export const createTagged = (data, tag) => {
   return {
     html: `<ul class="bl_posts">${
       data.map((eachData) => {
-          if (eachData.isVisible === true) {
+        if (eachData.isVisible === true) {
           return eachData.postlistHtml;
-          }
+        }
       }).join('')
       }</ul>`,
     suffix: '',

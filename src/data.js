@@ -17,19 +17,6 @@ export const process = (data, tag) => {
     } else { // 短文なら、
       eachData.postText = eachData.plainText; // プレーンテキストそのまま
     }
-    // 4. ハッシュタグを生成しておく
-    eachData.hashtags = eachData.tags
-      .map((eachTag) => {
-        if (eachTag === tag) { // タグフィルターにマッチしているなら、
-          return html_hashtags_highlighted(eachTag); // 当該タグをハイライト。
-        } else {
-          return html_hashtags(eachTag);
-        }
-      })
-      .join('');
-    // 5. 記事リストのHTMLを生成しておく
-    const i = data.length - eachData.id;
-    eachData.postlistHtml = html_postlist(data[i], eachData.id);
   }
 
   return data;
