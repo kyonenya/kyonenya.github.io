@@ -14,12 +14,11 @@ const route = (data, queries) => {
     render(html.postList(data));
   }
   if (Number.isFinite(Number(queries.id))) {
-    render(html.article(data[data.length - queries.id])); 
-    document.querySelector('.el_search_form').classList.add('hp_hidden'); // 検索フォームを非表示
+    render(html.article(data[data.length - queries.id]));
+    document.querySelector('.el_search_form').classList.add('hp_hidden'); // disable search form
   }
 };
 
-// JSONデータを取得して実行
 const app = async () => {
   const response = await fetch(jsonPath);
   const rawData = await response.json();

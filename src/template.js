@@ -1,32 +1,32 @@
 dayjs.locale('ja');
 dayjs.extend(dayjs_plugin_relativeTime);
 
-const postList = (data, id, filteredTag = null) => `
-  <li class="bl_posts_item" data-id=${id}>
-    <a href="?id=${id}">
+const postList = (aData, filteredTag = null) => `
+  <li class="bl_posts_item" data-id=${aData.id}>
+    <a href="?id=${aData.id}">
       <header class="bl_posts_header">
-        <time class="bl_posts_date" datetime="${dayjs(data.date).format('YYYY-MM-DD HH:mm')}">${dayjs(data.date).format('YYYY-MM-DD')}
+        <time class="bl_posts_date" datetime="${dayjs(aData.date).format('YYYY-MM-DD HH:mm')}">${dayjs(aData.date).format('YYYY-MM-DD')}
         </time>
       </header>
       <h2 class="bl_posts_title">
-        ${data.title}
+        ${aData.title}
       </h2>
-      <div class="bl_posts_summary" data-id=${id}>
+      <div class="bl_posts_summary" data-id=${aData.id}>
         <p>
-          ${data.plainText.length > 125
-            ? `${data.plainText.substr(0, 125)}…`
-            : data.plainText}
+          ${aData.plainText.length > 125
+            ? `${aData.plainText.substr(0, 125)}…`
+            : aData.plainText}
         </p>
       </div>
     </a>
     <footer class="bl_posts_footer">
-      <span class="bl_posts_dateago">${dayjs(data.date).fromNow()}</span>
+      <span class="bl_posts_dateago">${dayjs(aData.date).fromNow()}</span>
       <ul class="bl_tags">
-        ${data.tags.map(tag => {
-          if (tag === filteredTag) {
-            return filteredHashtag(tag);
+        ${aData.tags.map(aTag => {
+          if (aTag === filteredTag) {
+            return filteredHashtag(aTag);
           }
-          return hashtag(tag);
+          return hashtag(aTag);
         }).join('')}
       </ul>
     </footer>
@@ -45,7 +45,7 @@ const article = aData => `
       <footer class="bl_text_footer">
         <span class="bl_posts_dateago">${dayjs(aData.date).fromNow()}</span>
         <ul class="bl_tags">
-          ${aData.tags.map(tag => template.hashtag(tag)).join('')}
+          ${aData.tags.map(aTag => template.hashtag(aTag)).join('')}
         </ul>
       </footer>
     </article>`;
