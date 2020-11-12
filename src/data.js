@@ -1,14 +1,16 @@
-export const process = data => {
-  for (let i = 0; i < data.length; i++) {
-    data[i].index = i;
-    data[i].id = data.length - i; // overwrite existing post id
+export const process = (data) => {
+  const result = data.slice();
+
+  for (let i = 0; i < result.length; i += 1) {
+    result[i].index = i;
+    result[i].id = result.length - i; // overwrite existing post id
   }
-  
-  return data.map(aData => {
+
+  return result.map(aResult => {
+    const aData = { ...aResult };
     aData.text = aData.text.replace(/——/g, '──'); // replace double-dash of ruled lines
     aData.title = aData.title.replace(/——/g, '──');
     aData.plainText = aData.text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '');
-    
     return aData;
   });
 };
