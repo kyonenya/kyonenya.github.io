@@ -12,7 +12,11 @@ const postList = (data, id, filteredTag = null) => `
         ${data.title}
       </h2>
       <div class="bl_posts_summary" data-id=${id}>
-        <p>${data.postText}</p>
+        <p>
+          ${data.plainText.length > 125
+            ? `${data.plainText.substr(0, 125)}…`
+            : data.plainText}
+        </p>
       </div>
     </a>
     <footer class="bl_posts_footer">
