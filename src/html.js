@@ -1,6 +1,6 @@
 import { template } from './template.js';
 
-const article = (aData) => ({
+const article = aData => ({
   html: template.article(aData),
   suffix: ` :: ${aData.id}`,
   description: `${aData.plainText.substr(0, 110)}…`,
@@ -10,26 +10,26 @@ const article = (aData) => ({
   archiveHeader: '',
 });
 
-const postList = (data) => ({
+const postList = data => ({
   html: `
-    <ul class="bl_posts">${
-      data.map(aData => template.postList(data[aData.index])).join('')
-    }</ul>`,
+    <ul class="bl_posts">
+      ${data.map(aData => template.postList(data[aData.index])).join('')}
+    </ul>`,
   suffix: '',
   description: '',
   pageTitle: '',
   archiveHeader: '',
 });
-        
+
 const taggedPostList = (data, tag) => ({
   html: `
-    <ul class="bl_posts">${
-      data.map(aData => {
-        if (tag == null || aData.tags.includes(tag)) {
-          return template.postList(data[aData.index], tag);
-        }
-      }).join('')
-    }</ul>`,
+    <ul class="bl_posts">
+      ${data.map((aData) => {
+          if (tag == null || aData.tags.includes(tag)) {
+            return template.postList(data[aData.index], tag);
+          }
+        }).join('')}
+    </ul>`,
   suffix: '',
   description: '',
   pageTitle: `#${tag}｜placet experiri`,
