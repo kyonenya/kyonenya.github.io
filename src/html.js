@@ -13,7 +13,7 @@ const article = (aData) => ({
 const postList = (data) => ({
   html: `
     <ul class="bl_posts">${
-      data.map(aData => template.postList(data[data.length - aData.id], aData.id)).join('')
+      data.map(aData => template.postList(data[aData.index], aData.id)).join('')
     }</ul>`,
   suffix: '',
   description: '',
@@ -26,7 +26,7 @@ const taggedPostList = (data, tag) => ({
     <ul class="bl_posts">${
       data.map(aData => {
         if (tag == null || aData.tags.includes(tag)) {
-          return template.postList(data[data.length - aData.id], aData.id, tag);
+          return template.postList(data[aData.index], aData.id, tag);
         }
       }).join('')
     }</ul>`,

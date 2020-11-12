@@ -1,5 +1,5 @@
-export const process = (data, tag) => {
-  for (const eachData of data) { // data[]オブジェクト配列にプロパティを追加
+export const process = data => {
+  for (const eachData of data) {
     // 1. ダブルダッシュ——が途切れてしまうので罫線二つに置換しておく
     eachData.text = eachData.text.replace(/——/g, '──');
     eachData.title = eachData.title.replace(/——/g, '──');
@@ -16,6 +16,11 @@ export const process = (data, tag) => {
       eachData.postText = eachData.plainText; // プレーンテキストそのまま
     }
   }
-
+  
+  for (let i = 0; i < data.length; i++) {
+    data[i].index = i;
+    data[i].id = data.length - i; // overwrite
+  }
+  
   return data;
 };
