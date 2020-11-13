@@ -21,20 +21,20 @@ const postList = data => ({
   archiveHeader: '',
 });
 
-const taggedPostList = (data, tag) => ({
+const taggedPostList = (data, filteredTag) => ({
   html: `
     <ul class="bl_posts">
       ${data.map((aData) => {
-        if (tag == null || aData.tags.includes(tag)) {
-          return template.postList(data[aData.index], tag);
+        if (filteredTag !== null && !aData.tags.includes(filteredTag)) {
+          return '';
         }
-        return '';
+        return template.postList(data[aData.index], filteredTag);
       }).join('')}
     </ul>`,
   suffix: '',
   description: '',
-  pageTitle: `#${tag}｜placet experiri`,
-  archiveHeader: `#${tag}`,
+  pageTitle: `#${filteredTag}｜placet experiri`,
+  archiveHeader: `#${filteredTag}`,
 });
 
 export const html = {
