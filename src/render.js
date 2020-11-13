@@ -1,6 +1,6 @@
 export const render = (page) => {
-  document.getElementById('root').innerHTML = page.html;
-  if (page.pageTitle) {
+  document.getElementById('root').innerHTML = page.body;
+  if (page.title) {
     document.title = page.title;
   }
   if (page.suffix) {

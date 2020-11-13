@@ -1,20 +1,12 @@
-export const getUrlQueries = (queryStr) => {
-  const result = {};
-  queryStr = queryStr.slice(1);
-  // const queryStr = window.location.search.slice(1);  // 'foo=1&bar=2'、文頭の'?'を除外
-
-  // クエリがない場合は、
+export const queriesFor = (queryStr) => { // '?foo=1&bar=2'
   if (!queryStr) {
-    return result;  // 空のオブジェクトを返す。
+    return {};
   }
-  
-  // 複数のクエリを'&'で切って配列へと分解
-  const queryArr = queryStr.split('&')  // ['foo=1', 'bar=2']
-  queryArr.forEach((eachQueryStr) => {
-    const keyAndValue = eachQueryStr.split('=');  // ['foo', '1']// '='でさらに分割してそれぞれ配列（key,value）へと格納
-    // 配列からオブジェクトを生成、このとき値を日本語にデコードしておく
-    result[keyAndValue[0]] = decodeURIComponent(keyAndValue[1]);  // {foo: 1}
-  });
 
-  return result;
+  return queryStr.slice(1).split('&') // ['foo=1', 'bar=2']
+    .reduce((acc, aQuery) => {
+      const keyAndValue = aQuery.split('='); // ['foo', '1']
+      acc[keyAndValue[0]] = decodeURIComponent(keyAndValue[1]); // { foo: 1 }
+      return acc;
+    }, {});
 };

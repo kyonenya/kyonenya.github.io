@@ -1,7 +1,7 @@
 import { template } from './template.js';
 
 const article = aData => ({
-  html: template.article(aData),
+  body: template.article(aData),
   suffix: ` :: ${aData.id}`,
   description: `${aData.plainText.substr(0, 110)}…`,
   title: (aData.title)
@@ -11,7 +11,7 @@ const article = aData => ({
 });
 
 const postList = data => ({
-  html: `
+  body: `
     <ul class="bl_posts">
       ${data.map(aData => template.postList(data[aData.index])).join('')}
     </ul>`,
@@ -22,7 +22,7 @@ const postList = data => ({
 });
 
 const taggedPostList = (data, filteredTag) => ({
-  html: `
+  body: `
     <ul class="bl_posts">
       ${data.map((aData) => {
         if (filteredTag !== null && !aData.tags.includes(filteredTag)) {

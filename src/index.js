@@ -1,4 +1,4 @@
-import { getUrlQueries } from './router.js';
+import { queriesFor } from './router.js';
 import { process } from './data.js';
 import { pages } from './pages.js';
 import { render } from './render.js';
@@ -23,7 +23,7 @@ const app = async () => {
   const response = await fetch(jsonPath);
   const rawData = await response.json();
   const data = process(rawData);
-  route(data, getUrlQueries(window.location.search));
+  route(data, queriesFor(window.location.search));
   document.querySelector('.el_search_form').addEventListener('input', () => realTimeSearch(data)); // リアルタイム検索
   registerComponents(data);
 };
