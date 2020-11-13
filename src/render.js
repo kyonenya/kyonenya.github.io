@@ -1,20 +1,15 @@
-// レンダラー（汎用）
-export const render = (currentPage) => {
-  document.getElementById('root').innerHTML
-      = currentPage.html;  // 記事内容
-  if (currentPage.pageTitle) {
-    document.title = currentPage.pageTitle;  // ブラウザのタイトル
+export const render = (page) => {
+  document.getElementById('root').innerHTML = page.html;
+  if (page.pageTitle) {
+    document.title = page.title;
   }
-  if (currentPage.suffix) {
-    document.querySelector('.el_logo_suffix').innerText 
-        = currentPage.suffix;  // ロゴのidカウンター
+  if (page.suffix) {
+    document.querySelector('.el_logo_suffix').innerText = page.suffix;
   }
-  if (currentPage.description) {
-    document.querySelector('meta[name=description]').content
-        = currentPage.description;  // メタタグの説明文      
+  if (page.description) {
+    document.querySelector('meta[name=description]').content = page.description;
   }
-  if (currentPage.archiveHeader) {
-    document.querySelector('.el_archive_header').innerText
-        = currentPage.archiveHeader;  // 記事検索時に現れる、ページ上部のナビゲーションバー
+  if (page.archiveHeader) {
+    document.querySelector('.el_archive_header').innerText = page.archiveHeader;
   }
-}
+};

@@ -4,7 +4,7 @@ const article = aData => ({
   html: template.article(aData),
   suffix: ` :: ${aData.id}`,
   description: `${aData.plainText.substr(0, 110)}…`,
-  pageTitle: (aData.title)
+  title: (aData.title)
     ? `${aData.title}｜placet experiri :: ${aData.id}`
     : `placet experiri :: ${aData.id}`,
   archiveHeader: '',
@@ -17,7 +17,7 @@ const postList = data => ({
     </ul>`,
   suffix: '',
   description: '',
-  pageTitle: '',
+  title: '',
   archiveHeader: '',
 });
 
@@ -33,11 +33,11 @@ const taggedPostList = (data, filteredTag) => ({
     </ul>`,
   suffix: '',
   description: '',
-  pageTitle: `#${filteredTag}｜placet experiri`,
+  title: `#${filteredTag}｜placet experiri`,
   archiveHeader: `#${filteredTag}`,
 });
 
-export const html = {
+export const pages = {
   article,
   postList,
   taggedPostList,
