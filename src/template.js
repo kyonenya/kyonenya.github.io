@@ -1,6 +1,10 @@
 dayjs.locale('ja');
 dayjs.extend(dayjs_plugin_relativeTime);
 
+const hashtag = aTag => `<li><a href="?tag=${aTag}">#${aTag}</a></li>`;
+
+const filteredHashtag = aTag => `<li><a href="?tag=${aTag}" class="hp_bold">#${aTag}</a></li>`;
+
 const postList = (aData, filteredTag = null) => `
   <li class="bl_posts_item" data-id=${aData.id}>
     <a href="?id=${aData.id}">
@@ -22,7 +26,7 @@ const postList = (aData, filteredTag = null) => `
     <footer class="bl_posts_footer">
       <span class="bl_posts_dateago">${dayjs(aData.date).fromNow()}</span>
       <ul class="bl_tags">
-        ${aData.tags.map(aTag => {
+        ${aData.tags.map((aTag) => {
           if (aTag === filteredTag) {
             return filteredHashtag(aTag);
           }
@@ -45,18 +49,12 @@ const article = aData => `
       <footer class="bl_text_footer">
         <span class="bl_posts_dateago">${dayjs(aData.date).fromNow()}</span>
         <ul class="bl_tags">
-          ${aData.tags.map(aTag => template.hashtag(aTag)).join('')}
+          ${aData.tags.map(aTag => hashtag(aTag)).join('')}
         </ul>
       </footer>
     </article>`;
 
-const hashtag = aTag => `<li><a href="?tag=${aTag}">#${aTag}</a></li>`;
-
-const filteredHashtag = aTag => `<li><a href="?tag=${aTag}" class="hp_bold">#${aTag}</a></li>`;
-
 export const template = {
   postList,
   article,
-  hashtag,
-  filteredHashtag,
 };
