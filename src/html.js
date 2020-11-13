@@ -25,10 +25,11 @@ const taggedPostList = (data, tag) => ({
   html: `
     <ul class="bl_posts">
       ${data.map((aData) => {
-          if (tag == null || aData.tags.includes(tag)) {
-            return template.postList(data[aData.index], tag);
-          }
-        }).join('')}
+        if (tag == null || aData.tags.includes(tag)) {
+          return template.postList(data[aData.index], tag);
+        }
+        return '';
+      }).join('')}
     </ul>`,
   suffix: '',
   description: '',

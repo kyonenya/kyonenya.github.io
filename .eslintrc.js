@@ -18,7 +18,8 @@ module.exports = {
   rules: {
     'import/prefer-default-export': 0,
     'import/extensions': 0,
+    'indent': ['error', 2, { 'ignoredNodes': ['TemplateLiteral *'] }],
 //    'camelcase': 0,
-    'no-restricted-syntax': 0, // for...of
+//    'no-restricted-syntax': 0, // for...of
   },
 };
