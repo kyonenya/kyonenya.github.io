@@ -3,7 +3,7 @@ import { process } from './data.js';
 import { pages } from './pages.js';
 import { render } from './render.js';
 import { realTimeSearch } from './search.js';
-import { registerComponents } from './component.js';
+import { registerComponents } from './components.js';
 
 const jsonPath = './data.json';
 
