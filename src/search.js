@@ -23,32 +23,31 @@ export const realTimeSearch = (data, word) => {
       li.classList.remove('hp_hidden');  // 表示。
       
       // 検索結果に表示するための文字列を決定
-        // 検索語句が先頭に近すぎたら、
-        if (wordIndex <= beforeLength) {
-          wordIndex = beforeLength; // 冒頭から表示して、
-          resultText = ''; // 冒頭の'…'を削除。
-        }        
-        // 結果表示用の文字列
-        resultText += eachData.plainText.substr(wordIndex - beforeLength, resultLength)
-        // 検索語句が末尾より十分遠ければ、
-        const wordIndex_last = wordIndex + word.length + afterLength;
-        if (wordIndex_last < eachData.plainText.length) {
-          resultText += '…'; // 末尾に'…'を追加。
-        }
+      // 検索語句が先頭に近すぎたら、
+      if (wordIndex <= beforeLength) {
+        wordIndex = beforeLength; // 冒頭から表示して、
+        resultText = ''; // 冒頭の'…'を削除。
+      }        
+      // 結果表示用の文字列
+      resultText += eachData.plainText.substr(wordIndex - beforeLength, resultLength)
+      // 検索語句が末尾より十分遠ければ、
+      const wordIndex_last = wordIndex + word.length + afterLength;
+      if (wordIndex_last < eachData.plainText.length) {
+        resultText += '…'; // 末尾に'…'を追加。
+      }
 
       // 検索語句をハイライト表示する
-      resultText = resultText.replace(new RegExp(word, "g"), `<span class="hp_highlight">${word}</span>`);  // （変数を使って複数置換させる方法）
+      resultText = resultText.replace(new RegExp(word, "g"), `<span class="hp_highlight">${word}</span>`); // （変数を使って複数置換させる方法）
       // DOM要素として追加
       li_text.innerHTML = `<p>${resultText}</p>`;
-
     } else {
-    // マッチしなかったときは、
+      // マッチしなかったときは、
       li.classList.add('hp_hidden'); // 非表示に。
     }
 
     // 検索フォームが空になったら、
     if (word === '') {
-      li_text.innerHTML = eachData.postText // 元のテキストに戻す。
+      li_text.innerHTML = eachData.postText; // 元のテキストに戻す。
     }
   } // for(){...
 };
