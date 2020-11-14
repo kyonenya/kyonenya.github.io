@@ -24,7 +24,7 @@ const app = async () => {
   const rawData = await response.json();
   const data = process(rawData);
   route(data, queriesFor(window.location.search));
-  document.querySelector('.el_search_form').addEventListener('input', () => realTimeSearch(data)); // リアルタイム検索
+  document.querySelector('.el_search_form').addEventListener('input', () => realTimeSearch(data, document.querySelector('.el_search_form').value)); // リアルタイム検索
   registerComponents(data);
 };
 
