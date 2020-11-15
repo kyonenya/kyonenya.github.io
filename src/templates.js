@@ -37,24 +37,24 @@ const postList = (aData, filteredTag = null) => `
   </li>`;
 
 const article = aData => `
-    <article>
-      <header class="bl_text_header">
-        <time class="bl_text_date" datetime="${dayjs(aData.date).format('YYYY-MM-DD HH:mm')}">${dayjs(aData.date).format('YYYY-MM-DD HH:mm')}
-        </time>
-      </header>
-      <div class="bl_text">
-        <h2 class="bl_text_title">${aData.title}</h2>
-        ${aData.text}
-      </div>
-      <footer class="bl_text_footer">
-        <span class="bl_posts_dateago">${dayjs(aData.date).fromNow()}</span>
-        <ul class="bl_tags">
-          ${aData.tags.map(aTag => hashtag(aTag)).join('')}
-        </ul>
-      </footer>
-    </article>`;
+  <article>
+    <header class="bl_text_header">
+      <time class="bl_text_date" datetime="${dayjs(aData.date).format('YYYY-MM-DD HH:mm')}">${dayjs(aData.date).format('YYYY-MM-DD HH:mm')}
+      </time>
+    </header>
+    <div class="bl_text">
+      <h2 class="bl_text_title">${aData.title}</h2>
+      ${aData.text}
+    </div>
+    <footer class="bl_text_footer">
+      <span class="bl_posts_dateago">${dayjs(aData.date).fromNow()}</span>
+      <ul class="bl_tags">
+        ${aData.tags.map(aTag => hashtag(aTag)).join('')}
+      </ul>
+    </footer>
+  </article>`;
 
-export const template = {
+export const templates = {
   postList,
   article,
 };
