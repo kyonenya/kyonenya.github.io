@@ -2,14 +2,30 @@
   "name": "kyonenya.github.io",
   "version": "1.0.0",
   "scripts": {
-    "postcss watchモード": "postcss src/css/index.css -o dist/css/bundle.css -w"
+    "jest": "jest",
+    "webpack": "webpack",
+    "postcss": "postcss src/css/index.css -o dist/css/bundle.css -w",
+    "typeScript": "tsc -w"
   },
   "dependencies": {
+    "dayjs": "^1.9.6",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^17.1.1",
+    "eslint-loader": "^2.2.1",
+    "eslint-plugin-import": "^2.22.1",
     "postcss": "^8.1.2",
     "postcss-cli": "^8.1.0",
     "postcss-import": "^13.0.0",
     "postcss-reporter": "^7.0.1",
     "stylelint": "^13.7.2",
-    "stylelint-config-standard": "^20.0.0"
+    "stylelint-config-standard": "^20.0.0",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.12"
+  },
+  "devDependencies": {
+    "express": "^4.17.1",
+    "jest": "^26.6.1",
+    "jest-cli": "^25.5.4",
+    "webpack-dev-middleware": "^4.0.2"
   }
 }
