@@ -54,7 +54,7 @@ const article = aData => `
     </footer>
   </article>`;
 
-const searched = (aResult) => `
+const searchedPost = (aResult) => `
   ${aResult.beforeEllipsis}${aResult.beforeText}
   <span class="hp_highlight">
     ${aResult.word}

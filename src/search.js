@@ -3,34 +3,34 @@ import { templates } from './templates.js';
 const adjustText = (eachData, word, wordIndex) => {
   const resultLength = 41;
   const beforeLength = 15;
-
+  const beforeIndex = wordIndex - beforeLength;
+  const afterIndex = wordIndex + word.length;
+  const afterLength = resultLength - beforeLength - word.length;
+  
   if (wordIndex === -1) {
     return `${eachData.plainText.substr(0, resultLength)}…`;
   }
-  const afterLength = resultLength - beforeLength - word.length;
-  const beforeIndex = wordIndex - beforeLength;
-  const afterIndex = wordIndex + word.length;
-
-  const result = {
-    word: eachData.plainText.substr(wordIndex, word.length),
-  };
   
   if (beforeIndex <= 0) {
-    // 検索語句が先頭に近すぎる場合
-    result.beforeEllipsis = '';
-    result.beforeText = eachData.plainText.substr(0, wordIndex);
-    result.afterText = eachData.plainText.substr(afterIndex, resultLength - afterIndex);
-    result.afterEllipsis = '…';
+    // 検索語句が先頭に近い場合
+    return templates.searchedPost({
+      beforeEllipsis: '',
+      beforeText: eachData.plainText.substr(0, wordIndex),
+      word: eachData.plainText.substr(wordIndex, word.length),
+      afterText: eachData.plainText.substr(afterIndex, resultLength - afterIndex),
+      afterEllipsis: '…',
+    });
   } else {
-    result.beforeEllipsis = '…';
-    result.beforeText = eachData.plainText.substr(beforeIndex, beforeLength);
-    result.afterText = eachData.plainText.substr(afterIndex, afterLength);
-    result.afterEllipsis = (beforeIndex + resultLength < eachData.plainText.length)
-      ? '…'
-      : '';
+    return templates.searchedPost({
+      beforeEllipsis: '…',
+      beforeText: eachData.plainText.substr(beforeIndex, beforeLength),
+      word: eachData.plainText.substr(wordIndex, word.length),
+      afterText: eachData.plainText.substr(afterIndex, afterLength),
+      afterEllipsis: (beforeIndex + resultLength < eachData.plainText.length)
+        ? '…'
+        : '',
+    });
   }
-
-  return templates.searched(result);
 };
 
 export const realTimeSearch = (data) => {
