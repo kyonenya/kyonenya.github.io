@@ -11,8 +11,8 @@ const adjustText = (eachData, word, wordIndex) => {
     return `${eachData.plainText.substr(0, resultLength)}…`;
   }
   
+  // 検索語句が先頭に近い場合
   if (beforeIndex <= 0) {
-    // 検索語句が先頭に近い場合
     return templates.searchedPost({
       beforeEllipsis: '',
       beforeText: eachData.plainText.substr(0, wordIndex),
@@ -20,17 +20,16 @@ const adjustText = (eachData, word, wordIndex) => {
       afterText: eachData.plainText.substr(afterIndex, resultLength - afterIndex),
       afterEllipsis: '…',
     });
-  } else {
-    return templates.searchedPost({
-      beforeEllipsis: '…',
-      beforeText: eachData.plainText.substr(beforeIndex, beforeLength),
-      word: eachData.plainText.substr(wordIndex, word.length),
-      afterText: eachData.plainText.substr(afterIndex, afterLength),
-      afterEllipsis: (beforeIndex + resultLength < eachData.plainText.length)
-        ? '…'
-        : '',
-    });
-  }
+
+  return templates.searchedPost({
+    beforeEllipsis: '…',
+    beforeText: eachData.plainText.substr(beforeIndex, beforeLength),
+    word: eachData.plainText.substr(wordIndex, word.length),
+    afterText: eachData.plainText.substr(afterIndex, afterLength),
+    afterEllipsis: (beforeIndex + resultLength < eachData.plainText.length)
+      ? '…'
+      : '',
+  });
 };
 
 export const realTimeSearch = (data) => {
