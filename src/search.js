@@ -1,66 +1,62 @@
 import { templates } from './templates.js';
 
-const adjustText = (eachData, word, wordIndex) => {
+const summaryFor = (aData, word, wordIndex) => {
   const resultLength = 41;
   const beforeLength = 15;
   const beforeIndex = wordIndex - beforeLength;
   const afterIndex = wordIndex + word.length;
   const afterLength = resultLength - beforeLength - word.length;
-  
+
   if (wordIndex === -1) {
-    return `${eachData.plainText.substr(0, resultLength)}…`;
+    return `${aData.plainText.substr(0, resultLength)}…`;
   }
-  
+
   // 検索語句が先頭に近い場合
   if (beforeIndex <= 0) {
     return templates.searchedPost({
       beforeEllipsis: '',
-      beforeText: eachData.plainText.substr(0, wordIndex),
-      word: eachData.plainText.substr(wordIndex, word.length),
-      afterText: eachData.plainText.substr(afterIndex, resultLength - afterIndex),
+      beforeText: aData.plainText.substr(0, wordIndex),
+      word: aData.plainText.substr(wordIndex, word.length),
+      afterText: aData.plainText.substr(afterIndex, resultLength - afterIndex),
       afterEllipsis: '…',
     });
+  }
 
   return templates.searchedPost({
     beforeEllipsis: '…',
-    beforeText: eachData.plainText.substr(beforeIndex, beforeLength),
-    word: eachData.plainText.substr(wordIndex, word.length),
-    afterText: eachData.plainText.substr(afterIndex, afterLength),
-    afterEllipsis: (beforeIndex + resultLength < eachData.plainText.length)
+    beforeText: aData.plainText.substr(beforeIndex, beforeLength),
+    word: aData.plainText.substr(wordIndex, word.length),
+    afterText: aData.plainText.substr(afterIndex, afterLength),
+    afterEllipsis: (beforeIndex + resultLength < aData.plainText.length)
       ? '…'
       : '',
   });
 };
 
 export const realTimeSearch = (data) => {
-  // 検索ボックスに入力された値
   const word = document.querySelector('.el_search_form').value;
   
-  // 全件ループ開始
-  for (const eachData of data) {
-    const li = document.querySelector(`.bl_posts_item[data-id="${eachData.id}"]`);
-    const li_text = document.querySelector(`.bl_posts_summary[data-id="${eachData.id}"]`);
-
-    // 記事一覧に表示されてなければ、
-    if (!li) {
-      continue; // スキップして次のループへ。
+  for (const aData of data) {
+    const postItemElement = document.querySelector(`.bl_posts_item[data-id="${aData.id}"]`);
+    const summaryElement = document.querySelector(`.bl_posts_summary[data-id="${aData.id}"]`);
+    const wordIndex = aData.plainText.indexOf(word);
+    
+    // 記事一覧に表示されていない場合
+    if (!postItemElement) {
+      continue;
     }
 
-    let wordIndex = eachData.plainText.indexOf(word);
-
-    // マッチしたときは（本文・タイトル・タグのいずれかに）
-    if (wordIndex != -1 || eachData.title.includes(word) || eachData.tags.includes(word)) {
-      li.classList.remove('hp_hidden'); // 表示。
-      // DOM要素として追加
-      li_text.innerHTML = `<p>${adjustText(eachData, word, wordIndex)}</p>`;
+    // マッチした場合
+    if (wordIndex != -1 || aData.title.includes(word) || aData.tags.includes(word)) {
+      postItemElement.classList.remove('hp_hidden');
+      summaryElement.innerHTML = `<p>${summaryFor(aData, word, wordIndex)}</p>`;
     } else {
-      // マッチしなかったときは、
-      li.classList.add('hp_hidden'); // 非表示に。
+      postItemElement.classList.add('hp_hidden');
     }
 
-    // 検索フォームが空になったら、
+    // 検索フォームが空になった場合
     if (word === '') {
-      li_text.innerHTML = `${eachData.plainText.substr(0, 125)}…`; // 元のテキストに戻す。
+      summaryElement.innerHTML = `${aData.plainText.substr(0, 125)}…`;
     }
   }
 };

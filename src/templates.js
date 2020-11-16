@@ -64,5 +64,5 @@ const searchedPost = (aResult) => `
 export const templates = {
   postList,
   article,
-  searched,
+  searchedPost,
 };
