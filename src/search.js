@@ -1,11 +1,14 @@
-const searched = () => {
-  
-};
+const searched = (result) => `
+  ${result.beforeEllipsis}${result.beforeText}
+  <span class="hp_highlight">
+    ${result.searchedWord}
+  </span>
+  ${result.afterText}${result.afterEllipsis}`;
 
 const adjustText = (eachData, word, wordIndex) => {
   const resultLength = 41;
   const beforeLength = 15;
-  
+
   if (wordIndex === -1) {
     return `${eachData.plainText.substr(0, resultLength)}…`;
   }
@@ -14,8 +17,9 @@ const adjustText = (eachData, word, wordIndex) => {
   const afterIndex = wordIndex + word.length;
   const afterLength = resultLength - beforeLength - word.length;
 
-  let result = {};
-  
+  const result = {};
+  result.searchedWord = eachData.plainText.substr(wordIndex, word.length);
+
   if (beforeIndex <= 0) {
     // 検索語句が先頭に近すぎる場合
     result.beforeEllipsis = '';
@@ -31,13 +35,7 @@ const adjustText = (eachData, word, wordIndex) => {
       : '';
   }
 
-  return `
-    ${result.beforeEllipsis}${result.beforeText}
-    <span class="hp_highlight">
-      ${eachData.plainText.substr(wordIndex, word.length)}
-    </span>
-    ${result.afterText}${result.afterEllipsis}
-  `;
+  return searched(result);
 };
 
 export const realTimeSearch = (data) => {
