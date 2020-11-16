@@ -40,6 +40,7 @@ const adjustText = (eachData, word, wordIndex) => {
   }
   
   const beforeIndex = wordIndex - beforeLength;
+  const afterIndex = wordIndex + word.length;
   
   let beforeText= '';
   let afterText = '';
@@ -47,10 +48,10 @@ const adjustText = (eachData, word, wordIndex) => {
   if (beforeIndex <= 0) {
     // 検索語句が先頭に近すぎる場合
     beforeText = `${eachData.plainText.substr(0, wordIndex)}`;
-    afterText = `${eachData.plainText.substr(wordIndex + word.length, resultLength - wordIndex - word.length)}…`;
+    afterText = `${eachData.plainText.substr(afterIndex, resultLength - afterIndex)}…`;
   } else {
     beforeText = `…${eachData.plainText.substr(beforeIndex, beforeLength)}`;
-    afterText = `${eachData.plainText.substr(wordIndex + word.length, resultLength - beforeLength - word.length)}`;
+    afterText = `${eachData.plainText.substr(afterIndex, resultLength - beforeLength - word.length)}`;
     afterText +=  (beforeIndex + resultLength < eachData.plainText.length)
       ? '…'
       : '';
