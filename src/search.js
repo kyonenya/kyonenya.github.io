@@ -45,15 +45,17 @@ const adjustText = (eachData, word, wordIndex) => {
   
   let beforeText= '';
   let afterText = '';
+  let afterEllipsis = '';
   
   if (beforeIndex <= 0) {
     // 検索語句が先頭に近すぎる場合
     beforeText = `${eachData.plainText.substr(0, wordIndex)}`;
-    afterText = `${eachData.plainText.substr(afterIndex, resultLength - afterIndex)}…`;
+    afterText = `${eachData.plainText.substr(afterIndex, resultLength - afterIndex)}`;
+    afterEllipsis = '…';
   } else {
     beforeText = `…${eachData.plainText.substr(beforeIndex, beforeLength)}`;
     afterText = `${eachData.plainText.substr(afterIndex, afterLength)}`;
-    afterText +=  (beforeIndex + resultLength < eachData.plainText.length)
+    afterEllipsis = (beforeIndex + resultLength < eachData.plainText.length)
       ? '…'
       : '';
   }
@@ -63,7 +65,7 @@ const adjustText = (eachData, word, wordIndex) => {
     <span class="hp_highlight">
       ${eachData.plainText.substr(wordIndex, word.length)}
     </span>
-    <span>${afterText}</span>
+    <span>${afterText}${afterEllipsis}</span>
   `;
   
   return resultText;
