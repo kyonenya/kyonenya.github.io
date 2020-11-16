@@ -26,7 +26,7 @@ export const realTimeSearch = (data) => {
 
     // 検索フォームが空になったら、
     if (word === '') {
-      li_text.innerHTML = eachData.plainText.substr(0, 125); // 元のテキストに戻す。
+      li_text.innerHTML = `${eachData.plainText.substr(0, 125)}…`; // 元のテキストに戻す。
     }
   }
 };
@@ -34,22 +34,38 @@ export const realTimeSearch = (data) => {
 const adjustText = (eachData, word, wordIndex) => {
   const resultLength = 41; // 検索結果に表示したい文字数は？
   const beforeLength = 15; // 先読み、マッチした検索語句の何文字前から表示したい？
-  const afterLength = resultLength - beforeLength - word.length; // 後読み      
-  let resultText = '…';
-  
-  // 検索語句が先頭に近すぎたら、
-  if (wordIndex <= beforeLength) {
-    wordIndex = beforeLength; // 冒頭から表示して、
-    resultText = '' ; // 冒頭の'…'を削除。
-  }        
-  // 結果表示用の文字列
-  resultText += eachData.plainText.substr(wordIndex - beforeLength, resultLength);
-  // 検索語句が末尾より十分遠ければ、
-  if (wordIndex + word.length + afterLength < eachData.plainText.length) {
-    resultText += '…'; // 末尾に'…'を追加。
+  const afterLength = resultLength - beforeLength - word.length; // 後読み
+
+  if (wordIndex === -1) {
+    return `${eachData.plainText.substr(0, resultLength)}…`;
   }
-  // 検索語句をハイライト表示する
-  resultText = resultText.replace(new RegExp(word, "g"), `<span class="hp_highlight">${word}</span>`); // 変数を使って複数置換させる方法
+  
+  let beforeText= '';
+  let afterText = '';
+
+  if (wordIndex <= beforeLength) {
+    // 検索語句が先頭に近すぎる場合
+    beforeText = `${eachData.plainText.substr(0, wordIndex)}`;
+    afterText = `${eachData.plainText.substr(wordIndex + word.length, resultLength - wordIndex - word.length)}…`;
+  } else {
+    beforeText = `…${eachData.plainText.substr(wordIndex - beforeLength, beforeLength)}`;
+    afterText = `
+      ${eachData.plainText.substr(wordIndex + word.length, afterLength)}
+      ${wordIndex + word.length + afterLength >= eachData.plainText.length ? '' : '…'}
+    `;
+  }
+  
+  const resultText = `
+    <span>
+      ${beforeText}
+    </span>
+    <span ${wordIndex != -1 ? 'class="hp_highlight"' : ''}>
+      ${eachData.plainText.substr(wordIndex, word.length)}
+    </span>
+    <span>
+      ${afterText}
+    </span>
+  `;
   
   return resultText;
 };
