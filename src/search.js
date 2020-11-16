@@ -41,6 +41,7 @@ const adjustText = (eachData, word, wordIndex) => {
   
   const beforeIndex = wordIndex - beforeLength;
   const afterIndex = wordIndex + word.length;
+  const afterLength = resultLength - beforeLength - word.length;
   
   let beforeText= '';
   let afterText = '';
@@ -51,7 +52,7 @@ const adjustText = (eachData, word, wordIndex) => {
     afterText = `${eachData.plainText.substr(afterIndex, resultLength - afterIndex)}…`;
   } else {
     beforeText = `…${eachData.plainText.substr(beforeIndex, beforeLength)}`;
-    afterText = `${eachData.plainText.substr(afterIndex, resultLength - beforeLength - word.length)}`;
+    afterText = `${eachData.plainText.substr(afterIndex, afterLength)}`;
     afterText +=  (beforeIndex + resultLength < eachData.plainText.length)
       ? '…'
       : '';
