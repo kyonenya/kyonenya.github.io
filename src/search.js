@@ -36,7 +36,7 @@ const adjustText = (eachData, word, wordIndex) => {
   const beforeLength = 15;
   
   if (wordIndex === -1) {
-    return `<span>${eachData.plainText.substr(0, resultLength)}…</span>`;
+    return `${eachData.plainText.substr(0, resultLength)}…`;
   }
   
   const beforeIndex = wordIndex - beforeLength;
@@ -45,27 +45,30 @@ const adjustText = (eachData, word, wordIndex) => {
   
   let beforeText= '';
   let afterText = '';
+  let beforeEllipsis = '';
   let afterEllipsis = '';
-  
+
   if (beforeIndex <= 0) {
     // 検索語句が先頭に近すぎる場合
-    beforeText = `${eachData.plainText.substr(0, wordIndex)}`;
-    afterText = `${eachData.plainText.substr(afterIndex, resultLength - afterIndex)}`;
+    beforeEllipsis = '';
+    beforeText = eachData.plainText.substr(0, wordIndex);
+    afterText = eachData.plainText.substr(afterIndex, resultLength - afterIndex);
     afterEllipsis = '…';
   } else {
-    beforeText = `…${eachData.plainText.substr(beforeIndex, beforeLength)}`;
-    afterText = `${eachData.plainText.substr(afterIndex, afterLength)}`;
+    beforeEllipsis = '…';
+    beforeText = eachData.plainText.substr(beforeIndex, beforeLength);
+    afterText = eachData.plainText.substr(afterIndex, afterLength);
     afterEllipsis = (beforeIndex + resultLength < eachData.plainText.length)
       ? '…'
       : '';
   }
-  
+
   const resultText = `
-    <span>${beforeText}</span>
+    ${beforeEllipsis}${beforeText}
     <span class="hp_highlight">
       ${eachData.plainText.substr(wordIndex, word.length)}
     </span>
-    <span>${afterText}${afterEllipsis}</span>
+    ${afterText}${afterEllipsis}
   `;
   
   return resultText;
