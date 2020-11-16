@@ -32,39 +32,34 @@ export const realTimeSearch = (data) => {
 };
 
 const adjustText = (eachData, word, wordIndex) => {
-  const resultLength = 41; // 検索結果に表示したい文字数は？
-  const beforeLength = 15; // 先読み、マッチした検索語句の何文字前から表示したい？
-  const afterLength = resultLength - beforeLength - word.length; // 後読み
-
+  const resultLength = 41;
+  const beforeLength = 15;
+  
   if (wordIndex === -1) {
-    return `${eachData.plainText.substr(0, resultLength)}…`;
+    return `<span>${eachData.plainText.substr(0, resultLength)}…</span>`;
   }
   
   let beforeText= '';
   let afterText = '';
-
+  
   if (wordIndex <= beforeLength) {
     // 検索語句が先頭に近すぎる場合
     beforeText = `${eachData.plainText.substr(0, wordIndex)}`;
     afterText = `${eachData.plainText.substr(wordIndex + word.length, resultLength - wordIndex - word.length)}…`;
   } else {
     beforeText = `…${eachData.plainText.substr(wordIndex - beforeLength, beforeLength)}`;
-    afterText = `
-      ${eachData.plainText.substr(wordIndex + word.length, afterLength)}
-      ${wordIndex + word.length + afterLength >= eachData.plainText.length ? '' : '…'}
-    `;
+    afterText = `${eachData.plainText.substr(wordIndex + word.length, resultLength - beforeLength - word.length)}`;
+    afterText +=  (wordIndex - beforeLength + resultLength < eachData.plainText.length)
+      ? '…'
+      : '';
   }
   
   const resultText = `
-    <span>
-      ${beforeText}
-    </span>
+    <span>${beforeText}</span>
     <span ${wordIndex != -1 ? 'class="hp_highlight"' : ''}>
       ${eachData.plainText.substr(wordIndex, word.length)}
     </span>
-    <span>
-      ${afterText}
-    </span>
+    <span>${afterText}</span>
   `;
   
   return resultText;
