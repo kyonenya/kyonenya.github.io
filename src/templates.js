@@ -54,13 +54,13 @@ const article = aData => `
     </footer>
   </article>`;
 
-const searchedPost = (aResult) => `
+const searchedPost = aResult => `
   ${aResult.beforeEllipsis}${aResult.beforeText}
   <span class="hp_highlight">
     ${aResult.word}
   </span>
   ${aResult.afterText}${aResult.afterEllipsis}`;
-  
+
 export const templates = {
   postList,
   article,
