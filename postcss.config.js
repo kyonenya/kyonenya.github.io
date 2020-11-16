@@ -7,5 +7,8 @@ module.exports = {
         require('postcss-reporter'),
       ]
     }),
+    require('cssnano')({
+      preset: 'default',
+    }),
   ],
 }
