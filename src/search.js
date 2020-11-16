@@ -1,8 +1,8 @@
 import { templates } from './templates.js';
 
 const summaryFor = (aData, word, wordIndex) => {
-  const resultLength = 41;
-  const beforeLength = 15;
+  const resultLength = 50;
+  const beforeLength = 20;
   const beforeIndex = wordIndex - beforeLength;
   const afterIndex = wordIndex + word.length;
   const afterLength = resultLength - beforeLength - word.length;
