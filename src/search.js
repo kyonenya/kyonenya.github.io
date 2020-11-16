@@ -1,3 +1,45 @@
+const searched = () => {
+  
+};
+
+const adjustText = (eachData, word, wordIndex) => {
+  const resultLength = 41;
+  const beforeLength = 15;
+  
+  if (wordIndex === -1) {
+    return `${eachData.plainText.substr(0, resultLength)}…`;
+  }
+
+  const beforeIndex = wordIndex - beforeLength;
+  const afterIndex = wordIndex + word.length;
+  const afterLength = resultLength - beforeLength - word.length;
+
+  let result = {};
+  
+  if (beforeIndex <= 0) {
+    // 検索語句が先頭に近すぎる場合
+    result.beforeEllipsis = '';
+    result.beforeText = eachData.plainText.substr(0, wordIndex);
+    result.afterText = eachData.plainText.substr(afterIndex, resultLength - afterIndex);
+    result.afterEllipsis = '…';
+  } else {
+    result.beforeEllipsis = '…';
+    result.beforeText = eachData.plainText.substr(beforeIndex, beforeLength);
+    result.afterText = eachData.plainText.substr(afterIndex, afterLength);
+    result.afterEllipsis = (beforeIndex + resultLength < eachData.plainText.length)
+      ? '…'
+      : '';
+  }
+
+  return `
+    ${result.beforeEllipsis}${result.beforeText}
+    <span class="hp_highlight">
+      ${eachData.plainText.substr(wordIndex, word.length)}
+    </span>
+    ${result.afterText}${result.afterEllipsis}
+  `;
+};
+
 export const realTimeSearch = (data) => {
   // 検索ボックスに入力された値
   const word = document.querySelector('.el_search_form').value;
@@ -29,47 +71,4 @@ export const realTimeSearch = (data) => {
       li_text.innerHTML = `${eachData.plainText.substr(0, 125)}…`; // 元のテキストに戻す。
     }
   }
-};
-
-const adjustText = (eachData, word, wordIndex) => {
-  const resultLength = 41;
-  const beforeLength = 15;
-  
-  if (wordIndex === -1) {
-    return `${eachData.plainText.substr(0, resultLength)}…`;
-  }
-  
-  const beforeIndex = wordIndex - beforeLength;
-  const afterIndex = wordIndex + word.length;
-  const afterLength = resultLength - beforeLength - word.length;
-  
-  let beforeText= '';
-  let afterText = '';
-  let beforeEllipsis = '';
-  let afterEllipsis = '';
-
-  if (beforeIndex <= 0) {
-    // 検索語句が先頭に近すぎる場合
-    beforeEllipsis = '';
-    beforeText = eachData.plainText.substr(0, wordIndex);
-    afterText = eachData.plainText.substr(afterIndex, resultLength - afterIndex);
-    afterEllipsis = '…';
-  } else {
-    beforeEllipsis = '…';
-    beforeText = eachData.plainText.substr(beforeIndex, beforeLength);
-    afterText = eachData.plainText.substr(afterIndex, afterLength);
-    afterEllipsis = (beforeIndex + resultLength < eachData.plainText.length)
-      ? '…'
-      : '';
-  }
-
-  const resultText = `
-    ${beforeEllipsis}${beforeText}
-    <span class="hp_highlight">
-      ${eachData.plainText.substr(wordIndex, word.length)}
-    </span>
-    ${afterText}${afterEllipsis}
-  `;
-  
-  return resultText;
 };
