@@ -1,8 +1,8 @@
 import { queriesFor } from './router.js';
-import { process } from './data.js';
+import { enrich } from './data.js';
 import { pages } from './pages.js';
 import { render } from './render.js';
-import { realTimeSearch } from './search.js';
+import { searchPosts } from './search.js';
 import { registerComponents } from './components.js';
 
 const jsonPath = './data.json';
@@ -22,9 +22,9 @@ const route = (data, queries) => {
 const app = async () => {
   const response = await fetch(jsonPath);
   const rawData = await response.json();
-  const data = process(rawData);
+  const data = enrich(rawData);
   route(data, queriesFor(window.location.search));
-  document.querySelector('.el_search_form').addEventListener('input', () => realTimeSearch(data)); // リアルタイム検索
+  document.querySelector('.el_search_form').addEventListener('input', () => searchPosts(data));
   registerComponents(data);
 };
 

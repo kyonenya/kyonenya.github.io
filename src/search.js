@@ -33,7 +33,7 @@ const summaryFor = (aData, word, wordIndex) => {
   });
 };
 
-export const realTimeSearch = (data) => {
+export const searchPosts = (data) => {
   const word = document.querySelector('.el_search_form').value;
 
   data.forEach((aData) => {
@@ -41,22 +41,21 @@ export const realTimeSearch = (data) => {
     const summaryElement = document.querySelector(`.bl_posts_summary[data-id="${aData.id}"]`);
     const wordIndex = aData.plainText.indexOf(word);
 
-    // 記事一覧に表示されていない場合
     if (!postItemElement) {
       return;
     }
+    if (word === '') {
+      summaryElement.innerHTML = `${aData.plainText.substr(0, 125)}…`;
+    }
 
-    // マッチした場合
-    if (wordIndex !== -1 || aData.title.includes(word) || aData.tags.includes(word)) {
+    if (wordIndex !== -1
+      || aData.title.includes(word)
+      || aData.tags.includes(word)
+    ) {
       postItemElement.classList.remove('hp_hidden');
       summaryElement.innerHTML = `<p>${summaryFor(aData, word, wordIndex)}</p>`;
     } else {
       postItemElement.classList.add('hp_hidden');
-    }
-
-    // 検索フォームが空になった場合
-    if (word === '') {
-      summaryElement.innerHTML = `${aData.plainText.substr(0, 125)}…`;
     }
   });
 };

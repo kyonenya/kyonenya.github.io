@@ -1,4 +1,4 @@
-export const process = (data) => {
+export const enrich = (data) => {
   const result = [...data];
   for (let i = 0; i < result.length; i += 1) {
     result[i].index = i;
