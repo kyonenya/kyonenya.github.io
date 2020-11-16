@@ -39,17 +39,19 @@ const adjustText = (eachData, word, wordIndex) => {
     return `<span>${eachData.plainText.substr(0, resultLength)}…</span>`;
   }
   
+  const beforeIndex = wordIndex - beforeLength;
+  
   let beforeText= '';
   let afterText = '';
   
-  if (wordIndex <= beforeLength) {
+  if (beforeIndex <= 0) {
     // 検索語句が先頭に近すぎる場合
     beforeText = `${eachData.plainText.substr(0, wordIndex)}`;
     afterText = `${eachData.plainText.substr(wordIndex + word.length, resultLength - wordIndex - word.length)}…`;
   } else {
-    beforeText = `…${eachData.plainText.substr(wordIndex - beforeLength, beforeLength)}`;
+    beforeText = `…${eachData.plainText.substr(beforeIndex, beforeLength)}`;
     afterText = `${eachData.plainText.substr(wordIndex + word.length, resultLength - beforeLength - word.length)}`;
-    afterText +=  (wordIndex - beforeLength + resultLength < eachData.plainText.length)
+    afterText +=  (beforeIndex + resultLength < eachData.plainText.length)
       ? '…'
       : '';
   }
