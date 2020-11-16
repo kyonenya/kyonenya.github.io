@@ -60,7 +60,7 @@ const adjustText = (eachData, word, wordIndex) => {
   
   const resultText = `
     <span>${beforeText}</span>
-    <span ${wordIndex != -1 ? 'class="hp_highlight"' : ''}>
+    <span class="hp_highlight">
       ${eachData.plainText.substr(wordIndex, word.length)}
     </span>
     <span>${afterText}</span>
