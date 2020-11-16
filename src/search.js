@@ -1,9 +1,4 @@
-const searched = (result) => `
-  ${result.beforeEllipsis}${result.beforeText}
-  <span class="hp_highlight">
-    ${result.searchedWord}
-  </span>
-  ${result.afterText}${result.afterEllipsis}`;
+import { templates } from './templates.js';
 
 const adjustText = (eachData, word, wordIndex) => {
   const resultLength = 41;
@@ -12,14 +7,14 @@ const adjustText = (eachData, word, wordIndex) => {
   if (wordIndex === -1) {
     return `${eachData.plainText.substr(0, resultLength)}…`;
   }
-
+  const afterLength = resultLength - beforeLength - word.length;
   const beforeIndex = wordIndex - beforeLength;
   const afterIndex = wordIndex + word.length;
-  const afterLength = resultLength - beforeLength - word.length;
 
-  const result = {};
-  result.searchedWord = eachData.plainText.substr(wordIndex, word.length);
-
+  const result = {
+    word: eachData.plainText.substr(wordIndex, word.length),
+  };
+  
   if (beforeIndex <= 0) {
     // 検索語句が先頭に近すぎる場合
     result.beforeEllipsis = '';
@@ -35,7 +30,7 @@ const adjustText = (eachData, word, wordIndex) => {
       : '';
   }
 
-  return searched(result);
+  return templates.searched(result);
 };
 
 export const realTimeSearch = (data) => {
