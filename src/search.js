@@ -1,5 +1,4 @@
 export const realTimeSearch = (data) => {
-
   // 検索ボックスに入力された値
   const word = document.querySelector('.el_search_form').value;
   
@@ -9,13 +8,11 @@ export const realTimeSearch = (data) => {
     const li_text = document.querySelector(`.bl_posts_summary[data-id="${eachData.id}"]`);
     
     // 記事一覧に表示されてなければ、
-    if (eachData.isVisible === false) {
+    if (!li) {
       continue; // スキップして次のループへ。
     }
     
     let wordIndex = eachData.plainText.indexOf(word);
-    const isMatched_title = eachData.title.includes(word); // タイトル簡易検索
-    let isMatched_hashtags = eachData.tags.includes(word); // ハッシュタグ簡易検索
     let resultText = '…';
     
     // 表示調整用
@@ -24,7 +21,7 @@ export const realTimeSearch = (data) => {
     const afterLength = resultLength - beforeLength - word.length; // 後読み
     
     // マッチしたときは（本文・タイトル・タグのいずれかに）
-    if (wordIndex != -1 || isMatched_title === true || isMatched_hashtags === true) {
+    if (wordIndex != -1 || eachData.title.includes(word) || eachData.tags.includes(word)) {
       li.classList.remove('hp_hidden'); // 表示。
       
       // 検索結果に表示するための文字列を決定
@@ -36,13 +33,12 @@ export const realTimeSearch = (data) => {
         // 結果表示用の文字列
         resultText += eachData.plainText.substr(wordIndex - beforeLength, resultLength)
         // 検索語句が末尾より十分遠ければ、
-        const wordIndex_last = wordIndex + word.length + afterLength;
-        if (wordIndex_last < eachData.plainText.length) {
+        if (wordIndex + word.length + afterLength < eachData.plainText.length) {
           resultText += '…'; // 末尾に'…'を追加。
         }
       
       // 検索語句をハイライト表示する
-      resultText = resultText.replace(new RegExp(word, "g"), `<span class="hp_highlight">${word}</span>`);  // 変数を使って複数置換させる方法
+      resultText = resultText.replace(new RegExp(word, "g"), `<span class="hp_highlight">${word}</span>`); // 変数を使って複数置換させる方法
       // DOM要素として追加
       li_text.innerHTML = `<p>${resultText}</p>`;
       
@@ -55,6 +51,5 @@ export const realTimeSearch = (data) => {
     if (word === '') {
       li_text.innerHTML = eachData.plainText.substr(0, 125); // 元のテキストに戻す。
     }
-
   } // for(){...
-}; // ---------- realTimeSearch() => {...
+};
