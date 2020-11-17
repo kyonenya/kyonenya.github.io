@@ -5,7 +5,7 @@ const hashtag = aTag => `<li><a href="?tag=${aTag}">#${aTag}</a></li>`;
 
 const filteredHashtag = aTag => `<li><a href="?tag=${aTag}" class="hp_bold">#${aTag}</a></li>`;
 
-const postList = (aData, filteredTag = null) => `
+const postList = (aData, filteredTag = null, searchWord = null) => `
   <li class="bl_posts_item" data-id=${aData.id}>
     <a href="?id=${aData.id}">
       <header class="bl_posts_header">

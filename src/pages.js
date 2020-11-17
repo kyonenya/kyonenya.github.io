@@ -37,8 +37,22 @@ const taggedPostList = (data, filteredTag) => ({
   archiveHeader: `#${filteredTag}`,
 });
 
+const searchedPostList = (data, word) => {
+  return {
+    body: `
+      <ul class="bl_posts">
+        ${data.map(aData => templates.postList(data[aData.index]), null, word).join('')}
+      </ul>`,
+    suffix: '',
+    description: '',
+    title: word,
+    archiveHeader: word,
+  };
+};
+
 export const pages = {
   article,
   postList,
   taggedPostList,
+  searchedPostList,
 };

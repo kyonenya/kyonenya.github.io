@@ -22,5 +22,9 @@ export const route = (data, queries) => {
     render(pages.taggedPostList(data, queries.tag));
   } else if (queries.id == null) {
     render(pages.postList(data));
+    window.onhashchange = () => {
+      console.log(`検索中`);
+      render(pages.searchedPostList(data, decodeURIComponent(window.location.hash)));
+    };
   }
 };
