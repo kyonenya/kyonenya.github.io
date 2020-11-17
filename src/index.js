@@ -10,7 +10,7 @@ const app = async () => {
   const rawData = await response.json();
   const data = enrich(rawData);
   route(data, queriesFor(window.location.search));
-  document.querySelector('.el_search_form').addEventListener('input', () => searchPosts(data));
+  document.querySelector('.el_search_form').addEventListener('input', () => searchPosts(data, document.querySelector('.el_search_form').value));
   registerComponents(data);
 };
 

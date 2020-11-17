@@ -33,9 +33,7 @@ const summaryFor = (aData, word, wordIndex) => {
   });
 };
 
-export const searchPosts = (data) => {
-  const word = document.querySelector('.el_search_form').value;
-
+export const searchPosts = (data, word) => {
   data.forEach((aData) => {
     const postItemElement = document.querySelector(`.bl_posts_item[data-id="${aData.id}"]`);
     const summaryElement = document.querySelector(`.bl_posts_summary[data-id="${aData.id}"]`);
