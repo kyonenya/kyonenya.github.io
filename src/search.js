@@ -12,27 +12,36 @@ export const search = (aData, word) => {
     || aData.tags.includes(word);
   
   if (wordIndex === -1) {
-    return [isMatched, `${aData.plainText.substr(0, resultLength)}…`];
+    return {
+      isMatched, 
+      summary: `${aData.plainText.substr(0, resultLength)}…`,
+    };
   }
   if (beforeIndex <= 0) { // マッチした語句が先頭に近い場合
-    return [isMatched, templates.searchedPost({
-      beforeEllipsis: '',
-      beforeText: aData.plainText.substr(0, wordIndex),
-      word: aData.plainText.substr(wordIndex, word.length),
-      afterText: aData.plainText.substr(afterIndex, resultLength - afterIndex),
-      afterEllipsis: '…',
-    })];
+    return {
+      isMatched, 
+      summary: templates.searchedPost({
+        beforeEllipsis: '',
+        beforeText: aData.plainText.substr(0, wordIndex),
+        word: aData.plainText.substr(wordIndex, word.length),
+        afterText: aData.plainText.substr(afterIndex, resultLength - afterIndex),
+        afterEllipsis: '…',
+      }),
+    };
   }
 
-  return [isMatched, templates.searchedPost({
-    beforeEllipsis: '…',
-    beforeText: aData.plainText.substr(beforeIndex, beforeLength),
-    word: aData.plainText.substr(wordIndex, word.length),
-    afterText: aData.plainText.substr(afterIndex, afterLength),
-    afterEllipsis: (beforeIndex + resultLength < aData.plainText.length)
-      ? '…'
-      : '',
-  })];
+  return {
+    isMatched, 
+    summary: templates.searchedPost({
+      beforeEllipsis: '…',
+      beforeText: aData.plainText.substr(beforeIndex, beforeLength),
+      word: aData.plainText.substr(wordIndex, word.length),
+      afterText: aData.plainText.substr(afterIndex, afterLength),
+      afterEllipsis: (beforeIndex + resultLength < aData.plainText.length)
+        ? '…'
+        : '',
+    }),
+  };
 };
 
 export const searchPosts = (data, word) => {
@@ -44,11 +53,11 @@ export const searchPosts = (data, word) => {
       return;
     }
 
-    const [isMatched, summary] = search(aData, word);
-    
-    if (isMatched) {
+    const searched = search(aData, word);
+
+    if (searched.isMatched) {
       postItemElement.classList.remove('hp_hidden');
-      summaryElement.innerHTML = `<p>${summary}</p>`;
+      summaryElement.innerHTML = `<p>${searched.summary}</p>`;
     } else {
       postItemElement.classList.add('hp_hidden');
     }
