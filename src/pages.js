@@ -41,7 +41,9 @@ const searchedPostList = (data, word) => {
   return {
     body: `
       <ul class="bl_posts">
-        ${data.map(aData => templates.postList(data[aData.index]), null, word).join('')}
+      ${data.map((aData) => {
+        return templates.postList(data[aData.index], null, null);
+      }).join('')}
       </ul>`,
     suffix: '',
     description: '',
