@@ -23,8 +23,7 @@ export const route = (data, queries) => {
   } else if (queries.id == null) {
     render(pages.postList(data));
     window.onhashchange = () => {
-      console.log(`検索中`);
-      render(pages.searchedPostList(data, decodeURIComponent(window.location.hash)));
+      render(pages.searchedPostList(data, decodeURIComponent(window.location.hash.slice(1))));
     };
   }
 };
