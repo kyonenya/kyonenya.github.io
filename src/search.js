@@ -1,6 +1,7 @@
 import { templates } from './templates.js';
 
-const summaryFor = (aData, word, wordIndex) => {
+export const summaryFor = (aData, word) => {
+  const wordIndex = aData.plainText.indexOf(word);
   const resultLength = 50;
   const beforeLength = 20;
   const beforeIndex = wordIndex - beforeLength;
