@@ -44,9 +44,6 @@ export const searchPosts = (data) => {
     if (!postItemElement) {
       return;
     }
-    if (word === '') {
-      summaryElement.innerHTML = `${aData.plainText.substr(0, 125)}…`;
-    }
 
     if (wordIndex !== -1
       || aData.title.includes(word)
@@ -56,6 +53,10 @@ export const searchPosts = (data) => {
       summaryElement.innerHTML = `<p>${summaryFor(aData, word, wordIndex)}</p>`;
     } else {
       postItemElement.classList.add('hp_hidden');
+    }
+
+    if (word === '') {
+      summaryElement.innerHTML = `${aData.plainText.substr(0, 125)}…`;
     }
   });
 };
