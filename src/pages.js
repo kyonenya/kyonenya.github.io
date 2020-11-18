@@ -1,4 +1,5 @@
 import { templates } from './templates.js';
+import { search } from './search.js';
 
 const article = aData => ({
   body: templates.article(aData),
@@ -42,7 +43,7 @@ const searchedPostList = (data, word) => {
     body: `
       <ul class="bl_posts">
       ${data.map((aData) => {
-        return templates.postList(data[aData.index], null, null);
+        return templates.postList(data[aData.index], null, search(aData, word));
       }).join('')}
       </ul>`,
     suffix: '',

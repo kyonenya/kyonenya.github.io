@@ -5,7 +5,8 @@ const hashtag = aTag => `<li><a href="?tag=${aTag}">#${aTag}</a></li>`;
 
 const filteredHashtag = aTag => `<li><a href="?tag=${aTag}" class="hp_bold">#${aTag}</a></li>`;
 
-const postList = (aData, filteredTag = null, searchWord = null) => `
+const postList = (aData, filteredTag = null, searched = {}) => {
+  return `
   <li class="bl_posts_item" data-id=${aData.id}>
     <a href="?id=${aData.id}">
       <header class="bl_posts_header">
@@ -17,9 +18,7 @@ const postList = (aData, filteredTag = null, searchWord = null) => `
       </h2>
       <div class="bl_posts_summary" data-id=${aData.id}>
         <p>
-          ${aData.plainText.length > 125
-            ? `${aData.plainText.substr(0, 125)}…`
-            : aData.plainText}
+          ${searched.summary}
         </p>
       </div>
     </a>
@@ -34,7 +33,7 @@ const postList = (aData, filteredTag = null, searchWord = null) => `
         }).join('')}
       </ul>
     </footer>
-  </li>`;
+  </li>`};
 
 const article = aData => `
   <article>
