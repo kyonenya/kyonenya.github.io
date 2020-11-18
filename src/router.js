@@ -8,8 +8,8 @@ export const queriesFor = (queryStr) => { // '?foo=1&bar=2'
 
   return queryStr.slice(1).split('&') // ['foo=1', 'bar=2']
     .reduce((acc, aQuery) => {
-      const keyAndValue = aQuery.split('='); // ['foo', '1']
-      acc[keyAndValue[0]] = decodeURIComponent(keyAndValue[1]); // { foo: 1 }
+      const [key, value] = aQuery.split('='); // ['foo', '1']
+      acc[key] = decodeURIComponent(value); // { foo: 1 }
       return acc;
     }, {});
 };
