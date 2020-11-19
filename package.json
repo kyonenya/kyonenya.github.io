@@ -2,7 +2,6 @@
   "name": "kyonenya.github.io",
   "version": "1.0.0",
   "scripts": {
-    "jest": "jest",
     "webpack": "webpack",
     "postcss": "postcss src/css/index.css -o dist/css/bundle.css -w",
     "typeScript": "tsc -w"
@@ -25,8 +24,6 @@
   },
   "devDependencies": {
     "express": "^4.17.1",
-    "jest": "^26.6.1",
-    "jest-cli": "^25.5.4",
     "webpack-dev-middleware": "^4.0.2"
   }
 }
