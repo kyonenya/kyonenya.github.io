@@ -7,7 +7,7 @@ const filteredHashtag = aTag => `<li><a href="?tag=${aTag}" class="hp_bold">#${a
 
 const postList = (aData, filteredTag = null, searched = {}) => {
   return `
-  <li class="bl_posts_item${(searched.isMatched || false) ? '' : ' hp_hidden'}" data-id=${aData.id}>
+  <li class="bl_posts_item${(searched.isMatched || !searched.on) ? '' : ' hp_hidden'}" data-id=${aData.id}>
     <a href="?id=${aData.id}">
       <header class="bl_posts_header">
         <time class="bl_posts_date" datetime="${dayjs(aData.date).format('YYYY-MM-DD HH:mm')}">${dayjs(aData.date).format('YYYY-MM-DD')}

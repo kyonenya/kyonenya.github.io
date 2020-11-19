@@ -10,15 +10,18 @@ export const search = (aData, word) => {
   const isMatched = wordIndex !== -1
     || aData.title.includes(word)
     || aData.tags.includes(word);
+  const on = true;
 
   if (wordIndex === -1) {
     return {
-      isMatched, 
+      on,
+      isMatched,
       summary: `${aData.plainText.substr(0, resultLength)}…`,
     };
   }
   if (beforeIndex <= 0) { // マッチした語句が先頭に近い場合
     return {
+      on,
       isMatched, 
       summary: templates.searchedPost({
         beforeEllipsis: '',
@@ -31,6 +34,7 @@ export const search = (aData, word) => {
   }
 
   return {
+    on,
     isMatched, 
     summary: templates.searchedPost({
       beforeEllipsis: '…',
