@@ -1,7 +1,7 @@
 export const render = (page) => {
   const archiveHeaderElement = document.querySelector('.el_archive_header');
   const suffixElement = document.querySelector('.el_logo_suffix');
-  
+
   document.getElementById('root').innerHTML = page.body;
   if (document.title !== page.title) {
     document.title = page.title;

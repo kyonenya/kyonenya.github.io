@@ -8,7 +8,7 @@ export const search = (word, aData) => {
   const beforeIndex = wordIndex - beforeLength;
   const afterIndex = wordIndex + word.length;
   const isMatched = wordIndex !== -1 || aData.title.includes(word);
-  
+
   if (word === '') return {};
   if (wordIndex === -1) {
     return {
@@ -18,7 +18,7 @@ export const search = (word, aData) => {
   }
   if (beforeIndex <= 0) { // matched keyword is near the top
     return {
-      isMatched, 
+      isMatched,
       summary: templates.searchedSummary({
         beforeEllipsis: '',
         beforeText: aData.plainText.substr(0, wordIndex),
@@ -30,7 +30,7 @@ export const search = (word, aData) => {
   }
 
   return {
-    isMatched, 
+    isMatched,
     summary: templates.searchedSummary({
       beforeEllipsis: '…',
       beforeText: aData.plainText.substr(beforeIndex, beforeLength),
