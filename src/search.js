@@ -45,29 +45,3 @@ export const search = (aData, word) => {
     }),
   };
 };
-
-/*
-export const searchPosts = (data, word) => {
-  data.forEach((aData) => {
-    const postItemElement = document.querySelector(`.bl_posts_item[data-id="${aData.id}"]`);
-    const summaryElement = document.querySelector(`.bl_posts_summary[data-id="${aData.id}"]`);
-
-    if (!postItemElement) {
-      return;
-    }
-
-    const searched = search(aData, word);
-
-    if (searched.isMatched) {
-      postItemElement.classList.remove('hp_hidden');
-      summaryElement.innerHTML = `<p>${searched.summary}</p>`;
-    } else {
-      postItemElement.classList.add('hp_hidden');
-    }
-
-    if (word === '') {
-      summaryElement.innerHTML = `${aData.plainText.substr(0, 125)}…`;
-    }
-  });
-};
-*/
