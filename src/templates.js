@@ -3,6 +3,7 @@ dayjs.extend(dayjs_plugin_relativeTime);
 
 const hashtag = aTag => `<li><a href="?tag=${aTag}">#${aTag}</a></li>`;
 
+// TODO: matchedHashtag
 const filteredHashtag = aTag => `<li><a href="?tag=${aTag}" class="hp_bold">#${aTag}</a></li>`;
 
 const postList = (aData, filteredTag = null, searched = {}) => {
@@ -53,6 +54,7 @@ const article = aData => `
     </footer>
   </article>`;
 
+// TODO: searchedSummary
 const searchedPost = aResult => `
   ${aResult.beforeEllipsis}${aResult.beforeText}
   <span class="hp_highlight">

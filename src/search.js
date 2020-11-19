@@ -10,7 +10,7 @@ export const search = (aData, word) => {
   const isMatched = wordIndex !== -1
     || aData.title.includes(word)
     || aData.tags.includes(word);
-  const on = true;
+  const on = true; // TODO: これなしで済ませる冴えたやり方
 
   if (wordIndex === -1) {
     return {

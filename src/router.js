@@ -24,6 +24,7 @@ export const route = (data, queries) => {
     render(pages.article(data[data.length - queries.id]));
     document.querySelector('.el_search_form').classList.add('hp_hidden'); // disable search form
   } else if (queries.id == null && queries.tag) {
+    // TODO: タグフィルター時の検索
     render(pages.taggedPostList(data, queries.tag));
   } else if (queries.id == null) {
     render(pages.postList(data));
