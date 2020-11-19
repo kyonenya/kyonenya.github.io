@@ -7,9 +7,7 @@ export const search = (aData, word) => {
   const wordIndex = aData.plainText.indexOf(word);
   const beforeIndex = wordIndex - beforeLength;
   const afterIndex = wordIndex + word.length;
-  const isMatched = wordIndex !== -1
-    || aData.title.includes(word)
-    || aData.tags.includes(word);
+  const isMatched = wordIndex !== -1 || aData.title.includes(word);
   const on = true; // TODO: これなしで済ませる冴えたやり方
 
   if (wordIndex === -1) {
@@ -48,6 +46,7 @@ export const search = (aData, word) => {
   };
 };
 
+/*
 export const searchPosts = (data, word) => {
   data.forEach((aData) => {
     const postItemElement = document.querySelector(`.bl_posts_item[data-id="${aData.id}"]`);
@@ -71,3 +70,4 @@ export const searchPosts = (data, word) => {
     }
   });
 };
+*/

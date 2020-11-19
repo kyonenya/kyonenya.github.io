@@ -1,6 +1,6 @@
 import { enrich } from './data.js';
 import { route, queriesFor } from './router.js';
-import { searchPosts } from './search.js';
+// import { searchPosts } from './search.js';
 import { registerComponents } from './components.js';
 
 const jsonPath = './data.json';
