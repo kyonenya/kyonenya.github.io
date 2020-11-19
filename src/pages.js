@@ -38,7 +38,6 @@ const taggedPostList = (data, filteredTag) => ({
   archiveHeader: `#${filteredTag}`,
 });
 
-// TODO: word -> keyword
 const searchedPostList = (data, keyword, filteredTag = null) => {
   return {
     body: `
@@ -47,7 +46,7 @@ const searchedPostList = (data, keyword, filteredTag = null) => {
         if (filteredTag !== null && !aData.tags.includes(filteredTag)) {
           return '';
         }
-        return templates.postList(data[aData.index], filteredTag, search(aData, keyword));
+        return templates.postList(data[aData.index], filteredTag, search(keyword, aData));
       }).join('')}
       </ul>`,
     suffix: '',

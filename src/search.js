@@ -1,6 +1,6 @@
 import { templates } from './templates.js';
 
-export const search = (aData, word) => {
+export const search = (word, aData) => {
   const resultLength = 50;
   const beforeLength = 20;
   const afterLength = resultLength - beforeLength - word.length;
