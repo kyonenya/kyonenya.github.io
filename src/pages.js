@@ -38,6 +38,7 @@ const taggedPostList = (data, filteredTag) => ({
   archiveHeader: `#${filteredTag}`,
 });
 
+// TODO: word -> keyword
 const searchedPostList = (data, word, filteredTag = null) => {
   return {
     body: `

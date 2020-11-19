@@ -8,7 +8,7 @@ export const search = (aData, word) => {
   const beforeIndex = wordIndex - beforeLength;
   const afterIndex = wordIndex + word.length;
   const isMatched = wordIndex !== -1 || aData.title.includes(word);
-  const on = true; // TODO: これなしで済ませる冴えたやり方
+  const on = true; // TODO: これなしで済ませる冴えたやり方：検索OFF時に空のオブジェクトを返す？
 
   if (wordIndex === -1) {
     return {
