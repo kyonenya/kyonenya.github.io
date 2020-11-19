@@ -15,9 +15,11 @@ export const queriesFor = (queryStr) => { // '?foo=1&bar=2'
 };
 
 export const route = (data, queries) => {
-  const searching = (hash, data) => {
+  const searching = (hash, data, tag = null) => {
+    if (hash === '' && tag !== '') return render(pages.taggedPostList(data, tag));
     if (hash === '') return render(pages.postList(data));
-    return render(pages.searchedPostList(data, decodeURIComponent(hash.slice(1))));
+    
+    return render(pages.searchedPostList(data, decodeURIComponent(hash.slice(1)), tag));
   };
   
   if (Number.isFinite(Number(queries.id))) {
@@ -26,6 +28,9 @@ export const route = (data, queries) => {
   } else if (queries.id == null && queries.tag) {
     // TODO: タグフィルター時の検索
     render(pages.taggedPostList(data, queries.tag));
+    window.onhashchange = () => {
+      searching(window.location.hash, data, queries.tag);
+    };
   } else if (queries.id == null) {
     render(pages.postList(data));
     window.onhashchange = () => {

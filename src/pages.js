@@ -38,12 +38,15 @@ const taggedPostList = (data, filteredTag) => ({
   archiveHeader: `#${filteredTag}`,
 });
 
-const searchedPostList = (data, word) => {
+const searchedPostList = (data, word, filteredTag = null) => {
   return {
     body: `
       <ul class="bl_posts">
       ${data.map((aData) => {
-        return templates.postList(data[aData.index], null, search(aData, word));
+        if (filteredTag !== null && !aData.tags.includes(filteredTag)) {
+          return '';
+        }
+        return templates.postList(data[aData.index], filteredTag, search(aData, word));
       }).join('')}
       </ul>`,
     suffix: '',
