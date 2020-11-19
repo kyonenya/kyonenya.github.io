@@ -15,8 +15,9 @@ export const queriesFor = (queryStr) => { // '?foo=1&bar=2'
 };
 
 export const route = (data, queries) => {
-  const searching = (hash) => {
-    render(pages.searchedPostList(data, decodeURIComponent(window.location.hash.slice(1))));
+  const searching = (hash, data) => {
+    if (hash === '') return render(pages.postList(data));
+    return render(pages.searchedPostList(data, decodeURIComponent(hash)));
   };
   
   if (Number.isFinite(Number(queries.id))) {
@@ -27,7 +28,7 @@ export const route = (data, queries) => {
   } else if (queries.id == null) {
     render(pages.postList(data));
     window.onhashchange = () => {
-      searching(window.location.hash.slice(1));
+      searching(window.location.hash.slice(1), data);
     };
   }
 };
