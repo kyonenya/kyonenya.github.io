@@ -15,6 +15,10 @@ export const queriesFor = (queryStr) => { // '?foo=1&bar=2'
 };
 
 export const route = (data, queries) => {
+  const searching = (hash) => {
+    render(pages.searchedPostList(data, decodeURIComponent(window.location.hash.slice(1))));
+  };
+  
   if (Number.isFinite(Number(queries.id))) {
     render(pages.article(data[data.length - queries.id]));
     document.querySelector('.el_search_form').classList.add('hp_hidden'); // disable search form
@@ -23,7 +27,7 @@ export const route = (data, queries) => {
   } else if (queries.id == null) {
     render(pages.postList(data));
     window.onhashchange = () => {
-      render(pages.searchedPostList(data, decodeURIComponent(window.location.hash.slice(1))));
+      searching(window.location.hash.slice(1));
     };
   }
 };
