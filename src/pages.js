@@ -48,8 +48,8 @@ const searchedPostList = (data, word) => {
       </ul>`,
     suffix: '',
     description: '',
-    title: word,
-    archiveHeader: word,
+    title: `「${word}」｜placet experiri`,
+    archiveHeader: `「${word}」`,
   };
 };
 
