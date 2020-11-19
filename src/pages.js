@@ -38,23 +38,21 @@ const taggedPostList = (data, filteredTag) => ({
   archiveHeader: `#${filteredTag}`,
 });
 
-const searchedPostList = (data, keyword, filteredTag = null) => {
-  return {
-    body: `
-      <ul class="bl_posts">
-      ${data.map((aData) => {
-        if (filteredTag !== null && !aData.tags.includes(filteredTag)) {
-          return '';
-        }
-        return templates.postList(data[aData.index], filteredTag, search(keyword, aData));
-      }).join('')}
-      </ul>`,
-    suffix: '',
-    description: '',
-    title: `「${keyword}」｜placet experiri`,
-    archiveHeader: `「${keyword}」`,
-  };
-};
+const searchedPostList = (data, keyword, filteredTag = null) => ({
+  body: `
+    <ul class="bl_posts">
+    ${data.map((aData) => {
+      if (filteredTag !== null && !aData.tags.includes(filteredTag)) {
+        return '';
+      }
+      return templates.postList(data[aData.index], filteredTag, search(keyword, aData));
+    }).join('')}
+    </ul>`,
+  suffix: '',
+  description: '',
+  title: `「${keyword}」｜placet experiri`,
+  archiveHeader: `「${keyword}」`,
+});
 
 export const pages = {
   article,

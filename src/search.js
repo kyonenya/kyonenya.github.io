@@ -10,14 +10,13 @@ export const search = (word, aData) => {
   const isMatched = wordIndex !== -1 || aData.title.includes(word);
   
   if (word === '') return {};
-  
   if (wordIndex === -1) {
     return {
       isMatched,
       summary: `${aData.plainText.substr(0, resultLength)}…`,
     };
   }
-  if (beforeIndex <= 0) { // マッチした語句が先頭に近い場合
+  if (beforeIndex <= 0) { // matched keyword is near the top
     return {
       isMatched, 
       summary: templates.searchedSummary({
