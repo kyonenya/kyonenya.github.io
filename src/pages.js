@@ -18,7 +18,7 @@ const postList = data => ({
     </ul>`,
   suffix: '',
   description: '',
-  title: '',
+  title: 'placet experiri',
   archiveHeader: '',
 });
 

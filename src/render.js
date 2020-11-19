@@ -1,6 +1,6 @@
 export const render = (page) => {
   document.getElementById('root').innerHTML = page.body;
-  if (page.title) {
+  if (page.title !== document.title) {
     document.title = page.title;
   }
   if (page.suffix) {
@@ -9,7 +9,7 @@ export const render = (page) => {
   if (page.description) {
     document.querySelector('meta[name=description]').content = page.description;
   }
-  if (page.archiveHeader) {
+  // if (page.archiveHeader) {
     document.querySelector('.el_archive_header').innerText = page.archiveHeader;
-  }
+  // }
 };
