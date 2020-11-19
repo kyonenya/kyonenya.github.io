@@ -21,7 +21,7 @@ export const search = (aData, word) => {
     return {
       on,
       isMatched, 
-      summary: templates.searchedPost({
+      summary: templates.searchedSummary({
         beforeEllipsis: '',
         beforeText: aData.plainText.substr(0, wordIndex),
         word: aData.plainText.substr(wordIndex, word.length),
@@ -34,7 +34,7 @@ export const search = (aData, word) => {
   return {
     on,
     isMatched, 
-    summary: templates.searchedPost({
+    summary: templates.searchedSummary({
       beforeEllipsis: '…',
       beforeText: aData.plainText.substr(beforeIndex, beforeLength),
       word: aData.plainText.substr(wordIndex, word.length),

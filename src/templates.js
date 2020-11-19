@@ -3,8 +3,7 @@ dayjs.extend(dayjs_plugin_relativeTime);
 
 const hashtag = aTag => `<li><a href="?tag=${aTag}">#${aTag}</a></li>`;
 
-// TODO: matchedHashtag
-const filteredHashtag = aTag => `<li><a href="?tag=${aTag}" class="hp_bold">#${aTag}</a></li>`;
+const matchedHashtag = aTag => `<li><a href="?tag=${aTag}" class="hp_bold">#${aTag}</a></li>`;
 
 const postList = (aData, filteredTag = null, searched = {}) => {
   return `
@@ -28,7 +27,7 @@ const postList = (aData, filteredTag = null, searched = {}) => {
       <ul class="bl_tags">
         ${aData.tags.map((aTag) => {
           if (aTag === filteredTag) {
-            return filteredHashtag(aTag);
+            return matchedHashtag(aTag);
           }
           return hashtag(aTag);
         }).join('')}
@@ -55,7 +54,7 @@ const article = aData => `
   </article>`;
 
 // TODO: searchedSummary
-const searchedPost = aResult => `
+const searchedSummary = aResult => `
   ${aResult.beforeEllipsis}${aResult.beforeText}
   <span class="hp_highlight">
     ${aResult.word}
@@ -65,5 +64,5 @@ const searchedPost = aResult => `
 export const templates = {
   postList,
   article,
-  searchedPost,
+  searchedSummary,
 };
