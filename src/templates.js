@@ -1,12 +1,17 @@
+// import dayjs from 'dayjs';
+// import 'dayjs/locale/ja';
+// import relativeTime from 'dayjs/plugin/relativeTime';
+// dayjs.extend(relativeTime);
+
 dayjs.locale('ja');
 dayjs.extend(dayjs_plugin_relativeTime);
 
 const hashtag = aTag => `<li><a href="?tag=${aTag}">#${aTag}</a></li>`;
 
-const filteredHashtag = aTag => `<li><a href="?tag=${aTag}" class="hp_bold">#${aTag}</a></li>`;
+const matchedHashtag = aTag => `<li><a href="?tag=${aTag}" class="hp_bold">#${aTag}</a></li>`;
 
-const postList = (aData, filteredTag = null) => `
-  <li class="bl_posts_item" data-id=${aData.id}>
+const postList = (aData, filteredTag = null, searched = {}) => `
+  <li class="bl_posts_item${(searched.isMatched || Object.keys(searched).length === 0) ? '' : ' hp_hidden'}" data-id=${aData.id}>
     <a href="?id=${aData.id}">
       <header class="bl_posts_header">
         <time class="bl_posts_date" datetime="${dayjs(aData.date).format('YYYY-MM-DD HH:mm')}">${dayjs(aData.date).format('YYYY-MM-DD')}
@@ -17,9 +22,7 @@ const postList = (aData, filteredTag = null) => `
       </h2>
       <div class="bl_posts_summary" data-id=${aData.id}>
         <p>
-          ${aData.plainText.length > 125
-            ? `${aData.plainText.substr(0, 125)}…`
-            : aData.plainText}
+          ${(!searched.isMatched) ? `${aData.plainText.substr(0, 125)}…` : searched.summary}
         </p>
       </div>
     </a>
@@ -28,7 +31,7 @@ const postList = (aData, filteredTag = null) => `
       <ul class="bl_tags">
         ${aData.tags.map((aTag) => {
           if (aTag === filteredTag) {
-            return filteredHashtag(aTag);
+            return matchedHashtag(aTag);
           }
           return hashtag(aTag);
         }).join('')}
@@ -54,7 +57,7 @@ const article = aData => `
     </footer>
   </article>`;
 
-const searchedPost = aResult => `
+const searchedSummary = aResult => `
   ${aResult.beforeEllipsis}${aResult.beforeText}
   <span class="hp_highlight">
     ${aResult.word}
@@ -64,5 +67,5 @@ const searchedPost = aResult => `
 export const templates = {
   postList,
   article,
-  searchedPost,
+  searchedSummary,
 };

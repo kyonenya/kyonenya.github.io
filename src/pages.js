@@ -1,4 +1,5 @@
 import { templates } from './templates.js';
+import { search } from './search.js';
 
 const article = aData => ({
   body: templates.article(aData),
@@ -17,7 +18,7 @@ const postList = data => ({
     </ul>`,
   suffix: '',
   description: '',
-  title: '',
+  title: 'placet experiri',
   archiveHeader: '',
 });
 
@@ -37,8 +38,25 @@ const taggedPostList = (data, filteredTag) => ({
   archiveHeader: `#${filteredTag}`,
 });
 
+const searchedPostList = (data, keyword, filteredTag = null) => ({
+  body: `
+    <ul class="bl_posts">
+    ${data.map((aData) => {
+      if (filteredTag !== null && !aData.tags.includes(filteredTag)) {
+        return '';
+      }
+      return templates.postList(data[aData.index], filteredTag, search(keyword, aData));
+    }).join('')}
+    </ul>`,
+  suffix: '',
+  description: '',
+  title: `「${keyword}」｜placet experiri`,
+  archiveHeader: `「${keyword}」`,
+});
+
 export const pages = {
   article,
   postList,
   taggedPostList,
+  searchedPostList,
 };
