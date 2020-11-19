@@ -4,7 +4,7 @@ import { registerComponents } from './components.js';
 
 const jsonPath = './data.json';
 
-const app = async () => {
+const index = async () => {
   document.querySelector('.el_search_form').addEventListener('input', () => {
     window.location.hash = encodeURIComponent(document.querySelector('.el_search_form').value);
   });
@@ -15,4 +15,4 @@ const app = async () => {
   registerComponents(data);
 };
 
-app();
+index();

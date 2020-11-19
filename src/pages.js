@@ -39,7 +39,7 @@ const taggedPostList = (data, filteredTag) => ({
 });
 
 // TODO: word -> keyword
-const searchedPostList = (data, word, filteredTag = null) => {
+const searchedPostList = (data, keyword, filteredTag = null) => {
   return {
     body: `
       <ul class="bl_posts">
@@ -47,13 +47,13 @@ const searchedPostList = (data, word, filteredTag = null) => {
         if (filteredTag !== null && !aData.tags.includes(filteredTag)) {
           return '';
         }
-        return templates.postList(data[aData.index], filteredTag, search(aData, word));
+        return templates.postList(data[aData.index], filteredTag, search(aData, keyword));
       }).join('')}
       </ul>`,
     suffix: '',
     description: '',
-    title: `「${word}」｜placet experiri`,
-    archiveHeader: `「${word}」`,
+    title: `「${keyword}」｜placet experiri`,
+    archiveHeader: `「${keyword}」`,
   };
 };
 

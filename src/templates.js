@@ -53,7 +53,6 @@ const article = aData => `
     </footer>
   </article>`;
 
-// TODO: searchedSummary
 const searchedSummary = aResult => `
   ${aResult.beforeEllipsis}${aResult.beforeText}
   <span class="hp_highlight">
