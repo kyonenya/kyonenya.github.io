@@ -8,18 +8,17 @@ export const search = (word, aData) => {
   const beforeIndex = wordIndex - beforeLength;
   const afterIndex = wordIndex + word.length;
   const isMatched = wordIndex !== -1 || aData.title.includes(word);
-  const on = true; // TODO: これなしで済ませる冴えたやり方：検索OFF時に空のオブジェクトを返す？
-
+  
+  if (word === '') return {};
+  
   if (wordIndex === -1) {
     return {
-      on,
       isMatched,
       summary: `${aData.plainText.substr(0, resultLength)}…`,
     };
   }
   if (beforeIndex <= 0) { // マッチした語句が先頭に近い場合
     return {
-      on,
       isMatched, 
       summary: templates.searchedSummary({
         beforeEllipsis: '',
@@ -32,7 +31,6 @@ export const search = (word, aData) => {
   }
 
   return {
-    on,
     isMatched, 
     summary: templates.searchedSummary({
       beforeEllipsis: '…',
