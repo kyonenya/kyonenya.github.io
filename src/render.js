@@ -1,11 +1,11 @@
-import { route } from './router.js';
-
-export const render = (page, data) => {
+export const render = (page, data, route) => {
   const archiveHeaderElement = document.querySelector('.el_archive_header');
   const suffixElement = document.querySelector('.el_logo_suffix');
 
   document.getElementById('root').innerHTML = page.body;
-  document.querySelectorAll('a').forEach(a => {
+  // overwrite links
+  document.querySelectorAll('a').forEach((_a) => {
+    const a = _a;
     a.onclick = (event) => {
       event.preventDefault();
       window.history.pushState(null, '', a.href);
