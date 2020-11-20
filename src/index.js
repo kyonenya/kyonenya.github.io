@@ -20,6 +20,9 @@ const index = async () => {
       route(data, queriesFor(window.location.search));
     };
   });
+  window.addEventListener("popstate", () => {
+    route(data, queriesFor(window.location.search));
+  });
 };
 
 index();
