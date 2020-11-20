@@ -13,6 +13,13 @@ const index = async () => {
   const data = enrich(rawData);
   route(data, queriesFor(window.location.search));
   registerComponents(data);
+  document.querySelectorAll('a').forEach(a => {
+    a.onclick = (event) => {
+      event.preventDefault();
+      window.history.pushState(null, "", a.href);
+      route(data, queriesFor(window.location.search));
+    };
+  });
 };
 
 index();
