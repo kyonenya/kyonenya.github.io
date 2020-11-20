@@ -14,26 +14,29 @@ export const queriesFor = (queryStr) => { // '?foo=1&bar=2'
     }, {});
 };
 
-export const route = (data, queries) => {
+export const route = (data) => {
+  const queries = queriesFor(window.location.search);
   const searching = (hash, tag = null) => {
-    if (hash === '' && tag !== null) return render(pages.taggedPostList(data, tag));
-    if (hash === '') return render(pages.postList(data));
+    if (hash === '' && tag !== null) return render(pages.taggedPostList(data, tag), data);
+    if (hash === '') return render(pages.postList(data), data);
 
     return render(pages.searchedPostList(data, decodeURIComponent(hash.slice(1)), tag));
   };
 
   if (Number.isFinite(Number(queries.id))) {
-    render(pages.article(data[data.length - queries.id]));
+    render(pages.article(data[data.length - queries.id]), data);
     document.querySelector('.el_search_form').classList.add('hp_hidden'); // disable search form
   } else if (queries.id == null && queries.tag) {
-    render(pages.taggedPostList(data, queries.tag));
+    render(pages.taggedPostList(data, queries.tag), data);
     window.onhashchange = () => {
-      searching(window.location.hash, queries.tag);
+      searching(window.location.hash, queries.tag, data);
     };
+    document.querySelector('.el_search_form').classList.remove('hp_hidden');
   } else if (queries.id == null) {
-    render(pages.postList(data));
+    render(pages.postList(data), data);
     window.onhashchange = () => {
       searching(window.location.hash);
     };
+    document.querySelector('.el_search_form').classList.remove('hp_hidden');
   }
 };
