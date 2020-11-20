@@ -1,5 +1,5 @@
 import { enrich } from './data.js';
-import { route, queriesFor } from './router.js';
+import { route } from './router.js';
 import { registerComponents } from './components.js';
 
 const jsonPath = './data.json';
@@ -11,8 +11,9 @@ const index = async () => {
   const response = await fetch(jsonPath);
   const rawData = await response.json();
   const data = enrich(rawData);
-  route(data, queriesFor(window.location.search));
+  route(data);
   registerComponents(data);
+  window.addEventListener('popstate', () => route(data));
 };
 
 index();
