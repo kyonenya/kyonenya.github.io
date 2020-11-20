@@ -4,7 +4,7 @@ export const render = (page, data, route) => {
 
   document.getElementById('root').innerHTML = page.body;
   // overwrite links
-  document.querySelectorAll('a').forEach((_a) => {
+  document.querySelectorAll('a[href^="?"]').forEach((_a) => {
     const a = _a;
     a.onclick = (event) => {
       event.preventDefault();
