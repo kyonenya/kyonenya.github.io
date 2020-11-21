@@ -47,7 +47,7 @@ main {
 }
 
 @media screen and (max-width: 559px) {
-  /* ヘッダー --------------- */
+  /* ヘッダー */
   .ly_header {
     margin-bottom: 1.5em;
   }
@@ -69,7 +69,10 @@ main {
   }
 }
 
-/* ヘルパークラス ----- */
+/**
+ * ヘルパークラス
+ */
+
 .hp_hidden {
   display: none !important;
 }
@@ -93,7 +96,10 @@ main {
   font-weight: bold;
 }
 
-/* リセット ----- */
+/**
+ * リセット
+ */
+
 a {
   /* リンク装飾をリセット */
   text-decoration: none;
