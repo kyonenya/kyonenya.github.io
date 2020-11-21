@@ -12,8 +12,8 @@ const index = async () => {
   const rawData = await response.json();
   const data = enrich(rawData);
   route(data);
-  registerComponents(data);
   window.addEventListener('popstate', () => route(data));
+  registerComponents(data);
 };
 
 index();
