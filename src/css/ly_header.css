@@ -92,13 +92,13 @@
  */
 @media screen and (max-width: 559px) {
   .ly_header {
-    margin-bottom: 1.5em;
+    margin-bottom: 1.75em;
+    margin-top: 1.2em;
   }
 
   .ly_header_inner {
     /* スマホでは中央揃えに */
     text-align: center;
-    margin-top: 0.8em;
   }
 
   .el_logo_title {
