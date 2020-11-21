@@ -25,9 +25,11 @@ export const route = (data) => {
   };
 
   if (Number.isFinite(Number(queries.id))) {
+    window.scrollTo(0, 0);
     render(pages.article(data[data.length - queries.id]), () => route(data));
     document.querySelector('.el_search_form').classList.add('hp_hidden'); // disable search form
   } else if (queries.id == null && queries.tag) {
+    window.scrollTo(0, 0);
     render(pages.taggedPostList(data, queries.tag), () => route(data));
     window.onhashchange = () => {
       searching(window.location.hash, queries.tag, data);
