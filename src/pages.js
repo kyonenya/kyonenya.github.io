@@ -43,18 +43,18 @@ const taggedPostList = (data, filteredTag) => ({
 const searchedPostList = (data, keyword, filteredTag = null) => ({
   body: `
     <ul class="bl_posts">
-    ${data
-      .map((aData) => {
-        if (filteredTag !== null && !aData.tags.includes(filteredTag)) {
-          return '';
-        }
-        return templates.postList(
-          data[aData.index],
-          filteredTag,
-          search(keyword, aData)
-        );
-      })
-      .join('')}
+      ${data
+        .map((aData) => {
+          if (filteredTag !== null && !aData.tags.includes(filteredTag)) {
+            return '';
+          }
+          return templates.postList(
+            data[aData.index],
+            filteredTag,
+            search(keyword, aData)
+          );
+        })
+        .join('')}
     </ul>`,
   suffix: '',
   description: '',

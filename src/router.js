@@ -2,12 +2,11 @@ import { pages } from './pages.js';
 import { render } from './render.js';
 
 export const queriesFor = (queryStr) => {
-  // '?foo=1&bar=2'
   if (queryStr === '') {
     return {};
   }
 
-  return queryStr
+  return queryStr // '?foo=1&bar=2'
     .slice(1)
     .split('&') // ['foo=1', 'bar=2']
     .reduce((acc, aQuery) => {
