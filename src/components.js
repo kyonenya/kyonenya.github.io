@@ -9,7 +9,7 @@ export const registerComponents = (data) => {
       super();
       this.id = this.getAttribute('id');
       this.hashtags = data[data.length - this.id].tags
-        .map(eachTag => `<li>#${eachTag}</li>`)
+        .map((eachTag) => `<li>#${eachTag}</li>`)
         .join('');
       this.innerHTML = `
         <div class="bl_blogcard">
@@ -19,7 +19,9 @@ export const registerComponents = (data) => {
               <div class="bl_blogcard_logo">placet experiri</span>
               <span class="bl_blogcard_suffix"> :: ${this.id}</span>
             </header>
-            <div class="bl_blogcard_title">${data[data.length - this.id].title}</div>
+            <div class="bl_blogcard_title">${
+              data[data.length - this.id].title
+            }</div>
             <p class="bl_blogcard_text">
               ${data[data.length - this.id].plainText.substr(0, 56)}…
             </p>

@@ -1,12 +1,15 @@
 import { pages } from './pages.js';
 import { render } from './render.js';
 
-export const queriesFor = (queryStr) => { // '?foo=1&bar=2'
+export const queriesFor = (queryStr) => {
+  // '?foo=1&bar=2'
   if (queryStr === '') {
     return {};
   }
 
-  return queryStr.slice(1).split('&') // ['foo=1', 'bar=2']
+  return queryStr
+    .slice(1)
+    .split('&') // ['foo=1', 'bar=2']
     .reduce((acc, aQuery) => {
       const [key, value] = aQuery.split('='); // ['foo', '1']
       acc[key] = decodeURIComponent(value); // { foo: 1 }
@@ -17,11 +20,14 @@ export const queriesFor = (queryStr) => { // '?foo=1&bar=2'
 export const route = (data) => {
   const queries = queriesFor(window.location.search);
   const searching = (hash, tag = null) => {
-    if (hash === '' && tag !== null) return render(pages.taggedPostList(data, tag), () => route(data));
+    if (hash === '' && tag !== null)
+      return render(pages.taggedPostList(data, tag), () => route(data));
     if (hash === '') return render(pages.postList(data), () => route(data));
 
-    return render(pages.searchedPostList(data, decodeURIComponent(hash.slice(1)), tag),
-      () => route(data));
+    return render(
+      pages.searchedPostList(data, decodeURIComponent(hash.slice(1)), tag),
+      () => route(data)
+    );
   };
 
   if (Number.isFinite(Number(queries.id))) {

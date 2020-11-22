@@ -16,14 +16,18 @@ export const search = (word, aData) => {
       summary: `${aData.plainText.substr(0, resultLength)}…`,
     };
   }
-  if (beforeIndex <= 0) { // matched keyword is near the top
+  if (beforeIndex <= 0) {
+    // matched keyword is near the top
     return {
       isMatched,
       summary: templates.searchedSummary({
         beforeEllipsis: '',
         beforeText: aData.plainText.substr(0, wordIndex),
         word: aData.plainText.substr(wordIndex, word.length),
-        afterText: aData.plainText.substr(afterIndex, resultLength - afterIndex),
+        afterText: aData.plainText.substr(
+          afterIndex,
+          resultLength - afterIndex
+        ),
         afterEllipsis: '…',
       }),
     };
@@ -36,9 +40,8 @@ export const search = (word, aData) => {
       beforeText: aData.plainText.substr(beforeIndex, beforeLength),
       word: aData.plainText.substr(wordIndex, word.length),
       afterText: aData.plainText.substr(afterIndex, afterLength),
-      afterEllipsis: (beforeIndex + resultLength < aData.plainText.length)
-        ? '…'
-        : '',
+      afterEllipsis:
+        beforeIndex + resultLength < aData.plainText.length ? '…' : '',
     }),
   };
 };

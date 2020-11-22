@@ -13,6 +13,9 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
+        use: [
+          'prettier-loader',
+        ],
       },
     ],
   },
@@ -20,7 +23,7 @@ module.exports = {
   plugins: [
     new ESLintPlugin({
       files: './src',
-      fix: true,
+      // fix: true,
     }),
   ],
 };

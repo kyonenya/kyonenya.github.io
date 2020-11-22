@@ -1,20 +1,20 @@
 import { templates } from './templates.js';
 import { search } from './search.js';
 
-const article = aData => ({
+const article = (aData) => ({
   body: templates.article(aData),
   suffix: ` :: ${aData.id}`,
   description: `${aData.plainText.substr(0, 110)}…`,
-  title: (aData.title)
+  title: aData.title
     ? `${aData.title}｜placet experiri :: ${aData.id}`
     : `placet experiri :: ${aData.id}`,
   archiveHeader: '',
 });
 
-const postList = data => ({
+const postList = (data) => ({
   body: `
     <ul class="bl_posts">
-      ${data.map(aData => templates.postList(data[aData.index])).join('')}
+      ${data.map((aData) => templates.postList(data[aData.index])).join('')}
     </ul>`,
   suffix: '',
   description: '',
@@ -25,12 +25,14 @@ const postList = data => ({
 const taggedPostList = (data, filteredTag) => ({
   body: `
     <ul class="bl_posts">
-      ${data.map((aData) => {
-        if (filteredTag !== null && !aData.tags.includes(filteredTag)) {
-          return '';
-        }
-        return templates.postList(data[aData.index], filteredTag);
-      }).join('')}
+      ${data
+        .map((aData) => {
+          if (filteredTag !== null && !aData.tags.includes(filteredTag)) {
+            return '';
+          }
+          return templates.postList(data[aData.index], filteredTag);
+        })
+        .join('')}
     </ul>`,
   suffix: '',
   description: '',
@@ -41,12 +43,18 @@ const taggedPostList = (data, filteredTag) => ({
 const searchedPostList = (data, keyword, filteredTag = null) => ({
   body: `
     <ul class="bl_posts">
-    ${data.map((aData) => {
-      if (filteredTag !== null && !aData.tags.includes(filteredTag)) {
-        return '';
-      }
-      return templates.postList(data[aData.index], filteredTag, search(keyword, aData));
-    }).join('')}
+    ${data
+      .map((aData) => {
+        if (filteredTag !== null && !aData.tags.includes(filteredTag)) {
+          return '';
+        }
+        return templates.postList(
+          data[aData.index],
+          filteredTag,
+          search(keyword, aData)
+        );
+      })
+      .join('')}
     </ul>`,
   suffix: '',
   description: '',
