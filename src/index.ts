@@ -1,6 +1,6 @@
-import { enrich } from './data.js';
-import { route } from './router.js';
-import { registerComponents } from './components.js';
+import { enrich } from './data';
+import { route } from './router';
+import { registerComponents } from './components';
 
 const jsonPath = './data.json';
 

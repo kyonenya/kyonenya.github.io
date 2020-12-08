@@ -1,4 +1,4 @@
-import { templates } from './templates.js';
+import { templates } from './templates';
 
 export const search = (word, aData) => {
   const resultLength = 50;

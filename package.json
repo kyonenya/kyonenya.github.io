@@ -4,7 +4,7 @@
   "scripts": {
     "webpack": "webpack",
     "postcss": "postcss src/css/index.css -o dist/css/bundle.css -w",
-    "typeScript": "tsc -w"
+    "TypeScript": "tsc -w"
   },
   "dependencies": {
     "dayjs": "^1.9.6",
@@ -22,6 +22,7 @@
     "prettier-loader": "^3.3.0",
     "stylelint": "^13.7.2",
     "stylelint-config-standard": "^20.0.0",
+    "typescript": "^4.1.2",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12"
   },

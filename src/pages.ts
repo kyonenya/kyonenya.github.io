@@ -1,5 +1,5 @@
-import { templates } from './templates.js';
-import { search } from './search.js';
+import { templates } from './templates';
+import { search } from './search';
 
 const article = (aData) => ({
   body: templates.article(aData),

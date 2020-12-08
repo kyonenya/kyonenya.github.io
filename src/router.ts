@@ -1,5 +1,5 @@
-import { pages } from './pages.js';
-import { render } from './render.js';
+import { pages } from './pages';
+import { render } from './render';
 
 export const queriesFor = (queryStr) => {
   if (queryStr === '') {
