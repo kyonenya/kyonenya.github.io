@@ -17,17 +17,17 @@ export const registerComponents = (data) => {
               <span class="bl_blogcard_suffix"> :: ${this.id}</span>
             </header>
             <div class="bl_blogcard_title">
-              ${data[data.length - this.id].title}
+              ${data[data.length - parseInt(this.id)].title}
             </div>
             <p class="bl_blogcard_text">
-              ${data[data.length - this.id].plainText.substr(0, 56)}…
+              ${data[data.length - parseInt(this.id)].plainText.substr(0, 56)}…
             </p>
             <footer class="bl_blogcard_footer">
               <span class="bl_blogcard_time">
-                ${dayjs(data[data.length - this.id].date).format('YYYY-MM-DD')}
+                ${dayjs(data[data.length - parseInt(this.id)].date).format('YYYY-MM-DD')}
               </span>
               <ul class="bl_blogcard_tags">
-                ${data[data.length - this.id].tags
+                ${data[data.length - parseInt(this.id)].tags
                   .map((eachTag) => `<li>#${eachTag}</li>`)
                   .join('')}
               </ul>

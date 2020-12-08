@@ -1,10 +1,11 @@
 export const render = (page, route) => {
-  const archiveHeaderElement = document.querySelector('.el_archive_header');
-  const suffixElement = document.querySelector('.el_logo_suffix');
+  const archiveHeaderElement = <HTMLHeadingElement>document.querySelector('.el_archive_header');
+  const suffixElement = <HTMLSpanElement>document.querySelector('.el_logo_suffix');
+  const descriptionElement = <HTMLMetaElement>document.querySelector('meta[name=description]');
 
   document.getElementById('root').innerHTML = page.body;
   // overwrite links
-  document.querySelectorAll('a[href^="?"]').forEach((_a) => {
+  document.querySelectorAll('a[href^="?"]').forEach((_a: HTMLAnchorElement) => {
     const a = _a;
     a.onclick = (event) => {
       event.preventDefault();
@@ -22,6 +23,6 @@ export const render = (page, route) => {
     archiveHeaderElement.innerText = page.archiveHeader;
   }
   if (page.description !== '') {
-    document.querySelector('meta[name=description]').content = page.description;
+    descriptionElement.content = page.description;
   }
 };

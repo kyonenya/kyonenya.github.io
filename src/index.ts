@@ -5,10 +5,9 @@ import { registerComponents } from './components';
 const jsonPath = './data.json';
 
 const index = async () => {
-  document.querySelector('.el_search_form').addEventListener('input', () => {
-    window.location.hash = encodeURIComponent(
-      document.querySelector('.el_search_form').value
-    );
+  const formElement = <HTMLFormElement>document.querySelector('.el_search_form');
+  formElement.addEventListener('input', () => {
+    window.location.hash = encodeURIComponent(formElement.value);
   });
   const response = await fetch(jsonPath);
   const rawData = await response.json();
