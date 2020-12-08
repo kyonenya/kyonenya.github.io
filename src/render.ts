@@ -1,7 +1,13 @@
 export const render = (page, route) => {
-  const archiveHeaderElement = <HTMLHeadingElement>document.querySelector('.el_archive_header');
-  const suffixElement = <HTMLSpanElement>document.querySelector('.el_logo_suffix');
-  const descriptionElement = <HTMLMetaElement>document.querySelector('meta[name=description]');
+  const archiveHeaderElement = <HTMLHeadingElement>(
+    document.querySelector('.el_archive_header')
+  );
+  const suffixElement = <HTMLSpanElement>(
+    document.querySelector('.el_logo_suffix')
+  );
+  const descriptionElement = <HTMLMetaElement>(
+    document.querySelector('meta[name=description]')
+  );
 
   document.getElementById('root').innerHTML = page.body;
   // overwrite links

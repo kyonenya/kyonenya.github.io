@@ -11,7 +11,11 @@ const hashtag = (aTag) => `<li><a href="?tag=${aTag}">#${aTag}</a></li>`;
 const matchedHashtag = (aTag) =>
   `<li><a href="?tag=${aTag}" class="hp_bold">#${aTag}</a></li>`;
 
-const postList = (aData, filteredTag = null, searched: { isMatched?: boolean, summary?: string } = {}) => `
+const postList = (
+  aData,
+  filteredTag = null,
+  searched: { isMatched?: boolean; summary?: string } = {}
+) => `
   <li
     class="
       bl_posts_item

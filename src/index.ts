@@ -5,7 +5,9 @@ import { registerComponents } from './components';
 const jsonPath = './data.json';
 
 const index = async () => {
-  const formElement = <HTMLFormElement>document.querySelector('.el_search_form');
+  const formElement = <HTMLFormElement>(
+    document.querySelector('.el_search_form')
+  );
   formElement.addEventListener('input', () => {
     window.location.hash = encodeURIComponent(formElement.value);
   });

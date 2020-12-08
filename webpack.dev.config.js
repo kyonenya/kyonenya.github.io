@@ -23,7 +23,7 @@ module.exports = {
               transpileOnly: true,
             },
           },
-          // { loader: 'prettier-loader' },
+          { loader: 'prettier-loader' },
         ],
       },
     ],
