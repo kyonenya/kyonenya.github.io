@@ -31,7 +31,7 @@ export const route = (data) => {
         window.scrollTo(0, 0);
         render(pages.taggedPostList(data, queries.tag), () => route(data));
         window.onhashchange = () => {
-            searching(window.location.hash, queries.tag, data);
+            searching(window.location.hash, queries.tag);
         };
         document.querySelector('.el_search_form').classList.remove('hp_hidden');
     }

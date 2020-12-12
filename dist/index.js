@@ -12,8 +12,9 @@ import { route } from './router';
 import { registerComponents } from './components';
 const jsonPath = './data.json';
 const index = () => __awaiter(void 0, void 0, void 0, function* () {
-    document.querySelector('.el_search_form').addEventListener('input', () => {
-        window.location.hash = encodeURIComponent(document.querySelector('.el_search_form').value);
+    const formElement = (document.querySelector('.el_search_form'));
+    formElement.addEventListener('input', () => {
+        window.location.hash = encodeURIComponent(formElement.value);
     });
     const response = yield fetch(jsonPath);
     const rawData = yield response.json();
