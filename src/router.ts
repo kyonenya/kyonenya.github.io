@@ -1,7 +1,7 @@
 import { pages } from './pages';
 import { render } from './render';
 
-export const queriesFor = (queryStr: string) => {
+export const queriesFor = (queryStr: string): {} => {
   if (queryStr === '') {
     return {};
   }
@@ -17,7 +17,10 @@ export const queriesFor = (queryStr: string) => {
 };
 
 export const route = (data) => {
-  const queries = queriesFor(window.location.search);
+  const queries: {
+    id?: string,
+    tag?: string,
+  } = queriesFor(window.location.search);
   const searching = (hash, tag = null) => {
     if (hash === '' && tag !== null)
       return render(pages.taggedPostList(data, tag), () => route(data));
@@ -31,7 +34,7 @@ export const route = (data) => {
 
   if (Number.isFinite(Number(queries.id))) {
     window.scrollTo(0, 0);
-    render(pages.article(data[data.length - queries.id]), () => route(data));
+    render(pages.article(data[data.length - parseInt(queries.id)]), () => route(data));
     document.querySelector('.el_search_form').classList.add('hp_hidden'); // disable search form
   } else if (queries.id == null && queries.tag) {
     window.scrollTo(0, 0);
