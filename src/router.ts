@@ -1,7 +1,7 @@
 import { pages } from './pages';
 import { render } from './render';
 
-export const queriesFor = (queryStr) => {
+export const queriesFor = (queryStr: string) => {
   if (queryStr === '') {
     return {};
   }
