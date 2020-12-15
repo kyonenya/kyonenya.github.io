@@ -11,9 +11,11 @@ export const render = (page: pagable, route: () => void) => {
     document.querySelector('meta[name=description]')
   );
 
-  document.getElementById('root').innerHTML = page.body;
+  document.getElementById('root')!.innerHTML = page.body;
+  
   // overwrite links
-  document.querySelectorAll('a[href^="?"]').forEach((_a: HTMLAnchorElement) => {
+  const anchors: NodeListOf<HTMLAnchorElement> = document.querySelectorAll('a[href^="?"]');
+  anchors.forEach((_a) => {
     const a = _a;
     a.onclick = (event) => {
       event.preventDefault();

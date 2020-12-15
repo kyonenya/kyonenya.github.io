@@ -8,7 +8,7 @@ export const registerComponents = (data: datarable[]) => {
   class BlogCard extends HTMLElement {
     constructor() {
       super();
-      this.id = this.getAttribute('id');
+      this.id = this.getAttribute('id')!;
       this.innerHTML = `
         <div class="bl_blogcard">
           <a href="?id=${this.id}">

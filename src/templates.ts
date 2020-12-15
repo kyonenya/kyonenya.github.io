@@ -14,7 +14,7 @@ const matchedHashtag = (aTag: string) =>
 
 const postList = (
   aData: datarable,
-  filteredTag: string = null,
+  filteredTag: string | null = null,
   searched: { isMatched?: boolean; summary?: string } = {}
 ) => `
   <li
