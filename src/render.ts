@@ -1,4 +1,6 @@
-export const render = (page, route) => {
+import { pagable } from './types';
+
+export const render = (page: pagable, route: () => void) => {
   const archiveHeaderElement = <HTMLHeadingElement>(
     document.querySelector('.el_archive_header')
   );

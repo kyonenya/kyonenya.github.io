@@ -1,19 +1,20 @@
 import dayjs from 'dayjs';
 import 'dayjs/locale/ja';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import { datarable } from './types';
 
 dayjs.extend(relativeTime);
 dayjs.locale('ja');
 // dayjs.extend(dayjs_plugin_relativeTime);
 
-const hashtag = (aTag) => `<li><a href="?tag=${aTag}">#${aTag}</a></li>`;
+const hashtag = (aTag: string) => `<li><a href="?tag=${aTag}">#${aTag}</a></li>`;
 
-const matchedHashtag = (aTag) =>
+const matchedHashtag = (aTag: string) =>
   `<li><a href="?tag=${aTag}" class="hp_bold">#${aTag}</a></li>`;
 
 const postList = (
-  aData,
-  filteredTag = null,
+  aData: datarable,
+  filteredTag: string = null,
   searched: { isMatched?: boolean; summary?: string } = {}
 ) => `
   <li
@@ -62,7 +63,7 @@ const postList = (
     </footer>
   </li>`;
 
-const article = (aData) => `
+const article = (aData: datarable) => `
   <article>
     <header class="bl_text_header">
       <time class="bl_text_date"
@@ -83,7 +84,13 @@ const article = (aData) => `
     </footer>
   </article>`;
 
-const searchedSummary = (aResult) => `
+const searchedSummary = (aResult: {
+  beforeEllipsis: string,
+  beforeText: string,
+  word: string,
+  afterText: string,
+  afterEllipsis: string,
+}) => `
   ${aResult.beforeEllipsis}${aResult.beforeText}
   <span class="hp_highlight">
     ${aResult.word}

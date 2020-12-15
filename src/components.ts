@@ -1,9 +1,10 @@
 import dayjs from 'dayjs';
 import 'dayjs/locale/ja';
+import { datarable } from './types';
 
 dayjs.locale('ja');
 
-export const registerComponents = (data) => {
+export const registerComponents = (data: datarable[]) => {
   class BlogCard extends HTMLElement {
     constructor() {
       super();

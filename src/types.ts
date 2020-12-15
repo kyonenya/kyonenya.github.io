@@ -6,4 +6,12 @@ export type datarable = {
   text: string;
   plainText?: string;
   tags: string[];
-}
+};
+
+export type pagable = {
+  body: string,
+  suffix: string,
+  description: string,
+  title: string,
+  archiveHeader: string,
+};

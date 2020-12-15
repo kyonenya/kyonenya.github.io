@@ -1,5 +1,6 @@
 import { pages } from './pages';
 import { render } from './render';
+import { datarable } from './types';
 
 export const queriesFor = (queryStr: string): {} => {
   if (queryStr === '') {
@@ -9,14 +10,14 @@ export const queriesFor = (queryStr: string): {} => {
   return queryStr // '?foo=1&bar=2'
     .slice(1)
     .split('&') // ['foo=1', 'bar=2']
-    .reduce((acc, aQuery) => {
+    .reduce((acc: {[key: string]: any}, aQuery) => { // allow adding new keys
       const [key, value] = aQuery.split('='); // ['foo', '1']
       acc[key] = decodeURIComponent(value); // { foo: 1 }
       return acc;
     }, {});
 };
 
-export const route = (data): void => {
+export const route = (data: datarable[]): void => {
   const queries: {
     id?: string;
     tag?: string;
