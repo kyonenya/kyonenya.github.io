@@ -1,7 +1,8 @@
 import { templates } from './templates';
 import { search } from './search';
+import { datarable } from './types';
 
-const article = (aData) => ({
+const article = (aData: datarable) => ({
   body: templates.article(aData),
   suffix: ` :: ${aData.id}`,
   description: `${aData.plainText.substr(0, 110)}…`,
@@ -11,7 +12,7 @@ const article = (aData) => ({
   archiveHeader: '',
 });
 
-const postList = (data) => ({
+const postList = (data: datarable[]) => ({
   body: `
     <ul class="bl_posts">
       ${data.map((aData) => templates.postList(data[aData.index])).join('')}
@@ -22,7 +23,7 @@ const postList = (data) => ({
   archiveHeader: '',
 });
 
-const taggedPostList = (data, filteredTag) => ({
+const taggedPostList = (data: datarable[], filteredTag: string) => ({
   body: `
     <ul class="bl_posts">
       ${data
@@ -40,7 +41,7 @@ const taggedPostList = (data, filteredTag) => ({
   archiveHeader: `#${filteredTag}`,
 });
 
-const searchedPostList = (data, keyword, filteredTag = null) => ({
+const searchedPostList = (data: datarable[], keyword: string, filteredTag: string = null) => ({
   body: `
     <ul class="bl_posts">
       ${data

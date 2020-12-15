@@ -1,18 +1,10 @@
-export const enrich = (
-  data: {
-    id: number;
-    index?: number;
-    date: string;
-    title: string;
-    text: string;
-    plainText?: string;
-    tags: string[];
-  }[]
-) => {
-  return data.map((_aData, index) => {
+import { datarable } from './types';
+
+export const enrich = (data: datarable[]): datarable[] => {
+  return data.map((_aData, idx) => {
     const aData = { ..._aData };
-    aData.id = data.length - index;
-    aData.index = index;
+    aData.id = data.length - idx;
+    aData.index = idx;
     aData.text = aData.text.replace(/——/g, '──'); // replace double-dash of ruled lines
     aData.title = aData.title.replace(/——/g, '──');
     aData.plainText = aData.text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '');
