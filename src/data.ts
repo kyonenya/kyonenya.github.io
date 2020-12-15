@@ -1,12 +1,18 @@
-export const enrich = (data) => {
-  const result = [...data];
-  for (let i = 0; i < result.length; i += 1) {
-    result[i].index = i;
-    result[i].id = result.length - i; // overwrite existing post id
-  }
-
-  return result.map((aResult) => {
-    const aData = { ...aResult };
+export const enrich = (
+  data: {
+    id: number;
+    index?: number;
+    date: string;
+    title: string;
+    text: string;
+    plainText?: string;
+    tags: string[];
+  }[]
+) => {
+  return data.map((_aData, index) => {
+    const aData = { ..._aData };
+    aData.id = data.length - index;
+    aData.index = index;
     aData.text = aData.text.replace(/——/g, '──'); // replace double-dash of ruled lines
     aData.title = aData.title.replace(/——/g, '──');
     aData.plainText = aData.text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '');
