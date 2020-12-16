@@ -7,7 +7,8 @@ dayjs.extend(relativeTime);
 dayjs.locale('ja');
 // dayjs.extend(dayjs_plugin_relativeTime);
 
-const hashtag = (aTag: string) => `<li><a href="?tag=${aTag}">#${aTag}</a></li>`;
+const hashtag = (aTag: string) =>
+  `<li><a href="?tag=${aTag}">#${aTag}</a></li>`;
 
 const matchedHashtag = (aTag: string) =>
   `<li><a href="?tag=${aTag}" class="hp_bold">#${aTag}</a></li>`;
@@ -85,11 +86,11 @@ const article = (aData: datarable) => `
   </article>`;
 
 const searchedSummary = (aResult: {
-  beforeEllipsis: string,
-  beforeText: string,
-  word: string,
-  afterText: string,
-  afterEllipsis: string,
+  beforeEllipsis: string;
+  beforeText: string;
+  word: string;
+  afterText: string;
+  afterEllipsis: string;
 }) => `
   ${aResult.beforeEllipsis}${aResult.beforeText}
   <span class="hp_highlight">

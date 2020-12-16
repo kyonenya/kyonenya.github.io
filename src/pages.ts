@@ -41,7 +41,11 @@ const taggedPostList = (data: datarable[], filteredTag: string): pagable => ({
   archiveHeader: `#${filteredTag}`,
 });
 
-const searchedPostList = (data: datarable[], keyword: string, filteredTag: string|null = null): pagable => ({
+const searchedPostList = (
+  data: datarable[],
+  keyword: string,
+  filteredTag: string | null = null
+): pagable => ({
   body: `
     <ul class="bl_posts">
       ${data

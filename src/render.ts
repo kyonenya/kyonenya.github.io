@@ -12,9 +12,11 @@ export const render = (page: pagable, route: () => void) => {
   );
 
   document.getElementById('root')!.innerHTML = page.body;
-  
+
   // overwrite links
-  const anchors: NodeListOf<HTMLAnchorElement> = document.querySelectorAll('a[href^="?"]');
+  const anchors: NodeListOf<HTMLAnchorElement> = document.querySelectorAll(
+    'a[href^="?"]'
+  );
   anchors.forEach((_a) => {
     const a = _a;
     a.onclick = (event) => {
