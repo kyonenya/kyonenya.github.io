@@ -9,10 +9,10 @@ export const queriesFor = (queryStr: string): {} => {
 
   return queryStr // '?foo=1&bar=2'
     .slice(1)
-    .split('&') // ['foo=1', 'bar=2']
-    .reduce((acc: {[key: string]: any}, aQuery) => { // allow adding new keys
-      const [key, value] = aQuery.split('='); // ['foo', '1']
-      acc[key] = decodeURIComponent(value); // { foo: 1 }
+    .split('&')
+    .reduce((acc: {[key: string]: string}, aQuery) => { // allow to add new keys
+      const [key, value] = aQuery.split('=');
+      acc[key] = decodeURIComponent(value);
       return acc;
     }, {});
 };
