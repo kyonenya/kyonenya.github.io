@@ -10,7 +10,7 @@ export const queriesFor = (queryStr: string): {} => {
   return queryStr // '?foo=1&bar=2'
     .slice(1)
     .split('&')
-    .reduce((acc: {[key: string]: string}, aQuery) => { // allow to add new keys
+    .reduce((acc: {[k: string]: string}, aQuery) => { // allow to add new keys
       const [key, value] = aQuery.split('=');
       acc[key] = decodeURIComponent(value);
       return acc;
