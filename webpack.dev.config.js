@@ -32,10 +32,10 @@ module.exports = {
     extensions: ['.ts', '.tsx', '.js', 'jsx']
   },
   optimization: {},
-  // plugins: [
-    // new ESLintPlugin({
-      // files: './src',
+  plugins: [
+    new ESLintPlugin({
+      files: './src/**',
       // fix: true,
-    // }),
-  // ],
+    }),
+  ],
 };

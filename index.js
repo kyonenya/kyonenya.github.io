@@ -28,7 +28,6 @@ app.listen(port, () => {
 
 // Register app and middleware. Required for better performance when running from play.js
 try {
-  console.log(pjs);
   pjs.register(app, middleware);
 } catch (error) {
   console.log(error);

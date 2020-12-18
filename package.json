@@ -7,6 +7,8 @@
     "postcss": "postcss src/css/index.css -o dist/css/bundle.css -w"
   },
   "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.10.0",
+    "@typescript-eslint/parser": "^4.10.0",
     "dayjs": "^1.9.6",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^17.1.1",
