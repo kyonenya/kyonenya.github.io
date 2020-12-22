@@ -34,7 +34,7 @@ module.exports = {
   optimization: {},
   plugins: [
     new ESLintPlugin({
-      files: './src/**',
+      files: './src/**.ts',
       // fix: true,
     }),
   ],
