@@ -1,13 +1,14 @@
 import dayjs from 'dayjs';
 import 'dayjs/locale/ja';
+import { datarable } from './types';
 
 dayjs.locale('ja');
 
-export const registerComponents = (data) => {
+export const registerComponents = (data: datarable[]): void => {
   class BlogCard extends HTMLElement {
     constructor() {
       super();
-      this.id = this.getAttribute('id');
+      this.id = this.getAttribute('id')!;
       this.innerHTML = `
         <div class="bl_blogcard">
           <a href="?id=${this.id}">
@@ -17,19 +18,22 @@ export const registerComponents = (data) => {
               <span class="bl_blogcard_suffix"> :: ${this.id}</span>
             </header>
             <div class="bl_blogcard_title">
-              ${data[data.length - parseInt(this.id)].title}
+              ${data[data.length - parseInt(this.id, 10)].title}
             </div>
             <p class="bl_blogcard_text">
-              ${data[data.length - parseInt(this.id)].plainText.substr(0, 56)}…
+              ${data[data.length - parseInt(this.id, 10)].plainText.substr(
+                0,
+                56
+              )}…
             </p>
             <footer class="bl_blogcard_footer">
               <span class="bl_blogcard_time">
-                ${dayjs(data[data.length - parseInt(this.id)].date).format(
+                ${dayjs(data[data.length - parseInt(this.id, 10)].date).format(
                   'YYYY-MM-DD'
                 )}
               </span>
               <ul class="bl_blogcard_tags">
-                ${data[data.length - parseInt(this.id)].tags
+                ${data[data.length - parseInt(this.id, 10)].tags
                   .map((eachTag) => `<li>#${eachTag}</li>`)
                   .join('')}
               </ul>

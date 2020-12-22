@@ -12,6 +12,7 @@ const index = async () => {
     window.location.hash = encodeURIComponent(formElement.value);
   });
   const response = await fetch(jsonPath);
+  /* eslint-disable @typescript-eslint/no-unsafe-assignment */
   const rawData = await response.json();
   const data = enrich(rawData);
   route(data);
@@ -19,4 +20,5 @@ const index = async () => {
   registerComponents(data);
 };
 
+/* eslint-disable @typescript-eslint/no-floating-promises */
 index();
