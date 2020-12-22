@@ -6,6 +6,7 @@ module.exports = {
   extends: [
     'eslint:recommended',
     'airbnb-base',
+    'plugin:import/typescript',
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
@@ -25,7 +26,7 @@ module.exports = {
   },
   rules: {
     'import/prefer-default-export': 0,
-    // 'import/extensions': 0,
+    'import/extensions': 0,
     'indent': ['error', 2, { 'ignoredNodes': ['TemplateLiteral *'] }],
   },
 };
