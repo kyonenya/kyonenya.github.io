@@ -2,7 +2,11 @@ import { pages } from './pages';
 import { render } from './render';
 import { datarable } from './types';
 
-export const queriesFor = (queryStr: string): {} => {
+export const queriesFor = (
+  queryStr: string
+): {
+  [k: string]: string;
+} => {
   if (queryStr === '') {
     return {};
   }
@@ -37,7 +41,7 @@ export const route = (data: datarable[]): void => {
 
   if (Number.isFinite(Number(queries.id))) {
     window.scrollTo(0, 0);
-    render(pages.article(data[data.length - parseInt(queries.id!)]), () =>
+    render(pages.article(data[data.length - parseInt(queries.id!, 10)]), () =>
       route(data)
     );
     document.querySelector('.el_search_form')!.classList.add('hp_hidden'); // disable search form

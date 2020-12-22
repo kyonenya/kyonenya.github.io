@@ -1,7 +1,13 @@
 import { templates } from './templates';
 import { datarable } from './types';
 
-export const search = (word: string, aData: datarable) => {
+export const search = (
+  word: string,
+  aData: datarable
+): {
+  isMatched?: boolean;
+  summary?: string;
+} => {
   const resultLength = 50;
   const beforeLength = 20;
   const afterLength = resultLength - beforeLength - word.length;
