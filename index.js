@@ -1,15 +1,14 @@
 const express = require('express');
-const app = express();
 const path = require('path');
+const webpack = require('webpack');
+const webpackDevMiddleware = require('webpack-dev-middleware');
+const config = require('./webpack.dev.config.js');
 
 // Setup webpack-dev-middleware
-const webpack = require('webpack');
-const webpackMiddleware = require('webpack-dev-middleware');
-const config = require('./webpack.dev.config.js');
-const compiler = webpack(config);
-const middleware = webpackMiddleware(compiler, {
+const middleware = webpackDevMiddleware(webpack(config), {
   publicPath: config.output.publicPath,
 });
+const app = express();
 app.use(middleware);
 
 // Route
@@ -28,4 +27,8 @@ app.listen(port, () => {
 });
 
 // Register app and middleware. Required for better performance when running from play.js
-try { pjs.register(app, webpackMiddleware); } catch (error) { }
+try {
+  pjs.register(app, middleware);
+} catch (error) {
+  console.log(error);
+}

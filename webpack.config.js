@@ -3,24 +3,37 @@ const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = {
   mode: 'production',
-  entry: './src/index.js',
+  entry: './src/index.ts',
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
   },
+
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.tsx?$/,
         exclude: /node_modules/,
+        use: [
+          {
+            loader: 'ts-loader',
+            options: {
+              // transpileOnly: true,
+            },
+          },
+          { loader: 'prettier-loader' },
+        ],
       },
     ],
   },
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js', 'jsx']
+  },
   optimization: {},
-  plugins: [
-    new ESLintPlugin({
-      files: './src',
-      fix: true,
-    }),
-  ],
+//  plugins: [
+//    new ESLintPlugin({
+//      files: './src',
+//      // fix: true,
+//    }),
+//  ],
 };
