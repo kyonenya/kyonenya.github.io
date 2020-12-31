@@ -29,5 +29,6 @@ module.exports = {
     'import/extensions': 0,
     'indent': ['error', 2, { 'ignoredNodes': ['TemplateLiteral *'] }],
     '@typescript-eslint/no-non-null-assertion': 0,
+    'no-console': 0,
   },
 };
