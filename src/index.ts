@@ -6,10 +6,9 @@ import { datarable } from './types';
 const jsonPath = './data.json';
 
 const fetcher = async <T>(url: string): Promise<T> => {
-  return fetch(url).then((response) => {
-    if (!response.ok) throw new Error(response.statusText);
-    return response.json().then((data) => data as T);
-  });
+  const response = await fetch(url);
+  if (!response.ok) throw new Error(response.statusText);
+  return (await response.json()) as T;
 };
 
 const index = async (): Promise<void> => {
