@@ -13,7 +13,7 @@ app.use(middleware);
 
 // Route
 app.get('/', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'index_dev2.html'));
+  res.sendFile(path.resolve(__dirname, 'index_dev.html'));
 });
 const rootDir = __dirname;
 app.use(express.static(rootDir));
