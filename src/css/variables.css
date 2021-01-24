@@ -11,6 +11,7 @@
   --monochrome-medium: hsl(0, 0%, 68%);
   --monochrome-dark: hsl(0, 0%, 38%);
   --main-color: hsl(202, 35%, 50%);
+--main-color-midlight: hsl(202, 35%, 57%);
   --main-color-light: hsl(202, 35%, 65%);
 }
 
@@ -24,6 +25,7 @@
     --monochrome-medium: hsl(0, 0%, 50%);
     --monochrome-dark: hsl(0, 0%, 65%);
     --main-color: hsl(202, 35%, 55%);
+    --main-color-midlight: hsl(202, 35%, 50%);
     --main-color-light: hsl(202, 35%, 45%);
   }
 }

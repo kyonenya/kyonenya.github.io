@@ -41,6 +41,27 @@
   border-left: 1px solid var(--main-color-light);
 }
 
+.badge1 {
+   position:relative;
+}
+
+.badge1[data-badge]:after {
+  content:attr(data-badge);
+  position: absolute;  /* 基準に対して相対配置 */
+  top: -0.4em;
+  right: -1.32em;
+  font-size: 0.7em;
+  background: var(--main-color-midlight);
+  color: white;
+  width: 1.1em;
+  height: 1.1em;
+  line-height: 1.25em;
+  text-align: center;
+  border-radius: 50%;
+  box-shadow: 0 0 1px #333;
+  z-index: 100;
+}
+
 /* 検索フォーム */
 .el_search {
   position: relative;  /* 基準 */
