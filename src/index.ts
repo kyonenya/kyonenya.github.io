@@ -18,6 +18,14 @@ const index = async (): Promise<void> => {
   formElement.addEventListener('input', () => {
     window.location.hash = encodeURIComponent(formElement.value);
   });
+  document.getElementById('about')?.addEventListener('click', (e) => {
+    e.preventDefault;
+    console.log(e.target);
+    localStorage.setItem('a2', 'true');
+  });
+  if (localStorage.getItem('a2') !== 'true') {
+    document.getElementById('about')?.classList.add('badge1');
+  }
   const rawData = await fetcher<datarable[]>(jsonPath);
   const data = enrich(rawData);
   route(data);
