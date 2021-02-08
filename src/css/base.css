@@ -6,7 +6,7 @@ body {
   font-family: "Helvetica Neue", Verdana, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif;
   word-break: break-word;  /* 行頭に、。が来るのを避ける */
   color: var(--text-color);  /* 黒の文字色 */
-  line-height: 1.6;
+  line-height: 1.65;
   font-size: 16px;
   background: var(--background-color);
   -webkit-text-size-adjust: 100%; /* iPhone横画面の表示崩れを防ぐ */
