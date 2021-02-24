@@ -1,6 +1,6 @@
 {
   "name": "kyonenya.github.io",
-  "version": "1.0.0",
+  "version": "2.1.0",
   "scripts": {
     "tsc": "tsc -w --noEmit",
     "webpack": "webpack",
