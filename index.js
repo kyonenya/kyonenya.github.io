@@ -4,31 +4,19 @@ const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const config = require('./webpack.dev.config.js');
 
-// Setup webpack-dev-middleware
+const rootDir = __dirname;
+const port = process.env['WEB_APP_PORT'] ? process.env['WEB_APP_PORT'] : 3000;
 const middleware = webpackDevMiddleware(webpack(config), {
   publicPath: config.output.publicPath,
 });
+
 const app = express();
-app.use(middleware);
-
-// Route
-app.get('/', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'index_dev.html'));
-});
-const rootDir = __dirname;
-app.use(express.static(rootDir));
-
-// Launch app
-const port = process.env['WEB_APP_PORT']
-  ? process.env['WEB_APP_PORT']
-  : 3000;
-app.listen(port, () => {
-  console.log(`Launching app... http://localhost:${port}\n`);
-});
+app
+  .use(middleware)
+  .get('/', (req, res) => res.sendFile(path.resolve(rootDir, 'index_dev.html')))
+  .use(express.static(rootDir))
+  .listen(port, () => console.log(`Launching app... http://localhost:${port}\n`))
+  ;
 
 // Register app and middleware. Required for better performance when running from play.js
-try {
-  pjs.register(app, middleware);
-} catch (error) {
-  console.log(error);
-}
+pjs.register(app, middleware);
