@@ -15,7 +15,7 @@
     "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-webpack-plugin": "^1.0.0",
-    "postcss": "^8.1.2",
+    "postcss": "^8.2.10",
     "postcss-cli": "^8.1.0",
     "postcss-csso": "^5.0.0",
     "postcss-import": "^13.0.0",
