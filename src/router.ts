@@ -28,14 +28,14 @@ export const route = (data: datarable[]): void => {
   } = queriesFor(window.location.search);
 
   window.scrollTo(0, 0);
-  document.querySelector('.el_search_form')!.classList.remove('hp_hidden');
+  document.querySelector('.el_search_input')!.classList.remove('hp_hidden');
 
   if (Number.isFinite(Number(queries.id))) {
+    document.querySelector('.el_search_input')!.classList.add('hp_hidden'); // disable search form
     return render(
       pages.article(data[data.length - parseInt(queries.id!, 10)]),
       () => route(data)
     );
-    document.querySelector('.el_search_form')!.classList.add('hp_hidden'); // disable search form
   }
   if (window.location.hash !== '') {
     return render(
