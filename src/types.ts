@@ -9,9 +9,9 @@ export type datarable = {
 };
 
 export type pagable = {
-  body: string,
-  suffix: string,
-  description: string,
-  title: string,
-  archiveHeader: string,
+  body: string;
+  suffix: string;
+  description: string;
+  title: string;
+  archiveHeader: string;
 };

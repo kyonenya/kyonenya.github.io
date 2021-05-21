@@ -15,7 +15,6 @@ export const queriesFor = (
     .slice(1)
     .split('&')
     .reduce((acc: { [k: string]: string }, aQuery) => {
-      // allow to add new keys
       const [key, value] = aQuery.split('=');
       acc[key] = decodeURIComponent(value);
       return acc;
@@ -28,35 +27,28 @@ export const route = (data: datarable[]): void => {
     tag?: string;
   } = queriesFor(window.location.search);
 
-  const searching = (hash: string, tag: string | null = null): void => {
-    if (hash === '' && tag !== null)
-      return render(pages.taggedPostList(data, tag), () => route(data));
-    if (hash === '') return render(pages.postList(data), () => route(data));
-
-    return render(
-      pages.searchedPostList(data, decodeURIComponent(hash.slice(1)), tag),
-      () => route(data)
-    );
-  };
+  window.scrollTo(0, 0);
+  document.querySelector('.el_search_input')!.classList.remove('hp_hidden');
 
   if (Number.isFinite(Number(queries.id))) {
-    window.scrollTo(0, 0);
-    render(pages.article(data[data.length - parseInt(queries.id!, 10)]), () =>
-      route(data)
+    document.querySelector('.el_search_input')!.classList.add('hp_hidden'); // disable search form
+    return render(
+      pages.article(data[data.length - parseInt(queries.id!, 10)]),
+      () => route(data)
     );
-    document.querySelector('.el_search_form')!.classList.add('hp_hidden'); // disable search form
-  } else if (queries.id == null && queries.tag) {
-    window.scrollTo(0, 0);
-    render(pages.taggedPostList(data, queries.tag), () => route(data));
-    window.onhashchange = () => {
-      searching(window.location.hash, queries.tag);
-    };
-    document.querySelector('.el_search_form')!.classList.remove('hp_hidden');
-  } else if (queries.id == null) {
-    render(pages.postList(data), () => route(data));
-    window.onhashchange = () => {
-      searching(window.location.hash);
-    };
-    document.querySelector('.el_search_form')!.classList.remove('hp_hidden');
   }
+  if (window.location.hash !== '') {
+    return render(
+      pages.searchedPostList(
+        data,
+        decodeURIComponent(window.location.hash.slice(1)),
+        queries.tag
+      ),
+      () => route(data)
+    );
+  }
+  if (queries.tag != null) {
+    return render(pages.taggedPostList(data, queries.tag), () => route(data));
+  }
+  return render(pages.postList(data), () => route(data));
 };

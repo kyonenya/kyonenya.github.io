@@ -13,15 +13,26 @@ const fetcher = async <T>(url: string): Promise<T> => {
 };
 
 const index = async (): Promise<void> => {
+  const rawData = await fetcher<datarable[]>(jsonPath);
+  const data = enrich(rawData);
+
   const formElement = <HTMLFormElement>(
     document.querySelector('.el_search_form')
   );
-  formElement.addEventListener('input', () => {
-    window.location.hash = encodeURIComponent(formElement.value);
+  const inputElement = <HTMLInputElement>(
+    document.querySelector('.el_search_input')
+  );
+  formElement.addEventListener('submit', (e) => {
+    e.preventDefault();
+    window.history.pushState(
+      null,
+      '',
+      `${window.location.search}#${inputElement.value}`
+    );
+    route(data);
   });
   notifyUpdate();
-  const rawData = await fetcher<datarable[]>(jsonPath);
-  const data = enrich(rawData);
+
   route(data);
   window.addEventListener('popstate', () => route(data));
   registerComponents(data);
