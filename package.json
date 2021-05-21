@@ -4,6 +4,7 @@
   "scripts": {
     "fmt": "prettier --write **/*.{ts,json}",
     "lint": "eslint --fix src/**/*.ts",
+    "lint:css": "stylelint src/**/*.css",
     "postcss": "postcss src/css/index.css -o dist/css/bundle.css -w",
     "tsc": "tsc -w --noEmit",
     "build": "webpack"
@@ -14,7 +15,6 @@
     "postcss-cli": "^8.1.0",
     "postcss-csso": "^5.0.0",
     "postcss-import": "^13.0.0",
-    "postcss-reporter": "^7.0.1",
     "stylelint": "^13.7.2",
     "stylelint-config-standard": "^20.0.0",
     "ts-loader": "^8.3.0",
