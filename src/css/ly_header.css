@@ -70,7 +70,7 @@
 }
 
 .el_search_icon,
-.el_search_form {
+.el_search_input {
   position: absolute;  /* フォームにアイコンを重ねる */
   right: 0;
 }
@@ -89,7 +89,7 @@
   }
 }
 
-.el_search_form {
+.el_search_input {
   top: -10px;  /* フォームがメニューを覆い隠すよう少し上に */
   cursor: pointer;
   border: 1px solid var(--monochrome-light);
@@ -102,8 +102,8 @@
   border-radius: 4px;
 }
 
-.el_search_form:focus {
-  /* フォーカスされたら可視化し、左にビョーンと伸びる */
+.el_search_input:focus {
+  /* フォーカスされたら可視化し、左に伸びる */
   opacity: 1;
   cursor: text;
 }
@@ -139,7 +139,7 @@
   }
   
   .el_search_icon,
-  .el_search_form {
+  .el_search_input {
     width: 1.9em;  /* メニュー間隔を手動で調整、右からの幅が広いほど間隔が狭まる */
   }
   
@@ -149,7 +149,7 @@
     left: 0.5em;
   }
   
-  .el_search_form:focus {
+  .el_search_input:focus {
     width: 245px;  /* サイズはナビメニューの横幅に合わせて手動調整 */
   }
 }
@@ -188,7 +188,7 @@
   
   /* 検索フォーム */
   .el_search_icon,
-  .el_search_form {
+  .el_search_input {
     width: 1.7em;  /* メニュー間隔を上書き */
   }
   
@@ -199,7 +199,7 @@
     left: 10px;
   }
   
-  .el_search_form:focus {
+  .el_search_input:focus {
     width: 300px;  /* 手動調整 */
   }
 }
