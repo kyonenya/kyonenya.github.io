@@ -15,7 +15,6 @@ export const queriesFor = (
     .slice(1)
     .split('&')
     .reduce((acc: { [k: string]: string }, aQuery) => {
-      // allow to add new keys
       const [key, value] = aQuery.split('=');
       acc[key] = decodeURIComponent(value);
       return acc;
@@ -45,18 +44,9 @@ export const route = (data: datarable[]): void => {
       route(data)
     );
     document.querySelector('.el_search_form')!.classList.add('hp_hidden'); // disable search form
-  } else if (queries.id == null && queries.tag) {
+  } else {
     window.scrollTo(0, 0);
-    render(pages.taggedPostList(data, queries.tag), () => route(data));
-    window.onhashchange = () => {
-      searching(window.location.hash, queries.tag);
-    };
-    document.querySelector('.el_search_form')!.classList.remove('hp_hidden');
-  } else if (queries.id == null) {
-    render(pages.postList(data), () => route(data));
-    window.onhashchange = () => {
-      searching(window.location.hash);
-    };
+    searching(window.location.hash, queries.tag);
     document.querySelector('.el_search_form')!.classList.remove('hp_hidden');
   }
 };

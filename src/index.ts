@@ -13,6 +13,9 @@ const fetcher = async <T>(url: string): Promise<T> => {
 };
 
 const index = async (): Promise<void> => {
+  const rawData = await fetcher<datarable[]>(jsonPath);
+  const data = enrich(rawData);
+
   const formElement = <HTMLFormElement>(
     document.querySelector('.el_search_form')
   );
@@ -21,11 +24,15 @@ const index = async (): Promise<void> => {
   );
   formElement.addEventListener('submit', (e) => {
     e.preventDefault();
-    window.location.hash = encodeURIComponent(inputElement.value);
+    window.history.pushState(
+      null,
+      '',
+      `${window.location.search}#${inputElement.value}`
+    );
+    route(data);
   });
   notifyUpdate();
-  const rawData = await fetcher<datarable[]>(jsonPath);
-  const data = enrich(rawData);
+
   route(data);
   window.addEventListener('popstate', () => route(data));
   registerComponents(data);
