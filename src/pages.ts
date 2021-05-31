@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import { templates } from './templates';
 import { search } from './search';
 import { datarable, pagable } from './types';
@@ -15,7 +16,10 @@ const article = (aData: datarable): pagable => ({
 const postList = (data: datarable[]): pagable => ({
   body: `
     <ul class="bl_posts">
-      ${data.map((aData) => templates.postList(data[aData.index])).join('')}
+      ${data
+        .filter((aData) => dayjs(aData.date).isBefore(dayjs())) // exclude reserved post
+        .map((aData) => templates.postList(data[aData.index]))
+        .join('')}
     </ul>`,
   suffix: '',
   description: '',

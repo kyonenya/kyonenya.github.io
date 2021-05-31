@@ -1,29 +1,29 @@
 import { pagable } from './types';
 
-export const render = (page: pagable, route: () => void): void => {
-  const archiveHeaderElement = <HTMLHeadingElement>(
-    document.querySelector('.el_archive_header')
-  );
-  const suffixElement = <HTMLSpanElement>(
-    document.querySelector('.el_logo_suffix')
-  );
-  const descriptionElement = <HTMLMetaElement>(
-    document.querySelector('meta[name=description]')
-  );
+const rootElement = <HTMLDivElement>document.getElementById('root');
+const archiveHeaderElement = <HTMLHeadingElement>(
+  document.querySelector('.el_archive_header')
+);
+const suffixElement = <HTMLSpanElement>(
+  document.querySelector('.el_logo_suffix')
+);
+const descriptionElement = <HTMLMetaElement>(
+  document.querySelector('meta[name=description]')
+);
 
-  document.getElementById('root')!.innerHTML = page.body;
-
+export const render = (page: pagable, invokeRoute: () => void): void => {
   // overwrite links
   const anchors: NodeListOf<HTMLAnchorElement> =
     document.querySelectorAll('a[href^="?"]');
-  anchors.forEach((_a) => {
-    const a = _a;
+  anchors.forEach((a) => {
     a.onclick = (event) => {
       event.preventDefault();
-      window.history.pushState(null, '', a.href);
-      route();
+      window.history.pushState(a.href, '', a.href);
+      invokeRoute();
     };
   });
+
+  rootElement.innerHTML = page.body;
   if (document.title !== page.title) {
     document.title = page.title;
   }

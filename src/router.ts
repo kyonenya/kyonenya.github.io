@@ -2,39 +2,18 @@ import { pages } from './pages';
 import { render } from './render';
 import { datarable } from './types';
 
-export const queriesFor = (
-  queryStr: string
-): {
-  [k: string]: string;
-} => {
-  if (queryStr === '') {
-    return {};
-  }
-
-  return queryStr // '?foo=1&bar=2'
-    .slice(1)
-    .split('&')
-    .reduce((acc: { [k: string]: string }, aQuery) => {
-      const [key, value] = aQuery.split('=');
-      acc[key] = decodeURIComponent(value);
-      return acc;
-    }, {});
-};
-
 export const route = (data: datarable[]): void => {
-  const queries: {
-    id?: string;
-    tag?: string;
-  } = queriesFor(window.location.search);
+  const searchParams = new URLSearchParams(window.location.search);
+  const id = searchParams.get('id');
+  const tag = searchParams.get('tag');
 
   window.scrollTo(0, 0);
   document.querySelector('.el_search_input')!.classList.remove('hp_hidden');
 
-  if (Number.isFinite(Number(queries.id))) {
+  if (id && Number.isFinite(Number(id))) {
     document.querySelector('.el_search_input')!.classList.add('hp_hidden'); // disable search form
-    return render(
-      pages.article(data[data.length - parseInt(queries.id!, 10)]),
-      () => route(data)
+    return render(pages.article(data[data.length - parseInt(id, 10)]), () =>
+      route(data)
     );
   }
   if (window.location.hash !== '') {
@@ -42,13 +21,13 @@ export const route = (data: datarable[]): void => {
       pages.searchedPostList(
         data,
         decodeURIComponent(window.location.hash.slice(1)),
-        queries.tag
+        tag
       ),
       () => route(data)
     );
   }
-  if (queries.tag != null) {
-    return render(pages.taggedPostList(data, queries.tag), () => route(data));
+  if (tag != null) {
+    return render(pages.taggedPostList(data, tag), () => route(data));
   }
   return render(pages.postList(data), () => route(data));
 };
