@@ -1,4 +1,4 @@
-import { pages } from './pages';
+import * as pages from './pages';
 import { render } from './render';
 import { datarable } from './types';
 

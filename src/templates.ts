@@ -12,7 +12,7 @@ const hashtag = (aTag: string): string =>
 const matchedHashtag = (aTag: string): string =>
   `<li><a href="?tag=${aTag}" class="hp_bold">#${aTag}</a></li>`;
 
-const postList = (
+export const postList = (
   aData: datarable,
   filteredTag: string | null = null,
   searched: { isMatched?: boolean; summary?: string } = {}
@@ -63,7 +63,7 @@ const postList = (
     </footer>
   </li>`;
 
-const article = (aData: datarable): string => `
+export const article = (aData: datarable): string => `
   <article>
     <header class="bl_text_header">
       <time class="bl_text_date"
@@ -84,7 +84,7 @@ const article = (aData: datarable): string => `
     </footer>
   </article>`;
 
-const searchedSummary = (aResult: {
+export const searchedSummary = (aResult: {
   beforeEllipsis: string;
   beforeText: string;
   word: string;
@@ -96,9 +96,3 @@ const searchedSummary = (aResult: {
     ${aResult.word}
   </span>
   ${aResult.afterText}${aResult.afterEllipsis}`;
-
-export const templates = {
-  postList,
-  article,
-  searchedSummary,
-};

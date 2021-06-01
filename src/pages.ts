@@ -1,9 +1,9 @@
 import dayjs from 'dayjs';
-import { templates } from './templates';
+import * as templates from './templates';
 import { search } from './search';
 import { datarable, pagable } from './types';
 
-const article = (aData: datarable): pagable => ({
+export const article = (aData: datarable): pagable => ({
   body: templates.article(aData),
   suffix: ` :: ${aData.id}`,
   description: `${aData.plainText.substr(0, 110)}…`,
@@ -13,7 +13,7 @@ const article = (aData: datarable): pagable => ({
   archiveHeader: '',
 });
 
-const postList = (data: datarable[]): pagable => ({
+export const postList = (data: datarable[]): pagable => ({
   body: `
     <ul class="bl_posts">
       ${data
@@ -27,7 +27,10 @@ const postList = (data: datarable[]): pagable => ({
   archiveHeader: '',
 });
 
-const taggedPostList = (data: datarable[], filteredTag: string): pagable => ({
+export const taggedPostList = (
+  data: datarable[],
+  filteredTag: string
+): pagable => ({
   body: `
     <ul class="bl_posts">
       ${data
@@ -45,7 +48,7 @@ const taggedPostList = (data: datarable[], filteredTag: string): pagable => ({
   archiveHeader: `#${filteredTag}`,
 });
 
-const searchedPostList = (
+export const searchedPostList = (
   data: datarable[],
   keyword: string,
   filteredTag: string | null = null
@@ -70,10 +73,3 @@ const searchedPostList = (
   title: `「${keyword}」｜placet experiri`,
   archiveHeader: `「${keyword}」`,
 });
-
-export const pages = {
-  article,
-  postList,
-  taggedPostList,
-  searchedPostList,
-};
