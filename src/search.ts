@@ -1,4 +1,4 @@
-import { templates } from './templates';
+import * as templates from './templates';
 import { datarable } from './types';
 
 export const search = (
