@@ -71,7 +71,7 @@
 
 /* 大見出し */
 .bl_text h2,
-.el_heading1 {
+.el_heading2 {
   margin: 1.5em 0 1em;
   border-left: 4px solid var(--monochrome-medium);
   padding-left: 0.45em;
@@ -89,7 +89,7 @@
 
 /* 小見出し */
 .bl_text h3,
-.el_heading2 {
+.el_heading3 {
   margin: 1em 0 0.75em; /* セクション間余白、左右の余白限界からの余白、後続要素との余白 */
   font-weight: normal;
   font-size: 112%;
