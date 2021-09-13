@@ -73,7 +73,7 @@ export const article = (aData: datarable): string => `
       </time>
     </header>
     <div class="bl_text">
-      <h2 class="bl_text_title">${aData.title}</h2>
+      <h1 class="bl_text_title">${aData.title}</h1>
       ${aData.text}
     </div>
     <footer class="bl_text_footer">
