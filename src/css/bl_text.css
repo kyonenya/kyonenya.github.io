@@ -82,7 +82,7 @@
 }
 
 .ly_cont .bl_text h2:first-child,
-.ly_cont .el_heading1:first-child {
+.ly_cont .el_heading2:first-child {
   /* 先頭の見出しだけ上余白なし */
   margin-top: 0;
 }
