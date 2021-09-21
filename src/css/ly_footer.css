@@ -10,6 +10,7 @@
 @media print {
   .ly_footer {
     background-color: unset;
+    margin-top: 0;
   }
 }
 

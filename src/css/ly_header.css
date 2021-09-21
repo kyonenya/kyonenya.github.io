@@ -210,7 +210,10 @@
   }
 
   .el_logo {
-    font-size: 30px;
-    margin-bottom: 0.75em;
+    margin-bottom: 0.5em;
+  }
+
+  .el_logo_title {
+    font-size: 26px;
   }
 }

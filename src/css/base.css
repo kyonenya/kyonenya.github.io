@@ -32,6 +32,9 @@ body {
 @media print {
   body {
     background: unset;
+    /* 段落などの途中で改ページさせない */
+    display: block;
+    break-inside: avoid;
   }
 }
 
