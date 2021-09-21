@@ -29,6 +29,12 @@ body {
   }
 }
 
+@media print {
+  body {
+    background: unset;
+  }
+}
+
 main {
   flex: 1;  /* メイン領域を上下にめいっぱい広げておいて。 */
 }

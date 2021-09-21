@@ -179,3 +179,9 @@
   padding-top: 0.5em;
   color: var(--monochrome-dark);
 }
+
+@media print {
+  .bl_text {
+    break-inside: avoid-column;
+  }
+}
