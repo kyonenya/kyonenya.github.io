@@ -19,10 +19,6 @@
   color: var(--monochrome-dark);
 }
 
-.bl_posts_date {
-  /* display: inline-flex; */
-}
-
 .bl_posts_title {
   /* 装飾 */
   letter-spacing: 1px;
