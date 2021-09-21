@@ -75,6 +75,14 @@ main {
   }
 }
 
+@media print {
+  .ly_cont,
+  .ly_header {
+    width: 85%;
+    margin: 0 auto;
+  }
+}
+
 /**
  * ヘルパークラス
  */

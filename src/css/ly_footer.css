@@ -7,6 +7,12 @@
   margin-top: 2em;
 }
 
+@media print {
+  .ly_footer {
+    background-color: unset;
+  }
+}
+
 .ly_footer_inner {
   padding: 1.25em 0;  /* フッターの高さ */
 }
