@@ -105,6 +105,12 @@
   margin: 1.5em auto;
 }
 
+@media screen and (min-width: 560px) {
+  .bl_text hr {
+    margin: 2em auto;
+  }
+}
+
 /* 順序なしリスト */
 .bl_text ul {
   margin-left: 0;
