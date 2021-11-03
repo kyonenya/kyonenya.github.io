@@ -14,5 +14,6 @@ express()
   .use(middleware)
   .get('/', (req, res) => res.sendFile(path.resolve(rootDir, 'index_dev.html')))
   .use(express.static(rootDir))
-  .listen(port, () => console.log(`Launching app... http://localhost:${port}\n`))
-  ;
+  .listen(port, () =>
+    console.log(`Launching app... http://localhost:${port}\n`)
+  );
