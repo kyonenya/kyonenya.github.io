@@ -2,7 +2,7 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/ja';
 
 // modified at
-const dateStr = '2021-11-22';
+const dateStr = '2021-11-23';
 
 export const notifyUpdate = (): void => {
   const limitDate = dayjs(dateStr).add(1, 'month');
