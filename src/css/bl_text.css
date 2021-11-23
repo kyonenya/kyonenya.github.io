@@ -122,6 +122,10 @@
   margin-bottom: 0.25em;
 }
 
+.bl_text ul ul li {
+  list-style: circle;
+}
+
 /* 順序つきリスト */
 .bl_text ol {
   margin-left: 0;
