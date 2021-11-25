@@ -2,11 +2,25 @@ import fs from 'fs';
 import CSL, { MetaData } from 'citeproc';
 import { Data } from 'csl-json';
 
+type Bibliography = {
+  text: string;
+  isTranslation: boolean;
+  data: Data;
+};
+
+function toBibliography(text: string, item: Data) {
+  return {
+    text,
+    isTranslation: !!item.translator,
+    data: item,
+  };
+}
+
 export function makeBibliography(
   data: Data[],
   style: string,
   locale: string
-): { text: string; data: Data }[] {
+): Bibliography[] {
   const items = data as MetaData[];
   const sys = {
     retrieveLocale: (_lang: string) => locale,
@@ -20,8 +34,5 @@ export function makeBibliography(
   const bib = citeproc.makeBibliography();
   if (bib === false) return [];
 
-  return bib[1].map((text, i) => ({
-    text,
-    data: items[i] as Data,
-  }));
+  return bib[1].map((text, i) => toBibliography(text, items[i] as Data));
 }
