@@ -1,15 +1,15 @@
 import fs from 'fs';
-import { MetaData } from 'citeproc';
+import { Data } from 'csl-json';
 import { fetcher, fetchText } from '../utils';
-import { formatBibliography } from './formatBibliography';
+import { makeBibliography } from './citeproc';
 
 const jsonPath = './works.json';
 const xmlPath = './src/works/locales-ja-JP.xml';
 const stylePath = './src/works/sist02modified.csl';
 
 async function index() {
-  const works = await fetcher<MetaData[]>(jsonPath);
-  return formatBibliography(
+  const works = await fetcher<Data[]>(jsonPath);
+  return makeBibliography(
     works,
     await fetchText(stylePath),
     await fetchText(xmlPath)
