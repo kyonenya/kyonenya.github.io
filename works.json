@@ -1,0 +1,68 @@
+[
+  {
+    "type": "paper-conference",
+    "title": "考えるとき話しているのか——フッサール「独白」概念をめぐって",
+    "author": [
+      {
+        "literal": "京念屋隆史"
+      }
+    ],
+    "event-date": {
+      "year": 2021,
+      "month": 11,
+      "day": 3
+    },
+    "event": "日本現象学会2020年度研究大会",
+    "event-place": "オンライン開催",
+    "URL": "https://kyonenya.github.io/",
+    "id": "conf_id_1838593020252892",
+    "note": "発表原稿https://kyonenya.github.io/"
+  },
+  {
+    "type": "article-journal",
+    "title": "考えるとき話しているのか：フッサール「独白」概念をめぐって",
+    "container-title": "現象学年報",
+    "author": [
+      {
+        "literal": "京念屋隆史"
+      }
+    ],
+    "issued": {
+      "year": 2021
+    },
+    "issue": "37",
+    "page-first": "89",
+    "page": "89-97",
+    "publisher": "日本現象学会",
+    "ISBN": "0289-825X",
+    "URL": "https://kyonenya.github.io/",
+    "id": "temp_id_5858590020652892"
+  },
+  {
+    "id": "Q23571040",
+    "type": "article-journal",
+    "title": "ウィトゲンシュタインは誰のための哲学者か",
+    "author": [
+      {
+        "given": "アンスコム",
+        "family": "G・E・M"
+      }
+    ],
+    "translator": [
+      {
+        "literal": "吉田廉"
+      },
+      {
+        "literal": "京念屋隆史"
+      }
+    ],
+    "issued": {
+      "year": 2021,
+      "month": 1
+    },
+    "container-title": "現代思想",
+    "volume": "50",
+    "issue": "2",
+    "page": "89-97"
+  }
+]
