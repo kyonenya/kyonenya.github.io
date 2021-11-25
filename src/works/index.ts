@@ -2,6 +2,7 @@ import { Data } from 'csl-json';
 import { fetcher, fetchText } from '../utils';
 import { citeproc } from './citeproc';
 import { Bibliography, toBibliographies } from './bibliography';
+import { render } from './page';
 
 const jsonPath = './works.json';
 const xmlPath = './src/works/locales-ja-JP.xml';
@@ -15,6 +16,7 @@ async function index() {
     locale: await fetchText(xmlPath),
   });
   const bibliographies = toBibliographies(texts, works);
+  render(bibliographies);
   return bibliographies;
 }
 
