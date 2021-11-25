@@ -1,7 +1,7 @@
-import fs from 'fs';
 import { Data } from 'csl-json';
 import { fetcher, fetchText } from '../utils';
-import { makeBibliography } from './citeproc';
+import { citeproc } from './citeproc';
+import { Bibliography, toBibliographies } from './bibliography';
 
 const jsonPath = './works.json';
 const xmlPath = './src/works/locales-ja-JP.xml';
@@ -9,11 +9,13 @@ const stylePath = './src/works/sist02modified.csl';
 
 async function index() {
   const works = await fetcher<Data[]>(jsonPath);
-  return makeBibliography(
-    works,
-    await fetchText(stylePath),
-    await fetchText(xmlPath)
-  );
+  const texts = citeproc({
+    data: works,
+    style: await fetchText(stylePath),
+    locale: await fetchText(xmlPath),
+  });
+  const bibliographies = toBibliographies(texts, works);
+  return bibliographies;
 }
 
 index().then((x) => console.log(x));
