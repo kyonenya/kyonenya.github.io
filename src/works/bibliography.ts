@@ -1,16 +1,9 @@
 import { Data } from 'csl-json';
 
-export type Bibliography = {
-  text: string;
-  type: BibType | undefined;
-  item: Data;
-};
+const Category = ['論文', '発表', '翻訳', '書籍'] as const;
+type Category = typeof Category[number];
 
-export const bibTypes = ['論文', '発表', '翻訳', '書籍'] as const;
-
-export type BibType = typeof bibTypes[number];
-
-function detectBibType(item: Data): BibType | undefined {
+function detectCategory(item: Data): Category | undefined {
   switch (item.type) {
     case 'article-journal':
       if (item.translator) return '翻訳';
@@ -27,17 +20,26 @@ function detectBibType(item: Data): BibType | undefined {
   }
 }
 
-export function toBibliographies(
+export type Bibliography = {
+  text: string;
+  category: Category | undefined;
+  item: Data;
+};
+
+function toBibliographies(texts: string[], items: Data[]): Bibliography[] {
+  return texts.map((text, i) => ({
+    text,
+    category: detectCategory(items[i]),
+    item: items[i],
+  }));
+}
+
+export function toBibliographyMap(
   texts: string[],
   items: Data[]
-): Bibliography[] {
-  return texts.map((text, i) => {
-    const item = items[i];
-
-    return {
-      text,
-      type: detectBibType(item),
-      item,
-    };
-  });
+): Map<Category, Bibliography[]> {
+  const bibs = toBibliographies(texts, items);
+  return new Map(
+    Category.map((c) => [c, bibs.filter((bib) => bib.category === c)])
+  );
 }

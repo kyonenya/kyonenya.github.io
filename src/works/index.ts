@@ -1,7 +1,7 @@
 import { Data } from 'csl-json';
 import { fetcher, fetchText } from '../utils';
 import { citeproc } from './citeproc';
-import { Bibliography, toBibliographies } from './bibliography';
+import { toBibliographyMap } from './bibliography';
 import { render } from './page';
 
 const jsonPath = './works.json';
@@ -15,9 +15,10 @@ async function index() {
     style: await fetchText(stylePath),
     locale: await fetchText(xmlPath),
   });
-  const bibs = toBibliographies(texts, works);
-  console.log(bibs);
-  render(bibs);
+  const bibs = toBibliographyMap(texts, works);
+  console.log(bibs.get('論文'));
+  console.log(bibs.get('発表'));
+  //  render(bibs);
 }
 
 index().catch((e) => console.error(e));
