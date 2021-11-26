@@ -9,7 +9,7 @@ const Works = (bibs: Bibliography[]): string => `
   <div class="bl_text">
     <h2>業績一覧</h2>
     <ol>
-      ${bibs.map((bib) => Work(bib.text))}
+      ${bibs.map((bib) => Work(bib.text)).join('')}
     </ol>
   </div>
 `;

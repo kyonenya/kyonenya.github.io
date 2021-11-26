@@ -1,21 +1,17 @@
 import CSL, { MetaData } from 'citeproc';
 import { Data } from 'csl-json';
 
-export function citeproc({
-  data,
-  style,
-  locale,
-}: {
-  data: Data[];
+export function citeproc(props: {
+  items: Data[];
   style: string;
   locale: string;
 }): string[] {
-  const items = data as MetaData[];
+  const items = props.items as MetaData[];
   const sys = {
-    retrieveLocale: (_lang: string) => locale,
+    retrieveLocale: (_lang: string) => props.locale,
     retrieveItem: (id: string) => items.find((item) => id === item.id)!,
   };
-  const citeproc = new CSL.Engine(sys, style);
+  const citeproc = new CSL.Engine(sys, props.style);
 
   citeproc.setOutputFormat('text');
 
@@ -23,5 +19,5 @@ export function citeproc({
   const bib = citeproc.makeBibliography();
   if (bib === false) return [];
 
-  return bib[1];
+  return bib[1].map((text) => text.replace(/\n$/, ''));
 }

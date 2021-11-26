@@ -11,13 +11,13 @@ const stylePath = './src/works/sist02modified.csl';
 async function index() {
   const works = await fetcher<Data[]>(jsonPath);
   const texts = citeproc({
-    data: works,
+    items: works,
     style: await fetchText(stylePath),
     locale: await fetchText(xmlPath),
   });
-  const bibliographies = toBibliographies(texts, works);
-  render(bibliographies);
-  return bibliographies;
+  const bibs = toBibliographies(texts, works);
+  console.log(bibs);
+  render(bibs);
 }
 
-index().then((x) => console.log(x));
+index().catch((e) => console.error(e));
