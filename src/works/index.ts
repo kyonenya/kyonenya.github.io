@@ -1,14 +1,9 @@
 import { Data } from 'csl-json';
+import { renderRoot } from '../render';
 import { fetcher, fetchText } from '../utils';
 import { citeproc } from './citeproc';
 import { toBibliographyMap } from './bibliography';
 import { Works } from './Works';
-
-const rootElement = <HTMLDivElement>document.getElementById('root');
-
-function renderRoot(html: string) {
-  rootElement.innerHTML = html;
-}
 
 const jsonPath = './works.json';
 const xmlPath = './src/works/locales-ja-JP.xml';
