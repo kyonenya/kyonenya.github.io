@@ -6,7 +6,9 @@ export type Bibliography = {
   item: Data;
 };
 
-export type BibType = '論文' | '発表' | '翻訳' | '書籍';
+export const bibTypes = ['論文', '発表', '翻訳', '書籍'] as const;
+
+export type BibType = typeof bibTypes[number];
 
 function detectBibType(item: Data): BibType | undefined {
   switch (item.type) {
