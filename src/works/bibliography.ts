@@ -1,7 +1,7 @@
 import { Data } from 'csl-json';
 
-const Category = ['論文', '発表', '翻訳', '書籍'] as const;
-type Category = typeof Category[number];
+export const Category = ['論文', '発表', '翻訳', '書籍'] as const;
+export type Category = typeof Category[number];
 
 function detectCategory(item: Data): Category | undefined {
   switch (item.type) {
@@ -34,10 +34,12 @@ function toBibliographies(texts: string[], items: Data[]): Bibliography[] {
   }));
 }
 
+export type BibliographyMap = Map<Category, Bibliography[]>;
+
 export function toBibliographyMap(
   texts: string[],
   items: Data[]
-): Map<Category, Bibliography[]> {
+): BibliographyMap {
   const bibs = toBibliographies(texts, items);
   return new Map(
     Category.map((c) => [c, bibs.filter((bib) => bib.category === c)])

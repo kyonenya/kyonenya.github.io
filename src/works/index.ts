@@ -2,7 +2,13 @@ import { Data } from 'csl-json';
 import { fetcher, fetchText } from '../utils';
 import { citeproc } from './citeproc';
 import { toBibliographyMap } from './bibliography';
-import { render } from './page';
+import { Works } from './Works';
+
+const rootElement = <HTMLDivElement>document.getElementById('root');
+
+function renderRoot(html: string) {
+  rootElement.innerHTML = html;
+}
 
 const jsonPath = './works.json';
 const xmlPath = './src/works/locales-ja-JP.xml';
@@ -15,10 +21,8 @@ async function index() {
     style: await fetchText(stylePath),
     locale: await fetchText(xmlPath),
   });
-  const bibs = toBibliographyMap(texts, works);
-  console.log(bibs.get('論文'));
-  console.log(bibs.get('発表'));
-  //  render(bibs);
+  const bibMap = toBibliographyMap(texts, works);
+  renderRoot(Works(bibMap));
 }
 
 index().catch((e) => console.error(e));
