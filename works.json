@@ -1,68 +1,85 @@
 [
   {
-    "type": "paper-conference",
-    "title": "考えるとき話しているのか——フッサール「独白」概念をめぐって",
-    "author": [
-      {
-        "literal": "京念屋隆史"
-      }
-    ],
-    "event-date": {
-      "year": 2021,
-      "month": 11,
-      "day": 3
-    },
-    "event": "日本現象学会2020年度研究大会",
-    "event-place": "オンライン開催",
-    "URL": "https://kyonenya.github.io/",
-    "id": "conf_id_1838593020252892",
-    "note": "[発表原稿](https://kyonenya.github.io/)"
-  },
-  {
-    "type": "article-journal",
-    "title": "考えるとき話しているのか：フッサール「独白」概念をめぐって",
-    "container-title": "現象学年報",
-    "author": [
-      {
-        "literal": "京念屋隆史"
-      }
-    ],
-    "issued": {
-      "year": 2021
-    },
-    "issue": "37",
-    "page-first": "89",
-    "page": "89-97",
-    "publisher": "日本現象学会",
-    "ISBN": "0289-825X",
-    "URL": "https://kyonenya.github.io/",
-    "id": "temp_id_5858590020652892"
-  },
-  {
-    "id": "Q23571040",
+    "id": 6,
     "type": "article-journal",
     "title": "ウィトゲンシュタインは誰のための哲学者か",
-    "author": [
-      {
-        "given": "アンスコム",
-        "family": "G・E・M"
-      }
-    ],
-    "translator": [
-      {
-        "literal": "吉田廉"
-      },
-      {
-        "literal": "京念屋隆史"
-      }
-    ],
-    "issued": {
-      "year": 2021,
-      "month": 1
-    },
-    "container-title": "現代思想",
-    "volume": "50",
-    "issue": "2",
-    "page": "89-97"
+    "author": [{ "literal": "G・E・M・アンスコム" }],
+    "translator": [{ "literal": "吉田廉" }, { "literal": "京念屋隆史" }],
+    "issued": { "date-parts": [2022, 1] },
+    "container-title": "現代思想〔2022年1月臨時増刊号 総特集＝ウィトゲンシュタイン〕",
+    "publisher": "青土社",
+    "volume": 50,
+    "issue": 2,
+    "page": null,
+    "ISSN": null,
+    "URL": null,
+    "note": "〔2022年1月刊行予定〕"
+  },
+  {
+    "id": 5,
+    "type": "article-journal",
+    "title": "考えるとき話しているのか——フッサール「独白」概念をめぐって",
+    "author": [{ "literal": "京念屋隆史" }],
+    "issued": { "date-parts": [2021, 11, 18] },
+    "container-title": "現象学年報",
+    "publisher": "日本現象学会",
+    "volume": null,
+    "issue": 37,
+    "page": "89-97",
+    "ISSN": "0289-825X",
+    "URL": null,
+    "note": null
+  },
+  {
+    "id": 4,
+    "type": "paper-conference",
+    "title": "考えるとき話しているのか——フッサール「独白」概念をめぐって",
+    "author": [{ "literal": "京念屋隆史" }],
+    "event": "日本現象学会2020年度研究大会",
+    "event-place": "オンライン開催",
+    "event-date": { "date-parts": [2020, 11, 28] },
+    "URL": "https://kyonenya.github.io/docs/201128_考えるとき話しているのか.pdf",
+    "note": null
+  },
+  {
+    "id": 3,
+    "type": "article-journal",
+    "title": "なぜ時間と変化は不可分なのか――フッサール初期時間論における「絶対的意識流」の比喩",
+    "author": [{ "literal": "京念屋隆史" }],
+    "issued": { "date-parts": [2019, 7, 11] },
+    "container-title": "哲学の探求",
+    "publisher": "哲学若手研究者フォーラム",
+    "volume": null,
+    "issue": 46,
+    "page": "151–167",
+    "ISSN": "0916-2208",
+    "URL": "http://www.wakate-forum.org/data/tankyu/content46.php",
+    "note": null
+  },
+  {
+    "id": 2,
+    "type": "paper-conference",
+    "title": "なぜ時間と変化は不可分なのか――フッサール初期時間論における「絶対的意識流」の比喩",
+    "author": [{ "literal": "京念屋隆史" }],
+    "event": "2018年度哲学若手研究者フォーラム",
+    "event-place": "国立オリンピック記念青少年総合センター",
+    "event-date": { "date-parts": [2018, 7, 22] },
+    "URL": null,
+    "note": null
+  },
+  {
+    "id": 1,
+    "type": "article-journal",
+    "title": "言語行為の根源的演技性――デリダ－サール論争について",
+    "author": [{ "literal": "京念屋隆史" }],
+    "issued": { "date-parts": [2016, 3, 25] },
+    "container-title": "早稲田社会科学総合研究 別冊 2015年度学生論文集",
+    "publisher": "早稲田大学社会科学学会",
+    "volume": null,
+    "issue": null,
+    "page": "31−44",
+    "ISSN": "1345-7640",
+    "URL": "http://hdl.handle.net/2065/47966",
+    "note": null
   }
 ]
