@@ -1,12 +1,13 @@
 import CSL, { MetaData } from 'citeproc';
 import { Data } from 'csl-json';
+import { removeNull } from '../utils';
 
 export function citeproc(props: {
   items: Data[];
   style: string;
   locale: string;
 }): string[] {
-  const items = props.items as MetaData[];
+  const items = validateJson(props.items) as MetaData[];
   const sys = {
     retrieveLocale: (_lang: string) => props.locale,
     retrieveItem: (id: string) => items.find((item) => id === item.id)!,
@@ -20,4 +21,11 @@ export function citeproc(props: {
   if (bib === false) return [];
 
   return bib[1].map((text) => text.replace(/\n$/, ''));
+}
+
+function validateJson(items: Data[]): Data[] {
+  return items.map((item) => ({
+    ...removeNull(item),
+    id: item.id.toString(),
+  }));
 }

@@ -73,12 +73,9 @@
   <macro name="access">
     <group>
       <choose>
-        <if type="article-journal" match="any">
+        <if type="article-journal paper-conference" match="any">
           <text value="[PDF]"/>
         </if>
-        <else-if type="paper-conference" match="any">
-          <text value="[要旨]"/>
-        </else-if>
         <else>
           <text value="[リンク]"/>
         </else>

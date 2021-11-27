@@ -16,3 +16,9 @@ export const fetchText = async (url: string): Promise<string> => {
   if (!response.ok) throw new Error(response.statusText);
   return await response.text();
 };
+
+export function removeNull<T>(obj: T) {
+  return Object.fromEntries(
+    Object.entries(obj).filter(([_key, value]: [string, T]) => value !== null)
+  ) as T;
+}
