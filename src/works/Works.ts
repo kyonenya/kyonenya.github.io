@@ -1,3 +1,4 @@
+import { isNew } from '../utils';
 import { Bibliography, BibliographyMap, Category } from './bibliography';
 
 const Text = (text: string) =>

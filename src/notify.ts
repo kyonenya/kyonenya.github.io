@@ -1,20 +1,16 @@
-import dayjs from 'dayjs';
-import 'dayjs/locale/ja';
+import { isNew } from './utils';
 
-// modified at
-const dateStr = '2021-11-23';
+const modifiedAt = '2021-11-27';
+const expirationDays = 30;
+const aboutElement = document.getElementById('about')!;
 
 export const notifyUpdate = (): void => {
-  const limitDate = dayjs(dateStr).add(1, 'month');
-  if (dayjs().isAfter(limitDate)) {
-    return;
-  }
+  if (!isNew(modifiedAt, 30)) return;
 
-  const aboutElement = document.getElementById('about')!;
   aboutElement.addEventListener('click', () => {
-    localStorage.setItem(dateStr, 'true');
+    localStorage.setItem(modifiedAt, 'true');
   });
-  if (localStorage.getItem(dateStr) !== 'true') {
+  if (localStorage.getItem(modifiedAt) !== 'true') {
     aboutElement.classList.add('el_badge');
   }
 };

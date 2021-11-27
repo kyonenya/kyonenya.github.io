@@ -1,10 +1,5 @@
-import dayjs from 'dayjs';
-import 'dayjs/locale/ja';
-import relativeTime from 'dayjs/plugin/relativeTime';
+import dayjs from './dayjs';
 import { datarable } from './types';
-
-dayjs.extend(relativeTime);
-dayjs.locale('ja');
 
 const hashtag = (aTag: string): string =>
   `<li><a href="?tag=${aTag}">#${aTag}</a></li>`;
