@@ -1,4 +1,4 @@
-import CSL, { MetaData } from 'citeproc';
+import { Engine, MetaData } from 'citeproc';
 import { Data } from 'csl-json';
 import { removeNull } from '../utils';
 
@@ -12,7 +12,7 @@ export function citeproc(props: {
     retrieveLocale: (_lang: string) => props.locale,
     retrieveItem: (id: string) => items.find((item) => id === item.id)!,
   };
-  const citeproc = new CSL.Engine(sys, props.style);
+  const citeproc = new Engine(sys, props.style);
 
   citeproc.setOutputFormat('text');
 
