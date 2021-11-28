@@ -24,6 +24,10 @@ module.exports = {
           },
         ],
       },
+      {
+        test: /\.(xml|csl)/,
+        type: 'asset/source',
+      },
     ],
   },
   resolve: {
