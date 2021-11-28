@@ -51,7 +51,7 @@
   content: attr(data-badge);
   position: absolute;  /* 基準に対して相対配置 */
   top: -0.6em;
-  right: -1.2em;
+  right: -1.25em;
   font-size: 0.7em;
   background: var(--accent-color);
   color: white;
