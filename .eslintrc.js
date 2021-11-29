@@ -17,16 +17,11 @@ module.exports = {
     project: './tsconfig.eslint.json',
     tsconfigRootDir: __dirname,
   },
-  plugins: [],
-  globals: {
-    dayjs: false,
-    dayjs_plugin_relativeTime: false,
-  },
   rules: {
-    'import/prefer-default-export': 0,
-    'import/extensions': 0,
+    // 'import/prefer-default-export': 'off',
+    // 'import/extensions': 'off',
     indent: ['error', 2, { ignoredNodes: ['TemplateLiteral *'] }],
-    '@typescript-eslint/no-non-null-assertion': 0,
-    'no-console': 0,
+    // '@typescript-eslint/no-non-null-assertion': 'off',
+    // 'no-console': 'off',
   },
 };

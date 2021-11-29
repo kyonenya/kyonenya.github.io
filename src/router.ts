@@ -8,10 +8,10 @@ export const route = (data: datarable[]): void => {
   const tag = searchParams.get('tag');
 
   window.scrollTo(0, 0);
-  document.querySelector('.el_search_input')!.classList.remove('hp_hidden');
+  document.querySelector('.el_search_input')?.classList.remove('hp_hidden');
 
   if (id && Number.isFinite(Number(id))) {
-    document.querySelector('.el_search_input')!.classList.add('hp_hidden'); // disable search form
+    document.querySelector('.el_search_input')?.classList.add('hp_hidden'); // disable search form
     return render(pages.article(data[data.length - parseInt(id, 10)]), () =>
       route(data)
     );

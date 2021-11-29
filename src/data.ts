@@ -6,6 +6,7 @@ export const enrich = (data: datarable[]): datarable[] =>
     aData.id = data.length - idx;
     aData.index = idx;
     aData.text = aData.text.replace(/——/g, '──'); // ダブルダッシュ -> 罫線2つ
+    // eslint-disable-next-line no-irregular-whitespace
     aData.text = aData.text.replace(/　/g, ' '); // 全角スペース -> 半角スペース
     aData.title = aData.title.replace(/——/g, '──');
     aData.plainText = aData.text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, '');

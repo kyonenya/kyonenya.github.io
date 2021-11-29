@@ -1,22 +1,29 @@
-import { isNew } from '../utils';
-import { Citation, CitationMap, toCitationMap, Genre } from './citation';
+import { Citation, toCitationMap, Genre } from './citation';
+import { isNewCitation } from './citation-date';
 
-const Text = (text: string) =>
+const Text = (text: string): string =>
   text.replace(
     /\[(.+?)\]\((.+?)\)/g,
-    (_match, title, url) => `<a href="${url}">${title}</a>`
+    (_match, title: string, url: string) => `<a href="${url}">${title}</a>`
   );
 
-const Item = (text: string) => `<li>${Text(text)}</li>`;
+const Item = (text: string): string => `<li>${Text(text)}</li>`;
 
-const HilightedItem = (text: string) => `<string>${Item(text)}</strong>`;
+const HilightedItem = (text: string): string =>
+  `<strong>${Item(text)}</strong>`;
 
 const List = (citations: Citation[] | undefined, genre: Genre): string => {
   if (!citations || citations.length === 0) return '';
   return `
     <h3>${genre}</h3>
     <ol>
-      ${citations.map((citation) => Item(citation._bibliographyText)).join('')}
+      ${citations
+        .map((citation) =>
+          (isNewCitation(citation) ? HilightedItem : Item)(
+            citation._bibliographyText
+          )
+        )
+        .join('')}
     </ol>`;
 };
 

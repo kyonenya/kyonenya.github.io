@@ -11,7 +11,7 @@ const descriptionElement = <HTMLMetaElement>(
   document.querySelector('meta[name=description]')
 );
 
-export function renderRoot(html: string) {
+export function renderRoot(html: string): void {
   rootElement.innerHTML = html;
 }
 
