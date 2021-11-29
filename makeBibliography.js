@@ -2,9 +2,9 @@ const fs = require('fs');
 const path = require('path');
 const CSL = require('citeproc');
 
-const worksPath = path.resolve(__dirname, 'works.json');
-const stylePath = path.resolve(__dirname, 'src', 'works', 'sist02modified.csl');
-const localePath = path.resolve(__dirname, 'src', 'works', 'locales-ja-JP.xml');
+const worksPath = path.resolve('works.json');
+const stylePath = path.resolve('assets', 'citeproc', 'sist02modified.csl');
+const localePath = path.resolve('assets', 'citeproc', 'locales-ja-JP.xml');
 
 /** @url https://stackoverflow.com/questions/286141/remove-blank-attributes-from-an-object-in-javascript */
 function removeNull(obj) {
@@ -44,11 +44,11 @@ function AppendBibliopraphy(items) {
   }));
 }
 
-function index() {
+function makeBibliography() {
   const works = JSON.parse(fs.readFileSync(worksPath, 'utf8'));
   const newWorks = AppendBibliopraphy(works);
   fs.writeFileSync(worksPath, JSON.stringify(newWorks));
   console.log('success!');
 }
 
-index();
+makeBibliography();

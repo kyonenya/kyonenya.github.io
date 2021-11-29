@@ -11,12 +11,12 @@
     "build": "webpack"
   },
   "dependencies": {
-    "citeproc": "^2.4.62",
     "dayjs": "^1.10.4"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.24.0",
     "@typescript-eslint/parser": "^4.24.0",
+    "citeproc": "^2.4.62",
     "csl-json": "^0.1.0",
     "eslint": "^7.26.0",
     "eslint-config-prettier": "^8.3.0",
@@ -35,5 +35,8 @@
     "webpack": "^5.37.1",
     "webpack-cli": "^4.7.0",
     "webpack-dev-middleware": "^4.3.0"
+  },
+  "prettier": {
+    "singleQuote": true
   }
 }
