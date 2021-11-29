@@ -10,9 +10,3 @@ export const fetcher = async <T>(url: string): Promise<T> => {
   if (!response.ok) throw new Error(response.statusText);
   return (await response.json()) as T;
 };
-
-export function removeNull<T extends Object>(obj: T) {
-  return Object.fromEntries(
-    Object.entries(obj).filter(([_key, value]) => value !== null)
-  ) as T;
-}

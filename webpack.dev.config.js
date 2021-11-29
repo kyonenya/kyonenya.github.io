@@ -24,13 +24,9 @@ module.exports = {
           },
         ],
       },
-      {
-        test: /\.(xml|csl)/,
-        type: 'asset/source',
-      },
     ],
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', 'jsx'],
+    extensions: ['.ts', '.js'],
   },
 };

@@ -6,12 +6,13 @@ const config = require('./webpack.dev.config.js');
 
 const rootDir = __dirname;
 const port = process.env['WEB_APP_PORT'] ? process.env['WEB_APP_PORT'] : 3000;
-const middleware = webpackDevMiddleware(webpack(config), {
-  publicPath: config.output.publicPath,
-});
 
 express()
-  .use(middleware)
+  .use(
+    webpackDevMiddleware(webpack(config), {
+      publicPath: config.output.publicPath,
+    })
+  )
   .get('/', (req, res) => res.sendFile(path.resolve(rootDir, 'index_dev.html')))
   .get('/works', (req, res) =>
     res.sendFile(path.resolve(rootDir, 'works_dev.html'))

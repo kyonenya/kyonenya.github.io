@@ -1,5 +1,5 @@
 import { isNew } from '../utils';
-import { Bibliography, BibliographyMap, Category } from './bibliography';
+import { Citation, CitationMap, toCitationMap, Category } from './bibliography';
 
 const Text = (text: string) =>
   text.replace(
@@ -11,18 +11,25 @@ const Item = (text: string) => `<li>${Text(text)}</li>`;
 
 const HilightedItem = (text: string) => `<string>${Item(text)}</strong>`;
 
-const List = (bibs: Bibliography[] | undefined, category: Category): string => {
-  if (!bibs || bibs.length === 0) return '';
+const List = (
+  citations: Citation[] | undefined,
+  category: Category
+): string => {
+  if (!citations || citations.length === 0) return '';
   return `
     <h3>${category}</h3>
     <ol>
-      ${bibs.map((bib) => Item(bib.text)).join('')}
+      ${citations.map((citation) => Item(citation._bibliographyText)).join('')}
     </ol>`;
 };
 
-export const Works = (bibMap: BibliographyMap): string => `
+export const Works = (citations: Citation[]): string => {
+  const citationMap = toCitationMap(citations);
+
+  return `
   <section class="ly_cont">
   <div class="bl_text">
     <h2>業績一覧</h2>
-    ${Category.map((c) => List(bibMap.get(c), c)).join('')}
+    ${Category.map((c) => List(citationMap.get(c), c)).join('')}
   </div>`;
+};
