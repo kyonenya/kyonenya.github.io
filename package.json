@@ -6,7 +6,8 @@
     "lint": "eslint --fix src/**/*.ts",
     "lint:css": "stylelint --fix src/**/*.css",
     "postcss": "postcss src/css/index.css -o dist/css/bundle.css -w",
-    "tsc": "tsc -w --noEmit",
+    "_tsc": "tsc -w --noEmit",
+    "makeBibliography": "node makeBibliography.js",
     "build": "webpack"
   },
   "dependencies": {
