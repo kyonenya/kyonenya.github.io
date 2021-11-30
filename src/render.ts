@@ -11,6 +11,10 @@ const descriptionElement = <HTMLMetaElement>(
   document.querySelector('meta[name=description]')
 );
 
+export function renderRoot(html: string): void {
+  rootElement.innerHTML = html;
+}
+
 export const render = (page: pagable, invokeRoute: () => void): void => {
   // overwrite links
   const anchors: NodeListOf<HTMLAnchorElement> =
@@ -23,7 +27,7 @@ export const render = (page: pagable, invokeRoute: () => void): void => {
     };
   });
 
-  rootElement.innerHTML = page.body;
+  renderRoot(page.body);
   if (document.title !== page.title) {
     document.title = page.title;
   }

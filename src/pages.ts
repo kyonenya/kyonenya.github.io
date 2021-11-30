@@ -1,4 +1,4 @@
-import dayjs from 'dayjs';
+import dayjs from './dayjs';
 import * as templates from './templates';
 import { search } from './search';
 import { datarable, pagable } from './types';

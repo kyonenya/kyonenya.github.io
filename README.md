@@ -2,7 +2,7 @@
 
 ## これはどんなサイトですか
 
-静的なHTMLホスティングサイトでも動作するように、JavaScriptのみで構築したサーバーレスなブログサイト。フレームワークを使わず、Vanilla JS（後にTypeScript）で実装している。
+静的なHTMLホスティングサイトでも動作するように、JavaScriptのみで構築したサーバーレスなブログサイト。フレームワークを使わず、Vanilla JS（TypeScript）で実装している。
 
 ## 機能一覧
 
@@ -55,3 +55,10 @@
 - レスポンシブ対応、ダークモード対応。
 - サイトアイコンはSVGで描画している。引用符のアイコンに色をつけたもの。
 - CSSの命名規則は[PRECSS](http://precss.io/ja/) に則る。参考書籍：『CSS設計完全ガイド』（[Amazon](https://www.amazon.co.jp/dp/429711173X)）
+
+## Licencing
+
+- `locales-ja-JP.xml` in this repository is under the [CC BY-SA 3.0 Unported licence](https://creativecommons.org/licenses/by-sa/3.0/deed.ja) ©︎ [CitationStyles.org](https://citationstyles.org/)
+  - [citation-style-language/locales: Official repository for Citation Style Language (CSL) locale files.](https://github.com/citation-style-language/locales)
+- `sist02modified.csl` in this repository is under the [CC BY-SA 3.0 Unported licence](https://creativecommons.org/licenses/by-sa/3.0/deed.ja)
+  - This files is modified. Original: [sist02 – Zotero Style Repository](http://www.zotero.org/styles/sist02)

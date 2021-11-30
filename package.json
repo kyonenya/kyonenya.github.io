@@ -6,31 +6,37 @@
     "lint": "eslint --fix src/**/*.ts",
     "lint:css": "stylelint --fix src/**/*.css",
     "postcss": "postcss src/css/index.css -o dist/css/bundle.css -w",
-    "tsc": "tsc -w --noEmit",
+    "_tsc": "tsc -w --noEmit",
+    "makeBibliography": "node makeBibliography.js",
     "build": "webpack"
   },
   "dependencies": {
-    "dayjs": "^1.10.4",
-    "postcss": "^8.3.0",
-    "postcss-csso": "^5.0.1",
-    "postcss-import": "^14.0.2",
-    "ts-loader": "^9.2.1",
-    "webpack": "^5.37.1"
+    "dayjs": "^1.10.7"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.24.0",
     "@typescript-eslint/parser": "^4.24.0",
+    "citeproc": "^2.4.62",
+    "csl-json": "^0.1.0",
     "eslint": "^7.26.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.23.2",
     "express": "^4.17.1",
+    "postcss": "^8.3.0",
     "postcss-cli": "^8.3.1",
+    "postcss-csso": "^5.0.1",
+    "postcss-import": "^14.0.2",
     "prettier": "^2.3.0",
     "stylelint": "^13.13.1",
     "stylelint-cli": "^1.3.0",
     "stylelint-config-standard": "^22.0.0",
+    "ts-loader": "^9.2.1",
     "typescript": "^4.2.4",
+    "webpack": "^5.37.1",
     "webpack-cli": "^4.7.0",
     "webpack-dev-middleware": "^4.3.0"
+  },
+  "prettier": {
+    "singleQuote": true
   }
 }

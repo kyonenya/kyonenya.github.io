@@ -1,33 +1,19 @@
-const path = require('path');
+const productionConfig = require('./webpack.config');
 
 module.exports = {
+  ...productionConfig,
   mode: 'development',
-  entry: './src/index.ts',
-  output: {
-    filename: 'bundle.js',
-    path: __dirname,
-  },
-  watchOptions: {
-    ignored: '**', // disable file watching
-  },
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
-        exclude: /node_modules/,
+        ...productionConfig.module.rules[0],
         use: [
           {
             loader: 'ts-loader',
-            options: {
-              transpileOnly: true,
-            },
+            options: { transpileOnly: true },
           },
         ],
       },
     ],
   },
-  resolve: {
-    extensions: ['.ts', '.tsx', '.js', 'jsx'],
-  },
-  optimization: {},
 };

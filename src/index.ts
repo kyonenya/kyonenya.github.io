@@ -31,10 +31,8 @@ const bootstrap = (data: datarable[]): void => {
   registerComponents(data);
 };
 
-const index = async (): Promise<void> => {
+void (async function index() {
   const rawData = await fetcher<datarable[]>(jsonPath);
   const data = enrich(rawData);
   bootstrap(data);
-};
-
-index().catch((err) => console.error(err));
+})();
