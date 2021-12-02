@@ -12,8 +12,7 @@ export const route = (data: datarable[]): void => {
 
   if (id && Number.isFinite(Number(id))) {
     document.querySelector('.el_search_input')?.classList.add('hp_hidden'); // disable search form
-    return render(pages.article(data[data.length - parseInt(id, 10)]), () =>
-      route(data)
+    return render(pages.article(data[data.length - parseInt(id, 10)])
     );
   }
   if (window.location.hash !== '') {
@@ -22,12 +21,11 @@ export const route = (data: datarable[]): void => {
         data,
         decodeURIComponent(window.location.hash.slice(1)),
         tag
-      ),
-      () => route(data)
+      )
     );
   }
   if (tag != null) {
-    return render(pages.taggedPostList(data, tag), () => route(data));
+    return render(pages.taggedPostList(data, tag));
   }
-  return render(pages.postList(data), () => route(data));
+  return render(pages.postList(data));
 };

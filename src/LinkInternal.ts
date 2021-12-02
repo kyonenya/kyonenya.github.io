@@ -1,4 +1,4 @@
-export function registerLinkInternal(invokeRoute: () => void) {
+export function registerLinkInternal(invokeRoute: () => void): void {
   class LinkInternal extends HTMLElement {
     constructor() {
       super();
@@ -8,7 +8,7 @@ export function registerLinkInternal(invokeRoute: () => void) {
       const a = document.createElement('a');
       a.onclick = (e) => {
         e.preventDefault();
-        window.history.pushState(href, (href ?? '').toString(), href);
+        window.history.pushState(href, href ?? '', href);
         invokeRoute();
       };
       const slot = document.createElement('slot');

@@ -15,7 +15,7 @@ export function renderRoot(html: string): void {
   rootElement.innerHTML = html;
 }
 
-export const render = (page: pagable, invokeRoute: () => void): void => {
+export const render = (page: pagable): void => {
   renderRoot(page.body);
   if (document.title !== page.title) {
     document.title = page.title;
