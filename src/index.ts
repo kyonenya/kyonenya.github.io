@@ -1,4 +1,4 @@
-import { Post, toPost } from './post';
+import { jsonToPost, Post, JSONPost } from './post';
 import { route } from './router';
 import { activateSearchForm } from './search';
 import { registerBlogCard } from './BlogCard';
@@ -20,7 +20,7 @@ const bootstrap = (posts: Post[]): void => {
 };
 
 void (async function index() {
-  const rawData = await fetcher<Post[]>(jsonPath);
-  const posts = toPost(rawData);
+  const rawData = await fetcher<JSONPost[]>(jsonPath);
+  const posts = jsonToPost(rawData);
   bootstrap(posts);
 })();

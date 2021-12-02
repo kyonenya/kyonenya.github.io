@@ -14,7 +14,7 @@ export const search = (
   const wordIndex = post.plainText.indexOf(word);
   const beforeIndex = wordIndex - beforeLength;
   const afterIndex = wordIndex + word.length;
-  const isMatched = wordIndex !== -1 || post.title.includes(word);
+  const isMatched = wordIndex !== -1 || post.title?.includes(word);
 
   if (word === '') return {};
   if (wordIndex === -1) {
