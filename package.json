@@ -1,6 +1,6 @@
 {
   "name": "kyonenya.github.io",
-  "version": "2.1.2",
+  "version": "2.2.0",
   "scripts": {
     "fmt": "prettier --write **/*.{ts,js,json}",
     "lint": "eslint --fix src/**/*.ts",
