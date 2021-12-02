@@ -2,10 +2,10 @@ import dayjs from './dayjs';
 import { datarable } from './types';
 
 const hashtag = (aTag: string): string =>
-  `<li><a href="?tag=${aTag}">#${aTag}</a></li>`;
+  `<li><link-internal href="?tag=${aTag}">#${aTag}</link-internal></li>`;
 
 const matchedHashtag = (aTag: string): string =>
-  `<li><a href="?tag=${aTag}" class="hp_bold">#${aTag}</a></li>`;
+  `<li><link-internal href="?tag=${aTag}" class="hp_bold">#${aTag}</link-internal></li>`;
 
 export const postList = (
   aData: datarable,
@@ -22,7 +22,7 @@ export const postList = (
       }"
     data-id=${aData.id}
   >
-    <a href="?id=${aData.id}">
+    <link-internal href="?id=${aData.id}">
       <header class="bl_posts_header">
         <time class="bl_posts_date" 
           datetime="${dayjs(aData.date).format('YYYY-MM-DD HH:mm')}"
@@ -42,7 +42,7 @@ export const postList = (
           }
         </p>
       </div>
-    </a>
+    </link-internal>
     <footer class="bl_posts_footer">
       <span class="bl_posts_dateago">${dayjs(aData.date).fromNow()}</span>
       <ul class="bl_tags">

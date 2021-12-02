@@ -1,15 +1,14 @@
 import dayjs from 'dayjs';
 import { datarable } from './types';
 
-export const registerComponents = (data: datarable[]): void => {
+export const registerBlogCard = (data: datarable[]): void => {
   class BlogCard extends HTMLElement {
     constructor() {
       super();
-      this.id = this.getAttribute('id')!;
-      const id = parseInt(this.id, 10);
+      const id = parseInt(this.getAttribute('id')!, 10);
       this.innerHTML = `
         <div class="bl_blogcard">
-          <a href="?id=${this.id}">
+          <link-internal href="?id=${this.id}">
             <header class="bl_blogcard_header">
               <div class="bl_blogcard_icon"></div>
               <div class="bl_blogcard_logo">placet experiri</span>
@@ -31,7 +30,7 @@ export const registerComponents = (data: datarable[]): void => {
                   .join('')}
               </ul>
             </footer>
-          </a>
+          </link-internal>
         </div>`;
     }
   }

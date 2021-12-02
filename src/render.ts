@@ -16,17 +16,6 @@ export function renderRoot(html: string): void {
 }
 
 export const render = (page: pagable, invokeRoute: () => void): void => {
-  // overwrite links
-  const anchors: NodeListOf<HTMLAnchorElement> =
-    document.querySelectorAll('a[href^="?"]');
-  anchors.forEach((a) => {
-    a.onclick = (event) => {
-      event.preventDefault();
-      window.history.pushState(a.href, '', a.href);
-      invokeRoute();
-    };
-  });
-
   renderRoot(page.body);
   if (document.title !== page.title) {
     document.title = page.title;

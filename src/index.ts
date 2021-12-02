@@ -1,6 +1,7 @@
 import { enrich } from './data';
 import { route } from './router';
-import { registerComponents } from './components';
+import { registerBlogCard } from './BlogCard';
+import { registerLinkInternal } from './LinkInternal';
 import { fetcher } from './utils';
 import { notifyUpdate } from './notify';
 import { datarable } from './types';
@@ -17,6 +18,9 @@ const bootstrap = (data: datarable[]): void => {
   route(data);
   window.addEventListener('popstate', () => route(data));
 
+  registerLinkInternal(() => route(data));
+  registerBlogCard(data);
+
   searchFormElement.addEventListener('submit', (e) => {
     e.preventDefault();
     window.history.pushState(
@@ -28,7 +32,6 @@ const bootstrap = (data: datarable[]): void => {
   });
 
   notifyUpdate();
-  registerComponents(data);
 };
 
 void (async function index() {
