@@ -1,7 +1,7 @@
-import dayjs from 'dayjs';
-import { datarable } from './types';
+import dayjs from './dayjs';
+import { Post } from './post';
 
-export const registerBlogCard = (data: datarable[]): void => {
+export const registerBlogCard = (posts: Post[]): void => {
   class BlogCard extends HTMLElement {
     constructor() {
       super();
@@ -15,17 +15,17 @@ export const registerBlogCard = (data: datarable[]): void => {
               <span class="bl_blogcard_suffix"> :: ${this.id}</span>
             </header>
             <div class="bl_blogcard_title">
-              ${data[data.length - id].title}
+              ${posts[posts.length - id].title}
             </div>
             <p class="bl_blogcard_text">
-              ${data[data.length - id].plainText.substr(0, 56)}…
+              ${posts[posts.length - id].plainText.substr(0, 56)}…
             </p>
             <footer class="bl_blogcard_footer">
               <span class="bl_blogcard_time">
-                ${dayjs(data[data.length - id].date).format('YYYY-MM-DD')}
+                ${dayjs(posts[posts.length - id].date).format('YYYY-MM-DD')}
               </span>
               <ul class="bl_blogcard_tags">
-                ${data[data.length - id].tags
+                ${posts[posts.length - id].tags
                   .map((eachTag) => `<li>#${eachTag}</li>`)
                   .join('')}
               </ul>

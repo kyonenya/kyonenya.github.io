@@ -1,4 +1,4 @@
-import { pagable } from './types';
+import { Page } from './types';
 
 const rootElement = <HTMLDivElement>document.getElementById('root');
 const archiveHeaderElement = <HTMLHeadingElement>(
@@ -15,7 +15,7 @@ export function renderRoot(html: string): void {
   rootElement.innerHTML = html;
 }
 
-export const render = (page: pagable): void => {
+export const render = (page: Page): void => {
   renderRoot(page.body);
   if (document.title !== page.title) {
     document.title = page.title;

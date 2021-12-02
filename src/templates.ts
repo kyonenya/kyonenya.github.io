@@ -1,5 +1,5 @@
 import dayjs from './dayjs';
-import { datarable } from './types';
+import { Post } from './post';
 
 const hashtag = (aTag: string): string =>
   `<li><link-internal href="?tag=${aTag}">#${aTag}</link-internal></li>`;
@@ -8,7 +8,7 @@ const matchedHashtag = (aTag: string): string =>
   `<li><link-internal href="?tag=${aTag}" class="hp_bold">#${aTag}</link-internal></li>`;
 
 export const postList = (
-  aData: datarable,
+  post: Post,
   filteredTag: string | null = null,
   searched: { isMatched?: boolean; summary?: string } = {}
 ): string => `
@@ -20,33 +20,33 @@ export const postList = (
           ? ''
           : ' hp_hidden'
       }"
-    data-id=${aData.id}
+    posts-id=${post.id}
   >
-    <link-internal href="?id=${aData.id}">
+    <link-internal href="?id=${post.id}">
       <header class="bl_posts_header">
         <time class="bl_posts_date" 
-          datetime="${dayjs(aData.date).format('YYYY-MM-DD HH:mm')}"
+          datetime="${dayjs(post.date).format('YYYY-MM-DD HH:mm')}"
         >
-          ${dayjs(aData.date).format('YYYY-MM-DD')}
+          ${dayjs(post.date).format('YYYY-MM-DD')}
         </time>
       </header>
       <h2 class="bl_posts_title">
-        ${aData.title}
+        ${post.title}
       </h2>
-      <div class="bl_posts_summary" data-id=${aData.id}>
+      <div class="bl_posts_summary" posts-id=${post.id}>
         <p>
           ${
             !searched.isMatched
-              ? `${aData.plainText.substr(0, 125)}…`
+              ? `${post.plainText.substr(0, 125)}…`
               : searched.summary!
           }
         </p>
       </div>
     </link-internal>
     <footer class="bl_posts_footer">
-      <span class="bl_posts_dateago">${dayjs(aData.date).fromNow()}</span>
+      <span class="bl_posts_dateago">${dayjs(post.date).fromNow()}</span>
       <ul class="bl_tags">
-        ${aData.tags
+        ${post.tags
           .map((aTag) => {
             if (aTag === filteredTag) {
               return matchedHashtag(aTag);
@@ -58,23 +58,23 @@ export const postList = (
     </footer>
   </li>`;
 
-export const article = (aData: datarable): string => `
+export const article = (post: Post): string => `
   <article>
     <header class="bl_text_header">
       <time class="bl_text_date"
-        datetime="${dayjs(aData.date).format('YYYY-MM-DD HH:mm')}"
+        datetime="${dayjs(post.date).format('YYYY-MM-DD HH:mm')}"
       >
-        ${dayjs(aData.date).format('YYYY-MM-DD HH:mm')}
+        ${dayjs(post.date).format('YYYY-MM-DD HH:mm')}
       </time>
     </header>
     <div class="bl_text">
-      <h1 class="bl_text_title">${aData.title}</h1>
-      ${aData.text}
+      <h1 class="bl_text_title">${post.title}</h1>
+      ${post.text}
     </div>
     <footer class="bl_text_footer">
-      <span class="bl_posts_dateago">${dayjs(aData.date).fromNow()}</span>
+      <span class="bl_posts_dateago">${dayjs(post.date).fromNow()}</span>
       <ul class="bl_tags">
-        ${aData.tags.map((aTag) => hashtag(aTag)).join('')}
+        ${post.tags.map((aTag) => hashtag(aTag)).join('')}
       </ul>
     </footer>
   </article>`;

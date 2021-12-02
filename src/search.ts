@@ -1,9 +1,9 @@
 import * as templates from './templates';
-import { datarable } from './types';
+import { Post } from './post';
 
 export const search = (
   word: string,
-  aData: datarable
+  post: Post
 ): {
   isMatched?: boolean;
   summary?: string;
@@ -11,16 +11,16 @@ export const search = (
   const resultLength = 50;
   const beforeLength = 20;
   const afterLength = resultLength - beforeLength - word.length;
-  const wordIndex = aData.plainText.indexOf(word);
+  const wordIndex = post.plainText.indexOf(word);
   const beforeIndex = wordIndex - beforeLength;
   const afterIndex = wordIndex + word.length;
-  const isMatched = wordIndex !== -1 || aData.title.includes(word);
+  const isMatched = wordIndex !== -1 || post.title.includes(word);
 
   if (word === '') return {};
   if (wordIndex === -1) {
     return {
       isMatched,
-      summary: `${aData.plainText.substr(0, resultLength)}…`,
+      summary: `${post.plainText.substr(0, resultLength)}…`,
     };
   }
   if (beforeIndex <= 0) {
@@ -29,12 +29,9 @@ export const search = (
       isMatched,
       summary: templates.searchedSummary({
         beforeEllipsis: '',
-        beforeText: aData.plainText.substr(0, wordIndex),
-        word: aData.plainText.substr(wordIndex, word.length),
-        afterText: aData.plainText.substr(
-          afterIndex,
-          resultLength - afterIndex
-        ),
+        beforeText: post.plainText.substr(0, wordIndex),
+        word: post.plainText.substr(wordIndex, word.length),
+        afterText: post.plainText.substr(afterIndex, resultLength - afterIndex),
         afterEllipsis: '…',
       }),
     };
@@ -44,11 +41,11 @@ export const search = (
     isMatched,
     summary: templates.searchedSummary({
       beforeEllipsis: '…',
-      beforeText: aData.plainText.substr(beforeIndex, beforeLength),
-      word: aData.plainText.substr(wordIndex, word.length),
-      afterText: aData.plainText.substr(afterIndex, afterLength),
+      beforeText: post.plainText.substr(beforeIndex, beforeLength),
+      word: post.plainText.substr(wordIndex, word.length),
+      afterText: post.plainText.substr(afterIndex, afterLength),
       afterEllipsis:
-        beforeIndex + resultLength < aData.plainText.length ? '…' : '',
+        beforeIndex + resultLength < post.plainText.length ? '…' : '',
     }),
   };
 };

@@ -5,7 +5,7 @@ const webpackDevMiddleware = require('webpack-dev-middleware');
 const config = require('./webpack.dev.config.js');
 
 const rootDir = __dirname;
-const port = process.env['WEB_APP_PORT'] ? process.env['WEB_APP_PORT'] : 3000;
+const port = process.env['WEB_APP_PORT'] ? process.env['WEB_APP_PORT'] : 3100;
 
 express()
   .use(

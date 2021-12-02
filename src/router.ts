@@ -1,8 +1,8 @@
 import * as pages from './pages';
 import { render } from './render';
-import { datarable } from './types';
+import { Post } from './post';
 
-export const route = (data: datarable[]): void => {
+export const route = (posts: Post[]): void => {
   const searchParams = new URLSearchParams(window.location.search);
   const id = searchParams.get('id');
   const tag = searchParams.get('tag');
@@ -12,20 +12,19 @@ export const route = (data: datarable[]): void => {
 
   if (id && Number.isFinite(Number(id))) {
     document.querySelector('.el_search_input')?.classList.add('hp_hidden'); // disable search form
-    return render(pages.article(data[data.length - parseInt(id, 10)])
-    );
+    return render(pages.article(posts[posts.length - parseInt(id, 10)]));
   }
   if (window.location.hash !== '') {
     return render(
       pages.searchedPostList(
-        data,
+        posts,
         decodeURIComponent(window.location.hash.slice(1)),
         tag
       )
     );
   }
   if (tag != null) {
-    return render(pages.taggedPostList(data, tag));
+    return render(pages.taggedPostList(posts, tag));
   }
-  return render(pages.postList(data));
+  return render(pages.postList(posts));
 };

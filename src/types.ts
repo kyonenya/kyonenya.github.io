@@ -1,14 +1,4 @@
-export type datarable = {
-  id: number;
-  index: number;
-  date: string;
-  title: string;
-  text: string;
-  plainText: string;
-  tags: string[];
-};
-
-export type pagable = {
+export type Page = {
   body: string;
   suffix: string;
   description: string;

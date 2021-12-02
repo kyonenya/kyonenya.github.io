@@ -1,24 +1,25 @@
 import dayjs from './dayjs';
 import * as templates from './templates';
 import { search } from './search';
-import { datarable, pagable } from './types';
+import { Post } from './post';
+import { Page } from './types';
 
-export const article = (aData: datarable): pagable => ({
-  body: templates.article(aData),
-  suffix: ` :: ${aData.id}`,
-  description: `${aData.plainText.substr(0, 110)}…`,
-  title: aData.title
-    ? `${aData.title}｜placet experiri :: ${aData.id}`
-    : `placet experiri :: ${aData.id}`,
+export const article = (post: Post): Page => ({
+  body: templates.article(post),
+  suffix: ` :: ${post.id}`,
+  description: `${post.plainText.substr(0, 110)}…`,
+  title: post.title
+    ? `${post.title}｜placet experiri :: ${post.id}`
+    : `placet experiri :: ${post.id}`,
   archiveHeader: '',
 });
 
-export const postList = (data: datarable[]): pagable => ({
+export const postList = (posts: Post[]): Page => ({
   body: `
     <ul class="bl_posts">
-      ${data
-        .filter((aData) => dayjs(aData.date).isBefore(dayjs())) // exclude reserved post
-        .map((aData) => templates.postList(data[aData.index]))
+      ${posts
+        .filter((post) => dayjs(post.date).isBefore(dayjs())) // exclude reserved post
+        .map((post) => templates.postList(posts[post.index]))
         .join('')}
     </ul>`,
   suffix: '',
@@ -27,18 +28,15 @@ export const postList = (data: datarable[]): pagable => ({
   archiveHeader: '',
 });
 
-export const taggedPostList = (
-  data: datarable[],
-  filteredTag: string
-): pagable => ({
+export const taggedPostList = (posts: Post[], filteredTag: string): Page => ({
   body: `
     <ul class="bl_posts">
-      ${data
-        .map((aData) => {
-          if (filteredTag !== null && !aData.tags.includes(filteredTag)) {
+      ${posts
+        .map((post) => {
+          if (filteredTag !== null && !post.tags.includes(filteredTag)) {
             return '';
           }
-          return templates.postList(data[aData.index], filteredTag);
+          return templates.postList(posts[post.index], filteredTag);
         })
         .join('')}
     </ul>`,
@@ -49,21 +47,21 @@ export const taggedPostList = (
 });
 
 export const searchedPostList = (
-  data: datarable[],
+  posts: Post[],
   keyword: string,
   filteredTag: string | null = null
-): pagable => ({
+): Page => ({
   body: `
     <ul class="bl_posts">
-      ${data
-        .map((aData) => {
-          if (filteredTag !== null && !aData.tags.includes(filteredTag)) {
+      ${posts
+        .map((post) => {
+          if (filteredTag !== null && !post.tags.includes(filteredTag)) {
             return '';
           }
           return templates.postList(
-            data[aData.index],
+            posts[post.index],
             filteredTag,
-            search(keyword, aData)
+            search(keyword, post)
           );
         })
         .join('')}

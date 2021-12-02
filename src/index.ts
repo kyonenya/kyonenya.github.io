@@ -1,27 +1,26 @@
-import { enrich } from './data';
+import { Post, toPost } from './post';
 import { route } from './router';
 import { activateSearchForm } from './search';
 import { registerBlogCard } from './BlogCard';
 import { registerLinkInternal } from './LinkInternal';
 import { fetcher } from './utils';
 import { notifyUpdate } from './notify';
-import { datarable } from './types';
 
-const jsonPath = './data.json';
+const jsonPath = './posts.json';
 
-const bootstrap = (data: datarable[]): void => {
-  route(data);
-  window.addEventListener('popstate', () => route(data));
+const bootstrap = (posts: Post[]): void => {
+  route(posts);
+  window.addEventListener('popstate', () => route(posts));
 
-  registerLinkInternal(() => route(data));
-  registerBlogCard(data);
+  registerLinkInternal(() => route(posts));
+  registerBlogCard(posts);
 
-  activateSearchForm(() => route(data));
+  activateSearchForm(() => route(posts));
   notifyUpdate();
 };
 
 void (async function index() {
-  const rawData = await fetcher<datarable[]>(jsonPath);
-  const data = enrich(rawData);
-  bootstrap(data);
+  const rawData = await fetcher<Post[]>(jsonPath);
+  const posts = toPost(rawData);
+  bootstrap(posts);
 })();
