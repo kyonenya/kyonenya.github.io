@@ -3,7 +3,6 @@ export function registerLinkInternal(invokeRoute: () => void): void {
     constructor() {
       super();
       const href = this.getAttribute('href');
-      this.attachShadow({ mode: 'open' });
 
       const a = document.createElement('a');
       a.onclick = (e) => {
@@ -14,7 +13,7 @@ export function registerLinkInternal(invokeRoute: () => void): void {
       const slot = document.createElement('slot');
       a.appendChild(slot);
 
-      this.shadowRoot?.appendChild(a);
+      this.attachShadow({ mode: 'open' }).appendChild(a);
     }
   }
 

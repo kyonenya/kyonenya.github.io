@@ -1,6 +1,6 @@
 import * as pages from './pages';
-import { render } from './render';
 import { Post } from './post';
+import { render } from './render';
 
 export const route = (posts: Post[]): void => {
   const searchParams = new URLSearchParams(window.location.search);

@@ -20,7 +20,7 @@
     "csl-json": "^0.1.0",
     "eslint": "^7.26.0",
     "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-import": "^2.23.2",
+    "eslint-plugin-import": "^2.25.3",
     "express": "^4.17.1",
     "postcss": "^8.3.0",
     "postcss-cli": "^8.3.1",

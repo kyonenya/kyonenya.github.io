@@ -1,5 +1,5 @@
-import * as templates from './templates';
 import { Post } from './post';
+import * as templates from './templates';
 
 export const search = (
   word: string,

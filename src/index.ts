@@ -1,10 +1,10 @@
+import { registerBlogCard } from './BlogCard';
+import { registerLinkInternal } from './LinkInternal';
+import { notifyUpdate } from './notify';
 import { jsonToPost, Post, JSONPost } from './post';
 import { route } from './router';
 import { activateSearchForm } from './search';
-import { registerBlogCard } from './BlogCard';
-import { registerLinkInternal } from './LinkInternal';
 import { fetcher } from './utils';
-import { notifyUpdate } from './notify';
 
 const jsonPath = './posts.json';
 

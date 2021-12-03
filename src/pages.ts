@@ -1,7 +1,7 @@
 import dayjs from './dayjs';
-import * as templates from './templates';
-import { search } from './search';
 import { Post } from './post';
+import { search } from './search';
+import * as templates from './templates';
 import { Page } from './types';
 
 export const article = (post: Post): Page => ({
