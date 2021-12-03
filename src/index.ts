@@ -19,7 +19,7 @@ const bootstrap = (posts: Post[]): void => {
   notifyUpdate();
 };
 
-void (async function index() {
+(async function index() {
   const rawData = await fetcher<JSONPost[]>(jsonPath);
   const posts = jsonToPost(rawData);
   bootstrap(posts);

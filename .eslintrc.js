@@ -18,10 +18,7 @@ module.exports = {
     tsconfigRootDir: __dirname,
   },
   rules: {
-    // 'import/prefer-default-export': 'off',
-    // 'import/extensions': 'off',
-    indent: ['error', 2, { ignoredNodes: ['TemplateLiteral *'] }],
-    // '@typescript-eslint/no-non-null-assertion': 'off',
-    // 'no-console': 'off',
+    '@typescript-eslint/no-floating-promises': ['error', { ignoreIIFE: true }], // Promises must be handled appropriately or explicitly marked as ignored with the `void` operator
+    '@typescript-eslint/no-non-null-assertion': 'off', // Forbidden non-null assertion
   },
 };

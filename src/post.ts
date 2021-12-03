@@ -29,8 +29,8 @@ export const jsonToPost = (posts: JSONPost[]): Post[] =>
       date: toDate(post.date),
       title: post.title === null || post.title === '' ? undefined : post.title,
       text: post.text
-        .replace(/——/g, '──') // double dash -> double ruled line
-        .replace(/　/g, ' '), // full-width space -> half-width space
+        .replaceAll('——', '──') // double dash -> double ruled line
+        .replaceAll('　', ' '), // full-width space -> half-width space
       plainText: post.text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''),
     };
   });

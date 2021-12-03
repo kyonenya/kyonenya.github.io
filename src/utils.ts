@@ -10,7 +10,7 @@ export function isNew(
   return dayjs(now).isBefore(limitDate);
 }
 
-export const toDate = (date: ConfigType) => dayjs(date).toDate();
+export const toDate = (date: ConfigType): Date => dayjs(date).toDate();
 
 export const fetcher = async <T>(url: string): Promise<T> => {
   const response = await fetch(url);

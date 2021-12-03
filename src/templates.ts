@@ -11,8 +11,7 @@ export const postList = (
   post: Post,
   filteredTag: string | null = null,
   searched: { isMatched?: boolean; summary?: string } = {}
-): string => `
-  <li
+): string => `<li
     class="
       bl_posts_item
       ${
@@ -58,8 +57,7 @@ export const postList = (
     </footer>
   </li>`;
 
-export const article = (post: Post): string => `
-  <article>
+export const article = (post: Post): string => `<article>
     <header class="bl_text_header">
       <time class="bl_text_date"
         datetime="${dayjs(post.date).format('YYYY-MM-DD HH:mm')}"
