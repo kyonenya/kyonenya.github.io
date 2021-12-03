@@ -37,7 +37,7 @@
 - eslintでの構文チェック、prettierでのコード整形。
 - 他、[リファクタリング（第二版）](https://www.amazon.co.jp/dp/4274224546/)を参考にリファクタ。クラスを削除して関数にする、不要なコメントを削除してコードに語らせる、ループの分割とmapへの置き換え、変数のインライン化、等々。
 - ちなみに、iPadでnode.jsが動く[play.js](https://playdotjs.com)というアプリで主に開発している。
-- ほか[PR #5](https://github.com/kyonenya/kyonenya.github.io/pull/5)や[旧版README](https://github.com/kyonenya/kyonenya.github.io/tree/a6491416e7e7991cfef8fc4b65a5210d06ce7643)を参照。
+- ほか[PR #5](https://github.com/kyonenya/kyonenya.github.io/pull/5)や[旧版README](https://github.com/kyonenya/kyonenya.github.io/blob/v2.0.0/README.md)を参照。
 
 ## なぜそんな設計で作るのですか（2020/4）
 
@@ -55,10 +55,3 @@
 - レスポンシブ対応、ダークモード対応。
 - サイトアイコンはSVGで描画している。引用符のアイコンに色をつけたもの。
 - CSSの命名規則は[PRECSS](http://precss.io/ja/) に則る。参考書籍：『CSS設計完全ガイド』（[Amazon](https://www.amazon.co.jp/dp/429711173X)）
-
-## Licencing
-
-- `locales-ja-JP.xml` in this repository is under the [CC BY-SA 3.0 Unported licence](https://creativecommons.org/licenses/by-sa/3.0/deed.ja) ©︎ [CitationStyles.org](https://citationstyles.org/)
-  - [citation-style-language/locales: Official repository for Citation Style Language (CSL) locale files.](https://github.com/citation-style-language/locales)
-- `sist02modified.csl` in this repository is under the [CC BY-SA 3.0 Unported licence](https://creativecommons.org/licenses/by-sa/3.0/deed.ja)
-  - This files is modified. Original: [sist02 – Zotero Style Repository](http://www.zotero.org/styles/sist02)
