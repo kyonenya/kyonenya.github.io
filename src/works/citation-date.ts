@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-unresolved
 import { LooseNumber } from 'csl-json';
 import dayjs from '../dayjs';
 import { isNew } from '../utils';
@@ -8,14 +9,11 @@ const newDays = 30;
 // prettier-ignore
 type DateParts = [LooseNumber, (LooseNumber | undefined)?, (LooseNumber | undefined)?];
 
+// prettier-ignore
 function parseDateParts(dateParts: DateParts): Date {
   const sanitizedDateParts = dateParts
     .filter((dp): dp is LooseNumber => dp != null)
-    .map((dp) => (typeof dp === 'number' ? dp : parseInt(dp, 10))) as [
-    number,
-    number?,
-    number?
-  ];
+    .map((dp) => (typeof dp === 'number' ? dp : parseInt(dp, 10))) as [number, number?, number?];
   return dayjs(sanitizedDateParts).toDate();
 }
 
