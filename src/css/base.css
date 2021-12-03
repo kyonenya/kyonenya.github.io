@@ -96,7 +96,7 @@ main {
 
 .hp_highlight {
   display: inline-block;
-  background: hsl(60, 100%, 77%);  /* #ffff8c */
+  background: hsl(60, 100%, 77%);
   border: 1px solid hsla(0, 0%, 0%, 0.15);  /* 透明化した黒線を被せる */
   color: #333;  /* ダークモード下でも黒文字にする */
   border-radius: 3px;
@@ -111,6 +111,11 @@ main {
 
 .hp_bold {
   font-weight: bold;
+}
+
+.hp_kerning {
+  letter-spacing: -0.27em;
+  margin: 0 0.17em 0 0;
 }
 
 /**

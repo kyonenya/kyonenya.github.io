@@ -122,6 +122,7 @@
   margin-bottom: 0.25em;
 }
 
+/* stylelint-disable no-descending-specificity */
 .bl_text ul ul li {
   list-style: circle;
 }

@@ -2,10 +2,12 @@ import { Citation, toCitationMap, Genre } from './citation';
 import { isNewCitation } from './citation-date';
 
 const Text = (text: string): string =>
-  text.replace(
-    /\[(.+?)\]\((.+?)\)/g,
-    (_match, title: string, url: string) => `<a href="${url}">${title}</a>`
-  );
+  text
+    .replaceAll(
+      /\[(.+?)\]\((.+?)\)/g,
+      (_match, title: string, url: string) => `<a href="${url}">${title}</a>`
+    )
+    .replaceAll('——', '<span class="hp_kerning">——</span>');
 
 const Item = (text: string): string => `<li>${Text(text)}</li>`;
 
