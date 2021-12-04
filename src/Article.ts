@@ -3,7 +3,8 @@ import { Post } from './post';
 import { Page } from './render';
 import { hashtag } from './templates';
 
-const Article = (post: Post): string => `<article>
+const Article = (post: Post): string => `
+  <article>
     <header class="bl_text_header">
       <time class="bl_text_date"
         datetime="${dayjs(post.date).format('YYYY-MM-DD HH:mm')}"
