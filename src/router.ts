@@ -6,9 +6,9 @@ import { Post } from './post';
 import { render } from './render';
 
 type State = {
-  id?: number;
-  tag?: string;
-  keyword?: string;
+  id: number | undefined;
+  tag: string | undefined;
+  keyword: string | undefined;
 };
 
 export function toState(locationSearch: string, locationHash?: string): State {
