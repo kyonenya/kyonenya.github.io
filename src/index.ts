@@ -20,7 +20,6 @@ const bootstrap = (posts: Post[]): void => {
 };
 
 (async function index() {
-  const rawData = await fetcher<JSONPost[]>(jsonPath);
-  const posts = jsonToPost(rawData);
+  const posts = jsonToPost(await fetcher<JSONPost[]>(jsonPath));
   bootstrap(posts);
 })();
