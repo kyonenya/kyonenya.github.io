@@ -1,4 +1,5 @@
-import { Article } from './Article';
+import { ArticlePage } from './Article';
+import { PostListPage } from './PostList';
 import * as pages from './pages';
 import { Post } from './post';
 import { render } from './render';
@@ -32,7 +33,7 @@ export const route = (posts: Post[]): void => {
 
   if (state.id !== undefined) {
     document.querySelector('.el_search_input')?.classList.add('hp_hidden'); // disable search form
-    return render(Article(posts.find((post) => post.id === state.id)!));
+    return render(ArticlePage(posts.find((post) => post.id === state.id)!));
   }
   if (state.keyword !== undefined) {
     return render(pages.searchedPostList(posts, state.keyword, state.tag));
@@ -40,5 +41,5 @@ export const route = (posts: Post[]): void => {
   if (state.tag !== undefined) {
     return render(pages.taggedPostList(posts, state.tag));
   }
-  return render(pages.postList(posts));
+  return render(PostListPage(posts));
 };

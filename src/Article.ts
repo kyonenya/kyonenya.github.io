@@ -3,7 +3,7 @@ import { Post } from './post';
 import { Page } from './render';
 import { hashtag } from './templates';
 
-const article = (post: Post): string => `<article>
+const Article = (post: Post): string => `<article>
     <header class="bl_text_header">
       <time class="bl_text_date"
         datetime="${dayjs(post.date).format('YYYY-MM-DD HH:mm')}"
@@ -18,13 +18,13 @@ const article = (post: Post): string => `<article>
     <footer class="bl_text_footer">
       <span class="bl_posts_dateago">${dayjs(post.date).fromNow()}</span>
       <ul class="bl_tags">
-        ${post.tags.map((aTag) => hashtag(aTag)).join('')}
+        ${post.tags.map((tag) => hashtag(tag)).join('')}
       </ul>
     </footer>
   </article>`;
 
-export const Article = (post: Post): Page => ({
-  body: article(post),
+export const ArticlePage = (post: Post): Page => ({
+  body: Article(post),
   suffix: ` :: ${post.id}`,
   description: `${post.plainText.substr(0, 110)}…`,
   title: post.title
