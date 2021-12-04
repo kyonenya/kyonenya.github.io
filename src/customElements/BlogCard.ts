@@ -1,33 +1,37 @@
 import dayjs from '../dayjs';
 import { Post } from '../post';
 
-export const registerBlogCard = (posts: Post[]): void => {
+const summaryLength = 56;
+
+export const defineBlogCard = (posts: Post[]): void => {
   class BlogCard extends HTMLElement {
     constructor() {
       super();
-      const id = parseInt(this.getAttribute('id')!, 10);
+      if (!this.id) return;
+      const id = parseInt(this.id, 10);
+      const post = posts.find((post) => post.id === id);
+      if (!post) return;
+
       this.innerHTML = `
         <div class="bl_blogcard">
-          <link-internal href="?id=${this.id}">
+          <link-internal href="?id=${id}">
             <header class="bl_blogcard_header">
               <div class="bl_blogcard_icon"></div>
               <div class="bl_blogcard_logo">placet experiri</span>
-              <span class="bl_blogcard_suffix"> :: ${this.id}</span>
+              <span class="bl_blogcard_suffix"> :: ${id}</span>
             </header>
             <div class="bl_blogcard_title">
-              ${posts[posts.length - id].title}
+              ${post.title}
             </div>
             <p class="bl_blogcard_text">
-              ${posts[posts.length - id].plainText.substr(0, 56)}…
+              ${post.plainText.substr(0, summaryLength)}…
             </p>
             <footer class="bl_blogcard_footer">
               <span class="bl_blogcard_time">
-                ${dayjs(posts[posts.length - id].date).format('YYYY-MM-DD')}
+                ${dayjs(post.date).format('YYYY-MM-DD')}
               </span>
               <ul class="bl_blogcard_tags">
-                ${posts[posts.length - id].tags
-                  .map((eachTag) => `<li>#${eachTag}</li>`)
-                  .join('')}
+                ${post.tags.map((tag) => `<li>#${tag}</li>`).join('')}
               </ul>
             </footer>
           </link-internal>

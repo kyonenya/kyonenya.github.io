@@ -1,7 +1,7 @@
+import { Article } from './Article';
 import * as pages from './pages';
 import { Post } from './post';
 import { render } from './render';
-import { Article } from './Article';
 
 type State = {
   id?: number;

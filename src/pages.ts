@@ -1,8 +1,8 @@
 import dayjs from './dayjs';
 import { Post } from './post';
+import { Page } from './render';
 import { search } from './search';
 import * as templates from './templates';
-import { Page } from './render';
 
 export const postList = (posts: Post[]): Page => ({
   body: `

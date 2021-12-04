@@ -1,5 +1,5 @@
-import { registerBlogCard } from './customElements/BlogCard';
-import { registerLinkInternal } from './customElements/LinkInternal';
+import { defineBlogCard } from './customElements/BlogCard';
+import { defineLinkInternal } from './customElements/LinkInternal';
 import { notifyUpdate } from './notify';
 import { jsonToPost, Post, JSONPost } from './post';
 import { route } from './router';
@@ -12,8 +12,8 @@ const bootstrap = (posts: Post[]): void => {
   route(posts);
   window.addEventListener('popstate', () => route(posts));
 
-  registerLinkInternal(() => route(posts));
-  registerBlogCard(posts);
+  defineLinkInternal(() => route(posts));
+  defineBlogCard(posts);
 
   activateSearchForm(() => route(posts));
   notifyUpdate();

@@ -1,6 +1,6 @@
 import { toState } from '../router';
 
-export function registerLinkInternal(invokeRoute: () => void): void {
+export function defineLinkInternal(invokeRoute: () => void): void {
   class LinkInternal extends HTMLElement {
     constructor() {
       super();
@@ -9,7 +9,7 @@ export function registerLinkInternal(invokeRoute: () => void): void {
       const a = document.createElement('a');
       a.onclick = (e) => {
         e.preventDefault();
-        window.history.pushState(toState(href ?? ''), href ?? '', href);
+        window.history.pushState(toState(href ?? ''), '', href);
         invokeRoute();
       };
       const slot = document.createElement('slot');
