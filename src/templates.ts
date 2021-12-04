@@ -1,10 +1,10 @@
 import dayjs from './dayjs';
 import { Post } from './post';
 
-const hashtag = (aTag: string): string =>
+export const hashtag = (aTag: string): string =>
   `<li><link-internal href="?tag=${aTag}">#${aTag}</link-internal></li>`;
 
-const matchedHashtag = (aTag: string): string =>
+export const matchedHashtag = (aTag: string): string =>
   `<li><link-internal href="?tag=${aTag}" class="hp_bold">#${aTag}</link-internal></li>`;
 
 export const postList = (
@@ -56,26 +56,6 @@ export const postList = (
       </ul>
     </footer>
   </li>`;
-
-export const article = (post: Post): string => `<article>
-    <header class="bl_text_header">
-      <time class="bl_text_date"
-        datetime="${dayjs(post.date).format('YYYY-MM-DD HH:mm')}"
-      >
-        ${dayjs(post.date).format('YYYY-MM-DD HH:mm')}
-      </time>
-    </header>
-    <div class="bl_text">
-      <h1 class="bl_text_title">${post.title}</h1>
-      ${post.text}
-    </div>
-    <footer class="bl_text_footer">
-      <span class="bl_posts_dateago">${dayjs(post.date).fromNow()}</span>
-      <ul class="bl_tags">
-        ${post.tags.map((aTag) => hashtag(aTag)).join('')}
-      </ul>
-    </footer>
-  </article>`;
 
 export const searchedSummary = (aResult: {
   beforeEllipsis: string;

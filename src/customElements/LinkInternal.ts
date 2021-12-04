@@ -1,4 +1,4 @@
-import { toState } from './router';
+import { toState } from '../router';
 
 export function registerLinkInternal(invokeRoute: () => void): void {
   class LinkInternal extends HTMLElement {

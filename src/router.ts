@@ -1,6 +1,7 @@
 import * as pages from './pages';
 import { Post } from './post';
 import { render } from './render';
+import { Article } from './Article';
 
 type State = {
   id?: number;
@@ -31,7 +32,7 @@ export const route = (posts: Post[]): void => {
 
   if (state.id !== undefined) {
     document.querySelector('.el_search_input')?.classList.add('hp_hidden'); // disable search form
-    return render(pages.article(posts.find((post) => post.id === state.id)!));
+    return render(Article(posts.find((post) => post.id === state.id)!));
   }
   if (state.keyword !== undefined) {
     return render(pages.searchedPostList(posts, state.keyword, state.tag));

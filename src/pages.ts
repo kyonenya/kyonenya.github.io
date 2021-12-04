@@ -2,17 +2,7 @@ import dayjs from './dayjs';
 import { Post } from './post';
 import { search } from './search';
 import * as templates from './templates';
-import { Page } from './types';
-
-export const article = (post: Post): Page => ({
-  body: templates.article(post),
-  suffix: ` :: ${post.id}`,
-  description: `${post.plainText.substr(0, 110)}…`,
-  title: post.title
-    ? `${post.title}｜placet experiri :: ${post.id}`
-    : `placet experiri :: ${post.id}`,
-  archiveHeader: '',
-});
+import { Page } from './render';
 
 export const postList = (posts: Post[]): Page => ({
   body: `

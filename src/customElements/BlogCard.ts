@@ -1,5 +1,5 @@
-import dayjs from './dayjs';
-import { Post } from './post';
+import dayjs from '../dayjs';
+import { Post } from '../post';
 
 export const registerBlogCard = (posts: Post[]): void => {
   class BlogCard extends HTMLElement {

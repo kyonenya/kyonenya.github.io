@@ -1,5 +1,5 @@
-import { registerBlogCard } from './BlogCard';
-import { registerLinkInternal } from './LinkInternal';
+import { registerBlogCard } from './customElements/BlogCard';
+import { registerLinkInternal } from './customElements/LinkInternal';
 import { notifyUpdate } from './notify';
 import { jsonToPost, Post, JSONPost } from './post';
 import { route } from './router';
