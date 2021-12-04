@@ -1,18 +1,28 @@
-export const hashtag = (aTag: string): string =>
-  `<li><link-internal href="?tag=${aTag}">#${aTag}</link-internal></li>`;
+export const hashtag = (tag: string): string =>
+  `<li>
+    <link-internal href="?tag=${tag}">
+      #${tag}
+    </link-internal>
+  </li>`;
 
-export const matchedHashtag = (aTag: string): string =>
-  `<li><link-internal href="?tag=${aTag}" class="hp_bold">#${aTag}</link-internal></li>`;
+export const matchedHashtag = (tag: string): string =>
+  `<li>
+    <link-internal href="?tag=${tag}" class="hp_bold">
+      #${tag}
+    </link-internal>
+  </li>`;
 
-export const searchedSummary = (aResult: {
+export const searchedSummary = (searched: {
   beforeEllipsis: string;
   beforeText: string;
   word: string;
   afterText: string;
   afterEllipsis: string;
 }): string => `
-  ${aResult.beforeEllipsis}${aResult.beforeText}
+  ${searched.beforeEllipsis}
+  ${searched.beforeText}
   <span class="hp_highlight">
-    ${aResult.word}
+    ${searched.word}
   </span>
-  ${aResult.afterText}${aResult.afterEllipsis}`;
+  ${searched.afterText}
+  ${searched.afterEllipsis}`;

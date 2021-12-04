@@ -1,6 +1,7 @@
 import { ArticlePage } from './Article';
 import { PostListPage } from './PostList';
-import * as pages from './pages';
+import { PostListTaggedPage } from './PostListTagged';
+import { PostListSearchedPage } from './PostListSearched';
 import { Post } from './post';
 import { render } from './render';
 
@@ -36,10 +37,10 @@ export const route = (posts: Post[]): void => {
     return render(ArticlePage(posts.find((post) => post.id === state.id)!));
   }
   if (state.keyword !== undefined) {
-    return render(pages.searchedPostList(posts, state.keyword, state.tag));
+    return render(PostListSearchedPage(posts, state.keyword, state.tag));
   }
   if (state.tag !== undefined) {
-    return render(pages.taggedPostList(posts, state.tag));
+    return render(PostListTaggedPage(posts, state.tag));
   }
   return render(PostListPage(posts));
 };
