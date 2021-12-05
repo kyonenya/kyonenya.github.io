@@ -1,54 +1,80 @@
+import { generateSummary } from 'search-summary';
 import dayjs from './dayjs';
 import { Post } from './post';
 import { hashtag, matchedHashtag } from './templates';
 
-export const PostListItem = (
-  post: Post,
-  filteredTag: string | null = null,
-  searched: { isMatched?: boolean; summary?: string } = {}
-): string => `
-  <li
-    class="
-      bl_posts_item
-      ${
-        searched.isMatched || Object.keys(searched).length === 0
-          ? ''
-          : ' hp_hidden'
-      }"
-    posts-id=${post.id}
-  >
-    <link-internal href="?id=${post.id}">
-      <header class="bl_posts_header">
-        <time class="bl_posts_date" 
-          datetime="${dayjs(post.date).format('YYYY-MM-DD HH:mm')}"
-        >
-          ${dayjs(post.date).format('YYYY-MM-DD')}
-        </time>
-      </header>
-      <h2 class="bl_posts_title">
-        ${post.title}
-      </h2>
-      <div class="bl_posts_summary" posts-id=${post.id}>
+const summaryLength = 137;
+const summaryLengthNoTitle = 114;
+const elipsisToken = '…';
+
+const ListItemBody = (post: Post, searchSummary: string | undefined) => {
+  if (!post.title) {
+    return `
+      <div class="bl_posts_summary">
         <p>
           ${
-            !searched.isMatched
-              ? `${post.plainText.substr(0, 125)}…`
-              : searched.summary!
+            searchSummary ||
+            `${post.plainText.substr(0, summaryLengthNoTitle)}${elipsisToken}`
           }
         </p>
-      </div>
-    </link-internal>
-    <footer class="bl_posts_footer">
-      <span class="bl_posts_dateago">${dayjs(post.date).fromNow()}</span>
-      <ul class="bl_tags">
-        ${post.tags
-          .map((tag) => {
-            if (tag === filteredTag) {
-              return matchedHashtag(tag);
-            }
-            return hashtag(tag);
-          })
-          .join('')}
-      </ul>
-    </footer>
-  </li>`;
+      </div>`;
+  }
+
+  return `
+    <h2 class="bl_posts_title">${post.title}</h2>
+    <div class="bl_posts_summary">
+      <p>
+        ${
+          searchSummary ||
+          `${post.plainText.substr(0, summaryLength)}${elipsisToken}`
+        }
+      </p>
+    </div>`;
+};
+
+const KeywordHighlighted = (keyword: string) =>
+  `<span class="hp_highlight">${keyword}</span>`;
+
+export const PostListItem = (props: {
+  post: Post;
+  tag?: string;
+  keyword?: string;
+}): string => {
+  const { post } = props;
+  const searchSummary = props.keyword
+    ? generateSummary(post.plainText, props.keyword, {
+        maxLength: 50,
+        beforeLength: 20,
+        elipsisToken,
+        keywordModifier: (k) => KeywordHighlighted(k),
+      })
+    : undefined;
+
+  return `
+    <li
+      class="
+        bl_posts_item
+        ${props.keyword && !searchSummary ? ' hp_hidden' : ''}"
+    >
+      <link-internal href="?id=${post.id}">
+        <header class="bl_posts_header">
+          <time class="bl_posts_date">
+            ${dayjs(post.date).format('YYYY-MM-DD')}
+          </time>
+        </header>
+        ${ListItemBody(post, searchSummary)}
+      </link-internal>
+      <footer class="bl_posts_footer">
+        <span class="bl_posts_dateago">
+          ${dayjs(post.date).fromNow()}
+        </span>
+        <ul class="bl_tags">
+          ${post.tags
+            .map((tag) =>
+              tag === props.tag ? matchedHashtag(tag) : hashtag(tag)
+            )
+            .join('')}
+        </ul>
+      </footer>
+    </li>`;
+};

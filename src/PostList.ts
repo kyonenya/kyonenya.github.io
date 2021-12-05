@@ -1,13 +1,13 @@
+import { PostListItem } from './PostListItem';
 import dayjs from './dayjs';
 import { Post } from './post';
 import { Page } from './render';
-import { PostListItem } from './PostListItem';
 
 const PostList = (posts: Post[]): string => `
   <ul class="bl_posts">
     ${posts
       .filter((post) => dayjs(post.date).isBefore(dayjs())) // exclude reserved post
-      .map((post) => PostListItem(posts[post.index]))
+      .map((post) => PostListItem({ post: posts[post.index] }))
       .join('')}
   </ul>`;
 

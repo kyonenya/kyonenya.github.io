@@ -1,7 +1,6 @@
 import { PostListItem } from './PostListItem';
 import { Post } from './post';
 import { Page } from './render';
-import { search } from './search';
 
 const PostListSearched = (
   posts: Post[],
@@ -14,11 +13,11 @@ const PostListSearched = (
         if (filteredTag !== null && !post.tags.includes(filteredTag)) {
           return '';
         }
-        return PostListItem(
-          posts[post.index],
-          filteredTag,
-          search(keyword, post)
-        );
+        return PostListItem({
+          post: posts[post.index],
+          tag: filteredTag ?? undefined, // TODO: remove null
+          keyword: keyword,
+        });
       })
       .join('')}
   </ul>`;

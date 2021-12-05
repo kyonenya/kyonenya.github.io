@@ -11,18 +11,18 @@ export const matchedHashtag = (tag: string): string =>
       #${tag}
     </link-internal>
   </li>`;
-
-export const searchedSummary = (searched: {
-  beforeEllipsis: string;
-  beforeText: string;
-  word: string;
-  afterText: string;
-  afterEllipsis: string;
-}): string => `
-  ${searched.beforeEllipsis}
-  ${searched.beforeText}
-  <span class="hp_highlight">
-    ${searched.word}
-  </span>
-  ${searched.afterText}
-  ${searched.afterEllipsis}`;
+//
+//export const searchedSummary = (searched: {
+//  beforeEllipsis: string;
+//  beforeText: string;
+//  word: string;
+//  afterText: string;
+//  afterEllipsis: string;
+//}): string => `
+//  ${searched.beforeEllipsis}
+//  ${searched.beforeText}
+//  <span class="hp_highlight">
+//    ${searched.word}
+//  </span>
+//  ${searched.afterText}
+//  ${searched.afterEllipsis}`;

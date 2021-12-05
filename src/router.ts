@@ -1,7 +1,7 @@
 import { ArticlePage } from './Article';
 import { PostListPage } from './PostList';
-import { PostListTaggedPage } from './PostListTagged';
 import { PostListSearchedPage } from './PostListSearched';
+import { PostListTaggedPage } from './PostListTagged';
 import { Post } from './post';
 import { render } from './render';
 

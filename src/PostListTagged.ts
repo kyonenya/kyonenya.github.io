@@ -1,7 +1,6 @@
 import { PostListItem } from './PostListItem';
 import { Post } from './post';
 import { Page } from './render';
-import { search } from './search';
 
 const PostListTagged = (posts: Post[], filteredTag: string) => `
   <ul class="bl_posts">
@@ -10,7 +9,10 @@ const PostListTagged = (posts: Post[], filteredTag: string) => `
         if (filteredTag !== null && !post.tags.includes(filteredTag)) {
           return '';
         }
-        return PostListItem(posts[post.index], filteredTag);
+        return PostListItem({
+          post: posts[post.index],
+          tag: filteredTag,
+        });
       })
       .join('')}
   </ul>`;
