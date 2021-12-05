@@ -3,8 +3,8 @@ import dayjs from './dayjs';
 import { Post } from './post';
 import { hashtag, matchedHashtag } from './templates';
 
-const summaryLength = 137;
-const summaryLengthNoTitle = 114;
+const summaryLength = 134;
+const summaryLengthNoTitle = 113;
 const elipsisToken = '…';
 
 const ListItemBody = (post: Post, searchSummary: string | undefined) => {
