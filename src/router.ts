@@ -1,6 +1,5 @@
-import * as pages from './pages';
 import { Post } from './post';
-import { render } from './render';
+import { routes } from './routes';
 
 type State = {
   id: number | undefined;
@@ -24,20 +23,24 @@ export function toState(locationSearch: string, locationHash?: string): State {
 }
 
 export function route(posts: Post[]): void {
-  const state = toState(window.location.search, window.location.hash);
+  const { id, tag, keyword } = toState(
+    window.location.search,
+    window.location.hash
+  );
 
   window.scrollTo(0, 0);
   document.querySelector('.el_search_input')?.classList.remove('hp_hidden');
 
-  if (state.id !== undefined) {
-    document.querySelector('.el_search_input')?.classList.add('hp_hidden'); // disable search form
-    return render(pages.article(posts.find((post) => post.id === state.id)!));
+  if (id !== undefined) {
+    const post = posts.find((post) => post.id === id);
+    if (!post) return;
+    return routes.article({ post });
   }
-  if (state.keyword !== undefined) {
-    return render(pages.postListSearched(posts, state.keyword, state.tag));
+  if (keyword !== undefined) {
+    return routes.searchedPostList({ posts, keyword, tag });
   }
-  if (state.tag !== undefined) {
-    return render(pages.postListTagged(posts, state.tag));
+  if (tag !== undefined) {
+    return routes.taggedPostList({ posts, tag });
   }
-  return render(pages.postList(posts));
+  return routes.postList({ posts });
 }
