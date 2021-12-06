@@ -1,7 +1,7 @@
 import { generateSummary } from 'search-summary';
+import { Tags } from './Tags';
 import dayjs from './dayjs';
 import { Post } from './post';
-import { hashtag, matchedHashtag } from './templates';
 
 const summaryLength = 134;
 const summaryLengthNoTitle = 113;
@@ -32,7 +32,7 @@ const ListItemBody = (post: Post, searchSummary: string | undefined) => {
     </div>`;
 };
 
-const KeywordHighlighted = (keyword: string) =>
+const MatchedKeyword = (keyword: string) =>
   `<span class="hp_highlight">${keyword}</span>`;
 
 export const PostListItem = (props: {
@@ -40,13 +40,13 @@ export const PostListItem = (props: {
   tag?: string;
   keyword?: string;
 }): string => {
-  const { post } = props;
-  const searchSummary = props.keyword
-    ? generateSummary(post.plainText, props.keyword, {
+  const { post, tag: tagFilter, keyword } = props;
+  const searchSummary = keyword
+    ? generateSummary(post.plainText, keyword, {
         maxLength: 50,
         beforeLength: 20,
         elipsisToken,
-        keywordModifier: (k) => KeywordHighlighted(k),
+        keywordModifier: (k) => MatchedKeyword(k),
       })
     : undefined;
 
@@ -54,7 +54,7 @@ export const PostListItem = (props: {
     <li
       class="
         bl_posts_item
-        ${props.keyword && !searchSummary ? ' hp_hidden' : ''}"
+        ${keyword && !searchSummary ? ' hp_hidden' : ''}"
     >
       <link-internal href="?id=${post.id}">
         <header class="bl_posts_header">
@@ -68,13 +68,7 @@ export const PostListItem = (props: {
         <span class="bl_posts_dateago">
           ${dayjs(post.date).fromNow()}
         </span>
-        <ul class="bl_tags">
-          ${post.tags
-            .map((tag) =>
-              tag === props.tag ? matchedHashtag(tag) : hashtag(tag)
-            )
-            .join('')}
-        </ul>
+        ${Tags(post.tags, tagFilter)}
       </footer>
     </li>`;
 };
