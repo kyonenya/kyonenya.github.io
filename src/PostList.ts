@@ -1,9 +1,8 @@
 import { PostListItem } from './PostListItem';
 import dayjs from './dayjs';
 import { Post } from './post';
-import { Page } from './render';
 
-const PostList = (posts: Post[]): string => `
+export const PostList = (posts: Post[]): string => `
   <ul class="bl_posts">
     ${posts
       .filter((post) => dayjs(post.date).isBefore(dayjs())) // exclude reserved post
@@ -11,10 +10,37 @@ const PostList = (posts: Post[]): string => `
       .join('')}
   </ul>`;
 
-export const PostListPage = (posts: Post[]): Page => ({
-  body: PostList(posts),
-  suffix: '',
-  description: '',
-  title: 'placet experiri',
-  archiveHeader: '',
-});
+export const PostListSearched = (
+  posts: Post[],
+  keyword: string,
+  filteredTag: string | null
+): string => `
+  <ul class="bl_posts">
+    ${posts
+      .map((post) => {
+        if (filteredTag !== null && !post.tags.includes(filteredTag)) {
+          return '';
+        }
+        return PostListItem({
+          post: posts[post.index],
+          tag: filteredTag ?? undefined, // TODO: remove null
+          keyword: keyword,
+        });
+      })
+      .join('')}
+  </ul>`;
+
+export const PostListTagged = (posts: Post[], filteredTag: string): string => `
+  <ul class="bl_posts">
+    ${posts
+      .map((post) => {
+        if (filteredTag !== null && !post.tags.includes(filteredTag)) {
+          return '';
+        }
+        return PostListItem({
+          post: posts[post.index],
+          tag: filteredTag,
+        });
+      })
+      .join('')}
+  </ul>`;

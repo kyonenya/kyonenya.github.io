@@ -1,7 +1,4 @@
-import { ArticlePage } from './Article';
-import { PostListPage } from './PostList';
-import { PostListSearchedPage } from './PostListSearched';
-import { PostListTaggedPage } from './PostListTagged';
+import * as pages from './pages';
 import { Post } from './post';
 import { render } from './render';
 
@@ -34,13 +31,13 @@ export function route(posts: Post[]): void {
 
   if (state.id !== undefined) {
     document.querySelector('.el_search_input')?.classList.add('hp_hidden'); // disable search form
-    return render(ArticlePage(posts.find((post) => post.id === state.id)!));
+    return render(pages.article(posts.find((post) => post.id === state.id)!));
   }
   if (state.keyword !== undefined) {
-    return render(PostListSearchedPage(posts, state.keyword, state.tag));
+    return render(pages.postListSearched(posts, state.keyword, state.tag));
   }
   if (state.tag !== undefined) {
-    return render(PostListTaggedPage(posts, state.tag));
+    return render(pages.postListTagged(posts, state.tag));
   }
-  return render(PostListPage(posts));
+  return render(pages.postList(posts));
 }

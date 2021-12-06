@@ -1,10 +1,4 @@
-export type Page = {
-  body: string;
-  suffix: string;
-  description: string;
-  title: string;
-  archiveHeader: string;
-};
+import { Page } from './pages';
 
 const rootElement = <HTMLDivElement>document.getElementById('root');
 const archiveHeaderElement = <HTMLHeadingElement>(
