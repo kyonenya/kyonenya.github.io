@@ -26,7 +26,7 @@ export function toState(locationSearch: string, locationHash?: string): State {
   };
 }
 
-export const route = (posts: Post[]): void => {
+export function route(posts: Post[]): void {
   const state = toState(window.location.search, window.location.hash);
 
   window.scrollTo(0, 0);
@@ -43,4 +43,4 @@ export const route = (posts: Post[]): void => {
     return render(PostListTaggedPage(posts, state.tag));
   }
   return render(PostListPage(posts));
-};
+}

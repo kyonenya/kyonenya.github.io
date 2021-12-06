@@ -1,4 +1,4 @@
-import { toDate } from './utils';
+import dayjs from './dayjs';
 
 export type Post = {
   id: number;
@@ -21,12 +21,12 @@ export type JSONPost = {
 export const jsonToPost = (posts: JSONPost[]): Post[] =>
   posts.map((post, i) => {
     if (post.id !== posts.length - i) {
-      throw new Error('Post id should be sequential.');
+      throw new Error('Id should be sequential.');
     }
     return {
       ...post,
       index: i,
-      date: toDate(post.date),
+      date: dayjs(post.date).toDate(),
       title: post.title === null || post.title === '' ? undefined : post.title,
       text: post.text
         .replaceAll('——', '──') // double dash -> double ruled line

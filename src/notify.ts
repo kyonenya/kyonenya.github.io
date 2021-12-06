@@ -4,7 +4,7 @@ const modifiedAt = '2021-11-27';
 const newDays = 30;
 const aboutElement = document.getElementById('about');
 
-export const notifyUpdate = (): void => {
+export function notifyUpdate(): void {
   if (!isNew(modifiedAt, newDays)) return;
 
   aboutElement?.addEventListener('click', () => {
@@ -13,4 +13,4 @@ export const notifyUpdate = (): void => {
   if (localStorage.getItem(modifiedAt) !== 'true') {
     aboutElement?.classList.add('el_badge');
   }
-};
+}

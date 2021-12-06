@@ -21,7 +21,7 @@ export function renderRoot(html: string): void {
   rootElement.innerHTML = html;
 }
 
-export const render = (page: Page): void => {
+export function render(page: Page): void {
   renderRoot(page.body);
   if (document.title !== page.title) {
     document.title = page.title;
@@ -35,4 +35,4 @@ export const render = (page: Page): void => {
   if (page.description !== '') {
     descriptionElement.content = page.description;
   }
-};
+}

@@ -8,7 +8,7 @@ import { fetcher } from './utils';
 
 const jsonPath = './posts.json';
 
-const bootstrap = (posts: Post[]): void => {
+function bootstrap(posts: Post[]): void {
   route(posts);
   window.addEventListener('popstate', () => route(posts));
 
@@ -17,7 +17,7 @@ const bootstrap = (posts: Post[]): void => {
 
   activateSearchForm(() => route(posts));
   notifyUpdate();
-};
+}
 
 (async function index() {
   const posts = jsonToPost(await fetcher<JSONPost[]>(jsonPath));
