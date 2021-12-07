@@ -19,18 +19,21 @@ export type JSONPost = {
 };
 
 export const jsonToPost = (posts: JSONPost[]): Post[] =>
-  posts.map((post, i) => {
-    if (post.id !== posts.length - i) {
-      throw new Error('Id should be sequential.');
-    }
-    return {
-      ...post,
-      index: i,
-      date: dayjs(post.date).toDate(),
-      title: post.title === null || post.title === '' ? undefined : post.title,
-      text: post.text
-        .replaceAll('——', '──') // double dash -> double ruled line
-        .replaceAll('　', ' '), // full-width space -> half-width space
-      plainText: post.text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''),
-    };
-  });
+  posts
+    .filter((post) => dayjs(post.date).isBefore(dayjs())) // exclude reserved post
+    .map((post, i) => {
+      if (post.id !== posts.length - i) {
+        throw new Error('Id should be sequential.');
+      }
+      return {
+        ...post,
+        index: i,
+        date: dayjs(post.date).toDate(),
+        title:
+          post.title === null || post.title === '' ? undefined : post.title,
+        text: post.text
+          .replaceAll('——', '──') // double dash -> double ruled line
+          .replaceAll('　', ' '), // full-width space -> half-width space
+        plainText: post.text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''),
+      };
+    });

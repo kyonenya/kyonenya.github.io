@@ -37,7 +37,7 @@ const routes = {
     }),
   searchedPostList: (posts: Post[], keyword: string, tag?: string): void =>
     renderPage({
-      body: PostListSearched(posts, keyword, tag ?? null),
+      body: PostListSearched(posts, keyword, tag),
       suffix: '',
       description: '',
       title: `「${keyword}」｜placet experiri`,

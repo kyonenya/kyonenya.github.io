@@ -1,6 +1,6 @@
-import { activateSearchForm, notifyUpdate } from './bootstraps';
 import { defineBlogCard } from './BlogCard';
 import { defineLinkInternal } from './LinkInternal';
+import { activateSearchForm, notifyUpdate } from './bootstraps';
 import { fetcher } from './lib/utils';
 import { jsonToPost, JSONPost } from './post';
 import { route } from './router';
