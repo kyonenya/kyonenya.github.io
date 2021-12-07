@@ -21,7 +21,7 @@ export function renderRoot(html: string): void {
   rootElement.innerHTML = html;
 }
 
-export function render(page: Page): void {
+export function renderPage(page: Page): void {
   renderRoot(page.body);
   if (document.title !== page.title) {
     document.title = page.title;

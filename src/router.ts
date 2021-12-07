@@ -28,8 +28,7 @@ export function route(posts: Post[]): void {
     window.location.hash
   );
 
-  window.scrollTo(0, 0);
-  document.querySelector('.el_search_input')?.classList.remove('hp_hidden');
+  routes.beforeEach();
 
   if (id !== undefined) {
     const post = posts.find((post) => post.id === id);

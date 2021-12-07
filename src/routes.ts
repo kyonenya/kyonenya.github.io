@@ -1,11 +1,11 @@
 import { Article } from './Article';
 import { PostList, PostListTagged, PostListSearched } from './PostList';
 import { Post } from './post';
-import { render } from './render';
+import { renderPage } from './render';
 
 const article = (post: Post): void => {
   document.querySelector('.el_search_input')?.classList.add('hp_hidden'); // disable search form
-  return render({
+  return renderPage({
     body: Article(post),
     suffix: ` :: ${post.id}`,
     description: `${post.plainText.substr(0, 110)}…`,
@@ -17,7 +17,7 @@ const article = (post: Post): void => {
 };
 
 const postList = (posts: Post[]): void =>
-  render({
+  renderPage({
     body: PostList(posts),
     suffix: '',
     description: '',
@@ -26,7 +26,7 @@ const postList = (posts: Post[]): void =>
   });
 
 const taggedPostList = (posts: Post[], tag: string): void =>
-  render({
+  renderPage({
     body: PostListTagged(posts, tag),
     suffix: '',
     description: '',
@@ -35,7 +35,7 @@ const taggedPostList = (posts: Post[], tag: string): void =>
   });
 
 const searchedPostList = (posts: Post[], keyword: string, tag?: string): void =>
-  render({
+  renderPage({
     body: PostListSearched(posts, keyword, tag ?? null),
     suffix: '',
     description: '',
@@ -43,9 +43,17 @@ const searchedPostList = (posts: Post[], keyword: string, tag?: string): void =>
     archiveHeader: `「${keyword}」`,
   });
 
+export const beforeEach = (): void => {
+  window.scrollTo(0, 0);
+  document.querySelector('.el_search_input')?.classList.remove('hp_hidden');
+};
+
 export const routes = {
   article,
   postList,
   taggedPostList,
   searchedPostList,
+  beforeEach,
 };
+
+type Route = keyof typeof routes;
