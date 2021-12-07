@@ -1,5 +1,5 @@
 import { PostListItem } from './PostListItem';
-import dayjs from './dayjs';
+import dayjs from './lib/dayjs';
 import { Post } from './post';
 
 export const PostList = (posts: Post[]): string => `

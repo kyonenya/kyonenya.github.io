@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-unresolved
 import { LooseNumber } from 'csl-json';
-import dayjs from '../dayjs';
-import { isNew } from '../utils';
+import dayjs from '../lib/dayjs';
+import { isNew } from '../lib/utils';
 import { Citation } from './citation';
 
 const newDays = 30;

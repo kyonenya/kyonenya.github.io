@@ -1,6 +1,6 @@
 import { generateSummary } from 'search-summary';
 import { Tags } from './Tags';
-import dayjs from './dayjs';
+import dayjs from './lib/dayjs';
 import { Post } from './post';
 
 const summaryLength = 134;

@@ -1,14 +1,15 @@
+import { activateSearchForm, notifyUpdate } from './bootstraps';
 import { defineBlogCard } from './customElements/BlogCard';
 import { defineLinkInternal } from './customElements/LinkInternal';
-import { notifyUpdate } from './notify';
-import { jsonToPost, Post, JSONPost } from './post';
+import { fetcher } from './lib/utils';
+import { jsonToPost, JSONPost } from './post';
 import { route } from './router';
-import { activateSearchForm } from './search';
-import { fetcher } from './utils';
 
 const jsonPath = './posts.json';
 
-function bootstrap(posts: Post[]): void {
+(async function index() {
+  const posts = jsonToPost(await fetcher<JSONPost[]>(jsonPath));
+
   route(posts);
   window.addEventListener('popstate', () => route(posts));
 
@@ -17,9 +18,4 @@ function bootstrap(posts: Post[]): void {
 
   activateSearchForm(() => route(posts));
   notifyUpdate();
-}
-
-(async function index() {
-  const posts = jsonToPost(await fetcher<JSONPost[]>(jsonPath));
-  bootstrap(posts);
 })();

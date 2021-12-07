@@ -1,7 +1,7 @@
 import { Article } from './Article';
 import { PostList, PostListTagged, PostListSearched } from './PostList';
+import { renderPage } from './lib/render';
 import { Post } from './post';
-import { renderPage } from './render';
 
 const article = (post: Post): void => {
   document.querySelector('.el_search_input')?.classList.add('hp_hidden'); // disable search form

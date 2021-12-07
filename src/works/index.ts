@@ -1,5 +1,5 @@
-import { renderRoot } from '../render';
-import { fetcher } from '../utils';
+import { renderRoot } from '../lib/render';
+import { fetcher } from '../lib/utils';
 import { Works } from './Works';
 import { Citation } from './citation';
 
