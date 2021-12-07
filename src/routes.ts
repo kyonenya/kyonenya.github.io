@@ -3,7 +3,7 @@ import { PostList, PostListTagged, PostListSearched } from './PostList';
 import { Post } from './post';
 import { render } from './render';
 
-const article = ({ post }: { post: Post }): void => {
+const article = (post: Post): void => {
   document.querySelector('.el_search_input')?.classList.add('hp_hidden'); // disable search form
   return render({
     body: Article(post),
@@ -16,7 +16,7 @@ const article = ({ post }: { post: Post }): void => {
   });
 };
 
-const postList = ({ posts }: { posts: Post[] }): void =>
+const postList = (posts: Post[]): void =>
   render({
     body: PostList(posts),
     suffix: '',
@@ -25,7 +25,7 @@ const postList = ({ posts }: { posts: Post[] }): void =>
     archiveHeader: '',
   });
 
-const taggedPostList = ({ posts, tag }: { posts: Post[]; tag: string }): void =>
+const taggedPostList = (posts: Post[], tag: string): void =>
   render({
     body: PostListTagged(posts, tag),
     suffix: '',
@@ -34,15 +34,7 @@ const taggedPostList = ({ posts, tag }: { posts: Post[]; tag: string }): void =>
     archiveHeader: `#${tag}`,
   });
 
-const searchedPostList = ({
-  posts,
-  keyword,
-  tag,
-}: {
-  posts: Post[];
-  keyword: string;
-  tag?: string;
-}): void =>
+const searchedPostList = (posts: Post[], keyword: string, tag?: string): void =>
   render({
     body: PostListSearched(posts, keyword, tag ?? null),
     suffix: '',
