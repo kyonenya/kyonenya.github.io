@@ -1,5 +1,5 @@
-import dayjs from '../lib/dayjs';
-import { Post } from '../post';
+import dayjs from './lib/dayjs';
+import { Post } from './post';
 
 const summaryLength = 56;
 
