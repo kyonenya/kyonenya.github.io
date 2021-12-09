@@ -1,7 +1,7 @@
 export type Page = {
   body: string;
   suffix: string;
-  description: string;
+  description?: string;
   title: string;
   archiveHeader: string;
 };
@@ -32,7 +32,7 @@ export function renderPage(page: Page): void {
   if (archiveHeaderElement.innerText !== page.archiveHeader) {
     archiveHeaderElement.innerText = page.archiveHeader;
   }
-  if (page.description !== '') {
+  if (page.description) {
     descriptionElement.content = page.description;
   }
 }

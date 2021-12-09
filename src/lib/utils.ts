@@ -4,7 +4,7 @@ import dayjs from './dayjs';
 export function isNew(
   date: ConfigType,
   newDays: number,
-  now?: string
+  now?: ConfigType
 ): boolean {
   const limitDate = dayjs(date).add(newDays, 'day');
   return dayjs(now).isBefore(limitDate);

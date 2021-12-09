@@ -23,7 +23,7 @@ export const jsonToPost = (posts: JSONPost[]): Post[] =>
     .filter((post) => dayjs(post.date).isBefore(dayjs())) // exclude reserved post
     .map((post, i) => {
       if (post.id !== posts.length - i) {
-        throw new Error('Id should be sequential.');
+        throw new Error('ID should be sequential.');
       }
       return {
         ...post,
@@ -34,6 +34,6 @@ export const jsonToPost = (posts: JSONPost[]): Post[] =>
         text: post.text
           .replaceAll('——', '──') // double dash -> double ruled line
           .replaceAll('　', ' '), // full-width space -> half-width space
-        plainText: post.text.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''),
+        plainText: post.text.replaceAll(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''),
       };
     });

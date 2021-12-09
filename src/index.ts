@@ -3,7 +3,7 @@ import { defineLinkInternal } from './LinkInternal';
 import { activateSearchForm, notifyUpdate } from './bootstraps';
 import { fetcher } from './lib/utils';
 import { jsonToPost, JSONPost } from './post';
-import { route } from './router';
+import { route } from './route';
 
 const jsonPath = './posts.json';
 

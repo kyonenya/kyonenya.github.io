@@ -6,7 +6,7 @@ import { toState } from './state';
 
 const searchInputElement = document.querySelector('.el_search_input');
 
-const routes = {
+const routeMap = {
   article: (post: Post): void => {
     searchInputElement?.classList.add('hp_hidden'); // disable search form
     return renderPage({
@@ -23,7 +23,6 @@ const routes = {
     renderPage({
       body: PostList(posts),
       suffix: '',
-      description: '',
       title: 'placet experiri',
       archiveHeader: '',
     }),
@@ -31,7 +30,6 @@ const routes = {
     renderPage({
       body: PostListTagged(posts, tag),
       suffix: '',
-      description: '',
       title: `#${tag}｜placet experiri`,
       archiveHeader: `#${tag}`,
     }),
@@ -39,7 +37,6 @@ const routes = {
     renderPage({
       body: PostListSearched(posts, keyword, tag),
       suffix: '',
-      description: '',
       title: `「${keyword}」｜placet experiri`,
       archiveHeader: `「${keyword}」`,
     }),
@@ -57,18 +54,18 @@ export function route(posts: Post[]): void {
     window.location.hash
   );
 
-  routes.beforeEach();
+  routeMap.beforeEach();
 
   if (id !== undefined) {
     const post = posts.find((post) => post.id === id);
-    if (!post) return;
-    return routes.article(post);
+    if (!post) return; // TODO: 404
+    return routeMap.article(post);
   }
   if (keyword !== undefined) {
-    return routes.searchedPostList(posts, keyword, tag);
+    return routeMap.searchedPostList(posts, keyword, tag);
   }
   if (tag !== undefined) {
-    return routes.taggedPostList(posts, tag);
+    return routeMap.taggedPostList(posts, tag);
   }
-  return routes.postList(posts);
+  return routeMap.postList(posts);
 }
