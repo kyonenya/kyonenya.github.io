@@ -10,9 +10,13 @@ export const Article = (post: Post): string => `
       </time>
     </header>
     <div class="bl_text">
-      <h1 class="bl_text_title">
-        ${post.title}
-      </h1>
+      ${
+        post.title
+          ? `<h1 class="bl_text_title">
+              ${post.title}
+            </h1>`
+          : ''
+      }
       ${post.text}
     </div>
     <footer class="bl_text_footer">

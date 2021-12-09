@@ -20,9 +20,13 @@ export const defineBlogCard = (posts: Post[]): void => {
               <div class="bl_blogcard_logo">placet experiri</span>
               <span class="bl_blogcard_suffix"> :: ${id}</span>
             </header>
-            <div class="bl_blogcard_title">
-              ${post.title}
-            </div>
+            ${
+              post.title
+                ? `<div class="bl_blogcard_title">
+                    ${post.title}
+                  </div>`
+                : ''
+            }
             <p class="bl_blogcard_text">
               ${post.plainText.substr(0, summaryLength)}…
             </p>
