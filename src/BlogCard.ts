@@ -1,7 +1,7 @@
 import dayjs from './lib/dayjs';
 import { Post } from './post';
 
-const summaryLength = 56;
+const summaryLength = 74;
 
 export const defineBlogCard = (posts: Post[]): void => {
   class BlogCard extends HTMLElement {
