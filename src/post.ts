@@ -33,7 +33,15 @@ export const jsonToPost = (posts: JSONPost[]): Post[] =>
           post.title === null || post.title === '' ? undefined : post.title,
         text: post.text
           .replaceAll('——', '──') // double dash -> double ruled line
-          .replaceAll('　', ' '), // full-width space -> half-width space
+          .replaceAll('　', ' ') // full-width space -> half-width space
+          .replaceAll(
+            /<a (href='[^?].+?'.*?)>/g, // overwrite external link
+            "<a $1 target='_blank' rel='noopener'>"
+          )
+          .replaceAll(
+            /<a (href='\?.*?'.*?)>(.+?)<\/a>/g, // overwrite internal link
+            "<link-internal $1 class='el_link'>$2</link-internal>"
+          ),
         plainText: post.text.replaceAll(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''),
       };
     });
