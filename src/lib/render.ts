@@ -1,9 +1,9 @@
 export type Page = {
   body: string;
-  suffix: string;
-  description?: string;
   title: string;
-  archiveHeader: string;
+  suffix?: string;
+  description?: string;
+  archiveHeader?: string;
 };
 
 const rootElement = <HTMLDivElement>document.getElementById('root');
@@ -23,15 +23,9 @@ export function renderRoot(html: string): void {
 
 export function renderPage(page: Page): void {
   renderRoot(page.body);
-  if (document.title !== page.title) {
-    document.title = page.title;
-  }
-  if (suffixElement.innerText !== page.suffix) {
-    suffixElement.innerText = page.suffix;
-  }
-  if (archiveHeaderElement.innerText !== page.archiveHeader) {
-    archiveHeaderElement.innerText = page.archiveHeader;
-  }
+  document.title = page.title;
+  suffixElement.innerText = page.suffix ?? '';
+  archiveHeaderElement.innerText = page.archiveHeader ?? '';
   if (page.description) {
     descriptionElement.content = page.description;
   }

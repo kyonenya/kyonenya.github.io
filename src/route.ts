@@ -11,32 +11,27 @@ const routeMap = {
     searchInputElement?.classList.add('hp_hidden'); // disable search form
     return renderPage({
       body: Article(post),
-      suffix: ` :: ${post.id}`,
-      description: `${post.plainText.substr(0, 110)}…`,
       title: post.title
         ? `${post.title}｜placet experiri :: ${post.id}`
         : `placet experiri :: ${post.id}`,
-      archiveHeader: '',
+      suffix: ` :: ${post.id}`,
+      description: `${post.plainText.substr(0, 110)}…`,
     });
   },
   postList: (posts: Post[]): void =>
     renderPage({
       body: PostList(posts),
-      suffix: '',
       title: 'placet experiri',
-      archiveHeader: '',
     }),
   taggedPostList: (posts: Post[], tag: string): void =>
     renderPage({
       body: PostListTagged(posts, tag),
-      suffix: '',
       title: `#${tag}｜placet experiri`,
       archiveHeader: `#${tag}`,
     }),
   searchedPostList: (posts: Post[], keyword: string, tag?: string): void =>
     renderPage({
       body: PostListSearched(posts, keyword, tag),
-      suffix: '',
       title: `「${keyword}」｜placet experiri`,
       archiveHeader: `「${keyword}」`,
     }),
