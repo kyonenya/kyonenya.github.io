@@ -15,7 +15,7 @@ const routeMap = {
         ? `${post.title}｜placet experiri :: ${post.id}`
         : `placet experiri :: ${post.id}`,
       suffix: ` :: ${post.id}`,
-      description: `${post.plainText.substr(0, 110)}…`,
+      description: `${post.plainText.substring(0, 110)}…`,
     });
   },
   postList: (posts: Post[]): void =>

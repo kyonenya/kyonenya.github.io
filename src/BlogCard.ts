@@ -28,7 +28,7 @@ export const defineBlogCard = (posts: Post[]): void => {
                 : ''
             }
             <p class="bl_blogcard_text">
-              ${post.plainText.substr(0, summaryLength)}…
+              ${post.plainText.substring(0, summaryLength)}…
             </p>
             <footer class="bl_blogcard_footer">
               <span class="bl_blogcard_time">

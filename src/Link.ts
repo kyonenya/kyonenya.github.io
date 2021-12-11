@@ -5,7 +5,7 @@ export function defineLinks(invokeRoute: () => void): void {
     constructor() {
       super();
       const href = this.getAttribute('href');
-      const className = 'el_router-link';
+      const className = 'el_routerLink';
 
       const style = document.createElement('style');
       style.textContent = `

@@ -14,7 +14,7 @@ const ListItemBody = (post: Post, searchSummary: string | undefined) => {
         <p>
           ${
             searchSummary ||
-            `${post.plainText.substr(0, summaryLengthNoTitle)}${elipsisToken}`
+            `${post.plainText.substring(0, summaryLengthNoTitle)}${elipsisToken}`
           }
         </p>
       </div>`;
@@ -26,7 +26,7 @@ const ListItemBody = (post: Post, searchSummary: string | undefined) => {
       <p>
         ${
           searchSummary ||
-          `${post.plainText.substr(0, summaryLength)}${elipsisToken}`
+          `${post.plainText.substring(0, summaryLength)}${elipsisToken}`
         }
       </p>
     </div>`;
