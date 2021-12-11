@@ -8,7 +8,7 @@ export type Page = {
 
 const rootElement = <HTMLDivElement>document.getElementById('root');
 const archiveHeaderElement = <HTMLHeadingElement>(
-  document.querySelector('.el_archive_header')
+  document.querySelector('.el_archiveHeader')
 );
 const suffixElement = <HTMLSpanElement>(
   document.querySelector('.el_logo_suffix')
