@@ -127,12 +127,3 @@ a {
   text-decoration: none;
   color: inherit;
 }
-
-ul li {
-  list-style: none;
-}
-
-li:last-child {
-  /* リストの後続要素との余白をリセット */
-  margin-bottom: 0;
-}
