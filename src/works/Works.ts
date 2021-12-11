@@ -4,7 +4,7 @@ import { isNewCitation } from './citation-date';
 const Text = (text: string): string =>
   text
     .replaceAll(
-      /\[(.+?)\]\((.+?)\)/g,
+      /\[(.+?)\]\((.+?)\)/g, // markdown link -> external anchorlink
       (_match, title: string, url: string) =>
         `<a href="${url}" target="_blank" rel="noopener">${title}</a>`
     )
@@ -37,6 +37,6 @@ export const Works = (citations: Citation[]): string => {
     <section class="ly_cont">
     <div class="bl_text">
       <h2>業績一覧</h2>
-      ${Genre.map((g) => List(citationMap.get(g), g)).join('')}
+      ${Genre.map((genre) => List(citationMap[genre], genre)).join('')}
     </div>`;
 };

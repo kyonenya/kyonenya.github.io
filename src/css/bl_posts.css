@@ -11,8 +11,7 @@
 }
 
 .bl_posts_item:first-child {
-  /* 先頭の余白リセット */
-  padding-top: 0;
+  padding-top: 0;  /* 先頭の余白リセット */
 }
 
 .bl_posts_header {
@@ -20,10 +19,8 @@
 }
 
 .bl_posts_title {
-  /* 装飾 */
   letter-spacing: 1px;
-  /* リセット */
-  font-weight: normal;
+  font-weight: normal;  /* リセット */
   font-size: 128%;
   margin-top: 0.1em;
 }
@@ -35,11 +32,10 @@
 }
 
 .bl_posts_footer {
-  margin-top: 0.25em;
+  margin-top: 0.3em;
   color: var(--monochrome-dark);
 }
 
-/* タグリスト */
 .bl_tags {
   display: inline-flex;  /* 横並び、かつ先立つ要素（日付）に回り込める */
   flex-wrap: wrap;

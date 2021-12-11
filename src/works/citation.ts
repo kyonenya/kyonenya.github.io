@@ -25,7 +25,9 @@ function detectGenre(item: Citation): Genre | undefined {
   }
 }
 
-type CitationMap = Map<Genre, Citation[]>;
+type CitationMap = { [k in Genre]: Citation[] };
 
 export const toCitationMap = (citations: Citation[]): CitationMap =>
-  new Map(Genre.map((g) => [g, citations.filter((c) => detectGenre(c) === g)]));
+  Object.fromEntries(
+    Genre.map((genre) => [genre, citations.filter((c) => detectGenre(c) === genre)])
+  ) as CitationMap;
