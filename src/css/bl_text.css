@@ -82,7 +82,7 @@ a:visited.el_link {
   border-bottom: 1px solid var(--monochrome-midlight);
   padding-right: 0.75em;
   font-weight: normal;
-  font-size: 115%;
+  font-size: 120%;
 }
 
 .ly_cont .bl_text h2:first-child,

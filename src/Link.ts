@@ -1,6 +1,6 @@
 import { toState } from './state';
 
-export function defineRouterLink(invokeRoute: () => void): void {
+export function defineLinks(invokeRoute: () => void): void {
   class RouterLink extends HTMLElement {
     constructor() {
       super();
@@ -33,7 +33,6 @@ export function defineRouterLink(invokeRoute: () => void): void {
         window.history.pushState(toState(href ?? ''), '', href);
         invokeRoute();
       };
-
       a.innerText = this.innerText;
       this.innerText = '';
       

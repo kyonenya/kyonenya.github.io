@@ -1,5 +1,5 @@
 import { defineBlogCard } from './BlogCard';
-import { defineRouterLink } from './Link';
+import { defineLinks } from './Link';
 import { activateSearchForm, notifyUpdate } from './bootstraps';
 import { fetcher } from './lib/utils';
 import { jsonToPost, JSONPost } from './post';
@@ -13,7 +13,7 @@ const jsonPath = './posts.json';
   route(posts);
   window.addEventListener('popstate', () => route(posts));
 
-  defineRouterLink(() => route(posts));
+  defineLinks(() => route(posts));
   defineBlogCard(posts);
 
   activateSearchForm(() => route(posts));

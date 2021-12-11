@@ -3,7 +3,7 @@ import dayjs from './lib/dayjs';
 export type Post = {
   id: number;
   index: number;
-  date: Date;
+  date: string;
   title: string | undefined;
   text: string;
   plainText: string;
@@ -28,7 +28,6 @@ export const jsonToPost = (posts: JSONPost[]): Post[] =>
       return {
         ...post,
         index: i,
-        date: dayjs(post.date).toDate(),
         title:
           post.title === null || post.title === '' ? undefined : post.title,
         text: post.text
