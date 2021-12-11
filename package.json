@@ -3,12 +3,12 @@
   "version": "2.2.0",
   "scripts": {
     "_tsc": "tsc -w --noEmit",
-    "build": "webpack",
+    "build:js": "webpack",
+    "build:css": "postcss src/css/index.css -o dist/css/bundle.css -w",
     "fmt": "prettier --write **/*.{ts,js,json}",
-    "lint": "eslint --fix src/**/*.ts",
+    "lint:js": "eslint --fix src/**/*.ts",
     "lint:css": "stylelint --fix src/**/*.css",
-    "makeBibliography": "node makeBibliography.js",
-    "postcss": "postcss src/css/index.css -o dist/css/bundle.css -w"
+    "makeBibliography": "node makeBibliography.js"
   },
   "dependencies": {
     "dayjs": "^1.10.7",
