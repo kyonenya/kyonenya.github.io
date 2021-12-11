@@ -35,12 +35,12 @@ export const jsonToPost = (posts: JSONPost[]): Post[] =>
           .replaceAll('——', '──') // double dash -> double ruled line
           .replaceAll('　', ' ') // full-width space -> half-width space
           .replaceAll(
-            /<a (href='[^?].+?'.*?)>/g, // overwrite external link
-            "<a $1 target='_blank' rel='noopener'>"
+            /<a (href='[^?].+?'.*?)>(.+?)<\/a>/g, // overwrite external link
+            "<a $1 target='_blank' rel='noopener'>$2</a>"
           )
           .replaceAll(
             /<a (href='\?.*?'.*?)>(.+?)<\/a>/g, // overwrite internal link
-            "<link-internal $1 class='el_link'>$2</link-internal>"
+            "<internal-link $1>$2</internal-link>"
           ),
         plainText: post.text.replaceAll(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''),
       };

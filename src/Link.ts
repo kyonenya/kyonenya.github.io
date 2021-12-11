@@ -19,5 +19,28 @@ export function defineRouterLink(invokeRoute: () => void): void {
     }
   }
 
+  class InternalLink extends HTMLElement {
+    constructor() {
+      super();
+      const href = this.getAttribute('href');
+      if (!href) return;
+
+      const a = document.createElement('a');
+      a.href = href;
+      a.classList.add('el_link');
+      a.onclick = (e) => {
+        e.preventDefault();
+        window.history.pushState(toState(href ?? ''), '', href);
+        invokeRoute();
+      };
+
+      a.innerText = this.innerText;
+      this.innerText = '';
+      
+      this.appendChild(a);
+    }
+  }
+
   window.customElements.define('router-link', RouterLink);
+  window.customElements.define('internal-link', InternalLink);
 }
