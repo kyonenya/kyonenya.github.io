@@ -56,14 +56,14 @@ export const PostListItem = (props: {
         bl_posts_item
         ${keyword && !searchSummary ? ' hp_hidden' : ''}"
     >
-      <link-internal href="?id=${post.id}">
+      <router-link href="?id=${post.id}">
         <header class="bl_posts_header">
           <time class="bl_posts_date">
             ${dayjs(post.date).format('YYYY-MM-DD')}
           </time>
         </header>
         ${ListItemBody(post, searchSummary)}
-      </link-internal>
+      </router-link>
       <footer class="bl_posts_footer">
         <span class="bl_posts_dateago">
           ${dayjs(post.date).fromNow()}

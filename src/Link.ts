@@ -1,7 +1,7 @@
 import { toState } from './state';
 
-export function defineLinkInternal(invokeRoute: () => void): void {
-  class LinkInternal extends HTMLElement {
+export function defineRouterLink(invokeRoute: () => void): void {
+  class RouterLink extends HTMLElement {
     constructor() {
       super();
       const href = this.getAttribute('href');
@@ -19,5 +19,5 @@ export function defineLinkInternal(invokeRoute: () => void): void {
     }
   }
 
-  window.customElements.define('link-internal', LinkInternal);
+  window.customElements.define('router-link', RouterLink);
 }

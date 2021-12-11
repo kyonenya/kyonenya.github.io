@@ -1,15 +1,15 @@
 const Tag = (tag: string): string =>
   `<li>
-    <link-internal href="?tag=${tag}">
+    <router-link href="?tag=${tag}">
       #${tag}
-    </link-internal>
+    </router-link>
   </li>`;
 
 const MatchedTag = (tag: string): string =>
   `<li>
-    <link-internal href="?tag=${tag}" class="hp_bold">
+    <router-link href="?tag=${tag}" class="hp_bold">
       #${tag}
-    </link-internal>
+    </router-link>
   </li>`;
 
 export const Tags = (tags: string[], tagFilter?: string): string => `

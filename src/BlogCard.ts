@@ -14,7 +14,7 @@ export const defineBlogCard = (posts: Post[]): void => {
 
       this.innerHTML = `
         <div class="bl_blogcard">
-          <link-internal href="?id=${id}">
+          <router-link href="?id=${id}">
             <header class="bl_blogcard_header">
               <div class="bl_blogcard_icon"></div>
               <div class="bl_blogcard_logo">placet experiri</span>
@@ -38,7 +38,7 @@ export const defineBlogCard = (posts: Post[]): void => {
                 ${post.tags.map((tag) => `<li>#${tag}</li>`).join('')}
               </ul>
             </footer>
-          </link-internal>
+          </router-link>
         </div>`;
     }
   }
