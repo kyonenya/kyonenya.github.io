@@ -1,5 +1,5 @@
 import { Article } from './Article';
-import { PostList, PostListTagged, PostListSearched } from './PostList';
+import { PostList, TaggedPostList, SearchedPostList } from './PostList';
 import { renderPage } from './lib/render';
 import { Post } from './post';
 import { toState } from './state';
@@ -25,23 +25,19 @@ const routeMap = {
     }),
   taggedPostList: (posts: Post[], tag: string): void =>
     renderPage({
-      body: PostListTagged(posts, tag),
+      body: TaggedPostList(posts, tag),
       title: `#${tag}｜placet experiri`,
-      archiveHeader: `#${tag}`,
     }),
   searchedPostList: (posts: Post[], keyword: string, tag?: string): void =>
     renderPage({
-      body: PostListSearched(posts, keyword, tag),
+      body: SearchedPostList(posts, keyword, tag),
       title: `「${keyword}」｜placet experiri`,
-      archiveHeader: `「${keyword}」`,
     }),
   beforeEach: (): void => {
     window.scrollTo(0, 0);
     searchInputElement?.classList.remove('hp_hidden');
   },
 };
-
-// export type Route = keyof typeof routes;
 
 export function route(posts: Post[]): void {
   const { id, tag, keyword } = toState(

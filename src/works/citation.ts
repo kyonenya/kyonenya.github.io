@@ -29,5 +29,8 @@ type CitationMap = { [k in Genre]: Citation[] };
 
 export const toCitationMap = (citations: Citation[]): CitationMap =>
   Object.fromEntries(
-    Genre.map((genre) => [genre, citations.filter((c) => detectGenre(c) === genre)])
+    Genre.map((genre) => [
+      genre,
+      citations.filter((c) => detectGenre(c) === genre),
+    ])
   ) as CitationMap;

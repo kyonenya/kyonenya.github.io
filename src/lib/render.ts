@@ -3,13 +3,9 @@ export type Page = {
   title: string;
   suffix?: string;
   description?: string;
-  archiveHeader?: string;
 };
 
 const rootElement = <HTMLDivElement>document.getElementById('root');
-const archiveHeaderElement = <HTMLHeadingElement>(
-  document.querySelector('.el_archiveHeader')
-);
 const suffixElement = <HTMLSpanElement>(
   document.querySelector('.el_logo_suffix')
 );
@@ -25,7 +21,6 @@ export function renderPage(page: Page): void {
   renderRoot(page.body);
   document.title = page.title;
   suffixElement.innerText = page.suffix ?? '';
-  archiveHeaderElement.innerText = page.archiveHeader ?? '';
   if (page.description) {
     descriptionElement.content = page.description;
   }
