@@ -48,7 +48,6 @@ a:visited.el_link {
   padding: 0 0 0 0.75em;
   /* 左：padding＋border-left＝1emになるように */
   border-left: 0.25em solid var(--monochrome-light);
-  /* background: hsl(0, 0%, 95%); */
   font-family: Georgia, "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "游明朝", YuMincho, serif;
   box-sizing: border-box;
   margin: 1em 0 1em 0.7em;
@@ -94,7 +93,7 @@ a:visited.el_link {
 /* 小見出し */
 .bl_text h3,
 .el_heading3 {
-  margin: 1em 0 0.75em; /* セクション間余白、左右の余白限界からの余白、後続要素との余白 */
+  margin: 1em 0 0.75em;
   font-weight: normal;
   font-size: 112%;
   letter-spacing: 1px;
@@ -103,7 +102,7 @@ a:visited.el_link {
 
 /* 水平線 */
 .bl_text hr {
-  border: none;  /* デフォルトスタイルをリセット */
+  border: none;  /* unset */
   border-top: 1px solid var(--monochrome-light);
   width: 50%;
   margin: 1.5em auto;
