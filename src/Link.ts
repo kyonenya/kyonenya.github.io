@@ -5,8 +5,19 @@ export function defineLinks(invokeRoute: () => void): void {
     constructor() {
       super();
       const href = this.getAttribute('href');
+      const className = 'el_router-link';
+
+      const style = document.createElement('style');
+      style.textContent = `
+        .${className} {
+          cursor: pointer;
+          text-decoration: none;
+          color: inherit;
+        }
+      `;
 
       const a = document.createElement('a');
+      a.classList.add(className);
       a.onclick = (e) => {
         e.preventDefault();
         window.history.pushState(toState(href ?? ''), '', href);
@@ -15,7 +26,7 @@ export function defineLinks(invokeRoute: () => void): void {
       const slot = document.createElement('slot');
       a.appendChild(slot);
 
-      this.attachShadow({ mode: 'open' }).appendChild(a);
+      this.attachShadow({ mode: 'open' }).appendChild(a).appendChild(style);
     }
   }
 
@@ -35,7 +46,7 @@ export function defineLinks(invokeRoute: () => void): void {
       };
       a.innerText = this.innerText;
       this.innerText = '';
-      
+
       this.appendChild(a);
     }
   }

@@ -5,7 +5,8 @@ const Text = (text: string): string =>
   text
     .replaceAll(
       /\[(.+?)\]\((.+?)\)/g,
-      (_match, title: string, url: string) => `<a href="${url}" target="_blank" rel="noopener">${title}</a>`
+      (_match, title: string, url: string) =>
+        `<a href="${url}" target="_blank" rel="noopener">${title}</a>`
     )
     .replaceAll('——', '<span class="hp_kerning">——</span>');
 

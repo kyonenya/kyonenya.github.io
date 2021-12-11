@@ -39,7 +39,7 @@ export const jsonToPost = (posts: JSONPost[]): Post[] =>
           )
           .replaceAll(
             /<a (href='\?.*?'.*?)>(.+?)<\/a>/g, // overwrite internal link
-            "<internal-link $1>$2</internal-link>"
+            '<internal-link $1>$2</internal-link>'
           ),
         plainText: post.text.replaceAll(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''),
       };
