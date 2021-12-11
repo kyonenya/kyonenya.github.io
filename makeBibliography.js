@@ -6,16 +6,15 @@ const worksPath = path.resolve('works.json');
 const stylePath = path.resolve('assets', 'citeproc', 'sist02modified.csl');
 const localePath = path.resolve('assets', 'citeproc', 'locales-ja-JP.xml');
 
-/** @url https://stackoverflow.com/questions/286141/remove-blank-attributes-from-an-object-in-javascript */
-function removeNull(obj) {
+function removeNullProperties(obj) {
   return Object.entries(obj)
-    .filter(([_, v]) => v !== null)
+    .filter(([_k, v]) => v !== null)
     .reduce((acc, [k, v]) => ({ ...acc, [k]: v }), {});
 }
 
 function citeproc(data, style, locale) {
   const items = data.map((item) => ({
-    ...removeNull(item),
+    ...removeNullProperties(item),
     id: item.id.toString(),
   }));
   const sys = {

@@ -11,13 +11,15 @@
   box-sizing: border-box;
 }
 
-.bl_text .bl_blogcard a {  /* offset */
+.bl_text .bl_blogcard a {
+  /* offset */
   color: var(--text-color);
   border: none;
   line-height: 1.5;
 }
 
-.bl_text .bl_blogcard a:visited {  /* offset */
+.bl_text .bl_blogcard a:visited {
+  /* offset */
   color: var(--text-color);
   border: none;
 }
@@ -40,7 +42,7 @@
 .bl_text .bl_blogcard_logo {
   font-size: 130%;
   color: var(--text-color);
-  font-family: "Avenir Next", "Segoe UI", sans-serif;
+  font-family: "Avenir Next", "Lucida Sans", sans-serif;
   margin-left: 0.2em;
 }
 

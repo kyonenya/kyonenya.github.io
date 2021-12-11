@@ -1,11 +1,11 @@
 module.exports = {
   env: {
     browser: true,
-    es2020: true,
   },
   extends: [
     'eslint:recommended',
-    'plugin:import/typescript',
+    'plugin:import/recommended',
+    'plugin:import/typescript', // ≠eslint-plugin-import
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
@@ -13,15 +13,11 @@ module.exports = {
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
-    sourceType: 'module',
-    project: './tsconfig.eslint.json',
-    tsconfigRootDir: __dirname,
+    project: './tsconfig.json',
   },
   rules: {
-    // 'import/prefer-default-export': 'off',
-    // 'import/extensions': 'off',
-    indent: ['error', 2, { ignoredNodes: ['TemplateLiteral *'] }],
-    // '@typescript-eslint/no-non-null-assertion': 'off',
-    // 'no-console': 'off',
+    'import/order': ['warn', { alphabetize: { order: 'asc' } }],
+    '@typescript-eslint/no-floating-promises': ['error', { ignoreIIFE: true }], // Promises must be handled appropriately or explicitly marked as ignored with the `void` operator
+    // '@typescript-eslint/no-non-null-assertion': 'off', // Forbidden non-null assertion
   },
 };

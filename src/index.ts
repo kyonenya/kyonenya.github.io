@@ -1,38 +1,21 @@
-import { enrich } from './data';
-import { route } from './router';
-import { registerComponents } from './components';
-import { fetcher } from './utils';
-import { notifyUpdate } from './notify';
-import { datarable } from './types';
+import { defineBlogCard } from './BlogCard';
+import { defineLinks } from './Link';
+import { activateSearchForm, notifyUpdate } from './bootstraps';
+import { fetcher } from './lib/utils';
+import { jsonToPost, JSONPost } from './post';
+import { route } from './route';
 
-const jsonPath = './data.json';
-const searchFormElement = <HTMLFormElement>(
-  document.querySelector('.el_search_form')
-);
-const searchInputElement = <HTMLInputElement>(
-  document.querySelector('.el_search_input')
-);
+const jsonPath = './posts.json';
 
-const bootstrap = (data: datarable[]): void => {
-  route(data);
-  window.addEventListener('popstate', () => route(data));
+(async function index() {
+  const posts = jsonToPost(await fetcher<JSONPost[]>(jsonPath));
 
-  searchFormElement.addEventListener('submit', (e) => {
-    e.preventDefault();
-    window.history.pushState(
-      `${window.location.search}#${searchInputElement.value}`,
-      '',
-      `${window.location.search}#${searchInputElement.value}`
-    );
-    route(data);
-  });
+  route(posts);
+  window.addEventListener('popstate', () => route(posts));
 
+  defineLinks(() => route(posts));
+  defineBlogCard(posts);
+
+  activateSearchForm(() => route(posts));
   notifyUpdate();
-  registerComponents(data);
-};
-
-void (async function index() {
-  const rawData = await fetcher<datarable[]>(jsonPath);
-  const data = enrich(rawData);
-  bootstrap(data);
 })();

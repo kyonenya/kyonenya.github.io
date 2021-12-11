@@ -1,10 +1,10 @@
-import { renderRoot } from '../render';
-import { fetcher } from '../utils';
-import { Citation } from './citation';
+import { renderRoot } from '../lib/render';
+import { fetcher } from '../lib/utils';
 import { Works } from './Works';
+import { Citation } from './citation';
 
 const jsonPath = './works.json';
 
-void (async function index() {
+(async function index() {
   renderRoot(Works(await fetcher<Citation[]>(jsonPath)));
 })();

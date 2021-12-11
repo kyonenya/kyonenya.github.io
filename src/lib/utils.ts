@@ -4,14 +4,14 @@ import dayjs from './dayjs';
 export function isNew(
   date: ConfigType,
   newDays: number,
-  now?: string
+  now?: ConfigType
 ): boolean {
   const limitDate = dayjs(date).add(newDays, 'day');
   return dayjs(now).isBefore(limitDate);
 }
 
-export const fetcher = async <T>(url: string): Promise<T> => {
+export async function fetcher<T>(url: string): Promise<T> {
   const response = await fetch(url);
   if (!response.ok) throw new Error(response.statusText);
   return (await response.json()) as T;
-};
+}

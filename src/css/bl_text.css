@@ -2,7 +2,8 @@
  * マークアップ
  */
 
-.bl_text a {
+.bl_text a,
+a.el_link {
   /* 下線と文字とを空けるため、擬似的な下線を作る */
   display: inline;
   line-height: 1em;  /* 下余白リセット */
@@ -13,19 +14,22 @@
   text-indent: 0;  /* 時々生じる謎のインデントを削除 */
 }
 
-.bl_text a:visited {
+.bl_text a:visited,
+a:visited.el_link {
   /* 訪問済みリンク */
   color: hsl(271, 35%, 45%);  /* 紫、Wikipediaより */
   border-bottom: 1px solid hsl(271, 35%, 55%);
 }
 
 @media (prefers-color-scheme: dark) {
-  .bl_text a {
+  .bl_text a,
+  a.el_link {
     color: hsl(219, 62%, 68%);
     border-bottom: 1px solid hsl(219, 62%, 48%);
   }
   
-  .bl_text a:visited {
+  .bl_text a:visited,
+  a:visited.el_link {
     color: hsl(271, 35%, 68%);
     border-bottom: 1px solid hsl(271, 35%, 48%);
   }
@@ -44,7 +48,6 @@
   padding: 0 0 0 0.75em;
   /* 左：padding＋border-left＝1emになるように */
   border-left: 0.25em solid var(--monochrome-light);
-  /* background: hsl(0, 0%, 95%); */
   font-family: Georgia, "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "游明朝", YuMincho, serif;
   box-sizing: border-box;
   margin: 1em 0 1em 0.7em;
@@ -78,7 +81,7 @@
   border-bottom: 1px solid var(--monochrome-midlight);
   padding-right: 0.75em;
   font-weight: normal;
-  font-size: 115%;
+  font-size: 120%;
 }
 
 .ly_cont .bl_text h2:first-child,
@@ -90,7 +93,7 @@
 /* 小見出し */
 .bl_text h3,
 .el_heading3 {
-  margin: 1em 0 0.75em; /* セクション間余白、左右の余白限界からの余白、後続要素との余白 */
+  margin: 1em 0 0.75em;
   font-weight: normal;
   font-size: 112%;
   letter-spacing: 1px;
@@ -99,7 +102,7 @@
 
 /* 水平線 */
 .bl_text hr {
-  border: none;  /* デフォルトスタイルをリセット */
+  border: none;  /* unset */
   border-top: 1px solid var(--monochrome-light);
   width: 50%;
   margin: 1.5em auto;
@@ -122,6 +125,7 @@
   margin-bottom: 0.25em;
 }
 
+/* stylelint-disable no-descending-specificity */
 .bl_text ul ul li {
   list-style: circle;
 }

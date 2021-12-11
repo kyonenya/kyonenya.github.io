@@ -2,16 +2,17 @@
   "name": "kyonenya.github.io",
   "version": "2.2.0",
   "scripts": {
-    "fmt": "prettier --write **/*.{ts,js,json}",
-    "lint": "eslint --fix src/**/*.ts",
-    "lint:css": "stylelint --fix src/**/*.css",
-    "postcss": "postcss src/css/index.css -o dist/css/bundle.css -w",
     "_tsc": "tsc -w --noEmit",
-    "makeBibliography": "node makeBibliography.js",
-    "build": "webpack"
+    "build:js": "webpack",
+    "build:css": "postcss src/css/index.css -o dist/css/bundle.css -w",
+    "fmt": "prettier --write **/*.{ts,js,json}",
+    "lint:js": "eslint --fix src/**/*.ts",
+    "lint:css": "stylelint --fix src/**/*.css",
+    "makeBibliography": "node makeBibliography.js"
   },
   "dependencies": {
-    "dayjs": "^1.10.7"
+    "dayjs": "^1.10.7",
+    "search-summary": "^1.0.0"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.24.0",
@@ -20,7 +21,7 @@
     "csl-json": "^0.1.0",
     "eslint": "^7.26.0",
     "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-import": "^2.23.2",
+    "eslint-plugin-import": "^2.25.3",
     "express": "^4.17.1",
     "postcss": "^8.3.0",
     "postcss-cli": "^8.3.1",
