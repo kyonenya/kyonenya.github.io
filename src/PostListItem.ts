@@ -4,17 +4,18 @@ import dayjs from './lib/dayjs';
 import { Post } from './post';
 
 const summaryLength = 134;
-const summaryLengthNoTitle = 113;
+const noTitleSummaryLength = 113;
 const elipsisToken = '…';
 
 const ListItemBody = (post: Post, searchSummary: string | undefined) => {
   if (!post.title) {
+    // prettier-ignore
     return `
       <div class="bl_posts_summary">
         <p>
           ${
             searchSummary ||
-            `${post.plainText.substring(0, summaryLengthNoTitle)}${elipsisToken}`
+            `${post.plainText.substring(0, noTitleSummaryLength)}${elipsisToken}`
           }
         </p>
       </div>`;
@@ -32,21 +33,18 @@ const ListItemBody = (post: Post, searchSummary: string | undefined) => {
     </div>`;
 };
 
-const MatchedKeyword = (keyword: string) =>
-  `<span class="hp_highlight">${keyword}</span>`;
-
 export const PostListItem = (props: {
   post: Post;
   tag?: string;
   keyword?: string;
 }): string => {
-  const { post, tag: tagFilter, keyword } = props;
+  const { post, tag, keyword } = props;
   const searchSummary = keyword
     ? generateSummary(post.plainText, keyword, {
         maxLength: 50,
         beforeLength: 20,
         elipsisToken,
-        keywordModifier: (k) => MatchedKeyword(k),
+        keywordModifier: (k) => `<span class="hp_highlight">${k}</span>`,
       })
     : undefined;
 
@@ -68,7 +66,9 @@ export const PostListItem = (props: {
         <span class="bl_posts_dateago">
           ${dayjs(post.date).fromNow()}
         </span>
-        ${Tags(post.tags, tagFilter)}
+        <ul class="bl_tags">
+          ${Tags(post.tags, tag)}
+        </ul>
       </footer>
     </li>`;
 };

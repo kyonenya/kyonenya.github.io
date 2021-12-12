@@ -23,6 +23,8 @@ export const Article = (post: Post): string => `
       <span class="bl_posts_dateago">
         ${dayjs(post.date).fromNow()}
       </span>
-      ${Tags(post.tags)}
+      <ul class="bl_tags">
+        ${Tags(post.tags)}
+      </ul>
     </footer>
   </article>`;
