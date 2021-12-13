@@ -3,10 +3,10 @@
   "version": "2.3.0",
   "scripts": {
     "_tsc": "tsc -w --noEmit",
-    "build:js": "webpack",
+    "build": "webpack",
     "build:css": "postcss src/css/index.css -o dist/css/bundle.css -w",
-    "fmt": "prettier --write **/*.{ts,js,json}",
-    "lint:js": "eslint --fix src/**/*.ts",
+    "format": "prettier --write **/*.{ts,js,json}",
+    "lint": "eslint --fix src/**/*.ts",
     "lint:css": "stylelint --fix src/**/*.css",
     "makeBibliography": "node makeBibliography.js"
   },
