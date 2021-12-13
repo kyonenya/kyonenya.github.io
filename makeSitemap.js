@@ -1,25 +1,26 @@
 const { createWriteStream, writeFileSync } = require('fs');
 const { SitemapStream, streamToPromise } = require('sitemap');
-var format = require('xml-formatter');
+const format = require('xml-formatter');
 const posts = require('./posts.json');
 
-const outputDir = './sitemap2.xml';
+const worksLastmod = '2021-11-28';
+const aboutLastmod = '2021-11-28';
 
 const sitemap = new SitemapStream({ hostname: 'https://kyonenya.github.io/' });
 
 sitemap.write({ url: '', lastmod: posts[0].date });
-sitemap.write({ url: 'works', lastmod: '2021-12-04' });
-sitemap.write({ url: 'about', lastmod: '2021-12-04' });
+sitemap.write({ url: 'works', lastmod: worksLastmod });
+sitemap.write({ url: 'about', lastmod: aboutLastmod });
 posts.forEach((post) =>
   sitemap.write({ url: `?id=${post.id}`, lastmod: post.date })
 );
 sitemap.end();
 
 streamToPromise(sitemap)
-  .then((sitemap) =>
+  .then((sm) =>
     writeFileSync(
-      outputDir,
-      format(sitemap.toString(), { indentation: '  ', collapseContent: true })
+      './sitemap.xml',
+      format(sm.toString(), { indentation: '  ', collapseContent: true })
     )
   )
   .then(console.log('success!'));
