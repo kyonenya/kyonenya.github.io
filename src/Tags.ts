@@ -12,9 +12,5 @@ const MatchedTag = (tag: string): string =>
     </router-link>
   </li>`;
 
-export const Tags = (tags: string[], tagFilter?: string): string => `
-  <ul class="bl_tags">
-    ${tags
-      .map((tag) => (tag === tagFilter ? MatchedTag(tag) : Tag(tag)))
-      .join('')}
-  </ul>`;
+export const Tags = (tags: string[], tagFilter?: string): string =>
+  tags.map((tag) => (tag === tagFilter ? MatchedTag(tag) : Tag(tag))).join('');

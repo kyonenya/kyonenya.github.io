@@ -1,3 +1,6 @@
+const csso = require('postcss-csso');
+const atImport = require('postcss-import');
+
 module.exports = {
-  plugins: [require('postcss-import'), require('postcss-csso')],
+  plugins: [atImport, csso],
 };

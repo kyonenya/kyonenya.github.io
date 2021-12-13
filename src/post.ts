@@ -3,7 +3,8 @@ import dayjs from './lib/dayjs';
 export type Post = {
   id: number;
   index: number;
-  date: string;
+  createdAt: string;
+  modifiedAt: string;
   title: string | undefined;
   text: string;
   plainText: string;
@@ -12,7 +13,8 @@ export type Post = {
 
 export type JSONPost = {
   id: number;
-  date: string;
+  createdAt: string;
+  modifiedAt: string;
   title: string | null;
   text: string;
   tags: string[];
@@ -20,7 +22,7 @@ export type JSONPost = {
 
 export const jsonToPost = (posts: JSONPost[]): Post[] =>
   posts
-    .filter((post) => dayjs(post.date).isBefore(dayjs())) // exclude reserved post
+    .filter((post) => dayjs(post.createdAt).isBefore(dayjs())) // exclude reserved post
     .map((post, i) => {
       if (post.id !== posts.length - i) {
         throw new Error('ID should be sequential.');
