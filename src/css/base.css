@@ -5,7 +5,7 @@
 body {
   font-family: "Helvetica Neue", Verdana, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif;
   word-break: break-word;  /* 行頭に、。が来るのを避ける */
-  color: var(--text-color);  /* 黒の文字色 */
+  color: var(--text-color);
   line-height: 1.65;
   font-size: 16px;
   background: var(--background-color);
@@ -13,7 +13,7 @@ body {
   /* フッターを下部固定 */
   display: flex;
   flex-flow: column;  /* 縦の隊列 */
-  min-height: 100vh;  /* コンテンツが少なくても、 */
+  min-height: 100vh;
 }
 
 @media screen and (min-width: 560px) {
@@ -39,7 +39,8 @@ body {
 }
 
 main {
-  flex: 1;  /* メイン領域を上下にめいっぱい広げておいて。 */
+  /* フッターを下部固定 */
+  flex: 1;  /* 上下にめいっぱい広げておいて */
 }
 
 @media screen and (min-width: 560px) {
@@ -50,13 +51,11 @@ main {
 
 .ly_header,
 .ly_cont {
-  /* 余白限界 */
   width: 91vw;
   margin: 0 auto;
 }
 
 @media screen and (max-width: 559px) {
-  /* ヘッダー */
   .ly_header {
     margin-bottom: 1.5em;
   }
@@ -66,7 +65,7 @@ main {
   .ly_cont,
   .ly_header {
     width: 85%;
-    margin: 0 auto;  /* テキストを画面いっぱいに表示せず、中央に寄せる */
+    margin: 0 auto;
   }
 }
 
@@ -98,7 +97,7 @@ main {
   display: inline-block;
   background: hsl(60, 100%, 77%);
   border: 1px solid hsla(0, 0%, 0%, 0.15);  /* 透明化した黒線を被せる */
-  color: #333;  /* ダークモード下でも黒文字にする */
+  color: hsl(0, 0%, 20%);  /* ダークモード下でも黒文字 */
   border-radius: 3px;
   padding: 2px 3px;
   margin: 0;
@@ -122,8 +121,11 @@ main {
  * リセット
  */
 
+html {
+  scroll-behavior: auto;  /* unset `smooth` */
+}
+
 a {
-  /* リンク装飾をリセット */
   text-decoration: none;
   color: inherit;
 }
