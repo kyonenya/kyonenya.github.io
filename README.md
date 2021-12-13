@@ -1,21 +1,20 @@
 **[https://kyonenya.github.io/](https://kyonenya.github.io/)**
 
-## これはどんなサイトですか
-
-静的なHTMLホスティングサイトでも動作するように、JavaScriptのみで構築したサーバーレスなブログサイト。フレームワークを使わず、Vanilla JS（TypeScript）で実装している。
+静的なHTMLホスティングサイトでも動作するようにJavaScriptのみで構築した、サーバーレスなブログアプリケーション
 
 ## 機能
 
 - CMS機能
   - 記事データベースはJSONで代用
   - 個別記事ページはパーマリンクをクエリ文字列（`?id=123`）で割り振り、そのidをもとに個別ページをJSで生成
+  - 全件分の記事データ（〜数百KB程度）を一覧表示時に取得してあるので、個別ページへの遷移時に通信が発生せず、瞬時に表示される
 - 全文検索
-  - 記事データをすべて取得してクライアントサイドで検索実行
+  - 記事データはすべて取得してあるのでクライアントサイドで検索実行
   - 検索結果生成には自作パッケージ [search-summary](https://www.npmjs.com/package/search-summary) を使用
 - 記事タグによる絞り込み
 - ダークモード対応・レスポンシブ対応
 - 関連記事表示用のブログカード
-  - ネイティブの [Custom elements](https://developer.mozilla.org/ja/docs/Web/Web_Components/Using_custom_elements) で実装
+  - ブラウザ標準の [Custom elements](https://developer.mozilla.org/ja/docs/Web/Web_Components/Using_custom_elements) で実装
 - スムーズなページ遷移（[v1.2.0](https://github.com/kyonenya/kyonenya.github.io/releases/tag/v1.2.0)より）
   - aタグのページ再読み込みを無効化し、JSのみでページを再描画
   - ブラウザの履歴は [History API](https://developer.mozilla.org/ja/docs/Web/API/History_API) で作成
@@ -26,17 +25,17 @@
 - Worksページの業績リストの自動生成（[v2.2.0](https://github.com/kyonenya/kyonenya.github.io/releases/tag/v2.2.0)より）
   - 業績データは [CSL-JSON](https://docs.citationstyles.org/en/stable/specification.html#appendix-iv-variables) 形式で保持
   - 書式は [CSL (Citation Style Language)](https://docs.citationstyles.org/en/stable/specification.html#appendix-iv-variables) ファイルで調整し、文献リストは [citeproc-js](https://github.com/Juris-M/citeproc-js) で事前生成しておく
-  - 試行錯誤の履歴：[kyonenya/citation-js-playground](https://github.com/kyonenya/citation-js-playground)
+    - 試行錯誤の履歴：[kyonenya/citation-js-playground](https://github.com/kyonenya/citation-js-playground)
 
 ## 技術
 
 - Vanilla JS
-  - ノーフレームワークでSPAを作り、ブラウザ標準のAPIへの理解を深める
+  - ノーフレームワークでSPAを作り、Web標準のAPIへの理解を深める
   - コンポーネント設計や単方向データフローはReactを踏襲
   - TODO: [Web Components](https://developer.mozilla.org/ja/docs/Web/Web_Components) (とくに [shadow DOM](https://developer.mozilla.org/ja/docs/Web/Web_Components/Using_shadow_DOM)) の活用をさらに進める
-- Webpack・PostCSS（[v1.1.0](https://github.com/kyonenya/kyonenya.github.io/releases/tag/v1.1.0)より）
+- webpack・PostCSS（[v1.1.0](https://github.com/kyonenya/kyonenya.github.io/releases/tag/v1.1.0)より）
 - TypeScript（[v2.0.0](https://github.com/kyonenya/kyonenya.github.io/releases/tag/v2.0.0)より）
-- [play.js](https://playdotjs.com) というiPadでNode.jsが動かせるアプリで開発している
+- [play.js](https://playdotjs.com) というiPadでNode.jsが動かせるアプリで開発
 
 ## なぜそんな設計で作るのですか（v0.0.0）
 
@@ -45,4 +44,5 @@
 - なぜHTMLサイトにしないのですか——記事を100個作るためにディレクトリにHTMLファイルを100個作るのは合理的でないから。その場合、例えばヘッダーとフッターのデザインを変えるとき、100個のHTMLファイル全てを手動で更新することになる
 - それならなぜ静的サイトジェネレーター（Jekyllなど）を使わないのですか——スマホやタブレットから記事を追加したりスタイルを調整したりできないため。たかがブログを書くのにパソコンを開いていちいちビルドするのはスマートでない
 - 結論——静的なホスティングサイトで、かつ動的なページ生成を可能にするには、相手方のPCやスマホを使役してページ生成をやらせるのがよい（本来サーバーサイドでやるべき仕事を相手にやらせる横着な方法）
-- （以上はサイト作成当初（2020年4月）に書いた文章。何も分からないので自力で設計を考えたのだが、今読むとこれはSPA（シングルページアプリケーション）の再発明であったことが分かる。それにしても当時は本当に何も分からなくて、記事データをCSVで持とうとしたり、FC2サイトでホスティングしたりしようとしていた。ほか、旧版の [README (v2.0.0)](https://github.com/kyonenya/kyonenya.github.io/blob/v2.0.0/README.md) なども参照）
+- 以上はサイト作成当初（2020年4月）に書いた文章。何も分からないので自力で設計を考えたのだが、今読むとこれはSPA（シングルページアプリケーション）の再発明であったことが分かる。それにしても当時は本当に何も分からなくて、記事データをCSVで持とうとしたり、FC2サイトでホスティングしたりしようとしていた。
+  - ほか、旧版の [README (v2.0.0)](https://github.com/kyonenya/kyonenya.github.io/blob/v2.0.0/README.md) なども参照
