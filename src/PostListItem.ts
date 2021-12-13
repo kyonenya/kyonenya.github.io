@@ -57,14 +57,14 @@ export const PostListItem = (props: {
       <router-link href="?id=${post.id}">
         <header class="bl_posts_header">
           <time class="bl_posts_date">
-            ${dayjs(post.date).format('YYYY-MM-DD')}
+            ${dayjs(post.createdAt).format('YYYY-MM-DD')}
           </time>
         </header>
         ${ListItemBody(post, searchSummary)}
       </router-link>
       <footer class="bl_posts_footer">
         <span class="bl_posts_dateago">
-          ${dayjs(post.date).fromNow()}
+          ${dayjs(post.createdAt).fromNow()}
         </span>
         <ul class="bl_tags">
           ${Tags(post.tags, tag)}

@@ -8,11 +8,11 @@ const aboutLastmod = '2021-11-28';
 
 const sitemap = new SitemapStream({ hostname: 'https://kyonenya.github.io/' });
 
-sitemap.write({ url: '', lastmod: posts[0].date });
+sitemap.write({ url: '', lastmod: posts[0].createdAt });
 sitemap.write({ url: 'works', lastmod: worksLastmod });
 sitemap.write({ url: 'about', lastmod: aboutLastmod });
 posts.forEach((post) =>
-  sitemap.write({ url: `?id=${post.id}`, lastmod: post.date })
+  sitemap.write({ url: `?id=${post.id}`, lastmod: post.modifiedAt })
 );
 sitemap.end();
 

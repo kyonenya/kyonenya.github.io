@@ -34,7 +34,7 @@ export const defineBlogCard = (posts: Post[]): void => {
             </p>
             <footer class="bl_blogcard_footer">
               <span class="bl_blogcard_time">
-                ${dayjs(post.date).format('YYYY-MM-DD')}
+                ${dayjs(post.createdAt).format('YYYY-MM-DD')}
               </span>
               <ul class="bl_blogcard_tags">
                 ${Tags(post.tags)}
