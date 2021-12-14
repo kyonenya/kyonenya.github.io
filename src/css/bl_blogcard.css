@@ -7,22 +7,9 @@
   border: 1px solid var(--monochrome-light);
   border-radius: 4px;
   box-shadow: 0 0 1px var(--monochrome-midlight);  /* around */
-  padding: 0.6em 1em 0.7em;
+  padding: 0.6em 1em;
   margin: 1.25em 0.5em 1em;
   box-sizing: border-box;
-}
-
-.bl_text .bl_blogcard a {
-  /* offset */
-  color: var(--text-color);
-  border: none;
-  line-height: 1.5;
-}
-
-.bl_text .bl_blogcard a:visited {
-  /* offset */
-  color: var(--text-color);
-  border: none;
 }
 
 .bl_text .bl_blogcard_header {
@@ -35,7 +22,7 @@
   background-size: 100%;
   background-repeat: no-repeat;
   vertical-align: bottom;
-  margin-top: 0.25em;
+  margin-top: 0.4em;
   width: 1.4em;
   height: 1.4em;
 }
@@ -67,14 +54,9 @@
   flex-wrap: wrap;
 }
 
-.bl_text .bl_blogcard_time {
-  margin-right: 0;
-}
-
 .bl_text .bl_blogcard_tags {
   display: inline-flex;
   flex-wrap: wrap;
-  padding: 0;  /* offset */
   padding-left: 0.6em;
 }
 
