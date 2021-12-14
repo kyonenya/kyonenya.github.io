@@ -63,7 +63,6 @@
 
 .bl_text .bl_blogcard_tags li {
   padding-right: 0.3em;
-  list-style: none;  /* offset */
 }
 
 @media screen and (min-width: 560px) {
