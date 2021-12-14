@@ -1,12 +1,14 @@
+import { css } from './lib/tagged';
 import { toState } from './state';
 
 const style = document.createElement('style');
-style.textContent = `
+style.textContent = css`
   a {
     cursor: pointer;
     text-decoration: none;
     color: inherit;
-  }`;
+  }
+`;
 
 export function defineLinks(invokeRoute: () => void): void {
   const onClick = (e: Event, href: string) => {
