@@ -19,7 +19,7 @@ export const defineBlogCard = (posts: Post[]): void => {
           <router-link href="?id=${id}">
             <header class="bl_blogcard_header">
               <div class="bl_blogcard_icon"></div>
-              <div class="bl_blogcard_logo">placet experiri</span>
+              <span class="bl_blogcard_logo">placet experiri</span>
               <span class="bl_blogcard_suffix"> :: ${id}</span>
             </header>
             ${

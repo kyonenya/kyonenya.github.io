@@ -13,6 +13,7 @@
 }
 
 .bl_text .bl_blogcard_header {
+  font-family: "Avenir Next", "Lucida Sans", sans-serif;
   display: inline-flex;
   color: var(--monochrome-dark);
 }
@@ -30,13 +31,13 @@
 .bl_text .bl_blogcard_logo {
   font-size: 130%;
   color: var(--text-color);
-  font-family: "Avenir Next", "Lucida Sans", sans-serif;
   margin-left: 0.2em;
 }
 
 .bl_text .bl_blogcard_suffix {
   color: var(--monochrome-dark);
-  font-size: 75%;
+  font-size: 85%;
+  margin: 0.6em 0 0 0.3em;
 }
 
 .bl_text .bl_blogcard_title {
