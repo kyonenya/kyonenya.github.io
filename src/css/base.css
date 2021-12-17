@@ -54,12 +54,6 @@ main {
   margin: 0 auto;
 }
 
-@media screen and (max-width: 559px) {
-  .ly_header {
-    margin-bottom: 1.5em;
-  }
-}
-
 @media screen and (min-width: 560px) {
   .ly_cont,
   .ly_header {
