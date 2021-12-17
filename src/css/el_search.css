@@ -1,4 +1,7 @@
-/* 検索フォーム */
+/**
+ * 検索フォーム
+ */
+
 .el_search {
   position: relative;  /* 基準 */
   width: 1em;
@@ -43,7 +46,6 @@
   cursor: text;
 }
 
-
 /**
  * モバイル用（検索フォーム）
  */
@@ -60,20 +62,14 @@
   }
   
   .el_search_input:focus {
-    width: 245px;  /* サイズはナビメニューの横幅に合わせて手動調整 */
+    width: 245px;  /* ナビメニューの横幅に合わせて手動調整 */
   }
 }
 
 /**
  * タブレット・PC用（検索フォーム）
  */
-@media screen and (min-width: 560px) {
-  /* ロゴ */
-  .el_logo_title {
-    margin-left: 3px;
-    font-size: 34px;
-  }
-  
+@media screen and (min-width: 560px) {  
   /* 検索フォーム */
   .el_search_icon,
   .el_search_input {
