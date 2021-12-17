@@ -2,7 +2,7 @@
  * テキスト領域（マークアップ）
  */
 
-.bl_text > a,
+.bl_text a,
 a.el_link {
   /* 下線と文字とを空けるため、擬似的な下線を作る */
   display: inline;
@@ -14,7 +14,7 @@ a.el_link {
   text-indent: 0;  /* 時々生じる謎のインデントを削除 */
 }
 
-.bl_text > a:visited,
+.bl_text a:visited,
 a:visited.el_link {
   /* 訪問済みリンク */
   color: hsl(271, 35%, 45%);  /* 紫、Wikipediaより */
@@ -22,13 +22,13 @@ a:visited.el_link {
 }
 
 @media (prefers-color-scheme: dark) {
-  .bl_text > a,
+  .bl_text a,
   a.el_link {
     color: hsl(219, 62%, 68%);
     border-bottom: 1px solid hsl(219, 62%, 48%);
   }
   
-  .bl_text > a:visited,
+  .bl_text a:visited,
   a:visited.el_link {
     color: hsl(271, 35%, 68%);
     border-bottom: 1px solid hsl(271, 35%, 48%);
