@@ -63,51 +63,6 @@
   z-index: 10;
 }
 
-/* 検索フォーム */
-.el_search {
-  position: relative;  /* 基準 */
-  width: 1em;
-}
-
-.el_search_icon,
-.el_search_input {
-  position: absolute;  /* フォームにアイコンを重ねる */
-  right: 0;
-}
-
-.el_search_icon {
-  background-image: url(../../assets/images/search.svg);
-  background-size: 100%;
-  background-repeat: no-repeat;
-  z-index: 10;  /* フォームの下に重ねる */
-  padding-top: 2px;  /* 横一列になるよう手動調整（共通） */
-}
-
-@media (prefers-color-scheme: dark) {
-  .el_search_icon {
-    background-image: url(../../assets/images/search_dark.svg);
-  }
-}
-
-.el_search_input {
-  top: -10px;  /* フォームがメニューを覆い隠すよう少し上に */
-  cursor: pointer;
-  border: 1px solid var(--monochrome-light);
-  outline: none;
-  /* アイコンの上に重ねて、しかし透明に */
-  z-index: 100;
-  opacity: 0;
-  /* iOSのフォームスタイルを初期化してから装飾 */
-  -webkit-appearance: none;
-  border-radius: 4px;
-}
-
-.el_search_input:focus {
-  /* フォーカスされたら可視化し、左に伸びる */
-  opacity: 1;
-  cursor: text;
-}
-
 /**
  * モバイル用（ヘッダー）
  * ロゴとメニューを中央に縦並びにする
@@ -136,21 +91,6 @@
   
   .bl_nav a {
     font-size: 108%;
-  }
-  
-  .el_search_icon,
-  .el_search_input {
-    width: 1.9em;  /* メニュー間隔を手動で調整、右からの幅が広いほど間隔が狭まる */
-  }
-  
-  .el_search_icon {
-    height: 1.9em;
-    top: 1px;
-    left: 0.5em;
-  }
-  
-  .el_search_input:focus {
-    width: 245px;  /* サイズはナビメニューの横幅に合わせて手動調整 */
   }
 }
 
@@ -184,23 +124,6 @@
   .el_logo_title {
     margin-left: 3px;
     font-size: 34px;
-  }
-  
-  /* 検索フォーム */
-  .el_search_icon,
-  .el_search_input {
-    width: 1.7em;  /* メニュー間隔を上書き */
-  }
-  
-  .el_search_icon {
-    width: 1.95em;
-    height: 1.95em;  /* 大きく */
-    top: 2px;  /* 下にずり落ちるので上に押し上げて上書き */
-    left: 10px;
-  }
-  
-  .el_search_input:focus {
-    width: 300px;  /* 手動調整 */
   }
 }
 

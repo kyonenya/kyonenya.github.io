@@ -7,6 +7,7 @@
 @import url("variables.css");
 @import url("reset.css");
 @import url("base.css");
+@import url("el_search.css");
 @import url("ly_header.css");
 @import url("ly_footer.css");
 @import url("bl_text.css");
