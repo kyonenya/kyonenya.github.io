@@ -34,21 +34,3 @@
   margin-top: 0.3em;
   color: var(--monochrome-dark);
 }
-
-.bl_tags {
-  display: inline-flex;  /* 横並び、かつ先立つ要素（日付）に回り込める */
-  flex-wrap: wrap;
-  list-style: none;
-}
-
-.bl_tags li {
-  margin-left: 0.5em;
-}
-
-.el_archiveHeader {
-  color: var(--monochrome-dark);
-  text-align: center;
-  font-weight: bold;
-  font-size: 1.2em;
-  margin: -0.5em 0 0;
-}

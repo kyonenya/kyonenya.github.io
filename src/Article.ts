@@ -12,9 +12,7 @@ export const Article = (post: Post): string => `
     <div class="bl_text">
       ${
         post.title
-          ? `<h1 class="bl_text_title">
-              ${post.title}
-            </h1>`
+          ? `<h1>${post.title}</h1>`
           : ''
       }
       ${post.text}
