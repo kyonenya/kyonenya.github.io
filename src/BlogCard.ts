@@ -73,6 +73,7 @@ style.innerText = `
   }
 
   .${parent} .tags li {
+    list-style: none; /* unset */
     padding-right: 0.3em;
   }
 `;
