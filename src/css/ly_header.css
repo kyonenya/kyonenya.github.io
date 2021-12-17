@@ -13,6 +13,20 @@
   vertical-align: center;
 }
 
+@media screen and (max-width: 559px) {
+  .el_logo_title {
+    margin-left: 3px;
+    font-size: 30px;
+  }
+}
+
+@media screen and (min-width: 560px) {
+  .el_logo_title {
+    margin-left: 3px;
+    font-size: 34px;
+  }
+}
+
 .el_logo_suffix {
   font-size: 16px;
   font-weight: normal;
@@ -77,11 +91,6 @@
     /* スマホでは中央揃えに */
     text-align: center;
   }
-
-  .el_logo_title {
-    margin-left: 3px;
-    font-size: 30px;
-  }
   
   .bl_nav {
     display: inline-block;
@@ -118,12 +127,6 @@
   /* 小コンテナ：メニューリスト */
   .bl_nav a {
     font-size: 110%;
-  }
-  
-  /* ロゴ */
-  .el_logo_title {
-    margin-left: 3px;
-    font-size: 34px;
   }
 }
 
