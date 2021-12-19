@@ -4,9 +4,7 @@ import { Post } from './post';
 
 const summaryLength = 74;
 
-const style = document.createElement('style');
-const parent = 'bl_blogCard';
-style.innerText = `
+const css = (parent: string) => `
   .${parent} {
     font-size: 80%;
     border: 1px solid var(--monochrome-light);
@@ -78,47 +76,43 @@ style.innerText = `
   }
 `;
 
-export const defineBlogCard = (posts: Post[]): void => {
+const html = (post: Post, className: string) => `
+  <div class="${className}">
+    <router-link href="?id=${post.id}">
+      <header>
+        <div class="icon"></div>
+        <span class="logo">placet experiri</span>
+        <span class="suffix">:: ${post.id}</span>
+      </header>
+      ${post.title ? `<div class="title">${post.title}</div>` : ''}
+      <p class="text">
+        ${post.plainText.substring(0, summaryLength)}…
+      </p>
+      <footer>
+        <span>${dayjs(post.createdAt).format('YYYY-MM-DD')}</span>
+        <ul class="tags">
+          ${Tags(post.tags)}
+        </ul>
+      </footer>
+    </router-link>
+  </div>`;
+
+export function defineBlogCard(posts: Post[]): void {
   class BlogCard extends HTMLElement {
     constructor() {
       super();
       const idString = this.getAttribute('id');
       if (!idString) return;
-      const id = parseInt(idString, 10);
-      const post = posts.find((post) => post.id === id);
+      const post = posts.find((post) => post.id === parseInt(idString, 10));
       if (!post) return;
 
-      this.innerHTML = `
-        <div class="${parent}">
-          <router-link href="?id=${id}">
-            <header>
-              <div class="icon"></div>
-              <span class="logo">placet experiri</span>
-              <span class="suffix"> :: ${id}</span>
-            </header>
-            ${
-              post.title
-                ? `<div class="title">
-                    ${post.title}
-                  </div>`
-                : ''
-            }
-            <p class="text">
-              ${post.plainText.substring(0, summaryLength)}…
-            </p>
-            <footer>
-              <span>
-                ${dayjs(post.createdAt).format('YYYY-MM-DD')}
-              </span>
-              <ul class="tags">
-                ${Tags(post.tags)}
-              </ul>
-            </footer>
-          </router-link>
-        </div>`;
+      const className = 'bl_blogCard';
+      this.innerHTML = html(post, className);
+      const style = document.createElement('style');
+      style.innerText = css(className);
       this.appendChild(style);
     }
   }
 
   window.customElements.define('blog-card', BlogCard);
-};
+}
