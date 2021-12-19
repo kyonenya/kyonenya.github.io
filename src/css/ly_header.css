@@ -6,6 +6,12 @@
 }
 
 /* ナビメニュー */
+@media print {
+  .bl_nav {
+    display: none;
+  }
+}
+
 .bl_nav_inner {
   display: flex;
 }
@@ -15,6 +21,13 @@
   line-height: 1.25em;  /* 実質的には区切り線の高さ */
   text-align: center;
   color: var(--main-color);
+  font-size: 108%;
+}
+
+@media screen and (min-width: 560px) {
+  .bl_nav a {
+    font-size: 110%;
+  }
 }
 
 .bl_nav li {
@@ -46,10 +59,6 @@
     text-align: center;
     padding-top: 0.5em;
   }
-  
-  .bl_nav a {
-    font-size: 108%;
-  }
 }
 
 /**
@@ -71,16 +80,5 @@
     justify-content: space-between;  /* 二つを両端に分ける */
     align-items: center;  /* 二つの高さ位置を揃える */
     padding-top: 0.75em;  /* これにて手動で縦方向センタリング */
-  }
-
-  /* 小コンテナ：メニューリスト */
-  .bl_nav a {
-    font-size: 110%;
-  }
-}
-
-@media print {
-  .bl_nav {
-    display: none;
   }
 }

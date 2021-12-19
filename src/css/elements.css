@@ -1,6 +1,12 @@
 /**
  * ロゴ
  */
+@media print {
+  .el_logo {
+    margin-bottom: 0.5em;
+  }
+}
+
 .el_logo_title {
   font-family: "Avenir Next", "Lucida Sans", sans-serif;
   font-weight: normal;
@@ -17,10 +23,6 @@
 }
 
 @media print {
-  .el_logo {
-    margin-bottom: 0.5em;
-  }
-
   .el_logo_title {
     font-size: 26px;
   }
@@ -79,4 +81,17 @@
   font-weight: bold;
   font-size: 1.2em;
   margin: -0.5em 0 0;
+}
+
+/**
+ * フッターコピーライト
+ */
+.el_footerCopyright {
+  font-size: 85%;
+  text-align: center;
+  color: var(--monochrome-dark);
+}
+
+.el_footerCopyright a {
+  color: inherit;
 }
