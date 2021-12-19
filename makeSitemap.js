@@ -23,4 +23,4 @@ streamToPromise(sitemap)
       format(sm.toString(), { indentation: '  ', collapseContent: true })
     )
   )
-  .then(console.log('success!'));
+  .then(() => console.log('success!'));
