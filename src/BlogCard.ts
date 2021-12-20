@@ -4,7 +4,7 @@ import { Post } from './post';
 
 const summaryLength = 74;
 
-const css = (parent: string) => `
+const Style = (parent: string) => `
   .${parent} {
     font-size: 80%;
     border: 1px solid var(--monochrome-light);
@@ -76,7 +76,7 @@ const css = (parent: string) => `
   }
 `;
 
-const html = (post: Post, className: string) => `
+const Component = (post: Post, className: string) => `
   <div class="${className}">
     <router-link href="?id=${post.id}">
       <header>
@@ -107,9 +107,9 @@ export function defineBlogCard(posts: Post[]): void {
       if (!post) return;
 
       const className = 'bl_blogCard';
-      this.innerHTML = html(post, className);
+      this.innerHTML = Component(post, className);
       const style = document.createElement('style');
-      style.innerText = css(className);
+      style.innerText = Style(className);
       this.appendChild(style);
     }
   }

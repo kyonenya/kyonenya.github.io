@@ -1,7 +1,6 @@
 import { toState } from './state';
 
-const style = document.createElement('style');
-style.textContent = `
+const UnsetLinkStyle = `
   a {
     cursor: pointer;
     text-decoration: none;
@@ -24,6 +23,8 @@ export function defineLinks(invokeRoute: () => void): void {
       const a = document.createElement('a');
       a.onclick = (e) => onClick(e, href);
       a.appendChild(document.createElement('slot'));
+      const style = document.createElement('style');
+      style.innerText = UnsetLinkStyle;
 
       this.attachShadow({ mode: 'open' }).appendChild(a).appendChild(style);
     }
