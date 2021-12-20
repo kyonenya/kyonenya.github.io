@@ -10,7 +10,7 @@
 }
 
 .bl_posts_item:first-child {
-  padding-top: 0;  /* 先頭の余白リセット */
+  padding-top: 0;  /* 先頭は余白なし */
 }
 
 .bl_posts_header {
@@ -19,18 +19,18 @@
 
 .bl_posts_title {
   letter-spacing: 1px;
-  font-weight: normal;  /* unset */
+  font-weight: unset;
   font-size: 128%;
-  margin-top: 0.1em;
+  padding-top: 0.1em;
 }
 
 .bl_posts_summary {
-  margin-top: 0.3em;
+  padding-top: 0.3em;
   text-align: justify;
   line-height: 1.5;
 }
 
 .bl_posts_footer {
-  margin-top: 0.3em;
+  padding-top: 0.3em;
   color: var(--monochrome-dark);
 }

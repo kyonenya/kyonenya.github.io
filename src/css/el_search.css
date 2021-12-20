@@ -25,7 +25,7 @@
   background-size: 100%;
   background-repeat: no-repeat;
   z-index: 10;  /* フォームの下に重ねる */
-  padding-top: 2px;  /* 横一列になるよう手動調整（共通） */
+  padding-top: 2px;  /* 横一列になるよう手動調整 */
   width: 1.9em;
   height: 1.9em;
   top: 1px;
