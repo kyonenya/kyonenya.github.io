@@ -12,7 +12,7 @@
   font-weight: normal;
   vertical-align: center;
   margin-left: 3px;
-  font-size: 30px;
+  font-size: 32px;
 }
 
 @media screen and (min-width: 560px) {
@@ -32,7 +32,7 @@
   font-size: 16px;
   font-weight: normal;
   color: var(--monochrome-dark);
-  vertical-align: baseline;  /* 英単語帳の位置：baseline */
+  vertical-align: baseline;  /* 英単語帳の位置 */
 }
 
 /**

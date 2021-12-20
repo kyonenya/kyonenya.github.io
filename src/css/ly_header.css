@@ -32,7 +32,7 @@
  * ナビメニュー
  */
 .bl_nav {
-  font-family: "Avenir Next", "Segoe UI", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "游ゴシック Medium", "Yu Gothic Medium", "メイリオ", Meiryo, sans-serif;
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
   padding-top: 0.5em;
 }
 
@@ -59,12 +59,12 @@
   line-height: 1.25em;  /* 区切り線の高さ */
   text-align: center;
   color: var(--main-color);
-  font-size: 108%;
+  font-size: 110%;
 }
 
 @media screen and (min-width: 560px) {
   .bl_nav a {
-    font-size: 110%;
+    font-size: 112%;
   }
 }
 
