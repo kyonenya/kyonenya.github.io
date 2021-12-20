@@ -1,9 +1,8 @@
 /**
  * ベースグループ
  */
-
 body {
-  font-family: "Helvetica Neue", Verdana, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif;
+  font-family: "Helvetica Neue", "Verdana", "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", "Meiryo", sans-serif;
   word-break: break-word;  /* 行頭に、。が来るのを避ける */
   color: var(--text-color);
   line-height: 1.65;
@@ -55,12 +54,6 @@ main {
   margin: 0 auto;
 }
 
-@media screen and (max-width: 559px) {
-  .ly_header {
-    margin-bottom: 1.5em;
-  }
-}
-
 @media screen and (min-width: 560px) {
   .ly_cont,
   .ly_header {
@@ -88,7 +81,6 @@ main {
 /**
  * ヘルパークラス
  */
-
 .hp_hidden {
   display: none !important;
 }
@@ -120,7 +112,6 @@ main {
 /**
  * リセット
  */
-
 html {
   scroll-behavior: auto;  /* unset `smooth` */
 }

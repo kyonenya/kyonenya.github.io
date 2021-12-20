@@ -1,30 +1,30 @@
 import { toState } from './state';
 
+const UnsetLinkStyle = `
+  a {
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+  }`;
+
 export function defineLinks(invokeRoute: () => void): void {
+  const onClick = (e: Event, href: string) => {
+    e.preventDefault();
+    window.history.pushState(toState(href ?? ''), '', href);
+    invokeRoute();
+  };
+
   class RouterLink extends HTMLElement {
     constructor() {
       super();
       const href = this.getAttribute('href');
-
-      const className = 'el_routerLink';
-      const style = document.createElement('style');
-      style.textContent = `
-        .${className} {
-          cursor: pointer;
-          text-decoration: none;
-          color: inherit;
-        }
-      `;
+      if (!href) return;
 
       const a = document.createElement('a');
-      a.onclick = (e) => {
-        e.preventDefault();
-        window.history.pushState(toState(href ?? ''), '', href);
-        invokeRoute();
-      };
-      a.classList.add(className);
-      const slot = document.createElement('slot');
-      a.appendChild(slot);
+      a.onclick = (e) => onClick(e, href);
+      a.appendChild(document.createElement('slot'));
+      const style = document.createElement('style');
+      style.innerText = UnsetLinkStyle;
 
       this.attachShadow({ mode: 'open' }).appendChild(a).appendChild(style);
     }
@@ -40,11 +40,7 @@ export function defineLinks(invokeRoute: () => void): void {
       a.href = href;
       a.innerText = this.innerText;
       this.innerText = '';
-      a.onclick = (e) => {
-        e.preventDefault();
-        window.history.pushState(toState(href ?? ''), '', href);
-        invokeRoute();
-      };
+      a.onclick = (e) => onClick(e, href);
       a.classList.add('el_link');
 
       this.appendChild(a);

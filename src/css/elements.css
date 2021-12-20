@@ -1,0 +1,97 @@
+/**
+ * ロゴ
+ */
+@media print {
+  .el_logo {
+    margin-bottom: 0.5em;
+  }
+}
+
+.el_logo_title {
+  font-family: "Avenir Next", "Lucida Sans", sans-serif;
+  font-weight: normal;
+  vertical-align: center;
+  margin-left: 3px;
+  font-size: 32px;
+}
+
+@media screen and (min-width: 560px) {
+  .el_logo_title {
+    margin-left: 3px;
+    font-size: 34px;
+  }
+}
+
+@media print {
+  .el_logo_title {
+    font-size: 26px;
+  }
+}
+
+.el_logo_suffix {
+  font-size: 16px;
+  font-weight: normal;
+  color: var(--monochrome-dark);
+  vertical-align: baseline;  /* 英単語帳の位置 */
+}
+
+/**
+ * 記事タグ
+ */
+.bl_tags {
+  display: inline-flex;  /* 横並び、かつ先立つ要素（日付）に回り込める */
+  flex-wrap: wrap;
+  list-style: none;
+}
+
+.bl_tags li {
+  margin-left: 0.5em;
+}
+
+/**
+ * 更新通知バッジ
+ */
+.el_badge {
+  position: relative;
+}
+
+.el_badge[data-badge]::after {
+  content: attr(data-badge);
+  position: absolute;  /* 基準に対して相対配置 */
+  top: -0.6em;
+  right: -1.25em;
+  font-size: 0.7em;
+  background: var(--accent-color);
+  color: white;
+  width: 1.25em;
+  height: 1.25em;
+  line-height: 1.41em;
+  text-align: center;
+  border-radius: 50%;
+  box-shadow: 0 0 2px var(--monochrome-midlight);
+  z-index: 10;
+}
+
+/**
+ * アーカイブヘッダー
+ */
+.el_archiveHeader {
+  color: var(--monochrome-dark);
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.2em;
+  margin: -0.5em 0 0;
+}
+
+/**
+ * フッターコピーライト
+ */
+.el_footerCopyright {
+  font-size: 85%;
+  text-align: center;
+  color: var(--monochrome-dark);
+}
+
+.el_footerCopyright a {
+  color: inherit;
+}

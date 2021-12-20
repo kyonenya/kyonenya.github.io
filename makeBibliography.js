@@ -6,12 +6,22 @@ const worksPath = path.resolve('works.json');
 const stylePath = path.resolve('assets', 'citeproc', 'sist02modified.csl');
 const localePath = path.resolve('assets', 'citeproc', 'locales-ja-JP.xml');
 
+/**
+ * @param {object} obj
+ * @return {object}
+ */
 function removeNullProperties(obj) {
   return Object.entries(obj)
     .filter(([_k, v]) => v !== null)
     .reduce((acc, [k, v]) => ({ ...acc, [k]: v }), {});
 }
 
+/**
+ * @param {import('csl-json').Data[]} data
+ * @param {string} style
+ * @param {string} locale
+ * @return {string[]}
+ */
 function citeproc(data, style, locale) {
   const items = data.map((item) => ({
     ...removeNullProperties(item),
@@ -31,6 +41,10 @@ function citeproc(data, style, locale) {
   return bib[1].map((text) => text.replace(/\n$/, ''));
 }
 
+/**
+ * @param {import('csl-json').Data[]} items
+ * @return {import('csl-json').Data[]}
+ */
 function AppendBibliopraphy(items) {
   const bibTexts = citeproc(
     items,
@@ -43,11 +57,12 @@ function AppendBibliopraphy(items) {
   }));
 }
 
-function makeBibliography() {
+/**
+ * @return {void}
+ */
+(function makeBibliography() {
   const works = JSON.parse(fs.readFileSync(worksPath, 'utf8'));
   const newWorks = AppendBibliopraphy(works);
   fs.writeFileSync(worksPath, JSON.stringify(newWorks));
   console.log('success!');
-}
-
-makeBibliography();
+})();

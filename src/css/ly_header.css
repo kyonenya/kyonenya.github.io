@@ -1,206 +1,45 @@
 /**
  * ヘッダー
  */
-
+/* 大コンテナ */
 .ly_header {
-  font-family: "Avenir Next", "Segoe UI", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "游ゴシック Medium", "Yu Gothic Medium", "メイリオ", Meiryo, sans-serif;
+  margin: 1.1em auto 1.75em;
 }
 
-/* ロゴ */
-.el_logo_title {
-  font-family: "Avenir Next", "Lucida Sans", sans-serif;
-  font-weight: normal;
-  vertical-align: center;
-}
-
-.el_logo_suffix {
-  font-size: 16px;
-  font-weight: normal;
-  color: var(--monochrome-dark);
-  vertical-align: baseline;  /* 英単語帳の位置：baseline */
-}
-
-/* ナビメニュー */
-.bl_nav_inner {
-  display: flex;
-}
-
-.bl_nav a {
-  display: block;
-  line-height: 1.25em;  /* 実質的には区切り線の高さ */
-  text-align: center;
-  color: var(--main-color);
-}
-
-.bl_nav li {
-  list-style: none;
-  padding: 0 0.6em;  /* メニュー同士の間隔 */
-}
-
-.bl_nav li + li {
-  border-left: 1px solid var(--main-color-light);
-}
-
-/* 更新通知バッジ */
-.el_badge {
-  position: relative;
-}
-
-.el_badge[data-badge]::after {
-  content: attr(data-badge);
-  position: absolute;  /* 基準に対して相対配置 */
-  top: -0.6em;
-  right: -1.25em;
-  font-size: 0.7em;
-  background: var(--accent-color);
-  color: white;
-  width: 1.25em;
-  height: 1.25em;
-  line-height: 1.41em;
-  text-align: center;
-  border-radius: 50%;
-  box-shadow: 0 0 2px var(--monochrome-midlight);
-  z-index: 10;
-}
-
-/* 検索フォーム */
-.el_search {
-  position: relative;  /* 基準 */
-  width: 1em;
-}
-
-.el_search_icon,
-.el_search_input {
-  position: absolute;  /* フォームにアイコンを重ねる */
-  right: 0;
-}
-
-.el_search_icon {
-  background-image: url(../../assets/images/search.svg);
-  background-size: 100%;
-  background-repeat: no-repeat;
-  z-index: 10;  /* フォームの下に重ねる */
-  padding-top: 2px;  /* 横一列になるよう手動調整（共通） */
-}
-
-@media (prefers-color-scheme: dark) {
-  .el_search_icon {
-    background-image: url(../../assets/images/search_dark.svg);
-  }
-}
-
-.el_search_input {
-  top: -10px;  /* フォームがメニューを覆い隠すよう少し上に */
-  cursor: pointer;
-  border: 1px solid var(--monochrome-light);
-  outline: none;
-  /* アイコンの上に重ねて、しかし透明に */
-  z-index: 100;
-  opacity: 0;
-  /* iOSのフォームスタイルを初期化してから装飾 */
-  -webkit-appearance: none;
-  border-radius: 4px;
-}
-
-.el_search_input:focus {
-  /* フォーカスされたら可視化し、左に伸びる */
-  opacity: 1;
-  cursor: text;
-}
-
-/**
- * モバイル用（ヘッダー）
- * ロゴとメニューを中央に縦並びにする
- */
-@media screen and (max-width: 559px) {
-  .ly_header {
-    margin-bottom: 1.75em;
-    margin-top: 1.1em;
-  }
-
-  .ly_header_inner {
-    /* スマホでは中央揃えに */
-    text-align: center;
-  }
-
-  .el_logo_title {
-    margin-left: 3px;
-    font-size: 30px;
-  }
-  
-  .bl_nav {
-    display: inline-block;
-    text-align: center;
-    padding-top: 0.5em;
-  }
-  
-  .bl_nav a {
-    font-size: 108%;
-  }
-  
-  .el_search_icon,
-  .el_search_input {
-    width: 1.9em;  /* メニュー間隔を手動で調整、右からの幅が広いほど間隔が狭まる */
-  }
-  
-  .el_search_icon {
-    height: 1.9em;
-    top: 1px;
-    left: 0.5em;
-  }
-  
-  .el_search_input:focus {
-    width: 245px;  /* サイズはナビメニューの横幅に合わせて手動調整 */
-  }
-}
-
-/**
- * タブレット・PC用（ヘッダー）
- * ロゴとメニューを横並びにする
- */
 @media screen and (min-width: 560px) {
-  /* 大箱 */
   .ly_header {
-    background: var(--background-color);  /* 背景色で塗りつぶし */
     height: 4.5em;
     margin: 0.5em auto 0;
   }
+}
 
-  /* 中コンテナ：ロゴ＋メニュー */
+/* 中コンテナ：ロゴ＋メニュー */
+.ly_header_inner {
+  text-align: center;
+}
+
+@media screen and (min-width: 560px) {
   .ly_header_inner {
-    text-align: center;
     display: flex;
     justify-content: space-between;  /* 二つを両端に分ける */
     align-items: center;  /* 二つの高さ位置を揃える */
-    padding-top: 0.75em;  /* これにて手動で縦方向センタリング */
+    padding-top: 0.75em;
   }
+}
 
-  /* 小コンテナ：メニューリスト */
-  .bl_nav a {
-    font-size: 110%;
-  }
-  
-  /* ロゴ */
-  .el_logo_title {
-    margin-left: 3px;
-    font-size: 34px;
-  }
-  
-  /* 検索フォーム */
-  .el_search_icon,
-  .el_search_input {
-    width: 1.7em;  /* メニュー間隔を上書き */
-  }
-  
-  .el_search_icon {
-    width: 1.95em;
-    height: 1.95em;  /* 大きく */
-    top: 2px;  /* 下にずり落ちるので上に押し上げて上書き */
-    left: 10px;
-  }
-  
-  .el_search_input:focus {
-    width: 300px;  /* 手動調整 */
+/**
+ * ナビメニュー
+ */
+.bl_nav {
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
+  padding-top: 0.5em;
+}
+
+@media screen and (max-width: 559px) {
+  .bl_nav {
+    /* モバイルではメニューを中央揃え */
+    display: inline-block;
+    text-align: center;
   }
 }
 
@@ -208,12 +47,31 @@
   .bl_nav {
     display: none;
   }
+}
 
-  .el_logo {
-    margin-bottom: 0.5em;
-  }
+.bl_nav_inner {
+  display: flex;
+}
 
-  .el_logo_title {
-    font-size: 26px;
+.bl_nav a {
+  display: block;
+  line-height: 1.25em;  /* 区切り線の高さ */
+  text-align: center;
+  color: var(--main-color);
+  font-size: 110%;
+}
+
+@media screen and (min-width: 560px) {
+  .bl_nav a {
+    font-size: 112%;
   }
+}
+
+.bl_nav li {
+  list-style: none;
+  padding: 0 0.6em;
+}
+
+.bl_nav li + li {
+  border-left: 1px solid var(--main-color-light);
 }
