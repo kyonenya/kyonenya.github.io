@@ -2,41 +2,32 @@
  * 検索フォーム
  */
 .el_search {
-  position: relative;  /* 基準 */
+  position: relative;
   width: 1em;
 }
 
 .el_search_icon,
 .el_search_input {
-  position: absolute;  /* フォームにアイコンを重ねる */
-  right: 0;
-  width: 1.9em;  /* メニュー間隔、右からの幅が広いほど間隔が狭まる */
-}
-
-@media screen and (min-width: 560px) {
-  .el_search_icon,
-  .el_search_input {
-    width: 1.7em;
-  }
+  position: absolute;
+  right: 0;  /* フォームとアイコンを右端で位置合わせ */
 }
 
 .el_search_icon {
   background-image: url(../../assets/images/search.svg);
   background-size: 100%;
   background-repeat: no-repeat;
-  z-index: 10;  /* フォームの下に重ねる */
-  padding-top: 2px;  /* 横一列になるよう手動調整 */
   width: 1.9em;
   height: 1.9em;
-  top: 1px;
+  top: 2px;
   left: 0.5em;
+  z-index: 10;  /* 伸びたらフォームに隠れるようフォームより下に重ねる */
 }
 
 @media screen and (min-width: 560px) {
   .el_search_icon {
     width: 1.95em;
     height: 1.95em;
-    top: 2px;  /* 下にずり落ちるので上に押し上げて上書き */
+    top: 3px;  /* 下にずり落ちるのでより上に押し上げる */
     left: 10px;
   }
 }
@@ -48,16 +39,15 @@
 }
 
 .el_search_input {
-  top: -10px;  /* フォームがメニューを覆い隠すよう少し上に */
+  /* 透明化した検索フォームをアイコンの上に重ねておく */
+  opacity: 0;
   cursor: pointer;
+  top: -10px;  /* フォームがメニューを覆い隠すよう少し上に */
   border: 1px solid var(--monochrome-light);
   outline: none;
-  /* アイコンの上に重ねて、しかし透明に */
-  z-index: 100;
-  opacity: 0;
-  /* iOSのフォームスタイルを初期化してから装飾 */
-  -webkit-appearance: none;
+  -webkit-appearance: none;  /* iOSのフォームスタイルをunset */
   border-radius: 4px;
+  z-index: 20;
 }
 
 .el_search_input:focus {
