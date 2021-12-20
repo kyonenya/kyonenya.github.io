@@ -19,7 +19,7 @@
 
 .bl_posts_title {
   letter-spacing: 1px;
-  font-weight: normal;  /* リセット */
+  font-weight: normal;  /* unset */
   font-size: 128%;
   margin-top: 0.1em;
 }

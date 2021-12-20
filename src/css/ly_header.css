@@ -1,11 +1,49 @@
 /**
  * ヘッダー
  */
+/* 大コンテナ */
 .ly_header {
-  font-family: "Avenir Next", "Segoe UI", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "游ゴシック Medium", "Yu Gothic Medium", "メイリオ", Meiryo, sans-serif;
+  margin: 1.1em auto 1.75em;
 }
 
-/* ナビメニュー */
+@media screen and (min-width: 560px) {
+  .ly_header {
+    background: var(--background-color);  /* 背景色で塗りつぶし */
+    height: 4.5em;
+    margin: 0.5em auto 0;
+  }
+}
+
+/* 中コンテナ：ロゴ＋メニュー */
+.ly_header_inner {
+  text-align: center;
+}
+
+@media screen and (min-width: 560px) {
+  .ly_header_inner {
+    display: flex;
+    justify-content: space-between;  /* 二つを両端に分ける */
+    align-items: center;  /* 二つの高さ位置を揃える */
+    padding-top: 0.75em;
+  }
+}
+
+/**
+ * ナビメニュー
+ */
+.bl_nav {
+  font-family: "Avenir Next", "Segoe UI", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "游ゴシック Medium", "Yu Gothic Medium", "メイリオ", Meiryo, sans-serif;
+  padding-top: 0.5em;
+}
+
+@media screen and (max-width: 559px) {
+  .bl_nav {
+    /* モバイルではメニューを中央揃え */
+    display: inline-block;
+    text-align: center;
+  }
+}
+
 @media print {
   .bl_nav {
     display: none;
@@ -18,7 +56,7 @@
 
 .bl_nav a {
   display: block;
-  line-height: 1.25em;  /* 実質的には区切り線の高さ */
+  line-height: 1.25em;  /* 区切り線の高さ */
   text-align: center;
   color: var(--main-color);
   font-size: 108%;
@@ -37,48 +75,4 @@
 
 .bl_nav li + li {
   border-left: 1px solid var(--main-color-light);
-}
-
-/**
- * モバイル用（ヘッダー）
- * ロゴとメニューを中央に縦並びにする
- */
-@media screen and (max-width: 559px) {
-  .ly_header {
-    margin-bottom: 1.75em;
-    margin-top: 1.1em;
-  }
-
-  .ly_header_inner {
-    /* スマホでは中央揃えに */
-    text-align: center;
-  }
-  
-  .bl_nav {
-    display: inline-block;
-    text-align: center;
-    padding-top: 0.5em;
-  }
-}
-
-/**
- * タブレット・PC用（ヘッダー）
- * ロゴとメニューを横並びにする
- */
-@media screen and (min-width: 560px) {
-  /* 大箱 */
-  .ly_header {
-    background: var(--background-color);  /* 背景色で塗りつぶし */
-    height: 4.5em;
-    margin: 0.5em auto 0;
-  }
-
-  /* 中コンテナ：ロゴ＋メニュー */
-  .ly_header_inner {
-    text-align: center;
-    display: flex;
-    justify-content: space-between;  /* 二つを両端に分ける */
-    align-items: center;  /* 二つの高さ位置を揃える */
-    padding-top: 0.75em;  /* これにて手動で縦方向センタリング */
-  }
 }
