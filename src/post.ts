@@ -25,7 +25,7 @@ export const jsonToPost = (posts: JSONPost[]): Post[] =>
     .filter((post) => dayjs(post.createdAt).isBefore(dayjs())) // exclude reserved post
     .map((post, i) => {
       if (post.id !== posts.length - i) {
-        throw new Error('ID should be sequential.');
+        // throw new Error('ID should be sequential.');
       }
       return {
         ...post,
