@@ -118,7 +118,7 @@ a:visited.el_link {
 /* 水平線 */
 .bl_text hr {
   border: none;  /* unset */
-  border-top: 1px solid var(--monochrome-light);
+  border-top: 1px solid var(--monochrome-midlight);
   width: 50%;
   margin: 1.5em auto;
 }
@@ -189,6 +189,6 @@ a:visited.el_link {
 }
 
 .bl_text_footer {
-  padding-top: 0.5em;
+  padding-top: 0.75em;
   color: var(--monochrome-dark);
 }
