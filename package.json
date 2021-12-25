@@ -8,8 +8,8 @@
     "format": "prettier --write **/*.{ts,js,json}",
     "lint": "eslint --fix src/**/*.ts",
     "lint:css": "stylelint --fix src/**/*.css",
-    "makeBibliography": "node makeBibliography.js",
-    "makeSitemap": "node makeSitemap.js"
+    "bibliography": "node makeBibliography.js",
+    "sitemap": "node makeSitemap.js"
   },
   "dependencies": {
     "dayjs": "^1.10.7",
