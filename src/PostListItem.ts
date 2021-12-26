@@ -52,7 +52,13 @@ export const PostListItem = (props: {
     <li
       class="
         bl_posts_item
-        ${keyword && !searchSummary ? ' hp_hidden' : ''}"
+        ${
+          !keyword ||
+          searchSummary ||
+          (post.title && post.title.indexOf(keyword) !== -1)
+            ? ''
+            : ' hp_hidden'
+        }"
     >
       <router-link href="?id=${post.id}">
         <header class="bl_posts_header">

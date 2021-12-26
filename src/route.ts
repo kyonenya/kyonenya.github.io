@@ -17,7 +17,7 @@ const routeMap = {
         : `placet experiri :: ${post.id}`,
       suffix: ` :: ${post.id}`,
       description: `${post.plainText.substring(0, 110)}…`,
-      href: `${baseUrl}?id=${post.id}`
+      href: `${baseUrl}?id=${post.id}`,
     });
   },
   postList: (posts: Post[]): void =>

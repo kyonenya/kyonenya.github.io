@@ -13,7 +13,9 @@ const suffixElement = <HTMLSpanElement>(
 const descriptionElement = <HTMLMetaElement>(
   document.querySelector('meta[name=description]')
 );
-const canonicalElement = <HTMLLinkElement>document.querySelector('link[rel="canonical"]');
+const canonicalElement = <HTMLLinkElement>(
+  document.querySelector('link[rel="canonical"]')
+);
 
 export function renderRoot(html: string): void {
   rootElement.innerHTML = html;
