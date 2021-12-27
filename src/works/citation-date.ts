@@ -1,4 +1,3 @@
-import dayjs from '../lib/dayjs';
 import { isNew } from '../lib/utils';
 import { Citation } from './citation';
 

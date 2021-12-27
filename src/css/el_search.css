@@ -23,9 +23,9 @@
   z-index: 10;  /* 伸びたらフォームに隠れるようフォームより下に重ねる */
 }
 
-@media screen and (min-width: 560px) {
+@media screen and (min-width: 960px) {
   .el_search_icon {
-    /* top: 3px; */
+    top: 5px;
   }
 }
 
