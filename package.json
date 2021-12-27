@@ -5,11 +5,11 @@
     "_tsc": "tsc -w --noEmit",
     "build": "webpack",
     "build:css": "postcss src/css/index.css -o dist/css/bundle.css -w",
-    "format": "prettier --write **/*.{ts,js,json}",
+    "fmt": "prettier --write **/*.{ts,js,json}",
     "lint": "eslint --fix src/**/*.ts",
     "lint:css": "stylelint --fix src/**/*.css",
-    "bibliography": "node makeBibliography.js",
-    "sitemap": "node makeSitemap.js"
+    "bibliography": "node generateBibliography.js",
+    "sitemap": "node generateSitemap.js"
   },
   "dependencies": {
     "dayjs": "^1.10.7",

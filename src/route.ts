@@ -4,6 +4,7 @@ import { renderPage } from './lib/render';
 import { Post } from './post';
 import { toState } from './state';
 
+const baseUrl = 'https://kyonenya.github.io/';
 const searchInputElement = document.querySelector('.el_search_input');
 
 const routeMap = {
@@ -16,6 +17,7 @@ const routeMap = {
         : `placet experiri :: ${post.id}`,
       suffix: ` :: ${post.id}`,
       description: `${post.plainText.substring(0, 110)}…`,
+      href: `${baseUrl}?id=${post.id}`,
     });
   },
   postList: (posts: Post[]): void =>
@@ -27,6 +29,7 @@ const routeMap = {
     renderPage({
       body: TaggedPostList(posts, tag),
       title: `#${tag}｜placet experiri`,
+      href: `${baseUrl}?tag=${tag}`,
     }),
   searchedPostList: (posts: Post[], keyword: string, tag?: string): void =>
     renderPage({

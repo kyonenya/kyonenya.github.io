@@ -7,31 +7,34 @@ const summaryLength = 134;
 const noTitleSummaryLength = 113;
 const elipsisToken = '…';
 
-const ListItemBody = (post: Post, searchSummary: string | undefined) => {
-  if (!post.title) {
-    // prettier-ignore
-    return `
-      <div class="bl_posts_summary">
-        <p>
-          ${
-            searchSummary ||
-            `${post.plainText.substring(0, noTitleSummaryLength)}${elipsisToken}`
-          }
-        </p>
-      </div>`;
-  }
-
+const Title = (post: Post, keyword?: string) => {
+  if (!post.title) return '';
   return `
-    <h2 class="bl_posts_title">${post.title}</h2>
-    <div class="bl_posts_summary">
-      <p>
-        ${
-          searchSummary ||
-          `${post.plainText.substring(0, summaryLength)}${elipsisToken}`
-        }
-      </p>
-    </div>`;
+    <h2 class="bl_posts_title">
+      ${
+        keyword
+          ? post.title.replace(
+              keyword,
+              `<span class="hp_highlight">${keyword}</span>`
+            )
+          : post.title
+      }
+    </h2>`;
 };
+
+const Summary = (post: Post, searchSummary: string | undefined) => `
+  <div class="bl_posts_summary">
+    <p>
+      ${
+        searchSummary ||
+        `${post.plainText.substring(
+          0,
+          post.title ? summaryLength : noTitleSummaryLength
+        )}￼`
+      }
+      ${elipsisToken}
+    </p>
+  </div>`;
 
 export const PostListItem = (props: {
   post: Post;
@@ -52,7 +55,13 @@ export const PostListItem = (props: {
     <li
       class="
         bl_posts_item
-        ${keyword && !searchSummary ? ' hp_hidden' : ''}"
+        ${
+          !keyword ||
+          searchSummary ||
+          (post.title && post.title.indexOf(keyword) !== -1)
+            ? ''
+            : ' hp_hidden'
+        }"
     >
       <router-link href="?id=${post.id}">
         <header class="bl_posts_header">
@@ -60,7 +69,8 @@ export const PostListItem = (props: {
             ${dayjs(post.createdAt).format('YYYY-MM-DD')}
           </time>
         </header>
-        ${ListItemBody(post, searchSummary)}
+        ${Title(post, keyword)}
+        ${Summary(post, searchSummary)}
       </router-link>
       <footer class="bl_posts_footer">
         <span class="bl_posts_dateago">

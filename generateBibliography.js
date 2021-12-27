@@ -60,7 +60,7 @@ function AppendBibliopraphy(items) {
 /**
  * @return {void}
  */
-(function makeBibliography() {
+(function generateBibliography() {
   const works = JSON.parse(fs.readFileSync(worksPath, 'utf8'));
   const newWorks = AppendBibliopraphy(works);
   fs.writeFileSync(worksPath, JSON.stringify(newWorks));
