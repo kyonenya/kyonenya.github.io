@@ -25,7 +25,7 @@
 
 @media screen and (min-width: 560px) {
   .el_search_icon {
-    top: 6px;
+    /* top: 3px; */
   }
 }
 
@@ -40,7 +40,7 @@
   opacity: 0;
   cursor: pointer;
   width: 2.2em;  /* クリック領域の幅 */
-  top: -3px;  /* フォームがメニューを覆い隠すよう少し上に */
+  top: -5px;  /* フォームがメニューを覆い隠すよう少し上に */
   border: 1px solid var(--monochrome-light);
   border-radius: 4px;
   outline: none;
@@ -52,11 +52,11 @@
   /* フォーカスされたら可視化し、左に伸びる */
   opacity: 1;
   cursor: text;
-  width: 239px;  /* ナビメニューの横幅に合わせる */
+  width: 245px;  /* ナビメニューの横幅に合わせる */
 }
 
 @media screen and (min-width: 560px) {
   .el_search_input:focus {
-    width: 302px;
+    width: 300px;
   }
 }
