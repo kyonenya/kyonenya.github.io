@@ -13,9 +13,6 @@ const suffixElement = <HTMLSpanElement>(
 const descriptionElement = <HTMLMetaElement>(
   document.querySelector('meta[name=description]')
 );
-const canonicalElement = <HTMLLinkElement>(
-  document.querySelector('link[rel="canonical"]')
-);
 
 export function renderRoot(html: string): void {
   rootElement.innerHTML = html;
@@ -29,6 +26,12 @@ export function renderPage(page: Page): void {
     descriptionElement.content = page.description;
   }
   if (page.href) {
-    canonicalElement.href = page.href;
+    document
+      .querySelectorAll('link[rel="canonical"]')
+      .forEach((linkElement) => linkElement.remove());
+    const linkElement = document.createElement('link');
+    linkElement.rel = 'canonical';
+    linkElement.href = page.href;
+    document.head.appendChild(linkElement);
   }
 }
