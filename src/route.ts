@@ -24,6 +24,7 @@ const routeMap = {
     renderPage({
       body: PostList(posts),
       title: 'placet experiri',
+      href: baseUrl,
     }),
   taggedPostList: (posts: Post[], tag: string): void =>
     renderPage({
