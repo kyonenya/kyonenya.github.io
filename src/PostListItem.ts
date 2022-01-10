@@ -11,10 +11,7 @@ const Title = (title: string, keyword?: string) => `
   <h2 class="bl_posts_title">
     ${
       keyword
-        ? title.replace(
-            keyword,
-            `<span class="hp_highlight">${keyword}</span>`
-          )
+        ? title.replace(keyword, `<span class="hp_highlight">${keyword}</span>`)
         : title
     }
   </h2>`;
@@ -47,18 +44,16 @@ export const PostListItem = (props: {
         keywordModifier: (k) => `<span class="hp_highlight">${k}</span>`,
       })
     : undefined;
+  const isMatched =
+    !keyword ||
+    searchSummary ||
+    (post.title && post.title.indexOf(keyword) !== -1);
 
   return `
     <li
       class="
         bl_posts_item
-        ${
-          !keyword ||
-          searchSummary ||
-          (post.title && post.title.indexOf(keyword) !== -1)
-            ? ''
-            : ' hp_hidden'
-        }"
+        ${isMatched ? '' : 'hp_hidden'}"
     >
       <a href="?id=${post.id}">
         <header class="bl_posts_header">
