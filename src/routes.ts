@@ -41,6 +41,17 @@ const routeMap = {
     window.scrollTo(0, 0);
     searchInputElement?.classList.remove('hp_hidden');
   },
+  afterEach: (posts: Post[]): void => {
+    document
+      .querySelectorAll<HTMLAnchorElement>('a[href^="?"]')
+      .forEach((a) => {
+        a.onclick = (e) => {
+          e.preventDefault();
+          window.history.pushState(toState(a.href), a.href, a.href);
+          route(posts);
+        };
+      });
+  },
 };
 
 export function route(posts: Post[]): void {
@@ -54,13 +65,14 @@ export function route(posts: Post[]): void {
   if (id !== undefined) {
     const post = posts.find((post) => post.id === id);
     if (!post) return; // TODO: 404
-    return routeMap.article(post);
+    routeMap.article(post);
+  } else if (keyword !== undefined) {
+    routeMap.searchedPostList(posts, keyword, tag);
+  } else if (tag !== undefined) {
+    routeMap.taggedPostList(posts, tag);
+  } else {
+    routeMap.postList(posts);
   }
-  if (keyword !== undefined) {
-    return routeMap.searchedPostList(posts, keyword, tag);
-  }
-  if (tag !== undefined) {
-    return routeMap.taggedPostList(posts, tag);
-  }
-  return routeMap.postList(posts);
+
+  return routeMap.afterEach(posts);
 }
