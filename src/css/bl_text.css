@@ -2,31 +2,26 @@
  * テキスト領域（マークアップ）
  */
 .bl_text a:not(.hp_unsetLink) {
-  /* 下線と文字とを空けるため、擬似的な下線を作る */
-  display: inline;
-  line-height: 1em;  /* 下余白リセット */
-  text-decoration: none;
-  color: hsl(219, 62%, 50%);  /* 薄青、Wikipediaより */
-  border-bottom: 1px solid hsl(219, 62%, 65%);  /* 細く見せるため薄色に */
-  padding-bottom: 0;  /* 下線との距離 */
-  text-indent: 0;  /* 時々生じる謎のインデントを削除 */
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  color: hsl(219, 62%, 50%);
+  text-decoration-color: hsl(219, 62%, 65%);
 }
 
 .bl_text a:visited:not(.hp_unsetLink) {
-  /* 訪問済みリンク */
-  color: hsl(271, 35%, 45%);  /* 紫、Wikipediaより */
-  border-bottom: 1px solid hsl(271, 35%, 55%);
+  color: hsl(271, 35%, 45%);
+  text-decoration-color: hsl(271, 35%, 55%);
 }
 
 @media (prefers-color-scheme: dark) {
   .bl_text a:not(.hp_unsetLink) {
-    color: hsl(219, 62%, 68%);
-    border-bottom: 1px solid hsl(219, 62%, 48%);
+    color: hsl(219, 62%, 67%);
+    text-decoration-color: hsl(219, 62%, 52%);
   }
   
   .bl_text a:visited:not(.hp_unsetLink) {
-    color: hsl(271, 35%, 68%);
-    border-bottom: 1px solid hsl(271, 35%, 48%);
+    color: hsl(271, 35%, 67%);
+    text-decoration-color: hsl(271, 35%, 52%);
   }
 }
 

@@ -12,7 +12,7 @@ body {
   line-height: 1.65;
   font-size: 16px;
   background: var(--background-color);
-  -webkit-text-size-adjust: 100%; /* iPhone横画面の表示崩れを防ぐ */  
+  -webkit-text-size-adjust: 100%; /* iPhone横画面の表示崩れを防ぐ */
   /* フッターを下部固定 */
   display: flex;
   flex-flow: column;  /* 縦の隊列 */
