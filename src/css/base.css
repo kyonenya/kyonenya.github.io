@@ -1,6 +1,10 @@
 /**
  * ベースグループ
  */
+html {
+  scroll-behavior: auto;  /* unset `smooth` */
+}
+
 body {
   font-family: "Helvetica Neue", "Verdana", "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", "Meiryo", sans-serif;
   word-break: break-word;  /* 行頭に、。が来るのを避ける */
@@ -8,7 +12,7 @@ body {
   line-height: 1.65;
   font-size: 16px;
   background: var(--background-color);
-  -webkit-text-size-adjust: 100%; /* iPhone横画面の表示崩れを防ぐ */
+  -webkit-text-size-adjust: 100%; /* iPhone横画面の表示崩れを防ぐ */  
   /* フッターを下部固定 */
   display: flex;
   flex-flow: column;  /* 縦の隊列 */
@@ -109,14 +113,8 @@ main {
   margin: 0 0.17em 0 0;
 }
 
-/**
- * リセット
- */
-html {
-  scroll-behavior: auto;  /* unset `smooth` */
-}
-
-a {
+a,
+.hp_unsetLink {
   text-decoration: none;
   color: inherit;
 }

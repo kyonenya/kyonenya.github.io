@@ -78,7 +78,7 @@ const Style = (parent: string) => `
 
 const Component = (post: Post, className: string) => `
   <div class="${className}">
-    <router-link href="?id=${post.id}">
+    <a href="?id=${post.id}" class="hp_unsetLink">
       <header>
         <div class="icon"></div>
         <span class="logo">placet experiri</span>
@@ -94,7 +94,7 @@ const Component = (post: Post, className: string) => `
           ${Tags(post.tags)}
         </ul>
       </footer>
-    </router-link>
+    </a>
   </div>`;
 
 export function defineBlogCard(posts: Post[]): void {

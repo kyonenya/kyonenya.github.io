@@ -13,7 +13,7 @@ const jsonPath = './posts.json';
   route(posts);
   window.addEventListener('popstate', () => route(posts));
 
-  defineLinks(() => route(posts));
+  // defineLinks(() => route(posts));
   defineBlogCard(posts);
 
   activateSearchForm(() => route(posts));

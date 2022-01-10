@@ -63,7 +63,7 @@ export const PostListItem = (props: {
             : ' hp_hidden'
         }"
     >
-      <router-link href="?id=${post.id}">
+      <a href="?id=${post.id}">
         <header class="bl_posts_header">
           <time class="bl_posts_date">
             ${dayjs(post.createdAt).format('YYYY-MM-DD')}
@@ -71,7 +71,7 @@ export const PostListItem = (props: {
         </header>
         ${Title(post, keyword)}
         ${Summary(post, searchSummary)}
-      </router-link>
+      </a>
       <footer class="bl_posts_footer">
         <span class="bl_posts_dateago">
           ${dayjs(post.createdAt).fromNow()}
