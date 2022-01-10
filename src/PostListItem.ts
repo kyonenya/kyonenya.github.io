@@ -7,20 +7,17 @@ const summaryLength = 134;
 const noTitleSummaryLength = 113;
 const elipsisToken = '…';
 
-const Title = (post: Post, keyword?: string) => {
-  if (!post.title) return '';
-  return `
-    <h2 class="bl_posts_title">
-      ${
-        keyword
-          ? post.title.replace(
-              keyword,
-              `<span class="hp_highlight">${keyword}</span>`
-            )
-          : post.title
-      }
-    </h2>`;
-};
+const Title = (title: string, keyword?: string) => `
+  <h2 class="bl_posts_title">
+    ${
+      keyword
+        ? title.replace(
+            keyword,
+            `<span class="hp_highlight">${keyword}</span>`
+          )
+        : title
+    }
+  </h2>`;
 
 const Summary = (post: Post, searchSummary: string | undefined) => `
   <div class="bl_posts_summary">
@@ -69,7 +66,7 @@ export const PostListItem = (props: {
             ${dayjs(post.createdAt).format('YYYY-MM-DD')}
           </time>
         </header>
-        ${Title(post, keyword)}
+        ${post.title ? Title(post.title, keyword) : ''}
         ${Summary(post, searchSummary)}
       </a>
       <footer class="bl_posts_footer">
