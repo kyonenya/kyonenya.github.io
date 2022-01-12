@@ -35,8 +35,8 @@
 }
 
 .bl_text blockquote {
+  /* padding-left ＋ border-left ＝ 1em */
   padding: 0 0 0 0.75em;
-  /* 左：padding＋border-left＝1emになるように */
   border-left: 0.25em solid var(--monochrome-light);
   font-family: Georgia, "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "游明朝", YuMincho, serif;
   box-sizing: border-box;
@@ -44,7 +44,7 @@
 }
 
 .bl_text blockquote p {
-  /* 左：p:margin＋blockquote:margin＝1emになるように */
+  /* margin-left(blockquote) + margin-left(p) = 1em */
   margin: 0 0.5em 0 0.3em;
 }
 
@@ -92,8 +92,7 @@
 
 .ly_cont .bl_text h2:first-child,
 .ly_cont .el_heading2:first-child {
-  /* 先頭の見出しだけ上余白なし */
-  margin-top: 0;
+  margin-top: 0;  /* 先頭の見出しだけ上余白なし */
 }
 
 /* 小見出し */
@@ -170,7 +169,6 @@
  * テキスト領域（その他）
  */
 .bl_text + .bl_text {
-  /* セクション間余白 */
   margin-top: 1.5em;
 }
 

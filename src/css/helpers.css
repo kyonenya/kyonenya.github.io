@@ -1,0 +1,34 @@
+/**
+ * ヘルパークラス
+ */
+.hp_hidden {
+  display: none !important;
+}
+
+.hp_highlight {
+  display: inline-block;
+  background: hsl(60, 100%, 77%);
+  border: 1px solid hsla(0, 0%, 0%, 0.15);  /* layer translucent black line */
+  color: hsl(0, 0%, 20%);  /* black if under darkmode */
+  border-radius: 3px;
+  padding: 2px 3px;
+  margin: 0;
+}
+
+.hp_underline {
+  border-bottom: 1px solid var(--monochrome-dark);
+  padding-bottom: 0;
+}
+
+.hp_bold {
+  font-weight: bold;
+}
+
+.hp_kerning {
+  letter-spacing: -0.27em;
+  margin: 0 0.17em 0 0;
+}
+
+.hp_unsetLink {
+  /* link style is unset even if under `bl_text` module */
+}
