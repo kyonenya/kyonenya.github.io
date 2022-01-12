@@ -36,14 +36,12 @@ export const PostListItem = (props: {
   keyword?: string;
 }): string => {
   const { post, tag, keyword } = props;
-  const searchSummary = keyword
-    ? generateSummary(post.plainText, keyword, {
-        maxLength: 50,
-        beforeLength: 20,
-        elipsisToken,
-        keywordModifier: (k) => `<span class="hp_highlight">${k}</span>`,
-      })
-    : undefined;
+  const searchSummary = generateSummary(post.plainText, keyword, {
+    maxLength: 50,
+    beforeLength: 20,
+    elipsisToken,
+    keywordModifier: (k) => `<span class="hp_highlight">${k}</span>`,
+  });
   const isMatched =
     !keyword ||
     searchSummary ||
