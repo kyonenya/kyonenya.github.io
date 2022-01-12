@@ -15,7 +15,7 @@ body {
   -webkit-text-size-adjust: 100%; /* iPhone横画面の表示崩れを防ぐ */
   /* フッターを下部固定 */
   display: flex;
-  flex-flow: column;  /* 縦の隊列 */
+  flex-flow: column;
   min-height: 100vh;
 }
 
@@ -83,6 +83,7 @@ main {
 }
 
 a {
+  /* unset */
   text-decoration: none;
   color: inherit;
 }

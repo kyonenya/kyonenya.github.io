@@ -4,7 +4,6 @@
 .bl_posts_item {
   padding: 0.7em 0;
   border-bottom: 1px solid var(--monochrome-light);
-  /* 小ブロックにして中央揃え */
   display: block;
   margin: 0 auto;
 }
