@@ -3,9 +3,10 @@ import dayjs from './lib/dayjs';
 import { Post } from './post';
 
 const summaryLength = 74;
+const className = 'bl_blogCard';
 
-const Style = (parent: string) => `
-  .${parent} {
+const Style = `
+  .${className} {
     font-size: 80%;
     border: 1px solid var(--monochrome-light);
     border-radius: 4px;
@@ -16,18 +17,18 @@ const Style = (parent: string) => `
   }
   
   @media screen and (min-width: 560px) {
-    .${parent} {
+    .${className} {
       margin: 1.5em 2em 1.25em;
     }
   }
 
-  .${parent} header {
+  .${className} header {
     font-family: 'Avenir Next', 'Lucida Sans', sans-serif;
     display: inline-flex;
     color: var(--monochrome-dark);
   }
 
-  .${parent} .icon {
+  .${className} .icon {
     background-image: url(../../assets/icons/favicon.svg);
     background-size: 100%;
     background-repeat: no-repeat;
@@ -37,48 +38,48 @@ const Style = (parent: string) => `
     height: 1.4em;
   }
 
-  .${parent} .logo {
+  .${className} .logo {
     font-size: 130%;
     color: var(--text-color);
     margin-left: 0.2em;
   }
 
-  .${parent} .suffix {
+  .${className} .suffix {
     color: var(--monochrome-dark);
     font-size: 85%;
     margin: 0.6em 0 0 0.3em;
   }
 
-  .${parent} .title {
+  .${className} .title {
     font-weight: bold;
     font-size: 120%;
   }
 
-  .${parent} .text {
+  .${className} .text {
     margin: 0.2em 0;
   }
 
-  .${parent} footer {
+  .${className} footer {
     color: var(--monochrome-dark);
     display: inline-flex;
     flex-wrap: wrap;
   }
 
-  .${parent} .tags {
+  .${className} .tags {
     display: inline-flex;
     flex-wrap: wrap;
     padding-left: 0.6em;
   }
 
-  .${parent} .tags li {
+  .${className} .tags li {
     list-style: none; /* unset */
     padding-right: 0.3em;
   }
 `;
 
-const Component = (post: Post, className: string) => `
+const Component = (post: Post) => `
   <div class="${className}">
-    <router-link href="?id=${post.id}">
+    <a href="?id=${post.id}" class="hp_unsetLink">
       <header>
         <div class="icon"></div>
         <span class="logo">placet experiri</span>
@@ -94,7 +95,7 @@ const Component = (post: Post, className: string) => `
           ${Tags(post.tags)}
         </ul>
       </footer>
-    </router-link>
+    </a>
   </div>`;
 
 export function defineBlogCard(posts: Post[]): void {
@@ -106,10 +107,9 @@ export function defineBlogCard(posts: Post[]): void {
       const post = posts.find((post) => post.id === parseInt(idString, 10));
       if (!post) return;
 
-      const className = 'bl_blogCard';
-      this.innerHTML = Component(post, className);
+      this.innerHTML = Component(post);
       const style = document.createElement('style');
-      style.innerText = Style(className);
+      style.innerText = Style;
       this.appendChild(style);
     }
   }

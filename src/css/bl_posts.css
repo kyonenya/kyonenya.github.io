@@ -4,13 +4,12 @@
 .bl_posts_item {
   padding: 0.7em 0;
   border-bottom: 1px solid var(--monochrome-light);
-  /* 小ブロックにして中央揃え */
   display: block;
   margin: 0 auto;
 }
 
 .bl_posts_item:first-child {
-  padding-top: 0;  /* 先頭は余白なし */
+  padding-top: 0;  /* no padding-top at the top */
 }
 
 .bl_posts_header {

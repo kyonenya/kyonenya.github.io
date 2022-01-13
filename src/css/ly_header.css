@@ -1,7 +1,7 @@
 /**
  * ヘッダー
  */
-/* 大コンテナ */
+/* コンテナ */
 .ly_header {
   margin: 1.1em auto 1.75em;
 }
@@ -13,7 +13,7 @@
   }
 }
 
-/* 中コンテナ：ロゴ＋メニュー */
+/* ロゴ＋メニュー */
 .ly_header_inner {
   text-align: center;
 }
@@ -21,8 +21,8 @@
 @media screen and (min-width: 560px) {
   .ly_header_inner {
     display: flex;
-    justify-content: space-between;  /* 二つを両端に分ける */
-    align-items: center;  /* 二つの高さ位置を揃える */
+    justify-content: space-between;
+    align-items: center;  /* adjust height of logo and menu */
     padding-top: 0.75em;
   }
 }
@@ -36,10 +36,10 @@
 }
 
 @media screen and (max-width: 559px) {
+  /* mobile */
   .bl_nav {
-    /* モバイルではメニューを中央揃え */
     display: inline-block;
-    text-align: center;
+    text-align: center;  /* center menu */
   }
 }
 
@@ -55,7 +55,7 @@
 
 .bl_nav a {
   display: block;
-  line-height: 1.25em;  /* 区切り線の高さ */
+  line-height: 1.25em;  /* height of divider */
   text-align: center;
   color: var(--main-color);
   font-size: 110%;

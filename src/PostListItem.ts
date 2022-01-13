@@ -7,20 +7,14 @@ const summaryLength = 134;
 const noTitleSummaryLength = 113;
 const elipsisToken = '…';
 
-const Title = (post: Post, keyword?: string) => {
-  if (!post.title) return '';
-  return `
-    <h2 class="bl_posts_title">
-      ${
-        keyword
-          ? post.title.replace(
-              keyword,
-              `<span class="hp_highlight">${keyword}</span>`
-            )
-          : post.title
-      }
-    </h2>`;
-};
+const Title = (title: string, keyword?: string) => `
+  <h2 class="bl_posts_title">
+    ${
+      keyword
+        ? title.replace(keyword, `<span class="hp_highlight">${keyword}</span>`)
+        : title
+    }
+  </h2>`;
 
 const Summary = (post: Post, searchSummary: string | undefined) => `
   <div class="bl_posts_summary">
@@ -42,36 +36,32 @@ export const PostListItem = (props: {
   keyword?: string;
 }): string => {
   const { post, tag, keyword } = props;
-  const searchSummary = keyword
-    ? generateSummary(post.plainText, keyword, {
-        maxLength: 50,
-        beforeLength: 20,
-        elipsisToken,
-        keywordModifier: (k) => `<span class="hp_highlight">${k}</span>`,
-      })
-    : undefined;
+  const searchSummary = generateSummary(post.plainText, keyword, {
+    maxLength: 50,
+    beforeLength: 20,
+    elipsisToken,
+    keywordModifier: (k) => `<span class="hp_highlight">${k}</span>`,
+  });
+  const isMatched =
+    !keyword ||
+    searchSummary ||
+    (post.title && post.title.indexOf(keyword) !== -1);
 
   return `
     <li
       class="
         bl_posts_item
-        ${
-          !keyword ||
-          searchSummary ||
-          (post.title && post.title.indexOf(keyword) !== -1)
-            ? ''
-            : ' hp_hidden'
-        }"
+        ${isMatched ? '' : 'hp_hidden'}"
     >
-      <router-link href="?id=${post.id}">
+      <a href="?id=${post.id}">
         <header class="bl_posts_header">
           <time class="bl_posts_date">
             ${dayjs(post.createdAt).format('YYYY-MM-DD')}
           </time>
         </header>
-        ${Title(post, keyword)}
+        ${post.title ? Title(post.title, keyword) : ''}
         ${Summary(post, searchSummary)}
-      </router-link>
+      </a>
       <footer class="bl_posts_footer">
         <span class="bl_posts_dateago">
           ${dayjs(post.createdAt).fromNow()}

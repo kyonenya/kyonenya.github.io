@@ -1,17 +1,21 @@
 /**
  * ベースグループ
  */
+html {
+  scroll-behavior: auto;  /* unset `smooth` */
+}
+
 body {
   font-family: "Helvetica Neue", "Verdana", "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", "Meiryo", sans-serif;
-  word-break: break-word;  /* 行頭に、。が来るのを避ける */
   color: var(--text-color);
   line-height: 1.65;
   font-size: 16px;
   background: var(--background-color);
-  -webkit-text-size-adjust: 100%; /* iPhone横画面の表示崩れを防ぐ */
-  /* フッターを下部固定 */
+  word-break: break-word;  /* prevent beginning line with 、。 */
+  -webkit-text-size-adjust: 100%; /* prevent broken layout in horizontal view */
+  /* fix footer at the bottom */
   display: flex;
-  flex-flow: column;  /* 縦の隊列 */
+  flex-flow: column;
   min-height: 100vh;
 }
 
@@ -31,20 +35,20 @@ body {
 @media print {
   body {
     background: unset;
-    /* 段落などの途中で改ページさせない */
+    /* prevent page break in the middle of paragraph */
     display: block;
     break-inside: avoid;
   }
 }
 
 main {
-  /* フッターを下部固定 */
-  flex: 1;  /* 上下にめいっぱい広げておいて */
+  /* fix footer at the bottom */
+  flex: 1;  /* full height */
 }
 
 @media screen and (min-width: 560px) {
   main {
-    padding-top: 1.5em;  /* ヘッダーに本文がめり込まないように */
+    padding-top: 1.5em;  /* avoid body sinking in the header */
   }
 }
 
@@ -78,45 +82,8 @@ main {
   }
 }
 
-/**
- * ヘルパークラス
- */
-.hp_hidden {
-  display: none !important;
-}
-
-.hp_highlight {
-  display: inline-block;
-  background: hsl(60, 100%, 77%);
-  border: 1px solid hsla(0, 0%, 0%, 0.15);  /* 透明化した黒線を被せる */
-  color: hsl(0, 0%, 20%);  /* ダークモード下でも黒文字 */
-  border-radius: 3px;
-  padding: 2px 3px;
-  margin: 0;
-}
-
-.hp_underline {
-  border-bottom: 1px solid var(--monochrome-dark);
-  padding-bottom: 0;
-}
-
-.hp_bold {
-  font-weight: bold;
-}
-
-.hp_kerning {
-  letter-spacing: -0.27em;
-  margin: 0 0.17em 0 0;
-}
-
-/**
- * リセット
- */
-html {
-  scroll-behavior: auto;  /* unset `smooth` */
-}
-
 a {
+  /* unset */
   text-decoration: none;
   color: inherit;
 }

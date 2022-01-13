@@ -1,16 +1,9 @@
-const Tag = (tag: string): string =>
+const Tag = (tag: string, isMatched?: boolean): string =>
   `<li>
-    <router-link href="?tag=${tag}">
+    <a href="?tag=${tag}" class="hp_unsetLink ${isMatched ? 'hp_bold' : ''}">
       #${tag}
-    </router-link>
-  </li>`;
-
-const MatchedTag = (tag: string): string =>
-  `<li>
-    <router-link href="?tag=${tag}" class="hp_bold">
-      #${tag}
-    </router-link>
+    </a>
   </li>`;
 
 export const Tags = (tags: string[], tagFilter?: string): string =>
-  tags.map((tag) => (tag === tagFilter ? MatchedTag(tag) : Tag(tag))).join('');
+  tags.map((tag) => Tag(tag, tag === tagFilter)).join('');

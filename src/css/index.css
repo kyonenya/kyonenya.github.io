@@ -2,10 +2,14 @@
 
 /**
  * エントリーポイント
+ *
+ * Naming conventions are based on PRECSS
+ * @url https://precss.io/ja/
  */
 @import url("variables.css");
 @import url("reset.css");
 @import url("base.css");
+@import url("helpers.css");
 @import url("elements.css");
 @import url("el_search.css");
 @import url("ly_header.css");

@@ -31,14 +31,13 @@
   font-size: 16px;
   font-weight: normal;
   color: var(--monochrome-dark);
-  vertical-align: baseline;  /* 英単語帳の位置 */
 }
 
 /**
  * 記事タグ
  */
 .bl_tags {
-  display: inline-flex;  /* 横並び、かつ先立つ要素（日付）に回り込める */
+  display: inline-flex;  /* like `span`, but flexbox inside */
   flex-wrap: wrap;
   list-style: none;
 }
@@ -56,7 +55,7 @@
 
 .el_badge[data-badge]::after {
   content: attr(data-badge);
-  position: absolute;  /* 基準に対して相対配置 */
+  position: absolute;  /* relative to parent */
   top: -0.6em;
   right: -1.25em;
   font-size: 0.7em;
