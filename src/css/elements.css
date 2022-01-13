@@ -37,7 +37,7 @@
  * 記事タグ
  */
 .bl_tags {
-  display: inline-flex;  /* 横並び、かつ先立つ要素（日付）に回り込める */
+  display: inline-flex;  /* like `span`, but flexbox inside */
   flex-wrap: wrap;
   list-style: none;
 }
