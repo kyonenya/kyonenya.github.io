@@ -1,4 +1,4 @@
-import dayjs from './lib/dayjs';
+import { isPast } from './lib/dayjs';
 
 export type Post = {
   id: number;
@@ -22,7 +22,7 @@ export type JSONPost = {
 
 export const jsonToPost = (posts: JSONPost[]): Post[] =>
   posts
-    .filter((post) => dayjs(post.createdAt).isBefore(dayjs())) // exclude reserved post
+    .filter((post) => isPast(post.createdAt)) // exclude reserved post
     .map((post, i) => ({
       ...post,
       index: i,

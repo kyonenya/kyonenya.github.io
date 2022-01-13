@@ -1,5 +1,5 @@
 import { Tags } from './Tags';
-import dayjs from './lib/dayjs';
+import { formatYMD } from './lib/dayjs';
 import { Post } from './post';
 
 const summaryLength = 74;
@@ -90,7 +90,7 @@ const Component = (post: Post) => `
         ${post.plainText.substring(0, summaryLength)}…
       </p>
       <footer>
-        <span>${dayjs(post.createdAt).format('YYYY-MM-DD')}</span>
+        <span>${formatYMD(post.createdAt)}</span>
         <ul class="tags">
           ${Tags(post.tags)}
         </ul>

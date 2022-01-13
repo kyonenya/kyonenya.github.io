@@ -1,4 +1,4 @@
-import { isNew } from './lib/utils';
+import { isNew } from './lib/dayjs';
 
 const modifiedAt = '2021-11-27';
 const newDays = 30;
