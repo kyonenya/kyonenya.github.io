@@ -2,6 +2,7 @@
   "name": "kyonenya.github.io",
   "version": "2.3.3",
   "scripts": {
+    "date": "node date.js",
     "_tsc": "tsc -w --noEmit",
     "build": "webpack",
     "build:css": "postcss src/css/index.css -o dist/css/bundle.css -w",
