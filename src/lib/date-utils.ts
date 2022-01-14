@@ -6,44 +6,32 @@ const Week = Day * 7;
 const Month = Day * 30;
 const Year = Day * 365;
 
-const second = (ms: number) => ms / Second;
-const minute = (ms: number) => ms / Minute;
-const hour = (ms: number) => ms / Hour;
-const day = (ms: number) => ms / Day;
-const month = (ms: number) => ms / Month;
-const year = (ms: number) => ms / Year;
+const Unit = ['second', 'minute', 'hour', 'day', 'month', 'year'] as const;
+type Unit = typeof Unit[number];
 
-const map = {
-  second: [(ms: number) => ms / Second, 45],
-  minute: [(ms: number) => ms / Minute, 45],
-  hour: [(ms: number) => ms / Hour, 22],
-  day: [(ms: number) => ms / Day, 26],
-  month: [(ms: number) => ms / Month, 11],
-  year: [(ms: number) => ms / Year, 99999],
+type UnitMap = {
+  [k in Unit]: { threshold: number; fromMs: (ms: number) => number };
+};
+const unitMap: UnitMap = {
+  second: { threshold: 45, fromMs: (ms: number) => ms / Second },
+  minute: { threshold: 45, fromMs: (ms: number) => ms / Minute },
+  hour: { threshold: 22, fromMs: (ms: number) => ms / Hour },
+  day: { threshold: 26, fromMs: (ms: number) => ms / Day },
+  month: { threshold: 11, fromMs: (ms: number) => ms / Month },
+  year: { threshold: 99999 /* TODO */, fromMs: (ms: number) => ms / Year },
 };
 
 const relativeTimeIntl = new Intl.RelativeTimeFormat('ja-JP', {
   style: 'narrow',
 });
 
-function fromNow(date: Date) {
-  const diff = new Date(date).getTime() - new Date().getTime();
-
-  if (Math.abs(Math.round(second(diff))) < 45) {
-    return relativeTimeIntl.format(Math.round(second(diff)), 'second');
-  }
-  if (Math.abs(Math.round(minute(diff))) < 45) {
-    return relativeTimeIntl.format(Math.round(minute(diff)), 'minute');
-  }
-  if (Math.abs(Math.round(hour(diff))) < 22) {
-    return relativeTimeIntl.format(Math.round(hour(diff)), 'hour');
-  }
-  if (Math.abs(Math.round(day(diff))) < 26) {
-    return relativeTimeIntl.format(Math.round(day(diff)), 'day');
-  }
-  if (Math.abs(Math.round(month(diff))) < 11) {
-    console.log(month(diff));
-    return relativeTimeIntl.format(Math.round(month(diff)), 'month');
-  }
-  return relativeTimeIntl.format(Math.round(year(diff)), 'year');
+export function fromNow(date: Date): string {
+  const diffMs = new Date(date).getTime() - new Date().getTime();
+  const unit = Unit.find((unit) => {
+    const { threshold, fromMs } = unitMap[unit];
+    return Math.abs(Math.round(fromMs(diffMs))) < threshold;
+  });
+  if (!unit) return '';
+  const { fromMs } = unitMap[unit];
+  return relativeTimeIntl.format(Math.round(fromMs(diffMs)), unit);
 }
