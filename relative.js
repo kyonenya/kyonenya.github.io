@@ -31,12 +31,19 @@ console.log(fromNow(new Date('2022-01-14')));
 
 function fromNow(date) {
   const diff = new Date(date).getTime() - new Date().getTime();
-  
-  const result = Unit.map(unit => {
+
+  const result = Unit.map((unit) => {
     const [fromMs, threshold] = unitMap[unit];
     if (Math.abs(Math.round(fromMs(diff))) < threshold) {
       return relativeTimeIntl.format(Math.round(fromMs(diff)), unit);
     }
   });
   console.log(result); // [ undefined, '11分前', '0時間前', '0日前', '0か月前', '0年前' ]
+
+  const unit = Unit.find((unit) => {
+    const [fromMs, threshold] = unitMap[unit];
+    return Math.abs(Math.round(fromMs(diff))) < threshold;
+  });
+  const [fromMs, threshold] = unitMap[unit];
+  return relativeTimeIntl.format(Math.round(fromMs(diff)), unit);
 }
