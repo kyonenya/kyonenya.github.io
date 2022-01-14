@@ -9,23 +9,23 @@ const relativeTimeIntl = new Intl.RelativeTimeFormat('ja-JP', {
   style: 'narrow',
 });
 
-export function formatYMD(date: Date) {
+export function formatYMD(date: Date): string {
   return shortDateIntl.format(date).replaceAll('/', '-');
 }
 
-export function formatYMDHm(date: Date) {
+export function formatYMDHm(date: Date): string {
   return shortDateTimeIntl.format(date).replaceAll('/', '-');
 }
 
-function isBefore(date: Date, limitDate: Date) {
+function isBefore(date: Date, limitDate: Date): boolean {
   return new Date(date).getTime() < new Date(limitDate).getTime();
 }
 
-export function isPast(date: Date) {
+export function isPast(date: Date): boolean {
   return isBefore(date, new Date());
 }
 
-export function isNew(date: Date, newDays: number) {
+export function isNew(date: Date, newDays: number): boolean {
   const _date = new Date(date);
   _date.setDate(_date.getDate() + newDays); // limitDate
   return isBefore(new Date(), _date);
