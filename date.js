@@ -57,8 +57,7 @@ z = new Date(d);
 //   18 months+	yy	2 years ago ... 20 years ago
 
 function fromNow(date) {
-  const diff = new Date(date) - new Date();
-  const diffAbs = Math.abs(diff);
+  const diff = new Date(date).getTime() - new Date().getTime();
 
   if (Math.abs(Math.round(second(diff))) < 45) {
     return relativeTimeIntl.format(Math.round(second(diff)), 'second');

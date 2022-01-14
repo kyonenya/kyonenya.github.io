@@ -13,13 +13,13 @@ const day = (ms: number) => ms / Day;
 const month = (ms: number) => ms / Month;
 const year = (ms: number) => ms / Year;
 
-const msMap = {
-  second: (ms: number) => ms / Second,
-  minute: (ms: number) => ms / Minute,
-  hour: (ms: number) => ms / Hour,
-  day: (ms: number) => ms / Day,
-  month: (ms: number) => ms / Month,
-  year: (ms: number) => ms / Year,
+const map = {
+  second: [(ms: number) => ms / Second, 45],
+  minute: [(ms: number) => ms / Minute, 45],
+  hour: [(ms: number) => ms / Hour, 22],
+  day: [(ms: number) => ms / Day, 26],
+  month: [(ms: number) => ms / Month, 11],
+  year: [(ms: number) => ms / Year, 99999],
 };
 
 const relativeTimeIntl = new Intl.RelativeTimeFormat('ja-JP', {
