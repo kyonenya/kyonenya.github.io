@@ -24,6 +24,6 @@ const msMap: { [k in Unit]: number } = {
   year,
 };
 
-export function toUnitTime(ms: number, unit: Unit) {
+export function toUnitTime(ms: number, unit: Unit): number {
   return ms / msMap[unit];
 }

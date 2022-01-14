@@ -1,5 +1,5 @@
 import { Tags } from './Tags';
-import { formatYMD } from './lib/dayjs';
+import { formatYMD } from './lib/date-utils';
 import { Post } from './post';
 
 const summaryLength = 74;

@@ -1,27 +1,17 @@
 import dayjs, { ConfigType, Dayjs } from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
 import 'dayjs/locale/ja';
 
-dayjs.extend(relativeTime);
 dayjs.locale('ja');
 
-export function formatYMD(date: string): string {
-  return dayjs(date).format('YYYY-MM-DD');
-}
-
-export function formatYMDHm(date: string): string {
-  return dayjs(date).format('YYYY-MM-DD HH:mm');
-}
-
-export function isBefore(
-  date: string | Dayjs,
+function isBefore(
+  date: string | Dayjs | Date,
   limitDate: string | Dayjs
 ): boolean {
   return dayjs(date).isBefore(limitDate);
 }
 
-export function isPast(date: string): boolean {
-  return isBefore(date, dayjs());
+export function isPast(date: string | Date): boolean {
+  return isBefore(new Date(date), dayjs());
 }
 
 export function isNew(
@@ -31,8 +21,4 @@ export function isNew(
 ): boolean {
   const limitDate = dayjs(date).add(newDays, 'day');
   return isBefore(dayjs(now), limitDate);
-}
-
-export function fromNow(date: string): string {
-  return dayjs(date).fromNow();
 }

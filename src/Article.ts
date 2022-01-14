@@ -1,5 +1,5 @@
 import { Tags } from './Tags';
-import { formatYMDHm, fromNow } from './lib/dayjs';
+import { formatYMDHm, fromNow } from './lib/date-utils';
 import { Post } from './post';
 
 export const Article = (post: Post): string => `

@@ -34,7 +34,7 @@ const day = (ms) => ms / Day;
 const month = (ms) => ms / Month;
 const year = (ms) => ms / Year;
 
-d = '2021-05-05 08:11+9:00';
+d = '2021-12-25T00:00';
 x = fromNow(d);
 y = fromNow2(d);
 z = new Date(d);

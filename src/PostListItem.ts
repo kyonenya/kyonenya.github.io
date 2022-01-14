@@ -1,6 +1,6 @@
 import { generateSummary } from 'search-summary';
 import { Tags } from './Tags';
-import { formatYMD, fromNow } from './lib/dayjs';
+import { formatYMD, fromNow } from './lib/date-utils';
 import { Post } from './post';
 
 const summaryLength = 134;
