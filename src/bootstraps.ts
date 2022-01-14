@@ -9,15 +9,8 @@ const searchInputElement = <HTMLInputElement>(
   document.querySelector('.el_search_input')
 );
 
-export function notifyUpdate(): void {
-  if (!isNew(new Date(modifiedAt), newDays)) return;
-
-  aboutElement?.addEventListener('click', () => {
-    localStorage.setItem(modifiedAt, 'true');
-  });
-  if (localStorage.getItem(modifiedAt) !== 'true') {
-    aboutElement?.classList.add('el_badge');
-  }
+export function activatePopState(invokeRoute: () => void): void {
+  window.addEventListener('popstate', invokeRoute);
 }
 
 export function activateSearchForm(invokeRoute: () => void): void {
@@ -27,4 +20,15 @@ export function activateSearchForm(invokeRoute: () => void): void {
     window.history.pushState(query, '', query);
     invokeRoute();
   });
+}
+
+export function notifyUpdate(): void {
+  if (!isNew(new Date(modifiedAt), newDays)) return;
+
+  aboutElement?.addEventListener('click', () => {
+    localStorage.setItem(modifiedAt, 'true');
+  });
+  if (localStorage.getItem(modifiedAt) !== 'true') {
+    aboutElement?.classList.add('el_badge');
+  }
 }
