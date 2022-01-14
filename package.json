@@ -14,7 +14,6 @@
     "sitemap": "node generateSitemap.js"
   },
   "dependencies": {
-    "dayjs": "^1.10.7",
     "search-summary": "^1.1.1"
   },
   "devDependencies": {

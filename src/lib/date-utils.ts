@@ -25,7 +25,7 @@ export function isPast(date: Date) {
   return isBefore(date, new Date());
 }
 
-function isNew(date: Date, newDays: number) {
+export function isNew(date: Date, newDays: number) {
   const _date = new Date(date);
   _date.setDate(_date.getDate() + newDays); // limitDate
   return isBefore(new Date(), _date);

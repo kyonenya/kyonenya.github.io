@@ -1,4 +1,4 @@
-import { isNew } from './lib/dayjs';
+import { isNew } from './lib/date-utils';
 
 const modifiedAt = '2021-11-27';
 const newDays = 30;
@@ -10,7 +10,7 @@ const searchInputElement = <HTMLInputElement>(
 );
 
 export function notifyUpdate(): void {
-  if (!isNew(modifiedAt, newDays)) return;
+  if (!isNew(new Date(modifiedAt), newDays)) return;
 
   aboutElement?.addEventListener('click', () => {
     localStorage.setItem(modifiedAt, 'true');

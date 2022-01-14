@@ -1,4 +1,4 @@
-import { isPast } from './lib/dayjs';
+import { isPast } from './lib/date-utils';
 
 export type Post = {
   id: number;
@@ -29,7 +29,7 @@ function parseDate(dateStr: string): Date {
 
 export const jsonToPost = (posts: JSONPost[]): Post[] =>
   posts
-    .filter((post) => isPast(post.createdAt)) // exclude reserved post
+    .filter((post) => isPast(parseDate(post.createdAt))) // exclude reserved post
     .map((post, i) => ({
       ...post,
       index: i,
