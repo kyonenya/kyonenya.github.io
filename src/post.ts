@@ -1,10 +1,10 @@
-import dayjs from './lib/dayjs';
+import { isPast } from './lib/date-utils';
 
 export type Post = {
   id: number;
   index: number;
-  createdAt: string;
-  modifiedAt: string;
+  createdAt: Date;
+  modifiedAt: Date;
   title: string | undefined;
   text: string;
   plainText: string;
@@ -20,9 +20,16 @@ export type JSONPost = {
   tags: string[];
 };
 
+function parseDate(dateStr: string): Date {
+  if (/\+\d\d/.test(dateStr)) {
+    return new Date(dateStr);
+  }
+  return new Date(`${dateStr}+09:00`); // ja-JP locale
+}
+
 export const jsonToPost = (posts: JSONPost[]): Post[] =>
   posts
-    .filter((post) => dayjs(post.createdAt).isBefore(dayjs())) // exclude reserved post
+    .filter((post) => isPast(parseDate(post.createdAt))) // exclude reserved post
     .map((post, i) => ({
       ...post,
       index: i,
@@ -35,4 +42,6 @@ export const jsonToPost = (posts: JSONPost[]): Post[] =>
           "<a $1 target='_blank' rel='noopener'>$2</a>"
         ),
       plainText: post.text.replaceAll(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''),
+      createdAt: parseDate(post.createdAt + '+09:00'),
+      modifiedAt: parseDate(post.modifiedAt),
     }));

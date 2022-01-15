@@ -13,8 +13,8 @@ export function toState(locationSearch: string, locationHash?: string): State {
     id: id ? parseInt(id, 10) : undefined,
     tag: tag ?? undefined,
     keyword:
-      locationHash !== undefined && locationHash !== ''
-        ? decodeURIComponent(locationHash.slice(1))
-        : undefined,
+      locationHash === undefined || locationHash === ''
+        ? undefined
+        : decodeURIComponent(locationHash.replace('#', '')),
   };
 }

@@ -28,10 +28,10 @@ export function renderPage(page: Page): void {
   if (page.href) {
     document
       .querySelectorAll('link[rel="canonical"]')
-      .forEach((linkElement) => linkElement.remove());
-    const linkElement = document.createElement('link');
-    linkElement.rel = 'canonical';
-    linkElement.href = page.href;
-    document.head.appendChild(linkElement);
+      .forEach((link) => link.remove());
+    const link = document.createElement('link');
+    link.rel = 'canonical';
+    link.href = page.href;
+    document.head.appendChild(link);
   }
 }

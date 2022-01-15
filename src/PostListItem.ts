@@ -1,6 +1,7 @@
 import { generateSummary } from 'search-summary';
 import { Tags } from './Tags';
-import dayjs from './lib/dayjs';
+import { formatYMD, fromNow } from './lib/date-utils';
+import { className } from './lib/utils';
 import { Post } from './post';
 
 const summaryLength = 134;
@@ -49,14 +50,12 @@ export const PostListItem = (props: {
 
   return `
     <li
-      class="
-        bl_posts_item
-        ${isMatched ? '' : 'hp_hidden'}"
+      class="${className('bl_posts_item', !isMatched && 'hp_hidden')}"
     >
       <a href="?id=${post.id}">
         <header class="bl_posts_header">
           <time class="bl_posts_date">
-            ${dayjs(post.createdAt).format('YYYY-MM-DD')}
+            ${formatYMD(post.createdAt)}
           </time>
         </header>
         ${post.title ? Title(post.title, keyword) : ''}
@@ -64,7 +63,7 @@ export const PostListItem = (props: {
       </a>
       <footer class="bl_posts_footer">
         <span class="bl_posts_dateago">
-          ${dayjs(post.createdAt).fromNow()}
+          ${fromNow(post.createdAt)}
         </span>
         <ul class="bl_tags">
           ${Tags(post.tags, tag)}

@@ -1,6 +1,11 @@
+import { className } from './lib/utils';
+
 const Tag = (tag: string, isMatched?: boolean): string =>
   `<li>
-    <a href="?tag=${tag}" class="hp_unsetLink ${isMatched ? 'hp_bold' : ''}">
+    <a href="?tag=${tag}" class="${className(
+    'hp_unsetLink',
+    isMatched && 'hp_bold'
+  )}">
       #${tag}
     </a>
   </li>`;
