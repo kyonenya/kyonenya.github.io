@@ -1,8 +1,8 @@
-import { className } from './lib/utils';
+import { toClassName } from './lib/utils';
 
 const Tag = (tag: string, isMatched?: boolean): string =>
   `<li>
-    <a href="?tag=${tag}" class="${className(
+    <a href="?tag=${tag}" class="${toClassName(
     'hp_unsetLink',
     isMatched && 'hp_bold'
   )}">

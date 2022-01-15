@@ -1,7 +1,7 @@
 import { generateSummary } from 'search-summary';
 import { Tags } from './Tags';
 import { formatYMD, fromNow } from './lib/date-utils';
-import { className } from './lib/utils';
+import { toClassName } from './lib/utils';
 import { Post } from './post';
 
 const summaryLength = 134;
@@ -50,7 +50,7 @@ export const PostListItem = (props: {
 
   return `
     <li
-      class="${className('bl_posts_item', !isMatched && 'hp_hidden')}"
+      class="${toClassName('bl_posts_item', !isMatched && 'hp_hidden')}"
     >
       <a href="?id=${post.id}">
         <header class="bl_posts_header">
