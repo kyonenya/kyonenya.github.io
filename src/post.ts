@@ -27,8 +27,8 @@ function parseDate(dateStr: string): Date {
   return new Date(`${dateStr}+09:00`); // ja-JP locale
 }
 
-export const jsonToPost = (posts: JSONPost[]): Post[] =>
-  posts
+export function jsonToPost(posts: JSONPost[]): Post[] {
+  return posts
     .filter((post) => isPast(parseDate(post.createdAt))) // exclude reserved post
     .map((post, i) => ({
       ...post,
@@ -45,3 +45,4 @@ export const jsonToPost = (posts: JSONPost[]): Post[] =>
       createdAt: parseDate(post.createdAt + '+09:00'),
       modifiedAt: parseDate(post.modifiedAt),
     }));
+}

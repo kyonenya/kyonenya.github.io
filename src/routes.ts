@@ -10,7 +10,7 @@ const searchInputElement = document.querySelector('.el_search_input');
 const routeMap = {
   article: (post: Post): void => {
     searchInputElement?.classList.add('hp_hidden'); // disable search form
-    return renderPage({
+    renderPage({
       body: Article(post),
       title: post.title
         ? `${post.title}｜placet experiri :: ${post.id}`
@@ -41,7 +41,7 @@ const routeMap = {
     window.scrollTo(0, 0);
     searchInputElement?.classList.remove('hp_hidden');
   },
-  afterEach: (posts: Post[]): void => {
+  afterEach: (posts: Post[]): void =>
     document
       .querySelectorAll<HTMLAnchorElement>('a[href^="?"]')
       .forEach((a) => {
@@ -50,8 +50,7 @@ const routeMap = {
           window.history.pushState(toState(a.href), a.href, a.href);
           route(posts);
         };
-      });
-  },
+      }),
 };
 
 export function route(posts: Post[]): void {
