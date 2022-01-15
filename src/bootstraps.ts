@@ -1,4 +1,5 @@
 import { isNew } from './lib/date-utils';
+import { toState } from './state';
 
 const modifiedAt = '2021-11-27';
 const newDays = 30;
@@ -16,8 +17,11 @@ export function activatePopState(invokeRoute: () => void): void {
 export function activateSearchForm(invokeRoute: () => void): void {
   searchFormElement?.addEventListener('submit', (e) => {
     e.preventDefault();
-    const query = `${window.location.search}#${searchInputElement.value}`;
-    window.history.pushState(query, '', query);
+    window.history.pushState(
+      toState(window.location.search, `#{searchInputElement.value}`),
+      `${window.location.search}#${searchInputElement.value}`,
+      `${window.location.search}#${searchInputElement.value}`
+    );
     invokeRoute();
   });
 }
