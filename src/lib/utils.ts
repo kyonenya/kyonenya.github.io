@@ -5,5 +5,5 @@ export async function fetcher<T>(url: string): Promise<T> {
 }
 
 export function className(...classes: (string | false | undefined)[]): string {
-  return classes.map((c) => (!c ? '' : c)).join(' ');
+  return classes.map((c) => (typeof c === 'string' ? c : '')).join(' ');
 }

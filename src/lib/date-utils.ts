@@ -26,9 +26,9 @@ export function isPast(date: Date): boolean {
 }
 
 export function isNew(date: Date, newDays: number): boolean {
-  const _date = new Date(date);
-  _date.setDate(_date.getDate() + newDays); // limitDate
-  return isBefore(new Date(), _date);
+  const limitDate = date; // clone
+  limitDate.setDate(date.getDate() + newDays);
+  return isBefore(new Date(), limitDate);
 }
 
 const thresholdMap: { [k in Unit]: number } = {
