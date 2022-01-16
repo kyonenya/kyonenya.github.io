@@ -5,10 +5,13 @@ const Text = (text: string): string =>
   text
     .replaceAll(
       /\[(.+?)\]\((.+?)\)/g, // markdown link -> external anchorlink
-      (_match, title: string, url: string) =>
-        `<a href="${url}" target="_blank" rel="noopener">${title}</a>`
+      (_, linkText: string, href: string) =>
+        `<a href="${href}" target="_blank" rel="noopener">${linkText}</a>`
     )
-    .replaceAll('——', '<span style="letter-spacing: -0.27em; margin: 0 0.17em 0 0;">——</span>');
+    .replaceAll(
+      '——', // kerning
+      '<span style="letter-spacing: -0.27em; margin: 0 0.17em 0 0;">——</span>'
+    );
 
 const Item = (text: string): string => `<li>${Text(text)}</li>`;
 
