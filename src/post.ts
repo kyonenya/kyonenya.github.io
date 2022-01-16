@@ -40,6 +40,10 @@ export const jsonToPost = (posts: JSONPost[]): Post[] =>
         .replaceAll(
           /<a (href='[^?].+?'.*?)>(.+?)<\/a>/g, // overwrite external link
           "<a $1 target='_blank' rel='noopener'>$2</a>"
+        )
+        .replaceAll(
+          /<p>([「『（].+?)<\/p>/g, // paragraph start with '「'
+          "<p style='text-indent: 0'>$1</p>" // unset indent
         ),
       plainText: post.text.replaceAll(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''),
       createdAt: parseDate(post.createdAt + '+09:00'),

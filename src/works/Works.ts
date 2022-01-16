@@ -8,7 +8,7 @@ const Text = (text: string): string =>
       (_match, title: string, url: string) =>
         `<a href="${url}" target="_blank" rel="noopener">${title}</a>`
     )
-    .replaceAll('——', '<span class="hp_kerning">——</span>');
+    .replaceAll('——', '<span style="letter-spacing: -0.27em; margin: 0 0.17em 0 0;">——</span>');
 
 const Item = (text: string): string => `<li>${Text(text)}</li>`;
 

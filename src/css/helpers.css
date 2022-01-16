@@ -24,15 +24,6 @@
   font-weight: bold;
 }
 
-.hp_kerning {
-  letter-spacing: -0.27em;
-  margin: 0 0.17em 0 0;
-}
-
 .hp_unsetLink {
   /* link style is unset even if under `bl_text` module */
-}
-
-.hp_unsetIndent {
-  text-indent: 0 !important;
 }
