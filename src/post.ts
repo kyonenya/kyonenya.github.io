@@ -33,20 +33,20 @@ export const jsonToPost = (posts: JSONPost[]): Post[] =>
     .map((post, i) => ({
       ...post,
       index: i,
-      title: post.title === null || post.title === '' ? undefined : post.title,
+      title: post.title === null || '' ? undefined : post.title,
       text: post.text
         .replaceAll('——', '──') // double dash -> double ruled line
         .replaceAll('　', ' ') // full-width space -> half-width space
         .replaceAll(
           /<a (href='[^?].+?'.*?)>(.+?)<\/a>/g, // overwrite external link
-          (_, attributes, linkText) =>
-            `<a ${attributes} target='_blank' rel='noopener'>${linkText}</a>`
+          (_, attributes, content) =>
+            `<a ${attributes} target='_blank' rel='noopener'>${content}</a>`
         )
         .replaceAll(
           /<p>([「『（].+?)<\/p>/g, // unset paragraph indent start with '「'
-          (_, text) => `<p style='text-indent: 0'>${text}</p>`
+          (_, content) => `<p style='text-indent: 0'>${content}</p>`
         ),
       plainText: post.text.replaceAll(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''),
-      createdAt: parseDate(post.createdAt + '+09:00'),
+      createdAt: parseDate(post.createdAt),
       modifiedAt: parseDate(post.modifiedAt),
     }));

@@ -5,8 +5,8 @@ const Text = (text: string): string =>
   text
     .replaceAll(
       /\[(.+?)\]\((.+?)\)/g, // markdown link -> external anchorlink
-      (_, linkText: string, href: string) =>
-        `<a href="${href}" target="_blank" rel="noopener">${linkText}</a>`
+      (_, content: string, href: string) =>
+        `<a href="${href}" target="_blank" rel="noopener">${content}</a>`
     )
     .replaceAll(
       '——', // kerning
