@@ -33,21 +33,21 @@ export function jsonToPost(posts: JSONPost[]): Post[] {
     .map((post, i) => ({
       ...post,
       index: i,
-      title: post.title === null || '' ? undefined : post.title,
+      title: post.title === null || post.title === '' ? undefined : post.title,
       text: post.text
         .replaceAll('——', '──') // double dash -> double ruled line
         .replaceAll('　', ' ') // full-width space -> half-width space
         .replaceAll(
           /<a (href='[^?].+?'.*?)>(.+?)<\/a>/g, // overwrite external link
-          (_, attributes, content) =>
+          (_, attributes: string, content: string) =>
             `<a ${attributes} target='_blank' rel='noopener'>${content}</a>`
         )
         .replaceAll(
           /<p>([「『（].+?)<\/p>/g, // unset paragraph indent start with '「'
-          (_, content) => `<p style='text-indent: 0'>${content}</p>`
+          (_, content: string) => `<p style='text-indent: 0'>${content}</p>`
         ),
       plainText: post.text.replaceAll(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''),
-      createdAt: parseDate(post.createdAt),
+      createdAt: parseDate(post.createdAt + '+09:00'),
       modifiedAt: parseDate(post.modifiedAt),
     }));
 }
