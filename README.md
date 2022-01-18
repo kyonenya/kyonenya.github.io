@@ -31,8 +31,10 @@
 
 - Vanilla JS
   - ノーフレームワークでSPAを作り、Web標準のAPIへの理解を深める
+    - History API, Web Components, Local Storage, ...
   - コンポーネント設計や単方向データフローはReactを踏襲
-  - TODO: [Web Components](https://developer.mozilla.org/ja/docs/Web/Web_Components) (とくに [shadow DOM](https://developer.mozilla.org/ja/docs/Web/Web_Components/Using_shadow_DOM)) の活用をさらに進める
+- Zero dependency（[v2.4.0](https://github.com/kyonenya/kyonenya.github.io/releases/tag/v2.4.0)より）
+  - 依存パッケージ0、ビルドサイズを10KB未満まで削減
 - webpack・PostCSS（[v1.1.0](https://github.com/kyonenya/kyonenya.github.io/releases/tag/v1.1.0)より）
 - TypeScript（[v2.0.0](https://github.com/kyonenya/kyonenya.github.io/releases/tag/v2.0.0)より）
 - [play.js](https://playdotjs.com) というiPadでNode.jsが動かせるアプリで開発
