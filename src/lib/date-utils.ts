@@ -18,7 +18,7 @@ export function formatYMDHm(date: Date): string {
 }
 
 function isBefore(date: Date, limitDate: Date): boolean {
-  return new Date(date).getTime() < new Date(limitDate).getTime();
+  return date.getTime() < limitDate.getTime();
 }
 
 export function isPast(date: Date): boolean {
@@ -41,7 +41,7 @@ const thresholdMap: { [k in Unit]: number } = {
 };
 
 export function fromNow(date: Date): string {
-  const diffMs = new Date(date).getTime() - new Date().getTime();
+  const diffMs = date.getTime() - new Date().getTime();
   const unit = Unit.find(
     (unit) =>
       Math.abs(Math.round(toUnitTime(diffMs, unit))) < thresholdMap[unit]
