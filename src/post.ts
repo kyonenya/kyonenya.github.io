@@ -39,7 +39,12 @@ export function jsonToPost(posts: JSONPost[]): Post[] {
         .replaceAll('　', ' ') // full-width space -> half-width space
         .replaceAll(
           /<a (href='[^?].+?'.*?)>(.+?)<\/a>/g, // overwrite external link
-          "<a $1 target='_blank' rel='noopener'>$2</a>"
+          (_, attributes: string, content: string) =>
+            `<a ${attributes} target='_blank' rel='noopener'>${content}</a>`
+        )
+        .replaceAll(
+          /<p>([「『（].+?)<\/p>/g, // unset paragraph indent start with '「'
+          (_, content: string) => `<p style='text-indent: 0'>${content}</p>`
         ),
       plainText: post.text.replaceAll(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''),
       createdAt: parseDate(post.createdAt + '+09:00'),

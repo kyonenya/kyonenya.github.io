@@ -4,7 +4,7 @@
   "scripts": {
     "_tsc": "tsc -w --noEmit",
     "build": "webpack",
-    "build:css": "postcss src/css/index.css -o dist/css/bundle.css -w",
+    "build:css": "postcss src/css/index.css -o dist/css/bundle.css",
     "fmt": "prettier --write **/*.{ts,js,json}",
     "lint": "eslint --fix src/**/*.ts",
     "lint:css": "stylelint --fix src/**/*.css",

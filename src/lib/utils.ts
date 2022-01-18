@@ -4,6 +4,8 @@ export async function fetcher<T>(url: string): Promise<T> {
   return (await response.json()) as T;
 }
 
-export function toClassName(...classes: (string | false | undefined)[]): string {
+export function toClassName(
+  ...classes: (string | false | undefined)[]
+): string {
   return classes.map((c) => (typeof c === 'string' ? c : '')).join(' ');
 }
