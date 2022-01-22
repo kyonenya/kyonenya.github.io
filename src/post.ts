@@ -2,7 +2,6 @@ import { isPast } from './lib/date-utils';
 
 export type Post = {
   id: number;
-  index: number;
   createdAt: Date;
   modifiedAt: Date;
   title: string | undefined;
@@ -28,11 +27,11 @@ function parseDate(dateStr: string): Date {
 }
 
 export function jsonToPost(posts: JSONPost[]): Post[] {
-  return posts
+  return [...posts]
+    .reverse()
     .filter((post) => isPast(parseDate(post.createdAt))) // exclude reserved post
-    .map((post, i) => ({
+    .map((post) => ({
       ...post,
-      index: i,
       title: post.title === null || post.title === '' ? undefined : post.title,
       text: post.text
         .replaceAll('——', '──') // double dash -> double ruled line
