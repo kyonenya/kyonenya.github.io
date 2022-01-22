@@ -1,7 +1,8 @@
 import { Article } from './Article';
 import { PostList, TaggedPostList, SearchedPostList } from './PostList';
 import { renderPage } from './lib/render';
-import { Post } from './post';
+import { isDevelopment } from './lib/utils';
+import { Post, excludeReserved } from './post';
 import { toState } from './state';
 
 const baseUrl = 'https://kyonenya.github.io/';
@@ -53,11 +54,14 @@ const routeMap = {
       }),
 };
 
-export function route(posts: Post[]): void {
+export function route(rawPosts: Post[]): void {
   const { id, tag, keyword } = toState(
     window.location.search,
     window.location.hash
   );
+  const posts = isDevelopment(window.location.href)
+    ? rawPosts
+    : excludeReserved(rawPosts);
 
   routeMap.beforeEach();
 

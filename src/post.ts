@@ -27,26 +27,27 @@ function parseDate(dateStr: string): Date {
 }
 
 export function jsonToPost(posts: JSONPost[]): Post[] {
-  return [...posts]
-    .reverse()
-    .filter((post) => isPast(parseDate(post.createdAt))) // exclude reserved post
-    .map((post) => ({
-      ...post,
-      title: post.title === null || post.title === '' ? undefined : post.title,
-      text: post.text
-        .replaceAll('——', '──') // double dash -> double ruled line
-        .replaceAll('　', ' ') // full-width space -> half-width space
-        .replaceAll(
-          /<a (href='[^?].+?'.*?)>(.+?)<\/a>/g, // overwrite external link
-          (_, attributes: string, content: string) =>
-            `<a ${attributes} target='_blank' rel='noopener'>${content}</a>`
-        )
-        .replaceAll(
-          /<p>([「『（].+?)<\/p>/g, // unset paragraph indent start with '「'
-          (_, content: string) => `<p style='text-indent: 0'>${content}</p>`
-        ),
-      plainText: post.text.replaceAll(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''),
-      createdAt: parseDate(post.createdAt + '+09:00'),
-      modifiedAt: parseDate(post.modifiedAt),
-    }));
+  return [...posts].reverse().map((post) => ({
+    ...post,
+    title: post.title === null || post.title === '' ? undefined : post.title,
+    text: post.text
+      .replaceAll('——', '──') // double dash -> double ruled line
+      .replaceAll('　', ' ') // full-width space -> half-width space
+      .replaceAll(
+        /<a (href='[^?].+?'.*?)>(.+?)<\/a>/g, // overwrite external link
+        (_, attributes: string, content: string) =>
+          `<a ${attributes} target='_blank' rel='noopener'>${content}</a>`
+      )
+      .replaceAll(
+        /<p>([「『（].+?)<\/p>/g, // unset paragraph indent start with '「'
+        (_, content: string) => `<p style='text-indent: 0'>${content}</p>`
+      ),
+    plainText: post.text.replaceAll(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''),
+    createdAt: parseDate(post.createdAt + '+09:00'),
+    modifiedAt: parseDate(post.modifiedAt),
+  }));
+}
+
+export function excludeReserved(posts: Post[]): Post[] {
+  return posts.filter((post) => isPast(post.createdAt));
 }
