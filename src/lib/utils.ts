@@ -9,3 +9,7 @@ export function toClassName(
 ): string {
   return classes.map((c) => (typeof c === 'string' ? c : '')).join(' ');
 }
+
+export function isDevelopment(locationHref: string): boolean {
+  return /localhost:\d+/.test(locationHref);
+}
