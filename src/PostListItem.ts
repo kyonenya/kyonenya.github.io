@@ -4,7 +4,7 @@ import { formatYMD, fromNow } from './lib/date-utils';
 import { toClassName } from './lib/utils';
 import { Post } from './post';
 
-const summaryLength = 134;
+const summaryLength = 133;
 const noTitleSummaryLength = 113;
 const elipsisToken = '…';
 
@@ -25,7 +25,7 @@ const Summary = (post: Post, searchSummary: string | undefined) => `
         `${post.plainText.substring(
           0,
           post.title ? summaryLength : noTitleSummaryLength
-        )}￼`
+        )}`
       }
       ${elipsisToken}
     </p>
