@@ -43,7 +43,7 @@ function citeproc(data, style, locale) {
 
 /**
  * @param {import('csl-json').Data[]} items
- * @return {import('csl-json').Data[]}
+ * @return {import('./src/works/citation').Citation[]}
  */
 function AppendBibliopraphy(items) {
   const bibTexts = citeproc(
@@ -60,9 +60,11 @@ function AppendBibliopraphy(items) {
 /**
  * @return {void}
  */
-(function generateBibliography() {
+function generateBibliography() {
   const works = JSON.parse(fs.readFileSync(worksPath, 'utf8'));
   const newWorks = AppendBibliopraphy(works);
   fs.writeFileSync(worksPath, JSON.stringify(newWorks));
   console.log('success!');
-})();
+}
+
+generateBibliography();
