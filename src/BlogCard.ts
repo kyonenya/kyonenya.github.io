@@ -2,7 +2,6 @@ import { Tags } from './Tags';
 import { formatYMD } from './lib/date-utils';
 import { Post } from './post';
 
-const summaryLength = 74;
 const className = 'bl_blogCard';
 
 const Style = `
@@ -56,7 +55,7 @@ const Style = `
   }
 
   .${className} .text {
-    margin: 0.2em 0;
+    margin: 0.3em 0;
   }
 
   .${className} footer {
@@ -86,8 +85,8 @@ const Component = (post: Post) => `
         <span class="suffix">:: ${post.id}</span>
       </header>
       ${post.title ? `<div class="title">${post.title}</div>` : ''}
-      <p class="text">
-        ${post.plainText.substring(0, summaryLength)}…
+      <p class="text hp_ellipsis433">
+        ${post.plainText.substring(0, 200)}
       </p>
       <footer>
         <span>${formatYMD(post.createdAt)}</span>

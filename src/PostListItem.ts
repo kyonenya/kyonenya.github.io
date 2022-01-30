@@ -4,7 +4,6 @@ import { formatYMD, fromNow } from './lib/date-utils';
 import { Post } from './post';
 
 const elipsisToken = '…';
-const maxLength = 250;
 
 const Keyword = (keyword: string) =>
   `<span class="hp_highlight">${keyword}</span>`;
@@ -18,7 +17,7 @@ const Title = (title: string, keyword?: string) => `
   </h2>`;
 
 const SearchSummary = (searchSummary: SummaryEntity) => `
-  <div class="bl_posts_summary hp_ellipsis432">
+  <div class="bl_posts_summary hp_ellipsis433">
     <p>
       ${searchSummary.isBeforeEllipsed ? elipsisToken : ''}
       ${searchSummary.beforeText}
@@ -30,7 +29,7 @@ const SearchSummary = (searchSummary: SummaryEntity) => `
 const Summary = (post: Post) => `
   <div class="bl_post_summary hp_ellipsis654">
     <p>
-      ${post.plainText.substring(0, maxLength)}
+      ${post.plainText.substring(0, 250)}
     </p>
   </div>`;
 
@@ -41,7 +40,7 @@ export const PostListItem = (props: {
 }): string => {
   const { post, tag, keyword } = props;
   const searchSummary = generateSummaryEntity(post.plainText, keyword, {
-    maxLength,
+    maxLength: 200,
     beforeLength: 48,
   });
   const isMatched =

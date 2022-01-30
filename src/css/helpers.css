@@ -44,7 +44,7 @@
   }
 }
 
-.hp_ellipsis432 {
+.hp_ellipsis433 {
   text-align: justify-all;
   overflow: hidden;
   display: -webkit-box;
@@ -53,13 +53,13 @@
 }
 
 @media screen and (min-width: 560px) {
-  .hp_ellipsis432 {
+  .hp_ellipsis433 {
     -webkit-line-clamp: 3;
   }
 }
 
 @media screen and (min-width: 960px) {
-  .hp_ellipsis432 {
-    -webkit-line-clamp: 2;
+  .hp_ellipsis433 {
+    -webkit-line-clamp: 3;
   }
 }
