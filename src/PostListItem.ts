@@ -42,7 +42,7 @@ export const PostListItem = (props: {
   const { post, tag, keyword } = props;
   const searchSummary = generateSummaryEntity(post.plainText, keyword, {
     maxLength,
-    beforeLength: 42,
+    beforeLength: 48,
   });
   const isMatched =
     !keyword ||
