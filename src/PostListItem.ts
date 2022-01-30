@@ -16,7 +16,7 @@ const Title = (title: string, keyword?: string) => `
   </h2>`;
 
 const Summary = (post: Post, searchSummary: string | undefined) => `
-  <div class="bl_posts_summary">
+  <div class="bl_posts_summary hp_ellipsis654">
     <p>
       ${
         searchSummary ||
