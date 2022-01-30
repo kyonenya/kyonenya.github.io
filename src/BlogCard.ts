@@ -9,7 +9,7 @@ const Style = `
     font-size: 80%;
     border: 1px solid var(--monochrome-light);
     border-radius: 4px;
-    box-shadow: 0 0 1px var(--monochrome-midlight); /* around */
+    box-shadow: 0 0 2px var(--monochrome-midlight); /* around */
     padding: 0.6em 1em;
     margin: 1.25em 0.5em 1em;
     box-sizing: border-box;
@@ -17,7 +17,7 @@ const Style = `
   
   @media screen and (min-width: 560px) {
     .${className} {
-      margin: 1.5em 2em 1.25em;
+      margin: 1.5em 2.7em 1.25em; /* indent 2em */
     }
   }
 
