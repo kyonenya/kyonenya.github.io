@@ -1,10 +1,6 @@
 /**
  * ヘルパークラス
- */
-.hp_hidden {
-  display: none !important;
-}
-
+ */ 
 .hp_highlight {
   display: inline-block;
   background: hsl(60, 100%, 77%);

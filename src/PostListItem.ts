@@ -4,8 +4,6 @@ import { formatYMD, fromNow } from './lib/date-utils';
 import { toClassName } from './lib/utils';
 import { Post } from './post';
 
-const elipsisToken = '…';
-
 const Title = (title: string, keyword?: string) => `
   <h2 class="bl_posts_title">
     ${
@@ -34,7 +32,7 @@ export const PostListItem = (props: {
   const searchSummary = generateSummary(post.plainText, keyword, {
     maxLength: 50,
     beforeLength: 20,
-    elipsisToken,
+    elipsisToken: '…',
     keywordModifier: (k) => `<span class="hp_highlight">${k}</span>`,
   });
   const isMatched =
@@ -44,7 +42,8 @@ export const PostListItem = (props: {
 
   return `
     <li
-      class="${toClassName('bl_posts_item', !isMatched && 'hp_hidden')}"
+      class="bl_posts_item"
+      style="display: ${isMatched ? 'block' : 'none'}"
     >
       <a href="?id=${post.id}">
         <header class="bl_posts_header">
