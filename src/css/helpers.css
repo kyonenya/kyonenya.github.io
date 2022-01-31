@@ -5,7 +5,7 @@
   display: inline-block;
   background: hsl(60, 100%, 77%);
   border: 1px solid hsla(0, 0%, 0%, 0.15);  /* layer translucent black line */
-  color: hsl(0, 0%, 20%);  /* black if under darkmode */
+  color: hsl(0, 0%, 13%);  /* black if under darkmode */
   border-radius: 3px;
   padding: 2px 3px;
   margin: 0;
