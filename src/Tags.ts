@@ -1,20 +1,16 @@
-import { toClassName } from './lib/utils';
+const Tag = (tag: string): string => `#${tag}`;
 
-const Tag = (tag: string, isMatched?: boolean): string =>
-  `<li>
-    <a href="?tag=${tag}" class="${toClassName(
-    'hp_unsetLink',
-    isMatched && 'hp_bold'
-  )}">
-      #${tag}
+const StrongTag = (tag: string): string => `<strong>${Tag(tag)}</strong>`;
+
+export const TagListItem = (tag: string, tagFilter?: string): string => `
+  <li>
+    <a href="?tag=${tag}" class="hp_unsetLink">
+      ${tag === tagFilter ? StrongTag(tag) : Tag(tag)}
     </a>
   </li>`;
 
-export const Tags = (tags: string[], tagFilter?: string): string =>
-  tags.map((tag) => Tag(tag, tag === tagFilter)).join('');
-
 export const TagList = (tags: string[], tagFilter?: string): string => `
   <ul class="bl_tags">
-    ${Tags(tags, tagFilter)}
+    ${tags.map((tag) => TagListItem(tag, tagFilter)).join('')}
   </ul>
 `;

@@ -1,5 +1,5 @@
 import { SummaryEntity, generateSummaryEntity } from 'search-summary';
-import { Tags, TagList } from './Tags';
+import { TagList } from './Tags';
 import { formatYMD, fromNow } from './lib/date-utils';
 import { Post } from './post';
 

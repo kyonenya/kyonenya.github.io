@@ -1,4 +1,4 @@
-import { Tags } from './Tags';
+import { TagListItem } from './Tags';
 import { formatYMD } from './lib/date-utils';
 import { Post } from './post';
 
@@ -91,7 +91,7 @@ const Component = (post: Post) => `
       <footer>
         <span>${formatYMD(post.createdAt)}</span>
         <ul class="tags">
-          ${Tags(post.tags)}
+          ${post.tags.map((tag) => TagListItem(tag)).join('')}
         </ul>
       </footer>
     </a>
