@@ -1,4 +1,4 @@
-import { TagList } from './Tags';
+import { TagList } from './TagList';
 import { formatYMDHm, fromNow } from './lib/date-utils';
 import { Post } from './post';
 

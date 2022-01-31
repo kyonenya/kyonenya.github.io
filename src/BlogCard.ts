@@ -1,4 +1,4 @@
-import { TagListItem } from './Tags';
+import { TagListItem } from './TagList';
 import { formatYMD } from './lib/date-utils';
 import { Post } from './post';
 

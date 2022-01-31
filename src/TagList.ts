@@ -10,7 +10,7 @@ export const TagListItem = (tag: string, tagFilter?: string): string => `
   </li>`;
 
 export const TagList = (tags: string[], tagFilter?: string): string => `
-  <ul class="bl_tags">
+  <ul class="bl_tagList">
     ${tags.map((tag) => TagListItem(tag, tagFilter)).join('')}
   </ul>
 `;
