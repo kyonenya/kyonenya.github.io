@@ -56,6 +56,7 @@ const Style = `
 
   .${className} .text {
     margin: 0.3em 0;
+    text-align: right; /* unset */
     padding-left: 0.1em; /* substitute for text-align: justify */
   }
 
