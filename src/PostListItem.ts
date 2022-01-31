@@ -27,7 +27,7 @@ const SearchSummary = (searchSummary: SummaryEntity) => `
   </div>`;
 
 const Summary = (post: Post) => `
-  <div class="bl_post_summary hp_ellipsis654">
+  <div class="bl_posts_summary hp_ellipsis654">
     <p>
       ${post.plainText.substring(0, 250)}
     </p>
