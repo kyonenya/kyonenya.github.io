@@ -1,33 +1,35 @@
-import { generateSummary } from 'search-summary';
-import { Tags } from './Tags';
+import { SummaryEntity, generateSummaryEntity } from 'search-summary';
+import { TagList } from './TagList';
 import { formatYMD, fromNow } from './lib/date-utils';
-import { toClassName } from './lib/utils';
 import { Post } from './post';
 
-const summaryLength = 133;
-const noTitleSummaryLength = 113;
 const elipsisToken = '…';
+
+const Keyword = (keyword: string) =>
+  `<span class="hp_highlight">${keyword}</span>`;
+
+const TextWithKeyword = (text: string, keyword?: string) =>
+  keyword ? text.replace(keyword, Keyword(keyword)) : text;
 
 const Title = (title: string, keyword?: string) => `
   <h2 class="bl_posts_title">
-    ${
-      keyword
-        ? title.replace(keyword, `<span class="hp_highlight">${keyword}</span>`)
-        : title
-    }
+    ${TextWithKeyword(title, keyword)}
   </h2>`;
 
-const Summary = (post: Post, searchSummary: string | undefined) => `
-  <div class="bl_posts_summary">
+const SearchSummary = (searchSummary: SummaryEntity) => `
+  <div class="bl_posts_summary hp_ellipsis433">
     <p>
-      ${
-        searchSummary ||
-        `${post.plainText.substring(
-          0,
-          post.title ? summaryLength : noTitleSummaryLength
-        )}`
-      }
-      ${elipsisToken}
+      ${searchSummary.isBeforeEllipsed ? elipsisToken : ''}
+      ${searchSummary.beforeText}
+      ${Keyword(searchSummary.keyword)}
+      ${searchSummary.afterText}
+    </p>
+  </div>`;
+
+const Summary = (post: Post) => `
+  <div class="bl_posts_summary hp_ellipsis654">
+    <p>
+      ${post.plainText.substring(0, 250)}
     </p>
   </div>`;
 
@@ -37,11 +39,9 @@ export const PostListItem = (props: {
   keyword?: string;
 }): string => {
   const { post, tag, keyword } = props;
-  const searchSummary = generateSummary(post.plainText, keyword, {
-    maxLength: 50,
-    beforeLength: 20,
-    elipsisToken,
-    keywordModifier: (k) => `<span class="hp_highlight">${k}</span>`,
+  const searchSummary = generateSummaryEntity(post.plainText, keyword, {
+    maxLength: 200,
+    beforeLength: 48,
   });
   const isMatched =
     !keyword ||
@@ -50,7 +50,8 @@ export const PostListItem = (props: {
 
   return `
     <li
-      class="${toClassName('bl_posts_item', !isMatched && 'hp_hidden')}"
+      class="bl_posts_item"
+      style="display: ${isMatched ? 'block' : 'none'}"
     >
       <a href="?id=${post.id}">
         <header class="bl_posts_header">
@@ -59,15 +60,13 @@ export const PostListItem = (props: {
           </time>
         </header>
         ${post.title ? Title(post.title, keyword) : ''}
-        ${Summary(post, searchSummary)}
+        ${searchSummary ? SearchSummary(searchSummary) : Summary(post)}
       </a>
       <footer class="bl_posts_footer">
         <span class="bl_posts_dateago">
           ${fromNow(post.createdAt)}
         </span>
-        <ul class="bl_tags">
-          ${Tags(post.tags, tag)}
-        </ul>
+        ${TagList(post.tags, tag)}
       </footer>
     </li>`;
 };

@@ -1,8 +1,7 @@
-import { Tags } from './Tags';
+import { TagListItem } from './TagList';
 import { formatYMD } from './lib/date-utils';
 import { Post } from './post';
 
-const summaryLength = 74;
 const className = 'bl_blogCard';
 
 const Style = `
@@ -10,7 +9,7 @@ const Style = `
     font-size: 80%;
     border: 1px solid var(--monochrome-light);
     border-radius: 4px;
-    box-shadow: 0 0 1px var(--monochrome-midlight); /* around */
+    box-shadow: 0 0 2px var(--monochrome-midlight); /* around */
     padding: 0.6em 1em;
     margin: 1.25em 0.5em 1em;
     box-sizing: border-box;
@@ -18,7 +17,7 @@ const Style = `
   
   @media screen and (min-width: 560px) {
     .${className} {
-      margin: 1.5em 2em 1.25em;
+      margin: 1.5em 2.7em 1.25em; /* indent 2em */
     }
   }
 
@@ -56,7 +55,8 @@ const Style = `
   }
 
   .${className} .text {
-    margin: 0.2em 0;
+    margin: 0.3em 0;
+    padding-left: 0.1em; /* substitute for text-align: justify */
   }
 
   .${className} footer {
@@ -86,13 +86,13 @@ const Component = (post: Post) => `
         <span class="suffix">:: ${post.id}</span>
       </header>
       ${post.title ? `<div class="title">${post.title}</div>` : ''}
-      <p class="text">
-        ${post.plainText.substring(0, summaryLength)}…
+      <p class="text hp_ellipsis433">
+        ${post.plainText.substring(0, 200)}
       </p>
       <footer>
         <span>${formatYMD(post.createdAt)}</span>
         <ul class="tags">
-          ${Tags(post.tags)}
+          ${post.tags.map((tag) => TagListItem(tag)).join('')}
         </ul>
       </footer>
     </a>
