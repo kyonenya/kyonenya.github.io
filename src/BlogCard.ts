@@ -56,6 +56,7 @@ const Style = `
 
   .${className} .text {
     margin: 0.3em 0;
+    text-align: left;
   }
 
   .${className} footer {

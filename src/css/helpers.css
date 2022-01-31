@@ -25,7 +25,6 @@
 }
 
 .hp_ellipsis654 {
-  text-align: justify-all; /* also justify ellipsis token */
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -45,7 +44,6 @@
 }
 
 .hp_ellipsis433 {
-  text-align: justify-all;
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
