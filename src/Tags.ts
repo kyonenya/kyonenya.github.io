@@ -12,3 +12,9 @@ const Tag = (tag: string, isMatched?: boolean): string =>
 
 export const Tags = (tags: string[], tagFilter?: string): string =>
   tags.map((tag) => Tag(tag, tag === tagFilter)).join('');
+
+export const TagList = (tags: string[], tagFilter?: string): string => `
+  <ul class="bl_tags">
+    ${Tags(tags, tagFilter)}
+  </ul>
+`;

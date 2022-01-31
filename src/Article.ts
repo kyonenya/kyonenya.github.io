@@ -1,4 +1,4 @@
-import { Tags } from './Tags';
+import { Tags, TagList } from './Tags';
 import { formatYMDHm, fromNow } from './lib/date-utils';
 import { Post } from './post';
 
@@ -17,8 +17,6 @@ export const Article = (post: Post): string => `
       <span class="bl_posts_dateago">
         ${fromNow(post.createdAt)}
       </span>
-      <ul class="bl_tags">
-        ${Tags(post.tags)}
-      </ul>
+      ${TagList(post.tags)}
     </footer>
   </article>`;

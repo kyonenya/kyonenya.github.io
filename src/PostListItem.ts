@@ -1,5 +1,5 @@
 import { SummaryEntity, generateSummaryEntity } from 'search-summary';
-import { Tags } from './Tags';
+import { Tags, TagList } from './Tags';
 import { formatYMD, fromNow } from './lib/date-utils';
 import { Post } from './post';
 
@@ -66,9 +66,7 @@ export const PostListItem = (props: {
         <span class="bl_posts_dateago">
           ${fromNow(post.createdAt)}
         </span>
-        <ul class="bl_tags">
-          ${Tags(post.tags, tag)}
-        </ul>
+        ${TagList(post.tags, tag)}
       </footer>
     </li>`;
 };
