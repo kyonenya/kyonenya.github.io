@@ -56,7 +56,7 @@ const Style = `
 
   .${className} .text {
     margin: 0.3em 0;
-    text-align: left;
+    padding-left: 0.1em; /* substitute for text-align: justify */
   }
 
   .${className} footer {
