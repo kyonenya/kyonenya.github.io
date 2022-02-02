@@ -43,7 +43,7 @@ export function jsonToPost(posts: JSONPost[]): Post[] {
         (_, content: string) => `<p style='text-indent: 0'>${content}</p>`
       ),
     plainText: post.text.replaceAll(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''),
-    createdAt: parseDate(post.createdAt + '+09:00'),
+    createdAt: parseDate(post.createdAt),
     modifiedAt: parseDate(post.modifiedAt),
   }));
 }

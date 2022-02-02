@@ -24,6 +24,12 @@
   /* link style is unset even if under `bl_text` module */
 }
 
+.hp_kerning {
+  /* kerning of double dash */
+  letter-spacing: -0.27em;
+  margin: 0 0.17em 0 0;
+}
+
 .hp_ellipsis654 {
   overflow: hidden;
   display: -webkit-box;
