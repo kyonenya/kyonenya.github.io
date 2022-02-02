@@ -2,7 +2,7 @@ import { isNew } from './lib/date-utils';
 import { toState } from './state';
 
 const modifiedAt = '2022-02-02';
-const newDays = 14;
+const newDays = 15;
 
 const aboutElement = document.getElementById('about');
 const searchFormElement = document.querySelector('.el_search_form');
