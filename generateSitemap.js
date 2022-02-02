@@ -4,7 +4,7 @@ const format = require('xml-formatter');
 const posts = require('./posts.json');
 
 const worksLastmod = '2021-11-28';
-const aboutLastmod = '2021-11-28';
+const aboutLastmod = '2022-02-02';
 
 const sitemap = new SitemapStream({ hostname: 'https://kyonenya.github.io/' });
 
