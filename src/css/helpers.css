@@ -34,7 +34,8 @@
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 6;
+  text-align: left !important;
+  /* -webkit-line-clamp: 6; */
 }
 
 @media screen and (min-width: 560px) {
@@ -53,6 +54,7 @@
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
+  text-align: left !important;
   -webkit-line-clamp: 4;
 }
 

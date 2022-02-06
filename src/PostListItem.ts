@@ -27,6 +27,13 @@ const SearchSummary = (searchSummary: SummaryEntity) => `
     </p>
   </div>`;
 
+const MobileSummary = (post: Post) => `
+  <div class="bl_posts_summary">
+    <p>
+      ${post.plainText.substring(0, 134)}${elipsisToken}
+    </p>
+  </div>`;
+
 const Summary = (post: Post) => `
   <div class="bl_posts_summary hp_ellipsis654">
     <p>
@@ -61,7 +68,13 @@ export const PostListItem = (props: {
           </time>
         </header>
         ${post.title ? Title(post.title, keyword) : ''}
-        ${searchSummary ? SearchSummary(searchSummary) : Summary(post)}
+        ${
+          searchSummary
+            ? SearchSummary(searchSummary)
+            : isMobile
+            ? MobileSummary(post)
+            : Summary(post)
+        }
       </a>
       <footer class="bl_posts_footer">
         <span class="bl_posts_dateago">

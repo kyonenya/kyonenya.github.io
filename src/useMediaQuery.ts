@@ -4,7 +4,7 @@ const mediaQueryList = window.matchMedia(mediaQuery);
 
 export let isMobile = mediaQueryList.matches; // init
 
-export function activateMediaQuery(invokeRoute: () => void) {
+export function activateMediaQuery(invokeRoute: () => void): void {
   mediaQueryList.addListener((mql) => {
     isMobile = mql.matches;
     invokeRoute(); // re-render

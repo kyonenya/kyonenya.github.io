@@ -27,6 +27,7 @@
 .bl_posts_summary {
   padding-top: 0.3em;
   line-height: 1.5;
+  text-align: justify;
 }
 
 .bl_posts_footer {
