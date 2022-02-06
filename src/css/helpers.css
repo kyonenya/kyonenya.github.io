@@ -30,12 +30,16 @@
   margin: 0 0.17em 0 0;
 }
 
+.hp_alignJustify {
+  text-align: justify;
+}
+
 .hp_ellipsis654 {
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  text-align: left !important;
-  /* -webkit-line-clamp: 6; */
+  text-align: left;
+  -webkit-line-clamp: 6;
 }
 
 @media screen and (min-width: 560px) {
@@ -54,7 +58,7 @@
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  text-align: left !important;
+  text-align: left;
   -webkit-line-clamp: 4;
 }
 

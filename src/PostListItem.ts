@@ -18,20 +18,22 @@ const Title = (title: string, keyword?: string) => `
   </h2>`;
 
 const SearchSummary = (searchSummary: string) => `
-  <div class="bl_posts_summary hp_ellipsis433">
-    <p>${searchSummary}</p>
+  <div class="bl_posts_summary">
+    <p class="hp_ellipsis433">
+      ${searchSummary}
+    </p>
   </div>`;
 
 const MobileSummary = (post: Post) => `
   <div class="bl_posts_summary">
-    <p>
-      ${post.plainText.substring(0, 134)}${elipsisToken}
+    <p class="hp_alignJustify">
+      ${post.plainText.substring(0, 134) + elipsisToken}
     </p>
   </div>`;
 
 const Summary = (post: Post) => `
-  <div class="bl_posts_summary hp_ellipsis654">
-    <p>
+  <div class="bl_posts_summary">
+    <p class="hp_ellipsis654">
       ${post.plainText.substring(0, 250)}
     </p>
   </div>`;
