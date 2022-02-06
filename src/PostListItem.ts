@@ -2,6 +2,7 @@ import { SummaryEntity, generateSummaryEntity } from 'search-summary';
 import { TagList } from './TagList';
 import { formatYMD, fromNow } from './lib/date-utils';
 import { Post } from './post';
+import { isMobile } from './useMediaQuery';
 
 const elipsisToken = '…';
 

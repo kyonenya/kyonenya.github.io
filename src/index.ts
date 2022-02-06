@@ -7,6 +7,7 @@ import {
 import { fetcher } from './lib/utils';
 import { jsonToPost, JSONPost } from './post';
 import { route } from './routes';
+import { activateMediaQuery } from './useMediaQuery';
 
 const jsonPath = './posts.json';
 
@@ -15,6 +16,7 @@ const jsonPath = './posts.json';
   route(posts);
   activatePopState(() => route(posts));
   activateSearchForm(() => route(posts));
+  activateMediaQuery(() => route(posts));
   defineBlogCard(posts);
   notifyUpdate();
 })();
