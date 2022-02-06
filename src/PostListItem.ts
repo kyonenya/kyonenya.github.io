@@ -1,4 +1,4 @@
-import { SummaryEntity, generateSummaryEntity } from 'search-summary';
+import { generateSummary } from 'search-summary';
 import { TagList } from './TagList';
 import { formatYMD, fromNow } from './lib/date-utils';
 import { Post } from './post';
@@ -17,14 +17,9 @@ const Title = (title: string, keyword?: string) => `
     ${TextWithKeyword(title, keyword)}
   </h2>`;
 
-const SearchSummary = (searchSummary: SummaryEntity) => `
+const SearchSummary = (searchSummary: string) => `
   <div class="bl_posts_summary hp_ellipsis433">
-    <p>
-      ${searchSummary.isBeforeEllipsed ? elipsisToken : ''}
-      ${searchSummary.beforeText}
-      ${Keyword(searchSummary.keyword)}
-      ${searchSummary.afterText}
-    </p>
+    <p>${searchSummary}</p>
   </div>`;
 
 const MobileSummary = (post: Post) => `
@@ -47,9 +42,10 @@ export const PostListItem = (props: {
   keyword?: string;
 }): string => {
   const { post, tag, keyword } = props;
-  const searchSummary = generateSummaryEntity(post.plainText, keyword, {
+  const searchSummary = generateSummary(post.plainText, keyword, {
     maxLength: 200,
     beforeLength: 48,
+    keywordModifier: Keyword,
   });
   const isMatched =
     !keyword ||
