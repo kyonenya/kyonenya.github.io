@@ -11,12 +11,16 @@ import { activateMediaQuery } from './useMediaQuery';
 
 const jsonPath = './posts.json';
 
+function registerReRenderer(invokeRoute: () => void): void {
+  activatePopState(invokeRoute);
+  activateSearchForm(invokeRoute);
+  activateMediaQuery(invokeRoute);
+}
+
 (async function index() {
   const posts = jsonToPost(await fetcher<JSONPost[]>(jsonPath));
   route(posts);
-  activatePopState(() => route(posts));
-  activateSearchForm(() => route(posts));
-  activateMediaQuery(() => route(posts));
+  registerReRenderer(() => route(posts));
   defineBlogCard(posts);
   notifyUpdate();
 })();

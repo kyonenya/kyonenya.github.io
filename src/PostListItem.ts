@@ -24,17 +24,17 @@ const SearchSummary = (searchSummary: string) => `
     </p>
   </div>`;
 
-const MobileSummary = (post: Post) => `
+const MobileSummary = (plainText: string) => `
   <div class="bl_posts_summary">
     <p class="hp_alignJustify">
-      ${post.plainText.substring(0, 134) + elipsisToken}
+      ${plainText.substring(0, 134) + elipsisToken}
     </p>
   </div>`;
 
-const Summary = (post: Post) => `
+const Summary = (plainText: string) => `
   <div class="bl_posts_summary">
     <p class="hp_ellipsis654">
-      ${post.plainText.substring(0, 250)}
+      ${plainText.substring(0, 250)}
     </p>
   </div>`;
 
@@ -69,9 +69,7 @@ export const PostListItem = (props: {
         ${
           searchSummary
             ? SearchSummary(searchSummary)
-            : isMobile
-            ? MobileSummary(post)
-            : Summary(post)
+            : (isMobile ? MobileSummary : Summary)(post.plainText)
         }
       </a>
       <footer class="bl_posts_footer">
