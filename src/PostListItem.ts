@@ -1,8 +1,8 @@
 import { generateSummary } from 'search-summary';
 import { TagList } from './TagList';
 import { formatYMD, fromNow } from './lib/date-utils';
+import { useMediaQueryContext } from './mediaQueryContext';
 import { Post } from './post';
-import { isMobile } from './useMediaQuery';
 
 const elipsisToken = '…';
 
@@ -44,6 +44,7 @@ export const PostListItem = (props: {
   keyword?: string;
 }): string => {
   const { post, tag, keyword } = props;
+  const { isMobile } = useMediaQueryContext();
   const searchSummary = generateSummary(post.plainText, keyword, {
     maxLength: 200,
     beforeLength: 48,

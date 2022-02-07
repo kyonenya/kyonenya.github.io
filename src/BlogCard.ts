@@ -1,7 +1,7 @@
 import { TagListItem } from './TagList';
 import { formatYMD } from './lib/date-utils';
+import { useMediaQueryContext } from './mediaQueryContext';
 import { Post } from './post';
-import { isMobile } from './useMediaQuery';
 
 const className = 'bl_blogCard';
 
@@ -90,24 +90,27 @@ const Summary = (plainText: string) => `
   </p>
 `;
 
-const Component = (post: Post) => `
-  <div class="${className}">
-    <a href="?id=${post.id}" class="hp_unsetLink">
-      <header>
-        <div class="icon"></div>
-        <span class="logo">placet experiri</span>
-        <span class="suffix">:: ${post.id}</span>
-      </header>
-      ${post.title ? `<div class="title">${post.title}</div>` : ''}
-      ${(isMobile ? MobileSummary : Summary)(post.plainText)}
-      <footer>
-        <span>${formatYMD(post.createdAt)}</span>
-        <ul class="tags">
-          ${post.tags.map((tag) => TagListItem(tag)).join('')}
-        </ul>
-      </footer>
-    </a>
-  </div>`;
+const Component = (post: Post): string => {
+  const { isMobile } = useMediaQueryContext();
+  return `
+    <div class="${className}">
+      <a href="?id=${post.id}" class="hp_unsetLink">
+        <header>
+          <div class="icon"></div>
+          <span class="logo">placet experiri</span>
+          <span class="suffix">:: ${post.id}</span>
+        </header>
+        ${post.title ? `<div class="title">${post.title}</div>` : ''}
+        ${(isMobile ? MobileSummary : Summary)(post.plainText)}
+        <footer>
+          <span>${formatYMD(post.createdAt)}</span>
+          <ul class="tags">
+            ${post.tags.map((tag) => TagListItem(tag)).join('')}
+          </ul>
+        </footer>
+      </a>
+    </div>`;
+};
 
 export function defineBlogCard(posts: Post[]): void {
   class BlogCard extends HTMLElement {
