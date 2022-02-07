@@ -6,19 +6,19 @@ export type Page = {
   href?: string;
 };
 
-const rootElement = <HTMLDivElement>document.getElementById('root');
-const suffixElement = <HTMLSpanElement>(
-  document.querySelector('.el_logo_suffix')
-);
-const descriptionElement = <HTMLMetaElement>(
-  document.querySelector('meta[name=description]')
-);
-
 export function renderRoot(html: string): void {
+  const rootElement = <HTMLDivElement>document.getElementById('root');
   rootElement.innerHTML = html;
 }
 
 export function renderPage(page: Page): void {
+  const suffixElement = <HTMLSpanElement>(
+  document.querySelector('.el_logo_suffix')
+);
+  const descriptionElement = <HTMLMetaElement>(
+  document.querySelector('meta[name=description]')
+);
+
   renderRoot(page.body);
   document.title = page.title;
   suffixElement.innerText = page.suffix ?? '';

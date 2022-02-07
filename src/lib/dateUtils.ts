@@ -1,4 +1,4 @@
-import { toUnitTime, Unit } from './dateConstants';
+import { toUnitTime, Unit } from './dateUnit';
 
 const shortDateIntl = new Intl.DateTimeFormat('ja-JP', { dateStyle: 'short' });
 const shortDateTimeIntl = new Intl.DateTimeFormat('ja-JP', {
