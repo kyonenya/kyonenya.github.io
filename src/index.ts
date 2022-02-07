@@ -1,8 +1,9 @@
 import { defineBlogCard } from './BlogCard';
-import { watchPopState, watchSearchForm, notifyUpdate } from './bootstraps';
+import { notifyUpdate } from './bootstraps';
 import { fetcher } from './lib/utils';
 import { mediaQueryContextProvider } from './mediaQueryContext';
 import { jsonToPost, JSONPost } from './post';
+import { watchPopState, watchSearchForm } from './reRoute';
 import { route } from './routes';
 
 const jsonPath = './posts.json';

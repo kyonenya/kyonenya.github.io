@@ -1,6 +1,6 @@
 import { generateSummary } from 'search-summary';
 import { TagList } from './TagList';
-import { formatYMD, fromNow } from './lib/date-utils';
+import { formatYMD, fromNow } from './lib/dateUtils';
 import { useMediaQueryContext } from './mediaQueryContext';
 import { Post } from './post';
 

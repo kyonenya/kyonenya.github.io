@@ -48,7 +48,7 @@ const routeMap = {
       .forEach((a) => {
         a.onclick = (e) => {
           e.preventDefault();
-          window.history.pushState(toState(a.href), a.href, a.href);
+          window.history.pushState(undefined, '', a.href);
           route(posts);
         };
       }),
