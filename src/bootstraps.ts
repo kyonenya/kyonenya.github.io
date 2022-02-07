@@ -10,11 +10,11 @@ const searchInputElement = <HTMLInputElement>(
   document.querySelector('.el_search_input')
 );
 
-export function activatePopState(invokeRoute: () => void): void {
-  window.addEventListener('popstate', invokeRoute);
+export function watchPopState(reRoute: () => void): void {
+  window.addEventListener('popstate', reRoute);
 }
 
-export function activateSearchForm(invokeRoute: () => void): void {
+export function watchSearchForm(reRoute: () => void): void {
   searchFormElement?.addEventListener('submit', (e) => {
     e.preventDefault();
     window.history.pushState(
@@ -22,7 +22,7 @@ export function activateSearchForm(invokeRoute: () => void): void {
       `${window.location.search}#${searchInputElement.value}`,
       `${window.location.search}#${searchInputElement.value}`
     );
-    invokeRoute();
+    reRoute();
   });
 }
 

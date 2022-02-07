@@ -1,12 +1,10 @@
-const mediaQuery = '(max-width: 559px)';
+const mobileMediaQueryList = window.matchMedia('(max-width: 559px)');
 
-const mediaQueryList = window.matchMedia(mediaQuery);
+export let isMobile = mobileMediaQueryList.matches; // init
 
-export let isMobile = mediaQueryList.matches; // init
-
-export function activateMediaQuery(invokeRoute: () => void): void {
-  mediaQueryList.addListener((mql) => {
+export function watchMediaQuery(reRoute: () => void): void {
+  mobileMediaQueryList.addListener((mql) => {
     isMobile = mql.matches;
-    invokeRoute(); // re-render
+    reRoute();
   });
 }
