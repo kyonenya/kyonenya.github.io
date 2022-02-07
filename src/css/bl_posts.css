@@ -5,8 +5,7 @@
   border-bottom: 1px solid var(--monochrome-light);
   display: block;
   margin: 0 auto;
-  /* indent left sightly (substitute for `text-align: justify`) */
-  padding: 0.7em 0 0.7em 0.2em;
+  padding: 0.7em 0;
 }
 
 .bl_posts_item:first-child {

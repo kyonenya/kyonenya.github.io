@@ -1,5 +1,5 @@
 import { Citation, toCitationMap, Genre } from './citation';
-import { isNewCitation } from './citation-date';
+import { isNewCitation } from './citationDate';
 
 const Text = (text: string): string =>
   text

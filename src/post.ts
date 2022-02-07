@@ -1,4 +1,4 @@
-import { isPast } from './lib/date-utils';
+import { isPast } from './lib/dateUtils';
 
 export type Post = {
   id: number;

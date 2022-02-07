@@ -1,5 +1,6 @@
 import { TagListItem } from './TagList';
-import { formatYMD } from './lib/date-utils';
+import { formatYMD } from './lib/dateUtils';
+import { useMediaQueryContext } from './mediaQueryContext';
 import { Post } from './post';
 
 const className = 'bl_blogCard';
@@ -56,8 +57,7 @@ const Style = `
 
   .${className} .text {
     margin: 0.3em 0;
-    text-align: right; /* unset */
-    padding-left: 0.1em; /* substitute for text-align: justify */
+    text-align: left; /* unset */
   }
 
   .${className} footer {
@@ -78,26 +78,39 @@ const Style = `
   }
 `;
 
-const Component = (post: Post) => `
-  <div class="${className}">
-    <a href="?id=${post.id}" class="hp_unsetLink">
-      <header>
-        <div class="icon"></div>
-        <span class="logo">placet experiri</span>
-        <span class="suffix">:: ${post.id}</span>
-      </header>
-      ${post.title ? `<div class="title">${post.title}</div>` : ''}
-      <p class="text hp_ellipsis433">
-        ${post.plainText.substring(0, 200)}
-      </p>
-      <footer>
-        <span>${formatYMD(post.createdAt)}</span>
-        <ul class="tags">
-          ${post.tags.map((tag) => TagListItem(tag)).join('')}
-        </ul>
-      </footer>
-    </a>
-  </div>`;
+const MobileSummary = (plainText: string) => `
+  <p class="text hp_alignJustify">
+    ${plainText.substring(0, 74)}…
+  </p>
+`;
+
+const Summary = (plainText: string) => `
+  <p class="text hp_ellipsis433">
+    ${plainText.substring(0, 200)}
+  </p>
+`;
+
+const Component = (post: Post): string => {
+  const { isMobile } = useMediaQueryContext();
+  return `
+    <div class="${className}">
+      <a href="?id=${post.id}" class="hp_unsetLink">
+        <header>
+          <div class="icon"></div>
+          <span class="logo">placet experiri</span>
+          <span class="suffix">:: ${post.id}</span>
+        </header>
+        ${post.title ? `<div class="title">${post.title}</div>` : ''}
+        ${(isMobile ? MobileSummary : Summary)(post.plainText)}
+        <footer>
+          <span>${formatYMD(post.createdAt)}</span>
+          <ul class="tags">
+            ${post.tags.map((tag) => TagListItem(tag)).join('')}
+          </ul>
+        </footer>
+      </a>
+    </div>`;
+};
 
 export function defineBlogCard(posts: Post[]): void {
   class BlogCard extends HTMLElement {

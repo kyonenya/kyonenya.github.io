@@ -1,6 +1,7 @@
-import { SummaryEntity, generateSummaryEntity } from 'search-summary';
+import { generateSummary } from 'search-summary';
 import { TagList } from './TagList';
-import { formatYMD, fromNow } from './lib/date-utils';
+import { formatYMD, fromNow } from './lib/dateUtils';
+import { useMediaQueryContext } from './mediaQueryContext';
 import { Post } from './post';
 
 const elipsisToken = '…';
@@ -16,20 +17,24 @@ const Title = (title: string, keyword?: string) => `
     ${TextWithKeyword(title, keyword)}
   </h2>`;
 
-const SearchSummary = (searchSummary: SummaryEntity) => `
-  <div class="bl_posts_summary hp_ellipsis433">
-    <p>
-      ${searchSummary.isBeforeEllipsed ? elipsisToken : ''}
-      ${searchSummary.beforeText}
-      ${Keyword(searchSummary.keyword)}
-      ${searchSummary.afterText}
+const SearchSummary = (searchSummary: string) => `
+  <div class="bl_posts_summary">
+    <p class="hp_ellipsis433">
+      ${searchSummary}
     </p>
   </div>`;
 
-const Summary = (post: Post) => `
-  <div class="bl_posts_summary hp_ellipsis654">
-    <p>
-      ${post.plainText.substring(0, 250)}
+const MobileSummary = (plainText: string) => `
+  <div class="bl_posts_summary">
+    <p class="hp_alignJustify">
+      ${plainText.substring(0, 134) + elipsisToken}
+    </p>
+  </div>`;
+
+const Summary = (plainText: string) => `
+  <div class="bl_posts_summary">
+    <p class="hp_ellipsis654">
+      ${plainText.substring(0, 250)}
     </p>
   </div>`;
 
@@ -39,9 +44,11 @@ export const PostListItem = (props: {
   keyword?: string;
 }): string => {
   const { post, tag, keyword } = props;
-  const searchSummary = generateSummaryEntity(post.plainText, keyword, {
+  const { isMobile } = useMediaQueryContext();
+  const searchSummary = generateSummary(post.plainText, keyword, {
     maxLength: 200,
     beforeLength: 48,
+    keywordModifier: Keyword,
   });
   const isMatched =
     !keyword ||
@@ -60,7 +67,11 @@ export const PostListItem = (props: {
           </time>
         </header>
         ${post.title ? Title(post.title, keyword) : ''}
-        ${searchSummary ? SearchSummary(searchSummary) : Summary(post)}
+        ${
+          searchSummary
+            ? SearchSummary(searchSummary)
+            : (isMobile ? MobileSummary : Summary)(post.plainText)
+        }
       </a>
       <footer class="bl_posts_footer">
         <span class="bl_posts_dateago">

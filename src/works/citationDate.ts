@@ -1,4 +1,4 @@
-import { isNew } from '../lib/date-utils';
+import { isNew } from '../lib/dateUtils';
 import { Citation } from './citation';
 
 const newDays = 30;
