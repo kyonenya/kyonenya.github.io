@@ -1,10 +1,10 @@
 import { toState } from './state';
 
-export function watchPopState(reRoute: () => void): void {
-  window.addEventListener('popstate', reRoute);
+export function watchPopState(reroute: () => void): void {
+  window.addEventListener('popstate', reroute);
 }
 
-export function watchSearchForm(reRoute: () => void): void {
+export function watchSearchForm(reroute: () => void): void {
   const searchFormElement = document.querySelector('.el_search_form');
   const searchInputElement = <HTMLInputElement>(
     document.querySelector('.el_search_input')
@@ -17,6 +17,6 @@ export function watchSearchForm(reRoute: () => void): void {
       '',
       `${window.location.search}#${searchInputElement.value}`
     );
-    reRoute();
+    reroute();
   });
 }

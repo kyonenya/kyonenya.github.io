@@ -1,23 +1,23 @@
 import { defineBlogCard } from './BlogCard';
-import { notifyUpdate } from './bootstraps';
 import { fetcher } from './lib/utils';
 import { mediaQueryContextProvider } from './mediaQueryContext';
+import { notifyUpdate } from './notify';
 import { jsonToPost, JSONPost } from './post';
-import { watchPopState, watchSearchForm } from './reRoute';
-import { route } from './routes';
+import { watchPopState, watchSearchForm } from './reroute';
+import { route } from './route';
 
 const jsonPath = './posts.json';
 
-function registerReRoute(reRoute: () => void): void {
-  watchPopState(reRoute);
-  watchSearchForm(reRoute);
-  mediaQueryContextProvider(reRoute);
+function registerRerouters(reroute: () => void): void {
+  watchPopState(reroute);
+  watchSearchForm(reroute);
+  mediaQueryContextProvider(reroute);
 }
 
 (async function index() {
   const posts = jsonToPost(await fetcher<JSONPost[]>(jsonPath));
   route(posts);
-  registerReRoute(() => route(posts));
+  registerRerouters(() => route(posts));
   defineBlogCard(posts);
   notifyUpdate();
 })();
