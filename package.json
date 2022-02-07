@@ -1,6 +1,6 @@
 {
   "name": "kyonenya.github.io",
-  "version": "2.4.0",
+  "version": "2.4.1",
   "scripts": {
     "_tsc": "tsc -w --noEmit",
     "_tsc checkjs": "tsc -w --noEmit --resolveJsonModule --p tsconfig.checkjs.json",
