@@ -160,11 +160,11 @@
         <if type="article-journal">
           <group>
             <group delimiter=": ">
-              <!-- <text variable="collection-title"/> -->
               <text macro="title"/>
             </group>
             <text macro="translator" suffix=", "/>
             <text variable="container-title" prefix="『" suffix="』" />
+            <text macro="publisher" suffix=", "/>
             <text macro="locators" suffix=" "/>
             <group delimiter=", ">
               <text macro="page"/>
@@ -178,7 +178,7 @@
             <!-- <text variable="container-title"/> -->
             <!-- <text macro="editor"/> -->
             <text macro="event"/>
-            <!--            
+            <!--
             <group delimiter=", ">
               <text macro="publisher"/>
               <text macro="issued"/>
