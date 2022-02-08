@@ -10,7 +10,7 @@ const Text = (text: string): string =>
     )
     .replaceAll(
       '——', // kerning
-      '<span style="letter-spacing: -0.27em; margin: 0 0.17em 0 0;">——</span>'
+      '<span class="hp_kerning">——</span>'
     );
 
 const Item = (text: string): string => `<li>${Text(text)}</li>`;
