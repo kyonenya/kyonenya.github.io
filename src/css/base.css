@@ -1,15 +1,11 @@
 /**
  * ベースグループ
  */
-html {
-  scroll-behavior: auto;  /* unset `smooth` */
-}
-
 body {
   font-family: "Helvetica Neue", "Verdana", "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", "Meiryo", sans-serif;
-  color: var(--text-color);
-  line-height: 1.65;
   font-size: 16px;
+  line-height: 1.65;
+  color: var(--text-color);
   background: var(--background-color);
   word-break: break-word;  /* prevent beginning line with 、。 */
   -webkit-text-size-adjust: 100%; /* prevent broken layout in horizontal view */
@@ -85,13 +81,16 @@ main {
 /**
  * リセット
  */
-a {
+html {
+  scroll-behavior: auto;  /* unset `smooth` */
+}
+
+:where(a) {
   text-decoration: unset;
   color: unset;
 }
 
-ul[class],
-ol[class] {
+:where(ul[class], ol[class]) {
   margin: unset;
   padding: unset;
   list-style: none;

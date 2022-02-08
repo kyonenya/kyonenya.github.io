@@ -121,7 +121,7 @@
 }
 
 /* 順序なしリスト */
-.bl_text :where(ul) {
+:where(.bl_text) :where(ul) {
   margin-left: 0;
   padding-left: 1.5em;
 }
