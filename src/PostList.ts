@@ -2,15 +2,16 @@ import { PostListItem } from './PostListItem';
 import { Post } from './post';
 
 const Component = (children: string, archiveHeaderText?: string) => `
-  ${
-    archiveHeaderText
-      ? `<h2 class="el_archiveHeader">${archiveHeaderText}</h2>`
-      : ''
-  }
-  <ul class="bl_posts">
-    ${children}
-  </ul>
-`;
+  <section class="ly_cont">
+    ${
+      archiveHeaderText
+        ? `<h2 class="el_archiveHeader">${archiveHeaderText}</h2>`
+        : ''
+    }
+    <ul class="bl_posts">
+      ${children}
+    </ul>
+  </section>`;
 
 export const PostList = (posts: Post[]): string =>
   Component(
