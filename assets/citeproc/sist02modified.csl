@@ -160,14 +160,15 @@
         <if type="article-journal">
           <group>
             <group delimiter=": ">
+              <!-- <text variable="collection-title"/> -->
               <text macro="title"/>
             </group>
             <text macro="translator" suffix=", "/>
             <text variable="container-title" prefix="『" suffix="』" />
-            <text macro="publisher" suffix=", "/>
             <text macro="locators" suffix=" "/>
             <group delimiter=", ">
               <text macro="page"/>
+              <text macro="publisher"/>
               <text macro="issued"/>
             </group>
           </group>

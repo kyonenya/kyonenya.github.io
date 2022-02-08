@@ -25,7 +25,9 @@ const Component = (post: Post): string => {
           <span class="bl_blogCard_logo">placet experiri</span>
           <span class="bl_blogCard_suffix">:: ${post.id}</span>
         </header>
-        ${post.title ? `<div class="bl_blogCard_title">${post.title}</div>` : ''}
+        ${
+          post.title ? `<div class="bl_blogCard_title">${post.title}</div>` : ''
+        }
         ${(isMobile ? MobileSummary : Summary)(post.plainText)}
         <footer>
           <span>${formatYMD(post.createdAt)}</span>
