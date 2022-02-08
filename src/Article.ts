@@ -3,7 +3,7 @@ import { formatYMDHm, fromNow } from './lib/dateUtils';
 import { Post } from './post';
 
 export const Article = (post: Post): string => `
-  <section class="ly_cont">
+  <section class="ly_container">
     <article>
       <header class="bl_text_header">
         <time class="bl_text_date">

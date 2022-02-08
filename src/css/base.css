@@ -48,36 +48,6 @@ main {
   }
 }
 
-.ly_header,
-.ly_cont {
-  width: 91vw;
-  margin: 0 auto;
-}
-
-@media screen and (min-width: 560px) {
-  .ly_cont,
-  .ly_header {
-    width: 85%;
-    margin: 0 auto;
-  }
-}
-
-@media screen and (min-width: 960px) {
-  .ly_cont,
-  .ly_header {
-    width: 77%;
-    max-width: 900px;
-  }
-}
-
-@media print {
-  .ly_cont,
-  .ly_header {
-    width: 85%;
-    margin: 0 auto;
-  }
-}
-
 /**
  * リセット
  */

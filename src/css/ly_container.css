@@ -1,0 +1,33 @@
+/**
+ * コンテナ（共通）
+ */
+
+.ly_header,
+.ly_container {
+  width: 91vw;
+  margin: 0 auto;
+}
+
+@media screen and (min-width: 560px) {
+  .ly_container,
+  .ly_header {
+    width: 85%;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (min-width: 960px) {
+  .ly_container,
+  .ly_header {
+    width: 77%;
+    max-width: 900px;
+  }
+}
+
+@media print {
+  .ly_container,
+  .ly_header {
+    width: 85%;
+    margin: 0 auto;
+  }
+}

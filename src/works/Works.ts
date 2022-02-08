@@ -37,7 +37,7 @@ export const Works = (citations: Citation[]): string => {
   const citationMap = toCitationMap(citations);
 
   return `
-    <section class="ly_cont">
+    <section class="ly_container">
       <div class="bl_text">
         <h2>業績一覧</h2>
         ${Genre.map((genre) => List(citationMap[genre], genre)).join('')}

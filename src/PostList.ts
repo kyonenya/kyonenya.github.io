@@ -2,7 +2,7 @@ import { PostListItem } from './PostListItem';
 import { Post } from './post';
 
 const Component = (children: string, archiveHeaderText?: string) => `
-  <section class="ly_cont">
+  <section class="ly_container">
     ${
       archiveHeaderText
         ? `<h2 class="el_archiveHeader">${archiveHeaderText}</h2>`
