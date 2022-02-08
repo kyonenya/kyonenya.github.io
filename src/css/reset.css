@@ -26,7 +26,7 @@ dd {
 }
 
 /* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
-/* reset in `base.css` instead
+/* DISABLE: reset in `base.css` instead
 ul[role="list"],
 ol[role="list"] {
   list-style: none;
@@ -34,7 +34,7 @@ ol[role="list"] {
 */
 
 /* Set core root defaults */
-/* unset in `base.css`
+/* DISABLE: unset in `base.css`
 html:focus-within {
   scroll-behavior: smooth;
 }
