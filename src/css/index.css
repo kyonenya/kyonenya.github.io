@@ -3,7 +3,7 @@
 /**
  * エントリーポイント
  *
- * Naming conventions are based on PRECSS
+ * Naming conventions are based on PRECSS.
  * @url https://precss.io/ja/
  */
 @import url("variables.css");
@@ -16,3 +16,4 @@
 @import url("ly_footer.css");
 @import url("bl_text.css");
 @import url("bl_posts.css");
+@import url("bl_blogCard.css");
