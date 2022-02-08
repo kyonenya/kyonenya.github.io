@@ -1,23 +1,14 @@
 /**
- * A Modern CSS Reset 
- * @url https://github.com/hankchizljaw/modern-css-reset/blob/52c4af07cd44cd8654155636c52430be1697e2a8/src/reset.css
+ * A modern CSS reset
+ *
+ * @version 1.4.0
+ * @url https://github.com/hankchizljaw/modern-css-reset/blob/24f527e41419841b06eac09c8f07b3139cb867a1/src/reset.css
  */
-
 /* Box sizing rules */
-/*
 *,
 *::before,
 *::after {
   box-sizing: border-box;
-}
-*/
-
-/* Remove default padding */
-ul[class],
-ol[class] {
-  padding: 0;
-  /* Remove list styles on ul, ol elements with a class attribute */
-  list-style: none;
 }
 
 /* Remove default margin */
@@ -27,8 +18,6 @@ h2,
 h3,
 h4,
 p,
-ul[class],
-ol[class],
 figure,
 blockquote,
 dl,
@@ -36,8 +25,14 @@ dd {
   margin: 0;
 }
 
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+}
+
 /* Set core root defaults */
-html {
+html:focus-within {
   scroll-behavior: smooth;
 }
 
@@ -54,17 +49,11 @@ a:not([class]) {
 }
 
 /* Make images easier to work with */
-img {
+img,
+picture {
   max-width: 100%;
   display: block;
 }
-
-/* Natural flow and rhythm in articles by default */
-/*
-article > * + * {
-  margin-top: 1em;
-}
-*/
 
 /* Inherit fonts for inputs and buttons */
 input,
@@ -74,16 +63,15 @@ select {
   font: inherit;
 }
 
-/* Blur images when they have no alt attribute */
-/*
-img:not([alt]) {
-  filter: blur(10px);
-}
-*/
-
 /* Remove all animations and transitions for people that prefer not to see them */
 @media (prefers-reduced-motion: reduce) {
-  * {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;

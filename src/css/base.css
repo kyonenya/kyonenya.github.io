@@ -82,8 +82,17 @@ main {
   }
 }
 
+/**
+ * リセット
+ */
 a {
-  /* unset */
-  text-decoration: none;
-  color: inherit;
+  text-decoration: unset;
+  color: unset;
+}
+
+ul[class],
+ol[class] {
+  margin: unset;
+  padding: unset;
+  list-style: none;
 }
