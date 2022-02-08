@@ -38,8 +38,9 @@ export const Works = (citations: Citation[]): string => {
 
   return `
     <section class="ly_cont">
-    <div class="bl_text">
-      <h2>業績一覧</h2>
-      ${Genre.map((genre) => List(citationMap[genre], genre)).join('')}
-    </div>`;
+      <div class="bl_text">
+        <h2>業績一覧</h2>
+        ${Genre.map((genre) => List(citationMap[genre], genre)).join('')}
+      </div>
+    </section>`;
 };
