@@ -72,7 +72,7 @@ const Style = `
     padding-left: 0.6em;
   }
 
-  .${className} .tags li {
+  .tags li {
     list-style: none; /* unset */
     padding-right: 0.3em;
   }

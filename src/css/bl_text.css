@@ -121,18 +121,18 @@
 }
 
 /* 順序なしリスト */
-.bl_text ul {
+.bl_text :where(ul) {
   margin-left: 0;
   padding-left: 1.5em;
 }
 
-.bl_text ul li {
+.bl_text :where(ul li) {
   list-style: disc;
   margin-bottom: 0.25em;
 }
 
 /* stylelint-disable no-descending-specificity */
-.bl_text ul ul li {
+.bl_text :where(ul ul li) {
   list-style: circle;
 }
 
