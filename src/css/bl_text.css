@@ -25,8 +25,8 @@
   }
 }
 
-.bl_text p {
-  text-align: justify;  /* 均等割付でテキスト右端を揃える */
+:where(.bl_text) :where(p) {
+  text-align: justify;
 }
 
 .bl_text p + p {

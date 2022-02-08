@@ -55,9 +55,8 @@ const Style = `
     font-size: 120%;
   }
 
-  .${className} .text {
-    margin: 0.3em 0;
-    text-align: left; /* unset */
+  .text {
+    padding: 0.3em 0;
   }
 
   .${className} footer {
