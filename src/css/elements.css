@@ -8,7 +8,7 @@
 }
 
 .el_logo_title {
-  font-family: "Avenir Next", "Lucida Sans", sans-serif;
+  font-family: 'Avenir Next', 'Lucida Sans', sans-serif;
   font-weight: normal;
   vertical-align: center;
   font-size: 32px;
@@ -37,7 +37,7 @@
  * 記事タグ
  */
 .bl_tagList {
-  display: inline-flex;  /* like `span`, but flexbox inside */
+  display: inline-flex; /* like `span`, but flexbox inside */
   flex-wrap: wrap;
   list-style: none;
 }
@@ -55,7 +55,7 @@
 
 .el_badge[data-badge]::after {
   content: attr(data-badge);
-  position: absolute;  /* relative to parent */
+  position: absolute; /* relative to parent */
   top: -0.6em;
   right: -1.25em;
   font-size: 0.7em;

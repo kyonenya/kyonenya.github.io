@@ -21,7 +21,7 @@
     color: hsl(219, 62%, 67%);
     text-decoration-color: hsl(219, 62%, 52%);
   }
-  
+
   .bl_text :where(a:visited:not(.hp_unsetLink)) {
     color: hsl(271, 35%, 67%);
     text-decoration-color: hsl(271, 35%, 52%);
@@ -34,13 +34,14 @@
 }
 
 .bl_text :where(p + p) {
-  text-indent: 1em;  /* 二段落目以降を字下げ */
-  margin-top: 0.5em;  /* 段落間余白 */
+  text-indent: 1em; /* 二段落目以降を字下げ */
+  margin-top: 0.5em; /* 段落間余白 */
 }
 
 /* 引用ブロック */
 .bl_text :where(blockquote) {
-  font-family: Georgia, "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "游明朝", YuMincho, serif;
+  font-family: Georgia, 'ヒラギノ明朝 ProN W3', 'Hiragino Mincho ProN', '游明朝',
+    YuMincho, serif;
   box-sizing: border-box;
   margin: 1em 0 1em 0.7em;
   /* padding-left ＋ border-left ＝ 1em */
@@ -100,7 +101,7 @@
 
 .ly_cont :where(.bl_text h2:first-child),
 .ly_cont :where(.el_heading2:first-child) {
-  margin-top: 0;  /* no margin-top at the top */
+  margin-top: 0; /* no margin-top at the top */
 }
 
 /* 小見出し */
@@ -115,7 +116,7 @@
 
 /* 水平線 */
 .bl_text :where(hr) {
-  border: none;  /* unset */
+  border: none; /* unset */
   border-top: 1px solid var(--monochrome-midlight);
   width: 50%;
   margin: 1.5em auto;

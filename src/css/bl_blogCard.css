@@ -7,7 +7,7 @@
   margin: 1.25em 0.5em 1em;
   box-sizing: border-box;
 }
-  
+
 @media screen and (min-width: 560px) {
   .bl_blogCard {
     margin: 1.5em 2.7em 1.25em; /* indent 2em */

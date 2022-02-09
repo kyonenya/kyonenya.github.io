@@ -9,7 +9,7 @@
 }
 
 .bl_posts_item:first-child {
-  padding-top: 0;  /* no padding-top at the top */
+  padding-top: 0; /* no padding-top at the top */
 }
 
 .bl_posts_header {
