@@ -8,7 +8,7 @@ const Component = (children: string, archiveHeaderText?: string) => `
         ? `<h2 class="el_archiveHeader">${archiveHeaderText}</h2>`
         : ''
     }
-    <ul class="bl_posts">
+    <ul class="bl_postList">
       ${children}
     </ul>
   </section>`;

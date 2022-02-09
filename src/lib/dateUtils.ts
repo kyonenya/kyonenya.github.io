@@ -43,8 +43,7 @@ const thresholdMap: { [k in Unit]: number } = {
 export function fromNow(date: Date): string {
   const diffMs = date.getTime() - new Date().getTime();
   const unit = Unit.find(
-    (unit) =>
-      Math.abs(toUnitTime(diffMs, unit)) < thresholdMap[unit]
+    (unit) => Math.abs(toUnitTime(diffMs, unit)) < thresholdMap[unit]
   );
   if (!unit) return '';
   return relativeTimeIntl.format(Math.round(toUnitTime(diffMs, unit)), unit);

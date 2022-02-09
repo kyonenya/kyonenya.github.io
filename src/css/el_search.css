@@ -1,6 +1,7 @@
 /**
  * 検索フォーム
  */
+
 .el_search {
   position: relative;
   box-sizing: content-box; /* with `position: relative` */

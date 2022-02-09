@@ -1,7 +1,7 @@
 /**
  * ヘッダー
  */
-/* コンテナ */
+
 .ly_header {
   margin: 1.1em auto 1.75em;
 }
@@ -30,6 +30,7 @@
 /**
  * ナビメニュー
  */
+
 .bl_nav {
   font-family: 'Avenir Next', 'Segoe UI', sans-serif;
   padding-top: 0.5em;

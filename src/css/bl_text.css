@@ -152,6 +152,7 @@
 /**
  * テキスト領域（その他）
  */
+
 .bl_text + .bl_text {
   margin-top: 1.5em;
 }

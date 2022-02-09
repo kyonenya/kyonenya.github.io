@@ -1,6 +1,7 @@
 /**
  * ロゴ
  */
+
 @media print {
   .el_logo {
     margin-bottom: 0.5em;
@@ -36,19 +37,21 @@
 /**
  * 記事タグ
  */
-.bl_tagList {
+
+.el_tagList {
   display: inline-flex; /* like `span`, but flexbox inside */
   flex-wrap: wrap;
   list-style: none;
 }
 
-.bl_tagList li {
+.el_tagList li {
   margin-left: 0.5em;
 }
 
 /**
  * 更新通知バッジ
  */
+
 .el_badge {
   position: relative;
 }
@@ -84,6 +87,7 @@
 /**
  * フッターコピーライト
  */
+
 .el_footerCopyright {
   font-size: 85%;
   text-align: center;

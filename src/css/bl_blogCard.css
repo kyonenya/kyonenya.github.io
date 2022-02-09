@@ -1,3 +1,7 @@
+/**
+ * ブログカード
+ */
+
 .bl_blogCard {
   font-size: 80%;
   border: 1px solid var(--monochrome-light);

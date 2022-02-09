@@ -1,6 +1,7 @@
 /**
  * ベースグループ
  */
+
 body {
   font-family: 'Helvetica Neue', 'Verdana', 'ヒラギノ角ゴ ProN W3',
     'Hiragino Kaku Gothic ProN', 'メイリオ', 'Meiryo', sans-serif;
@@ -52,6 +53,7 @@ main {
 /**
  * リセット
  */
+
 html {
   scroll-behavior: auto; /* unset `smooth` */
 }
