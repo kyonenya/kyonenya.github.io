@@ -11,7 +11,7 @@
   text-decoration-color: hsl(219, 62%, 65%);
 }
 
-.bl_text :where(a:visited:not(.hp_unsetLink)) {
+.bl_text :where(a):visited:not(.hp_unsetLink) {
   color: hsl(271, 35%, 45%);
   text-decoration-color: hsl(271, 35%, 55%);
 }
@@ -19,12 +19,12 @@
 @media (prefers-color-scheme: dark) {
   .bl_text :where(a:not(.hp_unsetLink)) {
     color: hsl(219, 62%, 67%);
-    text-decoration-color: hsl(219, 62%, 52%);
+    text-decoration-color: hsl(219, 62%, 57%);
   }
 
-  .bl_text :where(a:visited:not(.hp_unsetLink)) {
+  .bl_text :where(a):visited:not(.hp_unsetLink) {
     color: hsl(271, 35%, 67%);
-    text-decoration-color: hsl(271, 35%, 52%);
+    text-decoration-color: hsl(271, 35%, 57%);
   }
 }
 
