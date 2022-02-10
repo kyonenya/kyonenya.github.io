@@ -99,8 +99,8 @@
   font-size: 120%;
 }
 
-.ly_cont :where(.bl_text h2:first-child),
-.ly_cont :where(.el_heading2:first-child) {
+.bl_text :is(h2:first-child),
+.el_heading2:first-child {
   margin-top: 0; /* no margin-top at the top */
 }
 
