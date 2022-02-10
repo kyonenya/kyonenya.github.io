@@ -61,14 +61,10 @@
 }
 
 /* 強調 */
-.bl_text :where(em) {
+.bl_text :where(strong) {
+  font-weight: unset;
   text-emphasis: dot;
   font-style: normal;
-}
-
-/* 強調 */
-.bl_text :where(strong) {
-  font-weight: bold;
 }
 
 /* タイトル */
