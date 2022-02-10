@@ -4,7 +4,7 @@
 
 :root {
   --text-color: hsl(0, 0%, 13%); /* #222 */
-  --background-color: hsl(40, 38%, 97%);
+  --background-color: hsl(40, 38%, 94%);
   --monochrome-bright: hsl(0, 0%, 90%);
   --monochrome-light: hsl(0, 0%, 85%);
   --monochrome-midlight: hsl(0, 0%, 75%);
