@@ -1,34 +1,35 @@
 /**
  * 記事一覧リスト
  */
-.bl_posts_item {
+
+.bl_postList_item {
   border-bottom: 1px solid var(--monochrome-light);
   display: block;
   margin: 0 auto;
   padding: 0.7em 0;
 }
 
-.bl_posts_item:first-child {
-  padding-top: 0;  /* no padding-top at the top */
+.bl_postList_item:first-child {
+  padding-top: 0; /* no padding-top at the top */
 }
 
-.bl_posts_header {
+.bl_postList_header {
   color: var(--monochrome-dark);
 }
 
-.bl_posts_title {
+.bl_postList_title {
   letter-spacing: 1px;
   font-weight: unset;
   font-size: 128%;
   padding-top: 0.1em;
 }
 
-.bl_posts_summary {
+.bl_postList_summary {
   padding-top: 0.3em;
   line-height: 1.5;
 }
 
-.bl_posts_footer {
+.bl_postList_footer {
   padding-top: 0.3em;
   color: var(--monochrome-dark);
 }

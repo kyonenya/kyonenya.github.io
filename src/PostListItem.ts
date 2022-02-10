@@ -13,26 +13,26 @@ const TextWithKeyword = (text: string, keyword?: string) =>
   keyword ? text.replace(keyword, Keyword(keyword)) : text;
 
 const Title = (title: string, keyword?: string) => `
-  <h2 class="bl_posts_title">
+  <h2 class="bl_postList_title">
     ${TextWithKeyword(title, keyword)}
   </h2>`;
 
 const SearchSummary = (searchSummary: string) => `
-  <div class="bl_posts_summary">
+  <div class="bl_postList_summary">
     <p class="hp_ellipsis433">
       ${searchSummary}
     </p>
   </div>`;
 
 const MobileSummary = (plainText: string) => `
-  <div class="bl_posts_summary">
+  <div class="bl_postList_summary">
     <p class="hp_alignJustify">
       ${plainText.substring(0, 134) + elipsisToken}
     </p>
   </div>`;
 
 const Summary = (plainText: string) => `
-  <div class="bl_posts_summary">
+  <div class="bl_postList_summary">
     <p class="hp_ellipsis654">
       ${plainText.substring(0, 250)}
     </p>
@@ -57,12 +57,12 @@ export const PostListItem = (props: {
 
   return `
     <li
-      class="bl_posts_item"
+      class="bl_postList_item"
       style="display: ${isMatched ? 'block' : 'none'}"
     >
       <a href="?id=${post.id}">
-        <header class="bl_posts_header">
-          <time class="bl_posts_date">
+        <header class="bl_postList_header">
+          <time class="bl_postList_date">
             ${formatYMD(post.createdAt)}
           </time>
         </header>
@@ -73,8 +73,8 @@ export const PostListItem = (props: {
             : (isMobile ? MobileSummary : Summary)(post.plainText)
         }
       </a>
-      <footer class="bl_posts_footer">
-        <span class="bl_posts_dateago">
+      <footer class="bl_postList_footer">
+        <span class="bl_postList_dateago">
           ${fromNow(post.createdAt)}
         </span>
         ${TagList(post.tags, tag)}

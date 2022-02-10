@@ -3,16 +3,19 @@
 /**
  * エントリーポイント
  *
- * Naming conventions are based on PRECSS
+ * 命名規則は PRECSS に則る
  * @url https://precss.io/ja/
  */
-@import url("variables.css");
-@import url("reset.css");
-@import url("base.css");
-@import url("helpers.css");
-@import url("elements.css");
-@import url("el_search.css");
-@import url("ly_header.css");
-@import url("ly_footer.css");
-@import url("bl_text.css");
-@import url("bl_posts.css");
+
+@import url('variables.css');
+@import url('reset.css');
+@import url('base.css');
+@import url('helpers.css');
+@import url('elements.css');
+@import url('el_search.css');
+@import url('ly_container.css');
+@import url('ly_header.css');
+@import url('ly_footer.css');
+@import url('bl_text.css');
+@import url('bl_postList.css');
+@import url('bl_blogCard.css');

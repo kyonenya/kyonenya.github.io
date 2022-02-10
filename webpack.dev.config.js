@@ -1,8 +1,12 @@
+const path = require('path');
 const productionConfig = require('./webpack.config');
 
 module.exports = {
   ...productionConfig,
   mode: 'development',
+  output: {
+    filename: 'dist/dev/[name].js',
+  },
   module: {
     rules: [
       {

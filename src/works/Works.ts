@@ -10,7 +10,7 @@ const Text = (text: string): string =>
     )
     .replaceAll(
       '——', // kerning
-      '<span style="letter-spacing: -0.27em; margin: 0 0.17em 0 0;">——</span>'
+      '<span class="hp_kerning">——</span>'
     );
 
 const Item = (text: string): string => `<li>${Text(text)}</li>`;
@@ -37,9 +37,10 @@ export const Works = (citations: Citation[]): string => {
   const citationMap = toCitationMap(citations);
 
   return `
-    <section class="ly_cont">
-    <div class="bl_text">
-      <h2>業績一覧</h2>
-      ${Genre.map((genre) => List(citationMap[genre], genre)).join('')}
-    </div>`;
+    <section class="ly_container">
+      <div class="bl_text">
+        <h2>業績一覧</h2>
+        ${Genre.map((genre) => List(citationMap[genre], genre)).join('')}
+      </div>
+    </section>`;
 };

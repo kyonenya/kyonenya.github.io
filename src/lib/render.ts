@@ -13,11 +13,11 @@ export function renderRoot(html: string): void {
 
 export function renderPage(page: Page): void {
   const suffixElement = <HTMLSpanElement>(
-  document.querySelector('.el_logo_suffix')
-);
+    document.querySelector('.el_logo_suffix')
+  );
   const descriptionElement = <HTMLMetaElement>(
-  document.querySelector('meta[name=description]')
-);
+    document.querySelector('meta[name=description]')
+  );
 
   renderRoot(page.body);
   document.title = page.title;

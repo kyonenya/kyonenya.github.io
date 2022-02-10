@@ -1,41 +1,47 @@
+/* stylelint-disable no-descending-specificity */
 /**
  * テキスト領域（マークアップ）
  */
-.bl_text a:not(.hp_unsetLink) {
+
+/* リンク */
+.bl_text :where(a:not(.hp_unsetLink)) {
   text-decoration: underline;
   text-underline-offset: 3px;
   color: hsl(219, 62%, 50%);
   text-decoration-color: hsl(219, 62%, 65%);
 }
 
-.bl_text a:visited:not(.hp_unsetLink) {
+.bl_text :where(a:visited:not(.hp_unsetLink)) {
   color: hsl(271, 35%, 45%);
   text-decoration-color: hsl(271, 35%, 55%);
 }
 
 @media (prefers-color-scheme: dark) {
-  .bl_text a:not(.hp_unsetLink) {
+  .bl_text :where(a:not(.hp_unsetLink)) {
     color: hsl(219, 62%, 67%);
     text-decoration-color: hsl(219, 62%, 52%);
   }
-  
-  .bl_text a:visited:not(.hp_unsetLink) {
+
+  .bl_text :where(a:visited:not(.hp_unsetLink)) {
     color: hsl(271, 35%, 67%);
     text-decoration-color: hsl(271, 35%, 52%);
   }
 }
 
-.bl_text p {
-  text-align: justify;  /* 均等割付でテキスト右端を揃える */
+/* 段落 */
+.bl_text :where(p) {
+  text-align: justify;
 }
 
-.bl_text p + p {
-  text-indent: 1em;  /* 二段落目以降を字下げ */
-  margin-top: 0.5em;  /* 段落間余白 */
+.bl_text :where(p + p) {
+  text-indent: 1em; /* 二段落目以降を字下げ */
+  margin-top: 0.5em; /* 段落間余白 */
 }
 
-.bl_text blockquote {
-  font-family: Georgia, "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "游明朝", YuMincho, serif;
+/* 引用ブロック */
+.bl_text :where(blockquote) {
+  font-family: Georgia, 'ヒラギノ明朝 ProN W3', 'Hiragino Mincho ProN', '游明朝',
+    YuMincho, serif;
   box-sizing: border-box;
   margin: 1em 0 1em 0.7em;
   /* padding-left ＋ border-left ＝ 1em */
@@ -43,28 +49,26 @@
   border-left: 0.25em solid var(--monochrome-light);
 }
 
-.bl_text blockquote p {
+.bl_text :where(blockquote p) {
   /* margin-left(blockquote) + margin-left(p) = 1em */
   margin: 0 0.5em 0 0.3em;
 }
 
-.bl_text blockquote p + p {
+.bl_text :where(blockquote p + p) {
   /* 引用ブロック中は字下げ・段落間余白なし */
   text-indent: 0;
   margin-top: 0;
 }
 
-.bl_text em {
+/* 強調 */
+.bl_text :where(strong) {
+  font-weight: unset;
   text-emphasis: dot;
   font-style: normal;
 }
 
-.bl_text strong {
-  font-weight: bold;
-}
-
 /* タイトル */
-.bl_text h1 {
+.bl_text :where(h1) {
   margin: 0 auto 0.4em;
   font-weight: bold;
   font-size: 117%;
@@ -73,14 +77,14 @@
 }
 
 @media screen and (min-width: 560px) {
-  .bl_text h1 {
+  .bl_text :where(h1) {
     font-size: 120%;
     margin: 0 auto 0.5em;
   }
 }
 
 /* 大見出し */
-.bl_text h2,
+.bl_text :where(h2),
 .el_heading2 {
   margin: 1.5em 0 1em;
   border-left: 4px solid var(--monochrome-medium);
@@ -91,13 +95,13 @@
   font-size: 120%;
 }
 
-.ly_cont .bl_text h2:first-child,
-.ly_cont .el_heading2:first-child {
-  margin-top: 0;  /* no margin-top at the top */
+.bl_text :is(h2:first-child),
+.el_heading2:first-child {
+  margin-top: 0; /* no margin-top at the top */
 }
 
 /* 小見出し */
-.bl_text h3,
+.bl_text :where(h3),
 .el_heading3 {
   margin: 1em 0 0.75em;
   font-weight: normal;
@@ -107,68 +111,44 @@
 }
 
 /* 水平線 */
-.bl_text hr {
-  border: none;  /* unset */
+.bl_text :where(hr) {
+  border: none; /* unset */
   border-top: 1px solid var(--monochrome-midlight);
   width: 50%;
   margin: 1.5em auto;
 }
 
 @media screen and (min-width: 560px) {
-  .bl_text hr {
+  .bl_text :where(hr) {
     margin: 2em auto;
   }
 }
 
 /* 順序なしリスト */
-.bl_text ul {
-  margin-left: 0;
+.bl_text :where(ul) {
+  margin-left: unset;
   padding-left: 1.5em;
 }
 
-.bl_text ul li {
-  list-style: disc;
+.bl_text :where(ul li) {
   margin-bottom: 0.25em;
 }
 
-/* stylelint-disable no-descending-specificity */
-.bl_text ul ul li {
-  list-style: circle;
-}
-
 /* 順序つきリスト */
-.bl_text ol {
+.bl_text :where(ol) {
   margin-left: 0;
   padding-left: 2em;
 }
 
-.bl_text ol li {
+.bl_text :where(ol li) {
   list-style: decimal;
   margin-bottom: 0.25em;
-}
-
-/* 説明リスト */
-.bl_text dt {
-  float: left;
-  text-align: right;
-  margin-left: -0.5em;  /* 4文字目は画面ギリギリに入れる */
-  width: 4em;  /* 最大文字数 */
-}
-
-.bl_text dd {
-  margin-left: 3.5em;  /* dtの左余白＋最大文字数 */
-  /* "： "にぶら下げ、狭い画面で改行されたとき */
-  padding-left: 1.25em;
-  text-indent: -1.25em;
-}
-
-.bl_text dd::before {
-  content: "： ";
 }
 
 /**
  * テキスト領域（その他）
  */
+
 .bl_text + .bl_text {
   margin-top: 1.5em;
 }

@@ -1,18 +1,28 @@
 import { PostListItem } from './PostListItem';
 import { Post } from './post';
 
-export const PostList = (posts: Post[]): string => `
-  <ul class="bl_posts">
-    ${posts
+const ArchiveHeader = (text: string) =>
+  `<h2 class="el_archiveHeader">${text}</h2>`;
+
+const Component = (children: string, archiveHeaderText?: string) => `
+  <section class="ly_container">
+    ${archiveHeaderText ? ArchiveHeader(archiveHeaderText) : ''}
+    <ul class="bl_postList">
+      ${children}
+    </ul>
+  </section>`;
+
+export const PostList = (posts: Post[]): string =>
+  Component(
+    posts
       .map((post, i) => PostListItem({ post: posts[i] }))
       .reverse()
-      .join('')}
-  </ul>`;
+      .join('')
+  );
 
-export const TaggedPostList = (posts: Post[], tag: string): string => `
-  <h2 class="el_archiveHeader">#${tag}</h2>
-  <ul class="bl_posts">
-    ${posts
+export const TaggedPostList = (posts: Post[], tag: string): string =>
+  Component(
+    posts
       .map((post, i) =>
         post.tags.includes(tag)
           ? PostListItem({
@@ -22,17 +32,17 @@ export const TaggedPostList = (posts: Post[], tag: string): string => `
           : ''
       )
       .reverse()
-      .join('')}
-  </ul>`;
+      .join(''),
+    `#${tag}`
+  );
 
 export const SearchedPostList = (
   posts: Post[],
   keyword: string,
   tag?: string
-): string => `
-  <h2 class="el_archiveHeader">「${keyword}」</h2>
-  <ul class="bl_posts">
-    ${posts
+): string =>
+  Component(
+    posts
       .map((post, i) =>
         tag === undefined || post.tags.includes(tag)
           ? PostListItem({
@@ -43,5 +53,6 @@ export const SearchedPostList = (
           : ''
       )
       .reverse()
-      .join('')}
-  </ul>`;
+      .join(''),
+    `「${keyword}」`
+  );

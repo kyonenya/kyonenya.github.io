@@ -168,6 +168,7 @@
             <text macro="locators" suffix=" "/>
             <group delimiter=", ">
               <text macro="page"/>
+              <text macro="publisher"/>
               <text macro="issued"/>
             </group>
           </group>
@@ -178,7 +179,7 @@
             <!-- <text variable="container-title"/> -->
             <!-- <text macro="editor"/> -->
             <text macro="event"/>
-            <!--            
+            <!--
             <group delimiter=", ">
               <text macro="publisher"/>
               <text macro="issued"/>

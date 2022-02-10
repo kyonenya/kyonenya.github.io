@@ -1,9 +1,10 @@
 /**
  * フッター
  */
+
 .ly_footer {
   background-color: var(--monochrome-bright);
-  margin-top: 2em;
+  margin-top: 1.75em;
 }
 
 @media print {
@@ -14,5 +15,5 @@
 }
 
 .ly_footer_inner {
-  padding: 1.25em 0;  /* footer height */
+  padding: 1.25em 0; /* footer height */
 }

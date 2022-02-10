@@ -2,7 +2,7 @@ import { isNew } from './lib/dateUtils';
 
 const modifiedAt = '2022-02-02';
 const newDays = 15;
-  
+
 export function notifyUpdate(): void {
   const aboutElement = document.getElementById('about');
 
