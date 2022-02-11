@@ -6,7 +6,7 @@
 
 :root {
   --text-primary: hsl(0, 0%, 13%); /* Gray 900 */
-  --text-secondary: hsl(0, 0%, 33%); /* Gray 750 */
+  --text-secondary: hsl(0, 0%, 30%); /* Gray 775 */
   --gray-strong: hsl(0, 0%, 68%); /* Gray 450 */
   --gray-medium: hsl(0, 0%, 74%); /* Gray 400 */
   --gray-weak: hsl(0, 0%, 83%); /* Gray 350 */
@@ -20,10 +20,10 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --text-primary: hsl(40, 38%, 97%); /* Orange 50 */
-    --text-secondary: hsl(0, 0%, 68%); /* Gray 450 */
-    --gray-strong: hsl(0, 0%, 43%); /* Gray 625 */
-    --gray-medium: hsl(0, 0%, 38%); /* Gray 700 */
-    --gray-weak: hsl(0, 0%, 30%); /* Gray 775 */
+    --text-secondary: hsl(0, 0%, 71%); /* Gray 425 */
+    --gray-strong: hsl(0, 0%, 46%); /* Gray 600 */
+    --gray-medium: hsl(0, 0%, 39%); /* Gray 675 */
+    --gray-weak: hsl(0, 0%, 33%); /* Gray 750 */
     --background-primary: hsl(0, 0%, 20%); /* Gray 850 */
     --background-secondary: hsl(0, 0%, 16%);
     --main-primary: hsl(202, 35%, 55%);
