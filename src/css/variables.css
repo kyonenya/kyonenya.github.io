@@ -1,5 +1,7 @@
 /**
  * 変数
+ *
+ * @url [The color system - Material Design](https://material.io/design/color/the-color-system.html#tools-for-picking-colors)
  */
 
 :root {
@@ -8,8 +10,8 @@
   --gray-strong: hsl(0, 0%, 68%); /* Gray 450 */
   --gray-medium: hsl(0, 0%, 74%); /* Gray 400 */
   --gray-weak: hsl(0, 0%, 83%); /* Gray 350 */
-  --background-primary: hsl(40, 38%, 95%); /* Cream 100 */
-  --background-secondary: hsl(0, 0%, 90%);
+  --background-primary: hsl(40, 38%, 95%); /* Orange 100 */
+  --background-secondary: hsl(0, 0%, 91%);
   --main-primary: hsl(202, 35%, 50%);
   --main-secondary: hsl(202, 35%, 65%);
   --accent-primary: hsl(349, 39%, 62%);
@@ -17,13 +19,13 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --text-primary: hsl(40, 38%, 97%); /* Cream 50 */
-    --text-secondary: hsl(0, 0%, 62%); /* Gray 500 */
-    --gray-strong: hsl(0, 0%, 41%); /* Gray 650 */
+    --text-primary: hsl(40, 38%, 97%); /* Orange 50 */
+    --text-secondary: hsl(0, 0%, 68%); /* Gray 450 */
+    --gray-strong: hsl(0, 0%, 43%); /* Gray 625 */
     --gray-medium: hsl(0, 0%, 38%); /* Gray 700 */
-    --gray-weak: hsl(0, 0%, 33%); /* Gray 750 */
+    --gray-weak: hsl(0, 0%, 30%); /* Gray 775 */
     --background-primary: hsl(0, 0%, 20%); /* Gray 850 */
-    --background-secondary: hsl(0, 0%, 15%);
+    --background-secondary: hsl(0, 0%, 16%);
     --main-primary: hsl(202, 35%, 55%);
     --main-secondary: hsl(202, 35%, 45%);
     --accent-primary: hsl(349, 39%, 58%);
