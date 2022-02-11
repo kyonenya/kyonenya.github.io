@@ -3,13 +3,13 @@
  */
 
 :root {
-  --text-color: hsl(0, 0%, 13%); /* #222 */
+  --text-color: hsl(0, 0%, 13%);
   --monochrome-dark: hsl(0, 0%, 35%);
-  --monochrome-medium: hsl(0, 0%, 68%);
-  --monochrome-midlight: hsl(0, 0%, 75%);
-  --monochrome-light: hsl(0, 0%, 85%);
+  --monochrome-medium: hsl(0, 0%, 68%); /* Gray 450 */
+  --monochrome-midlight: hsl(0, 0%, 74%); /* Gray 400 */
+  --monochrome-light: hsl(0, 0%, 83%); /* Gray 350 */
   --monochrome-bright: hsl(0, 0%, 90%);
-  --background-color: hsl(40, 38%, 94%);
+  --background-color: hsl(40, 38%, 95%);
   --main-color: hsl(202, 35%, 50%);
   --main-color-light: hsl(202, 35%, 65%);
   --accent-color: hsl(349, 39%, 62%);
@@ -19,9 +19,9 @@
   :root {
     --text-color: hsl(40, 38%, 97%);
     --monochrome-dark: hsl(0, 0%, 70%);
-    --monochrome-medium: hsl(0, 0%, 45%);
-    --monochrome-midlight: hsl(0, 0%, 37%);
-    --monochrome-light: hsl(0, 0%, 29%);
+    --monochrome-medium: hsl(0, 0%, 41%); /* Gray 650 */
+    --monochrome-midlight: hsl(0, 0%, 38%); /* Gray 700 */
+    --monochrome-light: hsl(0, 0%, 33%); /* Gray 750 */
     --monochrome-bright: hsl(0, 0%, 15%);
     --background-color: hsl(0, 0%, 20%);
     --main-color: hsl(202, 35%, 55%);
