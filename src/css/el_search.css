@@ -43,7 +43,7 @@
   cursor: pointer;
   width: 2.2em; /* クリック領域の幅 */
   top: -5px; /* フォームがメニューを覆い隠すよう少し上に */
-  border: 1px solid var(--monochrome-light);
+  border: 1px solid var(--gray-weak);
   border-radius: 4px;
   outline: none;
   -webkit-appearance: none; /* unset Safari */

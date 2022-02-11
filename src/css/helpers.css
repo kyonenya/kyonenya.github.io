@@ -17,7 +17,7 @@
 }
 
 .hp_underline {
-  border-bottom: 1px solid var(--monochrome-dark);
+  border-bottom: 1px solid var(--text-secondary);
   padding-bottom: 0;
 }
 

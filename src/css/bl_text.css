@@ -46,7 +46,7 @@
   margin: 1em 0 1em 0.7em;
   /* padding-left ＋ border-left ＝ 1em */
   padding: 0 0 0 0.75em;
-  border-left: 0.25em solid var(--monochrome-light);
+  border-left: 0.25em solid var(--gray-weak);
 }
 
 .bl_text :where(blockquote p) {
@@ -87,9 +87,9 @@
 .bl_text :where(h2),
 .el_heading2 {
   margin: 1.5em 0 1em;
-  border-left: 4px solid var(--monochrome-medium);
+  border-left: 4px solid var(--gray-strong);
   padding-left: 0.45em;
-  border-bottom: 1px solid var(--monochrome-midlight);
+  border-bottom: 1px solid var(--gray-medium);
   padding-right: 0.75em;
   font-weight: normal;
   font-size: 120%;
@@ -107,13 +107,13 @@
   font-weight: normal;
   font-size: 112%;
   letter-spacing: 1px;
-  border-bottom: 1px solid var(--monochrome-midlight);
+  border-bottom: 1px solid var(--gray-medium);
 }
 
 /* 水平線 */
 .bl_text :where(hr) {
   border: none; /* unset */
-  border-top: 1px solid var(--monochrome-midlight);
+  border-top: 1px solid var(--gray-medium);
   width: 50%;
   margin: 1.5em auto;
 }
@@ -155,10 +155,10 @@
 
 .bl_text_header {
   padding-bottom: 0.5em;
-  color: var(--monochrome-dark);
+  color: var(--text-secondary);
 }
 
 .bl_text_footer {
   padding-top: 0.75em;
-  color: var(--monochrome-dark);
+  color: var(--text-secondary);
 }

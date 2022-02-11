@@ -3,7 +3,7 @@
  */
 
 .ly_footer {
-  background-color: var(--monochrome-bright);
+  background-color: var(--background-secondary);
   margin-top: 1.75em;
 }
 

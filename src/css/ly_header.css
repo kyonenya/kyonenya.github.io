@@ -58,7 +58,7 @@
   display: block;
   line-height: 1.25em; /* height of divider */
   text-align: center;
-  color: var(--main-color);
+  color: var(--main-primary);
   font-size: 110%;
 }
 
@@ -74,5 +74,5 @@
 }
 
 .bl_nav li + li {
-  border-left: 1px solid var(--main-color-light);
+  border-left: 1px solid var(--main-secondary);
 }

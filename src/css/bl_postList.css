@@ -3,7 +3,7 @@
  */
 
 .bl_postList_item {
-  border-bottom: 1px solid var(--monochrome-light);
+  border-bottom: 1px solid var(--gray-weak);
   display: block;
   margin: 0 auto;
   padding: 0.7em 0;
@@ -14,7 +14,7 @@
 }
 
 .bl_postList_header {
-  color: var(--monochrome-dark);
+  color: var(--text-secondary);
 }
 
 .bl_postList_title {
@@ -31,5 +31,5 @@
 
 .bl_postList_footer {
   padding-top: 0.3em;
-  color: var(--monochrome-dark);
+  color: var(--text-secondary);
 }
