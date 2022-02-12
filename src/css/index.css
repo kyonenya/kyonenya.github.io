@@ -7,7 +7,7 @@
  * @url https://precss.io/ja/
  */
 
-@import url('variables.css');
+@import url('theme.css');
 @import url('reset.css');
 @import url('base.css');
 @import url('helpers.css');
