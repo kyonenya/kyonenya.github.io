@@ -12,8 +12,8 @@
 }
 
 .bl_text :where(a):visited:not(.hp_unsetLink) {
-  color: hsl(271, 35%, 45%);
-  text-decoration-color: hsl(271, 35%, 55%);
+  color: hsl(271, 35%, 42%); /* Purple 500 */
+  text-decoration-color: hsl(271, 35%, 55%); /* Purple 350 */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -23,8 +23,8 @@
   }
 
   .bl_text :where(a):visited:not(.hp_unsetLink) {
-    color: hsl(271, 35%, 67%);
-    text-decoration-color: hsl(271, 25%, 57%); /* desaturate */
+    color: hsl(271, 35%, 65%); /* Purple 250 */
+    text-decoration-color: hsl(271, 25%, 55%); /* Purple 350s */
   }
 }
 
