@@ -19,12 +19,12 @@
 @media (prefers-color-scheme: dark) {
   .bl_text :where(a:not(.hp_unsetLink)) {
     color: hsl(219, 62%, 67%);
-    text-decoration-color: hsl(219, 62%, 57%);
+    text-decoration-color: hsl(219, 47%, 57%); /* desaturate */
   }
 
   .bl_text :where(a):visited:not(.hp_unsetLink) {
     color: hsl(271, 35%, 67%);
-    text-decoration-color: hsl(271, 35%, 57%);
+    text-decoration-color: hsl(271, 25%, 57%); /* desaturate */
   }
 }
 
