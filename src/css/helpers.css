@@ -13,7 +13,7 @@
   color: hsl(0, 0%, 13%); /* black if under darkmode */
   border-radius: 3px;
   padding: 2px 3px;
-  margin: 0;
+  margin: 0 0.2em;
 }
 
 .hp_underline {
