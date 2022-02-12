@@ -1,11 +1,10 @@
 import { Article } from './Article';
 import { PostList, TaggedPostList, SearchedPostList } from './PostList';
-import { renderPage } from './lib/render';
+import { renderPage, baseUrl } from './lib/render';
 import { isDevelopment } from './lib/utils';
 import { Post, excludeReserved } from './post';
 import { toState } from './state';
 
-const baseUrl = 'https://kyonenya.github.io/';
 const searchInputElement = document.querySelector('.el_search_input');
 
 const routeMap = {
