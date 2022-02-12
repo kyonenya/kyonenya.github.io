@@ -7,8 +7,8 @@
 .bl_text :where(a:not(.hp_unsetLink)) {
   text-decoration: underline;
   text-underline-offset: 3px;
-  color: hsl(219, 62%, 50%);
-  text-decoration-color: hsl(219, 62%, 65%);
+  color: hsl(219, 62%, 48%); /* Indigo 500 */
+  text-decoration-color: hsl(219, 62%, 64%); /* Indigo 300 */
 }
 
 .bl_text :where(a):visited:not(.hp_unsetLink) {
@@ -18,8 +18,8 @@
 
 @media (prefers-color-scheme: dark) {
   .bl_text :where(a:not(.hp_unsetLink)) {
-    color: hsl(219, 62%, 67%);
-    text-decoration-color: hsl(219, 47%, 57%); /* desaturate */
+    color: hsl(219, 62%, 69%); /* Indigo 250 */
+    text-decoration-color: hsl(219, 42%, 57%); /* Indigo400s */
   }
 
   .bl_text :where(a):visited:not(.hp_unsetLink) {
