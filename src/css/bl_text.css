@@ -23,7 +23,7 @@
   }
 
   .bl_text :where(a):visited:not(.hp_unsetLink) {
-    color: hsl(271, 35%, 65%); /* Purple 250 */
+    color: hsl(271, 35%, 68%); /* Purple 225 */
     text-decoration-color: hsl(271, 25%, 55%); /* Purple 350s */
   }
 }
