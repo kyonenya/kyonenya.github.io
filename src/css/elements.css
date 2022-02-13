@@ -31,7 +31,7 @@
 .el_logo_suffix {
   font-size: 16px;
   font-weight: normal;
-  color: var(--monochrome-dark);
+  color: var(--text-secondary);
 }
 
 /**
@@ -62,14 +62,14 @@
   top: -0.6em;
   right: -1.25em;
   font-size: 0.7em;
-  background: var(--accent-color);
+  background: var(--accent-primary);
   color: white;
   width: 1.25em;
   height: 1.25em;
   line-height: 1.41em;
   text-align: center;
   border-radius: 50%;
-  box-shadow: 0 0 3px var(--monochrome-midlight);
+  box-shadow: 0 0 3px var(--gray-medium);
   z-index: 10;
 }
 
@@ -77,7 +77,7 @@
  * アーカイブヘッダー
  */
 .el_archiveHeader {
-  color: var(--monochrome-dark);
+  color: var(--text-secondary);
   text-align: center;
   font-weight: bold;
   font-size: 1.2em;
@@ -91,7 +91,7 @@
 .el_footerCopyright {
   font-size: 85%;
   text-align: center;
-  color: var(--monochrome-dark);
+  color: var(--text-secondary);
 }
 
 .el_footerCopyright a {
