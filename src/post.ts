@@ -32,7 +32,7 @@ export function jsonToPost(posts: JSONPost[]): Post[] {
     title: post.title === null || post.title === '' ? undefined : post.title,
     text: post.text
       .replaceAll('——', '──') // double dash -> double ruled line
-      .replaceAll('　', ' ') // full-width space -> half-width space
+      .replaceAll(/([！？])　/g, (_, token: string) => `${token} `) // full-width space -> half-width space after '！' or '？'
       .replaceAll(
         /<a (href='[^?].+?'.*?)>(.+?)<\/a>/g, // overwrite external link
         (_, attributes: string, content: string) =>
