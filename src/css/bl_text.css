@@ -121,7 +121,6 @@
 @media screen and (min-width: 560px) {
   .bl_text :where(hr) {
     width: 50%;
-    margin: 3em auto;
   }
 }
 
