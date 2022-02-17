@@ -8,7 +8,7 @@
   border-radius: 4px;
   box-shadow: 0 0 2px var(--gray-medium); /* around */
   padding: 0.6em 1em;
-  margin: 1.25em 1.3em 1em;  /* indent 1em */
+  margin: 1.25em 0.7em 1em;
   box-sizing: border-box;
 }
 
