@@ -26,7 +26,7 @@
     --gray-medium: hsl(0, 0%, 39%); /* Gray 675 */
     --gray-weak: hsl(0, 0%, 33%); /* Gray 750 */
     --background-primary: hsl(0, 0%, 20%); /* Gray 850 */
-    --background-secondary: hsl(0, 0%, 16%);
+    --background-secondary: hsl(0, 0%, 14%);
     --main-primary: hsl(202, 35%, 60%); /* LightBlue 350 */
     --main-secondary: hsl(202, 25%, 48%); /* LightBlue 500s */
     --accent-primary: hsl(349, 30%, 52%); /* Pink 500s */
