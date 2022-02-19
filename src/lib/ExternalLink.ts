@@ -4,7 +4,7 @@ const ExternalLink = (props: {
   attributes?: string;
 }): string => {
   const { href, content, attributes = '' } = props;
-  return `<a href="${href}" target='_blank' rel='noopener' ${attributes}>${content}</a>`;
+  return `<a href="${href}" target="_blank" rel="noopener" ${attributes}>${content}</a>`;
 };
 
 export function toExternalLink(html: string): string {
