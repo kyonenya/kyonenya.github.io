@@ -1,12 +1,13 @@
 import { PostListItem } from './PostListItem';
 import { Post } from './post';
 
-const ArchiveHeader = (text: string) =>
-  `<h2 class="el_archiveHeader">${text}</h2>`;
-
 const Component = (children: string, archiveHeaderText?: string) => `
   <section class="ly_container">
-    ${archiveHeaderText ? ArchiveHeader(archiveHeaderText) : ''}
+    ${
+      archiveHeaderText
+        ? `<h2 class="el_archiveHeader">${archiveHeaderText}</h2>`
+        : ''
+    }
     <ul class="bl_postList">
       ${children}
     </ul>

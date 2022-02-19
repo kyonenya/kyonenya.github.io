@@ -1,17 +1,13 @@
 import { Citation, toCitationMap, Genre } from './citation';
 import { isNewCitation } from './citationDate';
+import { MarkupText } from '../lib/MarkupText';
 
 const Text = (text: string): string =>
-  text
-    .replaceAll(
-      /\[(.+?)\]\((.+?)\)/g, // markdown link -> external anchorlink
-      (_, content: string, href: string) =>
-        `<a href="${href}" target="_blank" rel="noopener">${content}</a>`
-    )
-    .replaceAll(
-      '——', // kerning
-      '<span class="hp_kerning">——</span>'
-    );
+  MarkupText(text).replaceAll(
+    /\[(.+?)\]\((.+?)\)/g, // markdown link -> external anchorlink
+    (_, content: string, href: string) =>
+      `<a href="${href}" target="_blank" rel="noopener">${content}</a>`
+  );
 
 const Item = (text: string): string => `<li>${Text(text)}</li>`;
 
