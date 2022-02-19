@@ -5,7 +5,7 @@ import { isNewCitation } from './citationDate';
 
 const Text = (text: string): string => MarkupText(parseMarkdownLink(text));
 
-const BoldText = (text: string) => `<span class='hp_bold'>${Text(text)}</span>`;
+const BoldText = (text: string) => `<b>${Text(text)}</b>`;
 
 const ListItem = (citation: Citation) => `
   <li>

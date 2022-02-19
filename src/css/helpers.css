@@ -11,14 +11,6 @@
   padding-bottom: 0;
 }
 
-.hp_bold {
-  font-weight: bold;
-}
-
-.hp_strikethrough {
-  text-decoration: line-through;
-}
-
 .hp_kerning {
   /* kerning of double dash */
   letter-spacing: -0.27em;
