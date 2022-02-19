@@ -7,8 +7,9 @@
 }
 
 .hp_underline {
-  border-bottom: 1px solid var(--text-secondary);
-  padding-bottom: 0;
+  text-decoration: underline;
+  text-decoration-color: var(--text-secondary);
+  text-underline-offset: 3px;
 }
 
 .hp_kerning {
