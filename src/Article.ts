@@ -1,6 +1,7 @@
 import { TagList } from './TagList';
 import { MarkupText } from './lib/MarkupText';
 import { formatYMDHm, fromNow } from './lib/dateUtils';
+import { toExternalLink } from './lib/utils';
 import { Post } from './post';
 
 export const Article = (post: Post): string => `
@@ -13,7 +14,7 @@ export const Article = (post: Post): string => `
       </header>
       <div class="bl_text">
         ${post.title ? `<h1>${post.title}</h1>` : ''}
-        ${MarkupText(post.text)}
+        ${MarkupText(toExternalLink(post.text))}
       </div>
       <footer class="bl_text_footer">
         <span class="bl_posts_dateago">

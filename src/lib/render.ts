@@ -10,19 +10,16 @@ export type Page = {
 
 export const baseUrl = 'https://kyonenya.github.io/';
 
-function overwriteInternalLink(): void {
-  document
-    .querySelectorAll<HTMLAnchorElement>(`a[href^="${baseUrl}"]`)
-    .forEach((a) => {
-      a.href = '/' + a.href.replace(baseUrl, '');
-    });
-}
-
 export function renderRoot(html: string): void {
   const rootElement = <HTMLDivElement>document.getElementById('root');
   rootElement.innerHTML = html;
   if (isDevelopment(window.location.href)) {
-    overwriteInternalLink();
+    // overwrite to internal link
+    document
+      .querySelectorAll<HTMLAnchorElement>(`a[href^="${baseUrl}"]`)
+      .forEach((a) => {
+        a.href = '/' + a.href.replace(baseUrl, '');
+      });
   }
 }
 

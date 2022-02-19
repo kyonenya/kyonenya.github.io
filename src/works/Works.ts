@@ -1,13 +1,9 @@
+import { MarkupText } from '../lib/MarkupText';
+import { parseMarkdownLink } from '../lib/utils';
 import { Citation, toCitationMap, Genre } from './citation';
 import { isNewCitation } from './citationDate';
-import { MarkupText } from '../lib/MarkupText';
 
-const Text = (text: string): string =>
-  MarkupText(text).replaceAll(
-    /\[(.+?)\]\((.+?)\)/g, // markdown link -> external anchorlink
-    (_, content: string, href: string) =>
-      `<a href="${href}" target="_blank" rel="noopener">${content}</a>`
-  );
+const Text = (text: string): string => MarkupText(parseMarkdownLink(text));
 
 const Item = (text: string): string => `<li>${Text(text)}</li>`;
 

@@ -5,12 +5,6 @@ export const MarkupText = (html: string): string =>
     .replaceAll('——', '<span class="hp_kerning">——</span>')
     // full-width space -> half-width space after (！|？)
     .replaceAll(/([！？])　/g, (_, token: string) => `${token} `)
-    // overwrite external link
-    .replaceAll(
-      /<a (href='[^?].+?'.*?)>(.+?)<\/a>/g,
-      (_, attributes: string, content: string) =>
-        `<a ${attributes} target='_blank' rel='noopener'>${content}</a>`
-    )
     // unset paragraph indent start with '「'
     .replaceAll(
       /<p>([「『（].+?)<\/p>/g,
