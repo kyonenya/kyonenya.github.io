@@ -1,5 +1,5 @@
+import { parseMarkdownLink } from '../lib/ExternalLink';
 import { MarkupText } from '../lib/MarkupText';
-import { parseMarkdownLink } from '../lib/utils';
 import { Citation, toCitationMap, Genre } from './citation';
 import { isNewCitation } from './citationDate';
 

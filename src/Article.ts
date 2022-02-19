@@ -1,7 +1,7 @@
 import { TagList } from './TagList';
+import { toExternalLink } from './lib/ExternalLink';
 import { MarkupText } from './lib/MarkupText';
 import { formatYMDHm, fromNow } from './lib/dateUtils';
-import { toExternalLink } from './lib/utils';
 import { Post } from './post';
 
 export const Article = (post: Post): string => `

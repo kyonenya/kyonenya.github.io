@@ -1,7 +1,7 @@
 import { PostListItem } from './PostListItem';
 import { Post } from './post';
 
-const Component = (children: string, archiveHeaderText?: string) => `
+const Container = (listItems: string, archiveHeaderText?: string) => `
   <section class="ly_container">
     ${
       archiveHeaderText
@@ -9,12 +9,12 @@ const Component = (children: string, archiveHeaderText?: string) => `
         : ''
     }
     <ul class="bl_postList">
-      ${children}
+      ${listItems}
     </ul>
   </section>`;
 
 export const PostList = (posts: Post[]): string =>
-  Component(
+  Container(
     posts
       .map((post, i) => PostListItem({ post: posts[i] }))
       .reverse()
@@ -22,7 +22,7 @@ export const PostList = (posts: Post[]): string =>
   );
 
 export const TaggedPostList = (posts: Post[], tag: string): string =>
-  Component(
+  Container(
     posts
       .map((post, i) =>
         post.tags.includes(tag)
@@ -42,7 +42,7 @@ export const SearchedPostList = (
   keyword: string,
   tag?: string
 ): string =>
-  Component(
+  Container(
     posts
       .map((post, i) =>
         tag === undefined || post.tags.includes(tag)
