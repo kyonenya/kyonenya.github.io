@@ -5,10 +5,12 @@ import { isNewCitation } from './citationDate';
 
 const Text = (text: string): string => MarkupText(parseMarkdownLink(text));
 
-const Item = (text: string): string => `<li>${Text(text)}</li>`;
+const StrongText = (text: string) =>
+  `<span class='hp_bold'>${Text(text)}</span>`;
 
-const HilightedItem = (text: string): string =>
-  `<strong>${Item(text)}</strong>`;
+const Item = (text: string) => `<li>${Text(text)}</li>`;
+
+const HilightedItem = (text: string): string => `<li>${StrongText(text)}</li>`;
 
 const List = (citations: Citation[] | undefined, genre: Genre): string => {
   if (!citations || citations.length === 0) return '';
