@@ -8,7 +8,7 @@ import { route } from './route';
 
 const jsonPath = './posts.json';
 
-function registerRerouters(reroute: () => void): void {
+function registerRerouter(reroute: () => void): void {
   watchPopState(reroute);
   watchSearchForm(reroute);
   mediaQueryContextProvider(reroute);
@@ -17,7 +17,7 @@ function registerRerouters(reroute: () => void): void {
 (async function index() {
   const posts = jsonToPost(await fetcher<JSONPost[]>(jsonPath));
   route(posts);
-  registerRerouters(() => route(posts));
+  registerRerouter(() => route(posts));
   defineBlogCard(posts);
   notifyUpdate();
 })();

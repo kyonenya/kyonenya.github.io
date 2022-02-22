@@ -1,35 +1,24 @@
+import { parseMarkdownLink } from '../lib/ExternalLink';
+import { MarkupText } from '../lib/MarkupText';
 import { Citation, toCitationMap, Genre } from './citation';
 import { isNewCitation } from './citationDate';
 
-const Text = (text: string): string =>
-  text
-    .replaceAll(
-      /\[(.+?)\]\((.+?)\)/g, // markdown link -> external anchorlink
-      (_, content: string, href: string) =>
-        `<a href="${href}" target="_blank" rel="noopener">${content}</a>`
-    )
-    .replaceAll(
-      '——', // kerning
-      '<span class="hp_kerning">——</span>'
-    );
+const Text = (text: string): string => MarkupText(parseMarkdownLink(text));
 
-const Item = (text: string): string => `<li>${Text(text)}</li>`;
+const BoldText = (text: string) => `<b>${Text(text)}</b>`;
 
-const HilightedItem = (text: string): string =>
-  `<strong>${Item(text)}</strong>`;
+const ListItem = (citation: Citation) => `
+  <li>
+    ${(isNewCitation(citation) ? BoldText : Text)(citation._bibliographyText)}
+  </li>
+`;
 
 const List = (citations: Citation[] | undefined, genre: Genre): string => {
   if (!citations || citations.length === 0) return '';
   return `
     <h3>${genre}</h3>
     <ol>
-      ${citations
-        .map((citation) =>
-          (isNewCitation(citation) ? HilightedItem : Item)(
-            citation._bibliographyText
-          )
-        )
-        .join('')}
+      ${citations.map((citation) => ListItem(citation)).join('')}
     </ol>`;
 };
 
