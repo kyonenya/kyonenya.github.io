@@ -1,9 +1,11 @@
 import { parseMarkdownLink } from '../lib/ExternalLink';
-import { MarkupText } from '../lib/MarkupText';
 import { Citation, toCitationMap, Genre } from './citation';
 import { isNewCitation } from './citationDate';
 
-const Text = (text: string): string => MarkupText(parseMarkdownLink(text));
+const Text = (text: string): string =>
+  parseMarkdownLink(text)
+    // kerning of double dash
+    .replaceAll('——', '<span class="hp_kerning">——</span>');
 
 const BoldText = (text: string) => `<b>${Text(text)}</b>`;
 
