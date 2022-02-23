@@ -5,11 +5,11 @@ import { isDevelopment } from './lib/utils';
 import { Post, excludeReserved } from './post';
 import { toState } from './state';
 
-const searchInputElement = document.querySelector('.el_search_input');
+const searchInputElement =
+  document.querySelector<HTMLInputElement>('.el_search_input');
 
 const routeMap = {
   article: (post: Post): void => {
-    searchInputElement?.classList.add('hp_hidden'); // disable search form
     renderPage({
       body: Article(post),
       title: post.title
@@ -19,6 +19,8 @@ const routeMap = {
       description: `${post.plainText.substring(0, 110)}…`,
       href: `${baseUrl}?id=${post.id}`,
     });
+    if (!searchInputElement) return;
+    searchInputElement.style.display = 'none'; // disable search form
   },
   postList: (posts: Post[]): void =>
     renderPage({
@@ -39,7 +41,8 @@ const routeMap = {
     }),
   beforeEach: (): void => {
     window.scrollTo(0, 0);
-    searchInputElement?.classList.remove('hp_hidden');
+    if (!searchInputElement) return;
+    searchInputElement.style.display = 'block';
   },
   afterEach: (posts: Post[]): void =>
     document
