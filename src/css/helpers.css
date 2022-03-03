@@ -2,10 +2,6 @@
  * ヘルパークラス
  */
 
-.hp_hidden {
-  display: none;
-}
-
 .hp_underline {
   text-decoration: underline;
   text-decoration-color: var(--text-secondary);
