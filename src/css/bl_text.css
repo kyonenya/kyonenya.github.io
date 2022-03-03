@@ -146,7 +146,7 @@
 }
 
 /* YouTube埋め込み */
-.bl_text iframe[src*='youtube'] {
+.bl_text :where(iframe[src*='youtube']) {
   aspect-ratio: 16 / 9;
   width: 100%;
   height: 100%;
