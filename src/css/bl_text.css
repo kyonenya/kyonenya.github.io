@@ -155,6 +155,12 @@
   padding-top: 1em;
 }
 
+@media screen and (max-width: 559px) {
+  .bl_text iframe[src*='youtube'] {
+    aspect-ratio: 4 / 3;
+  }
+}
+
 @media screen and (min-width: 560px) {
   .bl_text iframe[src*='youtube'] {
     padding: 1.5em 0 0.5em;
