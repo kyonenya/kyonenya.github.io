@@ -151,7 +151,7 @@
 }
 
 .bl_text :where(table, td, th) {
-  border: 1px var(--gray-strong) solid;  
+  border: 1px var(--gray-strong) solid;
   border-collapse: collapse;
 }
 
