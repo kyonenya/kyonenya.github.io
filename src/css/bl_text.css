@@ -147,7 +147,7 @@
 
 /* 表 */
 .bl_text :where(table) {
-  margin: 1em 0 1em 2em;
+  margin: 1em;
 }
 
 .bl_text :where(table, td, th) {
