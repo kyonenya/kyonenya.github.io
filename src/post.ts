@@ -30,7 +30,12 @@ export function jsonToPost(posts: JSONPost[]): Post[] {
   return [...posts].reverse().map((post) => ({
     ...post,
     title: post.title === null || post.title === '' ? undefined : post.title,
-    plainText: post.text.replaceAll(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''),
+    plainText: post.text
+      .replaceAll(
+        /<blockquote>(.+?)<\/blockquote>/g,
+        (_, text: string) => `> ${text}`
+      )
+      .replaceAll(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''),
     createdAt: parseDate(post.createdAt),
     modifiedAt: parseDate(post.modifiedAt),
   }));

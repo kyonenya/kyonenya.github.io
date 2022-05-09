@@ -145,6 +145,25 @@
   margin-bottom: 0.25em;
 }
 
+/* 表 */
+.bl_text :where(table) {
+  margin: 1em;
+}
+
+.bl_text :where(table, td, th) {
+  border: 1px var(--gray-strong) solid;
+  border-collapse: collapse;
+}
+
+.bl_text :where(th, td) {
+  padding: 1px 0.5em;
+}
+
+.bl_text :where(th) {
+  font-weight: unset;
+  background: var(--gray-weak);
+}
+
 /* YouTube埋め込み */
 .bl_text :where(iframe[src*='youtube']) {
   display: block;
