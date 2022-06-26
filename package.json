@@ -3,14 +3,15 @@
   "version": "2.4.1",
   "scripts": {
     "_tsc": "tsc -w --noEmit",
-    "_tsc checkjs": "tsc -w --noEmit --resolveJsonModule --p tsconfig.checkjs.json",
     "build": "webpack",
     "build:css": "postcss src/css/index.css -o dist/css/bundle.css",
+    "dev": "node index.js",
     "fmt": "prettier --write **/*.{ts,js,json,css}",
     "lint": "eslint --fix src/**/*.ts",
     "lint:css": "stylelint src/**/*.css",
     "bibliography": "node generateBibliography.js",
-    "sitemap": "node generateSitemap.js"
+    "sitemap": "node generateSitemap.js",
+    "tsc checkjs": "tsc -w --noEmit --resolveJsonModule --p tsconfig.checkjs.json"
   },
   "dependencies": {
     "search-summary": "^1.1.1"
