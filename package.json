@@ -10,6 +10,7 @@
     "lint": "eslint --fix src/**/*.ts",
     "lint:css": "stylelint src/**/*.css",
     "bibliography": "node generateBibliography.js",
+    "posts": "node generatePosts.js",
     "sitemap": "node generateSitemap.js",
     "tsc checkjs": "tsc -w --noEmit --resolveJsonModule --p tsconfig.checkjs.json"
   },
@@ -25,6 +26,9 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.25.3",
     "express": "^4.17.1",
+    "gray-matter": "^4.0.3",
+    "markdown-it": "^13.0.1",
+    "markdown-it-footnote": "^3.0.3",
     "postcss": "^8.3.0",
     "postcss-cli": "^8.3.1",
     "postcss-csso": "^5.0.1",
