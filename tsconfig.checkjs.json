@@ -6,5 +6,9 @@
     "checkJs": true,
     "noImplicitAny": false
   },
-  "include": ["generateBibliography.js", "generatePosts.js", "generateSitemap.js"]
+  "include": [
+    "generateBibliography.js",
+    "generatePosts.js",
+    "generateSitemap.js"
+  ]
 }
