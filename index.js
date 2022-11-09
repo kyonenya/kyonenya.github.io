@@ -3,9 +3,12 @@ const path = require('path');
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const config = require('./webpack.dev.config.js');
+const generatePosts = require('./generatePosts');
 
 const rootDir = __dirname;
 const port = process.env['WEB_APP_PORT'] ? process.env['WEB_APP_PORT'] : 3100;
+
+generatePosts();
 
 express()
   .use(webpackDevMiddleware(webpack(config)))

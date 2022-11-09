@@ -15,16 +15,17 @@ const mdPath = path.resolve(__dirname, 'posts');
  * @param dir string
  * @return string[]
  */
-const listFiles = (dir) =>
-  fs
+function listFiles(dir) {
+  return fs
     .readdirSync(dir, { withFileTypes: true })
     .flatMap((dirent) => {
-      if (/.*.icloud/.test(dirent.name)) return;
+      if (/^\..*/.test(dirent.name)) return; // exclude '.icloud' file
       return dirent.isFile()
         ? [`${dir}/${dirent.name}`]
         : listFiles(`${dir}/${dirent.name}`);
     })
     .filter((v) => v !== undefined);
+}
 
 /**
  * @param paths string[]
@@ -79,7 +80,9 @@ function writePostsJson(posts, mdPosts) {
  */
 function generatePosts() {
   writePostsJson(readPostsMarkdown(listFiles(mdPath)), require(jsonPath));
-  console.log('success!');
+  console.log('posts genarated.');
 }
 
 generatePosts();
+
+module.exports = generatePosts;
