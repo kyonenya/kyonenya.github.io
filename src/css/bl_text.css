@@ -165,7 +165,7 @@
 }
 
 .bl_text :where(section.footnotes) {
-  font-size: 95%;
+  font-size: 90%;
 }
 
 /* YouTube埋め込み */

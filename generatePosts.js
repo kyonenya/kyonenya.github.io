@@ -83,6 +83,4 @@ function generatePosts() {
   console.log('posts genarated.');
 }
 
-generatePosts();
-
 module.exports = generatePosts;
