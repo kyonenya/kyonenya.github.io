@@ -1,7 +1,10 @@
 import { toState } from './state';
 
 export function watchPopState(reroute: () => void): void {
-  window.addEventListener('popstate', reroute);
+  window.addEventListener('popstate', () => {
+    if (window.location.hash) return; // enable page-internal jump
+    reroute();
+  });
 }
 
 export function watchSearchForm(reroute: () => void): void {
