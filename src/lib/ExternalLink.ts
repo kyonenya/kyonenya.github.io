@@ -9,7 +9,7 @@ const ExternalLink = (props: {
 
 export function toExternalLink(html: string): string {
   return html.replaceAll(
-    /<a href='([^?].+?)'(.*?)>(.+?)<\/a>/g, // href start with '?'
+    /<a href=['"]([^?].+?)['"](.*?)>(.+?)<\/a>/g, // href start with '?'
     (_, href: string, attributes: string, content: string) =>
       ExternalLink({ href, attributes, content })
   );
