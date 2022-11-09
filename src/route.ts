@@ -51,7 +51,7 @@ const routeMap = {
         a.onclick = (e) => {
           e.preventDefault();
           window.history.pushState(undefined, '', a.href);
-          if (!!a.hash) return;
+          if (a.hash) return;
           route(posts);
         };
       });
