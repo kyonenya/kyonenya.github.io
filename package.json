@@ -10,7 +10,6 @@
     "lint": "eslint --fix src/**/*.ts",
     "lint:css": "stylelint src/**/*.css",
     "bibliography": "node generateBibliography.js",
-    "posts": "node generatePosts.js",
     "sitemap": "node generateSitemap.js",
     "tsc checkjs": "tsc -w --noEmit --resolveJsonModule --p tsconfig.checkjs.json"
   },
