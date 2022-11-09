@@ -44,7 +44,7 @@ const routeMap = {
     if (!searchInputElement) return;
     searchInputElement.style.display = 'block';
   },
-  afterEach: (posts: Post[]): void =>
+  afterEach: (posts: Post[]): void => {
     document
       .querySelectorAll<HTMLAnchorElement>('a[href^="?"]')
       .forEach((a) => {
@@ -53,7 +53,8 @@ const routeMap = {
           window.history.pushState(undefined, '', a.href);
           route(posts);
         };
-      }),
+      });
+  },
 };
 
 export function route(rawPosts: Post[]): void {

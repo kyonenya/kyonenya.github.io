@@ -80,7 +80,7 @@ function writePostsJson(posts, mdPosts) {
  */
 function generatePosts() {
   writePostsJson(readPostsMarkdown(listFiles(mdPath)), require(jsonPath));
-  console.log('posts genarated.');
+  console.log('Posts genarated.');
 }
 
 module.exports = generatePosts;
