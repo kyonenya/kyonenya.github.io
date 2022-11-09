@@ -18,11 +18,14 @@ const mdPath = path.resolve(__dirname, 'posts');
 const listFiles = (dir) =>
   fs
     .readdirSync(dir, { withFileTypes: true })
-    .flatMap((dirent) =>
-      dirent.isFile()
+    .flatMap((dirent) => {
+      if (/.*.icloud/.test(dirent.name)) return;
+      return dirent.isFile()
         ? [`${dir}/${dirent.name}`]
         : listFiles(`${dir}/${dirent.name}`)
-    );
+      }
+    )
+    .filter(v => v !== undefined);
 
 /**
  * @param paths string[]
@@ -34,7 +37,11 @@ function readPostsMarkdown(paths) {
     .map((string) => matter(string))
     .map((matter) => ({
       ...matter.data,
-      text: md.replace(/\n/g, '').replace(/&gt;/g, '>').replace(/&lt;/g, '<'),
+      text: md
+        .render(matter.content)
+        .replace(/\n/g, '')
+        .replace(/&gt;/g, '>')
+        .replace(/&lt;/g, '<'),
     }));
 }
 
