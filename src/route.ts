@@ -51,7 +51,22 @@ const routeMap = {
         a.onclick = (e) => {
           e.preventDefault();
           window.history.pushState(undefined, '', a.href);
+          if (!!a.hash) return;
           route(posts);
+        };
+      });
+    document
+      .querySelectorAll<HTMLAnchorElement>('a[href^="#"]')
+      .forEach((a) => {
+        a.onclick = (e) => {
+          e.preventDefault();
+          window.history.pushState(undefined, '', a.href);
+          const targetElement = document.querySelector(a.hash);
+          if (!targetElement) return;
+          window.scrollTo({
+            top: window.pageYOffset + targetElement.getBoundingClientRect().top,
+            behavior: 'smooth',
+          });
         };
       });
   },
