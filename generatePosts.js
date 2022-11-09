@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const prettier = require('prettier');
 const MarkdownIt = require('markdown-it');
 const MarkdownItFootnote = require('markdown-it-footnote');
 const matter = require('gray-matter');
@@ -33,7 +34,7 @@ function readPostsMarkdown(paths) {
     .map((string) => matter(string))
     .map((matter) => ({
       ...matter.data,
-      text: md.render(matter.content).replace(/\n/g, ''),
+      text: md.replace(/\n/g, '').replace(/&gt;/g, '>').replace(/&lt;/g, '<'),
     }));
 }
 
@@ -57,11 +58,22 @@ function uniquePosts(posts) {
  * @param mdPosts {import('./src/post').JSONPost[]}
  * @return {void}
  */
-function generatePosts(posts, mdPosts) {
+function writePostsJson(posts, mdPosts) {
   fs.writeFileSync(
     jsonPath,
-    JSON.stringify(uniquePosts([...mdPosts, ...posts]))
+    prettier.format(JSON.stringify(uniquePosts([...mdPosts, ...posts])), {
+      semi: false,
+      parser: 'json',
+    })
   );
 }
 
-generatePosts(readPostsMarkdown(listFiles(mdPath)), require(jsonPath));
+/**
+ * @return {void}
+ */
+function generatePosts() {
+  writePostsJson(readPostsMarkdown(listFiles(mdPath)), require(jsonPath));
+  console.log('success!');
+}
+
+generatePosts();
