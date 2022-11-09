@@ -22,10 +22,9 @@ const listFiles = (dir) =>
       if (/.*.icloud/.test(dirent.name)) return;
       return dirent.isFile()
         ? [`${dir}/${dirent.name}`]
-        : listFiles(`${dir}/${dirent.name}`)
-      }
-    )
-    .filter(v => v !== undefined);
+        : listFiles(`${dir}/${dirent.name}`);
+    })
+    .filter((v) => v !== undefined);
 
 /**
  * @param paths string[]

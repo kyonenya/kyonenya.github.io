@@ -164,6 +164,10 @@
   background: var(--gray-weak);
 }
 
+.bl_text :where(section.footnotes) {
+  font-size: 95%;
+}
+
 /* YouTube埋め込み */
 .bl_text :where(iframe[src*='youtube']) {
   display: block;
