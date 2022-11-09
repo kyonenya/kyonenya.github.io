@@ -44,16 +44,32 @@ const routeMap = {
     if (!searchInputElement) return;
     searchInputElement.style.display = 'block';
   },
-  afterEach: (posts: Post[]): void =>
+  afterEach: (posts: Post[]): void => {
     document
       .querySelectorAll<HTMLAnchorElement>('a[href^="?"]')
       .forEach((a) => {
         a.onclick = (e) => {
           e.preventDefault();
           window.history.pushState(undefined, '', a.href);
+          if (a.hash) return;
           route(posts);
         };
-      }),
+      });
+    document
+      .querySelectorAll<HTMLAnchorElement>('a[href^="#"]')
+      .forEach((a) => {
+        a.onclick = (e) => {
+          e.preventDefault();
+          window.history.pushState(undefined, '', a.href);
+          const targetElement = document.querySelector(a.hash);
+          if (!targetElement) return;
+          window.scrollTo({
+            top: window.pageYOffset + targetElement.getBoundingClientRect().top,
+            behavior: 'smooth',
+          });
+        };
+      });
+  },
 };
 
 export function route(rawPosts: Post[]): void {

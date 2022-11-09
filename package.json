@@ -1,6 +1,6 @@
 {
   "name": "kyonenya.github.io",
-  "version": "2.4.1",
+  "version": "2.5.0",
   "scripts": {
     "_tsc": "tsc -w --noEmit",
     "build": "webpack",
@@ -25,6 +25,9 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.25.3",
     "express": "^4.17.1",
+    "gray-matter": "^4.0.3",
+    "markdown-it": "^13.0.1",
+    "markdown-it-footnote": "^3.0.3",
     "postcss": "^8.3.0",
     "postcss-cli": "^8.3.1",
     "postcss-csso": "^5.0.1",
