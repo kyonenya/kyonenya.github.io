@@ -41,7 +41,9 @@ function readPostsMarkdown(paths) {
         .render(matter.content)
         .replace(/\n/g, '')
         .replace(/&gt;/g, '>')
-        .replace(/&lt;/g, '<'),
+        .replace(/&lt;/g, '<')
+        // 漢字《ふりがな》
+        .replace(/([一-龠]+)《(.+?)》/g, '<ruby>$1<rt>$2</rt></ruby>'),
     }));
 }
 
