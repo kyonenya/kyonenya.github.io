@@ -35,6 +35,11 @@ export function jsonToPost(posts: JSONPost[]): Post[] {
         /<blockquote>(.+?)<\/blockquote>/g,
         (_, text: string) => `> ${text}`
       )
+      .replaceAll(
+        /<h2>(.+?)<\/h2>/g,
+        (_, text: string) => `## ${text}`
+      )
+      .replaceAll(/——/g, '──')
       .replaceAll(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''),
     createdAt: parseDate(post.createdAt),
     modifiedAt: parseDate(post.modifiedAt),
