@@ -43,6 +43,7 @@ function readPostsMarkdown(paths) {
         .replace(/&gt;/g, '>')
         .replace(/&lt;/g, '<')
         // 漢字《ふりがな》
+        .replace(/｜(.+?)《(.+?)》/g, '<ruby>$1<rt>$2</rt></ruby>')
         .replace(/([一-龠]+)《(.+?)》/g, '<ruby>$1<rt>$2</rt></ruby>'),
     }));
 }

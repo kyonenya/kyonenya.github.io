@@ -2,10 +2,10 @@
   "name": "kyonenya.github.io",
   "version": "2.5.0",
   "scripts": {
+    "_dev": "node index.js",
     "_tsc": "tsc -w --noEmit",
     "build": "webpack",
     "build:css": "postcss src/css/index.css -o dist/css/bundle.css",
-    "dev": "node index.js",
     "fmt": "prettier --write **/*.{ts,js,json,css}",
     "lint": "eslint --fix src/**/*.ts",
     "lint:css": "stylelint src/**/*.css",
