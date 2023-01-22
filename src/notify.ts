@@ -1,7 +1,7 @@
 import { isNew } from './lib/dateUtils';
 
-const modifiedAt = '2022-02-02';
-const newDays = 15;
+const modifiedAt = '2023-01-22';
+const newDays = 30;
 
 export function notifyUpdate(): void {
   const aboutElement = document.getElementById('about');
