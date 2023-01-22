@@ -1,6 +1,6 @@
 import { isNew } from './lib/dateUtils';
 
-const modifiedAt = '2023-01-21';
+const modifiedAt = '2023-01-22';
 const newDays = 30;
 
 export function notifyUpdate(): void {
