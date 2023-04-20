@@ -167,7 +167,7 @@
             <text variable="container-title" prefix="『" suffix="』" />
             <text macro="locators" suffix=" "/>
             <group delimiter=", ">
-              <text macro="page"/>
+              <text variable="page"/><!-- :のあとはpp.なし -->
               <text macro="publisher"/>
               <text macro="issued"/>
             </group>
