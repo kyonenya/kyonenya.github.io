@@ -44,7 +44,7 @@ function generateSitemap(posts) {
         format(sm.toString(), { indentation: '  ', collapseContent: true })
       )
     )
-    .then(() => console.log('success!'));
+    .then(() => console.log('sitemap generated.'));
 }
 
 generateSitemap(posts);

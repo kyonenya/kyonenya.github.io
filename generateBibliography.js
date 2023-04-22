@@ -71,7 +71,7 @@ function generateBibliography() {
       parser: 'json',
     })
   );
-  console.log('success!');
+  console.log('bibliography generated.');
 }
 
 generateBibliography();
