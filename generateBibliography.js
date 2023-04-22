@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const CSL = require('citeproc');
+const prettier = require('prettier');
 
 const worksPath = path.resolve('works.json');
 const stylePath = path.resolve('assets', 'citeproc', 'sist02modified.csl');
@@ -63,7 +64,13 @@ function AppendBibliopraphy(items) {
 function generateBibliography() {
   const works = JSON.parse(fs.readFileSync(worksPath, 'utf8'));
   const newWorks = AppendBibliopraphy(works);
-  fs.writeFileSync(worksPath, JSON.stringify(newWorks));
+  fs.writeFileSync(
+    worksPath,
+    prettier.format(JSON.stringify(newWorks), {
+      semi: false,
+      parser: 'json',
+    })
+  );
   console.log('success!');
 }
 
