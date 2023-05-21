@@ -15,9 +15,13 @@ export function toExternalLink(html: string): string {
   );
 }
 
-export function parseMarkdownLink(text: string): string {
+export function parseMarkdownLink(
+  text: string,
+  contentModifier = (content: string) => content
+): string {
   return text.replaceAll(
     /\[(.+?)\]\((.+?)\)/g,
-    (_, content: string, href: string) => ExternalLink({ content, href })
+    (_, content: string, href: string) =>
+      ExternalLink({ content: contentModifier(content), href })
   );
 }

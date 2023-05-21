@@ -90,7 +90,7 @@
           <date-part name="day" form="numeric-leading-zeros"/>
         </date>
       </group>
-      -->      
+      -->
     </group>
   </macro>
   <macro name="page">
@@ -157,8 +157,10 @@
       <!-- <text variable="citation-number" prefix="(" suffix=")"/> -->
       <text macro="author"/>
       <choose>
+        <!-- 論文（＋翻訳） -->
         <if type="article-journal">
           <group>
+            <text macro="issued" prefix="（" suffix="）" />
             <group delimiter=": ">
               <!-- <text variable="collection-title"/> -->
               <text macro="title"/>
@@ -169,10 +171,10 @@
             <group delimiter=", ">
               <text variable="page"/><!-- :のあとはpp.なし -->
               <text macro="publisher"/>
-              <text macro="issued"/>
             </group>
           </group>
         </if>
+        <!-- 発表 -->
         <else-if type="paper-conference" match="any">
           <group>
             <text macro="title"/>
@@ -189,6 +191,7 @@
             -->
           </group>
         </else-if>
+        <!-- 書籍 -->
         <else-if type="book" match="any">
           <group delimiter=". ">
             <text macro="title"/>
