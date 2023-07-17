@@ -81,16 +81,6 @@
         </else>
       </choose>
       <text variable="URL" prefix="(" suffix=")"/>
-      <!--
-      <group>
-        <text term="accessed" text-case="lowercase" prefix="(" suffix=" "/>
-        <date variable="accessed" suffix=")">
-          <date-part name="year" range-delimiter="-" suffix="-"/>
-          <date-part name="month" form="numeric-leading-zeros" range-delimiter="-" strip-periods="true" suffix="-"/>
-          <date-part name="day" form="numeric-leading-zeros"/>
-        </date>
-      </group>
-      -->
     </group>
   </macro>
   <macro name="page">
@@ -154,7 +144,6 @@
       <key variable="citation-number"/>
     </sort>
     <layout>
-      <!-- <text variable="citation-number" prefix="(" suffix=")"/> -->
       <text macro="author"/>
       <choose>
         <!-- 論文（＋翻訳） -->
@@ -162,14 +151,13 @@
           <group>
             <text macro="issued" prefix="（" suffix="）" />
             <group delimiter=": ">
-              <!-- <text variable="collection-title"/> -->
               <text macro="title"/>
             </group>
-            <text macro="translator" suffix=", "/>
             <text variable="container-title" prefix="『" suffix="』" />
             <text macro="locators" suffix=" "/>
             <group delimiter=", ">
               <text variable="page"/><!-- :のあとはpp.なし -->
+              <text macro="translator"/>
               <text macro="publisher"/>
             </group>
           </group>
