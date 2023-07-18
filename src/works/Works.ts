@@ -3,10 +3,9 @@ import { Citation, toCitationMap, Genre } from './citation';
 import { isNewCitation } from './citationDate';
 
 const Text = (text: string): string =>
-  parseMarkdownLink(text, (content) =>
-    // kerning of double dash
-    content.replaceAll('——', '<span class="hp_kerning">——</span>')
-  );
+  parseMarkdownLink(
+    text.replace(/——(?![^\(]*\))/g, '<span class="hp_kerning">——</span>') // kerning except link href
+    );
 
 const BoldText = (text: string) => `<b>${Text(text)}</b>`;
 

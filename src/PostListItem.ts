@@ -4,7 +4,7 @@ import { formatYMD, fromNow } from './lib/dateUtils';
 import { useMediaQueryContext } from './mediaQueryContext';
 import { Post } from './post';
 
-const elipsisToken = '…';
+const ellipsisToken = '…';
 
 const Keyword = (keyword: string) =>
   `<span class="hp_highlight">${keyword}</span>`;
@@ -27,7 +27,7 @@ const SearchSummary = (searchSummary: string) => `
 const MobileSummary = (plainText: string) => `
   <div class="bl_postList_summary">
     <p class="hp_alignJustify">
-      ${plainText.substring(0, 134) + elipsisToken}
+      ${plainText.substring(0, 134) + ellipsisToken}
     </p>
   </div>`;
 
