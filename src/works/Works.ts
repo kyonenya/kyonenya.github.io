@@ -5,7 +5,7 @@ import { isNewCitation } from './citationDate';
 const Text = (text: string): string =>
   parseMarkdownLink(
     text.replace(/——(?![^\(]*\))/g, '<span class="hp_kerning">——</span>') // kerning except link href
-    );
+  );
 
 const BoldText = (text: string) => `<b>${Text(text)}</b>`;
 
