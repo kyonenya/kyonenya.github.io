@@ -5,15 +5,15 @@ export type Update = {
   newDays: number;
 };
 
-export function notifyUpdate(props: Update): void {
+export function notifyUpdate({ updatedAt, newDays }: Update): void {
   const aboutElement = document.getElementById('about');
 
-  if (!isNew(new Date(props.updatedAt), props.newDays)) return;
+  if (!isNew(new Date(updatedAt), newDays) || newDays <= 0) return;
 
   aboutElement?.addEventListener('click', () => {
-    localStorage.setItem(props.updatedAt, 'true');
+    localStorage.setItem(updatedAt, 'true');
   });
-  if (localStorage.getItem(props.updatedAt) !== 'true') {
+  if (localStorage.getItem(updatedAt) !== 'true') {
     aboutElement?.classList.add('el_badge');
   }
 }
