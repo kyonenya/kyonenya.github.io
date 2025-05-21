@@ -32,7 +32,7 @@
   <macro name="event">
     <group delimiter=", ">
       <text variable="event"/>
-      <text variable="event-place"/>
+      <!-- <text variable="event-place"/> -->
       <date variable="event-date" delimiter="-">
         <date-part name="year"/>
         <date-part name="month" form="numeric-leading-zeros"/>
@@ -153,12 +153,12 @@
             <group delimiter=": ">
               <text macro="title"/>
             </group>
+            <text macro="translator" suffix=", " />
             <text variable="container-title" prefix="『" suffix="』" />
             <text macro="locators" suffix=" "/>
             <group delimiter=", ">
               <text variable="page"/><!-- :のあとはpp.なし -->
-              <text macro="translator"/>
-              <text macro="publisher"/>
+              <!-- <text macro="publisher"/> -->
             </group>
           </group>
         </if>
