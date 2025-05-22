@@ -7,25 +7,28 @@ const sitemap = new SitemapStream({ hostname: 'https://kyonenya.github.io/' });
 
 /**
  * @param {import('./src/post').JSONPost[]} posts
- * @return { {tag: string, modifiedAt: string}[] }
- */
-function tagHistory(posts) {
-  const tags = [...new Set(posts.map((post) => post.tags).flat())]; // uniq
-  return tags.map((tag) => {
-    const post = posts.find((post) => post.tags.includes(tag));
-    if (!post) return { tag, modifiedAt: '' };
-    return { tag, modifiedAt: post.modifiedAt };
-  });
-}
-
-/**
- * @param {import('./src/post').JSONPost[]} posts
  * @return {string}
  */
 function getLatestModifiedAt(posts) {
   return posts
     .map((post) => post.modifiedAt)
     .sort((a, b) => new Date(b).getTime() - new Date(a).getTime())[0];
+}
+
+/**
+ * @param {import('./src/post').JSONPost[]} posts
+ * @return { {tag: string, modifiedAt: string}[] }
+ */
+function tagHistory(posts) {
+  const tags = [...new Set(posts.map((post) => post.tags).flat())]; // uniq
+  return tags.map((tag) => {
+    return {
+      tag,
+      modifiedAt: getLatestModifiedAt(
+        posts.filter((post) => post.tags.includes(tag))
+      ),
+    };
+  });
 }
 
 /**
