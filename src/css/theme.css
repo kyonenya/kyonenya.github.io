@@ -16,6 +16,7 @@
   --main-primary: hsl(202, 45%, 45%); /* LightBlue 600s */
   --main-secondary: hsl(202, 35%, 60%); /* LightBlue 350 */
   --accent-primary: hsl(349, 39%, 66%); /* Pink 300 */
+  --hilight-primary: hsl(55, 100%, 70%);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -30,5 +31,6 @@
     --main-primary: hsl(202, 35%, 60%); /* LightBlue 350 */
     --main-secondary: hsl(202, 25%, 48%); /* LightBlue 500s */
     --accent-primary: hsl(349, 30%, 52%); /* Pink 500s */
+    --hilight-primary: hsl(55, 80%, 50%);
   }
 }

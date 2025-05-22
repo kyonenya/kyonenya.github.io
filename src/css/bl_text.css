@@ -135,7 +135,6 @@
 }
 
 /* 順序つきリスト */
-/* 順序つきリスト */
 .bl_text :where(ol) {
   counter-reset: listnum;
   list-style: none;
@@ -159,12 +158,13 @@
 
 .bl_text :where(ol li.hilightBefore)::before {
   display: inline-block;
-  background: hsl(60, 100%, 77%);
+  background: var(--hilight-primary);
   border: 1px solid hsla(0, 0%, 0%, 0.15);
-  color: hsl(0, 0%, 13%);
+  color: hsl(0, 0%, 0%); /* jet black */
   border-radius: 3px;
   padding: 2px 3px;
   margin: 0 0.2em;
+  font-weight: bold;  
 }
 
 /* 表 */
