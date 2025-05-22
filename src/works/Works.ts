@@ -1,6 +1,5 @@
 import { parseMarkdownLink } from '../lib/ExternalLink';
 import { Citation, toCitationMap, Genre } from './citation';
-import { isNewCitation } from './citationDate';
 
 const Text = (text: string): string =>
   parseMarkdownLink(
@@ -11,7 +10,7 @@ const BoldText = (text: string) => `<b>${Text(text)}</b>`;
 
 const ListItem = (citation: Citation) => `
   <li>
-    ${(isNewCitation(citation) ? BoldText : Text)(citation._bibliographyText)}
+    ${Text(citation._bibliographyText)}
   </li>
 `;
 
