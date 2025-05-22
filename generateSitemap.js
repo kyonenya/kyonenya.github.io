@@ -2,9 +2,7 @@ const { createWriteStream, writeFileSync } = require('fs');
 const { SitemapStream, streamToPromise } = require('sitemap');
 const format = require('xml-formatter');
 const posts = require('./posts.json');
-
-const worksLastmod = '2023-01-22';
-const aboutLastmod = '2023-01-22';
+const { updatedAt } = require('./about.json');
 
 const sitemap = new SitemapStream({ hostname: 'https://kyonenya.github.io/' });
 
@@ -23,12 +21,22 @@ function tagHistory(posts) {
 
 /**
  * @param {import('./src/post').JSONPost[]} posts
+ * @return {string}
+ */
+function getLatestModifiedAt(posts) {
+  return posts
+    .map((post) => post.modifiedAt)
+    .sort((a, b) => new Date(b).getTime() - new Date(a).getTime())[0];
+}
+
+/**
+ * @param {import('./src/post').JSONPost[]} posts
  * @return {void}
  */
 function generateSitemap(posts) {
-  sitemap.write({ url: '', lastmod: posts[0].modifiedAt });
-  sitemap.write({ url: 'works', lastmod: worksLastmod });
-  sitemap.write({ url: 'about', lastmod: aboutLastmod });
+  sitemap.write({ url: '', lastmod: getLatestModifiedAt(posts) });
+  sitemap.write({ url: 'works', lastmod: updatedAt });
+  sitemap.write({ url: 'about', lastmod: updatedAt });
   posts.forEach((post) =>
     sitemap.write({ url: `?id=${post.id}`, lastmod: post.modifiedAt })
   );
