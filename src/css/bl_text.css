@@ -135,14 +135,36 @@
 }
 
 /* 順序つきリスト */
+/* 順序つきリスト */
 .bl_text :where(ol) {
-  margin-left: 0;
-  padding-left: 2em;
+  counter-reset: listnum;
+  list-style: none;
+  padding-left: unset;
 }
 
 .bl_text :where(ol li) {
-  list-style: decimal;
+  counter-increment: listnum;
+  position: relative;
+  padding-left: 2em;
   margin-bottom: 0.25em;
+}
+
+.bl_text :where(ol li)::before {
+  content: counter(listnum) '.';
+  position: absolute;
+  left: 0;
+  width: 1.5em;
+  text-align: right;
+}
+
+.bl_text :where(ol li.hilightBefore)::before {
+  display: inline-block;
+  background: hsl(60, 100%, 77%);
+  border: 1px solid hsla(0, 0%, 0%, 0.15);
+  color: hsl(0, 0%, 13%);
+  border-radius: 3px;
+  padding: 2px 3px;
+  margin: 0 0.2em;
 }
 
 /* 表 */
