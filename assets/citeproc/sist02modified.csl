@@ -76,6 +76,9 @@
         <if type="article-journal paper-conference" match="any">
           <text value="[PDF]"/>
         </if>
+        <else-if type="book" match="any">
+          <text value="[出版社ページ]"/>
+        </else-if>
         <else>
           <text value="[リンク]"/>
         </else>
@@ -181,16 +184,16 @@
         </else-if>
         <!-- 書籍 -->
         <else-if type="book" match="any">
-          <group delimiter=". ">
+          <group>
+            <text macro="issued" prefix="（" suffix="）" />
             <text macro="title"/>
             <text macro="translator"/>
+            <text macro="publisher"/>
             <group delimiter=", ">
               <text variable="edition"/>
-              <text macro="publisher"/>
-              <text macro="issued"/>
               <text macro="page"/>
               <text variable="collection-title" prefix="(" suffix=")"/>
-              <text variable="ISBN" prefix="ISBN"/>
+              <!-- <text variable="ISBN" prefix="ISBN"/> -->
             </group>
           </group>
         </else-if>
