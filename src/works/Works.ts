@@ -1,5 +1,6 @@
 import { parseMarkdownLink } from '../lib/ExternalLink';
 import { Citation, toCitationMap, Genre } from './citation';
+import { isUnpublished } from './citationDate';
 
 const Text = (text: string): string =>
   parseMarkdownLink(
@@ -14,7 +15,13 @@ const ListItem = (citation: Citation, id?: string) => `
 }>
     ${(citation.id.toString() === id ? BoldText : Text)(
       citation._bibliographyText
-    )}
+    )}${
+  isUnpublished(citation)
+    ? citation.type === 'paper-conference'
+      ? '［発表予定］'
+      : '［刊行予定］'
+    : ''
+}
   </li>
 `;
 
