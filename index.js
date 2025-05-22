@@ -10,8 +10,6 @@ const generateBibliography = require('./generateBibliography');
 const rootDir = __dirname;
 const port = process.env['WEB_APP_PORT'] ? process.env['WEB_APP_PORT'] : 3100;
 
-generatePosts();
-
 express()
   .use(webpackDevMiddleware(webpack(config)))
   .get('/', (req, res) => res.sendFile(path.resolve(rootDir, 'index.html')))
@@ -31,5 +29,6 @@ express()
     console.log(`Launching app... http://localhost:${port}\n`)
   );
 
+generatePosts();
 generateSitemap(require('./posts.json'));
 generateBibliography();

@@ -58,7 +58,7 @@
         </header>
         <div class="bl_text">
           <p>
-            <a href="https://kyonenya.github.io/works">Works</a>ページに<a href="http://doi.org/10.15002/00026025" target="_blank">最近の論文</a>と過去の論文のPDFリンクを追加しました。
+            Worksページに<a href="https://kyonenya.github.io/works#7">最近の論文</a>と<a href="https://kyonenya.github.io/works#5">過去の論文</a>のPDFリンクを追加しました。
           </p>
         </div>
       </li>
@@ -82,7 +82,7 @@
           <time class="bl_postList_date">2022-02-02</time>
         </header>
         <div class="bl_text">
-          <p>永井均『遺稿焼却問題<span class="hp_kerning">——</span>哲学日記2014-2021』（ぷねうま舎、53頁〜）にて拙論「言語行為の根源的演技性」に言及していただきました。<a href="https://www.pneumasha.com/2021/12/13/%E9%81%BA%E7%A8%BF%E7%84%BC%E5%8D%B4%E5%95%8F%E9%A1%8C/" target="_blank" rel="noopener">出版社ページ</a></p>
+          <p>永井均『遺稿焼却問題<span class="hp_kerning">——</span>哲学日記2014-2021』（ぷねうま舎、53頁〜）にて拙論「<a href="https://kyonenya.github.io/works#1">言語行為の根源的演技性</a>」に言及していただきました。<a href="https://www.pneumasha.com/2021/12/13/%E9%81%BA%E7%A8%BF%E7%84%BC%E5%8D%B4%E5%95%8F%E9%A1%8C/" target="_blank" rel="noopener">出版社ページ</a></p>
         </div>
       </li>
       <li class="bl_postList_item">
@@ -90,7 +90,7 @@
           <time class="bl_postList_date">2021-11-28</time>
         </header>
         <div class="bl_text">
-          <p><a href="https://kyonenya.github.io/works">Works</a>ページに既刊論文と刊行予定の翻訳を追加しました。</p>
+          <p>Worksページに<a href="https://kyonenya.github.io/works#5">既刊論文</a>と<a href="https://kyonenya.github.io/works#6">刊行予定の翻訳</a>を追加しました。</p>
         </div>
       </li>
       <li class="bl_postList_item">
@@ -98,7 +98,7 @@
           <time class="bl_postList_date">2020-12-05</time>
         </header>
         <div class="bl_text">
-          <p><a href="https://kyonenya.github.io/works">Works</a>ページに発表原稿をアップしました。</p>
+          <p>Worksページに<a href="https://kyonenya.github.io/works#4">発表原稿</a>をアップしました。</p>
         </div>
       </li>
       <li class="bl_postList_item">
@@ -127,5 +127,15 @@
       </p>
     </div><!-- ./ly_footer_inner -->
   </footer>
+  <script>
+    if (/localhost:\d+/.test(window.location.href)) {
+      const baseUrl = 'https://kyonenya.github.io/';
+      document
+      .querySelectorAll(`a[href^="${baseUrl}"]`)
+      .forEach((a) => {
+        a.href = '/' + a.href.replace(baseUrl, '');
+      });
+    }
+  </script>
 </body>
 </html>
