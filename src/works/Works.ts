@@ -12,7 +12,9 @@ const ListItem = (citation: Citation, id?: string) => `
   <li id=${citation.id} class=${
   citation.id.toString() === id ? 'hilightBefore' : ''
 }>
-    ${(citation.id === id ? BoldText : Text)(citation._bibliographyText)}
+    ${(citation.id.toString() === id ? BoldText : Text)(
+      citation._bibliographyText
+    )}
   </li>
 `;
 
