@@ -1,7 +1,6 @@
 const { createWriteStream, writeFileSync } = require('fs');
 const { SitemapStream, streamToPromise } = require('sitemap');
 const format = require('xml-formatter');
-const posts = require('./posts.json');
 const { updatedAt } = require('./about.json');
 
 const sitemap = new SitemapStream({ hostname: 'https://kyonenya.github.io/' });
@@ -55,4 +54,9 @@ function generateSitemap(posts) {
     .then(() => console.log('sitemap generated.'));
 }
 
-generateSitemap(posts);
+module.exports = generateSitemap;
+
+if (require.main === module) {
+  const posts = require('./posts.json');
+  generateSitemap(posts);
+}

@@ -87,3 +87,7 @@ function generatePosts() {
 }
 
 module.exports = generatePosts;
+
+if (require.main === module) {
+  generatePosts();
+}

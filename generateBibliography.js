@@ -74,4 +74,8 @@ function generateBibliography() {
   console.log('bibliography generated.');
 }
 
-generateBibliography();
+module.exports = generateBibliography;
+
+if (require.main === module) {
+  generateBibliography();
+}

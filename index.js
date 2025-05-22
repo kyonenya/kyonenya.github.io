@@ -4,6 +4,8 @@ const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const config = require('./webpack.dev.config.js');
 const generatePosts = require('./generatePosts');
+const generateSitemap = require("./generateSitemap");
+const generateBibliography = require("./generateBibliography");
 
 const rootDir = __dirname;
 const port = process.env['WEB_APP_PORT'] ? process.env['WEB_APP_PORT'] : 3100;
@@ -28,3 +30,6 @@ express()
   .listen(port, () =>
     console.log(`Launching app... http://localhost:${port}\n`)
   );
+
+generateSitemap(require("./posts.json"));
+generateBibliography();
