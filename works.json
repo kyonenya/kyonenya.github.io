@@ -1,5 +1,29 @@
 [
   {
+    "id": 9,
+    "type": "book",
+    "title": "想像と観入の現象学",
+    "author": [{ "literal": "京念屋隆史" }],
+    "issued": { "date-parts": [[2026, 7, 15]] },
+    "publisher": "法政大学出版局",
+    "ISBN": null,
+    "URL": "https://www.h-up.com/books/isbn978-4-588-15104-0.html",
+    "note": "",
+    "_bibliographyText": "京念屋隆史（2026）『想像と観入の現象学』法政大学出版局. [出版社ページ](https://www.h-up.com/books/isbn978-4-588-15104-0.html)"
+  },
+  {
+    "id": 8,
+    "type": "book",
+    "title": "転移性恋愛について——ラカンと読む太宰治「駈込み訴え」",
+    "author": [{ "literal": "京念屋隆史" }],
+    "issued": { "date-parts": [[2025, 11, 23]] },
+    "publisher": "哲学書房 京念屋",
+    "ISBN": null,
+    "URL": "",
+    "note": "[販売ページ](https://kyonenya.booth.pm/items/6614402)",
+    "_bibliographyText": "京念屋隆史（2025）『転移性恋愛について——ラカンと読む太宰治「駈込み訴え」』哲学書房 京念屋. [販売ページ](https://kyonenya.booth.pm/items/6614402)"
+  },
+  {
     "id": 7,
     "type": "article-journal",
     "title": "サルトル想像論における「準観察」のテーゼ——想像と知覚の差異について",

@@ -8,7 +8,9 @@ const worksPath = './works.json';
 const aboutPath = './about.json';
 
 (async function index() {
-  renderRoot(Works(await fetcher<Citation[]>(worksPath)));
+  const citations = await fetcher<Citation[]>(worksPath);
+  const id = decodeURIComponent(window.location.hash.replace('#', ''));
+  renderRoot(Works(citations, id));
 
   const update = await fetcher<Update>(aboutPath);
   notifyUpdate(update);
