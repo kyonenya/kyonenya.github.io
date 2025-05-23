@@ -9,17 +9,16 @@ const Text = (text: string): string =>
 
 const BoldText = (text: string) => `<b>${Text(text)}</b>`;
 
-const ListItem = (citation: Citation, i: number, id?: string): string => {
+const ListItem = (citation: Citation, num: number, id?: string): string => {
   const isHighlighted = citation.id.toString() === id;
+  const ListNum = isHighlighted
+    ? `<a href="?" class="el_olNum hp_highlight hp_unsetLink">${num}.</a>`
+    : `<span class="el_olNum">${num}.</span>`;
   const statusNote = isUnpublished(citation)
     ? citation.type === 'paper-conference'
       ? '［発表予定］'
       : '［刊行予定］'
     : '';
-  const num = `${i + 1}`;
-  const ListNum = isHighlighted
-    ? `<a href="?" class="el_olNum hp_highlight hp_unsetLink">${num}.</a>`
-    : `<span class="el_olNum">${num}.</span>`;
 
   return `
     <li id="${citation.id}">
@@ -40,7 +39,7 @@ const List = (
   return `
     <h3>${genre}</h3>
     <ol>
-      ${citations.map((citation, i) => ListItem(citation, i, id)).join('')}
+      ${citations.map((citation, i) => ListItem(citation, i + 1, id)).join('')}
     </ol>`;
 };
 
