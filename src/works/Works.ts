@@ -9,21 +9,27 @@ const Text = (text: string): string =>
 
 const BoldText = (text: string) => `<b>${Text(text)}</b>`;
 
-const ListItem = (citation: Citation, id?: string) => `
-  <li id=${citation.id} class=${
-  citation.id.toString() === id ? 'hilightBefore' : ''
-}>
-    ${(citation.id.toString() === id ? BoldText : Text)(
-      citation._bibliographyText
-    )}${
-  isUnpublished(citation)
+const ListItem = (citation: Citation, i: number, id?: string): string => {
+  const isHighlighted = citation.id.toString() === id;
+  const statusNote = isUnpublished(citation)
     ? citation.type === 'paper-conference'
       ? '［発表予定］'
       : '［刊行予定］'
-    : ''
-}
-  </li>
-`;
+    : '';
+  const num = `${i + 1}`;
+  const ListNum = isHighlighted
+    ? `<a href="?" class="el_olNum hp_highlight hp_unsetLink">${num}.</a>`
+    : `<span class="el_olNum">${num}.</span>`;
+
+  return `
+    <li id="${citation.id}">
+      ${ListNum}
+      ${(isHighlighted ? BoldText : Text)(
+        citation._bibliographyText
+      )}${statusNote}
+    </li>
+  `;
+};
 
 const List = (
   citations: Citation[] | undefined,
@@ -34,7 +40,7 @@ const List = (
   return `
     <h3>${genre}</h3>
     <ol>
-      ${citations.map((citation) => ListItem(citation, id)).join('')}
+      ${citations.map((citation, i) => ListItem(citation, i, id)).join('')}
     </ol>`;
 };
 
