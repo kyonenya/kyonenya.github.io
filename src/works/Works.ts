@@ -12,7 +12,7 @@ const BoldText = (text: string) => `<b>${Text(text)}</b>`;
 const ListItem = (citation: Citation, num: number, id?: string): string => {
   const isHighlighted = citation.id.toString() === id;
   const ListNum = isHighlighted
-    ? `<a href="?" class="el_olNum hp_highlight hp_unsetLink">${num}.</a>`
+    ? `<a href="?" class="el_olNum hp_highlight hp_unsetLink"><b>${num}.</b></a>`
     : `<span class="el_olNum">${num}.</span>`;
   const statusNote = isUnpublished(citation)
     ? citation.type === 'paper-conference'
