@@ -1,5 +1,17 @@
 [
   {
+    "id": 9,
+    "type": "thesis",
+    "title": "想像と観入の現象学——知覚と想像の差異をめぐって",
+    "author": [{ "literal": "京念屋隆史" }],
+    "issued": { "date-parts": [[2025, 9, 15]] },
+    "publisher": "法政大学博士論文",
+    "ISBN": "null",
+    "URL": "",
+    "note": "[要旨](https://kyonenya.github.io/docs/250915_博論要旨.pdf)",
+    "_bibliographyText": "京念屋隆史（2025）「想像と観入の現象学——知覚と想像の差異をめぐって」法政大学博士論文. [要旨](https://kyonenya.github.io/docs/250915_博論要旨.pdf)"
+  },
+  {
     "id": 8,
     "type": "book",
     "title": "転移性恋愛について——ラカンと読む太宰治「駈込み訴え」",

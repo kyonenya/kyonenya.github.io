@@ -6,7 +6,7 @@ export type Citation = Omit<Data, 'id'> & {
   _bibliographyText: string;
 };
 
-export const Genre = ['書籍', '論文', '発表', '翻訳'] as const;
+export const Genre = ['書籍', '学位論文', '論文', '発表', '翻訳'] as const;
 export type Genre = typeof Genre[number];
 
 function detectGenre(item: Citation): Genre | undefined {
@@ -20,6 +20,9 @@ function detectGenre(item: Citation): Genre | undefined {
       break;
     case 'paper-conference':
       return '発表';
+      break;
+    case 'thesis':
+      return '学位論文';
       break;
     default:
       return undefined;

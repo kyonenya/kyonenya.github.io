@@ -183,7 +183,7 @@
           </group>
         </else-if>
         <!-- 書籍 -->
-        <else-if type="book" match="any">
+        <else-if type="book thesis" match="any">
           <group>
             <text macro="issued" prefix="（" suffix="）" />
             <text macro="title"/>
@@ -224,6 +224,7 @@
             </group>
           </group>
         </else-if>
+        <!--
         <else-if type="thesis" match="any">
           <group delimiter=". ">
             <text macro="title"/>
@@ -235,6 +236,7 @@
             </group>
           </group>
         </else-if>
+        -->
         <else-if type="patent" match="any">
           <group delimiter=". ">
             <text macro="title"/>
