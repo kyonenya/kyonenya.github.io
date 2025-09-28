@@ -213,6 +213,26 @@
   }
 }
 
+/* 段落注 */
+.bl_text :where(small) {
+  display: block;
+  /* 本文からみて2文字分字下げ */
+  padding-left: 2rem;
+  /* 文頭を頭出し */
+  text-indent: -1em;
+  font-size: 85%;
+}
+
+.bl_text :where(p:has(small)) {
+  /* 本文と段落注の間の余白 */
+  margin-block: 0.5em;
+}
+
+.bl_text :where(p:has(small) + p:has(small)) {
+  /* 段落注同士の間の余白は詰める */
+  /* margin-block: -0.5em 0.5em; */
+}
+
 /**
  * テキスト領域（その他）
  */

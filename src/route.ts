@@ -1,6 +1,6 @@
 import { Article } from './Article';
 import { PostList, TaggedPostList, SearchedPostList } from './PostList';
-import { renderPage, baseUrl } from './lib/render';
+import { renderPage, scrollToId, baseUrl } from './lib/render';
 import { isDevelopment } from './lib/utils';
 import { Post, excludeReserved } from './post';
 import { toState } from './state';
@@ -46,27 +46,13 @@ const routeMap = {
   },
   afterEach: (posts: Post[]): void => {
     document
-      .querySelectorAll<HTMLAnchorElement>('a[href^="?"]')
+      .querySelectorAll<HTMLAnchorElement>('a[href^="#"], a[href^="?"]')
       .forEach((a) => {
         a.onclick = (e) => {
           e.preventDefault();
           window.history.pushState(undefined, '', a.href);
-          if (a.hash) return;
           route(posts);
-        };
-      });
-    document
-      .querySelectorAll<HTMLAnchorElement>('a[href^="#"]')
-      .forEach((a) => {
-        a.onclick = (e) => {
-          e.preventDefault();
-          window.history.pushState(undefined, '', a.href);
-          const targetElement = document.querySelector(a.hash);
-          if (!targetElement) return;
-          window.scrollTo({
-            top: window.pageYOffset + targetElement.getBoundingClientRect().top,
-            behavior: 'smooth',
-          });
+          scrollToId(a.hash.replace('#', ''));
         };
       });
   },
