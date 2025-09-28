@@ -10,3 +10,6 @@ export const MarkupText = (html: string): string =>
       /<p>([「『（].+?)<\/p>/g,
       (_, content: string) => `<p style="text-indent: 0">${content}</p>`
     );
+
+export const kerningDoubleDash = (text: string):void =>
+  text.replace(/——(?![^(]*\))/g, '<span class="hp_kerning">——</span>'); // kerning except link href;

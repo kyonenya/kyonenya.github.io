@@ -1,5 +1,6 @@
 import { generateSummary } from 'search-summary';
 import { TagList } from './TagList';
+  import { kerningDoubleDash } from './lib/MarkupText';
 import { formatYMD, fromNow } from './lib/dateUtils';
 import { useMediaQueryContext } from './mediaQueryContext';
 import { Post } from './post';
@@ -14,7 +15,7 @@ const TextWithKeyword = (text: string, keyword?: string) =>
 
 const Title = (title: string, keyword?: string) => `
   <h2 class="bl_postList_title">
-    ${TextWithKeyword(title, keyword)}
+    ${kerningDoubleDash(TextWithKeyword(title, keyword))}
   </h2>`;
 
 const SearchSummary = (searchSummary: string) => `
