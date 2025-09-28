@@ -11,7 +11,7 @@
 .hp_kerning {
   /* kerning of double dash */
   letter-spacing: -0.27em;
-  margin: 0 0.17em 0 0;
+  margin: 0 0.25em 0 0;
 }
 
 .hp_alignJustify {
