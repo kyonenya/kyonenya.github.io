@@ -11,5 +11,5 @@ export const MarkupText = (html: string): string =>
       (_, content: string) => `<p style="text-indent: 0">${content}</p>`
     );
 
-export const kerningDoubleDash = (text: string):void =>
+export const kerningDoubleDash = (text: string):string =>
   text.replace(/——(?![^(]*\))/g, '<span class="hp_kerning">——</span>'); // kerning except link href;
