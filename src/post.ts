@@ -29,10 +29,7 @@ function parseDate(dateStr: string): Date {
 export function jsonToPost(posts: JSONPost[]): Post[] {
   return [...posts].reverse().map((post) => ({
     ...post,
-    title:
-      post.title === null || post.title === ''
-        ? undefined
-        : post.title,
+    title: post.title === null || post.title === '' ? undefined : post.title,
     plainText: post.text
       .replaceAll(
         /<blockquote>(.+?)<\/blockquote>/g,
@@ -40,8 +37,7 @@ export function jsonToPost(posts: JSONPost[]): Post[] {
       )
       .replaceAll(/<h2>(.+?)<\/h2>/g, (_, text: string) => `## ${text}`)
       .replaceAll(/——/g, '──')
-      .replaceAll(
-        /<div class='hp_hiddenFromSummary'>(.+?)<\/div>/g, '')
+      .replaceAll(/<div class='hp_hiddenFromSummary'>(.+?)<\/div>/g, '')
       .replaceAll(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''),
     createdAt: parseDate(post.createdAt),
     modifiedAt: parseDate(post.modifiedAt),

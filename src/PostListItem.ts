@@ -1,6 +1,6 @@
 import { generateSummary } from 'search-summary';
 import { TagList } from './TagList';
-  import { kerningDoubleDash } from './lib/MarkupText';
+import { kerningDoubleDash } from './lib/MarkupText';
 import { formatYMD, fromNow } from './lib/dateUtils';
 import { useMediaQueryContext } from './mediaQueryContext';
 import { Post } from './post';

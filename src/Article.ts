@@ -1,6 +1,6 @@
 import { TagList } from './TagList';
 import { toExternalLink } from './lib/ExternalLink';
-import { MarkupText , kerningDoubleDash } from './lib/MarkupText';
+import { MarkupText, kerningDoubleDash } from './lib/MarkupText';
 import { formatYMDHm, fromNow } from './lib/dateUtils';
 import { Post } from './post';
 

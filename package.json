@@ -9,7 +9,7 @@
     "fmt": "prettier --write **/*.{ts,js,json,css}",
     "lint": "eslint --fix src/**/*.ts",
     "lint:css": "stylelint src/**/*.css",
-    "tsc checkjs": "tsc -w --noEmit --resolveJsonModule --p tsconfig.checkjs.json"
+    "tsc:checkjs": "tsc -w --noEmit --resolveJsonModule --p tsconfig.checkjs.json"
   },
   "dependencies": {
     "search-summary": "^1.1.2"
