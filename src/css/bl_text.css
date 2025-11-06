@@ -60,6 +60,18 @@
   margin-top: 0;
 }
 
+/* エピグラフ */
+.bl_text :where(blockquote:has(blockquote), blockquote blockquote) {
+  border-left: unset;
+  padding-left: 0;
+  margin-left: 1.5em;
+}
+
+.bl_text :where(blockquote blockquote p) {
+  margin-left: unset;
+  font-size: 87%;
+}
+
 /* 強調 */
 .bl_text :where(strong) {
   font-weight: unset;
