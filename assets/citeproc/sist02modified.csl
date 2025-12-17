@@ -42,7 +42,7 @@
   </macro>
   <macro name="title">
     <choose>
-      <if type="book" match="any">
+      <if type="book thesis" match="any">
         <text variable="title" prefix="『" suffix="』"/>
       </if>
       <else>
