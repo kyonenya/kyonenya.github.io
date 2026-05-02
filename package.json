@@ -2,7 +2,7 @@
   "name": "kyonenya.github.io",
   "version": "2.5.0",
   "scripts": {
-    "ssg": "node generateStaticHTML.js",
+    "ssg": "ts-node src/ssg.ts",
     "_dev": "node index.js",
     "_tsc": "tsc -w --noEmit",
     "build": "webpack",
@@ -16,6 +16,7 @@
     "search-summary": "^1.1.2"
   },
   "devDependencies": {
+    "@types/prettier": "^2.7.3",
     "@typescript-eslint/eslint-plugin": "^4.24.0",
     "@typescript-eslint/parser": "^4.24.0",
     "citeproc": "^2.4.62",
@@ -38,6 +39,7 @@
     "stylelint-config-prettier": "^9.0.3",
     "stylelint-config-standard": "^22.0.0",
     "ts-loader": "^9.2.1",
+    "ts-node": "^9.1.1",
     "typescript": "^4.2.4",
     "webpack": "^5.37.1",
     "webpack-cli": "^4.7.0",

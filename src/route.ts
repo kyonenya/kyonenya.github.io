@@ -44,7 +44,7 @@ const routeMap = {
     if (!searchInputElement) return;
     searchInputElement.style.display = 'block';
   },
-  afterEach: (posts: Post[]): void => {
+  afterEach: (posts: Post[], id: number | undefined): void => {
     document
       .querySelectorAll<HTMLAnchorElement>('a[href^="#"], a[href^="?"]')
       .forEach((a) => {
@@ -55,8 +55,8 @@ const routeMap = {
           scrollToId(a.hash.replace('#', ''));
         };
       });
-    if (window.location.href.includes('?id=')) {
-      window.history.replaceState(undefined, '', '/posts/41');
+    if (id) {
+      window.history.replaceState(undefined, '', `/posts/${id}`);
     }
   },
 };
@@ -84,5 +84,5 @@ export function route(rawPosts: Post[]): void {
     routeMap.postList(posts);
   }
 
-  return routeMap.afterEach(posts);
+  return routeMap.afterEach(posts, id);
 }

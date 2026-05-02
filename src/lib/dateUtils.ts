@@ -14,7 +14,7 @@ export function formatYMD(date: Date): string {
 }
 
 export function formatYMDHm(date: Date): string {
-  return shortDateTimeIntl.format(date).replaceAll('/', '-');
+  return shortDateTimeIntl.format(date).replace(/\//g, '-');
 }
 
 function isBefore(date: Date, limitDate: Date): boolean {

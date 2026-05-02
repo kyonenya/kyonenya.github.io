@@ -8,7 +8,7 @@ const ExternalLink = (props: {
 };
 
 export function toExternalLink(html: string): string {
-  return html.replaceAll(
+  return html.replace(
     /<a href=['"]([^?/].+?)['"](.*?)>(.+?)<\/a>/g, // href start with '?' or '/'
     (_, href: string, attributes: string, content: string) =>
       ExternalLink({ href, attributes, content })
@@ -16,7 +16,7 @@ export function toExternalLink(html: string): string {
 }
 
 export function parseMarkdownLink(text: string): string {
-  return text.replaceAll(
+  return text.replace(
     /\[(.+?)\]\((.+?)\)/g,
     (_, content: string, href: string) => ExternalLink({ content, href })
   );

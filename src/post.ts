@@ -26,22 +26,26 @@ function parseDate(dateStr: string): Date {
   return new Date(`${dateStr}+09:00`); // ja-JP locale
 }
 
-export function jsonToPost(posts: JSONPost[]): Post[] {
-  return [...posts].reverse().map((post) => ({
+export function jsonToPost(post: JSONPost): Post {
+  return {
     ...post,
     title: post.title === null || post.title === '' ? undefined : post.title,
     plainText: post.text
-      .replaceAll(
+      .replace(
         /<blockquote>(.+?)<\/blockquote>/g,
         (_, text: string) => `> ${text}`
       )
-      .replaceAll(/<h2>(.+?)<\/h2>/g, (_, text: string) => `## ${text}`)
-      .replaceAll(/——/g, '──')
-      .replaceAll(/<div class='hp_hiddenFromSummary'>(.+?)<\/div>/g, '')
-      .replaceAll(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''),
+      .replace(/<h2>(.+?)<\/h2>/g, (_, text: string) => `## ${text}`)
+      .replace(/——/g, '──')
+      .replace(/<div class='hp_hiddenFromSummary'>(.+?)<\/div>/g, '')
+      .replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''),
     createdAt: parseDate(post.createdAt),
     modifiedAt: parseDate(post.modifiedAt),
-  }));
+  };
+}
+
+export function jsonToPosts(posts: JSONPost[]): Post[] {
+  return [...posts].reverse().map((post) => jsonToPost(post));
 }
 
 export function excludeReserved(posts: Post[]): Post[] {
