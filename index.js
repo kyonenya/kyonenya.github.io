@@ -32,6 +32,6 @@ express()
     console.log(`Launching app... http://localhost:${port}\n`)
   );
 
-// generatePosts();
-// generateSitemap(require('./posts.json'));
-// generateBibliography();
+generatePosts();
+generateSitemap(require('./posts.json'));
+generateBibliography();
