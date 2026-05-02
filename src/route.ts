@@ -17,7 +17,7 @@ const routeMap = {
         : `placet experiri :: ${post.id}`,
       suffix: ` :: ${post.id}`,
       description: `${post.plainText.substring(0, 110)}…`,
-      href: `${baseUrl}?id=${post.id}`,
+      href: `${baseUrl}posts/${post.id}`,
     });
     if (!searchInputElement) return;
     searchInputElement.style.display = 'none'; // disable search form
@@ -55,6 +55,9 @@ const routeMap = {
           scrollToId(a.hash.replace('#', ''));
         };
       });
+    if (window.location.href.includes('?id=')) {
+      window.history.replaceState(undefined, '', '/posts/41');
+    }
   },
 };
 

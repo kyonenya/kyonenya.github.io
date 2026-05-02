@@ -13,6 +13,9 @@ const port = process.env['WEB_APP_PORT'] ? process.env['WEB_APP_PORT'] : 3100;
 express()
   .use(webpackDevMiddleware(webpack(config)))
   .get('/', (req, res) => res.sendFile(path.resolve(rootDir, 'index.html')))
+  .get('/posts/:id', (req, res) =>
+    res.sendFile(path.resolve(rootDir, 'posts', `${req.params.id}.html`))
+  )
   .get('/works', (req, res) =>
     res.sendFile(path.resolve(rootDir, 'works.html'))
   )
@@ -29,6 +32,6 @@ express()
     console.log(`Launching app... http://localhost:${port}\n`)
   );
 
-generatePosts();
-generateSitemap(require('./posts.json'));
-generateBibliography();
+// generatePosts();
+// generateSitemap(require('./posts.json'));
+// generateBibliography();
