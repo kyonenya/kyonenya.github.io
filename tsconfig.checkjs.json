@@ -9,6 +9,7 @@
   "include": [
     "generateBibliography.js",
     "generatePosts.js",
-    "generateSitemap.js"
+    "generateSitemap.js",
+    "generateStaticHTML.js"
   ]
 }
