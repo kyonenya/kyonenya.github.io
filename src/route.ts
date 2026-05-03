@@ -36,11 +36,10 @@ const routeMap = {
     if (!searchInputElement) return;
     searchInputElement.style.display = 'block';
   },
-  afterEach: (posts: Post[], id?: number): void => {
+  afterEach: (posts: Post[], legacyId?: number): void => {
     document
-      .querySelectorAll<HTMLAnchorElement>('a[href^="#"], a[href^="/?"]')
+      .querySelectorAll<HTMLAnchorElement>('a[href^="#"], a[href^="/?"], a[href^="/posts/"]')
       .forEach((a) => {
-        console.log(a.href)
         a.onclick = (e) => {
           e.preventDefault();
           window.history.pushState(undefined, '', a.href);
@@ -48,14 +47,15 @@ const routeMap = {
           scrollToId(a.hash.replace('#', ''));
         };
       });
-    if (id) {
-      window.history.replaceState(undefined, '', `/posts/${id}`);
+    if (legacyId) {
+      // for backward compatibility
+      window.history.replaceState(undefined, '', `/posts/${legacyId}`);
     }
   },
 };
 
 export function route(rawPosts: Post[]): void {
-  const { id, tag, keyword } = toState(
+  const { id, legacyId, tag, keyword } = toState(
     window.location.search,
     window.location.pathname,
     window.location.hash
@@ -67,19 +67,17 @@ export function route(rawPosts: Post[]): void {
 
   routeMap.beforeEach();
 
-  if (id !== undefined) {
+  if (id !== undefined || legacyId!== undefined) {
     const post = posts.find((post) => post.id === id);
     if (!post) return; // TODO: 404
     routeMap.article(post);
-    return routeMap.afterEach(posts, id);
   } else if (keyword !== undefined) {
     routeMap.searchedPostList(posts, keyword, tag);
-    return routeMap.afterEach(posts);
   } else if (tag !== undefined) {
     routeMap.taggedPostList(posts, tag);
-    return routeMap.afterEach(posts);
   } else {
     routeMap.postList(posts);
-    return routeMap.afterEach(posts);
   }
+
+  return routeMap.afterEach(posts, legacyId);
 }

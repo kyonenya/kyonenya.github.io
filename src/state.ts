@@ -1,5 +1,6 @@
 type State = {
   id: number | undefined;
+  legacyId: number | undefined;
   tag: string | undefined;
   keyword: string | undefined;
 };
@@ -9,13 +10,17 @@ export function toState(
   locationPathname: string,
   locationHash?: string
 ): State {
+  const idStr = locationPathname.match(/\/posts\/(\d+)/)?.[1];
+  const id = idStr ? parseInt(idStr, 10) : undefined;
+
   const searchParams = new URLSearchParams(locationSearch);
-  const id = searchParams.get('id');
-  const id2 = locationPathname.match(/\/posts\/(\d+)/)?.[1];
   const tag = searchParams.get('tag');
+  const legacyIdStr = searchParams.get('id');  
+  const legacyId = legacyIdStr ? parseInt(legacyIdStr, 10) : undefined;
 
   return {
-    id: id ? parseInt(id, 10) : id2 ? parseInt(id2, 10) : undefined,
+    id: id ?? legacyId,
+    legacyId,
     tag: tag ?? undefined,
     keyword:
       locationHash === undefined || locationHash === ''
