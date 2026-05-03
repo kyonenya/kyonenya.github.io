@@ -9,9 +9,10 @@
   })(window,document,'script','dataLayer','GTM-5LKLRTM');</script>
   <!-- End Google Tag Manager -->
   <meta charset="UTF-8" />
-  <title>placet experiri</title>
+  <title>{{PAGE_TITLE}}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="言ってみただけ。哲学と哲学以外のことを書くテキストサイト" />
+  <meta name="description" content="{{PAGE_DESCRIPTION}}" />
+  <link rel="canonical" href="{{PAGE_HREF}}">
   <!-- JS・CSS -->
   <link href="../dist/css/bundle.css" media="all" rel="stylesheet" type="text/css" />  
   <!-- アイコン -->
@@ -21,10 +22,10 @@
   <!-- SNS用のメタデータ -->
   <meta property="og:site_name" content="placet experiri" />
   <meta property="og:locale" content="ja_JP" />
-  <meta property='og:type' content='article' />
-  <meta property='og:title' content='placet experiri' />
-  <meta property='og:url' content='https://kyonenya.github.io/' />
-  <meta property='og:description' content="言ってみただけ。哲学と哲学以外のこと" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="{{PAGE_TITLE}}" />
+  <meta property="og:url" content="{{PAGE_HREF}}" />
+  <meta property="og:description" content="{{PAGE_DESCRIPTION}}" />
   <meta property="og:image" content="https://kyonenya.github.io/assets/icons/ogp-image.png" />
   <meta name="twitter:card" content="summary" />
   <!-- Google Search Console -->
@@ -38,18 +39,18 @@
   <header class="ly_header">
     <div class="ly_header_inner">
       <h1 class="el_logo">
-        <a href="?" class="el_logo_title">placet experiri</a>
-        <span class="el_logo_suffix"></span>
+        <a href="https://kyonenya.github.io/" class="el_logo_title">placet experiri</a>
+        <span class="el_logo_suffix">{{PAGE_SUFFIX}}</span>
       </h1>
       <nav class="bl_nav">
         <ul class="bl_nav_inner">
-          <li><a href="?">Home</a></li>
+          <li><a href="https://kyonenya.github.io/">Home</a></li>
           <li><a href="https://kyonenya.github.io/works">Works</a></li>
           <li><a href="https://kyonenya.github.io/about" id="about" data-badge="1">About</a></li>
           <li class="el_search">
             <div class="el_search_icon"></div>
             <form class="el_search_form">
-              <input type="search" placeholder="検索ワードを入力" value="" class="el_search_input" />
+              <input type="search" placeholder="検索ワードを入力" value="" class="el_search_input" style="display: none;" />
             </form>
           </li>
         </ul>
@@ -59,7 +60,7 @@
   <main>
     <!-- JavaScriptによる動的生成コンテンツ -->
     <div id="root">
-      {{POST_BODY}}
+      {{PAGE_BODY}}
     </div><!-- ./root -->
   </main>
   <footer class="ly_footer">

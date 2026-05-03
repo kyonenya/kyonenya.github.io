@@ -1,4 +1,4 @@
-import { Article } from './Article';
+import { Article, articlePage } from './Article';
 import { PostList, TaggedPostList, SearchedPostList } from './PostList';
 import { renderPage, scrollToId, baseUrl } from './lib/render';
 import { isDevelopment } from './lib/utils';
@@ -10,15 +10,7 @@ const searchInputElement =
 
 const routeMap = {
   article: (post: Post): void => {
-    renderPage({
-      body: Article(post),
-      title: post.title
-        ? `${post.title}｜placet experiri :: ${post.id}`
-        : `placet experiri :: ${post.id}`,
-      suffix: ` :: ${post.id}`,
-      description: `${post.plainText.substring(0, 110)}…`,
-      href: `${baseUrl}posts/${post.id}`,
-    });
+    renderPage(articlePage(post));
     if (!searchInputElement) return;
     searchInputElement.style.display = 'none'; // disable search form
   },

@@ -3,6 +3,7 @@ import { toExternalLink } from './lib/ExternalLink';
 import { MarkupText, kerningDoubleDash } from './lib/MarkupText';
 import { formatYMDHm, fromNow } from './lib/dateUtils';
 import { Post } from './post';
+import { baseUrl } from './lib/render';
 
 export const Article = (post: Post): string => `
   <section class="ly_container">
@@ -24,3 +25,13 @@ export const Article = (post: Post): string => `
       </footer>
     </article>
   </section>`;
+
+export const articlePage = (post: Post) => ({
+  body: Article(post),
+  title: post.title
+    ? `${post.title}｜placet experiri :: ${post.id}`
+    : `placet experiri :: ${post.id}`,
+  suffix: ` :: ${post.id}`,
+  description: `${post.plainText.substring(0, 110)}…`,
+  href: `${baseUrl}posts/${post.id}`,
+});

@@ -1,8 +1,9 @@
 import { readFileSync, writeFileSync } from 'fs';
 import path from 'path';
-import { Article } from './Article';
 import { BlogCard } from './BlogCard';
 import { jsonToPosts, JSONPost, Post } from './post';
+//import { articlePage } from './route';
+import { Article, articlePage } from './Article';
 
 const templatePath = path.resolve(__dirname, '..', 'post.template.html');
 const jsonPath = path.resolve(__dirname, '..', 'posts.json');
@@ -11,9 +12,13 @@ const distPath = path.resolve(__dirname, '..', 'posts');
 type TemplateValues = Record<string, string>;
 
 function createTemplateValues(post: Post): TemplateValues {
+  const page = articlePage(post);
   return {
-    POST_BODY: Article(post),
-    POST_TITLE: post.title ?? '',
+    PAGE_BODY: page.body,
+    PAGE_TITLE: page.title,
+    PAGE_SUFFIX: page.suffix,
+    PAGE_DESCRIPTION: page.description,
+    PAGE_HREF: page.href,
   };
 }
 
@@ -21,8 +26,8 @@ function embedTemplate(template: string, values: TemplateValues): string {
   return template.replace(/\{\{(\w+)\}\}/g, (_, key: string) => {
     const value = values[key];
 
-    if (value === undefined) {
-      //      throw new Error(`Missing template var: ${key}`);
+    if (!value) {
+      console.log(`Missing template var: ${key}`);
     }
 
     return value;
@@ -47,7 +52,7 @@ function writePostsHTML(posts: Post[], template: string): void {
   posts.forEach((post) => writePostHTML(post, template, posts));
 }
 
-export async function generateStaticHTML(): Promise<void> {
+export function generateStaticHTML(): void {
   const template = readFileSync(templatePath, 'utf8');
   const posts = JSON.parse(readFileSync(jsonPath, 'utf8')) as JSONPost[];
   writePostsHTML(jsonToPosts(posts), template);
@@ -55,6 +60,4 @@ export async function generateStaticHTML(): Promise<void> {
   console.log('static html generated.');
 }
 
-generateStaticHTML().catch((error: unknown) => {
-  console.error(error);
-});
+generateStaticHTML();
