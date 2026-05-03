@@ -2,10 +2,7 @@ import { generateSummary } from 'search-summary';
 import { TagList } from './TagList';
 import { kerningDoubleDash } from './lib/MarkupText';
 import { formatYMD, fromNow } from './lib/dateUtils';
-import { useMediaQueryContext } from './mediaQueryContext';
 import { Post } from './post';
-
-const ellipsisToken = '…';
 
 const Keyword = (keyword: string) =>
   `<span class="hp_highlight">${keyword}</span>`;
@@ -25,17 +22,10 @@ const SearchSummary = (searchSummary: string) => `
     </p>
   </div>`;
 
-const MobileSummary = (plainText: string) => `
-  <div class="bl_postList_summary">
-    <p class="hp_alignJustify">
-      ${plainText.substring(0, 134) + ellipsisToken}
-    </p>
-  </div>`;
-
 const Summary = (plainText: string) => `
   <div class="bl_postList_summary">
     <p class="hp_ellipsis654">
-      ${plainText.substring(0, 250)}
+      ${plainText.substring(0, 300)}
     </p>
   </div>`;
 
@@ -45,7 +35,6 @@ export const PostListItem = (props: {
   keyword?: string;
 }): string => {
   const { post, tag, keyword } = props;
-  const { isMobile } = useMediaQueryContext();
   const searchSummary = generateSummary(post.plainText, keyword, {
     maxLength: 200,
     beforeLength: 48,
@@ -69,9 +58,7 @@ export const PostListItem = (props: {
         </header>
         ${post.title ? Title(post.title, keyword) : ''}
         ${
-          searchSummary
-            ? SearchSummary(searchSummary)
-            : (isMobile ? MobileSummary : Summary)(post.plainText)
+          searchSummary ? SearchSummary(searchSummary) : Summary(post.plainText)
         }
       </a>
       <footer class="bl_postList_footer">
