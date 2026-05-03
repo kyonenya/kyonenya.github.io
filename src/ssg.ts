@@ -29,9 +29,9 @@ function embedTemplate(post: Post, template: string, posts: Post[]): string {
       return value;
     })
     .replace(/<blog-card id='(\d+)'><\/blog-card>/g, (_, id: string) => {
-      const post = posts.filter((post) => id === post.id.toString())[0];
+      const post = posts.find((post) => id === post.id.toString());
       if (!post) return '';
-      return BlogCard(post, true);
+      return BlogCard(post);
     });
 }
 

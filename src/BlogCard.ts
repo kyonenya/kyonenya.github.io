@@ -9,10 +9,10 @@ const Summary = (plainText: string) => `
   </p>
 `;
 
-export const BlogCard = (post: Post, ssg?: boolean): string => {
+export const BlogCard = (post: Post): string => {
   return `
     <div class="bl_blogCard">
-      <a href="${ssg ? baseUrl : '/'}posts/${post.id}" class="hp_unsetLink">
+      <a href="/posts/${post.id}" class="hp_unsetLink">
         <header>
           <div class="bl_blogCard_icon"></div>
           <span class="bl_blogCard_logo">placet experiri</span>
