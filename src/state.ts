@@ -10,7 +10,7 @@ export function toState(
   locationPathname: string,
   locationHash?: string
 ): State {
-  const idStr = (/\/posts\/(\d+)/.exec(locationPathname))?.[1];
+  const idStr = /\/posts\/(\d+)/.exec(locationPathname)?.[1];
   const id = idStr ? parseInt(idStr, 10) : undefined;
 
   const searchParams = new URLSearchParams(locationSearch);

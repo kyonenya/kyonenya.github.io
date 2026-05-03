@@ -1,3 +1,4 @@
+/* server-side only: do not import client-side code */
 import { readFileSync, writeFileSync } from 'fs';
 import path from 'path';
 import { articlePage } from './Article';

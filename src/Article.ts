@@ -1,7 +1,7 @@
 import { TagList } from './TagList';
 import { toExternalLink } from './lib/ExternalLink';
 import { MarkupText, kerningDoubleDash } from './lib/MarkupText';
-import { formatYMDHm, fromNow } from './lib/dateUtils';
+import { formatYMDHm, formatYMD, fromNow } from './lib/dateUtils';
 import { baseUrl, Page } from './lib/render';
 import { Post } from './post';
 
@@ -18,10 +18,10 @@ const Article = (post: Post, ssg?: boolean): string => `
         ${MarkupText(toExternalLink(post.text))}
       </div>
       <footer class="bl_text_footer">
-        <span class="bl_posts_dateago">
-          ${fromNow(post.createdAt)}
+        <span class="bl_posts_dateago" data-date="${post.createdAt.toISOString()}">
+          ${ssg ? formatYMD(post.createdAt) : fromNow(post.createdAt)}
         </span>
-        ${TagList(post.tags, undefined, ssg)}
+        ${TagList(post.tags)}
       </footer>
     </article>
   </section>`;

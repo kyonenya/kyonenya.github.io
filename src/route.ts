@@ -31,12 +31,16 @@ const routeMap = {
       body: SearchedPostList(posts, keyword, tag),
       title: `「${keyword}」｜placet experiri`,
     }),
-  beforeEach: (): void => {
+  beforeEach: (legacyId: number | undefined): void => {
     window.scrollTo(0, 0);
     if (!searchInputElement) return;
     searchInputElement.style.display = 'block';
+    if (legacyId) {
+      // for backward compatibility
+      window.history.replaceState(undefined, '', `/posts/${legacyId}`);
+    }
   },
-  afterEach: (posts: Post[], legacyId?: number): void => {
+  afterEach: (posts: Post[]): void => {
     document
       .querySelectorAll<HTMLAnchorElement>(
         'a[href^="#"], a[href^="/?"], a[href="/"], a[href^="/posts/"]'
@@ -49,10 +53,6 @@ const routeMap = {
           scrollToId(a.hash.replace('#', ''));
         };
       });
-    if (legacyId) {
-      // for backward compatibility
-      window.history.replaceState(undefined, '', `/posts/${legacyId}`);
-    }
   },
 };
 
@@ -67,7 +67,7 @@ export function route(rawPosts: Post[]): void {
     ? rawPosts
     : excludeReserved(rawPosts);
 
-  routeMap.beforeEach();
+  routeMap.beforeEach(legacyId);
 
   if (id !== undefined) {
     const post = posts.find((post) => post.id === id);
@@ -81,5 +81,5 @@ export function route(rawPosts: Post[]): void {
     routeMap.postList(posts);
   }
 
-  return routeMap.afterEach(posts, legacyId);
+  return routeMap.afterEach(posts);
 }

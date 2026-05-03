@@ -5,6 +5,7 @@ module.exports = {
   entry: {
     index: path.join(__dirname, 'src', 'index.ts'),
     works: path.join(__dirname, 'src', 'works', 'index.ts'),
+    hydrate: path.join(__dirname, 'src', 'hydrate.ts'),
   },
   output: {
     path: path.join(__dirname, 'dist'),
