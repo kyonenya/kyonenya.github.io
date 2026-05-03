@@ -40,7 +40,7 @@ function generateSitemap(posts) {
   sitemap.write({ url: 'works', lastmod: updatedAt });
   sitemap.write({ url: 'about', lastmod: updatedAt });
   posts.forEach((post) =>
-    sitemap.write({ url: `?id=${post.id}`, lastmod: post.modifiedAt })
+    sitemap.write({ url: `/posts/${post.id}`, lastmod: post.modifiedAt })
   );
   tagHistory(posts).forEach(({ tag, modifiedAt }) =>
     sitemap.write({ url: `?tag=${tag}`, lastmod: modifiedAt })
