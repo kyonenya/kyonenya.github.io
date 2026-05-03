@@ -1,24 +1,3 @@
-import { defineBlogCard } from './BlogCard';
-import { fetcher } from './lib/utils';
-import { notifyUpdate, Update } from './notify';
-import { jsonToPosts, JSONPost } from './post';
-import { watchPopState, watchSearchForm } from './reroute';
-import { route } from './route';
+import { app } from './app';
 
-const postsPath = './posts.json';
-const aboutPath = './about.json';
-
-function registerRerouter(reroute: () => void): void {
-  watchPopState(reroute);
-  watchSearchForm(reroute);
-}
-
-(async function index() {
-  const posts = jsonToPosts(await fetcher<JSONPost[]>(postsPath));
-  route(posts);
-  registerRerouter(() => route(posts));
-  defineBlogCard(posts);
-
-  const update = await fetcher<Update>(aboutPath);
-  notifyUpdate(update);
-})();
+void app();

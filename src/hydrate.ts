@@ -1,3 +1,4 @@
+import { app } from './app';
 import { fromNow } from './lib/dateUtils';
 
 function hydrateFromNow() {
@@ -9,3 +10,5 @@ function hydrateFromNow() {
 }
 
 hydrateFromNow();
+// SSG -> SPA (progressive enhancement)
+void app(false, true);

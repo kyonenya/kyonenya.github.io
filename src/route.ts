@@ -1,6 +1,6 @@
 import { articlePage } from './Article';
 import { PostList, TaggedPostList, SearchedPostList } from './PostList';
-import { renderPage, scrollToId, baseUrl } from './lib/render';
+import { renderPage, baseUrl } from './lib/render';
 import { isDevelopment } from './lib/utils';
 import { Post, excludeReserved } from './post';
 import { toState } from './state';
@@ -40,20 +40,6 @@ const routeMap = {
       window.history.replaceState(undefined, '', `/posts/${legacyId}`);
     }
   },
-  afterEach: (posts: Post[]): void => {
-    document
-      .querySelectorAll<HTMLAnchorElement>(
-        'a[href^="#"], a[href^="/?"], a[href="/"], a[href^="/posts/"]'
-      )
-      .forEach((a) => {
-        a.onclick = (e) => {
-          e.preventDefault();
-          window.history.pushState(undefined, '', a.href);
-          route(posts);
-          scrollToId(a.hash.replace('#', ''));
-        };
-      });
-  },
 };
 
 export function route(rawPosts: Post[]): void {
@@ -80,6 +66,4 @@ export function route(rawPosts: Post[]): void {
   } else {
     routeMap.postList(posts);
   }
-
-  return routeMap.afterEach(posts);
 }
