@@ -15,7 +15,6 @@
     "search-summary": "^1.1.2"
   },
   "devDependencies": {
-    "@types/prettier": "^2.7.3",
     "@typescript-eslint/eslint-plugin": "^4.24.0",
     "@typescript-eslint/parser": "^4.24.0",
     "citeproc": "^2.4.62",
