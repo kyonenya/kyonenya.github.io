@@ -1,6 +1,5 @@
 import { defineBlogCard } from './BlogCard';
 import { fetcher } from './lib/utils';
-import { mediaQueryContextProvider } from './mediaQueryContext';
 import { notifyUpdate, Update } from './notify';
 import { jsonToPost, JSONPost } from './post';
 import { watchPopState, watchSearchForm } from './reroute';
@@ -12,7 +11,6 @@ const aboutPath = './about.json';
 function registerRerouter(reroute: () => void): void {
   watchPopState(reroute);
   watchSearchForm(reroute);
-  mediaQueryContextProvider(reroute);
 }
 
 (async function index() {

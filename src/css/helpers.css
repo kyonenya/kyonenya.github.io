@@ -37,17 +37,20 @@
   display: -webkit-box;
   -webkit-box-orient: vertical;
   text-align: left;
+  line-clamp: 6;
   -webkit-line-clamp: 6;
 }
 
 @media screen and (min-width: 560px) {
   .hp_ellipsis654 {
+    line-clamp: 5;
     -webkit-line-clamp: 5;
   }
 }
 
 @media screen and (min-width: 960px) {
   .hp_ellipsis654 {
+    line-clamp: 4;
     -webkit-line-clamp: 4;
   }
 }
@@ -57,17 +60,20 @@
   display: -webkit-box;
   -webkit-box-orient: vertical;
   text-align: left;
+  line-clamp: 4;
   -webkit-line-clamp: 4;
 }
 
 @media screen and (min-width: 560px) {
   .hp_ellipsis433 {
+    line-clamp: 3;
     -webkit-line-clamp: 3;
   }
 }
 
 @media screen and (min-width: 960px) {
   .hp_ellipsis433 {
+    line-clamp: 3;
     -webkit-line-clamp: 3;
   }
 }

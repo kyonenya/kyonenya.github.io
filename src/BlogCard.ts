@@ -1,13 +1,6 @@
 import { TagListItem } from './TagList';
 import { formatYMD } from './lib/dateUtils';
-import { useMediaQueryContext } from './mediaQueryContext';
 import { Post } from './post';
-
-const MobileSummary = (plainText: string) => `
-  <p class="bl_blogCard_summary hp_alignJustify">
-    ${plainText.substring(0, 74)}…
-  </p>
-`;
 
 const Summary = (plainText: string) => `
   <p class="bl_blogCard_summary hp_ellipsis433">
@@ -16,7 +9,6 @@ const Summary = (plainText: string) => `
 `;
 
 const Component = (post: Post): string => {
-  const { isMobile } = useMediaQueryContext();
   return `
     <div class="bl_blogCard">
       <a href="?id=${post.id}" class="hp_unsetLink">
@@ -28,7 +20,7 @@ const Component = (post: Post): string => {
         ${
           post.title ? `<div class="bl_blogCard_title">${post.title}</div>` : ''
         }
-        ${(isMobile ? MobileSummary : Summary)(post.plainText)}
+        ${Summary(post.plainText)}
         <footer>
           <span>${formatYMD(post.createdAt)}</span>
           <ul class="bl_blogCard_tagList">
