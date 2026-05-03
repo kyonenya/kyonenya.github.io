@@ -16,7 +16,7 @@ export function watchSearchForm(reroute: () => void): void {
       toState(
         window.location.search,
         window.location.pathname,
-        `#{searchInputElement.value}`
+        `#${searchInputElement.value}`
       ),
       '',
       `${window.location.search}#${searchInputElement.value}`

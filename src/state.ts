@@ -16,7 +16,8 @@ export function toState(
   const searchParams = new URLSearchParams(locationSearch);
   const tag = searchParams.get('tag');
   const legacyIdStr = searchParams.get('id');
-  const legacyId = legacyIdStr ? parseInt(legacyIdStr, 10) : undefined;
+  const legacyIdNum = legacyIdStr ? parseInt(legacyIdStr, 10) : NaN;
+  const legacyId = Number.isFinite(legacyIdNum) ? legacyIdNum : undefined;
 
   return {
     id: id ?? legacyId,
