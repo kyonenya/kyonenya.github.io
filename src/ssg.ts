@@ -2,15 +2,13 @@ import { readFileSync, writeFileSync } from 'fs';
 import path from 'path';
 import { articlePage } from './Article';
 import { BlogCard } from './BlogCard';
-import { jsonToPosts, JSONPost, Post } from './post';
+import { jsonToPosts, Post } from './post';
 
 const templatePath = path.resolve(__dirname, '..', 'post.template.html');
 const jsonPath = path.resolve(__dirname, '..', 'posts.json');
 const distPath = path.resolve(__dirname, '..', 'posts');
 
-type TemplateValues = Record<string, string>;
-
-function createTemplateValues(post: Post): TemplateValues {
+function createTemplateValues(post: Post): Record<string, string> {
   const page = articlePage(post, true);
   return {
     PAGE_BODY: page.body,
@@ -21,36 +19,30 @@ function createTemplateValues(post: Post): TemplateValues {
   };
 }
 
-function embedTemplate(template: string, values: TemplateValues): string {
-  return template.replace(/\{\{(\w+)\}\}/g, (_, key: string) => {
-    const value = values[key];
-    if (!value) console.log(`Missing template var: ${key}`);
-    return value;
-  });
-}
-
-function writePostHTML(post: Post, template: string, posts: Post[]): void {
-  const html = embedTemplate(template, createTemplateValues(post));
-  const html2 = html.replace(
-    /<blog-card id='(\d+)'><\/blog-card>/g,
-    (_, id: string) => {
+function embedTemplate(post: Post, template: string, posts: Post[]): string {
+  const values = createTemplateValues(post);
+  return template
+    .replace(/\{\{(\w+)\}\}/g, (_, key: string) => {
+      const value = values[key];
+      if (!value) console.log(`Missing template var: ${key}`);
+      return value;
+    })
+    .replace(/<blog-card id='(\d+)'><\/blog-card>/g, (_, id: string) => {
       const post = posts.filter((post) => id === post.id.toString())[0];
       if (!post) return '';
       return BlogCard(post, true);
-    }
-  );
-
-  writeFileSync(path.resolve(distPath, `${post.id}.html`), html2, 'utf8');
-}
-
-function writePostsHTML(posts: Post[], template: string): void {
-  posts.forEach((post) => writePostHTML(post, template, posts));
+    });
 }
 
 export function generateStaticHTML(): void {
   const template = readFileSync(templatePath, 'utf8');
-  const posts = JSON.parse(readFileSync(jsonPath, 'utf8')) as JSONPost[];
-  writePostsHTML(jsonToPosts(posts), template);
-
+  const posts = jsonToPosts(JSON.parse(readFileSync(jsonPath, 'utf8')));
+  posts.forEach((post) =>
+    writeFileSync(
+      path.resolve(distPath, `${post.id}.html`),
+      embedTemplate(post, template, posts),
+      'utf8'
+    )
+  );
   console.log('static html generated.');
 }

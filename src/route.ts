@@ -38,7 +38,9 @@ const routeMap = {
   },
   afterEach: (posts: Post[], legacyId?: number): void => {
     document
-      .querySelectorAll<HTMLAnchorElement>('a[href^="#"], a[href^="/?"], a[href^="/posts/"]')
+      .querySelectorAll<HTMLAnchorElement>(
+        'a[href^="#"], a[href^="/?"], a[href="/"], a[href^="/posts/"]'
+      )
       .forEach((a) => {
         a.onclick = (e) => {
           e.preventDefault();
@@ -67,7 +69,7 @@ export function route(rawPosts: Post[]): void {
 
   routeMap.beforeEach();
 
-  if (id !== undefined || legacyId!== undefined) {
+  if (id !== undefined) {
     const post = posts.find((post) => post.id === id);
     if (!post) return; // TODO: 404
     routeMap.article(post);

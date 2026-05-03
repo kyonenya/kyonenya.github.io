@@ -10,12 +10,12 @@ export function toState(
   locationPathname: string,
   locationHash?: string
 ): State {
-  const idStr = locationPathname.match(/\/posts\/(\d+)/)?.[1];
+  const idStr = (/\/posts\/(\d+)/.exec(locationPathname))?.[1];
   const id = idStr ? parseInt(idStr, 10) : undefined;
 
   const searchParams = new URLSearchParams(locationSearch);
   const tag = searchParams.get('tag');
-  const legacyIdStr = searchParams.get('id');  
+  const legacyIdStr = searchParams.get('id');
   const legacyId = legacyIdStr ? parseInt(legacyIdStr, 10) : undefined;
 
   return {
