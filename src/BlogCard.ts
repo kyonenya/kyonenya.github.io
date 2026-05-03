@@ -8,7 +8,7 @@ const Summary = (plainText: string) => `
   </p>
 `;
 
-const Component = (post: Post): string => {
+export const BlogCard = (post: Post): string => {
   return `
     <div class="bl_blogCard">
       <a href="?id=${post.id}" class="hp_unsetLink">
@@ -32,7 +32,7 @@ const Component = (post: Post): string => {
 };
 
 export function defineBlogCard(posts: Post[]): void {
-  class BlogCard extends HTMLElement {
+  class BlogCardComponent extends HTMLElement {
     constructor() {
       super();
       const idString = this.getAttribute('id');
@@ -40,9 +40,9 @@ export function defineBlogCard(posts: Post[]): void {
       const post = posts.find((post) => post.id === parseInt(idString, 10));
       if (!post) return;
 
-      this.innerHTML = Component(post);
+      this.innerHTML = BlogCard(post);
     }
   }
 
-  window.customElements.define('blog-card', BlogCard);
+  window.customElements.define('blog-card', BlogCardComponent);
 }

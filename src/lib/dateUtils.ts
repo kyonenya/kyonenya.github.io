@@ -10,7 +10,7 @@ const relativeTimeIntl = new Intl.RelativeTimeFormat('ja-JP', {
 });
 
 export function formatYMD(date: Date): string {
-  return shortDateIntl.format(date).replaceAll('/', '-');
+  return shortDateIntl.format(date).replace(/\//g, '-');
 }
 
 export function formatYMDHm(date: Date): string {

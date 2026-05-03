@@ -2,7 +2,7 @@
   "name": "kyonenya.github.io",
   "version": "2.5.0",
   "scripts": {
-    "ssg": "ts-node src/ssg.ts",
+    "_ssg": "ts-node src/ssg.ts",
     "_dev": "node index.js",
     "_tsc": "tsc -w --noEmit",
     "build": "webpack",
