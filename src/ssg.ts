@@ -54,5 +54,3 @@ export function generateStaticHTML(): void {
 
   console.log('static html generated.');
 }
-
-generateStaticHTML();

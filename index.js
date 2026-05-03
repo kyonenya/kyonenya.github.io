@@ -6,6 +6,8 @@ const config = require('./webpack.dev.config.js');
 const generatePosts = require('./generatePosts');
 const generateSitemap = require('./generateSitemap');
 const generateBibliography = require('./generateBibliography');
+require('ts-node/register');
+const { generateStaticHTML } = require('./src/ssg.ts');
 
 const rootDir = __dirname;
 const port = process.env['WEB_APP_PORT'] ? process.env['WEB_APP_PORT'] : 3100;
@@ -35,3 +37,4 @@ express()
 generatePosts();
 generateSitemap(require('./posts.json'));
 generateBibliography();
+generateStaticHTML();
