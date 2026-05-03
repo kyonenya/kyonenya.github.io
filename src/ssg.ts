@@ -25,7 +25,7 @@ function embedTemplate(post: Post, template: string, posts: Post[]): string {
   return template
     .replace(/\{\{(\w+)\}\}/g, (_, key: string) => {
       const value = values[key];
-      if (!value) console.log(`Missing template var: ${key}`);
+      if (value === undefined) console.log(`Missing template var: ${key}`);
       return value;
     })
     .replace(/<blog-card id='(\d+)'><\/blog-card>/g, (_, id: string) => {

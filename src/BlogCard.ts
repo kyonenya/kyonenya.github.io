@@ -1,6 +1,5 @@
 import { TagListItem } from './TagList';
 import { formatYMD } from './lib/dateUtils';
-import { baseUrl } from './lib/render';
 import { Post } from './post';
 
 const Summary = (plainText: string) => `

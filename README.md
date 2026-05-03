@@ -6,7 +6,7 @@
 
 - CMS機能
   - 記事データベースはJSONで代用
-  - 個別記事ページはパーマリンクをクエリ文字列（`?id=123`）で割り振り、そのidをもとに個別ページをJSで生成
+  - 個別記事ページはパーマリンクを~~クエリ文字列（?id=123）で~~割り振り、そのidをもとに個別ページをJSで生成
   - 全件分の記事データ（〜数百KB程度）を一覧表示時に取得してあるので、個別ページへの遷移時に通信が発生せず、瞬時に表示される
 - 全文検索
   - 記事データはすべて取得してあるのでクライアントサイドで検索実行
@@ -26,6 +26,10 @@
   - 業績データは [CSL-JSON](https://docs.citationstyles.org/en/stable/specification.html#appendix-iv-variables) 形式で保持
   - 書式は [CSL (Citation Style Language)](https://docs.citationstyles.org/en/stable/specification.html#appendix-iv-variables) ファイルで調整し、文献リストは [citeproc-js](https://github.com/Juris-M/citeproc-js) で事前生成しておく
     - 試行錯誤の履歴：[kyonenya/citation-js-playground](https://github.com/kyonenya/citation-js-playground)
+- マークダウンから記事HTMLを生成
+- 自作SSGスクリプトによるTwitter OGP対応
+  - SPAとSSGを共存：リロードしない限りは従来通りSPAとして爆速ページ遷移
+  - 個別記事リンク（/posts/[id]）に直アクセスされた場合のみ静的HTMLバージョンを表示
 
 ## 技術
 
