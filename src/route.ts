@@ -36,10 +36,11 @@ const routeMap = {
     if (!searchInputElement) return;
     searchInputElement.style.display = 'block';
   },
-  afterEach: (posts: Post[], id: number | undefined): void => {
+  afterEach: (posts: Post[], id?: number): void => {
     document
-      .querySelectorAll<HTMLAnchorElement>('a[href^="#"], a[href^="?"]')
+      .querySelectorAll<HTMLAnchorElement>('a[href^="#"], a[href^="/?"]')
       .forEach((a) => {
+        console.log(a.href)
         a.onclick = (e) => {
           e.preventDefault();
           window.history.pushState(undefined, '', a.href);
@@ -56,8 +57,10 @@ const routeMap = {
 export function route(rawPosts: Post[]): void {
   const { id, tag, keyword } = toState(
     window.location.search,
+    window.location.pathname,
     window.location.hash
   );
+
   const posts = isDevelopment(window.location.href)
     ? rawPosts
     : excludeReserved(rawPosts);
@@ -68,13 +71,15 @@ export function route(rawPosts: Post[]): void {
     const post = posts.find((post) => post.id === id);
     if (!post) return; // TODO: 404
     routeMap.article(post);
+    return routeMap.afterEach(posts, id);
   } else if (keyword !== undefined) {
     routeMap.searchedPostList(posts, keyword, tag);
+    return routeMap.afterEach(posts);
   } else if (tag !== undefined) {
     routeMap.taggedPostList(posts, tag);
+    return routeMap.afterEach(posts);
   } else {
     routeMap.postList(posts);
+    return routeMap.afterEach(posts);
   }
-
-  return routeMap.afterEach(posts, id);
 }

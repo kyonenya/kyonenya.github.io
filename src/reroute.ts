@@ -13,7 +13,11 @@ export function watchSearchForm(reroute: () => void): void {
   searchFormElement?.addEventListener('submit', (e) => {
     e.preventDefault();
     window.history.pushState(
-      toState(window.location.search, `#{searchInputElement.value}`),
+      toState(
+        window.location.search,
+        window.location.pathname,
+        `#{searchInputElement.value}`
+      ),
       '',
       `${window.location.search}#${searchInputElement.value}`
     );

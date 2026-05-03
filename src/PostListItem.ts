@@ -50,7 +50,7 @@ export const PostListItem = (props: {
       class="bl_postList_item"
       style="display: ${isMatched ? 'block' : 'none'}"
     >
-      <a href="?id=${post.id}">
+      <a href="/?id=${post.id}">
         <header class="bl_postList_header">
           <time class="bl_postList_date">
             ${formatYMD(post.createdAt)}
