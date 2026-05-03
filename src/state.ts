@@ -11,13 +11,13 @@ export function toState(
   locationHash?: string
 ): State {
   const idStr = /\/posts\/(\d+)/.exec(locationPathname)?.[1];
-  const id = idStr ? parseInt(idStr, 10) : undefined;
+  const id = idStr ? Number(idStr) : undefined;
 
   const searchParams = new URLSearchParams(locationSearch);
   const tag = searchParams.get('tag');
   const legacyIdStr = searchParams.get('id');
-  const legacyIdNum = legacyIdStr ? parseInt(legacyIdStr, 10) : NaN;
-  const legacyId = Number.isFinite(legacyIdNum) ? legacyIdNum : undefined;
+  const legacyId =
+    legacyIdStr && /^\d+$/.test(legacyIdStr) ? Number(legacyIdStr) : undefined;
 
   return {
     id: id ?? legacyId,
