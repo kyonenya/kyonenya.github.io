@@ -6,7 +6,7 @@
 
 - CMS機能
   - 記事データベースはJSONで代用
-  - 個別記事ページはパーマリンクを~~クエリ文字列（?id=123）で~~割り振り、そのidをもとに個別ページをJSで生成
+  - 個別記事ページはidごとにパーマリンクを割り振り、ページ内容はJSで生成
   - 全件分の記事データ（〜数百KB程度）を一覧表示時に取得してあるので、個別ページへの遷移時に通信が発生せず、瞬時に表示される
 - 全文検索
   - 記事データはすべて取得してあるのでクライアントサイドで検索実行
@@ -29,7 +29,7 @@
 - マークダウンから記事HTMLを生成
 - 自作SSGスクリプトによるTwitter OGP対応
   - SPAとSSGを共存：リロードしない限りは従来通りSPAとして爆速ページ遷移
-  - 個別記事リンク（/posts/[id]）に直アクセスされた場合のみ静的HTMLバージョンを表示
+  - 個別記事リンク /posts/[id] に直アクセスされた場合のみ静的HTMLバージョンを表示
 
 ## 技術
 
@@ -41,7 +41,7 @@
   - 依存パッケージ0、ビルドサイズを10KB未満まで削減
 - webpack・PostCSS（[v1.1.0](https://github.com/kyonenya/kyonenya.github.io/releases/tag/v1.1.0)より）
 - TypeScript（[v2.0.0](https://github.com/kyonenya/kyonenya.github.io/releases/tag/v2.0.0)より）
-- [play.js](https://playdotjs.com) というiPadでNode.jsが動かせるアプリで開発
+- [Codesandbox for iOS](https://codesandbox.io/codesandbox-for-ios) というiPadでNode.jsが動かせるアプリで開発
 
 ## なぜそんな設計で作るのですか（v0.0.0）
 
