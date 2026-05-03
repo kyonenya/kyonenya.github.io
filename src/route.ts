@@ -1,4 +1,4 @@
-import { Article, articlePage } from './Article';
+import { articlePage } from './Article';
 import { PostList, TaggedPostList, SearchedPostList } from './PostList';
 import { renderPage, scrollToId, baseUrl } from './lib/render';
 import { isDevelopment } from './lib/utils';

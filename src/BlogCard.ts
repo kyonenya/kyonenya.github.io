@@ -1,5 +1,6 @@
 import { TagListItem } from './TagList';
 import { formatYMD } from './lib/dateUtils';
+import { baseUrl } from './lib/render';
 import { Post } from './post';
 
 const Summary = (plainText: string) => `
@@ -8,10 +9,10 @@ const Summary = (plainText: string) => `
   </p>
 `;
 
-export const BlogCard = (post: Post): string => {
+export const BlogCard = (post: Post, ssg?: boolean): string => {
   return `
     <div class="bl_blogCard">
-      <a href="?id=${post.id}" class="hp_unsetLink">
+      <a href="${ssg ? baseUrl : ''}?id=${post.id}" class="hp_unsetLink">
         <header>
           <div class="bl_blogCard_icon"></div>
           <span class="bl_blogCard_logo">placet experiri</span>

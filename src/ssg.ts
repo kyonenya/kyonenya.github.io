@@ -1,9 +1,8 @@
 import { readFileSync, writeFileSync } from 'fs';
 import path from 'path';
+import { articlePage } from './Article';
 import { BlogCard } from './BlogCard';
 import { jsonToPosts, JSONPost, Post } from './post';
-//import { articlePage } from './route';
-import { Article, articlePage } from './Article';
 
 const templatePath = path.resolve(__dirname, '..', 'post.template.html');
 const jsonPath = path.resolve(__dirname, '..', 'posts.json');
@@ -12,24 +11,20 @@ const distPath = path.resolve(__dirname, '..', 'posts');
 type TemplateValues = Record<string, string>;
 
 function createTemplateValues(post: Post): TemplateValues {
-  const page = articlePage(post);
+  const page = articlePage(post, true);
   return {
     PAGE_BODY: page.body,
     PAGE_TITLE: page.title,
-    PAGE_SUFFIX: page.suffix,
-    PAGE_DESCRIPTION: page.description,
-    PAGE_HREF: page.href,
+    PAGE_SUFFIX: page.suffix ?? '',
+    PAGE_DESCRIPTION: page.description ?? '',
+    PAGE_HREF: page.href ?? '',
   };
 }
 
 function embedTemplate(template: string, values: TemplateValues): string {
   return template.replace(/\{\{(\w+)\}\}/g, (_, key: string) => {
     const value = values[key];
-
-    if (!value) {
-      console.log(`Missing template var: ${key}`);
-    }
-
+    if (!value) console.log(`Missing template var: ${key}`);
     return value;
   });
 }
@@ -41,7 +36,7 @@ function writePostHTML(post: Post, template: string, posts: Post[]): void {
     (_, id: string) => {
       const post = posts.filter((post) => id === post.id.toString())[0];
       if (!post) return '';
-      return BlogCard(post);
+      return BlogCard(post, true);
     }
   );
 

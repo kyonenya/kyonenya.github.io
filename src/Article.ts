@@ -2,10 +2,10 @@ import { TagList } from './TagList';
 import { toExternalLink } from './lib/ExternalLink';
 import { MarkupText, kerningDoubleDash } from './lib/MarkupText';
 import { formatYMDHm, fromNow } from './lib/dateUtils';
+import { baseUrl, Page } from './lib/render';
 import { Post } from './post';
-import { baseUrl } from './lib/render';
 
-export const Article = (post: Post): string => `
+const Article = (post: Post, ssg?: boolean): string => `
   <section class="ly_container">
     <article>
       <header class="bl_text_header">
@@ -21,13 +21,13 @@ export const Article = (post: Post): string => `
         <span class="bl_posts_dateago">
           ${fromNow(post.createdAt)}
         </span>
-        ${TagList(post.tags)}
+        ${TagList(post.tags, undefined, ssg)}
       </footer>
     </article>
   </section>`;
 
-export const articlePage = (post: Post) => ({
-  body: Article(post),
+export const articlePage = (post: Post, ssg?: boolean): Page => ({
+  body: Article(post, ssg),
   title: post.title
     ? `${post.title}｜placet experiri :: ${post.id}`
     : `placet experiri :: ${post.id}`,
