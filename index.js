@@ -12,8 +12,9 @@ const { generateStaticHTML } = require('./src/ssg.ts');
 
 const rootDir = __dirname;
 const port = process.env['WEB_APP_PORT'] ? process.env['WEB_APP_PORT'] : 3100;
+console.log('Starting development server...');
 
-express()
+const app = express()
   .use(webpackDevMiddleware(webpack(config)))
   .get('/', (req, res) => res.sendFile(path.resolve(rootDir, 'index.html')))
   .get('/posts/:id', (req, res) => {
@@ -31,10 +32,16 @@ express()
     res.redirect(`/dist/dev/${req.params.scriptName}`)
   )
   .get('/dist/css/bundle.css', (req, res) => res.redirect('/src/css/index.css'))
-  .use(express.static(rootDir))
-  .listen(port, () =>
-    console.log(`Launching app... http://localhost:${port}\n`)
-  );
+  .use(express.static(rootDir));
+
+const server = app.listen(port, () =>
+  console.log(`Launching app... http://localhost:${port}\n`)
+);
+
+server.on('error', (error) => {
+  console.error(error && error.stack ? error.stack : error);
+  process.exitCode = 1;
+});
 
 generatePosts();
 generateSitemap(require('./posts.json'));

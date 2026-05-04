@@ -3,6 +3,7 @@
   "version": "2.5.0",
   "scripts": {
     "_dev": "node index.js",
+    "_dev:debug": "node scripts/run-dev-debug.js",
     "_dev:trace-domain": "node -r ./scripts/trace-domain-require.js index.js",
     "probe:code-app": "node scripts/probe-code-app.js",
     "_tsc": "tsc -w --noEmit",
