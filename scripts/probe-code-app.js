@@ -27,9 +27,11 @@ if (typeof process.hasUncaughtExceptionCaptureCallback === 'function') {
   );
 }
 
-check('require scripts/patch-crypto-hash', () =>
-  require(path.join(rootDir, 'scripts', 'patch-crypto-hash'))
-);
+// Keep the crypto patch out of probe while verifying upgraded webpack no longer
+// needs the md4 compatibility fallback.
+// check('require scripts/patch-crypto-hash', () =>
+//   require(path.join(rootDir, 'scripts', 'patch-crypto-hash'))
+// );
 check('require domain', () => require('domain'), { allowFailure: true });
 check('require express', () => require('express'));
 const webpack = check('require webpack', () => require('webpack'));

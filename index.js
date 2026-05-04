@@ -1,4 +1,6 @@
-require('./scripts/patch-crypto-hash');
+// Keep this available for old webpack/OpenSSL 3 fallback, but do not load it
+// while verifying upgraded webpack works without the md4 compatibility patch.
+// require('./scripts/patch-crypto-hash');
 const express = require('express');
 const path = require('path');
 const webpack = require('webpack');
