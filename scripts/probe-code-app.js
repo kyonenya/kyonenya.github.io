@@ -41,9 +41,8 @@ const config = check('require webpack.dev.config.js', () =>
 const webpackDevMiddleware = check('require webpack-dev-middleware', () =>
   require('webpack-dev-middleware')
 );
-check('require scripts/register-typescript', () =>
-  require(path.join(rootDir, 'scripts', 'register-typescript'))
-);
+const { createJiti } = check('require jiti', () => require('jiti')) || {};
+const jiti = createJiti ? createJiti(__filename) : undefined;
 check('require generatePosts', () => require(path.join(rootDir, 'generatePosts')));
 check('require generateSitemap', () =>
   require(path.join(rootDir, 'generateSitemap'))
@@ -51,7 +50,10 @@ check('require generateSitemap', () =>
 check('require generateBibliography', () =>
   require(path.join(rootDir, 'generateBibliography'))
 );
-check('require src/ssg.ts', () => require(path.join(rootDir, 'src', 'ssg.ts')));
+check('jiti src/ssg.ts', () => {
+  if (!jiti) throw new Error('jiti is not available');
+  return jiti(path.join(rootDir, 'src', 'ssg.ts'));
+});
 
 if (webpack && config && webpackDevMiddleware) {
   check('create webpack compiler', () => webpack(config));
