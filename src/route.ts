@@ -1,6 +1,6 @@
-import { Article } from './Article';
+import { articlePage } from './Article';
 import { PostList, TaggedPostList, SearchedPostList } from './PostList';
-import { renderPage, scrollToId, baseUrl } from './lib/render';
+import { renderPage, baseUrl } from './lib/render';
 import { isDevelopment } from './lib/utils';
 import { Post, excludeReserved } from './post';
 import { toState } from './state';
@@ -10,15 +10,7 @@ const searchInputElement =
 
 const routeMap = {
   article: (post: Post): void => {
-    renderPage({
-      body: Article(post),
-      title: post.title
-        ? `${post.title}｜placet experiri :: ${post.id}`
-        : `placet experiri :: ${post.id}`,
-      suffix: ` :: ${post.id}`,
-      description: `${post.plainText.substring(0, 110)}…`,
-      href: `${baseUrl}?id=${post.id}`,
-    });
+    renderPage(articlePage(post));
     if (!searchInputElement) return;
     searchInputElement.style.display = 'none'; // disable search form
   },
@@ -39,35 +31,29 @@ const routeMap = {
       body: SearchedPostList(posts, keyword, tag),
       title: `「${keyword}」｜placet experiri`,
     }),
-  beforeEach: (): void => {
+  beforeEach: (legacyId: number | undefined): void => {
     window.scrollTo(0, 0);
     if (!searchInputElement) return;
     searchInputElement.style.display = 'block';
-  },
-  afterEach: (posts: Post[]): void => {
-    document
-      .querySelectorAll<HTMLAnchorElement>('a[href^="#"], a[href^="?"]')
-      .forEach((a) => {
-        a.onclick = (e) => {
-          e.preventDefault();
-          window.history.pushState(undefined, '', a.href);
-          route(posts);
-          scrollToId(a.hash.replace('#', ''));
-        };
-      });
+    if (legacyId) {
+      // for backward compatibility
+      window.history.replaceState(undefined, '', `/posts/${legacyId}`);
+    }
   },
 };
 
 export function route(rawPosts: Post[]): void {
-  const { id, tag, keyword } = toState(
+  const { id, legacyId, tag, keyword } = toState(
     window.location.search,
+    window.location.pathname,
     window.location.hash
   );
+
   const posts = isDevelopment(window.location.href)
     ? rawPosts
     : excludeReserved(rawPosts);
 
-  routeMap.beforeEach();
+  routeMap.beforeEach(legacyId);
 
   if (id !== undefined) {
     const post = posts.find((post) => post.id === id);
@@ -80,6 +66,4 @@ export function route(rawPosts: Post[]): void {
   } else {
     routeMap.postList(posts);
   }
-
-  return routeMap.afterEach(posts);
 }

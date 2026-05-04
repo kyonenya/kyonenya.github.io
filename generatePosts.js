@@ -9,7 +9,7 @@ const md = new MarkdownIt();
 md.use(MarkdownItFootnote);
 
 const jsonPath = path.resolve(__dirname, 'posts.json');
-const mdPath = path.resolve(__dirname, 'posts');
+const mdPath = path.resolve(__dirname, 'markdown');
 
 /**
  * @param dir string
