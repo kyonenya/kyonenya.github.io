@@ -3,6 +3,8 @@
   "version": "2.5.0",
   "scripts": {
     "_dev": "node index.js",
+    "_dev:trace-domain": "node -r ./scripts/trace-domain-require.js index.js",
+    "probe:code-app": "node scripts/probe-code-app.js",
     "_tsc": "tsc -w --noEmit",
     "build": "webpack",
     "build:css": "postcss src/css/index.css -o dist/css/bundle.css",
