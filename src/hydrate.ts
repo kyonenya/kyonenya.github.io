@@ -10,5 +10,6 @@ function hydrateFromNow() {
 }
 
 hydrateFromNow();
+
 // SSG -> SPA (progressive enhancement)
-void app(false, true);
+void app(false);

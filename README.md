@@ -28,8 +28,8 @@
     - 試行錯誤の履歴：[kyonenya/citation-js-playground](https://github.com/kyonenya/citation-js-playground)
 - マークダウンから記事HTMLを生成
 - 自作SSGスクリプトによるTwitter OGP対応
-  - SPAとSSGを共存：リロードしない限りは従来通りSPAとして爆速ページ遷移
-  - 個別記事リンク /posts/[id] に直アクセスされた場合のみ静的HTMLバージョンを表示
+  - /posts/[id] に直アクセスしてきた人やSNSのクローラーにはHTMLバージョンを提供
+  - SSGされた静的HTMLに後からSPAスクリプトがハイドレーションされ、index.htmlと同じ動的ページに変化する
 
 ## 技術
 
