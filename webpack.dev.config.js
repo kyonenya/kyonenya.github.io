@@ -5,6 +5,7 @@ module.exports = {
   ...productionConfig,
   mode: 'development',
   output: {
+    ...productionConfig.output,
     filename: 'dist/dev/[name].js',
   },
   module: {
