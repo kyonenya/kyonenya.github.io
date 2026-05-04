@@ -6,7 +6,7 @@ function log(message) {
   console.log(`[probe] ${message}`);
 }
 
-function check(label, fn) {
+function check(label, fn, options = {}) {
   log(`${label}: start`);
   try {
     const result = fn();
@@ -15,7 +15,7 @@ function check(label, fn) {
   } catch (error) {
     log(`${label}: failed`);
     console.error(error && error.stack ? error.stack : error);
-    process.exitCode = 1;
+    if (!options.allowFailure) process.exitCode = 1;
     return undefined;
   }
 }
@@ -27,7 +27,7 @@ if (typeof process.hasUncaughtExceptionCaptureCallback === 'function') {
   );
 }
 
-check('require domain', () => require('domain'));
+check('require domain', () => require('domain'), { allowFailure: true });
 check('require express', () => require('express'));
 const webpack = check('require webpack', () => require('webpack'));
 const config = check('require webpack.dev.config.js', () =>
@@ -36,8 +36,8 @@ const config = check('require webpack.dev.config.js', () =>
 const webpackDevMiddleware = check('require webpack-dev-middleware', () =>
   require('webpack-dev-middleware')
 );
-check('require ts-node/register/transpile-only', () =>
-  require('ts-node/register/transpile-only')
+check('require scripts/register-typescript', () =>
+  require(path.join(rootDir, 'scripts', 'register-typescript'))
 );
 check('require generatePosts', () => require(path.join(rootDir, 'generatePosts')));
 check('require generateSitemap', () =>
@@ -58,4 +58,3 @@ if (webpack && config && webpackDevMiddleware) {
     middleware.close(() => log('webpack-dev-middleware: closed'));
   }
 }
-

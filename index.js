@@ -6,7 +6,7 @@ const config = require('./webpack.dev.config.js');
 const generatePosts = require('./generatePosts');
 const generateSitemap = require('./generateSitemap');
 const generateBibliography = require('./generateBibliography');
-require('ts-node/register');
+require('./scripts/register-typescript');
 const { generateStaticHTML } = require('./src/ssg.ts');
 
 const rootDir = __dirname;
