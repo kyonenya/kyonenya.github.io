@@ -1,6 +1,3 @@
-// Keep this available for old webpack/OpenSSL 3 fallback, but do not load it
-// while verifying upgraded webpack works without the md4 compatibility patch.
-// require('./scripts/patch-crypto-hash');
 const express = require('express');
 const path = require('path');
 const webpack = require('webpack');
@@ -15,9 +12,8 @@ const { generateStaticHTML } = jiti('./src/ssg.ts');
 
 const rootDir = __dirname;
 const port = process.env['WEB_APP_PORT'] ? process.env['WEB_APP_PORT'] : 3100;
-console.log('Starting development server...');
 
-const app = express()
+express()
   .use(webpackDevMiddleware(webpack(config)))
   .get('/', (req, res) => res.sendFile(path.resolve(rootDir, 'index.html')))
   .get('/posts/:id', (req, res) => {
@@ -35,16 +31,10 @@ const app = express()
     res.redirect(`/dist/dev/${req.params.scriptName}`)
   )
   .get('/dist/css/bundle.css', (req, res) => res.redirect('/src/css/index.css'))
-  .use(express.static(rootDir));
-
-const server = app.listen(port, () =>
-  console.log(`Launching app... http://localhost:${port}\n`)
-);
-
-server.on('error', (error) => {
-  console.error(error && error.stack ? error.stack : error);
-  process.exitCode = 1;
-});
+  .use(express.static(rootDir))
+  .listen(port, () =>
+    console.log(`Launching app... http://localhost:${port}\n`)
+  );
 
 generatePosts();
 generateSitemap(require('./posts.json'));

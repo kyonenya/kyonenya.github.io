@@ -10,7 +10,6 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'dist'),
     filename: '[name].js',
-    hashFunction: 'sha256',
   },
   module: {
     rules: [

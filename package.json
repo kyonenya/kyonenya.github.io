@@ -3,10 +3,6 @@
   "version": "2.5.0",
   "scripts": {
     "_dev": "node index.js",
-    "_dev:debug": "node scripts/run-dev-debug.js",
-    "_dev:file-debug": "node scripts/run-dev-file-debug.js",
-    "_dev:trace-domain": "node -r ./scripts/trace-domain-require.js index.js",
-    "probe:code-app": "node scripts/probe-code-app.js",
     "_tsc": "tsc -w --noEmit",
     "build": "webpack",
     "build:css": "postcss src/css/index.css -o dist/css/bundle.css",
@@ -42,7 +38,6 @@
     "stylelint-config-prettier": "^9.0.3",
     "stylelint-config-standard": "^22.0.0",
     "ts-loader": "^9.5.4",
-    "ts-node": "^9.1.1",
     "typescript": "^4.2.4",
     "webpack": "^5.101.3",
     "webpack-cli": "^6.0.1",
