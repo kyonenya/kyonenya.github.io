@@ -23,7 +23,7 @@ export function isPast(date: Date): boolean {
 }
 
 export function isNew(date: Date, newDays: number): boolean {
-  const limitDate = date; // clone
+  const limitDate = new Date(date); // clone
   limitDate.setDate(date.getDate() + newDays);
   return isBefore(new Date(), limitDate);
 }
