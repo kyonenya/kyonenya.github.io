@@ -1,6 +1,6 @@
 /* server-side only: do not import client-side code */
-import { readFileSync, writeFileSync } from 'fs';
-import path from 'path';
+import { readFileSync, writeFileSync } from 'node:fs';
+import path from 'node:path';
 import { articlePage } from './Article';
 import { BlogCard } from './BlogCard';
 import { jsonToPosts, Post } from './post';
