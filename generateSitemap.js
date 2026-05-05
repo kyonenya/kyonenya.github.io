@@ -1,6 +1,7 @@
-const { createWriteStream, writeFileSync } = require('fs');
+const { writeFileSync } = require('fs');
 const { SitemapStream, streamToPromise } = require('sitemap');
-const format = require('xml-formatter');
+/** @type {(xml: string, options?: object) => string} */
+const format = /** @type {any} */ (require('xml-formatter'));
 const { updatedAt } = require('./about.json');
 
 const sitemap = new SitemapStream({ hostname: 'https://kyonenya.github.io/' });

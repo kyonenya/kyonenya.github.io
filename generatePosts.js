@@ -67,12 +67,12 @@ function uniquePosts(posts) {
 /**
  * @param posts {import('./src/post').JSONPost[]}
  * @param mdPosts {import('./src/post').JSONPost[]}
- * @return {void}
+ * @return {Promise<void>}
  */
-function writePostsJson(posts, mdPosts) {
+async function writePostsJson(posts, mdPosts) {
   fs.writeFileSync(
     jsonPath,
-    prettier.format(JSON.stringify(uniquePosts([...mdPosts, ...posts])), {
+    await prettier.format(JSON.stringify(uniquePosts([...mdPosts, ...posts])), {
       semi: false,
       parser: 'json',
     }),

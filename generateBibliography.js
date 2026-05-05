@@ -59,14 +59,14 @@ function AppendBibliopraphy(items) {
 }
 
 /**
- * @return {void}
+ * @return {Promise<void>}
  */
-function generateBibliography() {
+async function generateBibliography() {
   const works = JSON.parse(fs.readFileSync(worksPath, 'utf8'));
   const newWorks = AppendBibliopraphy(works);
   fs.writeFileSync(
     worksPath,
-    prettier.format(JSON.stringify(newWorks), {
+    await prettier.format(JSON.stringify(newWorks), {
       semi: false,
       parser: 'json',
     }),
