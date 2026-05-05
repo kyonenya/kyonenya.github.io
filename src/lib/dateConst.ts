@@ -14,7 +14,7 @@ const day = hours * 24;
 const month = day * 30;
 const year = month * 12;
 
-const msMap: DateParts = {
+const unitMsMap: DateParts = {
   seconds,
   minutes,
   hours,
@@ -23,10 +23,11 @@ const msMap: DateParts = {
   year,
 };
 
-export const units = Object.keys(msMap) as (keyof DateParts)[];
+type Unit = keyof DateParts;
+export const units = Object.keys(unitMsMap) as Unit[];
 
-export function toUnitTime(ms: number, unit: keyof DateParts): number {
-  return ms / msMap[unit];
+export function toUnitTime(ms: number, unit: Unit): number {
+  return ms / unitMsMap[unit];
 }
 
 export function getDateParts(date: Date): DateParts {
