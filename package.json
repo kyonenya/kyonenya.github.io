@@ -4,12 +4,12 @@
   "scripts": {
     "dev": "node index.js",
     "tsc": "tsc -w --noEmit",
+    "tsc:checkjs": "tsc -w --noEmit --resolveJsonModule --p tsconfig.checkjs.json",
     "build": "webpack",
     "build:css": "postcss src/css/index.css -o dist/css/bundle.css",
     "fmt": "prettier --write **/*.{ts,js,json,css}",
     "lint": "eslint --fix src/**/*.ts",
-    "lint:css": "stylelint src/**/*.css",
-    "tsc:checkjs": "tsc -w --noEmit --resolveJsonModule --p tsconfig.checkjs.json"
+    "lint:css": "stylelint src/**/*.css"
   },
   "dependencies": {
     "search-summary": "^1.1.2"
@@ -24,7 +24,7 @@
     "eslint-plugin-import": "^2.25.3",
     "express": "^4.17.1",
     "gray-matter": "^4.0.3",
-    "jiti": "^2.4.2",
+    "jiti": "^2.6.1",
     "markdown-it": "^13.0.1",
     "markdown-it-footnote": "^3.0.3",
     "postcss": "^8.3.0",
