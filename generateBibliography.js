@@ -50,7 +50,7 @@ function AppendBibliopraphy(items) {
   const bibTexts = citeproc(
     items,
     fs.readFileSync(stylePath, 'utf-8'),
-    fs.readFileSync(localePath, 'utf-8')
+    fs.readFileSync(localePath, 'utf-8'),
   );
   return items.map((item, i) => ({
     ...item,
@@ -69,7 +69,7 @@ function generateBibliography() {
     prettier.format(JSON.stringify(newWorks), {
       semi: false,
       parser: 'json',
-    })
+    }),
   );
   console.log('bibliography generated.');
 }

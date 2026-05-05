@@ -11,7 +11,7 @@ const BoldText = (text: string) => `<b>${Text(text)}</b>`;
 const ListItem = (
   citation: Citation,
   num: number,
-  hilightedId: string
+  hilightedId: string,
 ): string => {
   const isHighlighted = citation.id.toString() === hilightedId;
   const ListNum = isHighlighted
@@ -27,7 +27,7 @@ const ListItem = (
     <li id="${citation.id}">
       ${ListNum}
       ${(isHighlighted ? BoldText : Text)(
-        citation._bibliographyText
+        citation._bibliographyText,
       )}${statusNote}
     </li>
   `;
@@ -36,7 +36,7 @@ const ListItem = (
 const List = (
   citations: Citation[] | undefined,
   genre: Genre,
-  hilightedId: string
+  hilightedId: string,
 ): string => {
   if (!citations || citations.length === 0) return '';
   return `
@@ -56,7 +56,7 @@ export const Works = (citations: Citation[], hilightedId: string): string => {
       <div class="bl_text">
         <h2>業績一覧</h2>
         ${Genre.map((genre) =>
-          List(citationMap[genre], genre, hilightedId)
+          List(citationMap[genre], genre, hilightedId),
         ).join('')}
       </div>
     </section>`;

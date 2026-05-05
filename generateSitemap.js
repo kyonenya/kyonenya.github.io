@@ -25,7 +25,7 @@ function tagHistory(posts) {
     return {
       tag,
       modifiedAt: getLatestModifiedAt(
-        posts.filter((post) => post.tags.includes(tag))
+        posts.filter((post) => post.tags.includes(tag)),
       ),
     };
   });
@@ -40,10 +40,10 @@ function generateSitemap(posts) {
   sitemap.write({ url: 'works', lastmod: updatedAt });
   sitemap.write({ url: 'about', lastmod: updatedAt });
   posts.forEach((post) =>
-    sitemap.write({ url: `/posts/${post.id}`, lastmod: post.modifiedAt })
+    sitemap.write({ url: `/posts/${post.id}`, lastmod: post.modifiedAt }),
   );
   tagHistory(posts).forEach(({ tag, modifiedAt }) =>
-    sitemap.write({ url: `?tag=${tag}`, lastmod: modifiedAt })
+    sitemap.write({ url: `?tag=${tag}`, lastmod: modifiedAt }),
   );
   sitemap.end();
 
@@ -51,8 +51,8 @@ function generateSitemap(posts) {
     .then((sm) =>
       writeFileSync(
         './sitemap.xml',
-        format(sm.toString(), { indentation: '  ', collapseContent: true })
-      )
+        format(sm.toString(), { indentation: '  ', collapseContent: true }),
+      ),
     )
     .then(() => console.log('sitemap generated.'));
 }

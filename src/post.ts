@@ -33,7 +33,7 @@ export function jsonToPost(post: JSONPost): Post {
     plainText: post.text
       .replace(
         /<blockquote>(.+?)<\/blockquote>/g,
-        (_, text: string) => `> ${text}`
+        (_, text: string) => `> ${text}`,
       )
       .replace(/<h2>(.+?)<\/h2>/g, (_, text: string) => `## ${text}`)
       .replace(/——/g, '──')

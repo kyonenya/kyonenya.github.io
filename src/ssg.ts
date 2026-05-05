@@ -38,14 +38,14 @@ function embedTemplate(post: Post, template: string, posts: Post[]): string {
 export function generateStaticHTML(): void {
   const template = readFileSync(templatePath, 'utf8');
   const posts = jsonToPosts(
-    JSON.parse(readFileSync(jsonPath, 'utf8')) as JSONPost[]
+    JSON.parse(readFileSync(jsonPath, 'utf8')) as JSONPost[],
   );
   posts.forEach((post) =>
     writeFileSync(
       path.resolve(distPath, `${post.id}.html`),
       embedTemplate(post, template, posts),
-      'utf8'
-    )
+      'utf8',
+    ),
   );
   console.log('static html generated.');
 }

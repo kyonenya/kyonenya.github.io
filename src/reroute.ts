@@ -17,10 +17,10 @@ function watchSearchForm(reroute: () => void): void {
       toState(
         window.location.search,
         window.location.pathname,
-        `#${searchInputElement.value}`
+        `#${searchInputElement.value}`,
       ),
       '',
-      `${window.location.search}#${searchInputElement.value}`
+      `${window.location.search}#${searchInputElement.value}`,
     );
     reroute();
   });
@@ -30,7 +30,7 @@ function watchInternalLinkClicks(reroute: () => void): void {
   document.addEventListener('click', (e) => {
     if (!(e.target instanceof Element)) return;
     const a = e.target.closest<HTMLAnchorElement>(
-      'a[href^="#"], a[href^="/?"], a[href="/"], a[href^="/posts/"]'
+      'a[href^="#"], a[href^="/?"], a[href="/"], a[href^="/posts/"]',
     );
     if (a) {
       e.preventDefault();

@@ -55,7 +55,7 @@ function readPostsMarkdown(paths) {
  */
 function uniquePosts(posts) {
   const uniquePosts = Array.from(
-    new Map(posts.map((post) => [post.id, post])).values()
+    new Map(posts.map((post) => [post.id, post])).values(),
   );
   return uniquePosts.sort(function (a, b) {
     if (a.id < b.id) return 1;
@@ -75,7 +75,7 @@ function writePostsJson(posts, mdPosts) {
     prettier.format(JSON.stringify(uniquePosts([...mdPosts, ...posts])), {
       semi: false,
       parser: 'json',
-    })
+    }),
   );
 }
 

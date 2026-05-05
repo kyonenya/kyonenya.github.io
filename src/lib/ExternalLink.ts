@@ -11,13 +11,13 @@ export function toExternalLink(html: string): string {
   return html.replace(
     /<a href=['"]([^?/].+?)['"](.*?)>(.+?)<\/a>/g, // href start with '?' or '/'
     (_, href: string, attributes: string, content: string) =>
-      ExternalLink({ href, attributes, content })
+      ExternalLink({ href, attributes, content }),
   );
 }
 
 export function parseMarkdownLink(text: string): string {
   return text.replace(
     /\[(.+?)\]\((.+?)\)/g,
-    (_, content: string, href: string) => ExternalLink({ content, href })
+    (_, content: string, href: string) => ExternalLink({ content, href }),
   );
 }

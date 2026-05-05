@@ -8,7 +8,7 @@ type State = {
 export function toState(
   locationSearch: string,
   locationPathname: string,
-  locationHash?: string
+  locationHash?: string,
 ): State {
   const idStr = /\/posts\/(\d+)/.exec(locationPathname)?.[1];
   const id = idStr ? Number(idStr) : undefined;

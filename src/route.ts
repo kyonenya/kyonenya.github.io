@@ -46,7 +46,7 @@ export function route(rawPosts: Post[]): void {
   const { id, legacyId, tag, keyword } = toState(
     window.location.search,
     window.location.pathname,
-    window.location.hash
+    window.location.hash,
   );
 
   const posts = isDevelopment(window.location.href)
