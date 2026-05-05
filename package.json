@@ -5,7 +5,7 @@
     "dev": "node index.js",
     "tsc": "tsc -w --noEmit",
     "tsc:js": "tsc -w --noEmit --resolveJsonModule --p tsconfig.checkjs.json",
-    "build": "node webpack.js",
+    "build": "node ./node_modules/webpack/bin/webpack.js",
     "build:css": "postcss src/css/index.css -o dist/css/bundle.css",
     "fmt": "prettier --write **/*.{ts,js,json,css}",
     "lint": "eslint --fix src/**/*.ts",
@@ -41,6 +41,7 @@
     "ts-loader": "^9.5.7",
     "typescript": "^6.0.3",
     "webpack": "^5.106.2",
+    "webpack-cli": "^6.0.1",
     "webpack-dev-middleware": "^8.0.3",
     "xml-formatter": "^3.7.0"
   },
