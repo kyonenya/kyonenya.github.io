@@ -2,14 +2,14 @@
   "name": "kyonenya.github.io",
   "version": "2.5.0",
   "scripts": {
-    "_dev": "node index.js",
-    "_tsc": "tsc -w --noEmit",
+    "dev": "node index.js",
+    "tsc": "tsc -w --noEmit",
+    "tsc:checkjs": "tsc -w --noEmit --resolveJsonModule --p tsconfig.checkjs.json",
     "build": "webpack",
     "build:css": "postcss src/css/index.css -o dist/css/bundle.css",
     "fmt": "prettier --write **/*.{ts,js,json,css}",
     "lint": "eslint --fix src/**/*.ts",
-    "lint:css": "stylelint src/**/*.css",
-    "tsc:checkjs": "tsc -w --noEmit --resolveJsonModule --p tsconfig.checkjs.json"
+    "lint:css": "stylelint src/**/*.css"
   },
   "dependencies": {
     "search-summary": "^1.1.2"
@@ -24,6 +24,7 @@
     "eslint-plugin-import": "^2.25.3",
     "express": "^4.17.1",
     "gray-matter": "^4.0.3",
+    "jiti": "^2.6.1",
     "markdown-it": "^13.0.1",
     "markdown-it-footnote": "^3.0.3",
     "postcss": "^8.3.0",
@@ -36,12 +37,11 @@
     "stylelint-cli": "^1.3.0",
     "stylelint-config-prettier": "^9.0.3",
     "stylelint-config-standard": "^22.0.0",
-    "ts-loader": "^9.2.1",
-    "ts-node": "^9.1.1",
+    "ts-loader": "^9.5.4",
     "typescript": "^4.2.4",
-    "webpack": "^5.37.1",
-    "webpack-cli": "^4.7.0",
-    "webpack-dev-middleware": "^4.3.0",
+    "webpack": "^5.106.2",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-middleware": "^7.4.5",
     "xml-formatter": "^2.5.1"
   },
   "prettier": {

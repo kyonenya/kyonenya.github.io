@@ -1,20 +1,17 @@
-import { toUnitTime, Unit } from './dateUnit';
+import { toUnitTime, units, getDateParts, DateParts } from './dateConst';
 
-const shortDateIntl = new Intl.DateTimeFormat('ja-JP', { dateStyle: 'short' });
-const shortDateTimeIntl = new Intl.DateTimeFormat('ja-JP', {
-  dateStyle: 'short',
-  timeStyle: 'short',
-});
-const relativeTimeIntl = new Intl.RelativeTimeFormat('ja-JP', {
-  style: 'narrow',
-});
+function pad2(num: number): string {
+  return String(num).padStart(2, '0');
+}
 
 export function formatYMD(date: Date): string {
-  return shortDateIntl.format(date).replace(/\//g, '-');
+  const { year, month, day } = getDateParts(date);
+  return `${year}-${pad2(month)}-${pad2(day)}`;
 }
 
 export function formatYMDHm(date: Date): string {
-  return shortDateTimeIntl.format(date).replace(/\//g, '-');
+  const { year, month, day, hours, minutes } = getDateParts(date);
+  return `${year}-${pad2(month)}-${pad2(day)} ${hours}:${pad2(minutes)}`;
 }
 
 function isBefore(date: Date, limitDate: Date): boolean {
@@ -26,23 +23,27 @@ export function isPast(date: Date): boolean {
 }
 
 export function isNew(date: Date, newDays: number): boolean {
-  const limitDate = date; // clone
+  const limitDate = new Date(date); // clone
   limitDate.setDate(date.getDate() + newDays);
   return isBefore(new Date(), limitDate);
 }
 
-const thresholdMap: { [k in Unit]: number } = {
-  second: 45,
-  minute: 45,
-  hour: 22,
+const thresholdMap: DateParts = {
+  seconds: 45,
+  minutes: 45,
+  hours: 22,
   day: 26,
   month: 11,
   year: Infinity,
 };
 
+const relativeTimeIntl = new Intl.RelativeTimeFormat('ja-JP', {
+  style: 'narrow',
+});
+
 export function fromNow(date: Date): string {
   const diffMs = date.getTime() - new Date().getTime();
-  const unit = Unit.find(
+  const unit = units.find(
     (unit) => Math.abs(toUnitTime(diffMs, unit)) < thresholdMap[unit]
   );
   if (!unit) return '';

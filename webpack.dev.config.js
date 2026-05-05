@@ -5,7 +5,9 @@ module.exports = {
   ...productionConfig,
   mode: 'development',
   output: {
-    filename: 'dist/dev/[name].js',
+    ...productionConfig.output,
+    filename: 'dev/[name].js',
+    publicPath: '/dist/',
   },
   module: {
     rules: [
