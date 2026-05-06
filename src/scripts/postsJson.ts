@@ -56,15 +56,13 @@ function uniquePosts(posts: JSONPost[]): JSONPost[] {
 }
 
 async function writePostsJson(
-  posts: JSONPost[],
+  jsonPosts: JSONPost[],
   mdPosts: JSONPost[],
 ): Promise<JSONPost[]> {
-  const newPosts = uniquePosts([...posts, ...mdPosts]);
+  const newPosts = uniquePosts([...jsonPosts, ...mdPosts]); // mdPosts > jsonPosts
   await writeFile(
     jsonPath,
-    await format(JSON.stringify(newPosts), {
-      parser: 'json',
-    }),
+    await format(JSON.stringify(newPosts), { parser: 'json' }),
   );
   return newPosts;
 }
@@ -78,7 +76,7 @@ export async function generatePostsJson(): Promise<JSONPost[]> {
     JSON.parse(postsJson) as JSONPost[],
     await readPostsMarkdown(mdPaths),
   );
-  console.log('posts genarated.');
+  console.log('posts generated.');
   return posts;
 }
 
