@@ -15,7 +15,7 @@
 }
 
 .el_search_icon {
-  background-image: url(../../assets/images/search.svg);
+  background-image: url('../../assets/images/search.svg');
   background-size: 100%;
   background-repeat: no-repeat;
   width: 1em;
@@ -33,7 +33,7 @@
 
 @media (prefers-color-scheme: dark) {
   .el_search_icon {
-    background-image: url(../../assets/images/search_dark.svg);
+    background-image: url('../../assets/images/search_dark.svg');
   }
 }
 
