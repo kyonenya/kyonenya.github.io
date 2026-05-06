@@ -9,11 +9,17 @@ export default defineConfig(
   js.configs.recommended,
 
   ...tseslint.configs.recommended,
+  ...tseslint.configs.recommendedTypeChecked,
 
   importPlugin.flatConfigs.recommended,
   importPlugin.flatConfigs.typescript,
   {
     files: ['src/**/*.ts'],
+    languageOptions: {
+      parserOptions: {
+        project: './tsconfig.json',
+      },
+    },
     rules: {
       'import/order': [
         'warn',
