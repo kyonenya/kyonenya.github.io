@@ -17,11 +17,13 @@ const jsonPath = path.resolve(rootDir, 'posts.json');
 const mdPath = path.resolve(rootDir, 'markdown');
 
 async function listFiles(dir: string): Promise<string[]> {
+  const dirents = await readdir(dir, { withFileTypes: true });
   const paths = await Promise.all(
-    (await readdir(dir, { withFileTypes: true })).map(async (dirent) => {
+    dirents.map(async (dirent) => {
       if (/^\..*/.test(dirent.name)) return []; // exclude '.icloud' file
       const filePath = path.resolve(dir, dirent.name);
-      return dirent.isFile() ? [filePath] : await listFiles(filePath);
+      if (dirent.isFile()) return [filePath];
+      return await listFiles(filePath);
     }),
   );
   return paths.flat();

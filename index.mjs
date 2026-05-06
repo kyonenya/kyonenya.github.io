@@ -11,8 +11,8 @@ const rootDir = path.dirname(filename);
 const jiti = createJiti(import.meta.url);
 const { generatePostsJson } = jiti('./src/scripts/postsJson.ts');
 const { generateSitemap } = jiti('./src/scripts/sitemap.ts');
-const { generateWorks } = jiti('./src/scripts/worksJson.ts');
-const { generateStaticHTML } = jiti('./src/ssg.ts');
+const { generateWorksJson } = jiti('./src/scripts/worksJson.ts');
+const { generateStaticHtml } = jiti('./src/ssg.ts');
 
 const port = process.env['WEB_APP_PORT'] ?? 3100;
 
@@ -42,8 +42,8 @@ express()
 (async () => {
   const posts = await generatePostsJson();
   await Promise.all([
-    generateWorks(),
+    generateWorksJson(),
     generateSitemap(posts),
-    generateStaticHTML(posts),
+    generateStaticHtml(posts),
   ]);
 })();

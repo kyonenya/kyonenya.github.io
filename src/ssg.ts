@@ -11,7 +11,7 @@ const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 const rootDir = path.resolve(dirname, '..');
 const templatePath = path.resolve(rootDir, 'post.template.html');
-const distPath = path.resolve(rootDir, 'posts');
+const distDir = path.resolve(rootDir, 'posts');
 
 function createTemplateValues(post: Post): Record<string, string> {
   const page = articlePage(post, true);
@@ -39,13 +39,13 @@ function embedTemplate(post: Post, template: string, posts: Post[]): string {
     });
 }
 
-export async function generateStaticHTML(jsonPosts: JSONPost[]): Promise<void> {
+export async function generateStaticHtml(jsonPosts: JSONPost[]): Promise<void> {
   const template = await readFile(templatePath, 'utf8');
   const posts = jsonToPosts(jsonPosts);
   await Promise.all(
     posts.map((post) =>
       writeFile(
-        path.resolve(distPath, `${post.id}.html`),
+        path.resolve(distDir, `${post.id}.html`),
         embedTemplate(post, template, posts),
         'utf8',
       ),
@@ -58,5 +58,5 @@ if (path.resolve(process.argv[1] ?? '') === filename) {
   const posts = JSON.parse(
     await readFile(path.resolve(rootDir, 'posts.json'), 'utf8'),
   ) as JSONPost[];
-  void generateStaticHTML(posts);
+  void generateStaticHtml(posts);
 }

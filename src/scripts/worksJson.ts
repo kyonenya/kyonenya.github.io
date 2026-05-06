@@ -68,7 +68,7 @@ function citeproc(data: Data[], style: string, locale: string): string[] {
   return bib[1].map((text) => text.replace(/\n$/, ''));
 }
 
-async function appendBibliography(items: Data[]): Promise<Citation[]> {
+async function appendCitations(items: Data[]): Promise<Citation[]> {
   const [style, locale] = await Promise.all([
     readFile(stylePath, 'utf-8'),
     readFile(localePath, 'utf-8'),
@@ -80,9 +80,9 @@ async function appendBibliography(items: Data[]): Promise<Citation[]> {
   }));
 }
 
-export async function generateWorks(): Promise<void> {
+export async function generateWorksJson(): Promise<void> {
   const works = JSON.parse(await readFile(worksPath, 'utf8')) as Data[];
-  const newWorks = await appendBibliography(works);
+  const newWorks = await appendCitations(works);
   await writeFile(
     worksPath,
     await format(JSON.stringify(newWorks), {
@@ -94,5 +94,5 @@ export async function generateWorks(): Promise<void> {
 }
 
 if (path.resolve(process.argv[1] ?? '') === filename) {
-  void generateWorks();
+  void generateWorksJson();
 }
