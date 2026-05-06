@@ -81,7 +81,6 @@ export async function generatePostsJson(): Promise<JSONPost[]> {
   return posts;
 }
 
-
 if (path.resolve(process.argv[1] ?? '') === filename) {
   void generatePostsJson();
 }

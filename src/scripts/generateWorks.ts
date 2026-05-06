@@ -93,7 +93,6 @@ export async function generateWorks(): Promise<void> {
   console.log('works generated.');
 }
 
-
 if (path.resolve(process.argv[1] ?? '') === filename) {
   void generateWorks();
 }

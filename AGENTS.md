@@ -65,7 +65,7 @@ webpackのentryは `index`、`works`、`hydrate` の3種類。
 
 - iOSの[Code App](https://code.thebaselab.com/)でも開発サーバーを動かすことがある。公式ドキュメント上も、Code AppはiOSの制約を受け、ネイティブコンポーネントを含むモジュールの追加やsubprocess起動ができない。
 - Code AppのNode.js v18.19.0では、`process.setUncaughtExceptionCaptureCallback()` が有効な状態で起動することがある。この環境では `domain` モジュールと共存できず、`ts-node/register` は `ERR_DOMAIN_CALLBACK_NOT_AVAILABLE` で落ちる。サーバー側TSの読み込みには `jiti` を使う。
-- Code AppのNode環境では `WebAssembly` が未定義になることがある。webpackの既定 `md4` ハッシュ経路は `webpack/lib/util/hash/md4.js` に入り `ReferenceError: WebAssembly is not defined` になるため、`webpack.config.js` の `output.hashFunction: 'sha256'` を外さない。
+- Code AppのNode環境では `WebAssembly` が未定義になることがある。webpackの既定 `md4` ハッシュ経路は `webpack/lib/util/hash/md4.js` に入り `ReferenceError: WebAssembly is not defined` になるため、`webpack.config.mjs` の `output.hashFunction: 'sha256'` を外さない。
 - Node 18 / OpenSSL 3 では古いwebpackの `md4` ハッシュが `digital envelope routines` / `ERR_OSSL_EVP_UNSUPPORTED` で落ちる。webpack系依存を古い版へ戻す場合はCode Appで `npm run dev` を再検証する。
 - Code Appでは、Nodeの `child_process.spawn()` から子プロセスを作る処理が `spawn EPERM` / `Operation not permitted` で落ちることがある。内蔵ターミナルがコマンドを起動できても、その中のNodeプロセスからさらに別プロセスを起動できるとは限らない。Code Appで動かすツールは、外部CLIや複数コマンドを内部から起動しない構成を優先する。
 
