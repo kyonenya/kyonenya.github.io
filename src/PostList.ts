@@ -18,7 +18,7 @@ export const PostList = (posts: Post[]): string =>
     posts
       .map((post, i) => PostListItem({ post: posts[i] }))
       .reverse()
-      .join('')
+      .join(''),
   );
 
 export const TaggedPostList = (posts: Post[], tag: string): string =>
@@ -30,17 +30,17 @@ export const TaggedPostList = (posts: Post[], tag: string): string =>
               post: posts[i],
               tag,
             })
-          : ''
+          : '',
       )
       .reverse()
       .join(''),
-    `#${tag}`
+    `#${tag}`,
   );
 
 export const SearchedPostList = (
   posts: Post[],
   keyword: string,
-  tag?: string
+  tag?: string,
 ): string =>
   Container(
     posts
@@ -51,9 +51,9 @@ export const SearchedPostList = (
               tag,
               keyword,
             })
-          : ''
+          : '',
       )
       .reverse()
       .join(''),
-    `「${keyword}」`
+    `「${keyword}」`,
   );

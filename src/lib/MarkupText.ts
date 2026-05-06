@@ -8,7 +8,7 @@ export const MarkupText = (html: string): string =>
     // unset paragraph indent start with brackets
     .replace(
       /<p>([「『（].+?)<\/p>/g,
-      (_, content: string) => `<p style="text-indent: 0">${content}</p>`
+      (_, content: string) => `<p style="text-indent: 0">${content}</p>`,
     );
 
 export const kerningDoubleDash = (text: string): string =>

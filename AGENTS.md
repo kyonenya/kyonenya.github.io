@@ -54,12 +54,12 @@ webpackのentryは `index`、`works`、`hydrate` の3種類。
 - `npm run dev`: 開発サーバー起動。起動時に記事・サイトマップ・文献・静的記事HTMLも生成する。
 - `npm run tsc`: TypeScript型チェックのwatch。
 - `npm run build`: webpackで `dist/index.js`、`dist/hydrate.js`、`dist/works.js` を生成。
-- `npm run build:css`: CSSを `dist/css/bundle.css` に生成。
+- `npm run build-css`: CSSを `dist/css/bundle.css` に生成。
 - `npm run lint`: TypeScriptのESLint修正。
-- `npm run lint:css`: CSS lint。
+- `npm run lint-css`: CSS lint。
 - `npm run fmt`: Prettier整形。
 
-`tsc` と `tsc:checkjs` は `-w` 付きなので、単発確認では `./node_modules/.bin/tsc --noEmit` などを使う。
+`tsc` と `tsc-js` は `-w` 付きなので、単発確認では `./node_modules/.bin/tsc --noEmit` などを使う。
 
 ## Code App / iOS 環境
 
@@ -89,3 +89,12 @@ webpackのentryは `index`、`works`、`hydrate` の3種類。
 - むやみに関数や変数に切り出すよりもインラインで書くほうを優先する。
 - ワンライナー寄りの簡潔なコードスタイルを採用する。
 - 関数型プログラミングのスタイルを採用する。変数の再代入は避け、ループよりも非破壊的な配列操作を優先する。
+
+## コードレビューの基本方針
+
+- ベストプラクティスの具体例を提示してください
+- 学習リソースの提案を積極的に行ってください
+- 以下のプレフィックスを使用してレビューコメントを分類してください：
+  - `[must]`：必須修正項目（セキュリティ、バグ、重大な設計問題）
+  - `[recommend]`：推奨修正項目（パフォーマンス、可読性の大幅改善）
+  - `[nits]`：軽微な指摘（コードスタイル、タイポ等）

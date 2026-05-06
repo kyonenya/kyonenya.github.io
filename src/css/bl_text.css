@@ -40,8 +40,9 @@
 
 /* 引用ブロック */
 .bl_text :where(blockquote) {
-  font-family: Georgia, 'ヒラギノ明朝 ProN W3', 'Hiragino Mincho ProN', '游明朝',
-    YuMincho, serif;
+  font-family:
+    Georgia, 'ヒラギノ明朝 ProN W3', 'Hiragino Mincho ProN', '游明朝', YuMincho,
+    serif;
   box-sizing: border-box;
   margin: 1em 0 1em 0.7em;
   /* padding-left ＋ border-left ＝ 1em */

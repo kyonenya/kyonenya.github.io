@@ -1,9 +1,9 @@
 /* server-side only: do not import client-side code */
-import { readFileSync, writeFileSync } from 'fs';
-import path from 'path';
+import { readFileSync, writeFileSync } from 'node:fs';
+import path from 'node:path';
 import { articlePage } from './Article';
 import { BlogCard } from './BlogCard';
-import { jsonToPosts, Post } from './post';
+import { jsonToPosts, Post, JSONPost } from './post';
 
 const templatePath = path.resolve(__dirname, '..', 'post.template.html');
 const jsonPath = path.resolve(__dirname, '..', 'posts.json');
@@ -37,13 +37,15 @@ function embedTemplate(post: Post, template: string, posts: Post[]): string {
 
 export function generateStaticHTML(): void {
   const template = readFileSync(templatePath, 'utf8');
-  const posts = jsonToPosts(JSON.parse(readFileSync(jsonPath, 'utf8')));
+  const posts = jsonToPosts(
+    JSON.parse(readFileSync(jsonPath, 'utf8')) as JSONPost[],
+  );
   posts.forEach((post) =>
     writeFileSync(
       path.resolve(distPath, `${post.id}.html`),
       embedTemplate(post, template, posts),
-      'utf8'
-    )
+      'utf8',
+    ),
   );
   console.log('static html generated.');
 }

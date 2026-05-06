@@ -7,7 +7,7 @@ import { Citation } from './citation';
 const worksPath = './works.json';
 const aboutPath = './about.json';
 
-(async function index() {
+void (async function index() {
   const citations = await fetcher<Citation[]>(worksPath);
   const higlitedId = decodeURIComponent(window.location.hash.replace('#', ''));
   renderRoot(Works(citations, higlitedId));

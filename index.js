@@ -1,4 +1,5 @@
 const express = require('express');
+const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
@@ -11,7 +12,7 @@ const jiti = createJiti(__filename);
 const { generateStaticHTML } = jiti('./src/ssg.ts');
 
 const rootDir = __dirname;
-const port = process.env['WEB_APP_PORT'] ? process.env['WEB_APP_PORT'] : 3100;
+const port = process.env['WEB_APP_PORT'] ?? 3100;
 
 express()
   .use(webpackDevMiddleware(webpack(config)))
@@ -21,22 +22,27 @@ express()
     res.sendFile(path.resolve(rootDir, 'posts', `${req.params.id}.html`));
   })
   .get('/works', (req, res) =>
-    res.sendFile(path.resolve(rootDir, 'works.html'))
+    res.sendFile(path.resolve(rootDir, 'works.html')),
   )
   .get('/about', (req, res) =>
-    res.sendFile(path.resolve(rootDir, 'about.html'))
+    res.sendFile(path.resolve(rootDir, 'about.html')),
   )
   // redirect production -> development
   .get('/dist/:scriptName', (req, res) =>
-    res.redirect(`/dist/dev/${req.params.scriptName}`)
+    res.redirect(`/dist/dev/${req.params.scriptName}`),
   )
   .get('/dist/css/bundle.css', (req, res) => res.redirect('/src/css/index.css'))
   .use(express.static(rootDir))
   .listen(port, () =>
-    console.log(`Launching app... http://localhost:${port}\n`)
+    console.log(`Launching app... http://localhost:${port}\n`),
   );
 
-generatePosts();
-generateSitemap(require('./posts.json'));
-generateBibliography();
-generateStaticHTML();
+(async () => {
+  await generatePosts();
+  await generateBibliography();
+  const posts = JSON.parse(
+    fs.readFileSync(path.resolve(__dirname, 'posts.json'), 'utf8'),
+  );
+  generateSitemap(posts);
+  generateStaticHTML();
+})().catch((e) => console.error(e));

@@ -55,7 +55,7 @@ function readPostsMarkdown(paths) {
  */
 function uniquePosts(posts) {
   const uniquePosts = Array.from(
-    new Map(posts.map((post) => [post.id, post])).values()
+    new Map(posts.map((post) => [post.id, post])).values(),
   );
   return uniquePosts.sort(function (a, b) {
     if (a.id < b.id) return 1;
@@ -67,28 +67,34 @@ function uniquePosts(posts) {
 /**
  * @param posts {import('./src/post').JSONPost[]}
  * @param mdPosts {import('./src/post').JSONPost[]}
- * @return {void}
+ * @return {Promise<void>}
  */
-function writePostsJson(posts, mdPosts) {
+async function writePostsJson(posts, mdPosts) {
   fs.writeFileSync(
     jsonPath,
-    prettier.format(JSON.stringify(uniquePosts([...mdPosts, ...posts])), {
+    await prettier.format(JSON.stringify(uniquePosts([...mdPosts, ...posts])), {
       semi: false,
       parser: 'json',
-    })
+    }),
   );
 }
 
 /**
- * @return {void}
+ * @return {Promise<void>}
  */
-function generatePosts() {
-  writePostsJson(readPostsMarkdown(listFiles(mdPath)), require(jsonPath));
+async function generatePosts() {
+  await writePostsJson(
+    readPostsMarkdown(listFiles(mdPath)),
+    JSON.parse(fs.readFileSync(jsonPath, 'utf-8')),
+  );
   console.log('posts genarated.');
 }
 
 module.exports = generatePosts;
 
 if (require.main === module) {
-  generatePosts();
+  generatePosts().catch((e) => {
+    console.error(e);
+    process.exitCode = 1;
+  });
 }

@@ -50,7 +50,7 @@ function AppendBibliopraphy(items) {
   const bibTexts = citeproc(
     items,
     fs.readFileSync(stylePath, 'utf-8'),
-    fs.readFileSync(localePath, 'utf-8')
+    fs.readFileSync(localePath, 'utf-8'),
   );
   return items.map((item, i) => ({
     ...item,
@@ -59,17 +59,17 @@ function AppendBibliopraphy(items) {
 }
 
 /**
- * @return {void}
+ * @return {Promise<void>}
  */
-function generateBibliography() {
+async function generateBibliography() {
   const works = JSON.parse(fs.readFileSync(worksPath, 'utf8'));
   const newWorks = AppendBibliopraphy(works);
   fs.writeFileSync(
     worksPath,
-    prettier.format(JSON.stringify(newWorks), {
+    await prettier.format(JSON.stringify(newWorks), {
       semi: false,
       parser: 'json',
-    })
+    }),
   );
   console.log('bibliography generated.');
 }
@@ -77,5 +77,8 @@ function generateBibliography() {
 module.exports = generateBibliography;
 
 if (require.main === module) {
-  generateBibliography();
+  generateBibliography().catch((e) => {
+    console.error(e);
+    process.exitCode = 1;
+  });
 }

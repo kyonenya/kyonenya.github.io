@@ -44,7 +44,7 @@ const relativeTimeIntl = new Intl.RelativeTimeFormat('ja-JP', {
 export function fromNow(date: Date): string {
   const diffMs = date.getTime() - new Date().getTime();
   const unit = units.find(
-    (unit) => Math.abs(toUnitTime(diffMs, unit)) < thresholdMap[unit]
+    (unit) => Math.abs(toUnitTime(diffMs, unit)) < thresholdMap[unit],
   );
   if (!unit) return '';
   return relativeTimeIntl.format(Math.round(toUnitTime(diffMs, unit)), unit);

@@ -7,7 +7,7 @@ export type Citation = Omit<Data, 'id'> & {
 };
 
 export const Genre = ['書籍', '学位論文', '論文', '発表', '翻訳'] as const;
-export type Genre = typeof Genre[number];
+export type Genre = (typeof Genre)[number];
 
 function detectGenre(item: Citation): Genre | undefined {
   switch (item.type) {
@@ -36,5 +36,5 @@ export const toCitationMap = (citations: Citation[]): CitationMap =>
     Genre.map((genre) => [
       genre,
       citations.filter((c) => detectGenre(c) === genre),
-    ])
+    ]),
   ) as CitationMap;
