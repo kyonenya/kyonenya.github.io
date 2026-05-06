@@ -14,7 +14,11 @@ const { generateSitemap } = jiti('./src/scripts/sitemap.ts');
 const { generateWorksJson } = jiti('./src/scripts/worksJson.ts');
 const { generateStaticHtml } = jiti('./src/ssg.ts');
 
-const port = process.env['WEB_APP_PORT'] ?? 3100;
+const port = (() => {
+  const raw = process.env['WEB_APP_PORT'];
+  const parsed = raw === undefined ? 3100 : Number(raw);
+  return Number.isNaN(parsed) ? 3100 : parsed;
+})();
 
 express()
   .use(webpackDevMiddleware(webpack(config)))
