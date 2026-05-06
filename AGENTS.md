@@ -14,9 +14,9 @@
 - `src/route.ts`: URL状態から表示ページを決めて描画する。
 - `src/reroute.ts`: `popstate`、検索フォーム、内部リンククリックを監視して再ルーティングする。
 - `src/ssg.ts`: `post.template.html` と `posts.json` から `posts/*.html` を生成する。
-- `src/scripts/generatePostsJson.ts`: `markdown/*.md` から `posts.json` を更新する。
-- `src/scripts/generateWorks.ts`: `works.json` に文献表記を付与する。
-- `src/scripts/generateSitemap.ts`: `sitemap.xml` を生成する。
+- `src/scripts/postsJson.ts`: `markdown/*.md` から `posts.json` を更新する。
+- `src/scripts/worksJson.ts`: `works.json` に文献表記を付与する。
+- `src/scripts/sitemap.ts`: `sitemap.xml` を生成する。
 
 ## HTMLエントリー
 
@@ -32,7 +32,7 @@ webpackのentryは `index`、`works`、`hydrate` の3種類。
 - 研究業績ページ用の独立エントリー。
 - `./works.json` を読み、`src/works/Works.ts` でHTMLを生成して `renderRoot()` に渡す。
 - ブログSPAの `route.ts` は使わない。
-- 文献表記は `src/scripts/generateWorks.ts` が `works.json` に事前生成する。
+- 文献表記は `src/scripts/worksJson.ts` が `works.json` に事前生成する。
 
 ### `posts/[id].html` -> `src/hydrate.ts`
 

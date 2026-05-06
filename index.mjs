@@ -9,9 +9,9 @@ import config from './webpack.dev.config.mjs';
 const filename = fileURLToPath(import.meta.url);
 const rootDir = path.dirname(filename);
 const jiti = createJiti(import.meta.url);
-const { generatePostsJson } = jiti('./src/scripts/generatePostsJson.ts');
-const { generateSitemap } = jiti('./src/scripts/generateSitemap.ts');
-const { generateWorks } = jiti('./src/scripts/generateWorks.ts');
+const { generatePostsJson } = jiti('./src/scripts/postsJson.ts');
+const { generateSitemap } = jiti('./src/scripts/sitemap.ts');
+const { generateWorks } = jiti('./src/scripts/worksJson.ts');
 const { generateStaticHTML } = jiti('./src/ssg.ts');
 
 const port = process.env['WEB_APP_PORT'] ?? 3100;
