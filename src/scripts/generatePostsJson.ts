@@ -54,22 +54,25 @@ function uniquePosts(posts: JSONPost[]): JSONPost[] {
 async function writePostsJson(
   posts: JSONPost[],
   mdPosts: JSONPost[],
-): Promise<void> {
+): Promise<JSONPost[]> {
+  const newPosts = uniquePosts([...mdPosts, ...posts]);
   writeFileSync(
     jsonPath,
-    await format(JSON.stringify(uniquePosts([...mdPosts, ...posts])), {
+    await format(JSON.stringify(newPosts), {
       semi: false,
       parser: 'json',
     }),
   );
+  return newPosts;
 }
 
-export async function generatePostsJson(): Promise<void> {
-  await writePostsJson(
+export async function generatePostsJson(): Promise<JSONPost[]> {
+  const posts = await writePostsJson(
     readPostsMarkdown(listFiles(mdPath)),
     JSON.parse(readFileSync(jsonPath, 'utf-8')) as JSONPost[],
   );
   console.log('posts genarated.');
+  return posts;
 }
 
 if (path.resolve(process.argv[1] ?? '') === filename) {

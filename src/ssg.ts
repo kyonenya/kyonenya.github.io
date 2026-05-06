@@ -3,10 +3,10 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { articlePage } from './Article';
 import { BlogCard } from './BlogCard';
-import { jsonToPosts, Post, JSONPost } from './post';
+import { jsonToPosts } from './post';
+import type { JSONPost, Post } from './post';
 
 const templatePath = path.resolve(__dirname, '..', 'post.template.html');
-const jsonPath = path.resolve(__dirname, '..', 'posts.json');
 const distPath = path.resolve(__dirname, '..', 'posts');
 
 function createTemplateValues(post: Post): Record<string, string> {
@@ -35,11 +35,9 @@ function embedTemplate(post: Post, template: string, posts: Post[]): string {
     });
 }
 
-export function generateStaticHTML(): void {
+export function generateStaticHTML(jsonPosts: JSONPost[]): void {
   const template = readFileSync(templatePath, 'utf8');
-  const posts = jsonToPosts(
-    JSON.parse(readFileSync(jsonPath, 'utf8')) as JSONPost[],
-  );
+  const posts = jsonToPosts(jsonPosts);
   posts.forEach((post) =>
     writeFileSync(
       path.resolve(distPath, `${post.id}.html`),

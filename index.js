@@ -1,5 +1,4 @@
 const express = require('express');
-const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
@@ -38,11 +37,10 @@ express()
   );
 
 (async () => {
-  await generatePostsJson();
-  await generateWorks();
-  const posts = JSON.parse(
-    fs.readFileSync(path.resolve(__dirname, 'posts.json'), 'utf8'),
-  );
-  await generateSitemap(posts);
-  generateStaticHTML();
+  const posts = await generatePostsJson();
+  await Promise.all([
+    generateWorks(),
+    generateSitemap(posts),
+    Promise.resolve().then(() => generateStaticHTML(posts)),
+  ]);
 })().catch((e) => console.error(e));
