@@ -1,4 +1,4 @@
-import { isDevelopment } from './utils';
+import { isDevelopment } from './lib/utils';
 
 export type Page = {
   body: string;

@@ -1,4 +1,4 @@
-import { scrollToId } from './lib/render';
+import { scrollToId } from './render';
 import { toState } from './state';
 
 function watchPopState(reroute: () => void): void {

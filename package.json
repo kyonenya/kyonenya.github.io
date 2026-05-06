@@ -8,7 +8,7 @@
     "build": "node ./node_modules/webpack/bin/webpack.js",
     "build-css": "postcss src/css/index.css -o dist/css/bundle.css --verbose",
     "fmt": "prettier --write **/*.{ts,js,mjs,json,css}",
-    "lint": "eslint --fix src/**/*.ts",
+    "lint": "eslint --fix src/*.ts src/**/*.ts",
     "lint-css": "node ./node_modules/stylelint/bin/stylelint.mjs src/**/*.css",
     "lint-css:fix": "node ./node_modules/stylelint/bin/stylelint.mjs src/**/*.css --fix"
   },
