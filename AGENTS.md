@@ -14,9 +14,9 @@
 - `src/route.ts`: URL状態から表示ページを決めて描画する。
 - `src/reroute.ts`: `popstate`、検索フォーム、内部リンククリックを監視して再ルーティングする。
 - `src/ssg.ts`: `post.template.html` と `posts.json` から `posts/*.html` を生成する。
-- `generatePosts.js`: `markdown/*.md` から `posts.json` を更新する。
-- `generateBibliography.js`: `works.json` に文献表記を付与する。
-- `generateSitemap.js`: `sitemap.xml` を生成する。
+- `src/scripts/generatePosts.ts`: `markdown/*.md` から `posts.json` を更新する。
+- `src/scripts/generateBibliography.ts`: `works.json` に文献表記を付与する。
+- `src/scripts/generateSitemap.ts`: `sitemap.xml` を生成する。
 
 ## HTMLエントリー
 
@@ -32,7 +32,7 @@ webpackのentryは `index`、`works`、`hydrate` の3種類。
 - 研究業績ページ用の独立エントリー。
 - `./works.json` を読み、`src/works/Works.ts` でHTMLを生成して `renderRoot()` に渡す。
 - ブログSPAの `route.ts` は使わない。
-- 文献表記は `generateBibliography.js` が `works.json` に事前生成する。
+- 文献表記は `src/scripts/generateBibliography.ts` が `works.json` に事前生成する。
 
 ### `posts/[id].html` -> `src/hydrate.ts`
 
@@ -59,7 +59,7 @@ webpackのentryは `index`、`works`、`hydrate` の3種類。
 - `npm run lint-css`: CSS lint。
 - `npm run fmt`: Prettier整形。
 
-`tsc` と `tsc-js` は `-w` 付きなので、単発確認では `./node_modules/.bin/tsc --noEmit` などを使う。
+`tsc` は `-w` 付きなので、単発確認では `npm run tsc:once` などを使う。
 
 ## Code App / iOS 環境
 

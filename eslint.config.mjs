@@ -3,7 +3,6 @@ import js from '@eslint/js';
 import eslintConfigPrettier from 'eslint-config-prettier';
 import { defineConfig } from 'eslint/config';
 import importPlugin from 'eslint-plugin-import';
-import { fileURLToPath } from 'node:url';
 import tseslint from 'typescript-eslint';
 
 export default defineConfig(
