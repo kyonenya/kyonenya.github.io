@@ -54,9 +54,9 @@ webpackのentryは `index`、`works`、`hydrate` の3種類。
 - `npm run dev`: 開発サーバー起動。起動時に記事・サイトマップ・文献・静的記事HTMLも生成する。
 - `npm run tsc`: TypeScript型チェックのwatch。
 - `npm run build`: webpackで `dist/index.js`、`dist/hydrate.js`、`dist/works.js` を生成。
-- `npm run build:css`: CSSを `dist/css/bundle.css` に生成。
+- `npm run build-css`: CSSを `dist/css/bundle.css` に生成。
 - `npm run lint`: TypeScriptのESLint修正。
-- `npm run lint:css`: CSS lint。
+- `npm run lint-css`: CSS lint。
 - `npm run fmt`: Prettier整形。
 
 `tsc` と `tsc:checkjs` は `-w` 付きなので、単発確認では `./node_modules/.bin/tsc --noEmit` などを使う。
