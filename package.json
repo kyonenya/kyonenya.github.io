@@ -6,7 +6,7 @@
     "tsc": "tsc -w --noEmit",
     "tsc:js": "tsc -w --noEmit --resolveJsonModule --p tsconfig.checkjs.json",
     "build": "node ./node_modules/webpack/bin/webpack.js",
-    "build:css": "postcss src/css/index.css -o dist/css/bundle.css",
+    "build:css": "postcss src/css/index.css -o dist/css/bundle.css --verbose",
     "fmt": "prettier --write **/*.{ts,js,mjs,json,css}",
     "lint": "eslint --fix src/**/*.ts",
     "lint:css": "stylelint src/**/*.css"
