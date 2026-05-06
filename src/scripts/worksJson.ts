@@ -30,18 +30,9 @@ const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 const rootDir = path.resolve(dirname, '../..');
 const worksPath = path.resolve(rootDir, 'works.json');
-const stylePath = path.resolve(
-  rootDir,
-  'assets',
-  'citeproc',
-  'sist02modified.csl',
-);
-const localePath = path.resolve(
-  rootDir,
-  'assets',
-  'citeproc',
-  'locales-ja-JP.xml',
-);
+const citeprocDir = path.resolve(rootDir, 'assets', 'citeproc');
+const stylePath = path.resolve(citeprocDir, 'sist02modified.csl');
+const localePath = path.resolve(citeprocDir, 'locales-ja-JP.xml');
 
 function removeNullProperties<T extends object>(obj: T): Partial<T> {
   return Object.fromEntries(
