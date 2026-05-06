@@ -13,6 +13,9 @@
 - `src/app.ts`: ブログSPAの共通起動処理。
 - `src/route.ts`: URL状態から表示ページを決めて描画する。
 - `src/reroute.ts`: `popstate`、検索フォーム、内部リンククリックを監視して再ルーティングする。
+- `src/state.ts`: `pathname` / `search` / `hash` から記事ID・タグ・検索語を取り出す。
+- `src/render.ts`: `#root` 描画、canonical更新、開発時の内部リンク化、スクロールを扱う。
+- `src/notify.ts`: `about.json` の更新情報から通知表示を扱う。
 - `src/ssg.ts`: `post.template.html` と `posts.json` から `posts/*.html` を生成する。
 - `src/scripts/postsJson.ts`: `markdown/*.md` から `posts.json` を更新する。
 - `src/scripts/worksJson.ts`: `works.json` に文献表記を付与する。
@@ -25,13 +28,14 @@ webpackのentryは `index`、`works`、`hydrate` の3種類。
 ### `index.html` -> `src/index.ts`
 
 - ブログ本体のSPAエントリー。
-- `src/index.ts` は `app()` を呼ぶだけ。`app(true)` は `./posts.json` / `./about.json` を読み、初回に `route(posts)` で `#root` を描画する。
+- `src/index.ts` は `app()` を呼ぶだけ。`app()` は `./posts.json` / `./about.json` を読み、初回に `route(posts)` で `#root` を描画する。
 
 ### `works.html` -> `src/works/index.ts`
 
 - 研究業績ページ用の独立エントリー。
 - `./works.json` を読み、`src/works/Works.ts` でHTMLを生成して `renderRoot()` に渡す。
 - ブログSPAの `route.ts` は使わない。
+- `about.json` も読み、`notifyUpdate()` で更新通知を表示する。
 - 文献表記は `src/scripts/worksJson.ts` が `works.json` に事前生成する。
 
 ### `posts/[id].html` -> `src/hydrate.ts`
@@ -43,6 +47,7 @@ webpackのentryは `index`、`works`、`hydrate` の3種類。
 ## 生成物
 
 - `dist/*.js` と `dist/css/bundle.css` は公開対象のビルド成果物。
+- 開発サーバーではwebpack-dev-middlewareが `dist/dev/*.js` 相当を配信し、`/dist/*.js` からリダイレクトする。
 - `posts/*.html` はSSG成果物。
 - `posts.json`、`works.json`、`sitemap.xml` も生成スクリプトで更新されることがある。
 - 生成物の差分が大量に出る場合は、変更理由を確認してから扱う。無関係なら巻き戻さない。
@@ -51,15 +56,18 @@ webpackのentryは `index`、`works`、`hydrate` の3種類。
 
 `package.json` のscripts:
 
-- `npm run dev`: 開発サーバー起動。起動時に記事・サイトマップ・文献・静的記事HTMLも生成する。
+- `npm run dev`: Express開発サーバー起動。起動時に記事・サイトマップ・文献・静的記事HTMLも生成する。
 - `npm run tsc`: TypeScript型チェックのwatch。
+- `npm run tsc:once`: TypeScript型チェックの単発実行。
 - `npm run build`: webpackで `dist/index.js`、`dist/hydrate.js`、`dist/works.js` を生成。
 - `npm run build-css`: CSSを `dist/css/bundle.css` に生成。
-- `npm run lint`: TypeScriptのESLint修正。
+- `npm run lint`: TypeScriptのESLint確認。
+- `npm run lint:fix`: TypeScriptのESLint自動修正。
 - `npm run lint-css`: CSS lint。
+- `npm run lint-css:fix`: CSS lintの自動修正。
 - `npm run fmt`: Prettier整形。
 
-`tsc` は `-w` 付きなので、単発確認では `npm run tsc:once` などを使う。
+`tsc` は `-w` 付きなので、単発確認では `npm run tsc:once` を使う。
 
 ## Code App / iOS 環境
 
@@ -80,6 +88,7 @@ webpackのentryは `index`、`works`、`hydrate` の3種類。
 - `src/ssg.ts` はサーバーサイド専用。クライアント専用APIに依存するコードをimportしない。
 - 予約投稿は本番相当では `excludeReserved` で除外される。開発時はlocalhost判定で表示される。
 - `blog-card` はCustom Element。SSGではカードHTMLを事前埋め込みし、SPAでは `defineBlogCard` が定義する。
+- ESLint設定は `eslint.config.mjs` に集約されている。`import/order` はwarnで有効。
 
 ## 編集方針
 
