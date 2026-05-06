@@ -1,6 +1,7 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 // eslint-disable-next-line import/no-unresolved
 import { Data } from 'csl-json';
 import { format } from 'prettier';
@@ -24,9 +25,11 @@ type Csl = {
   ) => CslEngine;
 };
 
-const require = createRequire(__filename);
+const filename = fileURLToPath(import.meta.url);
+const dirname = path.dirname(filename);
+const require = createRequire(import.meta.url);
 const CSL = require('citeproc') as Csl;
-const rootDir = path.resolve(__dirname, '../..');
+const rootDir = path.resolve(dirname, '../..');
 const worksPath = path.resolve(rootDir, 'works.json');
 const stylePath = path.resolve(
   rootDir,
@@ -91,7 +94,7 @@ export async function generateBibliography(): Promise<void> {
   console.log('bibliography generated.');
 }
 
-if (path.resolve(process.argv[1] ?? '') === __filename) {
+if (path.resolve(process.argv[1] ?? '') === filename) {
   generateBibliography().catch((e: unknown) => {
     console.error(e);
     process.exitCode = 1;

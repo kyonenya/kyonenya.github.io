@@ -1,5 +1,6 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { SitemapStream, streamToPromise } from 'sitemap';
 import format from 'xml-formatter';
 import { JSONPost } from '../post';
@@ -8,7 +9,9 @@ type About = {
   updatedAt: string;
 };
 
-const rootDir = path.resolve(__dirname, '../..');
+const filename = fileURLToPath(import.meta.url);
+const dirname = path.dirname(filename);
+const rootDir = path.resolve(dirname, '../..');
 const sitemapPath = path.resolve(rootDir, 'sitemap.xml');
 
 function getLatestModifiedAt(posts: JSONPost[]): string {
@@ -56,7 +59,7 @@ export async function generateSitemap(posts: JSONPost[]): Promise<void> {
   console.log('sitemap generated.');
 }
 
-if (path.resolve(process.argv[1] ?? '') === __filename) {
+if (path.resolve(process.argv[1] ?? '') === filename) {
   const posts = JSON.parse(
     readFileSync(path.resolve(rootDir, 'posts.json'), 'utf8'),
   ) as JSONPost[];

@@ -1,5 +1,6 @@
 import { readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import matter from 'gray-matter';
 import MarkdownIt from 'markdown-it';
 import markdownItFootnote from 'markdown-it-footnote';
@@ -9,7 +10,9 @@ import { JSONPost } from '../post';
 const md = new MarkdownIt();
 md.use(markdownItFootnote);
 
-const rootDir = path.resolve(__dirname, '../..');
+const filename = fileURLToPath(import.meta.url);
+const dirname = path.dirname(filename);
+const rootDir = path.resolve(dirname, '../..');
 const jsonPath = path.resolve(rootDir, 'posts.json');
 const mdPath = path.resolve(rootDir, 'markdown');
 
@@ -69,7 +72,7 @@ export async function generatePosts(): Promise<void> {
   console.log('posts genarated.');
 }
 
-if (path.resolve(process.argv[1] ?? '') === __filename) {
+if (path.resolve(process.argv[1] ?? '') === filename) {
   generatePosts().catch((e: unknown) => {
     console.error(e);
     process.exitCode = 1;
