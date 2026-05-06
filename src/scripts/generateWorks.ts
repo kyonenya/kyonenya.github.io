@@ -1,7 +1,9 @@
 import { readFile, writeFile } from 'node:fs/promises';
-import { createRequire } from 'node:module';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore citeproc does not publish TypeScript declarations.
+import Citeproc from 'citeproc';
 import type { Data } from 'csl-json';
 import { format } from 'prettier';
 import type { Citation } from '../works/citation';
@@ -12,7 +14,7 @@ type CslEngine = {
   makeBibliography: () => false | [unknown, string[]];
 };
 
-type Csl = {
+const CSL = Citeproc as {
   Engine: new (
     sys: {
       retrieveLocale: (lang: string) => string;
@@ -26,8 +28,6 @@ type Csl = {
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
-const require = createRequire(import.meta.url);
-const CSL = require('citeproc') as Csl;
 const rootDir = path.resolve(dirname, '../..');
 const worksPath = path.resolve(rootDir, 'works.json');
 const stylePath = path.resolve(
@@ -93,15 +93,7 @@ export async function generateWorks(): Promise<void> {
   console.log('works generated.');
 }
 
-async function main(): Promise<void> {
-  try {
-    await generateWorks();
-  } catch (e) {
-    console.error(e);
-    process.exitCode = 1;
-  }
-}
 
 if (path.resolve(process.argv[1] ?? '') === filename) {
-  void main();
+  void generateWorks();
 }

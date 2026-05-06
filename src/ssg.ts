@@ -1,13 +1,17 @@
 /* server-side only: do not import client-side code */
 import { readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { articlePage } from './Article';
 import { BlogCard } from './BlogCard';
 import { jsonToPosts } from './post';
 import type { JSONPost, Post } from './post';
 
-const templatePath = path.resolve(__dirname, '..', 'post.template.html');
-const distPath = path.resolve(__dirname, '..', 'posts');
+const filename = fileURLToPath(import.meta.url);
+const dirname = path.dirname(filename);
+const rootDir = path.resolve(dirname, '..');
+const templatePath = path.resolve(rootDir, 'post.template.html');
+const distPath = path.resolve(rootDir, 'posts');
 
 function createTemplateValues(post: Post): Record<string, string> {
   const page = articlePage(post, true);
@@ -48,4 +52,11 @@ export async function generateStaticHTML(jsonPosts: JSONPost[]): Promise<void> {
     ),
   );
   console.log('static html generated.');
+}
+
+if (path.resolve(process.argv[1] ?? '') === filename) {
+  const posts = JSON.parse(
+    await readFile(path.resolve(rootDir, 'posts.json'), 'utf8'),
+  ) as JSONPost[];
+  void generateStaticHTML(posts);
 }

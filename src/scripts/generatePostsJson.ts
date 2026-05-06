@@ -81,15 +81,7 @@ export async function generatePostsJson(): Promise<JSONPost[]> {
   return posts;
 }
 
-async function main(): Promise<void> {
-  try {
-    await generatePostsJson();
-  } catch (e) {
-    console.error(e);
-    process.exitCode = 1;
-  }
-}
 
 if (path.resolve(process.argv[1] ?? '') === filename) {
-  void main();
+  void generatePostsJson();
 }

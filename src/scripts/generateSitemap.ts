@@ -56,18 +56,9 @@ export async function generateSitemap(posts: JSONPost[]): Promise<void> {
   console.log('sitemap generated.');
 }
 
-async function main(): Promise<void> {
-  try {
-    const posts = JSON.parse(
-      await readFile(path.resolve(rootDir, 'posts.json'), 'utf8'),
-    ) as JSONPost[];
-    await generateSitemap(posts);
-  } catch (e) {
-    console.error(e);
-    process.exitCode = 1;
-  }
-}
-
 if (path.resolve(process.argv[1] ?? '') === filename) {
-  void main();
+  const posts = JSON.parse(
+    await readFile(path.resolve(rootDir, 'posts.json'), 'utf8'),
+  ) as JSONPost[];
+  void generateSitemap(posts);
 }
