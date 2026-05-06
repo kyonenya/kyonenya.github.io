@@ -1,11 +1,10 @@
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFile, writeFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-// eslint-disable-next-line import/no-unresolved
-import { Data } from 'csl-json';
+import type { Data } from 'csl-json';
 import { format } from 'prettier';
-import { Citation } from '../works/citation';
+import type { Citation } from '../works/citation';
 
 type CslEngine = {
   setOutputFormat: (format: 'text') => void;
@@ -69,12 +68,12 @@ function citeproc(data: Data[], style: string, locale: string): string[] {
   return bib[1].map((text) => text.replace(/\n$/, ''));
 }
 
-function appendBibliography(items: Data[]): Citation[] {
-  const bibTexts = citeproc(
-    items,
-    readFileSync(stylePath, 'utf-8'),
-    readFileSync(localePath, 'utf-8'),
-  );
+async function appendBibliography(items: Data[]): Promise<Citation[]> {
+  const [style, locale] = await Promise.all([
+    readFile(stylePath, 'utf-8'),
+    readFile(localePath, 'utf-8'),
+  ]);
+  const bibTexts = citeproc(items, style, locale);
   return items.map((item, i) => ({
     ...item,
     _bibliographyText: bibTexts[i],
@@ -82,9 +81,9 @@ function appendBibliography(items: Data[]): Citation[] {
 }
 
 export async function generateWorks(): Promise<void> {
-  const works = JSON.parse(readFileSync(worksPath, 'utf8')) as Data[];
-  const newWorks = appendBibliography(works);
-  writeFileSync(
+  const works = JSON.parse(await readFile(worksPath, 'utf8')) as Data[];
+  const newWorks = await appendBibliography(works);
+  await writeFile(
     worksPath,
     await format(JSON.stringify(newWorks), {
       semi: false,
@@ -94,9 +93,15 @@ export async function generateWorks(): Promise<void> {
   console.log('works generated.');
 }
 
-if (path.resolve(process.argv[1] ?? '') === filename) {
-  generateWorks().catch((e: unknown) => {
+async function main(): Promise<void> {
+  try {
+    await generateWorks();
+  } catch (e) {
     console.error(e);
     process.exitCode = 1;
-  });
+  }
+}
+
+if (path.resolve(process.argv[1] ?? '') === filename) {
+  void main();
 }

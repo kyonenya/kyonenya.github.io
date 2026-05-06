@@ -37,10 +37,14 @@ express()
   );
 
 (async () => {
-  const posts = await generatePostsJson();
-  await Promise.all([
-    generateWorks(),
-    generateSitemap(posts),
-    Promise.resolve().then(() => generateStaticHTML(posts)),
-  ]);
-})().catch((e) => console.error(e));
+  try {
+    const posts = await generatePostsJson();
+    await Promise.all([
+      generateWorks(),
+      generateSitemap(posts),
+      generateStaticHTML(posts),
+    ]);
+  } catch (e) {
+    console.error(e);
+  }
+})();

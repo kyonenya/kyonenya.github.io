@@ -1,11 +1,11 @@
-import { readdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { readdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import matter from 'gray-matter';
 import MarkdownIt from 'markdown-it';
 import markdownItFootnote from 'markdown-it-footnote';
 import { format } from 'prettier';
-import { JSONPost } from '../post';
+import type { JSONPost } from '../post';
 
 const md = new MarkdownIt();
 md.use(markdownItFootnote);
@@ -16,33 +16,35 @@ const rootDir = path.resolve(dirname, '../..');
 const jsonPath = path.resolve(rootDir, 'posts.json');
 const mdPath = path.resolve(rootDir, 'markdown');
 
-function listFiles(dir: string): string[] {
-  return readdirSync(dir, { withFileTypes: true }).flatMap((dirent) => {
-    if (/^\..*/.test(dirent.name)) return []; // exclude '.icloud' file
-    const filePath = path.resolve(dir, dirent.name);
-    return dirent.isFile() ? [filePath] : listFiles(filePath);
-  });
+async function listFiles(dir: string): Promise<string[]> {
+  const paths = await Promise.all(
+    (await readdir(dir, { withFileTypes: true })).map(async (dirent) => {
+      if (/^\..*/.test(dirent.name)) return []; // exclude '.icloud' file
+      const filePath = path.resolve(dir, dirent.name);
+      return dirent.isFile() ? [filePath] : await listFiles(filePath);
+    }),
+  );
+  return paths.flat();
 }
 
-function readPostsMarkdown(paths: string[]): JSONPost[] {
-  return paths
-    .map((path) => readFileSync(path, 'utf-8'))
-    .map((string) => matter(string))
-    .map(
-      (matter) =>
-        ({
-          ...matter.data,
-          text: md
-            .render(matter.content)
-            .replace(/\n/g, '')
-            .replace(/&gt;/g, '>')
-            .replace(/&lt;/g, '<')
-            // 漢字《ふりがな》
-            .replace(/｜(.+?)《(.+?)》/g, '<ruby>$1<rt>$2</rt></ruby>')
-            .replace(/\{(.+?)\|(.+?)\}/g, '<ruby>$1<rt>$2</rt></ruby>')
-            .replace(/([一-龠]+)《(.+?)》/g, '<ruby>$1<rt>$2</rt></ruby>'),
-        }) as JSONPost,
-    );
+async function readPostsMarkdown(paths: string[]): Promise<JSONPost[]> {
+  return await Promise.all(
+    paths.map(async (path) => {
+      const { data, content } = matter(await readFile(path, 'utf-8'));
+      return {
+        ...data,
+        text: md
+          .render(content)
+          .replace(/\n/g, '')
+          .replace(/&gt;/g, '>')
+          .replace(/&lt;/g, '<')
+          // 漢字《ふりがな》
+          .replace(/｜(.+?)《(.+?)》/g, '<ruby>$1<rt>$2</rt></ruby>')
+          .replace(/\{(.+?)\|(.+?)\}/g, '<ruby>$1<rt>$2</rt></ruby>')
+          .replace(/([一-龠]+)《(.+?)》/g, '<ruby>$1<rt>$2</rt></ruby>'),
+      } as JSONPost;
+    }),
+  );
 }
 
 function uniquePosts(posts: JSONPost[]): JSONPost[] {
@@ -56,7 +58,7 @@ async function writePostsJson(
   mdPosts: JSONPost[],
 ): Promise<JSONPost[]> {
   const newPosts = uniquePosts([...mdPosts, ...posts]);
-  writeFileSync(
+  await writeFile(
     jsonPath,
     await format(JSON.stringify(newPosts), {
       semi: false,
@@ -67,17 +69,27 @@ async function writePostsJson(
 }
 
 export async function generatePostsJson(): Promise<JSONPost[]> {
+  const [mdPaths, postsJson] = await Promise.all([
+    listFiles(mdPath),
+    readFile(jsonPath, 'utf-8'),
+  ]);
   const posts = await writePostsJson(
-    readPostsMarkdown(listFiles(mdPath)),
-    JSON.parse(readFileSync(jsonPath, 'utf-8')) as JSONPost[],
+    JSON.parse(postsJson) as JSONPost[],
+    await readPostsMarkdown(mdPaths),
   );
   console.log('posts genarated.');
   return posts;
 }
 
-if (path.resolve(process.argv[1] ?? '') === filename) {
-  generatePostsJson().catch((e: unknown) => {
+async function main(): Promise<void> {
+  try {
+    await generatePostsJson();
+  } catch (e) {
     console.error(e);
     process.exitCode = 1;
-  });
+  }
+}
+
+if (path.resolve(process.argv[1] ?? '') === filename) {
+  void main();
 }

@@ -1,10 +1,10 @@
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { SitemapStream, streamToPromise } from 'sitemap';
 import format from 'xml-formatter';
-import { Update } from '../notify';
-import { JSONPost } from '../post';
+import type { Update } from '../notify';
+import type { JSONPost } from '../post';
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -31,7 +31,7 @@ function tagHistory(posts: JSONPost[]): { tag: string; modifiedAt: string }[] {
 
 export async function generateSitemap(posts: JSONPost[]): Promise<void> {
   const { updatedAt } = JSON.parse(
-    readFileSync(path.resolve(rootDir, 'about.json'), 'utf8'),
+    await readFile(path.resolve(rootDir, 'about.json'), 'utf8'),
   ) as Update;
   const sitemap = new SitemapStream({
     hostname: 'https://kyonenya.github.io/',
@@ -49,19 +49,25 @@ export async function generateSitemap(posts: JSONPost[]): Promise<void> {
   sitemap.end();
 
   const sm = await streamToPromise(sitemap);
-  writeFileSync(
+  await writeFile(
     sitemapPath,
     format(sm.toString(), { indentation: '  ', collapseContent: true }),
   );
   console.log('sitemap generated.');
 }
 
-if (path.resolve(process.argv[1] ?? '') === filename) {
-  const posts = JSON.parse(
-    readFileSync(path.resolve(rootDir, 'posts.json'), 'utf8'),
-  ) as JSONPost[];
-  generateSitemap(posts).catch((e: unknown) => {
+async function main(): Promise<void> {
+  try {
+    const posts = JSON.parse(
+      await readFile(path.resolve(rootDir, 'posts.json'), 'utf8'),
+    ) as JSONPost[];
+    await generateSitemap(posts);
+  } catch (e) {
     console.error(e);
     process.exitCode = 1;
-  });
+  }
+}
+
+if (path.resolve(process.argv[1] ?? '') === filename) {
+  void main();
 }

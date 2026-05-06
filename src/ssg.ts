@@ -1,5 +1,5 @@
 /* server-side only: do not import client-side code */
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { articlePage } from './Article';
 import { BlogCard } from './BlogCard';
@@ -35,14 +35,16 @@ function embedTemplate(post: Post, template: string, posts: Post[]): string {
     });
 }
 
-export function generateStaticHTML(jsonPosts: JSONPost[]): void {
-  const template = readFileSync(templatePath, 'utf8');
+export async function generateStaticHTML(jsonPosts: JSONPost[]): Promise<void> {
+  const template = await readFile(templatePath, 'utf8');
   const posts = jsonToPosts(jsonPosts);
-  posts.forEach((post) =>
-    writeFileSync(
-      path.resolve(distPath, `${post.id}.html`),
-      embedTemplate(post, template, posts),
-      'utf8',
+  await Promise.all(
+    posts.map((post) =>
+      writeFile(
+        path.resolve(distPath, `${post.id}.html`),
+        embedTemplate(post, template, posts),
+        'utf8',
+      ),
     ),
   );
   console.log('static html generated.');
