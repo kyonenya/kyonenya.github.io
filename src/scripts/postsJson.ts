@@ -59,11 +59,10 @@ async function writePostsJson(
   posts: JSONPost[],
   mdPosts: JSONPost[],
 ): Promise<JSONPost[]> {
-  const newPosts = uniquePosts([...mdPosts, ...posts]);
+  const newPosts = uniquePosts([...posts, ...mdPosts]);
   await writeFile(
     jsonPath,
     await format(JSON.stringify(newPosts), {
-      semi: false,
       parser: 'json',
     }),
   );
