@@ -3,11 +3,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { SitemapStream, streamToPromise } from 'sitemap';
 import format from 'xml-formatter';
+import { Update } from '../notify';
 import { JSONPost } from '../post';
-
-type About = {
-  updatedAt: string;
-};
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -35,7 +32,7 @@ function tagHistory(posts: JSONPost[]): { tag: string; modifiedAt: string }[] {
 export async function generateSitemap(posts: JSONPost[]): Promise<void> {
   const { updatedAt } = JSON.parse(
     readFileSync(path.resolve(rootDir, 'about.json'), 'utf8'),
-  ) as About;
+  ) as Update;
   const sitemap = new SitemapStream({
     hostname: 'https://kyonenya.github.io/',
   });

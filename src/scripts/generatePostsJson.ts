@@ -64,7 +64,7 @@ async function writePostsJson(
   );
 }
 
-export async function generatePosts(): Promise<void> {
+export async function generatePostsJson(): Promise<void> {
   await writePostsJson(
     readPostsMarkdown(listFiles(mdPath)),
     JSON.parse(readFileSync(jsonPath, 'utf-8')) as JSONPost[],
@@ -73,7 +73,7 @@ export async function generatePosts(): Promise<void> {
 }
 
 if (path.resolve(process.argv[1] ?? '') === filename) {
-  generatePosts().catch((e: unknown) => {
+  generatePostsJson().catch((e: unknown) => {
     console.error(e);
     process.exitCode = 1;
   });

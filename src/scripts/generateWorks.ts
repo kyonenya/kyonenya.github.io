@@ -81,7 +81,7 @@ function appendBibliography(items: Data[]): Citation[] {
   }));
 }
 
-export async function generateBibliography(): Promise<void> {
+export async function generateWorks(): Promise<void> {
   const works = JSON.parse(readFileSync(worksPath, 'utf8')) as Data[];
   const newWorks = appendBibliography(works);
   writeFileSync(
@@ -91,11 +91,11 @@ export async function generateBibliography(): Promise<void> {
       parser: 'json',
     }),
   );
-  console.log('bibliography generated.');
+  console.log('works generated.');
 }
 
 if (path.resolve(process.argv[1] ?? '') === filename) {
-  generateBibliography().catch((e: unknown) => {
+  generateWorks().catch((e: unknown) => {
     console.error(e);
     process.exitCode = 1;
   });

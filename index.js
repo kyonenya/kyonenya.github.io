@@ -6,9 +6,9 @@ const webpackDevMiddleware = require('webpack-dev-middleware');
 const config = require('./webpack.dev.config.js');
 const { createJiti } = require('jiti');
 const jiti = createJiti(__filename);
-const { generatePosts } = jiti('./src/scripts/generatePosts.ts');
+const { generatePostsJson } = jiti('./src/scripts/generatePostsJson.ts');
 const { generateSitemap } = jiti('./src/scripts/generateSitemap.ts');
-const { generateBibliography } = jiti('./src/scripts/generateBibliography.ts');
+const { generateWorks } = jiti('./src/scripts/generateWorks.ts');
 const { generateStaticHTML } = jiti('./src/ssg.ts');
 
 const rootDir = __dirname;
@@ -38,8 +38,8 @@ express()
   );
 
 (async () => {
-  await generatePosts();
-  await generateBibliography();
+  await generatePostsJson();
+  await generateWorks();
   const posts = JSON.parse(
     fs.readFileSync(path.resolve(__dirname, 'posts.json'), 'utf8'),
   );
