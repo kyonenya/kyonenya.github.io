@@ -77,5 +77,8 @@ async function generateBibliography() {
 module.exports = generateBibliography;
 
 if (require.main === module) {
-  generateBibliography();
+  generateBibliography().catch((e) => {
+    console.error(e);
+    process.exitCode = 1;
+  });
 }

@@ -80,15 +80,21 @@ async function writePostsJson(posts, mdPosts) {
 }
 
 /**
- * @return {void}
+ * @return {Promise<void>}
  */
-function generatePosts() {
-  writePostsJson(readPostsMarkdown(listFiles(mdPath)), require(jsonPath));
+async function generatePosts() {
+  await writePostsJson(
+    readPostsMarkdown(listFiles(mdPath)),
+    JSON.parse(fs.readFileSync(jsonPath, 'utf-8')),
+  );
   console.log('posts genarated.');
 }
 
 module.exports = generatePosts;
 
 if (require.main === module) {
-  generatePosts();
+  generatePosts().catch((e) => {
+    console.error(e);
+    process.exitCode = 1;
+  });
 }
