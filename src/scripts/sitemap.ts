@@ -11,11 +11,13 @@ const dirname = path.dirname(filename);
 const rootDir = path.resolve(dirname, '../..');
 const sitemapPath = path.resolve(rootDir, 'sitemap.xml');
 
-function getLatestModifiedAt(posts: JSONPost[]): string {
+function getLatestModifiedAt(posts: JSONPost[]): string | null {
+  const latest = Math.max(
+    ...posts.map((post) => new Date(post.modifiedAt).getTime()),
+  );
   return (
-    posts
-      .map((post) => post.modifiedAt)
-      .sort((a, b) => new Date(b).getTime() - new Date(a).getTime())[0] ?? ''
+    posts.find((post) => new Date(post.modifiedAt).getTime() === latest)
+      ?.modifiedAt ?? null
   );
 }
 
@@ -23,9 +25,9 @@ function tagHistory(posts: JSONPost[]): { tag: string; modifiedAt: string }[] {
   const tags = [...new Set(posts.flatMap((post) => post.tags))];
   return tags.map((tag) => ({
     tag,
-    modifiedAt: getLatestModifiedAt(
-      posts.filter((post) => post.tags.includes(tag)),
-    ),
+    modifiedAt:
+      getLatestModifiedAt(posts.filter((post) => post.tags.includes(tag))) ??
+      '',
   }));
 }
 
@@ -37,7 +39,7 @@ export async function generateSitemap(posts: JSONPost[]): Promise<void> {
     hostname: 'https://kyonenya.github.io/',
   });
 
-  sitemap.write({ url: '', lastmod: getLatestModifiedAt(posts) });
+  sitemap.write({ url: '', lastmod: getLatestModifiedAt(posts) ?? '' });
   sitemap.write({ url: 'works', lastmod: updatedAt });
   sitemap.write({ url: 'about', lastmod: updatedAt });
   posts.forEach((post) =>

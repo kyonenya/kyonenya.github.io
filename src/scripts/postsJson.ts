@@ -31,8 +31,8 @@ async function listFiles(dir: string): Promise<string[]> {
 
 async function readPostsMarkdown(paths: string[]): Promise<JSONPost[]> {
   return await Promise.all(
-    paths.map(async (path) => {
-      const { data, content } = matter(await readFile(path, 'utf-8'));
+    paths.map(async (filePath) => {
+      const { data, content } = matter(await readFile(filePath, 'utf-8'));
       return {
         ...data,
         text: md
@@ -55,29 +55,21 @@ function uniquePosts(posts: JSONPost[]): JSONPost[] {
   ).sort((a, b) => b.id - a.id);
 }
 
-async function writePostsJson(
-  jsonPosts: JSONPost[],
-  mdPosts: JSONPost[],
-): Promise<JSONPost[]> {
-  const newPosts = uniquePosts([...jsonPosts, ...mdPosts]); // mdPosts > jsonPosts
-  await writeFile(
-    jsonPath,
-    await format(JSON.stringify(newPosts), { parser: 'json' }),
-  );
-  return newPosts;
-}
-
 export async function generatePostsJson(): Promise<JSONPost[]> {
   const [mdPaths, postsJson] = await Promise.all([
     listFiles(mdPath),
     readFile(jsonPath, 'utf-8'),
   ]);
-  const posts = await writePostsJson(
-    JSON.parse(postsJson) as JSONPost[],
-    await readPostsMarkdown(mdPaths),
+  const jsonPosts = JSON.parse(postsJson) as JSONPost[];
+  const mdPosts = await readPostsMarkdown(mdPaths);
+  const newPosts = uniquePosts([...jsonPosts, ...mdPosts]); // mdPosts > jsonPosts
+  await writeFile(
+    jsonPath,
+    await format(JSON.stringify(newPosts), { parser: 'json' }),
   );
   console.log('posts generated.');
-  return posts;
+
+  return newPosts;
 }
 
 if (path.resolve(process.argv[1] ?? '') === filename) {

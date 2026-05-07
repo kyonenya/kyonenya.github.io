@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore citeproc does not publish TypeScript declarations.
 import Citeproc from 'citeproc';
-import type { Data } from 'csl-json';
+import type { Data as CSLJSON } from 'csl-json';
 import { format } from 'prettier';
 import type { Citation } from '../works/citation';
 
@@ -20,7 +20,7 @@ const CSL = Citeproc as {
       retrieveLocale: (lang: string) => string;
       retrieveItem: (
         id: string,
-      ) => (Partial<Data> & { id: string }) | undefined;
+      ) => (Partial<CSLJSON>) | undefined;
     },
     style: string,
   ) => CslEngine;
@@ -40,7 +40,7 @@ function removeNullProperties<T extends object>(obj: T): Partial<T> {
   ) as Partial<T>;
 }
 
-function citeproc(data: Data[], style: string, locale: string): string[] {
+function citeproc(data: CSLJSON[], style: string, locale: string): string[] {
   const items = data.map((item) => ({
     ...removeNullProperties(item),
     id: item.id.toString(),
@@ -59,7 +59,7 @@ function citeproc(data: Data[], style: string, locale: string): string[] {
   return bib[1].map((text) => text.replace(/\n$/, ''));
 }
 
-async function appendCitations(items: Data[]): Promise<Citation[]> {
+async function appendCitations(items: CSLJSON[]): Promise<Citation[]> {
   const [style, locale] = await Promise.all([
     readFile(stylePath, 'utf-8'),
     readFile(localePath, 'utf-8'),
@@ -72,7 +72,7 @@ async function appendCitations(items: Data[]): Promise<Citation[]> {
 }
 
 export async function generateWorksJson(): Promise<void> {
-  const works = JSON.parse(await readFile(worksPath, 'utf8')) as Data[];
+  const works = JSON.parse(await readFile(worksPath, 'utf8')) as CSLJSON[];
   const newWorks = await appendCitations(works);
   await writeFile(
     worksPath,
