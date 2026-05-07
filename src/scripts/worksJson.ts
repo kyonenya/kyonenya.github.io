@@ -1,30 +1,10 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore citeproc does not publish TypeScript declarations.
 import Citeproc from 'citeproc';
 import type { Data as CSLJSON } from 'csl-json';
 import { format } from 'prettier';
 import type { Citation } from '../works/citation';
-
-type CslEngine = {
-  setOutputFormat: (format: 'text') => void;
-  updateItems: (ids: string[]) => void;
-  makeBibliography: () => false | [unknown, string[]];
-};
-
-const CSL = Citeproc as {
-  Engine: new (
-    sys: {
-      retrieveLocale: (lang: string) => string;
-      retrieveItem: (
-        id: string,
-      ) => (Partial<CSLJSON>) | undefined;
-    },
-    style: string,
-  ) => CslEngine;
-};
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -47,9 +27,13 @@ function citeproc(data: CSLJSON[], style: string, locale: string): string[] {
   }));
   const sys = {
     retrieveLocale: () => locale,
-    retrieveItem: (id: string) => items.find((item) => id === item.id),
+    retrieveItem: (id: string) => {
+      const item = items.find((item) => id === item.id);
+      if (!item) throw new Error(`citeproc item not found: ${id}`);
+      return item;
+    },
   };
-  const citeproc = new CSL.Engine(sys, style);
+  const citeproc = new Citeproc.Engine(sys, style);
   citeproc.setOutputFormat('text');
 
   citeproc.updateItems(items.map((item) => item.id));

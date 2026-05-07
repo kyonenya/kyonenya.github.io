@@ -29,21 +29,24 @@ async function listFiles(dir: string): Promise<string[]> {
   return paths.flat();
 }
 
+function replacePostHtml(html: string): string {
+  return html
+    .replace(/\n/g, '')
+    .replace(/&gt;/g, '>')
+    .replace(/&lt;/g, '<')
+    // 漢字《ふりがな》
+    .replace(/｜(.+?)《(.+?)》/g, '<ruby>$1<rt>$2</rt></ruby>')
+    .replace(/\{(.+?)\|(.+?)\}/g, '<ruby>$1<rt>$2</rt></ruby>')
+    .replace(/([一-龠]+)《(.+?)》/g, '<ruby>$1<rt>$2</rt></ruby>');
+}
+
 async function readPostsMarkdown(paths: string[]): Promise<JSONPost[]> {
   return await Promise.all(
     paths.map(async (filePath) => {
       const { data, content } = matter(await readFile(filePath, 'utf-8'));
       return {
         ...data,
-        text: md
-          .render(content)
-          .replace(/\n/g, '')
-          .replace(/&gt;/g, '>')
-          .replace(/&lt;/g, '<')
-          // 漢字《ふりがな》
-          .replace(/｜(.+?)《(.+?)》/g, '<ruby>$1<rt>$2</rt></ruby>')
-          .replace(/\{(.+?)\|(.+?)\}/g, '<ruby>$1<rt>$2</rt></ruby>')
-          .replace(/([一-龠]+)《(.+?)》/g, '<ruby>$1<rt>$2</rt></ruby>'),
+        text: replacePostHtml(md.render(content)),
       } as JSONPost;
     }),
   );
