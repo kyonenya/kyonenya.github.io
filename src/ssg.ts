@@ -27,12 +27,12 @@ function createTemplateValues(post: Post): Record<string, string> {
 function embedTemplate(post: Post, template: string, posts: Post[]): string {
   const values = createTemplateValues(post);
   return template
-    .replace(/\{\{(\w+)\}\}/g, (_, key: string) => {
+    .replaceAll(/\{\{(\w+)\}\}/g, (_, key: string) => {
       const value = values[key];
       if (value === undefined) console.log(`Missing template var: ${key}`);
       return value;
     })
-    .replace(/<blog-card id='(\d+)'><\/blog-card>/g, (_, id: string) => {
+    .replaceAll(/<blog-card id='(\d+)'><\/blog-card>/g, (_, id: string) => {
       const post = posts.find((post) => id === post.id.toString());
       if (!post) return '';
       return `<blog-card id='${id}'>${BlogCard(post)}</blog-card>`;

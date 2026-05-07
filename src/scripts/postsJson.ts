@@ -32,13 +32,13 @@ async function listFiles(dir: string): Promise<string[]> {
 function replacePostHtml(html: string): string {
   return (
     html
-      .replace(/\n/g, '')
-      .replace(/&gt;/g, '>')
-      .replace(/&lt;/g, '<')
+      .replaceAll('\n', '')
+      .replaceAll('&gt;', '>')
+      .replaceAll('&lt;', '<')
       // 漢字《ふりがな》
-      .replace(/｜(.+?)《(.+?)》/g, '<ruby>$1<rt>$2</rt></ruby>')
-      .replace(/\{(.+?)\|(.+?)\}/g, '<ruby>$1<rt>$2</rt></ruby>')
-      .replace(/([一-龠]+)《(.+?)》/g, '<ruby>$1<rt>$2</rt></ruby>')
+      .replaceAll(/｜(.+?)《(.+?)》/g, '<ruby>$1<rt>$2</rt></ruby>')
+      .replaceAll(/\{(.+?)\|(.+?)\}/g, '<ruby>$1<rt>$2</rt></ruby>')
+      .replaceAll(/([一-龠]+)《(.+?)》/g, '<ruby>$1<rt>$2</rt></ruby>')
   );
 }
 
