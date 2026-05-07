@@ -1,7 +1,7 @@
 import { defineBlogCard } from './BlogCard';
 import { fetcher } from './lib/utils';
-import { notifyUpdate, Update } from './notify';
-import { jsonToPosts, JSONPost } from './post';
+import { notifyUpdate, type Update } from './notify';
+import { jsonToPosts, type JSONPost } from './post';
 import { registerRerouter } from './reroute';
 import { route } from './route';
 

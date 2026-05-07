@@ -1,7 +1,7 @@
 import { articlePage } from './Article';
 import { PostList, TaggedPostList, SearchedPostList } from './PostList';
 import { isDevelopment } from './lib/utils';
-import { Post, excludeReserved } from './post';
+import { excludeReserved, type Post } from './post';
 import { renderPage, baseUrl } from './render';
 import { toState } from './state';
 

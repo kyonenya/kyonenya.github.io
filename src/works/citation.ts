@@ -1,7 +1,6 @@
-// eslint-disable-next-line import/no-unresolved
-import { Data } from 'csl-json';
+import type { Data as CSLJSON } from 'csl-json';
 
-export type Citation = Omit<Data, 'id'> & {
+export type Citation = Omit<CSLJSON, 'id'> & {
   id: string | number;
   _bibliographyText: string;
 };

@@ -1,6 +1,6 @@
 import { TagListItem } from './TagList';
 import { formatYMD } from './lib/dateUtils';
-import { Post } from './post';
+import type { Post } from './post';
 
 const Summary = (plainText: string) => `
   <p class="bl_blogCard_summary hp_ellipsis433">

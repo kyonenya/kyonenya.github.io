@@ -1,4 +1,4 @@
-import { toUnitTime, units, getDateParts, DateParts } from './dateConst';
+import { toUnitTime, units, getDateParts, type DateParts } from './dateConst';
 
 function pad2(num: number): string {
   return String(num).padStart(2, '0');

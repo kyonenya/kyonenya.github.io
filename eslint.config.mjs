@@ -27,6 +27,13 @@ export default defineConfig(
           alphabetize: { order: 'asc' },
         },
       ],
+      '@typescript-eslint/consistent-type-imports': [
+        'error',
+        {
+          prefer: 'type-imports',
+          disallowTypeAnnotations: false, // allow `import('foo').Bar`
+        },
+      ],
     },
   },
 

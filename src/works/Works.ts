@@ -1,6 +1,6 @@
 import { parseMarkdownLink } from '../lib/ExternalLink';
 import { kerningDoubleDash } from '../lib/MarkupText';
-import { Citation, toCitationMap, Genre } from './citation';
+import { toCitationMap, type Citation, Genre } from './citation';
 import { isUnpublished } from './citationDate';
 
 const Text = (text: string): string =>
