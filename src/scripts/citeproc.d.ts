@@ -16,12 +16,7 @@ declare module 'citeproc' {
   };
 
   export class Engine {
-    constructor(
-      sys: Sys,
-      style: string,
-      lang?: string,
-      forceLang?: boolean,
-    );
+    constructor(sys: Sys, style: string, lang?: string, forceLang?: boolean);
     setOutputFormat: (mode: string) => void;
     updateItems: (
       idList: string[],
@@ -29,7 +24,9 @@ declare module 'citeproc' {
       rerunAmbigs?: boolean,
       implicitUpdate?: boolean,
     ) => void;
-    makeBibliography: (bibsection?: Record<string, unknown>) => false | Bibliography;
+    makeBibliography: (
+      bibsection?: Record<string, unknown>,
+    ) => false | Bibliography;
   }
 
   const Citeproc: {

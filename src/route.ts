@@ -37,8 +37,8 @@ const routeMap = {
     });
     if (searchInputElement) searchInputElement.style.display = 'block';
   },
-  beforeEach: (legacyId: number | undefined): void => {
-    if (legacyId) {
+  beforeEach: (legacyId: number | null): void => {
+    if (legacyId !== null) {
       // for backward compatibility
       window.history.replaceState(undefined, '', `/posts/${legacyId}`);
     }
@@ -58,13 +58,13 @@ export function route(rawPosts: Post[]): void {
 
   routeMap.beforeEach(legacyId);
 
-  if (id !== undefined) {
+  if (id !== null) {
     const post = posts.find((post) => post.id === id);
     if (!post) return; // TODO: 404
     routeMap.article(post);
-  } else if (keyword !== undefined) {
-    routeMap.searchedPostList(posts, keyword, tag);
-  } else if (tag !== undefined) {
+  } else if (keyword !== null) {
+    routeMap.searchedPostList(posts, keyword, tag ?? undefined);
+  } else if (tag !== null) {
     routeMap.taggedPostList(posts, tag);
   } else {
     routeMap.postList(posts);

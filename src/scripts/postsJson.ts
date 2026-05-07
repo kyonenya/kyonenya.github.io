@@ -30,14 +30,16 @@ async function listFiles(dir: string): Promise<string[]> {
 }
 
 function replacePostHtml(html: string): string {
-  return html
-    .replace(/\n/g, '')
-    .replace(/&gt;/g, '>')
-    .replace(/&lt;/g, '<')
-    // 漢字《ふりがな》
-    .replace(/｜(.+?)《(.+?)》/g, '<ruby>$1<rt>$2</rt></ruby>')
-    .replace(/\{(.+?)\|(.+?)\}/g, '<ruby>$1<rt>$2</rt></ruby>')
-    .replace(/([一-龠]+)《(.+?)》/g, '<ruby>$1<rt>$2</rt></ruby>');
+  return (
+    html
+      .replace(/\n/g, '')
+      .replace(/&gt;/g, '>')
+      .replace(/&lt;/g, '<')
+      // 漢字《ふりがな》
+      .replace(/｜(.+?)《(.+?)》/g, '<ruby>$1<rt>$2</rt></ruby>')
+      .replace(/\{(.+?)\|(.+?)\}/g, '<ruby>$1<rt>$2</rt></ruby>')
+      .replace(/([一-龠]+)《(.+?)》/g, '<ruby>$1<rt>$2</rt></ruby>')
+  );
 }
 
 async function readPostsMarkdown(paths: string[]): Promise<JSONPost[]> {
