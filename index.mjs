@@ -1,18 +1,20 @@
-const express = require('express');
-const fs = require('fs');
-const path = require('path');
-const webpack = require('webpack');
-const webpackDevMiddleware = require('webpack-dev-middleware');
-const config = require('./webpack.dev.config.js');
-const generatePosts = require('./generatePosts');
-const generateSitemap = require('./generateSitemap');
-const generateBibliography = require('./generateBibliography');
-const { createJiti } = require('jiti');
-const jiti = createJiti(__filename);
-const { generateStaticHTML } = jiti('./src/ssg.ts');
+import express from 'express';
+import { createJiti } from 'jiti';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import webpack from 'webpack';
+import webpackDevMiddleware from 'webpack-dev-middleware';
+import config from './webpack.dev.config.mjs';
 
-const rootDir = __dirname;
-const port = process.env['WEB_APP_PORT'] ?? 3100;
+const filename = fileURLToPath(import.meta.url);
+const rootDir = path.dirname(filename);
+const jiti = createJiti(import.meta.url);
+const { generatePostsJson } = jiti('./src/scripts/postsJson.ts');
+const { generateSitemap } = jiti('./src/scripts/sitemap.ts');
+const { generateWorksJson } = jiti('./src/scripts/worksJson.ts');
+const { generateStaticHtml } = jiti('./src/ssg.ts');
+
+const port = 3100;
 
 express()
   .use(webpackDevMiddleware(webpack(config)))
@@ -38,11 +40,10 @@ express()
   );
 
 (async () => {
-  await generatePosts();
-  await generateBibliography();
-  const posts = JSON.parse(
-    fs.readFileSync(path.resolve(__dirname, 'posts.json'), 'utf8'),
-  );
-  generateSitemap(posts);
-  generateStaticHTML();
+  const posts = await generatePostsJson();
+  await Promise.all([
+    generateWorksJson(),
+    generateSitemap(posts),
+    generateStaticHtml(posts),
+  ]);
 })().catch((e) => console.error(e));

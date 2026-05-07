@@ -2,7 +2,7 @@ import { generateSummary } from 'search-summary';
 import { TagList } from './TagList';
 import { kerningDoubleDash } from './lib/MarkupText';
 import { formatYMD, fromNow } from './lib/dateUtils';
-import { Post } from './post';
+import type { Post } from './post';
 
 const Keyword = (keyword: string) =>
   `<span class="hp_highlight">${keyword}</span>`;

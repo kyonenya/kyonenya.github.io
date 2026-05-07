@@ -1,4 +1,4 @@
-import { Citation } from './citation';
+import type { Citation } from './citation';
 
 type DateParts = [number, number, number];
 

@@ -13,10 +13,13 @@
 - `src/app.ts`: ブログSPAの共通起動処理。
 - `src/route.ts`: URL状態から表示ページを決めて描画する。
 - `src/reroute.ts`: `popstate`、検索フォーム、内部リンククリックを監視して再ルーティングする。
+- `src/state.ts`: `pathname` / `search` / `hash` から記事ID・タグ・検索語を取り出す。
+- `src/render.ts`: `#root` 描画、canonical更新、開発時の内部リンク化、スクロールを扱う。
+- `src/notify.ts`: `about.json` の更新情報から通知表示を扱う。
 - `src/ssg.ts`: `post.template.html` と `posts.json` から `posts/*.html` を生成する。
-- `generatePosts.js`: `markdown/*.md` から `posts.json` を更新する。
-- `generateBibliography.js`: `works.json` に文献表記を付与する。
-- `generateSitemap.js`: `sitemap.xml` を生成する。
+- `src/scripts/postsJson.ts`: `markdown/*.md` から `posts.json` を更新する。
+- `src/scripts/worksJson.ts`: `works.json` に文献表記を付与する。
+- `src/scripts/sitemap.ts`: `sitemap.xml` を生成する。
 
 ## HTMLエントリー
 
@@ -25,14 +28,15 @@ webpackのentryは `index`、`works`、`hydrate` の3種類。
 ### `index.html` -> `src/index.ts`
 
 - ブログ本体のSPAエントリー。
-- `src/index.ts` は `app()` を呼ぶだけ。`app(true)` は `./posts.json` / `./about.json` を読み、初回に `route(posts)` で `#root` を描画する。
+- `src/index.ts` は `app()` を呼ぶだけ。`app()` は `./posts.json` / `./about.json` を読み、初回に `route(posts)` で `#root` を描画する。
 
 ### `works.html` -> `src/works/index.ts`
 
 - 研究業績ページ用の独立エントリー。
 - `./works.json` を読み、`src/works/Works.ts` でHTMLを生成して `renderRoot()` に渡す。
 - ブログSPAの `route.ts` は使わない。
-- 文献表記は `generateBibliography.js` が `works.json` に事前生成する。
+- `about.json` も読み、`notifyUpdate()` で更新通知を表示する。
+- 文献表記は `src/scripts/worksJson.ts` が `works.json` に事前生成する。
 
 ### `posts/[id].html` -> `src/hydrate.ts`
 
@@ -43,6 +47,7 @@ webpackのentryは `index`、`works`、`hydrate` の3種類。
 ## 生成物
 
 - `dist/*.js` と `dist/css/bundle.css` は公開対象のビルド成果物。
+- 開発サーバーではwebpack-dev-middlewareが `dist/dev/*.js` 相当を配信し、`/dist/*.js` からリダイレクトする。
 - `posts/*.html` はSSG成果物。
 - `posts.json`、`works.json`、`sitemap.xml` も生成スクリプトで更新されることがある。
 - 生成物の差分が大量に出る場合は、変更理由を確認してから扱う。無関係なら巻き戻さない。
@@ -51,21 +56,24 @@ webpackのentryは `index`、`works`、`hydrate` の3種類。
 
 `package.json` のscripts:
 
-- `npm run dev`: 開発サーバー起動。起動時に記事・サイトマップ・文献・静的記事HTMLも生成する。
+- `npm run dev`: Express開発サーバー起動。起動時に記事・サイトマップ・文献・静的記事HTMLも生成する。
 - `npm run tsc`: TypeScript型チェックのwatch。
+- `npm run tsc:once`: TypeScript型チェックの単発実行。
 - `npm run build`: webpackで `dist/index.js`、`dist/hydrate.js`、`dist/works.js` を生成。
 - `npm run build-css`: CSSを `dist/css/bundle.css` に生成。
-- `npm run lint`: TypeScriptのESLint修正。
+- `npm run lint`: TypeScriptのESLint確認。
+- `npm run lint:fix`: TypeScriptのESLint自動修正。
 - `npm run lint-css`: CSS lint。
+- `npm run lint-css:fix`: CSS lintの自動修正。
 - `npm run fmt`: Prettier整形。
 
-`tsc` と `tsc-js` は `-w` 付きなので、単発確認では `./node_modules/.bin/tsc --noEmit` などを使う。
+`tsc` は `-w` 付きなので、単発確認では `npm run tsc:once` を使う。
 
 ## Code App / iOS 環境
 
 - iOSの[Code App](https://code.thebaselab.com/)でも開発サーバーを動かすことがある。公式ドキュメント上も、Code AppはiOSの制約を受け、ネイティブコンポーネントを含むモジュールの追加やsubprocess起動ができない。
 - Code AppのNode.js v18.19.0では、`process.setUncaughtExceptionCaptureCallback()` が有効な状態で起動することがある。この環境では `domain` モジュールと共存できず、`ts-node/register` は `ERR_DOMAIN_CALLBACK_NOT_AVAILABLE` で落ちる。サーバー側TSの読み込みには `jiti` を使う。
-- Code AppのNode環境では `WebAssembly` が未定義になることがある。webpackの既定 `md4` ハッシュ経路は `webpack/lib/util/hash/md4.js` に入り `ReferenceError: WebAssembly is not defined` になるため、`webpack.config.js` の `output.hashFunction: 'sha256'` を外さない。
+- Code AppのNode環境では `WebAssembly` が未定義になることがある。webpackの既定 `md4` ハッシュ経路は `webpack/lib/util/hash/md4.js` に入り `ReferenceError: WebAssembly is not defined` になるため、`webpack.config.mjs` の `output.hashFunction: 'sha256'` を外さない。
 - Node 18 / OpenSSL 3 では古いwebpackの `md4` ハッシュが `digital envelope routines` / `ERR_OSSL_EVP_UNSUPPORTED` で落ちる。webpack系依存を古い版へ戻す場合はCode Appで `npm run dev` を再検証する。
 - Code Appでは、Nodeの `child_process.spawn()` から子プロセスを作る処理が `spawn EPERM` / `Operation not permitted` で落ちることがある。内蔵ターミナルがコマンドを起動できても、その中のNodeプロセスからさらに別プロセスを起動できるとは限らない。Code Appで動かすツールは、外部CLIや複数コマンドを内部から起動しない構成を優先する。
 
@@ -80,6 +88,7 @@ webpackのentryは `index`、`works`、`hydrate` の3種類。
 - `src/ssg.ts` はサーバーサイド専用。クライアント専用APIに依存するコードをimportしない。
 - 予約投稿は本番相当では `excludeReserved` で除外される。開発時はlocalhost判定で表示される。
 - `blog-card` はCustom Element。SSGではカードHTMLを事前埋め込みし、SPAでは `defineBlogCard` が定義する。
+- ESLint設定は `eslint.config.mjs` に集約されている。`import/order` はwarnで有効。
 
 ## 編集方針
 
@@ -92,6 +101,8 @@ webpackのentryは `index`、`works`、`hydrate` の3種類。
 
 ## コードレビューの基本方針
 
+- GitHub PR上でレビューする場合は、まとめてコメントするだけで済ませず、当該の変更行へGitHubのPR上でインラインコメントを残してください。
+- レビュー依頼では、断りなくコミット・pushを行わないでください。レビューはレビューだけに留め、修正案はコメントとして提示してください。
 - ベストプラクティスの具体例を提示してください
 - 学習リソースの提案を積極的に行ってください
 - 以下のプレフィックスを使用してレビューコメントを分類してください：

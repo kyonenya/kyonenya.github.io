@@ -1,8 +1,8 @@
 type State = {
-  id: number | undefined;
-  legacyId: number | undefined;
-  tag: string | undefined;
-  keyword: string | undefined;
+  id: number | null;
+  legacyId: number | null;
+  tag: string | null;
+  keyword: string | null;
 };
 
 export function toState(
@@ -11,21 +11,23 @@ export function toState(
   locationHash?: string,
 ): State {
   const idStr = /\/posts\/(\d+)/.exec(locationPathname)?.[1];
-  const id = idStr ? Number(idStr) : undefined;
+  const id = idStr ? Number(idStr) : null;
 
   const searchParams = new URLSearchParams(locationSearch);
   const tag = searchParams.get('tag');
   const legacyIdStr = searchParams.get('id');
   const legacyId =
-    legacyIdStr && /^\d+$/.test(legacyIdStr) ? Number(legacyIdStr) : undefined;
+    legacyIdStr && /^\d+$/.test(legacyIdStr) ? Number(legacyIdStr) : null;
+
+  const keyword =
+    locationHash === undefined || locationHash === ''
+      ? null
+      : decodeURIComponent(locationHash.replace('#', ''));
 
   return {
     id: id ?? legacyId,
     legacyId,
-    tag: tag ?? undefined,
-    keyword:
-      locationHash === undefined || locationHash === ''
-        ? undefined
-        : decodeURIComponent(locationHash.replace('#', '')),
+    tag,
+    keyword,
   };
 }

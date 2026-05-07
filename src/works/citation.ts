@@ -1,7 +1,6 @@
-// eslint-disable-next-line import/no-unresolved
-import { Data } from 'csl-json';
+import type { Data as CSLJSON } from 'csl-json';
 
-export type Citation = Omit<Data, 'id'> & {
+export type Citation = Omit<CSLJSON, 'id'> & {
   id: string | number;
   _bibliographyText: string;
 };
@@ -13,17 +12,13 @@ function detectGenre(item: Citation): Genre | undefined {
   switch (item.type) {
     case 'book':
       return '書籍';
-      break;
     case 'article-journal':
       if (item.translator) return '翻訳';
       return '論文';
-      break;
     case 'paper-conference':
       return '発表';
-      break;
     case 'thesis':
       return '学位論文';
-      break;
     default:
       return undefined;
   }

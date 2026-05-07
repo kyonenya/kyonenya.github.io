@@ -1,7 +1,7 @@
-const path = require('path');
-const productionConfig = require('./webpack.config');
+// @ts-check
+import productionConfig from './webpack.config.mjs';
 
-module.exports = {
+export default {
   ...productionConfig,
   mode: 'development',
   output: {

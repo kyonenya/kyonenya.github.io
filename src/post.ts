@@ -31,14 +31,14 @@ export function jsonToPost(post: JSONPost): Post {
     ...post,
     title: post.title === null || post.title === '' ? undefined : post.title,
     plainText: post.text
-      .replace(
+      .replaceAll(
         /<blockquote>(.+?)<\/blockquote>/g,
         (_, text: string) => `> ${text}`,
       )
-      .replace(/<h2>(.+?)<\/h2>/g, (_, text: string) => `## ${text}`)
-      .replace(/——/g, '──')
-      .replace(/<div class='hp_hiddenFromSummary'>(.+?)<\/div>/g, '')
-      .replace(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''),
+      .replaceAll(/<h2>(.+?)<\/h2>/g, (_, text: string) => `## ${text}`)
+      .replaceAll('——', '──')
+      .replaceAll(/<div class='hp_hiddenFromSummary'>(.+?)<\/div>/g, '')
+      .replaceAll(/<("[^"]*"|'[^']*'|[^'">])*>/g, ''),
     createdAt: parseDate(post.createdAt),
     modifiedAt: parseDate(post.modifiedAt),
   };

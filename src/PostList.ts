@@ -1,5 +1,5 @@
 import { PostListItem } from './PostListItem';
-import { Post } from './post';
+import type { Post } from './post';
 
 const Container = (listItems: string, archiveHeaderText?: string) => `
   <section class="ly_container">

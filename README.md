@@ -41,7 +41,7 @@
   - 依存パッケージ0、ビルドサイズを10KB未満まで削減
 - webpack・PostCSS（[v1.1.0](https://github.com/kyonenya/kyonenya.github.io/releases/tag/v1.1.0)より）
 - TypeScript（[v2.0.0](https://github.com/kyonenya/kyonenya.github.io/releases/tag/v2.0.0)より）
-- [Codesandbox for iOS](https://codesandbox.io/codesandbox-for-ios) というiPadでNode.jsが動かせるアプリで開発
+- [Code App](https://code.thebaselab.com/) というiPadでNode.jsが動かせるアプリで開発
 
 ## なぜそんな設計で作るのですか（v0.0.0）
 

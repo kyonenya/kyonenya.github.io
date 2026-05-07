@@ -1,8 +1,8 @@
 import { articlePage } from './Article';
 import { PostList, TaggedPostList, SearchedPostList } from './PostList';
-import { renderPage, baseUrl } from './lib/render';
 import { isDevelopment } from './lib/utils';
-import { Post, excludeReserved } from './post';
+import { excludeReserved, type Post } from './post';
+import { renderPage, baseUrl } from './render';
 import { toState } from './state';
 
 const searchInputElement =
@@ -11,31 +11,34 @@ const searchInputElement =
 const routeMap = {
   article: (post: Post): void => {
     renderPage(articlePage(post));
-    if (!searchInputElement) return;
-    searchInputElement.style.display = 'none'; // disable search form
+    // disable search form
+    if (searchInputElement) searchInputElement.style.display = 'none';
   },
-  postList: (posts: Post[]): void =>
+  postList: (posts: Post[]): void => {
     renderPage({
       body: PostList(posts),
       title: 'placet experiri',
       href: baseUrl,
-    }),
-  taggedPostList: (posts: Post[], tag: string): void =>
+    });
+    if (searchInputElement) searchInputElement.style.display = 'block';
+  },
+  taggedPostList: (posts: Post[], tag: string): void => {
     renderPage({
       body: TaggedPostList(posts, tag),
       title: `#${tag}｜placet experiri`,
       href: `${baseUrl}?tag=${tag}`,
-    }),
-  searchedPostList: (posts: Post[], keyword: string, tag?: string): void =>
+    });
+    if (searchInputElement) searchInputElement.style.display = 'block';
+  },
+  searchedPostList: (posts: Post[], keyword: string, tag?: string): void => {
     renderPage({
       body: SearchedPostList(posts, keyword, tag),
       title: `「${keyword}」｜placet experiri`,
-    }),
-  beforeEach: (legacyId: number | undefined): void => {
-    window.scrollTo(0, 0);
-    if (!searchInputElement) return;
-    searchInputElement.style.display = 'block';
-    if (legacyId) {
+    });
+    if (searchInputElement) searchInputElement.style.display = 'block';
+  },
+  beforeEach: (legacyId: number | null): void => {
+    if (legacyId !== null) {
       // for backward compatibility
       window.history.replaceState(undefined, '', `/posts/${legacyId}`);
     }
@@ -55,13 +58,13 @@ export function route(rawPosts: Post[]): void {
 
   routeMap.beforeEach(legacyId);
 
-  if (id !== undefined) {
+  if (id !== null) {
     const post = posts.find((post) => post.id === id);
     if (!post) return; // TODO: 404
     routeMap.article(post);
-  } else if (keyword !== undefined) {
-    routeMap.searchedPostList(posts, keyword, tag);
-  } else if (tag !== undefined) {
+  } else if (keyword !== null) {
+    routeMap.searchedPostList(posts, keyword, tag ?? undefined);
+  } else if (tag !== null) {
     routeMap.taggedPostList(posts, tag);
   } else {
     routeMap.postList(posts);

@@ -1,8 +1,8 @@
-import { renderRoot } from '../lib/render';
 import { fetcher } from '../lib/utils';
-import { notifyUpdate, Update } from '../notify';
+import { notifyUpdate, type Update } from '../notify';
+import { renderRoot } from '../render';
 import { Works } from './Works';
-import { Citation } from './citation';
+import type { Citation } from './citation';
 
 const worksPath = './works.json';
 const aboutPath = './about.json';

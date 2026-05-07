@@ -2,8 +2,8 @@ import { TagList } from './TagList';
 import { toExternalLink } from './lib/ExternalLink';
 import { MarkupText, kerningDoubleDash } from './lib/MarkupText';
 import { formatYMDHm, formatYMD, fromNow } from './lib/dateUtils';
-import { baseUrl, Page } from './lib/render';
-import { Post } from './post';
+import type { Post } from './post';
+import { baseUrl, type Page } from './render';
 
 const Article = (post: Post, ssg?: boolean): string => `
   <section class="ly_container">
