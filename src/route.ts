@@ -11,30 +11,33 @@ const searchInputElement =
 const routeMap = {
   article: (post: Post): void => {
     renderPage(articlePage(post));
-    if (!searchInputElement) return;
-    searchInputElement.style.display = 'none'; // disable search form
+    // disable search form
+    if (searchInputElement) searchInputElement.style.display = 'none';
   },
-  postList: (posts: Post[]): void =>
+  postList: (posts: Post[]): void => {
     renderPage({
       body: PostList(posts),
       title: 'placet experiri',
       href: baseUrl,
-    }),
-  taggedPostList: (posts: Post[], tag: string): void =>
+    });
+    if (searchInputElement) searchInputElement.style.display = 'block';
+  },
+  taggedPostList: (posts: Post[], tag: string): void => {
     renderPage({
       body: TaggedPostList(posts, tag),
       title: `#${tag}｜placet experiri`,
       href: `${baseUrl}?tag=${tag}`,
-    }),
-  searchedPostList: (posts: Post[], keyword: string, tag?: string): void =>
+    });
+    if (searchInputElement) searchInputElement.style.display = 'block';
+  },
+  searchedPostList: (posts: Post[], keyword: string, tag?: string): void => {
     renderPage({
       body: SearchedPostList(posts, keyword, tag),
       title: `「${keyword}」｜placet experiri`,
-    }),
+    });
+    if (searchInputElement) searchInputElement.style.display = 'block';
+  },
   beforeEach: (legacyId: number | undefined): void => {
-    window.scrollTo(0, 0);
-    if (!searchInputElement) return;
-    searchInputElement.style.display = 'block';
     if (legacyId) {
       // for backward compatibility
       window.history.replaceState(undefined, '', `/posts/${legacyId}`);

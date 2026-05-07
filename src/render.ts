@@ -13,7 +13,13 @@ export const baseUrl = 'https://kyonenya.github.io/';
 export function renderRoot(html: string): void {
   const rootElement = <HTMLDivElement>document.getElementById('root');
   rootElement.innerHTML = html;
-  scrollToId(window.location.hash.replace('#', ''));
+
+  const target = document.getElementById(window.location.hash.replace('#', ''));
+  if (target) {
+    target.scrollIntoView({ behavior: 'smooth' });
+  } else {
+    window.scrollTo(0, 0);
+  }
 
   if (isDevelopment(window.location.href)) {
     // overwrite to internal link
@@ -49,9 +55,3 @@ export function renderPage(page: Page): void {
     document.head.appendChild(link);
   }
 }
-
-export const scrollToId = (id: string): void => {
-  document.getElementById(id)?.scrollIntoView({
-    behavior: 'smooth',
-  });
-};

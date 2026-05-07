@@ -1,4 +1,3 @@
-import { scrollToId } from './render';
 import { toState } from './state';
 
 function watchPopState(reroute: () => void): void {
@@ -36,7 +35,6 @@ function watchInternalLinkClicks(reroute: () => void): void {
       e.preventDefault();
       window.history.pushState(undefined, '', a.href);
       reroute();
-      scrollToId(a.hash.replace('#', ''));
     }
   });
 }
