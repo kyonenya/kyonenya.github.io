@@ -171,7 +171,7 @@
 .bl_text :where(ol li.hilightBefore)::before {
   display: inline-block;
   background: var(--hilight-primary);
-  border: 1px solid hsl(0 0% 0% / 0.15);
+  border: 1px solid hsl(0 0% 0% / 15%);
   color: hsl(0 0% 0%); /* jet black */
   border-radius: 3px;
   padding: 2px 3px;

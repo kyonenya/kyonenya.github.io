@@ -4,10 +4,7 @@ export default {
   rules: {
     'comment-empty-line-before': null,
     'selector-class-pattern': null, // allow PRECSS style
-    // disabled for config-standard@39
-    'hue-degree-notation': null,
-    'color-function-alias-notation': null,
-    'alpha-value-notation': null,
-    'media-feature-range-notation': null,
+    'hue-degree-notation': 'number',
+    'media-feature-range-notation': 'prefix', // compat for postcss-csso
   },
 };

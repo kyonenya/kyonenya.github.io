@@ -25,7 +25,7 @@
 .hp_highlight {
   display: inline-block;
   background: var(--hilight-primary);
-  border: 1px solid hsl(0 0% 0% / 0.15); /* layer translucent black line */
+  border: 1px solid hsl(0 0% 0% / 15%); /* layer translucent black line */
   color: hsl(0 0% 0%); /* black if under darkmode */
   border-radius: 3px;
   padding: 2px 3px;
