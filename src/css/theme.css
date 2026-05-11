@@ -6,7 +6,7 @@
  */
 
 :root {
-  --text-primary: hsl(0 0% 13%); /* Gray 900 */
+  --text-primary: hsl(0 0% 10%); /* Gray 925 */
   --text-secondary: hsl(0 0% 30%); /* Gray 775 */
   --gray-strong: hsl(0 0% 68%); /* Gray 450 */
   --gray-medium: hsl(0 0% 74%); /* Gray 400 */
