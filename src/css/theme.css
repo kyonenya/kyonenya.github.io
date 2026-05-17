@@ -6,31 +6,31 @@
  */
 
 :root {
-  --text-primary: hsl(0, 0%, 13%); /* Gray 900 */
-  --text-secondary: hsl(0, 0%, 30%); /* Gray 775 */
-  --gray-strong: hsl(0, 0%, 68%); /* Gray 450 */
-  --gray-medium: hsl(0, 0%, 74%); /* Gray 400 */
-  --gray-weak: hsl(0, 0%, 83%); /* Gray 350 */
-  --background-primary: hsl(40, 38%, 95%); /* Orange 100 */
-  --background-secondary: hsl(0, 0%, 91%);
-  --main-primary: hsl(202, 45%, 45%); /* LightBlue 600s */
-  --main-secondary: hsl(202, 35%, 60%); /* LightBlue 350 */
-  --accent-primary: hsl(349, 39%, 66%); /* Pink 300 */
-  --hilight-primary: hsl(55, 100%, 70%);
+  --text-primary: hsl(0 0% 10%); /* Gray 925 */
+  --text-secondary: hsl(0 0% 30%); /* Gray 775 */
+  --gray-strong: hsl(0 0% 68%); /* Gray 450 */
+  --gray-medium: hsl(0 0% 74%); /* Gray 400 */
+  --gray-weak: hsl(0 0% 83%); /* Gray 350 */
+  --background-primary: hsl(40 38% 95%); /* Orange 100 */
+  --background-secondary: hsl(0 0% 91%);
+  --main-primary: hsl(202 45% 45%); /* LightBlue 600s */
+  --main-secondary: hsl(202 35% 60%); /* LightBlue 350 */
+  --accent-primary: hsl(349 39% 66%); /* Pink 300 */
+  --hilight-primary: hsl(55 100% 70%);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --text-primary: hsl(40, 38%, 97%); /* Orange 50 */
-    --text-secondary: hsl(0, 0%, 71%); /* Gray 425 */
-    --gray-strong: hsl(0, 0%, 46%); /* Gray 600 */
-    --gray-medium: hsl(0, 0%, 39%); /* Gray 675 */
-    --gray-weak: hsl(0, 0%, 33%); /* Gray 750 */
-    --background-primary: hsl(0, 0%, 18%); /* Gray 870 */
-    --background-secondary: hsl(0, 0%, 13%);
-    --main-primary: hsl(202, 35%, 60%); /* LightBlue 350 */
-    --main-secondary: hsl(202, 25%, 48%); /* LightBlue 500s */
-    --accent-primary: hsl(349, 30%, 52%); /* Pink 500s */
-    --hilight-primary: hsl(55, 80%, 50%);
+    --text-primary: hsl(40 38% 97%); /* Orange 50 */
+    --text-secondary: hsl(0 0% 71%); /* Gray 425 */
+    --gray-strong: hsl(0 0% 46%); /* Gray 600 */
+    --gray-medium: hsl(0 0% 39%); /* Gray 675 */
+    --gray-weak: hsl(0 0% 33%); /* Gray 750 */
+    --background-primary: hsl(0 0% 18%); /* Gray 870 */
+    --background-secondary: hsl(0 0% 13%);
+    --main-primary: hsl(202 35% 60%); /* LightBlue 350 */
+    --main-secondary: hsl(202 25% 48%); /* LightBlue 500s */
+    --accent-primary: hsl(349 30% 52%); /* Pink 500s */
+    --hilight-primary: hsl(55 80% 50%);
   }
 }

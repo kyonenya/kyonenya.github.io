@@ -10,8 +10,12 @@ body {
   line-height: 1.7;
   color: var(--text-primary);
   background: var(--background-primary);
-  word-break: break-word; /* prevent beginning line with 、。 */
-  -webkit-text-size-adjust: 100%; /* prevent broken layout in horizontal view */
+  word-break: normal;
+  overflow-wrap: anywhere;
+  /* prevent broken layout in horizontal view */
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
   /* fix footer at the bottom */
   display: flex;
   flex-flow: column;
