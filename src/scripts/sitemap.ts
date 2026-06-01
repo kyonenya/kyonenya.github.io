@@ -9,7 +9,10 @@ import type { JSONPost } from '../post';
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 const rootDir = path.resolve(dirname, '../..');
-const sitemapPath = path.resolve(rootDir, 'sitemap.xml');
+const sitemapPaths = [
+  path.resolve(rootDir, 'sitemap.xml'),
+  path.resolve(rootDir, 'sitemap-resubmit.xml'),
+];
 
 function getLatestModifiedAt(posts: JSONPost[]): string | null {
   const latest = Math.max(
@@ -51,9 +54,12 @@ export async function generateSitemap(posts: JSONPost[]): Promise<void> {
   sitemap.end();
 
   const sm = await streamToPromise(sitemap);
-  await writeFile(
-    sitemapPath,
-    format(sm.toString(), { indentation: '  ', collapseContent: true }),
+  const formattedSitemap = format(sm.toString(), {
+    indentation: '  ',
+    collapseContent: true,
+  });
+  await Promise.all(
+    sitemapPaths.map((sitemapPath) => writeFile(sitemapPath, formattedSitemap)),
   );
   console.log('sitemap generated.');
 }
