@@ -1,6 +1,5 @@
 type State = {
   id: number | null;
-  legacyId: number | null;
   tag: string | null;
   keyword: string | null;
 };
@@ -26,7 +25,6 @@ export function toState(
 
   return {
     id: id ?? legacyId,
-    legacyId,
     tag,
     keyword,
   };

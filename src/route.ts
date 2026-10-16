@@ -37,16 +37,10 @@ const routeMap = {
     });
     if (searchInputElement) searchInputElement.style.display = 'block';
   },
-  beforeEach: (legacyId: number | null): void => {
-    if (legacyId !== null) {
-      // for backward compatibility
-      window.history.replaceState(undefined, '', `/posts/${legacyId}`);
-    }
-  },
 };
 
 export function route(rawPosts: Post[]): void {
-  const { id, legacyId, tag, keyword } = toState(
+  const { id, tag, keyword } = toState(
     window.location.search,
     window.location.pathname,
     window.location.hash,
@@ -55,8 +49,6 @@ export function route(rawPosts: Post[]): void {
   const posts = isDevelopment(window.location.href)
     ? rawPosts
     : excludeReserved(rawPosts);
-
-  routeMap.beforeEach(legacyId);
 
   if (id !== null) {
     const post = posts.find((post) => post.id === id);
