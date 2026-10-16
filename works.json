@@ -1,5 +1,16 @@
 [
   {
+    "id": 10,
+    "type": "paper-conference",
+    "title": "想像と観入の現象学——知覚と想像の差異をめぐって",
+    "author": [{ "literal": "京念屋隆史" }],
+    "event": "日本現象学会2026年度研究大会",
+    "event-place": "早稲田大学",
+    "event-date": { "date-parts": [[2026, 11, 14]] },
+    "note": "[要旨](https://gist.github.com/kyonenya/fc6c7fda6a3a3354a512491627415f2c) [大会概要](https://pa-j.jp/cn7/pg116.html)",
+    "_bibliographyText": "京念屋隆史「想像と観入の現象学——知覚と想像の差異をめぐって」日本現象学会2026年度研究大会, 2026-11-14. [要旨](https://gist.github.com/kyonenya/fc6c7fda6a3a3354a512491627415f2c) [大会概要](https://pa-j.jp/cn7/pg116.html)"
+  },
+  {
     "id": 9,
     "type": "thesis",
     "title": "想像と観入の現象学——知覚と想像の差異をめぐって",
@@ -21,8 +32,8 @@
     "publisher": "哲学書房 京念屋",
     "ISBN": null,
     "URL": "",
-    "note": "[通販ページ](https://kyonenya.booth.pm/items/6614402) [試し読み](/?id=41) [正誤表](https://gist.github.com/kyonenya/3da5e8d2b7fa5e9223abd9db9259c41a)",
-    "_bibliographyText": "京念屋隆史（2025）『転移性恋愛について——ラカンと読む太宰治「駈込み訴え」』哲学書房 京念屋. [通販ページ](https://kyonenya.booth.pm/items/6614402) [試し読み](/?id=41) [正誤表](https://gist.github.com/kyonenya/3da5e8d2b7fa5e9223abd9db9259c41a)"
+    "note": "[通販ページ](https://kyonenya.booth.pm/items/6614402) [試し読み](/posts/41) [正誤表](https://gist.github.com/kyonenya/3da5e8d2b7fa5e9223abd9db9259c41a)",
+    "_bibliographyText": "京念屋隆史（2025）『転移性恋愛について——ラカンと読む太宰治「駈込み訴え」』哲学書房 京念屋. [通販ページ](https://kyonenya.booth.pm/items/6614402) [試し読み](/posts/41) [正誤表](https://gist.github.com/kyonenya/3da5e8d2b7fa5e9223abd9db9259c41a)"
   },
   {
     "id": 7,
