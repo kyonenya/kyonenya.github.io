@@ -1,5 +1,5 @@
 import { fetcher } from '../lib/utils';
-import { notifyUpdate, type Update } from '../notify';
+import { notifyUpdate, type Notice } from '../notify';
 import { renderRoot } from '../render';
 import { Works } from './Works';
 import type { Citation } from './citation';
@@ -12,6 +12,6 @@ void (async function index() {
   const higlitedId = decodeURIComponent(window.location.hash.replace('#', ''));
   renderRoot(Works(citations, higlitedId));
 
-  const update = await fetcher<Update>(aboutPath);
-  notifyUpdate(update);
+  const notices = await fetcher<Notice[]>(aboutPath);
+  notifyUpdate(notices);
 })();

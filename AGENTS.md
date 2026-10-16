@@ -6,7 +6,7 @@
 
 - GitHub Pages向けのVanilla TypeScript SPA + 自作SSGサイト。
 - React等は使っていない。HTML文字列を生成して `#root` に描画する設計。
-- 実行入口は `index.html`、`works.html`、`posts/[id].html` の3系統。詳細は「HTMLエントリー」を参照。
+- 実行入口は `index.html`、`works.html`、`about.html`、`posts/[id].html` の4系統。詳細は「HTMLエントリー」を参照。
 
 ## 主要ファイル
 
@@ -15,7 +15,7 @@
 - `src/reroute.ts`: `popstate`、検索フォーム、内部リンククリックを監視して再ルーティングする。
 - `src/state.ts`: `pathname` / `search` / `hash` から記事ID・タグ・検索語を取り出す。
 - `src/render.ts`: `#root` 描画、canonical更新、開発時の内部リンク化、スクロールを扱う。
-- `src/notify.ts`: `about.json` の更新情報から通知表示を扱う。
+- `src/notify.ts`: `about.json` のお知らせの最新日付から、Aboutリンクの更新バッジ表示を扱う。表示期間は定数 `newDays`。
 - `src/ssg.ts`: `post.template.html` と `posts.json` から `posts/*.html` を生成する。
 - `src/scripts/postsJson.ts`: `markdown/*.md` から `posts.json` を更新する。
 - `src/scripts/worksJson.ts`: `works.json` に文献表記を付与する。
@@ -23,7 +23,7 @@
 
 ## HTMLエントリー
 
-webpackのentryは `index`、`works`、`hydrate` の3種類。
+webpackのentryは `index`、`works`、`about`、`hydrate` の4種類。
 
 ### `index.html` -> `src/index.ts`
 
@@ -37,6 +37,13 @@ webpackのentryは `index`、`works`、`hydrate` の3種類。
 - ブログSPAの `route.ts` は使わない。
 - `about.json` も読み、`notifyUpdate()` で更新通知を表示する。
 - 文献表記は `src/scripts/worksJson.ts` が `works.json` に事前生成する。
+
+### `about.html` -> `src/about/index.ts`
+
+- Aboutページ用の独立エントリー。「このサイトについて」は静的HTMLのまま。
+- `./about.json` のお知らせを日付の新しい順に並べ、`src/about/Notices.ts` でHTMLを生成して、`pinned: true` のものを `#notices`、それ以外を `#pastNotices` に描画する。
+- `about.json` はお知らせの配列。各要素は `date`（`YYYY-MM-DD`）、`body`（`<p>` から手書きするHTML）、省略可能な `pinned`。
+- `body` 内のリンクは `[]()` で書ける。`/` か `?` で始まるリンクは同じタブ、それ以外は新しいタブで開く（`parseMarkdownLink`）。サイト内リンクは `/works#9` のように `/` 始まりで書く。
 
 ### `posts/[id].html` -> `src/hydrate.ts`
 
@@ -59,7 +66,7 @@ webpackのentryは `index`、`works`、`hydrate` の3種類。
 - `npm run dev`: Express開発サーバー起動。起動時に記事・サイトマップ・文献・静的記事HTMLも生成する。
 - `npm run tsc`: TypeScript型チェックのwatch。
 - `npm run tsc:once`: TypeScript型チェックの単発実行。
-- `npm run build`: webpackで `dist/index.js`、`dist/hydrate.js`、`dist/works.js` を生成。
+- `npm run build`: webpackで `dist/index.js`、`dist/hydrate.js`、`dist/works.js`、`dist/about.js` を生成。
 - `npm run build-css`: CSSを `dist/css/bundle.css` に生成。
 - `npm run lint`: TypeScriptのESLint確認。
 - `npm run lint:fix`: TypeScriptのESLint自動修正。

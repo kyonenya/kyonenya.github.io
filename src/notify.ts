@@ -1,14 +1,24 @@
 import { isNew } from './lib/dateUtils';
 
-export type Update = {
-  updatedAt: string;
-  newDays: number;
+export type Notice = {
+  date: string;
+  body: string;
+  pinned?: boolean;
 };
 
-export function notifyUpdate({ updatedAt, newDays }: Update): void {
-  const aboutElement = document.getElementById('about');
+export const getUpdatedAt = (notices: Notice[]): string | undefined =>
+  notices
+    .map(({ date }) => date)
+    .sort()
+    .at(-1);
 
-  if (!isNew(new Date(updatedAt), newDays) || newDays <= 0) return;
+const newDays = 90;
+
+export function notifyUpdate(notices: Notice[]): void {
+  const aboutElement = document.getElementById('about');
+  const updatedAt = getUpdatedAt(notices);
+
+  if (!updatedAt || !isNew(new Date(updatedAt), newDays)) return;
 
   aboutElement?.addEventListener('click', () => {
     localStorage.setItem(updatedAt, 'true');
