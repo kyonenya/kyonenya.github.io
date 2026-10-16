@@ -14,4 +14,4 @@ const NoticeItem = ({ date, body }: Notice): string => `
 `;
 
 export const Notices = (notices: Notice[]): string =>
-  notices.map((notice) => NoticeItem(notice)).join('');
+  notices.map(NoticeItem).join('');
