@@ -16,9 +16,5 @@ export function toExternalLink(html: string): string {
 }
 
 export function parseMarkdownLink(text: string): string {
-  return text.replaceAll(
-    /\[(.+?)\]\((.+?)\)/g,
-    (_, content: string, href: string) =>
-      toExternalLink(`<a href="${href}">${content}</a>`),
-  );
+  return text.replaceAll(/\[(.+?)\]\((.+?)\)/g, '<a href="$2">$1</a>');
 }
