@@ -1,122 +1,27 @@
 # AGENTS.md
 
-このリポジトリで作業するAIエージェント向けのメモ。応答は日本語で行う。
+応答は日本語で行う。
 
-## 概要
-
-- GitHub Pages向けのVanilla TypeScript SPA + 自作SSGサイト。
+- GitHub Pages向けのVanilla TypeScript MPA + 自作SSGサイト。
 - React等は使っていない。HTML文字列を生成して `#root` に描画する設計。
-- 実行入口は `index.html`、`works.html`、`about.html`、`posts/[id].html` の4系統。詳細は「HTMLエントリー」を参照。
 
-## 主要ファイル
+## Code App（iOS）で起きた失敗
 
-- `src/app.ts`: ブログSPAの共通起動処理。
-- `src/route.ts`: URL状態から表示ページを決めて描画する。
-- `src/reroute.ts`: `popstate`、検索フォーム、内部リンククリックを監視して再ルーティングする。
-- `src/state.ts`: `pathname` / `search` / `hash` から記事ID・タグ・検索語を取り出す。
-- `src/render.ts`: `#root` 描画、canonical更新、開発時の内部リンク化、スクロールを扱う。
-- `src/notify.ts`: `about.json` のお知らせの最新日付から、Aboutリンクの更新バッジ表示を扱う。表示期間は定数 `newDays`。
-- `src/ssg.ts`: `post.template.html` と `posts.json` から `posts/*.html` を生成する。
-- `src/scripts/postsJson.ts`: `markdown/*.md` から `posts.json` を更新する。
-- `src/scripts/worksJson.ts`: `works.json` に文献表記を付与する。
-- `src/scripts/sitemap.ts`: `sitemap.xml` を生成する。
+`npm run dev` をiOSの[Code App](https://code.thebaselab.com/)（Node.js v18.19.0）でも動かす。ネイティブモジュールは入れられない。
 
-## HTMLエントリー
+- `ts-node/register` が `ERR_DOMAIN_CALLBACK_NOT_AVAILABLE` で落ちた（`process.setUncaughtExceptionCaptureCallback()` が有効なまま起動し、`domain` と共存できない）。サーバー側TSは `jiti` で読む。
+- `WebAssembly` が未定義で、webpack既定の `md4` ハッシュが `ReferenceError: WebAssembly is not defined` で落ちた。`webpack.config.mjs` の `output.hashFunction: 'sha256'` を外さない。古いwebpackではOpenSSL 3で `ERR_OSSL_EVP_UNSUPPORTED` にもなるので、webpack系を古い版へ戻したらCode Appで再確認する。
+- Nodeの `child_process.spawn()` が `spawn EPERM` で落ちた。Nodeから外部CLIや別プロセスを起動する構成にしない。
 
-webpackのentryは `index`、`works`、`about`、`hydrate` の4種類。
+## コードスタイル
 
-### `index.html` -> `src/index.ts`
+- 関数や変数にむやみに切り出さず、インラインで書く。ワンライナー寄りに簡潔に書く。
+- 関数型スタイルで書く。再代入を避け、ループより非破壊的な配列操作を使う。
+- フレームワークや大きな依存を追加しない。
 
-- ブログ本体のSPAエントリー。
-- `src/index.ts` は `app()` を呼ぶだけ。`app()` は `./posts.json` / `./about.json` を読み、初回に `route(posts)` で `#root` を描画する。
+## コードレビュー
 
-### `works.html` -> `src/works/index.ts`
-
-- 研究業績ページ用の独立エントリー。
-- `./works.json` を読み、`src/works/Works.ts` でHTMLを生成して `renderRoot()` に渡す。
-- ブログSPAの `route.ts` は使わない。
-- `about.json` も読み、`notifyUpdate()` で更新通知を表示する。
-- 文献表記は `src/scripts/worksJson.ts` が `works.json` に事前生成する。
-
-### `about.html` -> `src/about/index.ts`
-
-- Aboutページ用の独立エントリー。「このサイトについて」は静的HTMLのまま。
-- `./about.json` のお知らせを日付の新しい順に並べ、`src/about/Notices.ts` でHTMLを生成して、`pinned: true` のものを `#notices`、それ以外を `#pastNotices` に描画する。
-- `about.json` はお知らせの配列。各要素は `date`（`YYYY-MM-DD`）、`body`（`<p>` から手書きするHTML）、省略可能な `pinned`。
-- `body` 内のリンクは `[]()` でも `<a>` でも書ける。サイト内リンクは `/works#9` のように `/` 始まりで書く。外部リンクの判定は「実装上の注意」を参照。
-
-### `posts/[id].html` -> `src/hydrate.ts`
-
-- `src/ssg.ts` が `post.template.html` から生成する静的記事HTML。
-- 初期本文・canonical・OGPはHTMLに埋め込まれている。`src/hydrate.ts` は相対日付だけ更新し、`app(false)` でSPA遷移を後付けする。
-- `app(false)` は `../posts.json` / `../about.json` を読むが、SSG本文を保つため初回 `route(posts)` は実行しない。
-
-## 生成物
-
-- `dist/*.js` と `dist/css/bundle.css` は公開対象のビルド成果物。
-- 開発サーバーではwebpack-dev-middlewareが `dist/dev/*.js` 相当を配信し、`/dist/*.js` からリダイレクトする。
-- `posts/*.html` はSSG成果物。
-- `posts.json`、`works.json`、`sitemap.xml` も生成スクリプトで更新されることがある。
-- 生成物の差分が大量に出る場合は、変更理由を確認してから扱う。無関係なら巻き戻さない。
-
-## コマンド
-
-`package.json` のscripts:
-
-- `npm run dev`: Express開発サーバー起動。起動時に記事・サイトマップ・文献・静的記事HTMLも生成する。
-- `npm run tsc`: TypeScript型チェックのwatch。
-- `npm run tsc:once`: TypeScript型チェックの単発実行。
-- `npm run build`: webpackで `dist/index.js`、`dist/hydrate.js`、`dist/works.js`、`dist/about.js` を生成。
-- `npm run build-css`: CSSを `dist/css/bundle.css` に生成。
-- `npm run lint`: TypeScriptのESLint確認。
-- `npm run lint:fix`: TypeScriptのESLint自動修正。
-- `npm run lint-css`: CSS lint。
-- `npm run lint-css:fix`: CSS lintの自動修正。
-- `npm run fmt`: Prettier整形。
-
-`tsc` は `-w` 付きなので、単発確認では `npm run tsc:once` を使う。
-
-## Code App / iOS 環境
-
-- iOSの[Code App](https://code.thebaselab.com/)でも開発サーバーを動かすことがある。公式ドキュメント上も、Code AppはiOSの制約を受け、ネイティブコンポーネントを含むモジュールの追加やsubprocess起動ができない。
-- Code AppのNode.js v18.19.0では、`process.setUncaughtExceptionCaptureCallback()` が有効な状態で起動することがある。この環境では `domain` モジュールと共存できず、`ts-node/register` は `ERR_DOMAIN_CALLBACK_NOT_AVAILABLE` で落ちる。サーバー側TSの読み込みには `jiti` を使う。
-- Code AppのNode環境では `WebAssembly` が未定義になることがある。webpackの既定 `md4` ハッシュ経路は `webpack/lib/util/hash/md4.js` に入り `ReferenceError: WebAssembly is not defined` になるため、`webpack.config.mjs` の `output.hashFunction: 'sha256'` を外さない。
-- Node 18 / OpenSSL 3 では古いwebpackの `md4` ハッシュが `digital envelope routines` / `ERR_OSSL_EVP_UNSUPPORTED` で落ちる。webpack系依存を古い版へ戻す場合はCode Appで `npm run dev` を再検証する。
-- Code Appでは、Nodeの `child_process.spawn()` から子プロセスを作る処理が `spawn EPERM` / `Operation not permitted` で落ちることがある。内蔵ターミナルがコマンドを起動できても、その中のNodeプロセスからさらに別プロセスを起動できるとは限らない。Code Appで動かすツールは、外部CLIや複数コマンドを内部から起動しない構成を優先する。
-
-## 実装上の注意
-
-- ルーティング変更では、`route.ts` と `reroute.ts` の責務を分ける。
-  - `route.ts`: 現在URLから何を描画するか。
-  - `reroute.ts`: 何をきっかけに再描画するか。
-- 内部リンクのSPA遷移は `document` のクリック監視で拾う。`#root` は描画ごとに差し替わるため、個別リンクへ毎回イベントを貼る設計に戻さない。
-- 外部リンクかどうかは、Markdown記法の段階ではなく `<a>` になってから `resolveExternalLinks` で判定する。`href` が `/`・`?`・`#` のどれでも始まらない `<a>` に `target="_blank" rel="noopener"` を付ける。
-  - `parseMarkdownLink` は `[]()` を `<a>` に変換するだけで判定しない。Works・Aboutでは `resolveExternalLinks(parseMarkdownLink(...))` と組み合わせる。
-  - ブログ記事はビルド時にmarkdown-itで `<a>` になっているので、`resolveExternalLinks` だけを通す。
-  - 手書きの `<a>` には `target` / `rel` を書かない（二重に付く）。`href` は最初の属性にする（`resolveExternalLinks` の正規表現が `<a href=` を前提にしている）。
-- HTMLごとに基準ディレクトリが違う。JSON、JS、CSSの相対パスに注意する。
-- canonical、OGP、descriptionなどのhead要素は、SSGとSPAの両方で破綻しないようにする。
-- `src/ssg.ts` はサーバーサイド専用。クライアント専用APIに依存するコードをimportしない。
-- 予約投稿は本番相当では `excludeReserved` で除外される。開発時はlocalhost判定で表示される。
-- `blog-card` はCustom Element。SSGではカードHTMLを事前埋め込みし、SPAでは `defineBlogCard` が定義する。
-- ESLint設定は `eslint.config.mjs` に集約されている。`import/order` はwarnで有効。
-
-## 編集方針
-
-- 既存のHTML文字列コンポーネントの書き方に合わせる。
-- 余計なフレームワークや大きな依存を追加しない。
-- 手作業で生成物を直すより、可能なら生成元を直す。
-- むやみに関数や変数に切り出すよりもインラインで書くほうを優先する。
-- ワンライナー寄りの簡潔なコードスタイルを採用する。
-- 関数型プログラミングのスタイルを採用する。変数の再代入は避け、ループよりも非破壊的な配列操作を優先する。
-
-## コードレビューの基本方針
-
-- GitHub PR上でレビューする場合は、まとめてコメントするだけで済ませず、当該の変更行へGitHubのPR上でインラインコメントを残してください。
-- レビュー依頼では、断りなくコミット・pushを行わないでください。レビューはレビューだけに留め、修正案はコメントとして提示してください。
-- ベストプラクティスの具体例を提示してください
-- 学習リソースの提案を積極的に行ってください
-- 以下のプレフィックスを使用してレビューコメントを分類してください：
-  - `[must]`：必須修正項目（セキュリティ、バグ、重大な設計問題）
-  - `[recommend]`：推奨修正項目（パフォーマンス、可読性の大幅改善）
-  - `[nits]`：軽微な指摘（コードスタイル、タイポ等）
+- GitHubのPRでは、該当する変更行にインラインコメントを付ける。
+- レビュー依頼ではコミット・pushをしない。修正案はコメントで示す。
+- ベストプラクティスの具体例と学習リソースを示す。
+- 指摘には `[must]`（セキュリティ、バグ、重大な設計問題）、`[recommend]`（性能、可読性の大きな改善）、`[nits]`（スタイル、タイポ）を付ける。
