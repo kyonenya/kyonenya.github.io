@@ -34,4 +34,5 @@ export const articlePage = (post: Post): Page => ({
   suffix: ` :: ${post.id}`,
   description: `${post.plainText.substring(0, 110)}…`,
   href: `${baseUrl}posts/${post.id}`,
+  enableSearchForm: false,
 });

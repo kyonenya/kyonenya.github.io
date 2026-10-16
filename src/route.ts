@@ -5,42 +5,35 @@ import { excludeReserved, type Post } from './post';
 import { renderPage, renderHead, baseUrl } from './render';
 import { toState } from './state';
 
-const searchInputElement =
-  document.querySelector<HTMLInputElement>('.el_search_input');
-
 const routeMap = {
-  article: (post: Post): void => {
-    renderPage(articlePage(post));
-    // disable search form
-    if (searchInputElement) searchInputElement.style.display = 'none';
-  },
-  postList: (posts: Post[]): void => {
+  article: (post: Post): void => renderPage(articlePage(post)),
+  ssgArticle: (post: Post): void => renderHead(articlePage(post)),
+  postList: (posts: Post[]): void =>
     renderPage({
       body: PostList(posts),
       title: 'placet experiri',
       href: baseUrl,
-    });
-    if (searchInputElement) searchInputElement.style.display = 'block';
-  },
-  ssgPostList: (): void => {
-    renderHead({ title: 'placet experiri', href: baseUrl });
-    if (searchInputElement) searchInputElement.style.display = 'block';
-  },
-  taggedPostList: (posts: Post[], tag: string): void => {
+      enableSearchForm: true,
+    }),
+  ssgPostList: (): void =>
+    renderHead({
+      title: 'placet experiri',
+      href: baseUrl,
+      enableSearchForm: true,
+    }),
+  taggedPostList: (posts: Post[], tag: string): void =>
     renderPage({
       body: TaggedPostList(posts, tag),
       title: `#${tag}｜placet experiri`,
       href: `${baseUrl}?tag=${tag}`,
-    });
-    if (searchInputElement) searchInputElement.style.display = 'block';
-  },
-  searchedPostList: (posts: Post[], keyword: string, tag?: string): void => {
+      enableSearchForm: true,
+    }),
+  searchedPostList: (posts: Post[], keyword: string, tag?: string): void =>
     renderPage({
       body: SearchedPostList(posts, keyword, tag),
       title: `「${keyword}」｜placet experiri`,
-    });
-    if (searchInputElement) searchInputElement.style.display = 'block';
-  },
+      enableSearchForm: true,
+    }),
 };
 
 export function route(rawPosts: Post[], isInitial = false): void {
@@ -57,7 +50,11 @@ export function route(rawPosts: Post[], isInitial = false): void {
   if (id !== null) {
     const post = posts.find((post) => post.id === id);
     if (!post) return; // TODO: 404
-    routeMap.article(post);
+    if (isInitial && document.querySelector('#root article')) {
+      routeMap.ssgArticle(post); // reuse SSG article as is
+    } else {
+      routeMap.article(post);
+    }
   } else if (keyword !== null) {
     routeMap.searchedPostList(posts, keyword, tag ?? undefined);
   } else if (tag !== null) {

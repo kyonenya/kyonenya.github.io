@@ -6,6 +6,7 @@ export type Page = {
   suffix?: string;
   description?: string;
   href?: string;
+  enableSearchForm: boolean;
 };
 
 export const baseUrl = 'https://kyonenya.github.io/';
@@ -35,8 +36,12 @@ export function renderHead(page: Omit<Page, 'body' | 'suffix'>): void {
   const descriptionElement = <HTMLMetaElement>(
     document.querySelector('meta[name=description]')
   );
+  const searchInputElement = <HTMLInputElement>(
+    document.querySelector('.el_search_input')
+  );
 
   document.title = page.title;
+  searchInputElement.style.display = page.enableSearchForm ? 'block' : 'none';
   if (page.description) {
     descriptionElement.content = page.description;
   }

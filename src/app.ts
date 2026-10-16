@@ -14,16 +14,17 @@ function recalcFromNow() {
   });
 }
 
-export async function app(rootDir = true): Promise<void> {
+export async function app(): Promise<void> {
   recalcFromNow();
 
-  const rootPath = rootDir ? '.' : '..';
-  const postsPath = `${rootPath}/posts.json`;
-  const aboutPath = `${rootPath}/about.json`;
+  // posts/N(.html) sits one level below the root
+  const rootPath = /\/posts\/\d+/.test(window.location.pathname) ? '..' : '.';
 
-  const posts = jsonToPosts(await fetcher<JSONPost[]>(postsPath));
-  if (rootDir) route(posts, true); // initial rendering
+  const posts = jsonToPosts(
+    await fetcher<JSONPost[]>(`${rootPath}/posts.json`),
+  );
+  route(posts, true); // initial rendering
   registerRerouter(() => route(posts));
   defineBlogCard(posts);
-  notifyUpdate(await fetcher<Notice[]>(aboutPath));
+  notifyUpdate(await fetcher<Notice[]>(`${rootPath}/about.json`));
 }
