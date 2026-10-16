@@ -7,9 +7,10 @@
     "issued": { "date-parts": [[2025, 9, 15]] },
     "publisher": "法政大学博士論文",
     "ISBN": "null",
+    "DOI": "10.15002/00031852",
     "URL": "",
-    "note": "[要旨と審査結果](https://doi.org/10.15002/00031852) [図書館](http://opac.lib.hosei.ac.jp/opac/opac_link/bibid/1400554897)",
-    "_bibliographyText": "京念屋隆史（2025）『想像と観入の現象学——知覚と想像の差異をめぐって』法政大学博士論文. [要旨と審査結果](https://doi.org/10.15002/00031852) [図書館](http://opac.lib.hosei.ac.jp/opac/opac_link/bibid/1400554897)"
+    "note": "[要旨と審査結果](https://hosei.ecats-library.jp/da/repository/00031852) [図書館](http://opac.lib.hosei.ac.jp/opac/opac_link/bibid/1400554897)",
+    "_bibliographyText": "京念屋隆史（2025）『想像と観入の現象学——知覚と想像の差異をめぐって』法政大学博士論文. [要旨と審査結果](https://hosei.ecats-library.jp/da/repository/00031852) [図書館](http://opac.lib.hosei.ac.jp/opac/opac_link/bibid/1400554897)"
   },
   {
     "id": 8,
@@ -35,9 +36,10 @@
     "issue": 89,
     "page": "10–19",
     "ISSN": "0387-2610",
-    "URL": "http://doi.org/10.15002/00026025",
+    "DOI": "10.15002/00026025",
+    "URL": "https://hosei.ecats-library.jp/da/repository/00026057",
     "note": null,
-    "_bibliographyText": "京念屋隆史（2022）「サルトル想像論における「準観察」のテーゼ——想像と知覚の差異について」『法政大学大学院紀要』(89): 10–19. [PDF](http://doi.org/10.15002/00026025)"
+    "_bibliographyText": "京念屋隆史（2022）「サルトル想像論における「準観察」のテーゼ——想像と知覚の差異について」『法政大学大学院紀要』(89): 10–19. [PDF](https://hosei.ecats-library.jp/da/repository/00026057)"
   },
   {
     "id": 6,
@@ -96,9 +98,10 @@
     "issue": 46,
     "page": "151–167",
     "ISSN": "0916-2208",
-    "URL": "https://doi.org/10.69219/wakateforum.2019.46_151",
+    "DOI": "10.69219/wakateforum.2019.46_151",
+    "URL": "https://www.jstage.jst.go.jp/article/wakateforum/2019/46/2019_9/_article/-char/ja",
     "note": null,
-    "_bibliographyText": "京念屋隆史（2019）「なぜ時間と変化は不可分なのか——フッサール初期時間論における「絶対的意識流」の比喩」『哲学の探求』(46): 151–167. [PDF](https://doi.org/10.69219/wakateforum.2019.46_151)"
+    "_bibliographyText": "京念屋隆史（2019）「なぜ時間と変化は不可分なのか——フッサール初期時間論における「絶対的意識流」の比喩」『哲学の探求』(46): 151–167. [PDF](https://www.jstage.jst.go.jp/article/wakateforum/2019/46/2019_9/_article/-char/ja)"
   },
   {
     "id": 2,
