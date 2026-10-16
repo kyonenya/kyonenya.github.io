@@ -2,7 +2,7 @@ import { articlePage } from './Article';
 import { PostList, TaggedPostList, SearchedPostList } from './PostList';
 import { isDevelopment } from './lib/utils';
 import { excludeReserved, type Post } from './post';
-import { renderPage, baseUrl } from './render';
+import { renderPage, renderHead, baseUrl } from './render';
 import { toState } from './state';
 
 const searchInputElement =
@@ -22,6 +22,10 @@ const routeMap = {
     });
     if (searchInputElement) searchInputElement.style.display = 'block';
   },
+  ssgPostList: (): void => {
+    renderHead({ title: 'placet experiri', href: baseUrl });
+    if (searchInputElement) searchInputElement.style.display = 'block';
+  },
   taggedPostList: (posts: Post[], tag: string): void => {
     renderPage({
       body: TaggedPostList(posts, tag),
@@ -39,7 +43,7 @@ const routeMap = {
   },
 };
 
-export function route(rawPosts: Post[]): void {
+export function route(rawPosts: Post[], isInitial = false): void {
   const { id, tag, keyword } = toState(
     window.location.search,
     window.location.pathname,
@@ -58,6 +62,11 @@ export function route(rawPosts: Post[]): void {
     routeMap.searchedPostList(posts, keyword, tag ?? undefined);
   } else if (tag !== null) {
     routeMap.taggedPostList(posts, tag);
+  } else if (
+    isInitial &&
+    document.querySelectorAll('.bl_postList_item').length === posts.length
+  ) {
+    routeMap.ssgPostList(); // reuse SSG list as is
   } else {
     routeMap.postList(posts);
   }

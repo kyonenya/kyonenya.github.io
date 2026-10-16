@@ -4,6 +4,7 @@
 
 - GitHub Pages向けのVanilla TypeScript MPA + 自作SSGサイト。
 - React等は使っていない。HTML文字列を生成して `#root` に描画する設計。
+- `index.html` と `posts/*.html` はSSGの生成物。手で編集するのは `index.template.html` と `post.template.html`。
 
 ## Code App（iOS）で起きた失敗
 

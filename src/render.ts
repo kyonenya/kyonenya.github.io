@@ -31,17 +31,12 @@ export function renderRoot(html: string): void {
   }
 }
 
-export function renderPage(page: Page): void {
-  const suffixElement = <HTMLSpanElement>(
-    document.querySelector('.el_logo_suffix')
-  );
+export function renderHead(page: Omit<Page, 'body' | 'suffix'>): void {
   const descriptionElement = <HTMLMetaElement>(
     document.querySelector('meta[name=description]')
   );
 
-  renderRoot(page.body);
   document.title = page.title;
-  suffixElement.innerText = page.suffix ?? '';
   if (page.description) {
     descriptionElement.content = page.description;
   }
@@ -54,4 +49,14 @@ export function renderPage(page: Page): void {
     link.href = page.href;
     document.head.appendChild(link);
   }
+}
+
+export function renderPage(page: Page): void {
+  const suffixElement = <HTMLSpanElement>(
+    document.querySelector('.el_logo_suffix')
+  );
+
+  renderRoot(page.body);
+  suffixElement.innerText = page.suffix ?? '';
+  renderHead(page);
 }
