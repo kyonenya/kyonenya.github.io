@@ -14,8 +14,12 @@ export function formatYMDHm(date: Date): string {
   return `${year}-${pad2(month)}-${pad2(day)} ${hours}:${pad2(minutes)}`;
 }
 
+export function compareAsc(a: Date, b: Date): number {
+  return a.getTime() - b.getTime();
+}
+
 function isBefore(date: Date, limitDate: Date): boolean {
-  return date.getTime() < limitDate.getTime();
+  return compareAsc(date, limitDate) < 0;
 }
 
 export function isPast(date: Date): boolean {
