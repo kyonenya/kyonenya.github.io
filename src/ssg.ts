@@ -2,9 +2,9 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { articlePage } from './Article';
 import { BlogCard } from './BlogCard';
 import { PostList } from './PostList';
+import { articlePage } from './pages';
 import { excludeReserved, jsonToPosts } from './post';
 import type { JSONPost, Post } from './post';
 

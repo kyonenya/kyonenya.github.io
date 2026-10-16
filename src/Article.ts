@@ -3,9 +3,8 @@ import { resolveExternalLinks } from './lib/Link';
 import { MarkupText, kerningDoubleDash } from './lib/MarkupText';
 import { formatYMDHm, fromNow } from './lib/dateUtils';
 import type { Post } from './post';
-import { baseUrl, type Page } from './render';
 
-const Article = (post: Post): string => `
+export const Article = (post: Post): string => `
   <section class="ly_container">
     <article>
       <header class="bl_text_header">
@@ -25,14 +24,3 @@ const Article = (post: Post): string => `
       </footer>
     </article>
   </section>`;
-
-export const articlePage = (post: Post): Page => ({
-  body: Article(post),
-  title: post.title
-    ? `${post.title}｜placet experiri :: ${post.id}`
-    : `placet experiri :: ${post.id}`,
-  suffix: ` :: ${post.id}`,
-  description: `${post.plainText.substring(0, 110)}…`,
-  href: `${baseUrl}posts/${post.id}`,
-  enableSearchForm: false,
-});

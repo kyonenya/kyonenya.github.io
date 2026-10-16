@@ -1,15 +1,5 @@
-import { isDevelopment } from './lib/utils';
-
-export type Page = {
-  body: string;
-  title: string;
-  suffix?: string;
-  description?: string;
-  href?: string;
-  enableSearchForm: boolean;
-};
-
-export const baseUrl = 'https://kyonenya.github.io/';
+import { baseUrl, isDevelopment } from './lib/utils';
+import type { Head, Page } from './pages';
 
 export function renderRoot(html: string): void {
   const rootElement = <HTMLDivElement>document.getElementById('root');
@@ -32,7 +22,7 @@ export function renderRoot(html: string): void {
   }
 }
 
-export function renderHead(page: Omit<Page, 'body' | 'suffix'>): void {
+export function renderHead(head: Head): void {
   const descriptionElement = <HTMLMetaElement>(
     document.querySelector('meta[name=description]')
   );
@@ -40,18 +30,18 @@ export function renderHead(page: Omit<Page, 'body' | 'suffix'>): void {
     document.querySelector('.el_search_input')
   );
 
-  document.title = page.title;
-  searchInputElement.style.display = page.enableSearchForm ? 'block' : 'none';
-  if (page.description) {
-    descriptionElement.content = page.description;
+  document.title = head.title;
+  searchInputElement.style.display = head.enableSearchForm ? 'block' : 'none';
+  if (head.description) {
+    descriptionElement.content = head.description;
   }
-  if (page.href) {
+  if (head.href) {
     document
       .querySelectorAll('link[rel="canonical"]')
       .forEach((link) => link.remove());
     const link = document.createElement('link');
     link.rel = 'canonical';
-    link.href = page.href;
+    link.href = head.href;
     document.head.appendChild(link);
   }
 }
