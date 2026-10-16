@@ -33,9 +33,8 @@ export const PostListItem = (props: {
   post: Post;
   tag?: string;
   keyword?: string;
-  ssg?: boolean;
 }): string => {
-  const { post, tag, keyword, ssg } = props;
+  const { post, tag, keyword } = props;
   const searchSummary = generateSummary(post.plainText, keyword, {
     maxLength: 200,
     beforeLength: 48,
@@ -64,7 +63,7 @@ export const PostListItem = (props: {
       </a>
       <footer class="bl_postList_footer">
         <span class="bl_postList_dateago" data-date="${post.createdAt.toISOString()}">
-          ${ssg ? formatYMD(post.createdAt) : fromNow(post.createdAt)}
+          ${fromNow(post.createdAt)}
         </span>
         ${TagList(post.tags, tag)}
       </footer>

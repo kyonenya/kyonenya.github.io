@@ -16,7 +16,7 @@ const indexTemplatePath = path.resolve(rootDir, 'index.template.html');
 const distDir = path.resolve(rootDir, 'posts');
 
 function createTemplateValues(post: Post): Record<string, string> {
-  const page = articlePage(post, true);
+  const page = articlePage(post);
   return {
     PAGE_BODY: page.body,
     PAGE_TITLE: page.title,
@@ -51,7 +51,7 @@ export async function generateStaticHtml(jsonPosts: JSONPost[]): Promise<void> {
     writeFile(
       path.resolve(rootDir, 'index.html'),
       indexTemplate.replace('{{PAGE_BODY}}', () =>
-        PostList(excludeReserved(posts), true),
+        PostList(excludeReserved(posts)),
       ),
       'utf8',
     ),

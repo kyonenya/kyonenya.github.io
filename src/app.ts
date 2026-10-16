@@ -6,7 +6,7 @@ import { jsonToPosts, type JSONPost } from './post';
 import { registerRerouter } from './reroute';
 import { route } from './route';
 
-function hydrateFromNow() {
+function recalcFromNow() {
   document.querySelectorAll('[data-date]').forEach((el) => {
     const dateStr = el.getAttribute('data-date');
     if (!dateStr) return;
@@ -15,7 +15,7 @@ function hydrateFromNow() {
 }
 
 export async function app(rootDir = true): Promise<void> {
-  hydrateFromNow();
+  recalcFromNow();
 
   const rootPath = rootDir ? '.' : '..';
   const postsPath = `${rootPath}/posts.json`;

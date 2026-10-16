@@ -13,10 +13,10 @@ const Container = (listItems: string, archiveHeaderText?: string) => `
     </ul>
   </section>`;
 
-export const PostList = (posts: Post[], ssg?: boolean): string =>
+export const PostList = (posts: Post[]): string =>
   Container(
     posts
-      .map((post, i) => PostListItem({ post: posts[i], ssg }))
+      .map((post, i) => PostListItem({ post: posts[i] }))
       .reverse()
       .join(''),
   );
