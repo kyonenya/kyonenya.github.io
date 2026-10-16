@@ -1,4 +1,4 @@
-import { parseMarkdownLink, toExternalLink } from '../lib/ExternalLink';
+import { parseMarkdownLink, markExternalLinks } from '../lib/Link';
 import { kerningDoubleDash } from '../lib/MarkupText';
 import type { Notice } from '../notify';
 
@@ -8,7 +8,7 @@ const NoticeItem = ({ date, body }: Notice): string => `
       <time class="bl_postList_date">${date}</time>
     </header>
     <div class="bl_text">
-      ${toExternalLink(parseMarkdownLink(kerningDoubleDash(body)))}
+      ${markExternalLinks(parseMarkdownLink(kerningDoubleDash(body)))}
     </div>
   </li>
 `;

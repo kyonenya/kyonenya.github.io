@@ -1,10 +1,10 @@
-import { parseMarkdownLink, toExternalLink } from '../lib/ExternalLink';
+import { parseMarkdownLink, markExternalLinks } from '../lib/Link';
 import { kerningDoubleDash } from '../lib/MarkupText';
 import { toCitationMap, type Citation, Genre } from './citation';
 import { isUnpublished } from './citationDate';
 
 const Text = (text: string): string =>
-  toExternalLink(parseMarkdownLink(kerningDoubleDash(text)));
+  markExternalLinks(parseMarkdownLink(kerningDoubleDash(text)));
 
 const BoldText = (text: string) => `<b>${Text(text)}</b>`;
 

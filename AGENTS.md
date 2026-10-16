@@ -90,10 +90,10 @@ webpackのentryは `index`、`works`、`about`、`hydrate` の4種類。
   - `route.ts`: 現在URLから何を描画するか。
   - `reroute.ts`: 何をきっかけに再描画するか。
 - 内部リンクのSPA遷移は `document` のクリック監視で拾う。`#root` は描画ごとに差し替わるため、個別リンクへ毎回イベントを貼る設計に戻さない。
-- 外部リンクかどうかは、Markdown記法の段階ではなく `<a>` になってから `toExternalLink` で判定する。`href` が `/`・`?`・`#` のどれでも始まらない `<a>` に `target="_blank" rel="noopener"` を付ける。
-  - `parseMarkdownLink` は `[]()` を `<a>` に変換するだけで判定しない。Works・Aboutでは `toExternalLink(parseMarkdownLink(...))` と組み合わせる。
-  - ブログ記事はビルド時にmarkdown-itで `<a>` になっているので、`toExternalLink` だけを通す。
-  - 手書きの `<a>` には `target` / `rel` を書かない（二重に付く）。`href` は最初の属性にする（`toExternalLink` の正規表現が `<a href=` を前提にしている）。
+- 外部リンクかどうかは、Markdown記法の段階ではなく `<a>` になってから `markExternalLinks` で判定する。`href` が `/`・`?`・`#` のどれでも始まらない `<a>` に `target="_blank" rel="noopener"` を付ける。
+  - `parseMarkdownLink` は `[]()` を `<a>` に変換するだけで判定しない。Works・Aboutでは `markExternalLinks(parseMarkdownLink(...))` と組み合わせる。
+  - ブログ記事はビルド時にmarkdown-itで `<a>` になっているので、`markExternalLinks` だけを通す。
+  - 手書きの `<a>` には `target` / `rel` を書かない（二重に付く）。`href` は最初の属性にする（`markExternalLinks` の正規表現が `<a href=` を前提にしている）。
 - HTMLごとに基準ディレクトリが違う。JSON、JS、CSSの相対パスに注意する。
 - canonical、OGP、descriptionなどのhead要素は、SSGとSPAの両方で破綻しないようにする。
 - `src/ssg.ts` はサーバーサイド専用。クライアント専用APIに依存するコードをimportしない。
