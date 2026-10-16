@@ -7,7 +7,7 @@ const ExternalLink = (props: {
   return `<a href="${href}" target="_blank" rel="noopener" ${attributes}>${content}</a>`;
 };
 
-export function markExternalLinks(html: string): string {
+export function resolveExternalLinks(html: string): string {
   return html.replaceAll(
     /<a href=['"]([^?/#].+?)['"](.*?)>(.+?)<\/a>/g, // except href start with '?', '/' or '#'
     (_, href: string, attributes: string, content: string) =>

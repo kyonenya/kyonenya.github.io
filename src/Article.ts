@@ -1,5 +1,5 @@
 import { TagList } from './TagList';
-import { markExternalLinks } from './lib/Link';
+import { resolveExternalLinks } from './lib/Link';
 import { MarkupText, kerningDoubleDash } from './lib/MarkupText';
 import { formatYMDHm, formatYMD, fromNow } from './lib/dateUtils';
 import type { Post } from './post';
@@ -15,7 +15,7 @@ const Article = (post: Post, ssg?: boolean): string => `
       </header>
       <div class="bl_text">
         ${post.title ? `<h1>${kerningDoubleDash(post.title)}</h1>` : ''}
-        ${MarkupText(markExternalLinks(post.text))}
+        ${MarkupText(resolveExternalLinks(post.text))}
       </div>
       <footer class="bl_text_footer">
         <span class="bl_posts_dateago" data-date="${post.createdAt.toISOString()}">
