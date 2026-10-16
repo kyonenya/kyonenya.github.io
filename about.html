@@ -13,8 +13,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="このサイト“placet experiri”についての説明とお知らせ" />
   <link rel="canonical" href="https://kyonenya.github.io/about" />
-  <!-- CSS -->
+  <!-- JS・CSS -->
   <link href="./dist/css/bundle.css" media="all" rel="stylesheet" type="text/css" />
+  <script type="module" src="./dist/about.js"></script>
   <!-- アイコン -->
   <link rel="icon" href="./assets/icons/favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="./assets/icons/apple-touch-icon-180x180.png" />
@@ -50,16 +51,7 @@
   <main> 
   <section class="ly_container">
     <h2 class="el_heading2">お知らせ</h2>
-    <ul class="bl_postList">
-      <li class="bl_postList_item">
-        <header class="bl_postList_header">
-          <time class="bl_postList_date">2026-10-16</time>
-        </header>
-        <div class="bl_text">
-          <p>Worksページに<a href="https://kyonenya.github.io/works#10">発表予定</a>とその要旨を追加しました。</p>
-        </div>
-      </li>
-    </ul>
+    <ul class="bl_postList" id="notices"></ul>
     <h2 class="el_heading2">このサイトについて</h2>
     <div class="bl_text">
       <p>言ってみただけ。哲学と哲学以外のことを書くテキストサイト。</p>
@@ -67,82 +59,10 @@
         <li>リンク・引用などは自由です</li>
         <li>ご連絡は <span class="hp_underline">kyonenya.takashiアットマークgmail.com</span> まで</li>
         <li>当サイトの技術的なことについては <a href="https://github.com/kyonenya/kyonenya.github.io">GitHubリポジトリ</a> を参照してください</li>
-        <ul>
-          <li>当サイトはアクセス解析ツール「Google Analytics」を使用しています</li>
-        </ul>
       </ul>
     </div><!-- ./bl_text -->
     <h2 class="el_heading2">過去のお知らせ</h2>
-    <ul class="bl_postList">
-      <li class="bl_postList_item">
-        <header class="bl_postList_header">
-          <time class="bl_postList_date">2025-09-25</time>
-        </header>
-        <div class="bl_text">
-          <p>Worksページに<a href="https://kyonenya.github.io/works#9">博士論文</a>とその要旨を追加しました。</p>
-        </div>
-      </li>
-      <li class="bl_postList_item">
-        <header class="bl_postList_header">
-          <time class="bl_postList_date">2025-06-01</time>
-        </header>
-        <div class="bl_text">
-          <p>
-            <a href="https://kyonenya.github.io/works#8">同人誌</a>を作って<a href="https://bunfree.net/event/tokyo41#i-0" class="hp_unsetLink hp_underline" target="_blank" rel="noopener">文学フリマ東京41</a>（11月23日、東京ビックサイト）にて頒布します。X のアカウントも開設しました。<a href="https://x.com/kyonenya" target="_blank" rel="noopener">@kyonenya</a>
-          </p>
-        </div>
-      </li>
-      <li class="bl_postList_item">
-        <header class="bl_postList_header">
-          <time class="bl_postList_date">2023-01-22</time>
-        </header>
-        <div class="bl_text">
-          <p>
-            Worksページに<a href="https://kyonenya.github.io/works#7">最近の論文</a>と<a href="https://kyonenya.github.io/works#5">過去の論文</a>のPDFリンクを追加しました。
-          </p>
-        </div>
-      </li>
-      <li class="bl_postList_item">
-        <header class="bl_postList_header">
-          <time class="bl_postList_date">2022-02-02</time>
-        </header>
-        <div class="bl_text">
-          <p>永井均『遺稿焼却問題<span class="hp_kerning">——</span>哲学日記2014-2021』（ぷねうま舎、53頁〜）にて拙論「<a href="https://kyonenya.github.io/works#1">言語行為の根源的演技性</a>」に言及していただきました。<a href="https://www.pneumasha.com/2021/12/13/%E9%81%BA%E7%A8%BF%E7%84%BC%E5%8D%B4%E5%95%8F%E9%A1%8C/" target="_blank" rel="noopener">出版社ページ</a></p>
-        </div>
-      </li>
-      <li class="bl_postList_item">
-        <header class="bl_postList_header">
-          <time class="bl_postList_date">2021-11-28</time>
-        </header>
-        <div class="bl_text">
-          <p>Worksページに<a href="https://kyonenya.github.io/works#5">既刊論文</a>と<a href="https://kyonenya.github.io/works#6">刊行予定の翻訳</a>を追加しました。</p>
-        </div>
-      </li>
-      <li class="bl_postList_item">
-        <header class="bl_postList_header">
-          <time class="bl_postList_date">2020-12-05</time>
-        </header>
-        <div class="bl_text">
-          <p>Worksページに<a href="https://kyonenya.github.io/works#4">発表原稿</a>をアップしました。</p>
-        </div>
-      </li>
-      <li class="bl_postList_item">
-        <header class="bl_postList_header">
-          <time class="bl_postList_date">2020-06-12</time>
-        </header>
-        <div class="bl_text">
-          <p><a href="https://kyonenya.github.io/works">Works</a>ページを追加しました。</p>
-        </div>
-      </li>
-      <li class="bl_postList_item">
-        <header class="bl_postList_header">
-          <time class="bl_postList_date">2020-04-05</time>
-        </header>
-        <div class="bl_text">
-          <p>ウェブサイトを公開しました。</p>
-        </div>
-      </li>
-    </ul>
+    <ul class="bl_postList" id="pastNotices"></ul>
   </section>
   </main> 
   <footer class="ly_footer">

@@ -7,17 +7,14 @@ const ExternalLink = (props: {
   return `<a href="${href}" target="_blank" rel="noopener" ${attributes}>${content}</a>`;
 };
 
-export function toExternalLink(html: string): string {
+export function resolveExternalLinks(html: string): string {
   return html.replaceAll(
-    /<a href=['"]([^?/].+?)['"](.*?)>(.+?)<\/a>/g, // href start with '?' or '/'
+    /<a href=['"]([^?/#].+?)['"](.*?)>(.+?)<\/a>/g, // except href start with '?', '/' or '#'
     (_, href: string, attributes: string, content: string) =>
       ExternalLink({ href, attributes, content }),
   );
 }
 
 export function parseMarkdownLink(text: string): string {
-  return text.replaceAll(
-    /\[(.+?)\]\((.+?)\)/g,
-    (_, content: string, href: string) => ExternalLink({ content, href }),
-  );
+  return text.replaceAll(/\[(.+?)\]\((.+?)\)/g, '<a href="$2">$1</a>');
 }

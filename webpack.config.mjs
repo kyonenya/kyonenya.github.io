@@ -10,6 +10,7 @@ export default {
   entry: {
     index: path.join(dirname, 'src', 'index.ts'),
     works: path.join(dirname, 'src', 'works', 'index.ts'),
+    about: path.join(dirname, 'src', 'about', 'index.ts'),
     hydrate: path.join(dirname, 'src', 'hydrate.ts'),
   },
   output: {
