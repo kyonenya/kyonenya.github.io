@@ -59,7 +59,7 @@
   line-height: 1.25em; /* height of divider */
   text-align: center;
   color: var(--main-primary);
-  font-size: 110%;
+  font-size: 117%;
 }
 
 @media screen and (min-width: 560px) {
