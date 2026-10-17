@@ -20,8 +20,8 @@ export async function app(): Promise<void> {
   const posts = jsonToPosts(
     await fetcher<JSONPost[]>(`${rootPath}/posts.json`),
   );
-  route(posts, true); // initial rendering
-  registerRerouter(() => route(posts));
+  route(posts);
+  registerRerouter(() => route(posts, true)); // ignore SSG and refresh
   defineBlogCard(posts);
   notifyUpdate(await fetcher<Notice[]>(`${rootPath}/about.json`));
 }

@@ -11,7 +11,7 @@ import { excludeReserved, type Post } from './post';
 import { renderPage, renderHead } from './render';
 import { toState } from './state';
 
-export function route(rawPosts: Post[], isInitial = false): void {
+export function route(rawPosts: Post[], forceRerender = false): void {
   const { id, tag, keyword } = toState(
     window.location.search,
     window.location.pathname,
@@ -25,7 +25,7 @@ export function route(rawPosts: Post[], isInitial = false): void {
   if (id !== null) {
     const post = posts.find((post) => post.id === id);
     if (!post) return; // TODO: 404
-    if (isInitial && document.querySelector('#root article')) {
+    if (!forceRerender && document.querySelector('#root article')) {
       renderHead(articleHead(post)); // reuse SSG article as is
     } else {
       renderPage(articlePage(post));
@@ -35,7 +35,7 @@ export function route(rawPosts: Post[], isInitial = false): void {
   } else if (tag !== null) {
     renderPage(taggedPostListPage(posts, tag));
   } else if (
-    isInitial &&
+    !forceRerender &&
     document.querySelectorAll('.bl_postList_item').length === posts.length
   ) {
     renderHead(postListHead); // reuse SSG list as is
