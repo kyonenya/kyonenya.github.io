@@ -1,45 +1,17 @@
-import { articlePage } from './Article';
-import { PostList, TaggedPostList, SearchedPostList } from './PostList';
 import { isDevelopment } from './lib/utils';
+import {
+  articleHead,
+  articlePage,
+  postListHead,
+  postListPage,
+  taggedPostListPage,
+  searchedPostListPage,
+} from './pages';
 import { excludeReserved, type Post } from './post';
-import { renderPage, baseUrl } from './render';
+import { renderPage, renderHead } from './render';
 import { toState } from './state';
 
-const searchInputElement =
-  document.querySelector<HTMLInputElement>('.el_search_input');
-
-const routeMap = {
-  article: (post: Post): void => {
-    renderPage(articlePage(post));
-    // disable search form
-    if (searchInputElement) searchInputElement.style.display = 'none';
-  },
-  postList: (posts: Post[]): void => {
-    renderPage({
-      body: PostList(posts),
-      title: 'placet experiri',
-      href: baseUrl,
-    });
-    if (searchInputElement) searchInputElement.style.display = 'block';
-  },
-  taggedPostList: (posts: Post[], tag: string): void => {
-    renderPage({
-      body: TaggedPostList(posts, tag),
-      title: `#${tag}｜placet experiri`,
-      href: `${baseUrl}?tag=${tag}`,
-    });
-    if (searchInputElement) searchInputElement.style.display = 'block';
-  },
-  searchedPostList: (posts: Post[], keyword: string, tag?: string): void => {
-    renderPage({
-      body: SearchedPostList(posts, keyword, tag),
-      title: `「${keyword}」｜placet experiri`,
-    });
-    if (searchInputElement) searchInputElement.style.display = 'block';
-  },
-};
-
-export function route(rawPosts: Post[]): void {
+export function route(rawPosts: Post[], forceRerender = false): void {
   const { id, tag, keyword } = toState(
     window.location.search,
     window.location.pathname,
@@ -53,12 +25,21 @@ export function route(rawPosts: Post[]): void {
   if (id !== null) {
     const post = posts.find((post) => post.id === id);
     if (!post) return; // TODO: 404
-    routeMap.article(post);
+    if (!forceRerender && document.querySelector('#root article')) {
+      renderHead(articleHead(post)); // reuse SSG article as is
+    } else {
+      renderPage(articlePage(post));
+    }
   } else if (keyword !== null) {
-    routeMap.searchedPostList(posts, keyword, tag ?? undefined);
+    renderPage(searchedPostListPage(posts, keyword, tag ?? undefined));
   } else if (tag !== null) {
-    routeMap.taggedPostList(posts, tag);
+    renderPage(taggedPostListPage(posts, tag));
+  } else if (
+    !forceRerender &&
+    document.querySelectorAll('.bl_postList_item').length === posts.length
+  ) {
+    renderHead(postListHead); // reuse SSG list as is
   } else {
-    routeMap.postList(posts);
+    renderPage(postListPage(posts));
   }
 }

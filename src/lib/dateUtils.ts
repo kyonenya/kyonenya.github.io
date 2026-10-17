@@ -41,9 +41,14 @@ const thresholdMap: DateParts = {
   year: Infinity,
 };
 
-const relativeTimeIntl = new Intl.RelativeTimeFormat('ja-JP', {
-  style: 'narrow',
-});
+const unitLabelMap: Record<keyof DateParts, string> = {
+  seconds: '秒',
+  minutes: '分',
+  hours: '時間',
+  day: '日',
+  month: 'か月',
+  year: '年',
+};
 
 export function fromNow(date: Date): string {
   const diffMs = date.getTime() - new Date().getTime();
@@ -51,5 +56,9 @@ export function fromNow(date: Date): string {
     (unit) => Math.abs(toUnitTime(diffMs, unit)) < thresholdMap[unit],
   );
   if (!unit) return '';
-  return relativeTimeIntl.format(Math.round(toUnitTime(diffMs, unit)), unit);
+  return (
+    Math.abs(Math.round(toUnitTime(diffMs, unit))) +
+    unitLabelMap[unit] +
+    (diffMs < 0 ? '前' : '後')
+  );
 }

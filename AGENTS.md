@@ -4,6 +4,8 @@
 
 - GitHub Pages向けのVanilla TypeScript MPA + 自作SSGサイト。
 - React等は使っていない。HTML文字列を生成して `#root` に描画する設計。
+- `index.html` と `posts/*.html` はSSGの生成物。手で編集するのは共通テンプレートの `template.html`。
+- HTMLを `file://` で直接開いても動くように、JS・CSS・JSONは相対パスで読む（`posts/[id].html` からは `../`）。`/posts.json` のような絶対パスにすると `file:///posts.json` を読みに行って壊れる。
 
 ## Code App（iOS）で起きた失敗
 
@@ -12,6 +14,7 @@
 - `ts-node/register` が `ERR_DOMAIN_CALLBACK_NOT_AVAILABLE` で落ちた（`process.setUncaughtExceptionCaptureCallback()` が有効なまま起動し、`domain` と共存できない）。サーバー側TSは `jiti` で読む。
 - `WebAssembly` が未定義で、webpack既定の `md4` ハッシュが `ReferenceError: WebAssembly is not defined` で落ちた。`webpack.config.mjs` の `output.hashFunction: 'sha256'` を外さない。古いwebpackではOpenSSL 3で `ERR_OSSL_EVP_UNSUPPORTED` にもなるので、webpack系を古い版へ戻したらCode Appで再確認する。
 - Nodeの `child_process.spawn()` が `spawn EPERM` で落ちた。Nodeから外部CLIや別プロセスを起動する構成にしない。
+- `Intl.RelativeTimeFormat('ja-JP')` が日本語のロケールデータを持たず、「2日前」が「2 days ago」になった。SSGで使う文字列の整形に `Intl` を使わない（`fromNow` は単位の対応表で組み立てている）。
 
 ## コードスタイル
 

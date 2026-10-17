@@ -62,7 +62,7 @@ export const PostListItem = (props: {
         }
       </a>
       <footer class="bl_postList_footer">
-        <span class="bl_postList_dateago">
+        <span class="bl_postList_dateago" data-date="${post.createdAt.toISOString()}">
           ${fromNow(post.createdAt)}
         </span>
         ${TagList(post.tags, tag)}

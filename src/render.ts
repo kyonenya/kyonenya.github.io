@@ -1,14 +1,4 @@
-import { isDevelopment } from './lib/utils';
-
-export type Page = {
-  body: string;
-  title: string;
-  suffix?: string;
-  description?: string;
-  href?: string;
-};
-
-export const baseUrl = 'https://kyonenya.github.io/';
+import type { Head, Page } from './pages';
 
 export function renderRoot(html: string): void {
   const rootElement = <HTMLDivElement>document.getElementById('root');
@@ -20,14 +10,29 @@ export function renderRoot(html: string): void {
   } else {
     window.scrollTo(0, 0);
   }
+}
 
-  if (isDevelopment(window.location.href)) {
-    // overwrite to internal link
+export function renderHead(head: Head): void {
+  const descriptionElement = <HTMLMetaElement>(
+    document.querySelector('meta[name=description]')
+  );
+  const searchInputElement = <HTMLInputElement>(
+    document.querySelector('.el_search_input')
+  );
+
+  document.title = head.title;
+  searchInputElement.style.display = head.enableSearchForm ? 'block' : 'none';
+  if (head.description) {
+    descriptionElement.content = head.description;
+  }
+  if (head.href) {
     document
-      .querySelectorAll<HTMLAnchorElement>(`a[href^="${baseUrl}"]`)
-      .forEach((a) => {
-        a.href = '/' + a.href.replace(baseUrl, '');
-      });
+      .querySelectorAll('link[rel="canonical"]')
+      .forEach((link) => link.remove());
+    const link = document.createElement('link');
+    link.rel = 'canonical';
+    link.href = head.href;
+    document.head.appendChild(link);
   }
 }
 
@@ -35,23 +40,8 @@ export function renderPage(page: Page): void {
   const suffixElement = <HTMLSpanElement>(
     document.querySelector('.el_logo_suffix')
   );
-  const descriptionElement = <HTMLMetaElement>(
-    document.querySelector('meta[name=description]')
-  );
 
   renderRoot(page.body);
-  document.title = page.title;
   suffixElement.innerText = page.suffix ?? '';
-  if (page.description) {
-    descriptionElement.content = page.description;
-  }
-  if (page.href) {
-    document
-      .querySelectorAll('link[rel="canonical"]')
-      .forEach((link) => link.remove());
-    const link = document.createElement('link');
-    link.rel = 'canonical';
-    link.href = page.href;
-    document.head.appendChild(link);
-  }
+  renderHead(page);
 }

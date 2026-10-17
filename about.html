@@ -36,14 +36,14 @@
   <header class="ly_header">
     <div class="ly_header_inner">
       <h1 class="el_logo">
-        <a href="https://kyonenya.github.io/" class="el_logo_title">placet experiri</a>
+        <a href="/" class="el_logo_title">placet experiri</a>
         <span class="el_logo_suffix"></span>
       </h1>
       <nav class="bl_nav">
         <ul class="bl_nav_inner">
-          <li><a href="https://kyonenya.github.io/">Home</a></li>
-          <li><a href="https://kyonenya.github.io/works">Works</a></li>
-          <li><a href="https://kyonenya.github.io/about">About</a></li>
+          <li><a href="/">Home</a></li>
+          <li><a href="/works">Works</a></li>
+          <li><a href="/about">About</a></li>
         </ul>
       </nav>
     </div><!-- /.ly_header_inner -->
@@ -68,19 +68,9 @@
   <footer class="ly_footer">
     <div class="ly_footer_inner">
       <p class="el_footerCopyright">
-        &copy; 2020- <a href="https://kyonenya.github.io/about">kyonenya</a>
+        &copy; 2020- <a href="/about">kyonenya</a>
       </p>
     </div><!-- ./ly_footer_inner -->
   </footer>
-  <script>
-    if (/localhost:\d+/.test(window.location.href)) {
-      const baseUrl = 'https://kyonenya.github.io/';
-      document
-      .querySelectorAll(`a[href^="${baseUrl}"]`)
-      .forEach((a) => {
-        a.href = '/' + a.href.replace(baseUrl, '');
-      });
-    }
-  </script>
 </body>
 </html>

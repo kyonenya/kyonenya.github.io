@@ -14,12 +14,12 @@
   <meta name="description" content="{{PAGE_DESCRIPTION}}" />
   <link rel="canonical" href="{{PAGE_HREF}}">
   <!-- JS・CSS -->
-  <link href="../dist/css/bundle.css" media="all" rel="stylesheet" type="text/css" />
-  <script type="module" src="../dist/hydrate.js"></script>
+  <link href="{{ROOT_PATH}}/dist/css/bundle.css" media="all" rel="stylesheet" type="text/css" />
+  <script type="module" src="{{ROOT_PATH}}/dist/index.js"></script>
   <!-- アイコン -->
-  <link rel="icon" href="https://kyonenya.github.io/assets/icons/favicon.svg" type="image/svg+xml" />
-  <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="https://kyonenya.github.io/assets/icons/apple-touch-icon-180x180.png" />
-  <link rel="icon" type="image/png" sizes="192x192" href="https://kyonenya.github.io/assets/icons/icon-192x192.png" />
+  <link rel="icon" href="{{ROOT_PATH}}/assets/icons/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="{{ROOT_PATH}}/assets/icons/apple-touch-icon-180x180.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="{{ROOT_PATH}}/assets/icons/icon-192x192.png" />
   <!-- SNS用のメタデータ -->
   <meta property="og:site_name" content="placet experiri" />
   <meta property="og:locale" content="ja_JP" />
@@ -46,12 +46,12 @@
       <nav class="bl_nav">
         <ul class="bl_nav_inner">
           <li><a href="/">Home</a></li>
-          <li><a href="https://kyonenya.github.io/works">Works</a></li>
-          <li><a href="https://kyonenya.github.io/about" id="about" data-badge="1">About</a></li>
+          <li><a href="/works">Works</a></li>
+          <li><a href="/about" id="about" data-badge="1">About</a></li>
           <li class="el_search">
             <div class="el_search_icon"></div>
             <form class="el_search_form">
-              <input type="search" placeholder="検索ワードを入力" value="" class="el_search_input" style="display: none;" />
+              <input type="search" placeholder="検索ワードを入力" value="" class="el_search_input" style="display: {{SEARCH_DISPLAY}};" />
             </form>
           </li>
         </ul>
@@ -66,7 +66,7 @@
   <footer class="ly_footer">
     <div class="ly_footer_inner">
       <p class="el_footerCopyright">
-        &copy; 2020- <a href="https://kyonenya.github.io/about">kyonenya</a>
+        &copy; 2020- <a href="/about">kyonenya</a>
       </p>
     </div><!-- ./ly_footer_inner -->
   </footer>

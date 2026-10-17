@@ -2,30 +2,31 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { articlePage } from './Article';
 import { BlogCard } from './BlogCard';
-import { jsonToPosts } from './post';
+import { articlePage, postListPage, type Page } from './pages';
+import { excludeReserved, jsonToPosts } from './post';
 import type { JSONPost, Post } from './post';
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 const rootDir = path.resolve(dirname, '..');
-const templatePath = path.resolve(rootDir, 'post.template.html');
-const distDir = path.resolve(rootDir, 'posts');
+const templatePath = path.resolve(rootDir, 'template.html');
 
-function createTemplateValues(post: Post): Record<string, string> {
-  const page = articlePage(post, true);
-  return {
+function embedTemplate(
+  template: string,
+  page: Page,
+  rootPath: string,
+  posts: Post[],
+): string {
+  const values: Record<string, string> = {
+    ROOT_PATH: rootPath,
     PAGE_BODY: page.body,
     PAGE_TITLE: page.title,
     PAGE_SUFFIX: page.suffix ?? '',
     PAGE_DESCRIPTION: page.description ?? '',
     PAGE_HREF: page.href ?? '',
+    SEARCH_DISPLAY: page.enableSearchForm ? 'block' : 'none',
   };
-}
-
-function embedTemplate(post: Post, template: string, posts: Post[]): string {
-  const values = createTemplateValues(post);
   return template
     .replaceAll(/\{\{(\w+)\}\}/g, (_, key: string) => {
       const value = values[key];
@@ -43,10 +44,21 @@ export async function generateStaticHtml(jsonPosts: JSONPost[]): Promise<void> {
   const template = await readFile(templatePath, 'utf8');
   const posts = jsonToPosts(jsonPosts);
   await Promise.all(
-    posts.map((post) =>
+    [
+      {
+        file: 'index.html',
+        rootPath: '.',
+        page: postListPage(excludeReserved(posts)),
+      },
+      ...posts.map((post) => ({
+        file: `posts/${post.id}.html`,
+        rootPath: '..',
+        page: articlePage(post),
+      })),
+    ].map(({ file, rootPath, page }) =>
       writeFile(
-        path.resolve(distDir, `${post.id}.html`),
-        embedTemplate(post, template, posts),
+        path.resolve(rootDir, file),
+        embedTemplate(template, page, rootPath, posts),
         'utf8',
       ),
     ),
