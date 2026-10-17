@@ -5,21 +5,13 @@ function watchPopState(reroute: () => void): void {
 }
 
 function watchSearchForm(reroute: () => void): void {
-  const searchFormElement = document.querySelector('.el_search_form');
-  const searchInputElement = <HTMLInputElement>(
-    document.querySelector('.el_search_input')
-  );
-
-  searchFormElement?.addEventListener('submit', (e) => {
+  document.querySelector('.el_search_form')?.addEventListener('submit', (e) => {
     e.preventDefault();
+    const hash = `#${document.querySelector<HTMLInputElement>('.el_search_input')?.value ?? ''}`;
     window.history.pushState(
-      toState(
-        window.location.search,
-        window.location.pathname,
-        `#${searchInputElement.value}`,
-      ),
+      toState(window.location.search, window.location.pathname, hash),
       '',
-      `${window.location.search}#${searchInputElement.value}`,
+      `${window.location.search}${hash}`,
     );
     reroute();
   });

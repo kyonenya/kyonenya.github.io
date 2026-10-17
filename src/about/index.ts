@@ -9,13 +9,10 @@ void (async function index() {
   const notices = [...(await fetcher<Notice[]>(aboutPath))].sort((a, b) =>
     compareAsc(new Date(b.date), new Date(a.date)),
   );
-  const noticesElement = <HTMLUListElement>document.getElementById('notices');
-  const pastNoticesElement = <HTMLUListElement>(
-    document.getElementById('pastNotices')
+  document.getElementById('notices')!.innerHTML = Notices(
+    notices.filter(({ pinned }) => pinned),
   );
-
-  noticesElement.innerHTML = Notices(notices.filter(({ pinned }) => pinned));
-  pastNoticesElement.innerHTML = Notices(
+  document.getElementById('pastNotices')!.innerHTML = Notices(
     notices.filter(({ pinned }) => !pinned),
   );
 })();
