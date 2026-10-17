@@ -15,7 +15,7 @@ const ListItem = (
 ): string => {
   const isHighlighted = citation.id.toString() === hilightedId;
   const ListNum = isHighlighted
-    ? `<a href="/works" class="el_olNum hp_highlight hp_unsetLink"><b>${num}.</b></a>`
+    ? `<a href="#" class="el_olNum hp_highlight hp_unsetLink"><b>${num}.</b></a>`
     : `<a href="#${citation.id}" class="el_olNum hp_unsetLink">${num}.</a>`;
   const statusNote = isUnpublished(citation)
     ? citation.type === 'paper-conference'
