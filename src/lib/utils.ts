@@ -1,5 +1,3 @@
-export const baseUrl = 'https://kyonenya.github.io/';
-
 export async function fetcher<T>(url: string): Promise<T> {
   const response = await fetch(url);
   if (!response.ok) throw new Error(response.statusText);

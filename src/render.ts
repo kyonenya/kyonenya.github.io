@@ -1,4 +1,3 @@
-import { baseUrl, isDevelopment } from './lib/utils';
 import type { Head, Page } from './pages';
 
 export function renderRoot(html: string): void {
@@ -10,15 +9,6 @@ export function renderRoot(html: string): void {
     target.scrollIntoView({ behavior: 'smooth' });
   } else {
     window.scrollTo(0, 0);
-  }
-
-  if (isDevelopment(window.location.href)) {
-    // overwrite to internal link
-    document
-      .querySelectorAll<HTMLAnchorElement>(`a[href^="${baseUrl}"]`)
-      .forEach((a) => {
-        a.href = '/' + a.href.replace(baseUrl, '');
-      });
   }
 }
 

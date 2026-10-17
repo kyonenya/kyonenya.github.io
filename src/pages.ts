@@ -1,8 +1,9 @@
 /* shared with ssg.ts: do not touch the DOM */
 import { Article } from './Article';
 import { PostList, TaggedPostList, SearchedPostList } from './PostList';
-import { baseUrl } from './lib/utils';
 import type { Post } from './post';
+
+const baseUrl = 'https://kyonenya.github.io/';
 
 export type Head = {
   title: string;
