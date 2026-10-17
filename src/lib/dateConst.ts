@@ -31,12 +31,13 @@ export function toUnitTime(ms: number, unit: Unit): number {
 }
 
 export function getDateParts(date: Date): DateParts {
+  const jst = new Date(date.getTime() + 9 * hours); // regardless of runtime timezone
   return {
-    seconds: date.getSeconds(),
-    minutes: date.getMinutes(),
-    hours: date.getHours(),
-    day: date.getDate(),
-    month: date.getMonth() + 1,
-    year: date.getFullYear(),
+    seconds: jst.getUTCSeconds(),
+    minutes: jst.getUTCMinutes(),
+    hours: jst.getUTCHours(),
+    day: jst.getUTCDate(),
+    month: jst.getUTCMonth() + 1,
+    year: jst.getUTCFullYear(),
   };
 }
