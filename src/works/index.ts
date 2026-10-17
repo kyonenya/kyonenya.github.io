@@ -9,8 +9,16 @@ const aboutPath = './about.json';
 
 void (async function index() {
   const citations = await fetcher<Citation[]>(worksPath);
-  const higlitedId = decodeURIComponent(window.location.hash.replace('#', ''));
-  renderRoot(Works(citations, higlitedId));
+  const render = () =>
+    renderRoot(
+      Works(
+        citations,
+        decodeURIComponent(window.location.hash.replace('#', '')),
+      ),
+    );
+
+  render();
+  window.addEventListener('hashchange', render);
 
   const notices = await fetcher<Notice[]>(aboutPath);
   notifyUpdate(notices);

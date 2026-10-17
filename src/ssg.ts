@@ -25,7 +25,7 @@ function embedTemplate(
     PAGE_SUFFIX: page.suffix ?? '',
     PAGE_DESCRIPTION: page.description ?? '',
     PAGE_HREF: page.href ?? '',
-    SEARCH_DISPLAY: page.enableSearchForm ? 'block' : 'none',
+    SEARCH_DISPLAY: page.disableSearchForm ? 'none' : 'block',
   };
   return template
     .replaceAll(/\{\{(\w+)\}\}/g, (_, key: string) => {
