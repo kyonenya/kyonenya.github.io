@@ -15,7 +15,7 @@ export function renderHead(head: Head): void {
   document.title = head.title;
   document
     .querySelector<HTMLElement>('.el_search_input')
-    ?.style.setProperty('display', head.enableSearchForm ? 'block' : 'none');
+    ?.style.setProperty('display', head.disableSearchForm ? 'none' : 'block');
   if (head.description) {
     document
       .querySelector('meta[name=description]')

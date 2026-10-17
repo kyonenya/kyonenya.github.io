@@ -17,7 +17,6 @@ export function route(rawPosts: Post[], forceRerender = false): void {
     window.location.pathname,
     window.location.hash,
   );
-
   const posts = isDevelopment(window.location.href)
     ? rawPosts
     : excludeReserved(rawPosts);
@@ -26,7 +25,7 @@ export function route(rawPosts: Post[], forceRerender = false): void {
     const post = posts.find((post) => post.id === id);
     if (!post) return; // TODO: 404
     if (!forceRerender && document.querySelector('#root article')) {
-      renderHead(articleHead(post)); // reuse SSG article as is
+      renderHead(articleHead(post)); // reuse SSG article
     } else {
       renderPage(articlePage(post));
     }
@@ -38,7 +37,7 @@ export function route(rawPosts: Post[], forceRerender = false): void {
     !forceRerender &&
     document.querySelectorAll('.bl_postList_item').length === posts.length
   ) {
-    renderHead(postListHead); // reuse SSG list as is
+    renderHead(postListHead); // reuse SSG postlist
   } else {
     renderPage(postListPage(posts));
   }
