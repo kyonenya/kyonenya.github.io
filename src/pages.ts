@@ -33,6 +33,7 @@ export const articlePage = (post: Post): Page => ({
 
 export const postListHead: Head = {
   title: 'placet experiri',
+  description: '言ってみただけ。哲学と哲学以外のことを書くテキストサイト',
   href: baseUrl,
   enableSearchForm: true,
 };

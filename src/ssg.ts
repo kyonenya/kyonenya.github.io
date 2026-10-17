@@ -3,31 +3,30 @@ import { readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { BlogCard } from './BlogCard';
-import { PostList } from './PostList';
-import { articlePage } from './pages';
+import { articlePage, postListPage, type Page } from './pages';
 import { excludeReserved, jsonToPosts } from './post';
 import type { JSONPost, Post } from './post';
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 const rootDir = path.resolve(dirname, '..');
-const templatePath = path.resolve(rootDir, 'post.template.html');
-const indexTemplatePath = path.resolve(rootDir, 'index.template.html');
-const distDir = path.resolve(rootDir, 'posts');
+const templatePath = path.resolve(rootDir, 'template.html');
 
-function createTemplateValues(post: Post): Record<string, string> {
-  const page = articlePage(post);
-  return {
+function embedTemplate(
+  template: string,
+  page: Page,
+  rootPath: string,
+  posts: Post[],
+): string {
+  const values: Record<string, string> = {
+    ROOT_PATH: rootPath,
     PAGE_BODY: page.body,
     PAGE_TITLE: page.title,
     PAGE_SUFFIX: page.suffix ?? '',
     PAGE_DESCRIPTION: page.description ?? '',
     PAGE_HREF: page.href ?? '',
+    SEARCH_DISPLAY: page.enableSearchForm ? 'block' : 'none',
   };
-}
-
-function embedTemplate(post: Post, template: string, posts: Post[]): string {
-  const values = createTemplateValues(post);
   return template
     .replaceAll(/\{\{(\w+)\}\}/g, (_, key: string) => {
       const value = values[key];
@@ -42,27 +41,28 @@ function embedTemplate(post: Post, template: string, posts: Post[]): string {
 }
 
 export async function generateStaticHtml(jsonPosts: JSONPost[]): Promise<void> {
-  const [template, indexTemplate] = await Promise.all([
-    readFile(templatePath, 'utf8'),
-    readFile(indexTemplatePath, 'utf8'),
-  ]);
+  const template = await readFile(templatePath, 'utf8');
   const posts = jsonToPosts(jsonPosts);
-  await Promise.all([
-    writeFile(
-      path.resolve(rootDir, 'index.html'),
-      indexTemplate.replace('{{PAGE_BODY}}', () =>
-        PostList(excludeReserved(posts)),
-      ),
-      'utf8',
-    ),
-    ...posts.map((post) =>
+  await Promise.all(
+    [
+      {
+        file: 'index.html',
+        rootPath: '.',
+        page: postListPage(excludeReserved(posts)),
+      },
+      ...posts.map((post) => ({
+        file: `posts/${post.id}.html`,
+        rootPath: '..',
+        page: articlePage(post),
+      })),
+    ].map(({ file, rootPath, page }) =>
       writeFile(
-        path.resolve(distDir, `${post.id}.html`),
-        embedTemplate(post, template, posts),
+        path.resolve(rootDir, file),
+        embedTemplate(template, page, rootPath, posts),
         'utf8',
       ),
     ),
-  ]);
+  );
   console.log('static html generated.');
 }
 

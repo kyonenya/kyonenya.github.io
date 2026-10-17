@@ -4,8 +4,8 @@
 
 - GitHub Pages向けのVanilla TypeScript MPA + 自作SSGサイト。
 - React等は使っていない。HTML文字列を生成して `#root` に描画する設計。
-- `index.html` と `posts/*.html` はSSGの生成物。手で編集するのは `index.template.html` と `post.template.html`。
-- HTMLを `file://` で直接開いても動くように、JS・CSS・JSONは相対パスで読む（`posts/N.html` からは `../`）。`/posts.json` のような絶対パスにすると `file:///posts.json` を読みに行って壊れる。
+- `index.html` と `posts/*.html` はSSGの生成物。手で編集するのは共通テンプレートの `template.html`。
+- HTMLを `file://` で直接開いても動くように、JS・CSS・JSONは相対パスで読む（`posts/[id].html` からは `../`）。`/posts.json` のような絶対パスにすると `file:///posts.json` を読みに行って壊れる。
 
 ## Code App（iOS）で起きた失敗
 

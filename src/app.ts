@@ -16,10 +16,7 @@ function recalcFromNow() {
 
 export async function app(): Promise<void> {
   recalcFromNow();
-
-  // posts/N(.html) sits one level below the root
   const rootPath = /\/posts\/\d+/.test(window.location.pathname) ? '..' : '.';
-
   const posts = jsonToPosts(
     await fetcher<JSONPost[]>(`${rootPath}/posts.json`),
   );
