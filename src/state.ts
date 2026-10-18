@@ -14,9 +14,6 @@ export function toState(
 
   const searchParams = new URLSearchParams(locationSearch);
   const tag = searchParams.get('tag');
-  const legacyIdStr = searchParams.get('id');
-  const legacyId =
-    legacyIdStr && /^\d+$/.test(legacyIdStr) ? Number(legacyIdStr) : null;
 
   const keyword =
     locationHash === undefined || locationHash === ''
@@ -24,7 +21,7 @@ export function toState(
       : decodeURIComponent(locationHash.replace('#', ''));
 
   return {
-    id: id ?? legacyId,
+    id,
     tag,
     keyword,
   };
