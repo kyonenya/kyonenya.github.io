@@ -14,7 +14,7 @@
     "lint-css:fix": "node ./node_modules/stylelint/bin/stylelint.mjs src/**/*.css --fix"
   },
   "dependencies": {
-    "search-summary": "^1.1.2"
+    "search-summary": "^2.1.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.4",
